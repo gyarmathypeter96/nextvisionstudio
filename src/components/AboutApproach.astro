@@ -1,0 +1,393 @@
+---
+const values = [
+  {
+    number: "01",
+    title: "Human-first creative",
+    text: "Every project starts with your business, your audience and the message people need to understand.",
+  },
+  {
+    number: "02",
+    title: "Strategy before production",
+    text: "The idea, format and goal are made clear before filming, designing or launching a campaign.",
+  },
+  {
+    number: "03",
+    title: "One connected system",
+    text: "Content, advertising and web design work better when they support the same clear brand story.",
+  },
+];
+
+const serviceLinks = [
+  {
+    title: "Content creation",
+    text: "Videography, photography and short-form social content.",
+    href: "/services/#content-creation",
+  },
+  {
+    title: "Advertising",
+    text: "Meta Ads and Google Ads built around a clear goal.",
+    href: "/services/#advertising",
+  },
+  {
+    title: "Web development",
+    text: "Fast, premium websites designed to generate enquiries.",
+    href: "/services/#web-development",
+  },
+];
+---
+
+<section class="about-approach" aria-labelledby="about-approach-title">
+  <div class="about-approach__inner">
+    <header class="about-approach__header">
+      <div class="about-approach__kicker">The approach</div>
+      <h2 id="about-approach-title">Creative Work That Makes Business Sense</h2>
+      <p>
+        Strong visuals should do more than look polished. They should make your
+        business easier to understand, easier to trust and easier to remember.
+      </p>
+    </header>
+
+    <div class="about-approach__story">
+      <div class="about-approach__story-copy">
+        <p class="about-approach__overline">From New York to Dublin</p>
+        <h3>An international eye, focused on local businesses.</h3>
+        <p>
+          Peter developed his visual storytelling approach through creative
+          experience in New York before bringing that perspective to Dublin.
+          Today, NextVision Studio works directly with businesses that want to
+          look professional and communicate with more clarity online.
+        </p>
+        <p>
+          You work directly with the person planning and creating the project.
+          That keeps communication simple, decisions faster and every piece of
+          work connected to the original goal.
+        </p>
+      </div>
+
+      <ol class="about-approach__values">
+        {
+          values.map((value) => (
+            <li>
+              <span>{value.number}</span>
+              <div>
+                <h3>{value.title}</h3>
+                <p>{value.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="about-approach__services">
+      <div class="about-approach__services-copy">
+        <p>What we do</p>
+        <h3>Three services, one clear digital presence.</h3>
+      </div>
+
+      <div class="about-approach__service-links">
+        {
+          serviceLinks.map((service, index) => (
+            <a href={service.href}>
+              <span>0{index + 1}</span>
+              <div>
+                <strong>{service.title}</strong>
+                <p>{service.text}</p>
+              </div>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-approach,
+  .about-approach * {
+    box-sizing: border-box;
+  }
+
+  .about-approach {
+    position: relative;
+    padding: 118px 24px 126px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 11% 42%, rgba(155, 210, 255, 0.07), transparent 28%),
+      #111111;
+    color: #ffffff;
+  }
+
+  .about-approach__inner {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+  }
+
+  .about-approach__header {
+    width: min(100%, 860px);
+    margin: 0 auto 72px;
+    text-align: center;
+  }
+
+  .about-approach__kicker,
+  .about-approach__overline,
+  .about-approach__services-copy > p {
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .about-approach__kicker {
+    display: inline-flex;
+    margin-bottom: 22px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+  }
+
+  .about-approach__header h2 {
+    margin: 0;
+    font-size: clamp(48px, 6.7vw, 82px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .about-approach__header > p {
+    width: min(100%, 680px);
+    margin: 25px auto 0;
+    color: rgba(255, 255, 255, 0.63);
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+  }
+
+  .about-approach__story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+    gap: clamp(42px, 7vw, 94px);
+    align-items: start;
+    padding: clamp(32px, 5vw, 62px);
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 34px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+      #15191d;
+    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.32);
+  }
+
+  .about-approach__overline {
+    margin: 0 0 19px;
+  }
+
+  .about-approach__story-copy h3,
+  .about-approach__services-copy h3 {
+    margin: 0;
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .about-approach__story-copy > p:not(.about-approach__overline) {
+    margin: 23px 0 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .about-approach__values {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: 13px;
+    list-style: none;
+  }
+
+  .about-approach__values li {
+    display: grid;
+    grid-template-columns: 43px 1fr;
+    padding: 21px;
+    gap: 16px;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.025);
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  }
+
+  .about-approach__values li:hover {
+    border-color: rgba(180, 220, 255, 0.25);
+    background: rgba(155, 210, 255, 0.055);
+    transform: translateY(-2px);
+  }
+
+  .about-approach__values li > span {
+    display: grid;
+    width: 43px;
+    height: 43px;
+    place-items: center;
+    border: 1px solid rgba(180, 220, 255, 0.2);
+    border-radius: 14px;
+    background: rgba(155, 210, 255, 0.08);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+  }
+
+  .about-approach__values h3 {
+    margin: 1px 0 6px;
+    font-size: 17px;
+    letter-spacing: -0.025em;
+  }
+
+  .about-approach__values p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .about-approach__services {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1.38fr);
+    align-items: start;
+    margin-top: 94px;
+    gap: clamp(42px, 7vw, 88px);
+  }
+
+  .about-approach__services-copy > p {
+    margin: 0 0 18px;
+  }
+
+  .about-approach__service-links {
+    display: grid;
+    gap: 11px;
+  }
+
+  .about-approach__service-links a {
+    display: grid;
+    grid-template-columns: 38px 1fr 28px;
+    align-items: center;
+    min-height: 104px;
+    padding: 20px 22px;
+    gap: 16px;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  }
+
+  .about-approach__service-links a:hover {
+    border-color: rgba(180, 220, 255, 0.28);
+    background: rgba(155, 210, 255, 0.055);
+    transform: translateX(5px);
+  }
+
+  .about-approach__service-links a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .about-approach__service-links a > span {
+    color: #9bd2ff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+  }
+
+  .about-approach__service-links strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    letter-spacing: -0.025em;
+  }
+
+  .about-approach__service-links p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .about-approach__service-links svg {
+    width: 24px;
+    fill: none;
+    stroke: #cfeaff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+  }
+
+  @media (max-width: 880px) {
+    .about-approach__story,
+    .about-approach__services {
+      grid-template-columns: 1fr;
+    }
+
+    .about-approach__services {
+      margin-top: 75px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-approach {
+      padding: 88px 16px 94px;
+    }
+
+    .about-approach__header {
+      margin-bottom: 48px;
+    }
+
+    .about-approach__header h2 {
+      font-size: clamp(42px, 13vw, 58px);
+    }
+
+    .about-approach__story {
+      padding: 27px 20px;
+      border-radius: 25px;
+    }
+
+    .about-approach__story-copy h3,
+    .about-approach__services-copy h3 {
+      font-size: 36px;
+    }
+
+    .about-approach__values li {
+      grid-template-columns: 38px 1fr;
+      padding: 18px;
+      gap: 13px;
+    }
+
+    .about-approach__values li > span {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+    }
+
+    .about-approach__services {
+      margin-top: 70px;
+    }
+
+    .about-approach__service-links a {
+      grid-template-columns: 30px 1fr 22px;
+      min-height: 112px;
+      padding: 18px;
+      gap: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-approach__values li,
+    .about-approach__service-links a {
+      transition: none;
+    }
+  }
+</style>

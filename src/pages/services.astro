@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ServicesPageHero from "../components/ServicesPageHero.astro";
+import ServicePillars from "../components/ServicePillars.astro";
+import ServicesProcess from "../components/ServicesProcess.astro";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "NextVision Studio",
+  url: "https://nextvisionstudio.com/services/",
+  areaServed: {
+    "@type": "City",
+    name: "Dublin",
+  },
+  serviceType: [
+    "Social media content creation",
+    "Meta Ads and Google Ads management",
+    "Website design and development",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "NextVision Studio creative and digital services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Social Media Content Creation Dublin",
+          description:
+            "Videography, photography and short-form social media content for Dublin businesses.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Meta Ads and Google Ads Management",
+          description:
+            "Paid advertising strategy, campaign setup, creative support and ongoing optimisation.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Website Design and Development Dublin",
+          description:
+            "Fast, responsive and SEO-friendly business websites designed to generate enquiries.",
+        },
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title="Creative & Digital Services Dublin | NextVision Studio"
+  description="Social media content creation, Meta and Google Ads management, and premium website design for Dublin businesses from NextVision Studio."
+  canonical="https://nextvisionstudio.com/services/"
+>
+  <main class="services-page">
+    <ServicesPageHero />
+    <ServicePillars />
+    <ServicesProcess />
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+</BaseLayout>
+
+<style>
+  .services-page {
+    width: 100%;
+    overflow: hidden;
+    background: #111111;
+  }
+</style>

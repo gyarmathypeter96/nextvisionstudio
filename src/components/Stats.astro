@@ -1,0 +1,225 @@
+---
+const stats = [
+  {
+    label: "Total video views",
+    target: 1000000,
+    formattedValue: "1,000,000+",
+  },
+  {
+    label: "Pieces of content created",
+    target: 100,
+    formattedValue: "100+",
+  },
+  {
+    label: "Followers gained for clients",
+    target: 1000,
+    formattedValue: "1,000+",
+  },
+];
+---
+
+<section
+  class="stats"
+  id="results"
+  aria-label="NextVision Studio results"
+  data-stats
+>
+  <dl class="stats__grid">
+    {
+      stats.map((stat) => (
+        <div class="stats__item">
+          <dt>{stat.label}</dt>
+          <dd
+            class="stats__number"
+            data-counter
+            data-target={stat.target}
+            data-suffix="+"
+            aria-label={`${stat.formattedValue} ${stat.label.toLowerCase()}`}
+          >
+            {stat.formattedValue}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<script>
+  const statsSection = document.querySelector("[data-stats]");
+
+  if (statsSection) {
+    const counters = statsSection.querySelectorAll("[data-counter]");
+    const numberFormatter = new Intl.NumberFormat("en-US");
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const showFinalValues = () => {
+      counters.forEach((counter) => {
+        const target = Number(counter.getAttribute("data-target"));
+        const suffix = counter.getAttribute("data-suffix") ?? "";
+        counter.textContent = `${numberFormatter.format(target)}${suffix}`;
+      });
+    };
+
+    const animateCounter = (counter: Element) => {
+      if (counter.getAttribute("data-animated") === "true") return;
+
+      counter.setAttribute("data-animated", "true");
+      counter.classList.add("is-counting");
+
+      const target = Number(counter.getAttribute("data-target"));
+      const suffix = counter.getAttribute("data-suffix") ?? "";
+      const duration = 1700;
+      let startTime: number | undefined;
+
+      const updateCounter = (currentTime: number) => {
+        startTime ??= currentTime;
+
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easedProgress * target);
+
+        counter.textContent = `${numberFormatter.format(currentValue)}${suffix}`;
+
+        if (progress < 1) {
+          window.requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = `${numberFormatter.format(target)}${suffix}`;
+          counter.classList.remove("is-counting");
+        }
+      };
+
+      window.requestAnimationFrame(updateCounter);
+    };
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      showFinalValues();
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+
+          counters.forEach(animateCounter);
+          observer.disconnect();
+        },
+        { threshold: 0.28 },
+      );
+
+      observer.observe(statsSection);
+    }
+  }
+</script>
+
+<style>
+  .stats,
+  .stats * {
+    box-sizing: border-box;
+  }
+
+  .stats {
+    width: 100%;
+    margin: 0;
+    padding: 82px 24px 92px;
+    overflow: hidden;
+
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 56px;
+
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    padding: 8px 0;
+  }
+
+  .stats__item dt {
+    order: 2;
+    margin: 16px 0 0;
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+
+  .stats__number {
+    order: 1;
+    margin: 0;
+    color: #ffffff;
+
+    font-size: clamp(54px, 6.5vw, 92px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+  }
+
+  .stats__number.is-counting {
+    animation: counter-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes counter-rise {
+    from {
+      opacity: 0.35;
+      filter: blur(4px);
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .stats {
+      padding: 62px 18px 72px;
+    }
+
+    .stats__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .stats__number {
+      font-size: clamp(46px, 14vw, 58px);
+      letter-spacing: -0.05em;
+    }
+
+    .stats__item dt {
+      margin-top: 12px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .stats__number {
+      font-size: 43px;
+      letter-spacing: -0.045em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stats__number.is-counting {
+      animation: none;
+    }
+  }
+</style>

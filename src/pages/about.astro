@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutPageHero from "../components/AboutPageHero.astro";
+import AboutApproach from "../components/AboutApproach.astro";
+import AboutCTA from "../components/AboutCTA.astro";
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      name: "About NextVision Studio",
+      url: "https://nextvisionstudio.com/about/",
+      description:
+        "Meet Peter Gyarmathy and learn about NextVision Studio, a Dublin creative studio for videography, photography, social media, advertising and website design.",
+      about: { "@id": "https://nextvisionstudio.com/#business" },
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://nextvisionstudio.com/#business",
+      name: "NextVision Studio",
+      url: "https://nextvisionstudio.com/",
+      image: "https://nextvisionstudio.com/images/brand/nextvision-studio-logo.png",
+      telephone: "+353894797055",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Dublin",
+        addressCountry: "IE",
+      },
+      founder: { "@id": "https://nextvisionstudio.com/about/#peter-gyarmathy" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://nextvisionstudio.com/about/#peter-gyarmathy",
+      name: "Peter Gyarmathy",
+      jobTitle: "Founder and Creative Lead",
+      image: "https://nextvisionstudio.com/images/about/peter-gyarmathy.webp",
+      worksFor: { "@id": "https://nextvisionstudio.com/#business" },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="About NextVision Studio | Dublin Creative Studio"
+  description="Meet Peter Gyarmathy and discover NextVision Studio, a Dublin creative studio for videography, photography, social media, ads and premium websites."
+  canonical="https://nextvisionstudio.com/about/"
+>
+  <main class="about-page">
+    <AboutPageHero />
+    <AboutApproach />
+    <AboutCTA />
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+</BaseLayout>
+
+<style>
+  .about-page {
+    width: 100%;
+    overflow: hidden;
+    background: #111111;
+  }
+</style>

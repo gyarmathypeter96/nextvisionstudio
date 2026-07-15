@@ -1,0 +1,141 @@
+---
+interface Props {
+  line: string;
+}
+
+const { line } = Astro.props;
+
+const clients = [
+  { name: "Gut Fest", src: "/images/clients/gut-fest.png" },
+  { name: "Saxoo London", src: "/images/clients/saxoo-london.png" },
+  { name: "Emo Night Brooklyn", src: "/images/clients/emo-night-brooklyn.png" },
+  { name: "Leroy's Barking World", src: "/images/clients/leroys-barking-world.png" },
+  { name: "Muri Pub and More", src: "/images/clients/muri-pub-and-more.png" },
+  { name: "Perfect Clean", src: "/images/clients/perfect-clean.png" },
+];
+---
+
+<section class="landing-trust" aria-labelledby="landing-trust-title">
+  <div class="landing-trust__inner">
+    <p id="landing-trust-title">{line}</p>
+    <ul aria-label="Selected NextVision Studio clients">
+      {
+        clients.map((client) => (
+          <li>
+            <img
+              src={client.src}
+              width="500"
+              height="500"
+              alt={`${client.name} logo`}
+              loading="lazy"
+              decoding="async"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .landing-trust,
+  .landing-trust * {
+    box-sizing: border-box;
+  }
+
+  .landing-trust {
+    padding: 48px 24px 54px;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .landing-trust__inner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.65fr) minmax(0, 1.35fr);
+    align-items: center;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    gap: 54px;
+  }
+
+  .landing-trust p {
+    max-width: 340px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.075em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+  .landing-trust ul {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 22px;
+    list-style: none;
+  }
+
+  .landing-trust li {
+    display: grid;
+    min-height: 58px;
+    place-items: center;
+  }
+
+  .landing-trust img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 47px;
+    object-fit: contain;
+    opacity: 0.56;
+    filter: grayscale(1) brightness(1.25);
+    transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease;
+  }
+
+  .landing-trust li:hover img {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 820px) {
+    .landing-trust__inner {
+      grid-template-columns: 1fr;
+      gap: 33px;
+    }
+
+    .landing-trust p {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .landing-trust ul {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .landing-trust {
+      padding: 42px 20px 46px;
+    }
+
+    .landing-trust ul {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 19px 30px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-trust img {
+      transition: none;
+    }
+  }
+</style>

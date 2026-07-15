@@ -1,0 +1,829 @@
+---
+const services = [
+  {
+    id: "content-creation",
+    number: "01",
+    title: "Social Media Content Creation",
+    lead:
+      "Professional videography, photography and short-form content for Dublin businesses that want to look active, credible and memorable online.",
+    points: [
+      {
+        title: "Content strategy",
+        text: "Clear ideas built around your audience, services and monthly business goals.",
+      },
+      {
+        title: "Filming and photography",
+        text: "Brand videos, Reels, Shorts, product photography and campaign visuals.",
+      },
+      {
+        title: "Editing and delivery",
+        text: "Hooks, captions, music and platform-ready formats prepared for publishing.",
+      },
+    ],
+    primary: "Plan your content",
+    secondary: "View our portfolio",
+    secondaryHref: "/#portfolio",
+    visual: "content",
+  },
+  {
+    id: "advertising",
+    number: "02",
+    title: "Meta & Google Ads Management",
+    lead:
+      "Paid advertising for businesses that need more than boosted posts. We connect the right message, creative and audience with a clear campaign goal.",
+    points: [
+      {
+        title: "Campaign planning",
+        text: "Goals, offers, audiences and budget are defined before the campaign goes live.",
+      },
+      {
+        title: "Ad creative support",
+        text: "Video, photography and copy designed for Meta Ads and Google campaigns.",
+      },
+      {
+        title: "Ongoing optimisation",
+        text: "Performance is reviewed and campaigns are refined using real results.",
+      },
+    ],
+    primary: "Discuss advertising",
+    secondary: "See our process",
+    secondaryHref: "#our-process",
+    visual: "ads",
+  },
+  {
+    id: "web-development",
+    number: "03",
+    title: "Website Design & Development",
+    lead:
+      "Modern, fast and conversion-focused websites that explain your business clearly, work beautifully on mobile and make it easy for customers to contact you.",
+    points: [
+      {
+        title: "Premium responsive design",
+        text: "Clean pages shaped around your brand and built for every screen size.",
+      },
+      {
+        title: "Clear conversion paths",
+        text: "Simple navigation and strong calls to action guide visitors towards an enquiry.",
+      },
+      {
+        title: "SEO-friendly foundations",
+        text: "Fast performance, semantic content and search-ready technical structure.",
+      },
+    ],
+    primary: "Plan your website",
+    secondary: "Get a free quote",
+    secondaryHref: "/contact/",
+    visual: "web",
+  },
+];
+---
+
+<section class="service-pillars" aria-labelledby="service-pillars-title">
+  <div class="service-pillars__inner">
+    <header class="service-pillars__intro">
+      <div class="service-pillars__kicker">Three connected services</div>
+      <h2 id="service-pillars-title">Everything Your Brand Needs to Grow Online</h2>
+      <p>
+        Content earns attention, advertising brings the right people closer and a
+        strong website turns interest into enquiries.
+      </p>
+    </header>
+
+    <div class="service-pillars__list">
+      {
+        services.map((service, index) => (
+          <article
+            class:list={[
+              "service-pillar",
+              `service-pillar--${service.visual}`,
+              { "service-pillar--reverse": index % 2 === 1 },
+            ]}
+            id={service.id}
+          >
+            <div class="service-pillar__copy">
+              <div class="service-pillar__label">Service {service.number}</div>
+              <h3>{service.title}</h3>
+              <p class="service-pillar__lead">{service.lead}</p>
+
+              <ul class="service-pillar__points">
+                {service.points.map((point) => (
+                  <li>
+                    <span aria-hidden="true"></span>
+                    <div>
+                      <strong>{point.title}</strong>
+                      <p>{point.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="service-pillar__actions">
+                <a class="service-pillar__primary" href="/contact/">
+                  {service.primary}
+                </a>
+                <a class="service-pillar__secondary" href={service.secondaryHref}>
+                  {service.secondary}
+                </a>
+              </div>
+            </div>
+
+            <div class="service-pillar__visual" aria-hidden="true">
+              {service.visual === "content" && (
+                <div class="content-device">
+                  <div class="content-device__speaker"></div>
+                  <div class="content-device__screen">
+                    <div class="content-tile"><small>01</small><strong>Hook</strong></div>
+                    <div class="content-tile"><small>02</small><strong>Story</strong></div>
+                    <div class="content-tile"><small>03</small><strong>CTA</strong></div>
+                  </div>
+                  <div class="content-photo content-photo--one">Photo</div>
+                  <div class="content-photo content-photo--two">Video</div>
+                </div>
+              )}
+
+              {service.visual === "ads" && (
+                <div class="ads-dashboard">
+                  <div class="ads-dashboard__top">
+                    <i></i><i></i><i></i><span>Campaign overview</span>
+                  </div>
+                  <div class="ads-dashboard__summary">
+                    <div><small>Reach</small><strong>Growing</strong></div>
+                    <div><small>Enquiries</small><strong>Tracked</strong></div>
+                  </div>
+                  <div class="ads-dashboard__chart">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="ads-dashboard__legend">
+                    <span>Creative</span><span>Audience</span><span>Results</span>
+                  </div>
+                </div>
+              )}
+
+              {service.visual === "web" && (
+                <div class="web-browser">
+                  <div class="web-browser__top">
+                    <i></i><i></i><i></i><span>nextvision website</span>
+                  </div>
+                  <div class="web-browser__hero">
+                    <small>Clear digital presence</small>
+                    <strong>Your business,<br />made easy to trust.</strong>
+                    <span>Get a quote</span>
+                  </div>
+                  <div class="web-browser__cards">
+                    <i></i><i></i><i></i>
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-pillars,
+  .service-pillars * {
+    box-sizing: border-box;
+  }
+
+  .service-pillars {
+    position: relative;
+    padding: 118px 24px 126px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 8% 18%, rgba(155, 210, 255, 0.07), transparent 23%),
+      radial-gradient(circle at 92% 68%, rgba(155, 210, 255, 0.055), transparent 24%),
+      #111111;
+    color: #ffffff;
+  }
+
+  .service-pillars__inner {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+  }
+
+  .service-pillars__intro {
+    width: min(100%, 900px);
+    margin: 0 auto 70px;
+    text-align: center;
+  }
+
+  .service-pillars__kicker,
+  .service-pillar__label {
+    display: inline-flex;
+    margin-bottom: 20px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .service-pillars__intro h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(46px, 7vw, 82px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .service-pillars__intro > p {
+    width: min(100%, 720px);
+    margin: 25px auto 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+
+  .service-pillars__list {
+    border-top: 1px solid rgba(180, 220, 255, 0.08);
+  }
+
+  .service-pillar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+    padding: 92px 0;
+    align-items: center;
+    gap: clamp(48px, 7vw, 86px);
+    border-bottom: 1px solid rgba(180, 220, 255, 0.08);
+    scroll-margin-top: 110px;
+  }
+
+  .service-pillar--reverse .service-pillar__copy {
+    order: 2;
+  }
+
+  .service-pillar--reverse .service-pillar__visual {
+    order: 1;
+  }
+
+  .service-pillar__copy {
+    min-width: 0;
+  }
+
+  .service-pillar h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 950;
+    letter-spacing: -0.065em;
+    line-height: 0.93;
+    text-wrap: balance;
+  }
+
+  .service-pillar__lead {
+    margin: 26px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(16px, 1.8vw, 19px);
+    font-weight: 520;
+    line-height: 1.65;
+  }
+
+  .service-pillar__points {
+    display: grid;
+    margin: 32px 0 0;
+    padding: 0;
+    gap: 12px;
+    list-style: none;
+  }
+
+  .service-pillar__points li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    padding: 18px 19px;
+    align-items: start;
+    gap: 12px;
+    border: 1px solid rgba(180, 220, 255, 0.11);
+    border-radius: 18px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+      rgba(20, 26, 31, 0.72);
+    transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease;
+  }
+
+  .service-pillar__points li:hover {
+    border-color: rgba(180, 220, 255, 0.24);
+    box-shadow: 0 17px 40px rgba(0, 0, 0, 0.24);
+    transform: translateY(-2px);
+  }
+
+  .service-pillar__points li > span {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border: 1px solid rgba(155, 210, 255, 0.22);
+    border-radius: 10px;
+    background: rgba(155, 210, 255, 0.08);
+  }
+
+  .service-pillar__points li > span::after {
+    content: "✓";
+    color: #cfeaff;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .service-pillar__points strong {
+    display: block;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 850;
+    line-height: 1.3;
+  }
+
+  .service-pillar__points p {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .service-pillar__actions {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .service-pillar__actions a {
+    display: inline-flex;
+    min-height: 53px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.055em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .service-pillar__primary {
+    position: relative;
+    min-width: 190px;
+    padding: 0 25px;
+    overflow: hidden;
+    border: 1px solid rgba(207, 234, 255, 0.3);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(155, 210, 255, 0.1)),
+      rgba(255, 255, 255, 0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      0 18px 42px rgba(0, 0, 0, 0.28);
+    color: #ffffff;
+    transition: box-shadow 220ms ease, transform 220ms ease;
+  }
+
+  .service-pillar__primary:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      0 0 30px rgba(155, 210, 255, 0.13),
+      0 21px 46px rgba(0, 0, 0, 0.34);
+    transform: translateY(-2px);
+  }
+
+  .service-pillar__secondary {
+    min-height: 42px !important;
+    padding: 0 2px;
+    border-bottom: 1px solid rgba(207, 234, 255, 0.23);
+    color: rgba(207, 234, 255, 0.76);
+  }
+
+  .service-pillar__actions a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .service-pillar__visual {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 540px;
+    place-items: center;
+  }
+
+  .service-pillar__visual::before {
+    content: "";
+    position: absolute;
+    width: 90%;
+    height: 60%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155, 210, 255, 0.14), transparent 68%);
+    filter: blur(35px);
+  }
+
+  .content-device {
+    position: relative;
+    z-index: 1;
+    width: min(315px, 78vw);
+    aspect-ratio: 9 / 16;
+    padding: 12px;
+    border: 1px solid rgba(180, 220, 255, 0.2);
+    border-radius: 40px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.035)),
+      #080a0c;
+    box-shadow:
+      0 0 42px rgba(155, 210, 255, 0.12),
+      0 35px 90px rgba(0, 0, 0, 0.58);
+    transform: rotate(2.5deg);
+  }
+
+  .content-device__speaker {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    z-index: 3;
+    width: 78px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(207, 234, 255, 0.2);
+    transform: translateX(-50%);
+  }
+
+  .content-device__screen {
+    display: grid;
+    height: 100%;
+    padding: 36px 15px 15px;
+    gap: 12px;
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 25% 15%, rgba(155, 210, 255, 0.18), transparent 32%),
+      linear-gradient(160deg, #151d24, #0b0e11);
+  }
+
+  .content-tile {
+    position: relative;
+    display: flex;
+    padding: 17px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(180, 220, 255, 0.13);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  }
+
+  .content-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(155, 210, 255, 0.2), transparent 46%);
+  }
+
+  .content-tile small,
+  .content-tile strong {
+    position: relative;
+    z-index: 1;
+  }
+
+  .content-tile small {
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+  }
+
+  .content-tile strong {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .content-photo {
+    position: absolute;
+    z-index: -1;
+    display: grid;
+    width: 145px;
+    height: 190px;
+    padding: 16px;
+    align-items: end;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 25px;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(155, 210, 255, 0.2), transparent 30%),
+      linear-gradient(155deg, #25313a, #0b0e11);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .content-photo--one {
+    top: 25%;
+    left: -92px;
+    transform: rotate(-10deg);
+  }
+
+  .content-photo--two {
+    right: -92px;
+    bottom: 18%;
+    transform: rotate(10deg);
+  }
+
+  .ads-dashboard,
+  .web-browser {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 470px);
+    padding: 21px;
+    border: 1px solid rgba(180, 220, 255, 0.17);
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at top, rgba(155, 210, 255, 0.11), transparent 52%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+      rgba(16, 21, 26, 0.94);
+    box-shadow:
+      0 0 42px rgba(155, 210, 255, 0.09),
+      0 34px 90px rgba(0, 0, 0, 0.52);
+  }
+
+  .ads-dashboard {
+    transform: rotate(-2deg);
+  }
+
+  .ads-dashboard__top,
+  .web-browser__top {
+    display: flex;
+    height: 34px;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .ads-dashboard__top i,
+  .web-browser__top i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(207, 234, 255, 0.25);
+  }
+
+  .ads-dashboard__top span,
+  .web-browser__top span {
+    margin-left: 7px;
+    color: rgba(255, 255, 255, 0.36);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .ads-dashboard__summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 14px;
+    gap: 12px;
+  }
+
+  .ads-dashboard__summary > div {
+    padding: 19px;
+    border: 1px solid rgba(180, 220, 255, 0.11);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .ads-dashboard__summary small,
+  .ads-dashboard__summary strong {
+    display: block;
+  }
+
+  .ads-dashboard__summary small {
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .ads-dashboard__summary strong {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 22px;
+    letter-spacing: -0.04em;
+  }
+
+  .ads-dashboard__chart {
+    display: flex;
+    height: 205px;
+    margin-top: 13px;
+    padding: 24px 21px 18px;
+    align-items: end;
+    gap: 11px;
+    border: 1px solid rgba(180, 220, 255, 0.11);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .ads-dashboard__chart i {
+    flex: 1;
+    border-radius: 999px 999px 5px 5px;
+    background: linear-gradient(to top, rgba(72, 99, 120, 0.7), #d7efff);
+    box-shadow: 0 0 16px rgba(155, 210, 255, 0.17);
+  }
+
+  .ads-dashboard__chart i:nth-child(1) { height: 32%; }
+  .ads-dashboard__chart i:nth-child(2) { height: 48%; }
+  .ads-dashboard__chart i:nth-child(3) { height: 43%; }
+  .ads-dashboard__chart i:nth-child(4) { height: 67%; }
+  .ads-dashboard__chart i:nth-child(5) { height: 75%; }
+  .ads-dashboard__chart i:nth-child(6) { height: 91%; }
+
+  .ads-dashboard__legend {
+    display: flex;
+    margin-top: 14px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ads-dashboard__legend span {
+    padding: 8px 10px;
+    border: 1px solid rgba(180, 220, 255, 0.1);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 9px;
+    font-weight: 750;
+  }
+
+  .web-browser {
+    transform: rotate(1.5deg);
+  }
+
+  .web-browser__hero {
+    display: flex;
+    min-height: 250px;
+    margin-top: 13px;
+    padding: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 74% 26%, rgba(155, 210, 255, 0.17), transparent 29%),
+      linear-gradient(145deg, #151d24, #090c0f);
+  }
+
+  .web-browser__hero small {
+    color: #cfeaff;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .web-browser__hero strong {
+    margin-top: 15px;
+    color: #ffffff;
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -0.065em;
+    line-height: 0.94;
+  }
+
+  .web-browser__hero > span {
+    display: inline-flex;
+    min-height: 33px;
+    margin-top: 22px;
+    padding: 0 13px;
+    align-items: center;
+    border: 1px solid rgba(207, 234, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .web-browser__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 13px;
+    gap: 11px;
+  }
+
+  .web-browser__cards i {
+    height: 78px;
+    border: 1px solid rgba(180, 220, 255, 0.1);
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  @media (max-width: 980px) {
+    .service-pillar {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .service-pillar--reverse .service-pillar__copy,
+    .service-pillar--reverse .service-pillar__visual {
+      order: initial;
+    }
+
+    .service-pillar__copy {
+      width: min(100%, 720px);
+      margin: 0 auto;
+    }
+
+    .service-pillar__points {
+      text-align: left;
+    }
+
+    .service-pillar__actions {
+      justify-content: center;
+    }
+
+    .service-pillar__visual {
+      min-height: 500px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .service-pillars {
+      padding: 84px 16px 90px;
+    }
+
+    .service-pillars__intro {
+      margin-bottom: 46px;
+    }
+
+    .service-pillars__intro h2 {
+      font-size: clamp(40px, 13vw, 57px);
+    }
+
+    .service-pillar {
+      padding: 65px 0;
+      gap: 42px;
+    }
+
+    .service-pillar h3 {
+      font-size: clamp(37px, 12vw, 51px);
+    }
+
+    .service-pillar__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .service-pillar__primary {
+      width: 100%;
+    }
+
+    .service-pillar__secondary {
+      justify-self: center;
+    }
+
+    .service-pillar__visual {
+      min-height: 455px;
+    }
+
+    .content-device {
+      width: min(265px, 70vw);
+    }
+
+    .content-photo {
+      width: 112px;
+      height: 148px;
+    }
+
+    .content-photo--one { left: -56px; }
+    .content-photo--two { right: -56px; }
+
+    .content-tile strong {
+      font-size: 24px;
+    }
+
+    .ads-dashboard,
+    .web-browser {
+      width: min(100%, 360px);
+      padding: 16px;
+      border-radius: 26px;
+    }
+
+    .ads-dashboard__chart {
+      height: 170px;
+    }
+
+    .web-browser__hero {
+      min-height: 220px;
+      padding: 23px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-pillar__points li,
+    .service-pillar__primary {
+      transition: none;
+    }
+  }
+</style>

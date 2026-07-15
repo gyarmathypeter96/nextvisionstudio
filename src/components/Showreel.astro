@@ -1,0 +1,316 @@
+---
+import { WHATSAPP_URL } from "../config/contact";
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: "NextVision Studio 2025 Showreel — Video Production Dublin",
+  description:
+    "A selection of commercial videography, branded content and video production work created by NextVision Studio in Dublin.",
+  thumbnailUrl:
+    "https://nextvisionstudio.com/images/showreel/showreel-2025.webp",
+  uploadDate: "2025-08-10",
+  duration: "PT44S",
+  contentUrl: "https://nextvisionstudio.com/videos/showreel-2025.mp4",
+};
+---
+
+<section class="showreel" id="showreel" aria-labelledby="showreel-title">
+  <header class="showreel__header">
+    <div class="showreel__label">Selected video production work</div>
+    <h2 id="showreel-title">Watch Our 2025 Showreel</h2>
+    <p id="showreel-description">
+      A 44-second selection of videography, branded content and commercial video
+      production created by NextVision Studio in Dublin.
+    </p>
+  </header>
+
+  <div class="showreel__frame">
+    <div class="showreel__video-wrap">
+      <video
+        controls
+        playsinline
+        preload="metadata"
+        poster="/images/showreel/showreel-2025.webp"
+        width="1280"
+        height="720"
+        title="NextVision Studio 2025 Showreel"
+        aria-describedby="showreel-description"
+      >
+        <source src="/videos/showreel-2025.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <aside class="showreel__whatsapp" aria-labelledby="whatsapp-cta-title">
+    <div>
+      <h3 id="whatsapp-cta-title">Too busy for forms?</h3>
+      <p>
+        Send us a quick WhatsApp message and tell us what kind of video, photo
+        content or website you need.
+      </p>
+    </div>
+
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Start a WhatsApp conversation with NextVision Studio"
+    >
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M16.04 3.2A12.75 12.75 0 0 0 5.2 22.65L3.4 29.2l6.7-1.76A12.8 12.8 0 1 0 16.04 3.2Zm0 23.42c-2.06 0-4.08-.56-5.83-1.62l-.42-.25-3.97 1.04 1.06-3.86-.27-.43a10.65 10.65 0 1 1 9.43 5.12Zm5.84-7.98c-.32-.16-1.9-.94-2.2-1.05-.29-.1-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.19.22-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59a9.62 9.62 0 0 1-1.78-2.21c-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.35-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.07 1.3 3.28c.16.21 2.24 3.42 5.42 4.8.76.32 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.9-.78 2.16-1.53.27-.75.27-1.4.19-1.53-.08-.14-.29-.22-.61-.38Z"
+        ></path>
+      </svg>
+      <span>Message us on WhatsApp</span>
+    </a>
+  </aside>
+
+  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+</section>
+
+<style>
+  .showreel,
+  .showreel * {
+    box-sizing: border-box;
+  }
+
+  .showreel {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 108px 24px 118px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    background:
+      radial-gradient(circle at 50% 34%, rgba(95, 165, 215, 0.11), transparent 31%),
+      #111111;
+    color: #ffffff;
+  }
+
+  .showreel__header {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 850px);
+    margin: 0 auto 46px;
+    text-align: center;
+  }
+
+  .showreel__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 21px;
+    padding: 10px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.08);
+    color: #cfeaff;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .showreel__header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(44px, 5.8vw, 78px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+
+  .showreel__header p {
+    width: min(100%, 680px);
+    margin: 22px auto 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: clamp(16px, 1.55vw, 18px);
+    font-weight: 500;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
+
+  .showreel__frame {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 11px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    background:
+      linear-gradient(#14171a, #14171a) padding-box,
+      linear-gradient(
+          135deg,
+          rgba(210, 235, 255, 0.68),
+          rgba(130, 165, 190, 0.24),
+          rgba(255, 255, 255, 0.09)
+        ) border-box;
+    box-shadow:
+      0 0 30px rgba(155, 210, 255, 0.1),
+      0 26px 74px rgba(0, 0, 0, 0.5);
+    transition:
+      transform 280ms ease,
+      box-shadow 280ms ease;
+  }
+
+  .showreel__frame:hover {
+    box-shadow:
+      0 0 42px rgba(155, 210, 255, 0.16),
+      0 30px 82px rgba(0, 0, 0, 0.58);
+    transform: translateY(-4px);
+  }
+
+  .showreel__video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 21px;
+    background: #000000;
+  }
+
+  .showreel video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000000;
+    object-fit: cover;
+  }
+
+  .showreel__whatsapp {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    width: min(100%, 860px);
+    margin: 40px auto 0;
+    padding: 27px 28px 27px 32px;
+    overflow: hidden;
+    border: 1px solid rgba(37, 211, 102, 0.24);
+    border-radius: 25px;
+    background:
+      radial-gradient(circle at 82% 50%, rgba(37, 211, 102, 0.13), transparent 36%),
+      rgba(13, 20, 16, 0.76);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
+  }
+
+  .showreel__whatsapp > div {
+    max-width: 620px;
+  }
+
+  .showreel__whatsapp h3 {
+    margin: 0;
+    color: #31df72;
+    font-size: clamp(25px, 3vw, 36px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+
+  .showreel__whatsapp p {
+    margin: 9px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 15px;
+    font-weight: 550;
+    line-height: 1.5;
+  }
+
+  .showreel__whatsapp > a {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    border-radius: 50%;
+    background: #25d366;
+    color: #ffffff;
+    box-shadow:
+      0 0 0 6px rgba(37, 211, 102, 0.09),
+      0 0 28px rgba(37, 211, 102, 0.25);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .showreel__whatsapp > a:hover {
+    box-shadow:
+      0 0 0 8px rgba(37, 211, 102, 0.11),
+      0 0 38px rgba(37, 211, 102, 0.38);
+    transform: scale(1.07);
+  }
+
+  .showreel__whatsapp > a:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 4px;
+  }
+
+  .showreel__whatsapp svg {
+    width: 33px;
+    height: 33px;
+  }
+
+  .showreel__whatsapp a span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .showreel {
+      padding: 90px 16px 96px;
+    }
+
+    .showreel__header {
+      margin-bottom: 36px;
+    }
+
+    .showreel__header h2 {
+      font-size: clamp(39px, 11vw, 54px);
+    }
+
+    .showreel__frame {
+      padding: 7px;
+      border-radius: 22px;
+    }
+
+    .showreel__video-wrap {
+      border-radius: 15px;
+    }
+
+    .showreel__whatsapp {
+      flex-direction: column;
+      gap: 22px;
+      margin-top: 30px;
+      padding: 28px 20px;
+      border-radius: 22px;
+      text-align: center;
+    }
+
+    .showreel__whatsapp > a {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showreel__frame,
+    .showreel__whatsapp > a {
+      transition: none;
+    }
+  }
+</style>

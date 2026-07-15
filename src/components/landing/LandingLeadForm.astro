@@ -1,0 +1,357 @@
+---
+import { WHATSAPP_URL } from "../../config/contact";
+import { WEB3FORMS_ACCESS_KEY } from "../../config/forms";
+import type { LandingPageData } from "../../data/landingPages";
+
+interface Props {
+  page: LandingPageData;
+}
+
+const { page } = Astro.props;
+const nameId = `${page.slug}-name`;
+const emailId = `${page.slug}-email`;
+const messageId = `${page.slug}-message`;
+---
+
+<section class="landing-contact" id="landing-contact" aria-labelledby="landing-contact-title">
+  <div class="landing-contact__inner">
+    <div class="landing-contact__copy">
+      <div class="landing-contact__kicker">Free project conversation</div>
+      <h2 id="landing-contact-title">{page.formTitle}</h2>
+      <p>{page.formText}</p>
+
+      <ul>
+        <li><span aria-hidden="true">✓</span> No finished brief required</li>
+        <li><span aria-hidden="true">✓</span> Clear scope before work begins</li>
+        <li><span aria-hidden="true">✓</span> Direct contact with NextVision Studio</li>
+      </ul>
+
+      <a class="landing-contact__whatsapp" href={WHATSAPP_URL}>
+        Prefer WhatsApp? Message us directly
+      </a>
+    </div>
+
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="redirect" value="https://nextvisionstudio.com/quotesend/" />
+      <input type="hidden" name="subject" value={page.formSubject} />
+      <input type="hidden" name="from_name" value="NextVision Studio Website" />
+      <input type="hidden" name="landing_page" value={`/${page.slug}/`} />
+      <input type="hidden" name="service" value={page.serviceType} />
+
+      <div class="landing-contact__botcheck" aria-hidden="true">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="landing-contact__field">
+        <label for={nameId}>Name</label>
+        <input
+          id={nameId}
+          type="text"
+          name="name"
+          placeholder="Your name"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div class="landing-contact__field">
+        <label for={emailId}>Email</label>
+        <input
+          id={emailId}
+          type="email"
+          name="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          inputmode="email"
+          required
+        />
+      </div>
+
+      <div class="landing-contact__field">
+        <label for={messageId}>Project details</label>
+        <textarea
+          id={messageId}
+          name="message"
+          placeholder="What would you like to create or improve?"
+          rows="7"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit"><span>Request a project recommendation</span></button>
+      <p class="landing-contact__privacy">
+        Your details are used only to respond to this enquiry.
+      </p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .landing-contact,
+  .landing-contact * {
+    box-sizing: border-box;
+  }
+
+  .landing-contact {
+    position: relative;
+    padding: 122px 24px 128px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 72% 40%, rgba(155, 210, 255, 0.11), transparent 31%),
+      linear-gradient(180deg, #111111, #0d1114);
+    color: #ffffff;
+    scroll-margin-top: 94px;
+  }
+
+  .landing-contact__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(480px, 1.2fr);
+    align-items: center;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    gap: clamp(54px, 8vw, 100px);
+  }
+
+  .landing-contact__kicker {
+    display: inline-flex;
+    margin-bottom: 21px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .landing-contact h2 {
+    margin: 0;
+    font-size: clamp(46px, 6vw, 76px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .landing-contact__copy > p {
+    margin: 24px 0 0;
+    color: rgba(255, 255, 255, 0.59);
+    font-size: 16px;
+    line-height: 1.66;
+  }
+
+  .landing-contact__copy ul {
+    display: grid;
+    margin: 31px 0 0;
+    padding: 0;
+    gap: 12px;
+    list-style: none;
+  }
+
+  .landing-contact__copy li {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: rgba(255, 255, 255, 0.67);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .landing-contact__copy li span {
+    display: grid;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    border: 1px solid rgba(180, 220, 255, 0.18);
+    border-radius: 50%;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 11px;
+  }
+
+  .landing-contact__whatsapp {
+    display: inline-flex;
+    margin-top: 30px;
+    color: #8ce9ae;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-underline-offset: 4px;
+    text-transform: uppercase;
+  }
+
+  .landing-contact__whatsapp:focus-visible {
+    outline: 2px solid #8ce9ae;
+    outline-offset: 4px;
+  }
+
+  .landing-contact form {
+    padding: clamp(30px, 5vw, 50px);
+    border: 1px solid rgba(180, 220, 255, 0.17);
+    border-radius: 30px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.022)),
+      #15191d;
+    box-shadow:
+      0 32px 90px rgba(0, 0, 0, 0.38),
+      0 0 48px rgba(155, 210, 255, 0.06);
+  }
+
+  .landing-contact__botcheck {
+    display: none;
+  }
+
+  .landing-contact__field {
+    margin-bottom: 18px;
+  }
+
+  .landing-contact__field label {
+    display: block;
+    margin-bottom: 9px;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .landing-contact__field input,
+  .landing-contact__field textarea {
+    display: block;
+    width: 100%;
+    min-height: 56px;
+    padding: 15px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 15px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.045);
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  }
+
+  .landing-contact__field textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
+
+  .landing-contact__field input::placeholder,
+  .landing-contact__field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.34);
+  }
+
+  .landing-contact__field input:focus,
+  .landing-contact__field textarea:focus {
+    border-color: rgba(155, 210, 255, 0.58);
+    background: rgba(255, 255, 255, 0.065);
+    box-shadow: 0 0 0 4px rgba(155, 210, 255, 0.085);
+  }
+
+  .landing-contact button {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.32);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(155, 210, 255, 0.11)),
+      rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.27),
+      0 20px 46px rgba(0, 0, 0, 0.32);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .landing-contact button::after {
+    content: "";
+    position: absolute;
+    top: -90%;
+    left: -85%;
+    width: 55%;
+    height: 280%;
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+    opacity: 0.45;
+    transform: rotate(15deg);
+    transition: left 700ms ease;
+  }
+
+  .landing-contact button span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .landing-contact button:hover {
+    border-color: rgba(207, 234, 255, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 0 34px rgba(155, 210, 255, 0.13),
+      0 24px 54px rgba(0, 0, 0, 0.36);
+    transform: translateY(-2px);
+  }
+
+  .landing-contact button:hover::after {
+    left: 130%;
+  }
+
+  .landing-contact button:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .landing-contact__privacy {
+    margin: 15px 0 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    text-align: center;
+  }
+
+  @media (max-width: 880px) {
+    .landing-contact__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .landing-contact {
+      padding: 90px 16px 96px;
+    }
+
+    .landing-contact h2 {
+      font-size: clamp(41px, 12.5vw, 56px);
+    }
+
+    .landing-contact form {
+      padding: 29px 20px;
+      border-radius: 24px;
+    }
+
+    .landing-contact button {
+      padding: 0 17px;
+      font-size: 9px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-contact__field input,
+    .landing-contact__field textarea,
+    .landing-contact button,
+    .landing-contact button::after {
+      transition: none;
+    }
+  }
+</style>

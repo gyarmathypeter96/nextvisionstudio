@@ -1,0 +1,924 @@
+---
+const videos = [
+  {
+    id: "JVA_WxYY3p0",
+    title: "Gut Fest Promo Video",
+    category: "Dublin Event Videography",
+    orientation: "landscape",
+  },
+  {
+    id: "ganLqcBd5Eg",
+    title: "Red Line ONE",
+    category: "Concert Videography Dublin",
+    orientation: "portrait",
+  },
+  {
+    id: "mYssEeIWuxM",
+    title: "Cannonball Dublin 2026",
+    category: "Automotive Event Video",
+    orientation: "portrait",
+  },
+  {
+    id: "w2nOFnxvOL8",
+    title: "Pogány Induló — Dublin Concert",
+    category: "Live Music Videography",
+    orientation: "portrait",
+  },
+  {
+    id: "GTzSrbR4-k4",
+    title: "Macaron Boutique Promo",
+    category: "Product Video",
+    orientation: "portrait",
+  },
+  {
+    id: "53-_kK95Eoc",
+    title: "Leroys Barking World Promo",
+    category: "Social Media Content",
+    orientation: "portrait",
+  },
+  {
+    id: "SUeoIgRtH0I",
+    title: "VentSolve Promo Videography",
+    category: "Brand Promo Video",
+    orientation: "portrait",
+  },
+  {
+    id: "8ouFX2Nqe7o",
+    title: "VentSolve ChatGPT Promo",
+    category: "Promotional Content",
+    orientation: "portrait",
+  },
+  {
+    id: "X68pQhtHIOY",
+    title: "VentSolve Promo Video",
+    category: "Short-Form Brand Video",
+    orientation: "portrait",
+  },
+  {
+    id: "fLzjvPVHzAc",
+    title: "Podcast Video",
+    category: "Talking-Head Content",
+    orientation: "portrait",
+  },
+  {
+    id: "2Q6jsrpyJUE",
+    title: "AI Storytelling Video",
+    category: "Creative Campaign",
+    orientation: "portrait",
+  },
+  {
+    id: "lo7yFbvq6pU",
+    title: "Short-Form Brand Video",
+    category: "Social Video Portfolio",
+    orientation: "portrait",
+    fallbackThumbnail: true,
+  },
+  {
+    id: "RuqRonMu12o",
+    title: "SiInk Promo Video",
+    category: "Business Promo Video",
+    orientation: "portrait",
+  },
+  {
+    id: "wADEq5-xi34",
+    title: "Saxoo London Product Video",
+    category: "Fashion Brand Content",
+    orientation: "portrait",
+  },
+  {
+    id: "TeX-7ITDSQg",
+    title: "Pekado Kebab Alicante",
+    category: "Restaurant Short-Form Video",
+    orientation: "portrait",
+  },
+  {
+    id: "LqePwDWaP8Y",
+    title: "Eco Vent Turbo Corporate Video",
+    category: "Corporate Video Production",
+    orientation: "portrait",
+  },
+  {
+    id: "dnZDdtZYsNM",
+    title: "Cyprus Drone Videography",
+    category: "Aerial Video Production",
+    orientation: "portrait",
+  },
+  {
+    id: "VMcywbhRMCc",
+    title: "Buga Ramen",
+    category: "Restaurant Promo Video",
+    orientation: "portrait",
+  },
+];
+
+const videoRows = [
+  {
+    id: "portfolio-row-brand",
+    title: "Brand, Event & Promotional Video",
+    label: "Brand and promotional video portfolio",
+    videos: videos.slice(0, 9),
+  },
+  {
+    id: "portfolio-row-social",
+    title: "Short-Form Social Video",
+    label: "Short-form social media video portfolio",
+    videos: videos.slice(9),
+  },
+];
+
+const thumbnailFor = (video: (typeof videos)[number]) =>
+  video.fallbackThumbnail
+    ? "/images/portfolio/video-placeholder.svg"
+    : `/images/portfolio/${video.id}.webp`;
+
+const portfolioSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "NextVision Studio Video Production Portfolio",
+  description:
+    "Brand videos, event videography, promotional films and short-form social media video created by NextVision Studio in Dublin.",
+  numberOfItems: videos.length,
+  itemListElement: videos.map((video, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "VideoObject",
+      name: video.title,
+      description: `${video.category} created by NextVision Studio, a Dublin video production studio.`,
+      thumbnailUrl: `https://nextvisionstudio.com${thumbnailFor(video)}`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+    },
+  })),
+};
+---
+
+<section class="portfolio" id="portfolio" aria-labelledby="portfolio-title" data-video-portfolio>
+  <header class="portfolio__header">
+    <div class="portfolio__label">Video portfolio</div>
+    <h2 id="portfolio-title">Video Work That Builds Brands</h2>
+    <p>
+      A selection of brand films, event videography, promotional videos and
+      short-form social media content produced by NextVision Studio in Dublin.
+    </p>
+  </header>
+
+  <div class="portfolio__rows">
+    {
+      videoRows.map((row) => (
+        <section class="portfolio__row" aria-labelledby={`${row.id}-title`}>
+          <div class="portfolio__row-header">
+            <h3 id={`${row.id}-title`}>{row.title}</h3>
+            <div class="portfolio__controls" aria-label={`${row.title} controls`}>
+              <button
+                type="button"
+                aria-label={`Scroll ${row.title} left`}
+                aria-controls={row.id}
+                data-rail-control={row.id}
+                data-direction="left"
+              >
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m12.5 4.5-5.5 5.5 5.5 5.5" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                aria-label={`Scroll ${row.title} right`}
+                aria-controls={row.id}
+                data-rail-control={row.id}
+                data-direction="right"
+              >
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m7.5 4.5 5.5 5.5-5.5 5.5" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="portfolio__rail-shell">
+            <div class="portfolio__rail" id={row.id} aria-label={row.label} tabindex="0">
+              {row.videos.map((video) => (
+                <button
+                  class="portfolio__card"
+                  type="button"
+                  aria-label={`Play ${video.title}`}
+                  data-video-id={video.id}
+                  data-video-title={video.title}
+                  data-orientation={video.orientation}
+                >
+                  <img
+                    src={thumbnailFor(video)}
+                    alt={`${video.title} — ${video.category} by NextVision Studio`}
+                    width="640"
+                    height="360"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="portfolio__shade" aria-hidden="true"></span>
+                  <span class="portfolio__card-copy">
+                    <strong>{video.title}</strong>
+                    <span>{video.category}</span>
+                  </span>
+                  <span class="portfolio__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="m9 7 8 5-8 5Z" />
+                    </svg>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <dialog class="portfolio-dialog" aria-labelledby="portfolio-dialog-title" data-video-dialog>
+    <button class="portfolio-dialog__close" type="button" aria-label="Close video" data-dialog-close>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6 6 12 12M18 6 6 18" />
+      </svg>
+    </button>
+    <div class="portfolio-dialog__player" data-dialog-player></div>
+    <div class="portfolio-dialog__meta">
+      <p id="portfolio-dialog-title" class="portfolio-dialog__title" data-dialog-title></p>
+      <a
+        class="portfolio-dialog__youtube-link"
+        href="https://www.youtube.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-youtube-link
+      >
+        Watch on YouTube
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M7 13 13 7m-5 0h5v5" />
+        </svg>
+      </a>
+    </div>
+  </dialog>
+
+  <script type="application/ld+json" set:html={JSON.stringify(portfolioSchema)} />
+</section>
+
+<script>
+  const setupVideoPortfolios = () => {
+    document.querySelectorAll<HTMLElement>("[data-video-portfolio]").forEach((section) => {
+      if (section.dataset.ready === "true") return;
+      section.dataset.ready = "true";
+
+      const dialog = section.querySelector<HTMLDialogElement>("[data-video-dialog]");
+      const player = section.querySelector<HTMLElement>("[data-dialog-player]");
+      const dialogTitle = section.querySelector<HTMLElement>("[data-dialog-title]");
+      const youtubeLink = section.querySelector<HTMLAnchorElement>("[data-youtube-link]");
+      const closeButton = section.querySelector<HTMLButtonElement>("[data-dialog-close]");
+      let lastTrigger: HTMLButtonElement | null = null;
+      let openRequest = 0;
+
+      const resetPlayer = () => {
+        openRequest += 1;
+        player?.replaceChildren();
+        player?.classList.remove("is-loading");
+        player?.removeAttribute("aria-busy");
+        dialog?.classList.remove("is-portrait");
+        if (dialogTitle) dialogTitle.textContent = "";
+      };
+
+      section.querySelectorAll<HTMLButtonElement>("[data-video-id]").forEach((card) => {
+        card.addEventListener("click", () => {
+          if (!dialog || !player) return;
+
+          const videoId = card.dataset.videoId;
+          const title = card.dataset.videoTitle ?? "NextVision Studio portfolio video";
+          if (!videoId) return;
+
+          lastTrigger = card;
+          dialog.classList.toggle("is-portrait", card.dataset.orientation === "portrait");
+          if (dialogTitle) dialogTitle.textContent = title;
+          if (youtubeLink) youtubeLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+          const requestId = ++openRequest;
+          player.replaceChildren();
+          player.classList.add("is-loading");
+          player.setAttribute("aria-busy", "true");
+          dialog.showModal();
+
+          // The YouTube player must be created only after the dialog has its final
+          // 16:9 or 9:16 size. Initialising it while the dialog is hidden makes the
+          // embedded player calculate a tiny viewport in some browsers.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (requestId !== openRequest || !dialog.open) return;
+
+              const { width, height } = player.getBoundingClientRect();
+              const iframe = document.createElement("iframe");
+              iframe.width = String(Math.round(width));
+              iframe.height = String(Math.round(height));
+              iframe.title = `YouTube video: ${title}`;
+              iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+              iframe.referrerPolicy = "strict-origin-when-cross-origin";
+              iframe.allowFullscreen = true;
+
+              const origin = encodeURIComponent(window.location.origin);
+              iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&origin=${origin}`;
+              iframe.addEventListener(
+                "load",
+                () => {
+                  player.classList.remove("is-loading");
+                  player.removeAttribute("aria-busy");
+                },
+                { once: true },
+              );
+              player.replaceChildren(iframe);
+            });
+          });
+        });
+      });
+
+      closeButton?.addEventListener("click", () => dialog?.close());
+
+      dialog?.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      dialog?.addEventListener("close", () => {
+        resetPlayer();
+        lastTrigger?.focus();
+      });
+
+      section.querySelectorAll<HTMLButtonElement>("[data-rail-control]").forEach((control) => {
+        const targetId = control.dataset.railControl;
+        const rail = targetId ? section.querySelector<HTMLElement>(`#${targetId}`) : null;
+        if (!rail) return;
+
+        const updateControls = () => {
+          const rowControls = section.querySelectorAll<HTMLButtonElement>(
+            `[data-rail-control="${targetId}"]`,
+          );
+          const atStart = rail.scrollLeft <= 2;
+          const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+          rowControls.forEach((button) => {
+            button.disabled = button.dataset.direction === "left" ? atStart : atEnd;
+          });
+        };
+
+        control.addEventListener("click", () => {
+          const direction = control.dataset.direction === "left" ? -1 : 1;
+          rail.scrollBy({ left: rail.clientWidth * 0.82 * direction, behavior: "smooth" });
+        });
+
+        rail.addEventListener("scroll", updateControls, { passive: true });
+        updateControls();
+      });
+    });
+  };
+
+  setupVideoPortfolios();
+  document.addEventListener("astro:page-load", setupVideoPortfolios);
+</script>
+
+<style>
+  .portfolio,
+  .portfolio * {
+    box-sizing: border-box;
+  }
+
+  .portfolio {
+    position: relative;
+    width: 100%;
+    margin: -1px 0 0;
+    padding: 110px 0 118px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    background:
+      radial-gradient(circle at 50% 19%, rgba(93, 163, 213, 0.11), transparent 27%),
+      linear-gradient(to bottom, #111111 0%, #10151a 43%, #111111 100%);
+    color: #ffffff;
+  }
+
+  .portfolio__header {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 32px, 880px);
+    margin: 0 auto 62px;
+    text-align: center;
+  }
+
+  .portfolio__label {
+    display: inline-flex;
+    margin-bottom: 20px;
+    padding: 10px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.27);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.075);
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .portfolio__header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(44px, 5.8vw, 76px);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  .portfolio__header p {
+    width: min(100%, 720px);
+    margin: 23px auto 0;
+    color: rgba(255, 255, 255, 0.63);
+    font-size: clamp(16px, 1.7vw, 19px);
+    font-weight: 500;
+    line-height: 1.58;
+    text-wrap: balance;
+  }
+
+  .portfolio__rows {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 42px;
+  }
+
+  .portfolio__row {
+    min-width: 0;
+  }
+
+  .portfolio__row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: min(100% - 48px, 1220px);
+    margin: 0 auto 16px;
+  }
+
+  .portfolio__row-header h3 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .portfolio__controls {
+    display: flex;
+    gap: 9px;
+  }
+
+  .portfolio__controls button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(180, 220, 255, 0.19);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.055);
+    color: #d7efff;
+    cursor: pointer;
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      opacity 200ms ease,
+      transform 200ms ease;
+  }
+
+  .portfolio__controls button:hover:not(:disabled) {
+    border-color: rgba(180, 220, 255, 0.38);
+    background: rgba(155, 210, 255, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .portfolio__controls button:disabled {
+    cursor: default;
+    opacity: 0.28;
+  }
+
+  .portfolio__controls button:focus-visible,
+  .portfolio__card:focus-visible,
+  .portfolio-dialog__close:focus-visible {
+    outline: 3px solid #cfeaff;
+    outline-offset: 3px;
+  }
+
+  .portfolio__controls svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .portfolio__rail-shell {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .portfolio__rail-shell::before,
+  .portfolio__rail-shell::after {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    width: max(28px, calc((100vw - 1420px) / 2));
+    content: "";
+    pointer-events: none;
+  }
+
+  .portfolio__rail-shell::before {
+    left: 0;
+    background: linear-gradient(to right, #111111, transparent);
+  }
+
+  .portfolio__rail-shell::after {
+    right: 0;
+    background: linear-gradient(to left, #111111, transparent);
+  }
+
+  .portfolio__rail {
+    display: grid;
+    grid-auto-columns: minmax(300px, 360px);
+    grid-auto-flow: column;
+    gap: 18px;
+    width: 100%;
+    padding: 10px max(24px, calc((100vw - 1220px) / 2)) 28px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: max(24px, calc((100vw - 1220px) / 2));
+    scroll-snap-type: inline mandatory;
+    scrollbar-color: rgba(155, 210, 255, 0.25) transparent;
+    scrollbar-width: thin;
+  }
+
+  .portfolio__card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.7;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.11);
+    border-radius: 20px;
+    background: #172027;
+    box-shadow:
+      0 16px 46px rgba(0, 0, 0, 0.36),
+      0 0 28px rgba(155, 210, 255, 0.035);
+    color: #ffffff;
+    cursor: pointer;
+    scroll-snap-align: start;
+    text-align: left;
+    transition:
+      border-color 300ms ease,
+      box-shadow 300ms ease,
+      transform 300ms ease;
+  }
+
+  .portfolio__card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #10151a;
+    object-fit: cover;
+    transition:
+      filter 480ms ease,
+      transform 480ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .portfolio__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3, 5, 6, 0.94), rgba(3, 5, 6, 0.2) 62%, transparent);
+    pointer-events: none;
+  }
+
+  .portfolio__card-copy {
+    position: absolute;
+    z-index: 1;
+    right: 68px;
+    bottom: 18px;
+    left: 19px;
+    display: grid;
+    gap: 5px;
+  }
+
+  .portfolio__card-copy strong {
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 850;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .portfolio__card-copy span {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .portfolio__play {
+    position: absolute;
+    z-index: 2;
+    right: 18px;
+    bottom: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    border: 1px solid rgba(210, 235, 255, 0.66);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    transition:
+      background 280ms ease,
+      box-shadow 280ms ease,
+      transform 280ms ease;
+  }
+
+  .portfolio__play svg {
+    width: 22px;
+    height: 22px;
+    fill: #ffffff;
+  }
+
+  .portfolio__card:hover {
+    border-color: rgba(180, 220, 255, 0.28);
+    box-shadow:
+      0 0 34px rgba(155, 210, 255, 0.13),
+      0 27px 66px rgba(0, 0, 0, 0.45);
+    transform: translateY(-5px) scale(1.014);
+  }
+
+  .portfolio__card:hover img {
+    filter: brightness(1.08) saturate(1.05);
+    transform: scale(1.055);
+  }
+
+  .portfolio__card:hover .portfolio__play {
+    background: rgba(155, 210, 255, 0.18);
+    box-shadow: 0 0 28px rgba(155, 210, 255, 0.3);
+    transform: scale(1.07);
+  }
+
+  .portfolio-dialog {
+    width: min(1050px, calc(100vw - 40px));
+    max-width: none;
+    padding: 10px;
+    overflow: visible;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 25px;
+    background: #080b0d;
+    box-shadow:
+      0 0 80px rgba(0, 0, 0, 0.85),
+      0 0 50px rgba(155, 210, 255, 0.13);
+    color: #ffffff;
+  }
+
+  .portfolio-dialog::backdrop {
+    background: rgba(2, 4, 5, 0.88);
+    backdrop-filter: blur(12px);
+  }
+
+  .portfolio-dialog.is-portrait {
+    width: min(430px, calc(100vw - 32px), calc(42.75vh + 20px));
+  }
+
+  .portfolio-dialog__player {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 17px;
+    background: #000000;
+  }
+
+  .portfolio-dialog__player.is-loading::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    border: 2px solid rgba(207, 234, 255, 0.2);
+    border-top-color: #cfeaff;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: portfolio-player-loading 700ms linear infinite;
+  }
+
+  @keyframes portfolio-player-loading {
+    to {
+      transform: translate(-50%, -50%) rotate(1turn);
+    }
+  }
+
+  .portfolio-dialog.is-portrait .portfolio-dialog__player {
+    aspect-ratio: 9 / 16;
+  }
+
+  .portfolio-dialog__player iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .portfolio-dialog__close {
+    position: absolute;
+    z-index: 2;
+    top: -17px;
+    right: -17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid rgba(210, 235, 255, 0.36);
+    border-radius: 50%;
+    background: rgba(25, 33, 39, 0.96);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .portfolio-dialog__close svg {
+    width: 23px;
+    height: 23px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+  }
+
+  .portfolio-dialog__title {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .portfolio-dialog__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 40px;
+    padding: 10px 8px 0;
+  }
+
+  .portfolio-dialog__youtube-link {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    color: #cfeaff;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .portfolio-dialog__youtube-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .portfolio-dialog__youtube-link:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 3px;
+  }
+
+  .portfolio-dialog__youtube-link svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  @media (max-width: 767px) {
+    .portfolio {
+      padding: 88px 0 94px;
+    }
+
+    .portfolio__header {
+      margin-bottom: 49px;
+    }
+
+    .portfolio__header h2 {
+      font-size: clamp(42px, 12vw, 57px);
+    }
+
+    .portfolio__rows {
+      gap: 34px;
+    }
+
+    .portfolio__row-header {
+      width: calc(100% - 32px);
+      margin-bottom: 11px;
+    }
+
+    .portfolio__row-header h3 {
+      font-size: 18px;
+    }
+
+    .portfolio__controls {
+      display: none;
+    }
+
+    .portfolio__rail-shell::before,
+    .portfolio__rail-shell::after {
+      display: none;
+    }
+
+    .portfolio__rail {
+      grid-auto-columns: minmax(268px, 78vw);
+      gap: 13px;
+      padding: 8px 16px 22px;
+      scroll-padding-inline: 16px;
+    }
+
+    .portfolio__card {
+      border-radius: 17px;
+    }
+
+    .portfolio__card-copy {
+      right: 62px;
+      bottom: 15px;
+      left: 16px;
+    }
+
+    .portfolio__card-copy strong {
+      font-size: 16px;
+    }
+
+    .portfolio__play {
+      right: 15px;
+      bottom: 14px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .portfolio-dialog {
+      padding: 7px;
+      border-radius: 20px;
+    }
+
+    .portfolio-dialog__player {
+      border-radius: 14px;
+    }
+
+    .portfolio-dialog__close {
+      top: -13px;
+      right: -8px;
+      width: 45px;
+      height: 45px;
+    }
+
+    .portfolio-dialog__meta {
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 5px 1px;
+    }
+
+    .portfolio-dialog__title,
+    .portfolio-dialog__youtube-link {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portfolio-dialog__player.is-loading::after {
+      animation: none;
+    }
+
+    .portfolio__controls button,
+    .portfolio__card,
+    .portfolio__card img,
+    .portfolio__play {
+      transition: none;
+    }
+  }
+</style>

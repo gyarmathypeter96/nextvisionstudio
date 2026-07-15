@@ -1,0 +1,370 @@
+---
+import type { LandingPageData } from "../../data/landingPages";
+
+interface Props {
+  page: LandingPageData;
+}
+
+const { page } = Astro.props;
+---
+
+<section class="landing-process" aria-labelledby="landing-process-title">
+  <div class="landing-process__inner">
+    <header>
+      <div class="landing-process__kicker">How it works</div>
+      <h2 id="landing-process-title">{page.processTitle}</h2>
+      <p>{page.processText}</p>
+    </header>
+
+    <ol class="landing-process__steps">
+      {
+        page.process.map((step, index) => (
+          <li>
+            <span>0{index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <aside class="landing-process__decision">
+      <div>
+        <small>A useful first conversation</small>
+        <h3>{page.decisionTitle}</h3>
+        <p>{page.decisionText}</p>
+      </div>
+      <div class="landing-process__decision-actions">
+        <a href="#landing-contact">Get a clear next step</a>
+        <span>No finished brief required</span>
+      </div>
+    </aside>
+
+    <nav class="landing-process__related" aria-label="Related NextVision Studio services">
+      <span>Continue exploring</span>
+      {page.relatedLinks.slice(1).map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+  </div>
+</section>
+
+<style>
+  .landing-process,
+  .landing-process * {
+    box-sizing: border-box;
+  }
+
+  .landing-process {
+    position: relative;
+    padding: 120px 24px 126px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 48%, rgba(155, 210, 255, 0.075), transparent 34%),
+      linear-gradient(to bottom, #111111, #10151a 54%, #111111);
+    color: #ffffff;
+  }
+
+  .landing-process::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(207, 234, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 234, 255, 0.018) 1px, transparent 1px);
+    background-size: 82px 82px;
+    mask-image: radial-gradient(circle at center, #000, transparent 76%);
+    pointer-events: none;
+  }
+
+  .landing-process__inner {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+  }
+
+  .landing-process header {
+    width: min(100%, 850px);
+    margin: 0 auto 63px;
+    text-align: center;
+  }
+
+  .landing-process__kicker {
+    display: inline-flex;
+    margin-bottom: 21px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .landing-process header h2 {
+    margin: 0;
+    font-size: clamp(48px, 6.7vw, 82px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .landing-process header p {
+    width: min(100%, 680px);
+    margin: 24px auto 0;
+    color: rgba(255, 255, 255, 0.59);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .landing-process__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    gap: 12px;
+    list-style: none;
+  }
+
+  .landing-process__steps::before {
+    content: "";
+    position: absolute;
+    top: 49px;
+    right: 10%;
+    left: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155, 210, 255, 0.42), transparent);
+  }
+
+  .landing-process__steps li {
+    position: relative;
+    min-height: 270px;
+    padding: 28px;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 23px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+      #15191d;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+  }
+
+  .landing-process__steps li > span {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 43px;
+    height: 43px;
+    margin-bottom: 49px;
+    place-items: center;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 50%;
+    background: #172029;
+    color: #cfeaff;
+    font-size: 9px;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(155, 210, 255, 0.1);
+  }
+
+  .landing-process__steps h3 {
+    margin: 0 0 11px;
+    font-size: 23px;
+    letter-spacing: -0.045em;
+  }
+
+  .landing-process__steps p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    line-height: 1.58;
+  }
+
+  .landing-process__decision {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    margin-top: 70px;
+    padding: clamp(32px, 5vw, 55px);
+    gap: 50px;
+    border: 1px solid rgba(180, 220, 255, 0.18);
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 85% 50%, rgba(155, 210, 255, 0.12), transparent 30%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+      #15191d;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  }
+
+  .landing-process__decision small {
+    color: #cfeaff;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .landing-process__decision h3 {
+    margin: 14px 0 0;
+    font-size: clamp(32px, 4vw, 50px);
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .landing-process__decision p {
+    max-width: 700px;
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .landing-process__decision-actions {
+    display: grid;
+    justify-items: center;
+    gap: 13px;
+  }
+
+  .landing-process__decision-actions a {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 23px;
+    border: 1px solid rgba(207, 234, 255, 0.36);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(155, 210, 255, 0.1)),
+      rgba(255, 255, 255, 0.055);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+
+  .landing-process__decision-actions a:hover {
+    border-color: rgba(207, 234, 255, 0.52);
+    transform: translateY(-2px);
+  }
+
+  .landing-process__decision-actions a:focus-visible,
+  .landing-process__related a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .landing-process__decision-actions span {
+    color: rgba(255, 255, 255, 0.37);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .landing-process__related {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 37px;
+    gap: 10px;
+  }
+
+  .landing-process__related span,
+  .landing-process__related a {
+    padding: 11px 15px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .landing-process__related span {
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .landing-process__related a {
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    color: rgba(255, 255, 255, 0.61);
+    text-decoration: none;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  .landing-process__related a:hover {
+    border-color: rgba(180, 220, 255, 0.28);
+    color: #ffffff;
+  }
+
+  @media (max-width: 900px) {
+    .landing-process__steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .landing-process__steps::before {
+      display: none;
+    }
+
+    .landing-process__decision {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-process__decision-actions {
+      justify-items: start;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .landing-process {
+      padding: 90px 16px 96px;
+    }
+
+    .landing-process header {
+      margin-bottom: 46px;
+    }
+
+    .landing-process header h2 {
+      font-size: clamp(41px, 12.5vw, 56px);
+    }
+
+    .landing-process__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-process__steps li {
+      min-height: 220px;
+      padding: 24px;
+    }
+
+    .landing-process__steps li > span {
+      margin-bottom: 35px;
+    }
+
+    .landing-process__decision {
+      margin-top: 52px;
+      padding: 30px 22px;
+      border-radius: 24px;
+    }
+
+    .landing-process__decision-actions,
+    .landing-process__decision-actions a {
+      width: 100%;
+    }
+
+    .landing-process__related {
+      display: grid;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-process__decision-actions a,
+    .landing-process__related a {
+      transition: none;
+    }
+  }
+</style>

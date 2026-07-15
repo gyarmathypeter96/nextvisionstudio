@@ -1,0 +1,453 @@
+---
+import { WHATSAPP_URL } from "../config/contact";
+import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
+---
+
+<section class="contact-page" aria-labelledby="contact-page-title">
+  <div class="contact-page__inner">
+    <header class="contact-page__header">
+      <div class="contact-page__kicker">Start a project</div>
+      <h1 id="contact-page-title">Let’s Talk About What You Want to Create</h1>
+      <p>
+        Looking for videography, photography, social media content, advertising
+        or website design in Dublin? Send a few details and NextVision Studio
+        will reply with the clearest next step.
+      </p>
+    </header>
+
+    <div class="contact-page__layout">
+      <aside class="contact-page__details" aria-label="Contact details">
+        <p class="contact-page__eyebrow">Direct, simple, no pressure</p>
+        <h2>Tell us about your idea.</h2>
+        <p>
+          You do not need a finished brief. Share what your business does, what
+          you want to improve and any timing you already have in mind.
+        </p>
+
+        <dl>
+          <div>
+            <dt>Based in</dt>
+            <dd>Dublin, Ireland</dd>
+          </div>
+          <div>
+            <dt>WhatsApp</dt>
+            <dd><a href={WHATSAPP_URL}>+353 89 479 7055</a></dd>
+          </div>
+          <div>
+            <dt>Explore first</dt>
+            <dd><a href="/services/">View our services</a></dd>
+          </div>
+        </dl>
+
+        <p class="contact-page__note">
+          Prefer to see examples first? Browse our
+          <a href="/#portfolio">video portfolio</a> and
+          <a href="/#photography-portfolio">photography work</a>.
+        </p>
+      </aside>
+
+      <form
+        class="contact-page__form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+        <input
+          type="hidden"
+          name="redirect"
+          value="https://nextvisionstudio.com/quotesend/"
+        />
+        <input
+          type="hidden"
+          name="subject"
+          value="New project enquiry from the NextVision Studio contact page"
+        />
+        <input type="hidden" name="from_name" value="NextVision Studio Website" />
+
+        <div class="contact-page__botcheck" aria-hidden="true">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="contact-page__field">
+          <label for="contact-page-name">Name</label>
+          <input
+            id="contact-page-name"
+            type="text"
+            name="name"
+            placeholder="Your name"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="contact-page__field">
+          <label for="contact-page-email">Email</label>
+          <input
+            id="contact-page-email"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            inputmode="email"
+            required
+          />
+        </div>
+
+        <div class="contact-page__field">
+          <label for="contact-page-message">Tell us about your project</label>
+          <textarea
+            id="contact-page-message"
+            name="message"
+            placeholder="What would you like to create or improve?"
+            rows="7"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit"><span>Send enquiry</span></button>
+        <p class="contact-page__privacy">
+          Your details are used only to respond to this enquiry.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-page,
+  .contact-page * {
+    box-sizing: border-box;
+  }
+
+  .contact-page {
+    position: relative;
+    min-height: 100svh;
+    padding: 158px 24px 124px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 75% 38%, rgba(155, 210, 255, 0.1), transparent 29%),
+      radial-gradient(circle at 15% 75%, rgba(78, 118, 147, 0.07), transparent 25%),
+      linear-gradient(180deg, #0d1013, #10151a 60%, #111111);
+    color: #ffffff;
+  }
+
+  .contact-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(207, 234, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 234, 255, 0.018) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, #000, transparent 92%);
+    pointer-events: none;
+  }
+
+  .contact-page__inner {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+  }
+
+  .contact-page__header {
+    width: min(100%, 900px);
+    margin: 0 auto 66px;
+    text-align: center;
+  }
+
+  .contact-page__kicker,
+  .contact-page__eyebrow {
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .contact-page__kicker {
+    display: inline-flex;
+    margin-bottom: 23px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+  }
+
+  .contact-page__header h1 {
+    margin: 0;
+    font-size: clamp(58px, 8vw, 104px);
+    font-weight: 950;
+    letter-spacing: -0.075em;
+    line-height: 0.88;
+    text-wrap: balance;
+  }
+
+  .contact-page__header > p {
+    width: min(100%, 720px);
+    margin: 28px auto 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: clamp(16px, 1.9vw, 19px);
+    line-height: 1.62;
+  }
+
+  .contact-page__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(480px, 1.22fr);
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.16);
+    border-radius: 32px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+      #15191d;
+    box-shadow:
+      0 32px 100px rgba(0, 0, 0, 0.42),
+      0 0 52px rgba(155, 210, 255, 0.055);
+  }
+
+  .contact-page__details {
+    padding: clamp(36px, 5.4vw, 64px);
+    border-right: 1px solid rgba(180, 220, 255, 0.11);
+    background:
+      radial-gradient(circle at 10% 100%, rgba(155, 210, 255, 0.11), transparent 45%),
+      rgba(255, 255, 255, 0.015);
+  }
+
+  .contact-page__eyebrow {
+    margin: 0 0 18px;
+  }
+
+  .contact-page__details h2 {
+    margin: 0;
+    font-size: clamp(35px, 4vw, 52px);
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .contact-page__details > p:not(.contact-page__eyebrow):not(.contact-page__note) {
+    margin: 22px 0 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .contact-page__details dl {
+    display: grid;
+    margin: 38px 0 0;
+    gap: 0;
+  }
+
+  .contact-page__details dl div {
+    padding: 17px 0;
+    border-top: 1px solid rgba(180, 220, 255, 0.1);
+  }
+
+  .contact-page__details dt {
+    margin-bottom: 7px;
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .contact-page__details dd {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 750;
+  }
+
+  .contact-page__details a,
+  .contact-page__note a {
+    color: #cfeaff;
+    text-underline-offset: 3px;
+  }
+
+  .contact-page__note {
+    margin: 30px 0 0;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .contact-page__form {
+    padding: clamp(36px, 5.4vw, 64px);
+  }
+
+  .contact-page__botcheck {
+    display: none;
+  }
+
+  .contact-page__field {
+    margin-bottom: 19px;
+  }
+
+  .contact-page__field label {
+    display: block;
+    margin-bottom: 9px;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .contact-page__field input,
+  .contact-page__field textarea {
+    display: block;
+    width: 100%;
+    min-height: 56px;
+    padding: 15px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 15px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.045);
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  }
+
+  .contact-page__field textarea {
+    min-height: 164px;
+    resize: vertical;
+  }
+
+  .contact-page__field input::placeholder,
+  .contact-page__field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.34);
+  }
+
+  .contact-page__field input:focus,
+  .contact-page__field textarea:focus {
+    border-color: rgba(155, 210, 255, 0.58);
+    background: rgba(255, 255, 255, 0.065);
+    box-shadow: 0 0 0 4px rgba(155, 210, 255, 0.085);
+  }
+
+  .contact-page__form button {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.31);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(155, 210, 255, 0.11)),
+      rgba(255, 255, 255, 0.065);
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.27),
+      0 19px 45px rgba(0, 0, 0, 0.3);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .contact-page__form button::after {
+    content: "";
+    position: absolute;
+    top: -90%;
+    left: -80%;
+    width: 55%;
+    height: 280%;
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    opacity: 0.45;
+    transform: rotate(15deg);
+    transition: left 700ms ease;
+  }
+
+  .contact-page__form button span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-page__form button:hover {
+    border-color: rgba(207, 234, 255, 0.48);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      0 0 34px rgba(155, 210, 255, 0.14),
+      0 22px 52px rgba(0, 0, 0, 0.36);
+    transform: translateY(-2px);
+  }
+
+  .contact-page__form button:hover::after {
+    left: 130%;
+  }
+
+  .contact-page__form button:focus-visible,
+  .contact-page__details a:focus-visible,
+  .contact-page__note a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .contact-page__privacy {
+    margin: 15px 0 0;
+    color: rgba(255, 255, 255, 0.41);
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  @media (max-width: 880px) {
+    .contact-page {
+      padding: 132px 20px 100px;
+    }
+
+    .contact-page__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-page__details {
+      border-right: 0;
+      border-bottom: 1px solid rgba(180, 220, 255, 0.11);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact-page {
+      padding: 116px 16px 86px;
+    }
+
+    .contact-page__header {
+      margin-bottom: 45px;
+    }
+
+    .contact-page__header h1 {
+      font-size: clamp(47px, 14.5vw, 68px);
+      line-height: 0.91;
+    }
+
+    .contact-page__layout {
+      border-radius: 25px;
+    }
+
+    .contact-page__details,
+    .contact-page__form {
+      padding: 29px 20px;
+    }
+
+    .contact-page__field input,
+    .contact-page__field textarea {
+      font-size: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-page__field input,
+    .contact-page__field textarea,
+    .contact-page__form button,
+    .contact-page__form button::after {
+      transition: none;
+    }
+  }
+</style>

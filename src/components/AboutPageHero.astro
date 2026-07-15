@@ -1,0 +1,401 @@
+<section class="about-hero" aria-labelledby="about-page-title">
+  <div class="about-hero__glow" aria-hidden="true"></div>
+
+  <div class="about-hero__inner">
+    <div class="about-hero__copy">
+      <div class="about-hero__kicker">About NextVision Studio</div>
+      <h1 id="about-page-title">
+        Creative Work With <span>Clear Purpose</span>
+      </h1>
+      <p class="about-hero__lead">
+        NextVision Studio is a Dublin creative studio led by Peter Gyarmathy,
+        helping businesses communicate through professional videography,
+        photography, social media content, advertising and modern websites.
+      </p>
+
+      <div class="about-hero__actions">
+        <a class="about-hero__primary" href="/contact/">Start a project</a>
+        <a class="about-hero__secondary" href="/services/">Explore services</a>
+      </div>
+
+      <div class="about-hero__route" aria-label="Peter's creative journey">
+        <span>Hungarian born</span>
+        <i aria-hidden="true"></i>
+        <span>New York trained</span>
+        <i aria-hidden="true"></i>
+        <span>Dublin based</span>
+      </div>
+    </div>
+
+    <div class="about-hero__visual">
+      <div class="about-hero__image-shell">
+        <div class="about-hero__image-glow" aria-hidden="true"></div>
+        <img
+          src="/images/about/peter-gyarmathy.webp"
+          width="480"
+          height="480"
+          alt="Peter Gyarmathy, founder of NextVision Studio in Dublin"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="about-hero__image-copy">
+          <strong>Peter Gyarmathy</strong>
+          <span>Founder &amp; Creative Lead</span>
+        </div>
+      </div>
+
+      <div class="about-hero__tag about-hero__tag--one">Video</div>
+      <div class="about-hero__tag about-hero__tag--two">Photo</div>
+      <div class="about-hero__tag about-hero__tag--three">Digital</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero,
+  .about-hero * {
+    box-sizing: border-box;
+  }
+
+  .about-hero {
+    position: relative;
+    min-height: 100svh;
+    padding: 160px 24px 112px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 78% 48%, rgba(155, 210, 255, 0.1), transparent 31%),
+      linear-gradient(180deg, #0d1013 0%, #10151a 58%, #111111 100%);
+    color: #ffffff;
+  }
+
+  .about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(207, 234, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 234, 255, 0.018) 1px, transparent 1px);
+    background-size: 78px 78px;
+    mask-image: linear-gradient(to bottom, #000, transparent 90%);
+    pointer-events: none;
+  }
+
+  .about-hero__glow {
+    position: absolute;
+    top: 28%;
+    left: -170px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: rgba(99, 154, 195, 0.08);
+    filter: blur(90px);
+    pointer-events: none;
+  }
+
+  .about-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.72fr);
+    align-items: center;
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    gap: clamp(58px, 8vw, 112px);
+  }
+
+  .about-hero__kicker,
+  .about-hero__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-hero__kicker {
+    margin-bottom: 25px;
+  }
+
+  .about-hero h1 {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(58px, 7.6vw, 108px);
+    font-weight: 950;
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+    text-wrap: balance;
+  }
+
+  .about-hero h1 span {
+    display: block;
+    color: #cfeaff;
+    text-shadow: 0 0 46px rgba(155, 210, 255, 0.17);
+  }
+
+  .about-hero__lead {
+    max-width: 670px;
+    margin: 30px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(17px, 1.8vw, 20px);
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  .about-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .about-hero__actions a {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  }
+
+  .about-hero__primary {
+    border: 1px solid rgba(207, 234, 255, 0.36);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(155, 210, 255, 0.1)),
+      rgba(255, 255, 255, 0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 16px 38px rgba(0, 0, 0, 0.28),
+      0 0 28px rgba(155, 210, 255, 0.09);
+  }
+
+  .about-hero__secondary {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .about-hero__actions a:hover {
+    border-color: rgba(207, 234, 255, 0.45);
+    background-color: rgba(155, 210, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .about-hero__actions a:focus-visible,
+  .about-hero__route:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .about-hero__route {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 37px;
+    color: rgba(255, 255, 255, 0.47);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+  }
+
+  .about-hero__route i {
+    width: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(155, 210, 255, 0.16), #9bd2ff);
+  }
+
+  .about-hero__visual {
+    position: relative;
+    width: min(100%, 480px);
+    margin: 0 auto;
+  }
+
+  .about-hero__image-shell {
+    position: relative;
+    padding: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 40px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+      #151b20;
+    box-shadow:
+      0 34px 90px rgba(0, 0, 0, 0.52),
+      0 0 60px rgba(155, 210, 255, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: rotate(1.5deg);
+  }
+
+  .about-hero__image-shell img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 31px;
+    object-fit: cover;
+    filter: saturate(0.82) contrast(1.04);
+  }
+
+  .about-hero__image-shell::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 31px;
+    background: linear-gradient(to top, rgba(5, 8, 10, 0.78), transparent 47%);
+    pointer-events: none;
+  }
+
+  .about-hero__image-copy {
+    position: absolute;
+    z-index: 2;
+    right: 34px;
+    bottom: 32px;
+    left: 34px;
+    display: grid;
+    gap: 5px;
+  }
+
+  .about-hero__image-copy strong {
+    font-size: 23px;
+    letter-spacing: -0.035em;
+  }
+
+  .about-hero__image-copy span {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-hero__tag {
+    position: absolute;
+    z-index: 3;
+    background: rgba(16, 21, 26, 0.82);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(16px);
+  }
+
+  .about-hero__tag--one {
+    top: 14%;
+    left: -32px;
+    transform: rotate(-8deg);
+  }
+
+  .about-hero__tag--two {
+    top: 33%;
+    right: -30px;
+    transform: rotate(7deg);
+  }
+
+  .about-hero__tag--three {
+    right: 12%;
+    bottom: -20px;
+    transform: rotate(-4deg);
+  }
+
+  @media (max-width: 900px) {
+    .about-hero {
+      min-height: auto;
+      padding: 130px 20px 92px;
+    }
+
+    .about-hero__inner {
+      grid-template-columns: 1fr;
+      gap: 68px;
+    }
+
+    .about-hero__copy {
+      text-align: center;
+    }
+
+    .about-hero__lead {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .about-hero__actions,
+    .about-hero__route {
+      justify-content: center;
+    }
+
+    .about-hero__visual {
+      width: min(88%, 460px);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .about-hero {
+      padding: 116px 16px 82px;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(49px, 15.5vw, 72px);
+      line-height: 0.9;
+    }
+
+    .about-hero__lead {
+      margin-top: 25px;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    .about-hero__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .about-hero__route {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    .about-hero__route i {
+      width: 1px;
+      height: 13px;
+      margin: 0 auto;
+      background: linear-gradient(rgba(155, 210, 255, 0.16), #9bd2ff);
+    }
+
+    .about-hero__visual {
+      width: calc(100% - 22px);
+    }
+
+    .about-hero__image-shell {
+      border-radius: 30px;
+    }
+
+    .about-hero__image-shell img,
+    .about-hero__image-shell::after {
+      border-radius: 22px;
+    }
+
+    .about-hero__tag--one {
+      left: -12px;
+    }
+
+    .about-hero__tag--two {
+      right: -10px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-hero__actions a {
+      transition: none;
+    }
+  }
+</style>

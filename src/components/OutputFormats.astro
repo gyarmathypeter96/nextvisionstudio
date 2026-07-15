@@ -1,0 +1,881 @@
+<section class="formats" aria-labelledby="formats-title" data-formats>
+  <div class="formats__inner">
+    <div class="formats__content">
+      <div class="formats__label">Content for every platform</div>
+      <h2 id="formats-title">Video Content for Every Screen</h2>
+      <p>
+        One Dublin video production, adapted for the platforms where your
+        audience actually watches.
+      </p>
+
+      <ul class="formats__list">
+        <li>
+          <span aria-hidden="true">✓</span>
+          Vertical video for Reels, TikTok and YouTube Shorts
+        </li>
+        <li>
+          <span aria-hidden="true">✓</span>
+          16:9 video for websites, YouTube and presentations
+        </li>
+        <li>
+          <span aria-hidden="true">✓</span>
+          Organic social media content and paid video ads
+        </li>
+      </ul>
+    </div>
+
+    <div class="formats__visual">
+      <div class="formats__switch" role="tablist" aria-label="Preview format">
+        <span class="formats__switch-glow" aria-hidden="true"></span>
+        <button
+          class="formats__toggle is-active"
+          id="formats-desktop-tab"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="formats-desktop"
+          data-format-button="desktop"
+        >
+          Desktop
+        </button>
+        <button
+          class="formats__toggle"
+          id="formats-phone-tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="formats-phone"
+          data-format-button="phone"
+        >
+          Phone
+        </button>
+      </div>
+
+      <div class="formats__stage" data-format-stage>
+        <span class="formats__orb formats__orb--one" aria-hidden="true"></span>
+        <span class="formats__orb formats__orb--two" aria-hidden="true"></span>
+
+        <div
+          class="formats__panel formats__panel--desktop is-active"
+          id="formats-desktop"
+          role="tabpanel"
+          aria-labelledby="formats-desktop-tab"
+          aria-hidden="false"
+          data-format-panel="desktop"
+        >
+          <div class="formats__desktop-frame">
+            <div class="formats__browser-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <i></i>
+            </div>
+
+            <div class="formats__desktop-video">
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="/images/showreel/showreel-2025.webp"
+                width="1280"
+                height="720"
+                aria-label="NextVision Studio showreel shown in desktop format"
+                data-format-video="desktop"
+              >
+                <source src="/videos/showreel-2025.mp4" type="video/mp4" />
+              </video>
+            </div>
+
+            <div class="formats__browser-lines" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="formats__panel formats__panel--phone"
+          id="formats-phone"
+          role="tabpanel"
+          aria-labelledby="formats-phone-tab"
+          aria-hidden="true"
+          data-format-panel="phone"
+        >
+          <div class="formats__phone-group">
+            <div class="formats__phone formats__phone--side formats__phone--left" aria-hidden="true">
+              <div class="formats__phone-screen formats__phone-screen--decorative"></div>
+            </div>
+
+            <div class="formats__phone formats__phone--main">
+              <div class="formats__phone-screen">
+                <video
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster="/images/showreel/showreel-2025.webp"
+                  width="720"
+                  height="1280"
+                  aria-label="NextVision Studio showreel shown in vertical phone format"
+                  data-format-video="phone"
+                  data-src="/videos/showreel-2025.mp4"
+                ></video>
+                <span class="formats__phone-status" aria-hidden="true"></span>
+                <span class="formats__phone-home" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="formats__phone formats__phone--side formats__phone--right" aria-hidden="true">
+              <div class="formats__phone-screen formats__phone-screen--decorative"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const setupFormatSwitchers = () => {
+    document.querySelectorAll<HTMLElement>("[data-formats]").forEach((section) => {
+      if (section.dataset.ready === "true") return;
+      section.dataset.ready = "true";
+
+      const buttons = Array.from(
+        section.querySelectorAll<HTMLButtonElement>("[data-format-button]"),
+      );
+      const panels = Array.from(
+        section.querySelectorAll<HTMLElement>("[data-format-panel]"),
+      );
+      const stage = section.querySelector<HTMLElement>("[data-format-stage]");
+      const desktopVideo = section.querySelector<HTMLVideoElement>(
+        '[data-format-video="desktop"]',
+      );
+      const phoneVideo = section.querySelector<HTMLVideoElement>(
+        '[data-format-video="phone"]',
+      );
+      let activeFormat = "desktop";
+      let sectionIsVisible = false;
+
+      const loadPhoneVideo = () => {
+        if (!phoneVideo || phoneVideo.currentSrc) return;
+        const source = phoneVideo.dataset.src;
+        if (!source) return;
+        phoneVideo.src = source;
+        phoneVideo.load();
+      };
+
+      const playActiveVideo = () => {
+        if (!sectionIsVisible) return;
+        const activeVideo = activeFormat === "phone" ? phoneVideo : desktopVideo;
+        activeVideo?.play().catch(() => {});
+      };
+
+      const selectFormat = (nextFormat: string, focusButton = false) => {
+        if (nextFormat === activeFormat) return;
+
+        activeFormat = nextFormat;
+        stage?.classList.remove("is-switching");
+        void stage?.offsetWidth;
+        stage?.classList.add("is-switching");
+
+        buttons.forEach((button) => {
+          const isActive = button.dataset.formatButton === nextFormat;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-selected", String(isActive));
+          if (isActive && focusButton) button.focus();
+        });
+
+        panels.forEach((panel) => {
+          const isActive = panel.dataset.formatPanel === nextFormat;
+          panel.classList.toggle("is-active", isActive);
+          panel.setAttribute("aria-hidden", String(!isActive));
+        });
+
+        desktopVideo?.pause();
+        phoneVideo?.pause();
+
+        if (nextFormat === "phone") loadPhoneVideo();
+        window.setTimeout(playActiveVideo, 180);
+        window.setTimeout(() => stage?.classList.remove("is-switching"), 900);
+      };
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          selectFormat(button.dataset.formatButton ?? "desktop");
+        });
+
+        button.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          const direction = event.key === "ArrowRight" ? 1 : -1;
+          const nextButton = buttons[(index + direction + buttons.length) % buttons.length];
+          selectFormat(nextButton.dataset.formatButton ?? "desktop", true);
+        });
+      });
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          sectionIsVisible = entry.isIntersecting;
+          if (sectionIsVisible) {
+            playActiveVideo();
+          } else {
+            desktopVideo?.pause();
+            phoneVideo?.pause();
+          }
+        },
+        { threshold: 0.2 },
+      );
+
+      observer.observe(section);
+    });
+  };
+
+  setupFormatSwitchers();
+  document.addEventListener("astro:page-load", setupFormatSwitchers);
+</script>
+
+<style>
+  .formats,
+  .formats * {
+    box-sizing: border-box;
+  }
+
+  .formats {
+    position: relative;
+    width: 100%;
+    margin: -1px 0 0;
+    padding: 112px 24px 104px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    background:
+      radial-gradient(circle at 73% 38%, rgba(104, 177, 229, 0.105), transparent 28%),
+      linear-gradient(to bottom, #111111 0%, #10151a 48%, #111111 100%);
+    color: #ffffff;
+  }
+
+  .formats::before {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #111111 0, transparent 17%, transparent 84%, #111111 100%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .formats__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(520px, 1.18fr);
+    align-items: center;
+    gap: clamp(50px, 7vw, 92px);
+    width: min(100%, 1220px);
+    margin: 0 auto;
+  }
+
+  .formats__content {
+    max-width: 510px;
+  }
+
+  .formats__label {
+    display: inline-flex;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    border: 1px solid rgba(180, 220, 255, 0.26);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .formats__content h2 {
+    margin: 0;
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(49px, 5.3vw, 76px);
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .formats__content > p {
+    margin: 24px 0 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .formats__list {
+    display: grid;
+    gap: 17px;
+    margin: 31px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .formats__list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 13px;
+    align-items: start;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .formats__list li span {
+    color: #cfeaff;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .formats__visual {
+    min-width: 0;
+  }
+
+  .formats__switch {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 270px;
+    margin: 0 auto 28px;
+    padding: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.19);
+    border-radius: 999px;
+    background: rgba(31, 39, 46, 0.76);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.09),
+      0 18px 45px rgba(0, 0, 0, 0.3),
+      0 0 32px rgba(155, 210, 255, 0.08);
+    isolation: isolate;
+  }
+
+  .formats__switch-glow {
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    width: calc(50% - 5px);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #cfeaff, #7fa7c2);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.62),
+      0 8px 25px rgba(155, 210, 255, 0.24);
+    transition: transform 520ms cubic-bezier(0.18, 0.9, 0.2, 1.16);
+  }
+
+  .formats__switch:has([data-format-button="phone"].is-active) .formats__switch-glow {
+    transform: translateX(100%);
+  }
+
+  .formats__toggle {
+    height: 42px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: color 280ms ease, transform 280ms ease;
+  }
+
+  .formats__toggle.is-active {
+    color: #10161b;
+  }
+
+  .formats__toggle:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .formats__toggle.is-active:hover {
+    color: #10161b;
+  }
+
+  .formats__toggle:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: -3px;
+  }
+
+  .formats__stage {
+    position: relative;
+    height: 470px;
+    perspective: 1300px;
+  }
+
+  .formats__stage::before,
+  .formats__stage::after {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 1px solid rgba(155, 210, 255, 0.13);
+    border-radius: 50%;
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.55);
+  }
+
+  .formats__stage::before {
+    width: 420px;
+    height: 420px;
+  }
+
+  .formats__stage::after {
+    width: 530px;
+    height: 530px;
+  }
+
+  .formats__stage.is-switching::before {
+    animation: formats-ring 820ms ease-out;
+  }
+
+  .formats__stage.is-switching::after {
+    animation: formats-ring 820ms 90ms ease-out;
+  }
+
+  .formats__orb {
+    position: absolute;
+    z-index: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cfeaff;
+    box-shadow: 0 0 18px rgba(155, 210, 255, 0.8);
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .formats__orb--one {
+    left: 11%;
+    top: 25%;
+  }
+
+  .formats__orb--two {
+    bottom: 18%;
+    right: 10%;
+  }
+
+  .formats__stage.is-switching .formats__orb--one {
+    animation: formats-orb-one 850ms ease-out;
+  }
+
+  .formats__stage.is-switching .formats__orb--two {
+    animation: formats-orb-two 850ms ease-out;
+  }
+
+  .formats__panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(16px);
+    pointer-events: none;
+    transform: translateY(26px) rotateX(9deg) scale(0.88);
+    transition:
+      opacity 500ms ease,
+      filter 500ms ease,
+      transform 620ms cubic-bezier(0.18, 0.9, 0.2, 1.1),
+      visibility 500ms;
+  }
+
+  .formats__panel.is-active {
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
+    filter: blur(0);
+    pointer-events: auto;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+
+  .formats__desktop-frame {
+    width: min(100%, 660px);
+    padding: 13px;
+    border: 5px solid rgba(196, 225, 243, 0.72);
+    border-radius: 27px;
+    background: linear-gradient(145deg, #d7efff, #a9bfcd);
+    box-shadow:
+      0 34px 90px rgba(0, 0, 0, 0.48),
+      0 0 65px rgba(155, 210, 255, 0.13),
+      inset 0 1px rgba(255, 255, 255, 0.8);
+  }
+
+  .formats__panel--desktop.is-active .formats__desktop-frame {
+    animation: formats-desktop-in 720ms cubic-bezier(0.18, 0.9, 0.2, 1.1) both;
+  }
+
+  .formats__browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    height: 26px;
+    padding: 0 5px;
+  }
+
+  .formats__browser-bar span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(15, 25, 32, 0.23);
+  }
+
+  .formats__browser-bar i {
+    width: 48%;
+    height: 7px;
+    margin-left: auto;
+    border-radius: 99px;
+    background: rgba(15, 25, 32, 0.12);
+  }
+
+  .formats__desktop-video {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 17px;
+    background: #05080a;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .formats video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #05080a;
+    object-fit: cover;
+  }
+
+  .formats__browser-lines {
+    display: grid;
+    gap: 8px;
+    padding: 14px 8px 4px;
+  }
+
+  .formats__browser-lines span {
+    width: 76%;
+    height: 7px;
+    border-radius: 99px;
+    background: rgba(15, 25, 32, 0.12);
+  }
+
+  .formats__browser-lines span:nth-child(2) {
+    width: 58%;
+  }
+
+  .formats__browser-lines span:nth-child(3) {
+    width: 36%;
+  }
+
+  .formats__phone-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .formats__phone {
+    position: absolute;
+    width: 205px;
+    aspect-ratio: 9 / 16;
+    padding: 5px;
+    overflow: hidden;
+    border: 2px solid rgba(200, 228, 246, 0.72);
+    border-radius: 37px;
+    background: linear-gradient(145deg, #d7efff, #91a9ba);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 44px rgba(155, 210, 255, 0.13),
+      inset 0 1px rgba(255, 255, 255, 0.65);
+  }
+
+  .formats__phone--main {
+    z-index: 3;
+    width: 222px;
+  }
+
+  .formats__phone--left {
+    z-index: 1;
+    opacity: 0.42;
+    transform: translateX(-156px) rotate(-12deg) scale(0.88);
+  }
+
+  .formats__phone--right {
+    z-index: 1;
+    opacity: 0.42;
+    transform: translateX(156px) rotate(12deg) scale(0.88);
+  }
+
+  .formats__panel--phone.is-active .formats__phone--main {
+    animation: formats-phone-main-in 760ms cubic-bezier(0.18, 0.9, 0.2, 1.12) both;
+  }
+
+  .formats__panel--phone.is-active .formats__phone--left {
+    animation: formats-phone-left-in 820ms cubic-bezier(0.18, 0.9, 0.2, 1.08) both;
+  }
+
+  .formats__panel--phone.is-active .formats__phone--right {
+    animation: formats-phone-right-in 820ms cubic-bezier(0.18, 0.9, 0.2, 1.08) both;
+  }
+
+  .formats__phone-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 31px;
+    background: #05080a;
+  }
+
+  .formats__phone-screen::before {
+    position: absolute;
+    z-index: 4;
+    top: 7px;
+    left: 50%;
+    width: 66px;
+    height: 17px;
+    border-radius: 0 0 12px 12px;
+    background: #05080a;
+    content: "";
+    transform: translateX(-50%);
+  }
+
+  .formats__phone-screen--decorative {
+    background:
+      linear-gradient(rgba(5, 8, 10, 0.28), rgba(5, 8, 10, 0.52)),
+      url("/images/showreel/showreel-2025.webp") center / cover;
+    filter: saturate(0.55);
+  }
+
+  .formats__phone-main video {
+    object-position: center center;
+  }
+
+  .formats__phone-status {
+    position: absolute;
+    z-index: 3;
+    top: 37px;
+    left: 17px;
+    width: 39px;
+    height: 6px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow:
+      52px 0 rgba(255, 255, 255, 0.3),
+      103px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .formats__phone-home {
+    position: absolute;
+    z-index: 3;
+    bottom: 15px;
+    left: 50%;
+    width: 54px;
+    height: 4px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.82);
+    transform: translateX(-50%);
+  }
+
+  @keyframes formats-ring {
+    0% { opacity: 0.75; transform: translate(-50%, -50%) scale(0.55); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+  }
+
+  @keyframes formats-orb-one {
+    0% { opacity: 0.9; transform: translate(0, 0) scale(1.4); }
+    100% { opacity: 0; transform: translate(90px, -55px) scale(0.2); }
+  }
+
+  @keyframes formats-orb-two {
+    0% { opacity: 0.9; transform: translate(0, 0) scale(1.4); }
+    100% { opacity: 0; transform: translate(-85px, 52px) scale(0.2); }
+  }
+
+  @keyframes formats-desktop-in {
+    0% { opacity: 0; filter: blur(14px); transform: translateY(34px) rotateX(12deg) scale(0.86); }
+    64% { opacity: 1; filter: blur(0); transform: translateY(-5px) rotateX(-2deg) scale(1.025); }
+    100% { opacity: 1; filter: blur(0); transform: none; }
+  }
+
+  @keyframes formats-phone-main-in {
+    0% { opacity: 0; filter: blur(14px); transform: translateY(44px) scale(0.74); }
+    62% { opacity: 1; filter: blur(0); transform: translateY(-7px) scale(1.035); }
+    100% { opacity: 1; filter: blur(0); transform: none; }
+  }
+
+  @keyframes formats-phone-left-in {
+    0% { opacity: 0; filter: blur(13px); transform: translateX(-45px) translateY(30px) rotate(-4deg) scale(0.7); }
+    100% { opacity: 0.42; filter: blur(0); transform: translateX(-156px) rotate(-12deg) scale(0.88); }
+  }
+
+  @keyframes formats-phone-right-in {
+    0% { opacity: 0; filter: blur(13px); transform: translateX(45px) translateY(30px) rotate(4deg) scale(0.7); }
+    100% { opacity: 0.42; filter: blur(0); transform: translateX(156px) rotate(12deg) scale(0.88); }
+  }
+
+  @media (max-width: 1024px) {
+    .formats__inner {
+      grid-template-columns: 1fr;
+      gap: 54px;
+    }
+
+    .formats__content {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .formats__list {
+      width: min(100%, 560px);
+      margin-right: auto;
+      margin-left: auto;
+      text-align: left;
+    }
+
+    .formats__visual {
+      width: min(100%, 720px);
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .formats {
+      padding: 90px 16px 82px;
+    }
+
+    .formats__inner {
+      gap: 42px;
+    }
+
+    .formats__content h2 {
+      font-size: clamp(44px, 13vw, 60px);
+    }
+
+    .formats__content > p {
+      font-size: 16px;
+    }
+
+    .formats__switch {
+      width: min(100%, 274px);
+      margin-bottom: 22px;
+    }
+
+    .formats__stage {
+      height: 380px;
+    }
+
+    .formats__desktop-frame {
+      padding: 9px;
+      border-width: 4px;
+      border-radius: 21px;
+    }
+
+    .formats__browser-bar {
+      height: 21px;
+    }
+
+    .formats__desktop-video {
+      border-radius: 13px;
+    }
+
+    .formats__browser-lines {
+      gap: 6px;
+      padding: 11px 6px 3px;
+    }
+
+    .formats__browser-lines span {
+      height: 6px;
+    }
+
+    .formats__phone {
+      width: 146px;
+      border-radius: 30px;
+    }
+
+    .formats__phone--main {
+      width: 162px;
+    }
+
+    .formats__phone--left {
+      transform: translateX(-105px) rotate(-10deg) scale(0.86);
+    }
+
+    .formats__phone--right {
+      transform: translateX(105px) rotate(10deg) scale(0.86);
+    }
+
+    .formats__phone-screen {
+      border-radius: 25px;
+    }
+
+    @keyframes formats-phone-left-in {
+      0% { opacity: 0; filter: blur(13px); transform: translateX(-35px) translateY(25px) rotate(-3deg) scale(0.68); }
+      100% { opacity: 0.42; filter: blur(0); transform: translateX(-105px) rotate(-10deg) scale(0.86); }
+    }
+
+    @keyframes formats-phone-right-in {
+      0% { opacity: 0; filter: blur(13px); transform: translateX(35px) translateY(25px) rotate(3deg) scale(0.68); }
+      100% { opacity: 0.42; filter: blur(0); transform: translateX(105px) rotate(10deg) scale(0.86); }
+    }
+  }
+
+  @media (max-width: 380px) {
+    .formats__stage {
+      height: 350px;
+    }
+
+    .formats__phone--left {
+      transform: translateX(-82px) rotate(-9deg) scale(0.8);
+    }
+
+    .formats__phone--right {
+      transform: translateX(82px) rotate(9deg) scale(0.8);
+    }
+
+    .formats__phone--main {
+      width: 154px;
+    }
+
+    @keyframes formats-phone-left-in {
+      0% { opacity: 0; transform: translateX(-30px) translateY(22px) scale(0.66); }
+      100% { opacity: 0.35; transform: translateX(-82px) rotate(-9deg) scale(0.8); }
+    }
+
+    @keyframes formats-phone-right-in {
+      0% { opacity: 0; transform: translateX(30px) translateY(22px) scale(0.66); }
+      100% { opacity: 0.35; transform: translateX(82px) rotate(9deg) scale(0.8); }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .formats__switch-glow,
+    .formats__toggle,
+    .formats__panel {
+      transition: none;
+    }
+
+    .formats__panel--desktop.is-active .formats__desktop-frame,
+    .formats__panel--phone.is-active .formats__phone,
+    .formats__stage.is-switching::before,
+    .formats__stage.is-switching::after,
+    .formats__stage.is-switching .formats__orb {
+      animation: none;
+    }
+  }
+</style>

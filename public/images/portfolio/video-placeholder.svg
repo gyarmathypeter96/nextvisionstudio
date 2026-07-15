@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title description">
+  <title id="title">NextVision Studio video portfolio</title>
+  <desc id="description">A dark blue-grey video placeholder with a play symbol.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="66%">
+      <stop offset="0" stop-color="#314657" />
+      <stop offset="0.52" stop-color="#182129" />
+      <stop offset="1" stop-color="#0d1114" />
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d7efff" />
+      <stop offset="1" stop-color="#7498b0" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#glow)" />
+  <circle cx="320" cy="164" r="56" fill="#ffffff" fill-opacity=".07" stroke="url(#ring)" stroke-opacity=".7" stroke-width="2" />
+  <path d="M307 137 348 164 307 191Z" fill="#d7efff" />
+  <text x="320" y="253" fill="#cfeaff" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="3">NEXTVISION STUDIO</text>
+</svg>

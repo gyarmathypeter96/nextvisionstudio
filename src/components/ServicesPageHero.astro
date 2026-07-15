@@ -1,0 +1,329 @@
+<section class="services-hero" id="services" aria-labelledby="services-page-title">
+  <div class="services-hero__glow" aria-hidden="true"></div>
+  <div class="services-hero__grid" aria-hidden="true"></div>
+
+  <div class="services-hero__float services-hero__float--content" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <path d="m10 10 5 3-5 3z"></path>
+    </svg>
+  </div>
+
+  <div class="services-hero__float services-hero__float--ads" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M4 13v-2a2 2 0 0 1 2-2h2l8-4v14l-8-4H6a2 2 0 0 1-2-2Z"></path>
+      <path d="M18 9.5a4 4 0 0 1 0 5"></path>
+    </svg>
+  </div>
+
+  <div class="services-hero__float services-hero__float--web" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+      <path d="M3 8h18M7 13h5M7 16h9"></path>
+    </svg>
+  </div>
+
+  <div class="services-hero__inner">
+    <div class="services-hero__kicker">NextVision Studio Dublin</div>
+    <h1 id="services-page-title">Services</h1>
+    <div class="services-hero__beam" aria-hidden="true"></div>
+
+    <p>
+      Three connected services to help your business look professional, reach the
+      right people and generate more enquiries online.
+    </p>
+
+    <nav class="services-hero__anchors" aria-label="Services on this page">
+      <a href="#content-creation">Content creation</a>
+      <a href="#advertising">Advertising</a>
+      <a href="#web-development">Web development</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .services-hero,
+  .services-hero * {
+    box-sizing: border-box;
+  }
+
+  .services-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    min-height: 82svh;
+    padding: 164px 24px 104px;
+    overflow: hidden;
+    place-items: center;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(155, 210, 255, 0.12), transparent 27%),
+      linear-gradient(155deg, #111111 0%, #10151a 52%, #111111 100%);
+    color: #ffffff;
+  }
+
+  .services-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to bottom, rgba(17, 17, 17, 0.08), rgba(17, 17, 17, 0.76)),
+      radial-gradient(circle at center, transparent 20%, rgba(0, 0, 0, 0.42) 92%);
+    pointer-events: none;
+  }
+
+  .services-hero__glow {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    z-index: -1;
+    width: min(980px, 95vw);
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155, 210, 255, 0.16), transparent 68%);
+    filter: blur(58px);
+    transform: translate(-50%, -50%);
+    animation: servicesGlow 8s ease-in-out infinite alternate;
+  }
+
+  .services-hero__grid {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(rgba(207, 234, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 234, 255, 0.025) 1px, transparent 1px);
+    background-size: 74px 74px;
+    mask-image: radial-gradient(circle at center, #000 0%, transparent 75%);
+  }
+
+  .services-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .services-hero__kicker {
+    display: inline-flex;
+    margin-bottom: 24px;
+    padding: 9px 16px;
+    border: 1px solid rgba(180, 220, 255, 0.27);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      0 0 28px rgba(155, 210, 255, 0.08);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .services-hero h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(82px, 15vw, 190px);
+    font-weight: 950;
+    letter-spacing: -0.085em;
+    line-height: 0.78;
+    text-transform: uppercase;
+    text-shadow:
+      0 25px 80px rgba(0, 0, 0, 0.6),
+      0 0 70px rgba(155, 210, 255, 0.08);
+    animation: servicesTitleIn 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .services-hero__beam {
+    width: min(180px, 42vw);
+    height: 2px;
+    margin: 36px auto 0;
+    background: linear-gradient(90deg, transparent, #d7efff, #9bd2ff, transparent);
+    box-shadow:
+      0 0 12px rgba(155, 210, 255, 0.8),
+      0 0 34px rgba(155, 210, 255, 0.35);
+  }
+
+  .services-hero p {
+    width: min(100%, 720px);
+    margin: 28px auto 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 520;
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+
+  .services-hero__anchors {
+    display: flex;
+    margin-top: 34px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .services-hero__anchors a {
+    display: inline-flex;
+    min-height: 43px;
+    padding: 0 17px;
+    align-items: center;
+    border: 1px solid rgba(207, 234, 255, 0.13);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.035em;
+    text-decoration: none;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+
+  .services-hero__anchors a:hover {
+    border-color: rgba(207, 234, 255, 0.32);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .services-hero__anchors a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .services-hero__float {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    width: 70px;
+    height: 70px;
+    place-items: center;
+    border: 1px solid rgba(180, 220, 255, 0.13);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.045);
+    color: rgba(207, 234, 255, 0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 24px 60px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    animation: servicesFloat 9s ease-in-out infinite;
+  }
+
+  .services-hero__float svg {
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5;
+  }
+
+  .services-hero__float--content {
+    top: 27%;
+    left: 8%;
+    animation-delay: -1s;
+  }
+
+  .services-hero__float--ads {
+    top: 60%;
+    left: 16%;
+    animation-delay: -5s;
+  }
+
+  .services-hero__float--web {
+    top: 35%;
+    right: 9%;
+    animation-delay: -3s;
+  }
+
+  @keyframes servicesTitleIn {
+    from {
+      opacity: 0;
+      filter: blur(9px);
+      transform: translateY(28px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes servicesGlow {
+    to {
+      transform: translate(-50%, -46%) scale(1.08);
+    }
+  }
+
+  @keyframes servicesFloat {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(-5deg);
+    }
+    50% {
+      transform: translate3d(15px, -18px, 0) rotate(5deg);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .services-hero {
+      min-height: 760px;
+      padding: 132px 16px 80px;
+    }
+
+    .services-hero h1 {
+      font-size: clamp(58px, 19vw, 80px);
+      letter-spacing: -0.075em;
+      line-height: 0.86;
+    }
+
+    .services-hero__beam {
+      margin-top: 28px;
+    }
+
+    .services-hero__anchors {
+      width: min(100%, 340px);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .services-hero__float {
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      opacity: 0.55;
+    }
+
+    .services-hero__float svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .services-hero__float--content {
+      top: 20%;
+      left: 4%;
+    }
+
+    .services-hero__float--ads {
+      top: 72%;
+      left: 5%;
+    }
+
+    .services-hero__float--web {
+      top: 24%;
+      right: 4%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .services-hero h1,
+    .services-hero__glow,
+    .services-hero__float {
+      animation: none;
+    }
+
+    .services-hero__anchors a {
+      transition: none;
+    }
+  }
+</style>

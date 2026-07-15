@@ -1,0 +1,245 @@
+---
+const clients = [
+  {
+    name: "Gut Fest",
+    src: "/images/clients/gut-fest.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Saxoo London",
+    src: "/images/clients/saxoo-london.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Emo Night Brooklyn",
+    src: "/images/clients/emo-night-brooklyn.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Leroy's Barking World",
+    src: "/images/clients/leroys-barking-world.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Muri Pub and More",
+    src: "/images/clients/muri-pub-and-more.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "The Macaron Boutique",
+    src: "/images/clients/the-macaron-boutique.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Japanese calligraphy client",
+    src: "/images/clients/client-logo-07.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    name: "Perfect Clean",
+    src: "/images/clients/perfect-clean.png",
+    width: 517,
+    height: 483,
+  },
+  {
+    name: "Pogány Induló",
+    src: "/images/clients/pogany-indulo.png",
+    width: 666,
+    height: 375,
+  },
+];
+---
+
+<section class="clients" id="clients" aria-labelledby="clients-title">
+  <div class="clients__inner">
+    <h2 id="clients-title">Our clients</h2>
+
+    <ul class="clients__grid" aria-label="Selected NextVision Studio clients">
+      {
+        clients.map((client) => (
+          <li class="clients__item" tabindex="0">
+            <img
+              src={client.src}
+              alt={`${client.name} logo`}
+              width={client.width}
+              height={client.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .clients,
+  .clients * {
+    box-sizing: border-box;
+  }
+
+  .clients {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 88px 0 98px;
+    overflow: hidden;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .clients__inner {
+    width: min(100%, 1160px);
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .clients h2 {
+    margin: 0 0 62px;
+    color: #ffffff;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    text-align: center;
+  }
+
+  .clients__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 38px 50px;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .clients__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 132px;
+    min-height: 76px;
+    margin: 0;
+    padding: 7px;
+
+    border-radius: 18px;
+    outline: none;
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .clients__item img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 64px;
+
+    border: 0;
+    object-fit: contain;
+    opacity: 0.62;
+    filter: grayscale(1) saturate(0) brightness(1.18);
+    transform: translateZ(0) scale(1);
+
+    transition:
+      filter 260ms ease,
+      opacity 260ms ease,
+      transform 260ms ease;
+  }
+
+  .clients__item:hover img,
+  .clients__item:focus img,
+  .clients__item:active img {
+    opacity: 1;
+    filter: grayscale(0) saturate(1) brightness(1);
+    transform: translateZ(0) scale(1.07);
+  }
+
+  .clients__item:focus-visible {
+    outline: 1px solid rgba(207, 234, 255, 0.64);
+    outline-offset: 4px;
+    background: rgba(207, 234, 255, 0.035);
+  }
+
+  @media (max-width: 900px) {
+    .clients__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 32px 36px;
+    }
+
+    .clients__item {
+      max-width: 104px;
+    }
+
+    .clients__item img {
+      max-height: 54px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .clients {
+      padding: 68px 0 78px;
+    }
+
+    .clients__inner {
+      padding: 0 18px;
+    }
+
+    .clients h2 {
+      margin-bottom: 46px;
+      font-size: clamp(36px, 10.5vw, 44px);
+    }
+
+    .clients__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px 22px;
+    }
+
+    .clients__item {
+      max-width: 78px;
+      min-height: 58px;
+      padding: 5px;
+      border-radius: 14px;
+    }
+
+    .clients__item img {
+      max-height: 46px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .clients__grid {
+      column-gap: 16px;
+    }
+
+    .clients__item {
+      max-width: 68px;
+    }
+
+    .clients__item img {
+      max-height: 40px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .clients__item img {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,812 @@
+---
+import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
+---
+
+<section
+  class="growth-check"
+  id="content-growth-check"
+  aria-labelledby="growth-check-title"
+>
+  <header class="growth-check__header">
+    <div class="growth-check__kicker">Free tool</div>
+    <h2 id="growth-check-title">Get Your Free Content Growth Check</h2>
+    <p>
+      Answer five quick questions about your social media and business. Your
+      answers help us understand where your content can improve first.
+    </p>
+  </header>
+
+  <form
+    class="growth-check__form"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    data-growth-check
+  >
+    <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+    <input
+      type="hidden"
+      name="subject"
+      value="New Content Growth Check response"
+    />
+    <input type="hidden" name="from_name" value="NextVision Studio Website" />
+    <input type="hidden" name="form_type" value="Content Growth Check" />
+
+    <div class="growth-check__botcheck" aria-hidden="true">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="growth-check__progress" aria-live="polite">
+      <div class="growth-check__progress-copy">
+        <span data-progress-label>Step 1 of 5</span>
+        <span data-progress-percent>20%</span>
+      </div>
+      <div
+        class="growth-check__progress-track"
+        role="progressbar"
+        aria-label="Questionnaire progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="20"
+        data-progress-track
+      >
+        <span data-progress-bar></span>
+      </div>
+    </div>
+
+    <fieldset class="growth-check__step" data-step>
+      <span class="growth-check__eyebrow">Platform</span>
+      <legend>Which social media platform do you want to improve?</legend>
+      <div class="growth-check__options">
+        <label class="growth-check__option">
+          <input type="radio" name="platform" value="Instagram" />
+          <strong>Instagram</strong>
+          <span>Reels, profile, content style</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="platform" value="Facebook / Meta" />
+          <strong>Facebook / Meta</strong>
+          <span>Business page, ads, posts</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="platform" value="LinkedIn" />
+          <strong>LinkedIn</strong>
+          <span>B2B, authority, trust</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="platform" value="TikTok" />
+          <strong>TikTok</strong>
+          <span>Short-form reach and attention</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="platform" value="YouTube" />
+          <strong>YouTube</strong>
+          <span>Shorts, search, long-form</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="growth-check__step" data-step hidden>
+      <span class="growth-check__eyebrow">Main goal</span>
+      <legend>What would make the biggest difference to your business?</legend>
+      <div class="growth-check__options">
+        <label class="growth-check__option">
+          <input type="radio" name="primary_goal" value="More visibility" />
+          <strong>More visibility</strong>
+          <span>Reach more of the right people</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="primary_goal" value="More enquiries" />
+          <strong>More enquiries</strong>
+          <span>Generate qualified leads</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="primary_goal" value="Stronger brand" />
+          <strong>A stronger brand</strong>
+          <span>Look professional and consistent</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="primary_goal" value="More sales" />
+          <strong>More sales</strong>
+          <span>Turn attention into customers</span>
+        </label>
+        <label class="growth-check__option">
+          <input type="radio" name="primary_goal" value="Build a community" />
+          <strong>Build a community</strong>
+          <span>Grow trust and loyalty</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="growth-check__step" data-step hidden>
+      <span class="growth-check__eyebrow">Challenge</span>
+      <legend>What is currently holding your content back?</legend>
+      <div class="growth-check__options">
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="content_challenge"
+            value="I do not know what to post"
+          />
+          <strong>I don’t know what to post</strong>
+          <span>Ideas and direction are the problem</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="content_challenge"
+            value="I do not have enough time"
+          />
+          <strong>I don’t have enough time</strong>
+          <span>Content keeps falling down the list</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="content_challenge"
+            value="My content looks inconsistent"
+          />
+          <strong>My content looks inconsistent</strong>
+          <span>The brand does not feel connected</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="content_challenge"
+            value="Not enough engagement"
+          />
+          <strong>I’m not getting engagement</strong>
+          <span>People see it but rarely respond</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="content_challenge"
+            value="No clear strategy"
+          />
+          <strong>I don’t have a clear strategy</strong>
+          <span>There is no repeatable system</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="growth-check__step" data-step hidden>
+      <span class="growth-check__eyebrow">Consistency</span>
+      <legend>How often do you currently publish content?</legend>
+      <div class="growth-check__options">
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="posting_frequency"
+            value="Not posting yet"
+          />
+          <strong>Not posting yet</strong>
+          <span>I am starting from the beginning</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="posting_frequency"
+            value="Less than once a week"
+          />
+          <strong>Less than once a week</strong>
+          <span>Only when I find the time</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="posting_frequency"
+            value="1–2 times a week"
+          />
+          <strong>1–2 times a week</strong>
+          <span>Some consistency, but room to grow</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="posting_frequency"
+            value="3–4 times a week"
+          />
+          <strong>3–4 times a week</strong>
+          <span>A regular publishing rhythm</span>
+        </label>
+        <label class="growth-check__option">
+          <input
+            type="radio"
+            name="posting_frequency"
+            value="Almost every day"
+          />
+          <strong>Almost every day</strong>
+          <span>High output across my channels</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset class="growth-check__step" data-step hidden>
+      <span class="growth-check__eyebrow">Your growth check</span>
+      <legend>Where should we send your personalised next steps?</legend>
+      <p class="growth-check__step-intro">
+        Add your details and all four answers will be included in one Content
+        Growth Check submission.
+      </p>
+      <div class="growth-check__details">
+        <div class="growth-check__field">
+          <label for="growth-name">Name</label>
+          <input
+            id="growth-name"
+            type="text"
+            name="name"
+            placeholder="Your name"
+            autocomplete="name"
+            required
+          />
+        </div>
+        <div class="growth-check__field">
+          <label for="growth-email">Email</label>
+          <input
+            id="growth-email"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            inputmode="email"
+            required
+          />
+        </div>
+        <div class="growth-check__field growth-check__field--wide">
+          <label for="growth-business">Business name <span>(optional)</span></label>
+          <input
+            id="growth-business"
+            type="text"
+            name="business_name"
+            placeholder="Your business"
+            autocomplete="organization"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <p class="growth-check__error" role="alert" data-step-error></p>
+
+    <div class="growth-check__actions">
+      <button class="growth-check__back" type="button" data-back disabled>
+        Back
+      </button>
+      <button class="growth-check__next" type="button" data-next>
+        Next
+      </button>
+      <button class="growth-check__submit" type="submit" data-submit hidden>
+        Send my answers
+      </button>
+    </div>
+
+    <p class="growth-check__privacy">
+      Your answers are sent securely and used only to respond to your growth
+      check.
+    </p>
+  </form>
+</section>
+
+<script>
+  const growthCheckForm = document.querySelector<HTMLFormElement>(
+    "[data-growth-check]",
+  );
+
+  if (growthCheckForm) {
+    const steps = Array.from(
+      growthCheckForm.querySelectorAll<HTMLElement>("[data-step]"),
+    );
+    const progressLabel =
+      growthCheckForm.querySelector<HTMLElement>("[data-progress-label]");
+    const progressPercent =
+      growthCheckForm.querySelector<HTMLElement>("[data-progress-percent]");
+    const progressTrack =
+      growthCheckForm.querySelector<HTMLElement>("[data-progress-track]");
+    const progressBar =
+      growthCheckForm.querySelector<HTMLElement>("[data-progress-bar]");
+    const backButton =
+      growthCheckForm.querySelector<HTMLButtonElement>("[data-back]");
+    const nextButton =
+      growthCheckForm.querySelector<HTMLButtonElement>("[data-next]");
+    const submitButton =
+      growthCheckForm.querySelector<HTMLButtonElement>("[data-submit]");
+    const errorMessage =
+      growthCheckForm.querySelector<HTMLElement>("[data-step-error]");
+    let currentStep = 0;
+
+    const showStep = () => {
+      steps.forEach((step, index) => {
+        step.hidden = index !== currentStep;
+      });
+
+      const progress = Math.round(((currentStep + 1) / steps.length) * 100);
+
+      if (progressLabel) {
+        progressLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+      }
+      if (progressPercent) progressPercent.textContent = `${progress}%`;
+      if (progressBar) progressBar.style.width = `${progress}%`;
+      if (progressTrack) {
+        progressTrack.setAttribute("aria-valuenow", String(progress));
+      }
+      if (backButton) backButton.disabled = currentStep === 0;
+      if (nextButton) nextButton.hidden = currentStep === steps.length - 1;
+      if (submitButton) submitButton.hidden = currentStep !== steps.length - 1;
+      if (errorMessage) errorMessage.textContent = "";
+    };
+
+    const validateCurrentStep = () => {
+      const step = steps[currentStep];
+      if (!step) return false;
+
+      const firstRadio = step.querySelector<HTMLInputElement>(
+        'input[type="radio"]',
+      );
+      const selectedRadio = step.querySelector<HTMLInputElement>(
+        'input[type="radio"]:checked',
+      );
+
+      if (firstRadio && !selectedRadio) {
+        if (errorMessage) {
+          errorMessage.textContent = "Please choose an option to continue.";
+        }
+        firstRadio.focus();
+        return false;
+      }
+
+      const requiredFields = Array.from(
+        step.querySelectorAll<HTMLInputElement>("input[required]"),
+      );
+
+      for (const field of requiredFields) {
+        if (!field.checkValidity()) {
+          field.reportValidity();
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    nextButton?.addEventListener("click", () => {
+      if (!validateCurrentStep()) return;
+      currentStep = Math.min(currentStep + 1, steps.length - 1);
+      showStep();
+    });
+
+    backButton?.addEventListener("click", () => {
+      currentStep = Math.max(currentStep - 1, 0);
+      showStep();
+    });
+
+    growthCheckForm.addEventListener("change", () => {
+      if (errorMessage) errorMessage.textContent = "";
+    });
+
+    growthCheckForm.addEventListener("submit", (event) => {
+      if (!validateCurrentStep()) event.preventDefault();
+    });
+
+    showStep();
+  }
+</script>
+
+<style>
+  .growth-check,
+  .growth-check * {
+    box-sizing: border-box;
+  }
+
+  .growth-check [hidden] {
+    display: none !important;
+  }
+
+  .growth-check {
+    width: 100%;
+    margin: 0;
+    padding: 112px 24px 124px;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    background:
+      radial-gradient(circle at 50% 36%, rgba(65, 126, 169, 0.13), transparent 35%),
+      #111111;
+    color: #ffffff;
+  }
+
+  .growth-check__header {
+    width: min(100%, 820px);
+    margin: 0 auto 52px;
+    text-align: center;
+  }
+
+  .growth-check__kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    padding: 10px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.08);
+    color: #cfeaff;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .growth-check__header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(42px, 5.7vw, 70px);
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+    text-transform: uppercase;
+  }
+
+  .growth-check__header p {
+    width: min(100%, 650px);
+    margin: 24px auto 0;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: clamp(16px, 1.8vw, 19px);
+    font-weight: 500;
+    line-height: 1.58;
+    text-wrap: balance;
+  }
+
+  .growth-check__form {
+    width: min(100%, 760px);
+    min-height: 560px;
+    margin: 0 auto;
+    padding: 36px 42px 30px;
+    border: 1px solid rgba(180, 220, 255, 0.16);
+    border-radius: 28px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+      #171d22;
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.35),
+      0 0 42px rgba(155, 210, 255, 0.06);
+  }
+
+  .growth-check__botcheck {
+    display: none;
+  }
+
+  .growth-check__progress-copy {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    color: rgba(215, 239, 255, 0.82);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .growth-check__progress-track {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.055);
+  }
+
+  .growth-check__progress-track > span {
+    display: block;
+    width: 20%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #cfeaff, #79bceb);
+    box-shadow: 0 0 20px rgba(155, 210, 255, 0.34);
+    transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .growth-check__step {
+    min-width: 0;
+    margin: 33px 0 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .growth-check__eyebrow {
+    display: block;
+    margin-bottom: 11px;
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .growth-check__step legend {
+    display: block;
+    width: 100%;
+    margin: 0 0 26px;
+    padding: 0;
+    color: #ffffff;
+    font-size: clamp(27px, 3.4vw, 38px);
+    font-weight: 850;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .growth-check__options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .growth-check__option {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    padding: 15px 14px;
+    border: 1px solid rgba(180, 220, 255, 0.1);
+    border-radius: 19px;
+    background: rgba(5, 9, 13, 0.22);
+    cursor: pointer;
+    text-align: center;
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .growth-check__option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .growth-check__option strong {
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .growth-check__option > span {
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .growth-check__option:hover {
+    border-color: rgba(180, 220, 255, 0.26);
+    background: rgba(155, 210, 255, 0.075);
+    transform: translateY(-2px);
+  }
+
+  .growth-check__option:has(input:checked) {
+    border-color: rgba(155, 210, 255, 0.58);
+    background: rgba(155, 210, 255, 0.13);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 28px rgba(155, 210, 255, 0.09);
+  }
+
+  .growth-check__option:has(input:focus-visible) {
+    outline: 2px solid #cfeaff;
+    outline-offset: 3px;
+  }
+
+  .growth-check__step-intro {
+    width: min(100%, 560px);
+    margin: -10px auto 24px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .growth-check__details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .growth-check__field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .growth-check__field label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .growth-check__field label span {
+    color: rgba(255, 255, 255, 0.38);
+    font-weight: 550;
+  }
+
+  .growth-check__field input {
+    display: block;
+    width: 100%;
+    min-height: 54px;
+    padding: 15px 17px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 16px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.055);
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+    transition:
+      border-color 220ms ease,
+      background 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .growth-check__field input::placeholder {
+    color: rgba(255, 255, 255, 0.36);
+  }
+
+  .growth-check__field input:focus {
+    border-color: rgba(155, 210, 255, 0.58);
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: 0 0 0 4px rgba(155, 210, 255, 0.1);
+  }
+
+  .growth-check__error {
+    min-height: 20px;
+    margin: 16px 0 0;
+    color: #d7efff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .growth-check__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .growth-check__actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 112px;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: 999px;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .growth-check__back {
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .growth-check__next,
+  .growth-check__submit {
+    margin-left: auto;
+    border: 1px solid rgba(180, 220, 255, 0.34);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.17), rgba(155, 210, 255, 0.12)),
+      rgba(255, 255, 255, 0.08);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      0 0 28px rgba(155, 210, 255, 0.1);
+  }
+
+  .growth-check__actions button:hover:not(:disabled) {
+    border-color: rgba(180, 220, 255, 0.5);
+    background-color: rgba(155, 210, 255, 0.14);
+    transform: translateY(-2px);
+  }
+
+  .growth-check__actions button:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .growth-check__actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.34;
+  }
+
+  .growth-check__privacy {
+    margin: 17px 0 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .growth-check {
+      padding: 90px 16px 96px;
+    }
+
+    .growth-check__header {
+      margin-bottom: 40px;
+    }
+
+    .growth-check__header h2 {
+      font-size: clamp(37px, 11vw, 51px);
+    }
+
+    .growth-check__form {
+      min-height: 0;
+      padding: 28px 20px 25px;
+      border-radius: 24px;
+    }
+
+    .growth-check__step {
+      margin-top: 28px;
+    }
+
+    .growth-check__step legend {
+      margin-bottom: 22px;
+      font-size: clamp(27px, 8.5vw, 35px);
+    }
+
+    .growth-check__options,
+    .growth-check__details {
+      grid-template-columns: 1fr;
+    }
+
+    .growth-check__field--wide {
+      grid-column: auto;
+    }
+
+    .growth-check__option {
+      min-height: 82px;
+    }
+
+    .growth-check__actions button {
+      min-width: 100px;
+      padding: 0 19px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .growth-check__form {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    .growth-check__actions button {
+      min-width: 92px;
+      padding: 0 14px;
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .growth-check__progress-track > span,
+    .growth-check__option,
+    .growth-check__field input,
+    .growth-check__actions button {
+      transition: none;
+    }
+  }
+</style>

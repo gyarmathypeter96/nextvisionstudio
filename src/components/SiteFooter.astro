@@ -1,0 +1,199 @@
+---
+import { WHATSAPP_URL } from "../config/contact";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a href="/" aria-label="NextVision Studio home">
+        <img
+          src="/images/brand/nextvision-studio-logo.png"
+          width="500"
+          height="500"
+          alt="NextVision Studio logo"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <p>
+        Dublin creative studio for videography, photography, social media,
+        advertising and premium website design.
+      </p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer navigation">
+      <div>
+        <p>Pages</p>
+        <a href="/">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div>
+        <p>Services</p>
+        <a href="/videography-dublin/">Videography Dublin</a>
+        <a href="/photography-dublin/">Photography Dublin</a>
+        <a href="/webdesigner-dublin/">Web Designer Dublin</a>
+        <a href="/social-media-content-creation-dublin/">Social media content</a>
+      </div>
+      <div>
+        <p>Explore</p>
+        <a href="/#portfolio">Video portfolio</a>
+        <a href="/#photography-portfolio">Photography</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/services/#our-process">Our process</a>
+      </div>
+      <div>
+        <p>Connect</p>
+        <a href="tel:+353894797055">+353 89 479 7055</a>
+        <a href={WHATSAPP_URL}>WhatsApp</a>
+        <span>Dublin, Ireland</span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="site-footer__bottom">
+    <span>© {currentYear} NextVision Studio</span>
+    <span>Creative &amp; digital services in Dublin</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer,
+  .site-footer * {
+    box-sizing: border-box;
+  }
+
+  .site-footer {
+    position: relative;
+    padding: 78px 24px 30px;
+    border-top: 1px solid rgba(180, 220, 255, 0.1);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(155, 210, 255, 0.065), transparent 28%),
+      #0c0f12;
+    color: #ffffff;
+  }
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.74fr) minmax(0, 1.26fr);
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    gap: clamp(60px, 10vw, 130px);
+  }
+
+  .site-footer__brand > a {
+    display: inline-flex;
+    width: 92px;
+    height: 92px;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .site-footer__brand img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+  }
+
+  .site-footer__brand p {
+    max-width: 370px;
+    margin: 17px 0 0;
+    color: rgba(255, 255, 255, 0.49);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .site-footer__nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px;
+  }
+
+  .site-footer__nav div {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+
+  .site-footer__nav p {
+    margin: 0 0 5px;
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .site-footer__nav a,
+  .site-footer__nav span {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 13px;
+    line-height: 1.45;
+    text-decoration: none;
+  }
+
+  .site-footer__nav a {
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .site-footer__nav a:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  .site-footer__nav a:focus-visible,
+  .site-footer__brand > a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    width: min(100%, 1180px);
+    justify-content: space-between;
+    margin: 58px auto 0;
+    padding-top: 22px;
+    gap: 20px;
+    border-top: 1px solid rgba(180, 220, 255, 0.08);
+    color: rgba(255, 255, 255, 0.32);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 800px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .site-footer__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 38px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .site-footer {
+      padding: 62px 20px 28px;
+    }
+
+    .site-footer__bottom {
+      display: grid;
+      margin-top: 44px;
+      line-height: 1.55;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-footer__nav a {
+      transition: none;
+    }
+  }
+</style>

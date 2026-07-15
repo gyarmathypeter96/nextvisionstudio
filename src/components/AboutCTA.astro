@@ -1,0 +1,149 @@
+<section class="about-cta" aria-labelledby="about-cta-title">
+  <div class="about-cta__card">
+    <div class="about-cta__kicker">Have a project in mind?</div>
+    <h2 id="about-cta-title">Let’s Make Your Business Impossible to Ignore</h2>
+    <p>
+      Tell us what you want to create and we’ll help you choose the right mix of
+      video, photography, social media, advertising and web support.
+    </p>
+    <div class="about-cta__actions">
+      <a class="about-cta__primary" href="/contact/">Contact NextVision Studio</a>
+      <a class="about-cta__secondary" href="/#portfolio">View our work</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-cta,
+  .about-cta * {
+    box-sizing: border-box;
+  }
+
+  .about-cta {
+    padding: 30px 24px 126px;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .about-cta__card {
+    position: relative;
+    width: min(100%, 1060px);
+    margin: 0 auto;
+    padding: clamp(50px, 8vw, 88px) 24px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.18);
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 50% 110%, rgba(155, 210, 255, 0.16), transparent 48%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+      #151a1e;
+    text-align: center;
+    box-shadow: 0 32px 100px rgba(0, 0, 0, 0.36);
+  }
+
+  .about-cta__kicker {
+    display: inline-flex;
+    margin-bottom: 22px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-cta h2 {
+    width: min(100%, 770px);
+    margin: 0 auto;
+    font-size: clamp(44px, 6.5vw, 78px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .about-cta p {
+    width: min(100%, 680px);
+    margin: 25px auto 0;
+    color: rgba(255, 255, 255, 0.61);
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.6;
+  }
+
+  .about-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  .about-cta__actions a {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  }
+
+  .about-cta__primary {
+    border: 1px solid rgba(207, 234, 255, 0.35);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(155, 210, 255, 0.1)),
+      rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.23);
+  }
+
+  .about-cta__secondary {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .about-cta__actions a:hover {
+    border-color: rgba(207, 234, 255, 0.45);
+    background-color: rgba(155, 210, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .about-cta__actions a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .about-cta {
+      padding: 15px 16px 94px;
+    }
+
+    .about-cta__card {
+      padding: 49px 20px;
+      border-radius: 26px;
+    }
+
+    .about-cta h2 {
+      font-size: clamp(41px, 12.5vw, 56px);
+    }
+
+    .about-cta__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-cta__actions a {
+      transition: none;
+    }
+  }
+</style>

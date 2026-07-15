@@ -1,0 +1,194 @@
+---
+import type { LandingPageData } from "../../data/landingPages";
+
+interface Props {
+  page: LandingPageData;
+}
+
+const { page } = Astro.props;
+---
+
+<section class="landing-deliverables" aria-labelledby="landing-deliverables-title">
+  <div class="landing-deliverables__inner">
+    <header>
+      <div class="landing-deliverables__kicker">{page.deliverablesKicker}</div>
+      <h2 id="landing-deliverables-title">{page.deliverablesTitle}</h2>
+      <p>{page.deliverablesText}</p>
+    </header>
+
+    <div class="landing-deliverables__grid">
+      {
+        page.deliverables.map((item, index) => (
+          <article>
+            <span>0{index + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .landing-deliverables,
+  .landing-deliverables * {
+    box-sizing: border-box;
+  }
+
+  .landing-deliverables {
+    position: relative;
+    padding: 120px 24px 126px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(155, 210, 255, 0.085), transparent 29%),
+      linear-gradient(to bottom, #111111, #10151a 52%, #111111);
+    color: #ffffff;
+  }
+
+  .landing-deliverables__inner {
+    width: min(100%, 1160px);
+    margin: 0 auto;
+  }
+
+  .landing-deliverables header {
+    width: min(100%, 870px);
+    margin: 0 auto 61px;
+    text-align: center;
+  }
+
+  .landing-deliverables__kicker {
+    display: inline-flex;
+    margin-bottom: 21px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .landing-deliverables h2 {
+    margin: 0;
+    font-size: clamp(48px, 6.7vw, 82px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .landing-deliverables header p {
+    width: min(100%, 690px);
+    margin: 24px auto 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 17px;
+    line-height: 1.62;
+  }
+
+  .landing-deliverables__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .landing-deliverables article {
+    position: relative;
+    min-height: 235px;
+    padding: 29px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 24px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+      #15191d;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.21);
+    transition: transform 230ms ease, border-color 230ms ease;
+  }
+
+  .landing-deliverables article::after {
+    content: "";
+    position: absolute;
+    right: -45px;
+    bottom: -75px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(155, 210, 255, 0.08);
+    filter: blur(36px);
+    pointer-events: none;
+  }
+
+  .landing-deliverables article:hover {
+    border-color: rgba(180, 220, 255, 0.26);
+    transform: translateY(-4px);
+  }
+
+  .landing-deliverables article > span {
+    display: inline-flex;
+    margin-bottom: 48px;
+    color: #9bd2ff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .landing-deliverables h3 {
+    margin: 0 0 11px;
+    font-size: 23px;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+
+  .landing-deliverables article p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.49);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 900px) {
+    .landing-deliverables__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .landing-deliverables {
+      padding: 90px 16px 96px;
+    }
+
+    .landing-deliverables header {
+      margin-bottom: 45px;
+    }
+
+    .landing-deliverables h2 {
+      font-size: clamp(41px, 12.5vw, 56px);
+    }
+
+    .landing-deliverables header p {
+      font-size: 16px;
+    }
+
+    .landing-deliverables__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-deliverables article {
+      min-height: 200px;
+      padding: 25px;
+    }
+
+    .landing-deliverables article > span {
+      margin-bottom: 34px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-deliverables article {
+      transition: none;
+    }
+  }
+</style>

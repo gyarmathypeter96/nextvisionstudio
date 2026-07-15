@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactPage from "../components/ContactPage.astro";
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      name: "Contact NextVision Studio",
+      url: "https://nextvisionstudio.com/contact/",
+      description:
+        "Contact NextVision Studio about videography, photography, social media content, ads management or website design in Dublin.",
+      mainEntity: { "@id": "https://nextvisionstudio.com/#business" },
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://nextvisionstudio.com/#business",
+      name: "NextVision Studio",
+      url: "https://nextvisionstudio.com/",
+      telephone: "+353894797055",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Dublin",
+        addressCountry: "IE",
+      },
+      areaServed: {
+        "@type": "City",
+        name: "Dublin",
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Contact NextVision Studio | Start a Project in Dublin"
+  description="Contact NextVision Studio for videography, photography, social media content, ads management or website design services in Dublin."
+  canonical="https://nextvisionstudio.com/contact/"
+>
+  <main class="contact-page-main">
+    <ContactPage />
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
+</BaseLayout>
+
+<style>
+  .contact-page-main {
+    width: 100%;
+    overflow: hidden;
+    background: #111111;
+  }
+</style>

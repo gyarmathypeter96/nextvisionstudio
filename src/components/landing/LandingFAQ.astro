@@ -1,0 +1,199 @@
+---
+import type { LandingPageData } from "../../data/landingPages";
+
+interface Props {
+  page: LandingPageData;
+}
+
+const { page } = Astro.props;
+---
+
+<section class="landing-faq" aria-labelledby="landing-faq-title">
+  <div class="landing-faq__inner">
+    <header>
+      <div class="landing-faq__kicker">Questions before you enquire</div>
+      <h2 id="landing-faq-title">{page.eyebrow} FAQ</h2>
+      <p>
+        Clear answers about scope, planning and starting a project with
+        NextVision Studio.
+      </p>
+    </header>
+
+    <div class="landing-faq__grid">
+      {
+        page.faq.map((item, index) => (
+          <details open={index === 0}>
+            <summary>{item.question}</summary>
+            <div><p>{item.answer}</p></div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .landing-faq,
+  .landing-faq * {
+    box-sizing: border-box;
+  }
+
+  .landing-faq {
+    padding: 116px 24px 122px;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .landing-faq__inner {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+  }
+
+  .landing-faq header {
+    width: min(100%, 800px);
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+
+  .landing-faq__kicker {
+    display: inline-flex;
+    margin-bottom: 21px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .landing-faq h2 {
+    margin: 0;
+    font-size: clamp(46px, 6.3vw, 76px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .landing-faq header p {
+    margin: 22px 0 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .landing-faq__grid {
+    columns: 2;
+    column-gap: 13px;
+  }
+
+  .landing-faq details {
+    break-inside: avoid;
+    margin: 0 0 13px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 20px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.018)),
+      #15191d;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+
+  .landing-faq details:hover,
+  .landing-faq details[open] {
+    border-color: rgba(180, 220, 255, 0.25);
+    background-color: rgba(155, 210, 255, 0.035);
+  }
+
+  .landing-faq summary {
+    position: relative;
+    padding: 21px 57px 21px 22px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 850;
+    line-height: 1.4;
+    list-style: none;
+  }
+
+  .landing-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .landing-faq summary::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 19px;
+    display: grid;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    border: 1px solid rgba(180, 220, 255, 0.17);
+    border-radius: 50%;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 16px;
+    font-weight: 500;
+    transform: translateY(-50%);
+    transition: transform 200ms ease;
+  }
+
+  .landing-faq details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .landing-faq summary:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: -3px;
+  }
+
+  .landing-faq details > div {
+    padding: 0 22px 22px;
+  }
+
+  .landing-faq details p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.54);
+    font-size: 13px;
+    line-height: 1.67;
+  }
+
+  @media (max-width: 760px) {
+    .landing-faq__grid {
+      columns: 1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .landing-faq {
+      padding: 88px 16px 94px;
+    }
+
+    .landing-faq header {
+      margin-bottom: 43px;
+    }
+
+    .landing-faq h2 {
+      font-size: clamp(40px, 12vw, 54px);
+    }
+
+    .landing-faq summary {
+      padding: 19px 53px 19px 18px;
+    }
+
+    .landing-faq details > div {
+      padding: 0 18px 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-faq details,
+    .landing-faq summary::after {
+      transition: none;
+    }
+  }
+</style>
