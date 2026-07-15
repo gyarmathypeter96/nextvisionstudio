@@ -54,6 +54,17 @@
       <div class="formats__stage" data-format-stage>
         <span class="formats__orb formats__orb--one" aria-hidden="true"></span>
         <span class="formats__orb formats__orb--two" aria-hidden="true"></span>
+        <button
+          class="formats__play"
+          type="button"
+          aria-label="Play the video format preview"
+          data-format-play
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 7 8 5-8 5Z"></path>
+          </svg>
+          <span>Play preview</span>
+        </button>
 
         <div
           class="formats__panel formats__panel--desktop is-active"
@@ -74,14 +85,14 @@
                 muted
                 loop
                 playsinline
-                preload="metadata"
+                preload="none"
                 poster="/images/showreel/showreel-2025.webp"
                 width="1280"
                 height="720"
                 aria-label="NextVision Studio showreel shown in desktop format"
                 data-format-video="desktop"
+                data-src="/videos/showreel-preview.mp4"
               >
-                <source src="/videos/showreel-2025.mp4" type="video/mp4" />
               </video>
             </div>
 
@@ -116,7 +127,7 @@
                   height="1280"
                   aria-label="NextVision Studio showreel shown in vertical phone format"
                   data-format-video="phone"
-                  data-src="/videos/showreel-2025.mp4"
+                  data-src="/videos/showreel-preview.mp4"
                 ></video>
                 <span class="formats__phone-status" aria-hidden="true"></span>
                 <span class="formats__phone-home" aria-hidden="true"></span>
@@ -146,6 +157,7 @@
         section.querySelectorAll<HTMLElement>("[data-format-panel]"),
       );
       const stage = section.querySelector<HTMLElement>("[data-format-stage]");
+      const playButton = section.querySelector<HTMLButtonElement>("[data-format-play]");
       const desktopVideo = section.querySelector<HTMLVideoElement>(
         '[data-format-video="desktop"]',
       );
@@ -154,18 +166,29 @@
       );
       let activeFormat = "desktop";
       let sectionIsVisible = false;
+      const connection = (
+        navigator as Navigator & { connection?: { saveData?: boolean } }
+      ).connection;
+      const prefersManualPlayback =
+        window.matchMedia("(max-width: 767px)").matches ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        connection?.saveData === true;
+      let userActivated = !prefersManualPlayback;
 
-      const loadPhoneVideo = () => {
-        if (!phoneVideo || phoneVideo.currentSrc) return;
-        const source = phoneVideo.dataset.src;
+      section.classList.toggle("requires-interaction", prefersManualPlayback);
+
+      const loadVideo = (video?: HTMLVideoElement | null) => {
+        if (!video || video.currentSrc) return;
+        const source = video.dataset.src;
         if (!source) return;
-        phoneVideo.src = source;
-        phoneVideo.load();
+        video.src = source;
+        video.load();
       };
 
       const playActiveVideo = () => {
-        if (!sectionIsVisible) return;
+        if (!sectionIsVisible || !userActivated) return;
         const activeVideo = activeFormat === "phone" ? phoneVideo : desktopVideo;
+        loadVideo(activeVideo);
         activeVideo?.play().catch(() => {});
       };
 
@@ -193,7 +216,6 @@
         desktopVideo?.pause();
         phoneVideo?.pause();
 
-        if (nextFormat === "phone") loadPhoneVideo();
         window.setTimeout(playActiveVideo, 180);
         window.setTimeout(() => stage?.classList.remove("is-switching"), 900);
       };
@@ -210,6 +232,12 @@
           const nextButton = buttons[(index + direction + buttons.length) % buttons.length];
           selectFormat(nextButton.dataset.formatButton ?? "desktop", true);
         });
+      });
+
+      playButton?.addEventListener("click", () => {
+        userActivated = true;
+        section.classList.remove("requires-interaction");
+        playActiveVideo();
       });
 
       const observer = new IntersectionObserver(
@@ -413,6 +441,53 @@
     position: relative;
     height: 470px;
     perspective: 1300px;
+  }
+
+  .formats__play {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgba(220, 238, 255, 0.68);
+    border-radius: 50%;
+    background: rgba(15, 22, 27, 0.78);
+    box-shadow:
+      0 0 0 8px rgba(155, 210, 255, 0.07),
+      0 18px 48px rgba(0, 0, 0, 0.48);
+    color: #ffffff;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(14px);
+  }
+
+  .formats.requires-interaction .formats__play {
+    display: grid;
+  }
+
+  .formats__play:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 5px;
+  }
+
+  .formats__play svg {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+    transform: translateX(2px);
+  }
+
+  .formats__play span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .formats__stage::before,

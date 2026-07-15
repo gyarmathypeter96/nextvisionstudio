@@ -30,16 +30,28 @@ const videoSchema = {
       <video
         controls
         playsinline
-        preload="metadata"
+        preload="none"
         poster="/images/showreel/showreel-2025.webp"
         width="1280"
         height="720"
         title="NextVision Studio 2025 Showreel"
         aria-describedby="showreel-description"
+        data-showreel-video
+        data-src="/videos/showreel-2025.mp4"
       >
-        <source src="/videos/showreel-2025.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <button
+        class="showreel__play"
+        type="button"
+        aria-label="Play the NextVision Studio 2025 showreel"
+        data-showreel-play
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 7 8 5-8 5Z"></path>
+        </svg>
+        <span>Play showreel</span>
+      </button>
     </div>
   </div>
 
@@ -70,6 +82,37 @@ const videoSchema = {
 
   <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
 </section>
+
+<script>
+  const setupShowreels = () => {
+    document.querySelectorAll<HTMLElement>(".showreel").forEach((section) => {
+      if (section.dataset.ready === "true") return;
+      section.dataset.ready = "true";
+
+      const video = section.querySelector<HTMLVideoElement>("[data-showreel-video]");
+      const playButton = section.querySelector<HTMLButtonElement>("[data-showreel-play]");
+      if (!video || !playButton) return;
+
+      const loadVideo = () => {
+        if (video.currentSrc || !video.dataset.src) return;
+        video.src = video.dataset.src;
+        video.load();
+      };
+
+      playButton.addEventListener("click", () => {
+        loadVideo();
+        video.play().catch(() => {});
+      });
+
+      video.addEventListener("play", () => {
+        playButton.hidden = true;
+      });
+    });
+  };
+
+  setupShowreels();
+  document.addEventListener("astro:page-load", setupShowreels);
+</script>
 
 <style>
   .showreel,
@@ -184,6 +227,67 @@ const videoSchema = {
     object-fit: cover;
   }
 
+  .showreel__play {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 82px;
+    height: 82px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgba(220, 238, 255, 0.72);
+    border-radius: 50%;
+    background: rgba(16, 22, 27, 0.72);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.28),
+      0 0 0 8px rgba(155, 210, 255, 0.07),
+      0 18px 46px rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(16px) saturate(145%);
+    transition:
+      background 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .showreel__play[hidden] {
+    display: none;
+  }
+
+  .showreel__play:hover {
+    background: rgba(38, 56, 70, 0.86);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.34),
+      0 0 0 11px rgba(155, 210, 255, 0.09),
+      0 20px 50px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .showreel__play:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 5px;
+  }
+
+  .showreel__play svg {
+    width: 34px;
+    height: 34px;
+    fill: currentColor;
+    transform: translateX(2px);
+  }
+
+  .showreel__play span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .showreel__whatsapp {
     position: relative;
     z-index: 1;
@@ -290,6 +394,11 @@ const videoSchema = {
 
     .showreel__video-wrap {
       border-radius: 15px;
+    }
+
+    .showreel__play {
+      width: 68px;
+      height: 68px;
     }
 
     .showreel__whatsapp {

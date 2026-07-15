@@ -17,10 +17,18 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  preloadImage?: string;
   noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  preloadImage,
+  noindex = false,
+} = Astro.props;
 const canonicalUrl = canonical || `${SITE_URL}${Astro.url.pathname}`;
 const socialImage = ogImage
   ? new URL(ogImage, SITE_URL).toString()
@@ -102,6 +110,11 @@ const websiteSchema = {
     <meta name="twitter:image" content={socialImage} />
 
     <link rel="canonical" href={canonicalUrl} />
+    {
+      preloadImage && (
+        <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+      )
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />

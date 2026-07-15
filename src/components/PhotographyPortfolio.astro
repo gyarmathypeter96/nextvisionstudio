@@ -139,7 +139,9 @@ const gallerySchema = {
           data-photo-height={photo.height}
         >
           <img
-            src={photo.src}
+            src={photo.src
+              .replace("/images/photography/", "/images/photography/thumbs/")
+              .replace(".webp", ".jpg")}
             width={photo.width}
             height={photo.height}
             alt={photo.alt}

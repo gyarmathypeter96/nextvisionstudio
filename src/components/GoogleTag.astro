@@ -6,7 +6,7 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
 
 <script
   is:inline
-  define:vars={{ GOOGLE_TAG_ID, GOOGLE_ADS_ID }}
+  define:vars={{ GOOGLE_TAG_ID, GOOGLE_ADS_ID, googleTagSource }}
 >
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () {
@@ -34,6 +34,32 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
   window.gtag("config", GOOGLE_TAG_ID);
   window.gtag("config", GOOGLE_ADS_ID);
 
+  window.nvsLoadGoogleTag = window.nvsLoadGoogleTag || function () {
+    if (document.querySelector("script[data-nvs-google-tag]")) return;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = googleTagSource;
+    script.dataset.nvsGoogleTag = "true";
+    document.head.appendChild(script);
+  };
+
+  if (consentGranted) {
+    const loadTagWhenIdle = function () {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(window.nvsLoadGoogleTag, { timeout: 1800 });
+      } else {
+        window.setTimeout(window.nvsLoadGoogleTag, 900);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      loadTagWhenIdle();
+    } else {
+      window.addEventListener("load", loadTagWhenIdle, { once: true });
+    }
+  }
+
   const isConfirmedLead =
     window.location.pathname.replace(/\/+$/, "") === "/quotesend" &&
     new URLSearchParams(window.location.search).get("submitted") === "1";
@@ -59,6 +85,3 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
     }
   }
 </script>
-
-<script is:inline async src={googleTagSource}></script>
-

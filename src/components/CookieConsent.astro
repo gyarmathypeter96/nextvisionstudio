@@ -17,22 +17,20 @@
     <button
       type="button"
       data-cookie-essential
-      onclick="window.nvsSetCookieConsent(false, this)"
     >Essential only</button>
     <button
       type="button"
       class="cookie-consent__accept"
       data-cookie-accept
-      onclick="window.nvsSetCookieConsent(true, this)"
     >
       Accept analytics
     </button>
   </div>
 </aside>
 
-<script>
+<script is:inline>
   const readCookieConsent = () => {
-    let storedConsent: string | null = null;
+    let storedConsent = null;
     try {
       storedConsent = localStorage.getItem("nvs-cookie-consent");
     } catch (_) {}
@@ -40,22 +38,22 @@
   };
 
   const initialiseCookieConsent = () => {
-    const banner = document.querySelector<HTMLElement>("[data-cookie-consent]");
+    const banner = document.querySelector("[data-cookie-consent]");
     if (!banner) return;
 
+    if (banner.dataset.choiceMade === "true") {
+      banner.hidden = true;
+      return;
+    }
+
     banner.hidden = Boolean(readCookieConsent());
-  };
 
-  const consentWindow = window as typeof window & {
-    nvsSetCookieConsent?: (
-      granted: boolean,
-      choice: HTMLButtonElement,
-    ) => void;
-    gtag?: (...args: unknown[]) => void;
-  };
+    if (banner.dataset.ready === "true") return;
+    banner.dataset.ready = "true";
 
-  if (!consentWindow.nvsSetCookieConsent) {
-    consentWindow.nvsSetCookieConsent = (granted, choice) => {
+    const saveChoice = (granted) => {
+      banner.dataset.choiceMade = "true";
+
       try {
         localStorage.setItem(
           "nvs-cookie-consent",
@@ -63,17 +61,24 @@
         );
       } catch (_) {}
 
-      consentWindow.gtag?.("consent", "update", {
+      window.gtag?.("consent", "update", {
         analytics_storage: granted ? "granted" : "denied",
         ad_storage: granted ? "granted" : "denied",
         ad_user_data: granted ? "granted" : "denied",
         ad_personalization: granted ? "granted" : "denied",
       });
 
-      const banner = choice.closest<HTMLElement>("[data-cookie-consent]");
-      if (banner) banner.hidden = true;
+      if (granted) window.nvsLoadGoogleTag?.();
+      banner.hidden = true;
     };
-  }
+
+    banner
+      .querySelector("[data-cookie-essential]")
+      ?.addEventListener("click", () => saveChoice(false));
+    banner
+      .querySelector("[data-cookie-accept]")
+      ?.addEventListener("click", () => saveChoice(true));
+  };
 
   initialiseCookieConsent();
   document.addEventListener("astro:page-load", initialiseCookieConsent);
