@@ -1,0 +1,171 @@
+<aside
+  class="cookie-consent"
+  aria-label="Cookie preferences"
+  aria-live="polite"
+  data-cookie-consent
+  hidden
+>
+  <div>
+    <strong>Analytics preferences</strong>
+    <p>
+      We use optional Google Analytics and advertising measurement to understand
+      which pages and campaigns generate enquiries. Essential site features work
+      without these cookies. <a href="/privacy-policy/">Privacy policy</a>
+    </p>
+  </div>
+  <div class="cookie-consent__actions">
+    <button
+      type="button"
+      data-cookie-essential
+      onclick="window.nvsSetCookieConsent(false, this)"
+    >Essential only</button>
+    <button
+      type="button"
+      class="cookie-consent__accept"
+      data-cookie-accept
+      onclick="window.nvsSetCookieConsent(true, this)"
+    >
+      Accept analytics
+    </button>
+  </div>
+</aside>
+
+<script>
+  const readCookieConsent = () => {
+    let storedConsent: string | null = null;
+    try {
+      storedConsent = localStorage.getItem("nvs-cookie-consent");
+    } catch (_) {}
+    return storedConsent;
+  };
+
+  const initialiseCookieConsent = () => {
+    const banner = document.querySelector<HTMLElement>("[data-cookie-consent]");
+    if (!banner) return;
+
+    banner.hidden = Boolean(readCookieConsent());
+  };
+
+  const consentWindow = window as typeof window & {
+    nvsSetCookieConsent?: (
+      granted: boolean,
+      choice: HTMLButtonElement,
+    ) => void;
+    gtag?: (...args: unknown[]) => void;
+  };
+
+  if (!consentWindow.nvsSetCookieConsent) {
+    consentWindow.nvsSetCookieConsent = (granted, choice) => {
+      try {
+        localStorage.setItem(
+          "nvs-cookie-consent",
+          granted ? "granted" : "denied",
+        );
+      } catch (_) {}
+
+      consentWindow.gtag?.("consent", "update", {
+        analytics_storage: granted ? "granted" : "denied",
+        ad_storage: granted ? "granted" : "denied",
+        ad_user_data: granted ? "granted" : "denied",
+        ad_personalization: granted ? "granted" : "denied",
+      });
+
+      const banner = choice.closest<HTMLElement>("[data-cookie-consent]");
+      if (banner) banner.hidden = true;
+    };
+  }
+
+  initialiseCookieConsent();
+  document.addEventListener("astro:page-load", initialiseCookieConsent);
+</script>
+
+<style>
+  .cookie-consent,
+  .cookie-consent * {
+    box-sizing: border-box;
+  }
+
+  .cookie-consent[hidden] {
+    display: none;
+  }
+
+  .cookie-consent {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2000;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    width: min(720px, calc(100vw - 44px));
+    padding: 20px;
+    gap: 24px;
+    border: 1px solid rgba(180, 220, 255, 0.24);
+    border-radius: 22px;
+    background: rgba(15, 20, 24, 0.94);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.52);
+    color: #ffffff;
+    backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .cookie-consent strong {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .cookie-consent p {
+    margin: 7px 0 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .cookie-consent a {
+    color: #cfeaff;
+  }
+
+  .cookie-consent__actions {
+    display: flex;
+    gap: 9px;
+  }
+
+  .cookie-consent button {
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid rgba(180, 220, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.055);
+    color: rgba(255, 255, 255, 0.76);
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .cookie-consent .cookie-consent__accept {
+    border-color: rgba(180, 220, 255, 0.42);
+    background: linear-gradient(135deg, rgba(207, 234, 255, 0.2), rgba(155, 210, 255, 0.1));
+    color: #ffffff;
+  }
+
+  .cookie-consent button:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 680px) {
+    .cookie-consent {
+      right: 12px;
+      bottom: 12px;
+      grid-template-columns: 1fr;
+      width: calc(100vw - 24px);
+      gap: 16px;
+    }
+
+    .cookie-consent__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

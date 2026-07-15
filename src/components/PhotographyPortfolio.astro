@@ -90,18 +90,18 @@ const gallerySchema = {
   name: "NextVision Studio Photography Portfolio Dublin",
   description:
     "A portfolio of event, brand, product, food, corporate and automotive photography by NextVision Studio in Dublin.",
-  url: "https://nextvisionstudio.com/#photography-portfolio",
+  url: "https://www.nextvisionstudio.com/#photography-portfolio",
   associatedMedia: photos.map((photo) => ({
     "@type": "ImageObject",
     name: photo.title,
     caption: photo.alt,
-    contentUrl: `https://nextvisionstudio.com${photo.src}`,
+    contentUrl: `https://www.nextvisionstudio.com${photo.src}`,
     width: photo.width,
     height: photo.height,
     creator: {
       "@type": "Organization",
       name: "NextVision Studio",
-      url: "https://nextvisionstudio.com/",
+      url: "https://www.nextvisionstudio.com/",
     },
   })),
 };

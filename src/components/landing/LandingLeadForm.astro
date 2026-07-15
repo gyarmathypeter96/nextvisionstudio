@@ -33,7 +33,11 @@ const messageId = `${page.slug}-message`;
 
     <form action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-      <input type="hidden" name="redirect" value="https://nextvisionstudio.com/quotesend/" />
+      <input
+        type="hidden"
+        name="redirect"
+        value={`https://www.nextvisionstudio.com/quotesend/?submitted=1&source=${page.slug}`}
+      />
       <input type="hidden" name="subject" value={page.formSubject} />
       <input type="hidden" name="from_name" value="NextVision Studio Website" />
       <input type="hidden" name="landing_page" value={`/${page.slug}/`} />

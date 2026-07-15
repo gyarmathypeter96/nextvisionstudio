@@ -1,0 +1,45 @@
+{
+  "redirects": [
+    {
+      "source": "/home-3-2-2-2/",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/home-2-2-2-2-2-2/",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/category/uncategorized/",
+      "destination": "/how-much-does-a-videographer-cost-in-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/page-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/post-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/category-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ]
+}
+

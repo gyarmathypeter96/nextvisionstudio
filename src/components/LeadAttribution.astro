@@ -1,0 +1,58 @@
+<script>
+  const initialiseLeadAttribution = () => {
+    const storageKey = "nvs-lead-attribution";
+    const query = new URLSearchParams(window.location.search);
+    const trackedKeys = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "utm_term",
+      "gclid",
+      "gbraid",
+      "wbraid",
+      "fbclid",
+    ];
+
+    let attribution: Record<string, string> = {};
+    try {
+      attribution = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
+    } catch (_) {}
+
+    trackedKeys.forEach((key) => {
+      const value = query.get(key);
+      if (value) attribution[key] = value.slice(0, 300);
+    });
+
+    if (!attribution.landing_page) attribution.landing_page = window.location.href;
+    if (!attribution.initial_referrer && document.referrer) {
+      attribution.initial_referrer = document.referrer;
+    }
+
+    try {
+      sessionStorage.setItem(storageKey, JSON.stringify(attribution));
+    } catch (_) {}
+
+    document
+      .querySelectorAll<HTMLFormElement>('form[action*="api.web3forms.com"]')
+      .forEach((form) => {
+        const values = {
+          ...attribution,
+          submission_page: window.location.href,
+        };
+
+        Object.entries(values).forEach(([name, value]) => {
+          if (!value || form.elements.namedItem(name)) return;
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = name;
+          input.value = value;
+          form.append(input);
+        });
+      });
+  };
+
+  initialiseLeadAttribution();
+  document.addEventListener("astro:page-load", initialiseLeadAttribution);
+</script>
+

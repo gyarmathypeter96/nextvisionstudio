@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const canonical = `https://nextvisionstudio.com/${page.slug}/`;
+const canonical = `https://www.nextvisionstudio.com/${page.slug}/`;
 
 const landingSchema = {
   "@context": "https://schema.org",
@@ -26,7 +26,7 @@ const landingSchema = {
       name: page.metaTitle,
       description: page.metaDescription,
       about: { "@id": `${canonical}#service` },
-      isPartOf: { "@id": "https://nextvisionstudio.com/#website" },
+      isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" },
     },
     {
       "@type": "Service",
@@ -41,9 +41,9 @@ const landingSchema = {
       },
       provider: {
         "@type": "ProfessionalService",
-        "@id": "https://nextvisionstudio.com/#business",
+        "@id": "https://www.nextvisionstudio.com/#business",
         name: "NextVision Studio",
-        url: "https://nextvisionstudio.com/",
+        url: "https://www.nextvisionstudio.com/",
         telephone: "+353894797055",
         address: {
           "@type": "PostalAddress",
@@ -83,7 +83,7 @@ const landingSchema = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://nextvisionstudio.com/",
+          item: "https://www.nextvisionstudio.com/",
         },
         {
           "@type": "ListItem",

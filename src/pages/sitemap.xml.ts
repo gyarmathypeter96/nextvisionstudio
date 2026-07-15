@@ -1,21 +1,30 @@
 import type { APIRoute } from "astro";
 
 const routes = [
-  "",
-  "services/",
-  "about/",
-  "contact/",
-  "videography-dublin/",
-  "photography-dublin/",
-  "webdesigner-dublin/",
-  "social-media-content-creation-dublin/",
+  { path: "", lastmod: "2026-07-15" },
+  { path: "services/", lastmod: "2026-07-15" },
+  { path: "about/", lastmod: "2026-07-15" },
+  { path: "contact/", lastmod: "2026-07-15" },
+  { path: "videography-dublin/", lastmod: "2026-07-15" },
+  { path: "photography-dublin/", lastmod: "2026-07-15" },
+  { path: "webdesigner-dublin/", lastmod: "2026-07-15" },
+  {
+    path: "social-media-content-creation-dublin/",
+    lastmod: "2026-07-15",
+  },
+  {
+    path: "how-much-does-a-videographer-cost-in-dublin/",
+    lastmod: "2026-07-15",
+  },
+  { path: "privacy-policy/", lastmod: "2026-07-15" },
 ];
 
 export const GET: APIRoute = () => {
   const urls = routes
     .map(
       (route) => `  <url>
-    <loc>https://nextvisionstudio.com/${route}</loc>
+    <loc>https://www.nextvisionstudio.com/${route.path}</loc>
+    <lastmod>${route.lastmod}</lastmod>
   </url>`,
     )
     .join("\n");

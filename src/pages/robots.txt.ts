@@ -6,7 +6,7 @@ export const GET: APIRoute = () =>
       "User-agent: *",
       "Allow: /",
       "Disallow: /quotesend/",
-      "Sitemap: https://nextvisionstudio.com/sitemap.xml",
+      "Sitemap: https://www.nextvisionstudio.com/sitemap.xml",
       "",
     ].join("\n"),
     {

@@ -1,0 +1,64 @@
+---
+import { GOOGLE_ADS_ID, GOOGLE_TAG_ID } from "../config/site";
+
+const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`;
+---
+
+<script
+  is:inline
+  define:vars={{ GOOGLE_TAG_ID, GOOGLE_ADS_ID }}
+>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+
+  let storedConsent = null;
+  try {
+    storedConsent = localStorage.getItem("nvs-cookie-consent");
+  } catch (_) {}
+
+  const consentGranted = storedConsent === "granted";
+
+  window.gtag("consent", "default", {
+    analytics_storage: consentGranted ? "granted" : "denied",
+    ad_storage: consentGranted ? "granted" : "denied",
+    ad_user_data: consentGranted ? "granted" : "denied",
+    ad_personalization: consentGranted ? "granted" : "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+    wait_for_update: 500,
+  });
+
+  window.gtag("js", new Date());
+  window.gtag("config", GOOGLE_TAG_ID);
+  window.gtag("config", GOOGLE_ADS_ID);
+
+  const isConfirmedLead =
+    window.location.pathname.replace(/\/+$/, "") === "/quotesend" &&
+    new URLSearchParams(window.location.search).get("submitted") === "1";
+
+  if (isConfirmedLead) {
+    let alreadyTracked = false;
+    try {
+      alreadyTracked = sessionStorage.getItem("nvs-lead-tracked") === "true";
+    } catch (_) {}
+
+    if (!alreadyTracked) {
+      window.gtag("event", "generate_lead", {
+        currency: "EUR",
+        value: 1,
+        lead_source:
+          new URLSearchParams(window.location.search).get("source") || "website-form",
+      });
+      window.dataLayer.push({ event: "quote_request_submitted" });
+
+      try {
+        sessionStorage.setItem("nvs-lead-tracked", "true");
+      } catch (_) {}
+    }
+  }
+</script>
+
+<script is:inline async src={googleTagSource}></script>
+

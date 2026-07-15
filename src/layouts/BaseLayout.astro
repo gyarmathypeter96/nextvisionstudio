@@ -2,6 +2,15 @@
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
+import GoogleTag from "../components/GoogleTag.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+import LeadAttribution from "../components/LeadAttribution.astro";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_E164,
+  SITE_NAME,
+  SITE_URL,
+} from "../config/site";
 
 interface Props {
   title: string;
@@ -12,6 +21,53 @@ interface Props {
 }
 
 const { title, description, canonical, ogImage, noindex = false } = Astro.props;
+const canonicalUrl = canonical || `${SITE_URL}${Astro.url.pathname}`;
+const socialImage = ogImage
+  ? new URL(ogImage, SITE_URL).toString()
+  : `${SITE_URL}/images/showreel/showreel-2025.webp`;
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: SITE_NAME,
+      inLanguage: "en-IE",
+      publisher: { "@id": `${SITE_URL}/#business` },
+    },
+    {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": `${SITE_URL}/#business`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      image: socialImage,
+      logo: `${SITE_URL}/images/brand/nextvision-studio-logo.png`,
+      email: CONTACT_EMAIL,
+      telephone: CONTACT_PHONE_E164,
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Dublin",
+        addressCountry: "IE",
+      },
+      areaServed: {
+        "@type": "City",
+        name: "Dublin",
+      },
+      knowsAbout: [
+        "Videography Dublin",
+        "Video production Dublin",
+        "Photography Dublin",
+        "Social media content creation",
+        "Meta Ads",
+        "Google Ads",
+        "Website design Dublin",
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -22,22 +78,34 @@ const { title, description, canonical, ogImage, noindex = false } = Astro.props;
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta
+      name="robots"
+      content={
+        noindex
+          ? "noindex, nofollow"
+          : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      }
+    />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    {canonical && <meta property="og:url" content={canonical} />}
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_IE" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${SITE_NAME} — Dublin creative studio`} />
 
-    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={socialImage} />
 
-    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <GoogleTag />
   </head>
 
   <body>
@@ -45,6 +113,8 @@ const { title, description, canonical, ogImage, noindex = false } = Astro.props;
     <slot />
     <SiteFooter />
     <WhatsAppButton />
+    <CookieConsent />
+    <LeadAttribution />
   </body>
 </html>
 
