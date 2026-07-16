@@ -1,0 +1,95 @@
+---
+import ShortFormHero from "./ShortFormHero.astro";
+import ShortFormProblem from "./ShortFormProblem.astro";
+import ShortFormSystem from "./ShortFormSystem.astro";
+import ShortFormResults from "./ShortFormResults.astro";
+import ShortFormClientProof from "./ShortFormClientProof.astro";
+import ShortFormPricing from "./ShortFormPricing.astro";
+import ShortFormFounder from "./ShortFormFounder.astro";
+import ShortFormConsultation from "./ShortFormConsultation.astro";
+import ShortFormFAQ from "./ShortFormFAQ.astro";
+import ShortFormFinalCTA from "./ShortFormFinalCTA.astro";
+import "../../styles/short-form.css";
+
+const canonical = "https://www.nextvisionstudio.com/short-form-video-production-dublin/";
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": canonical + "#service",
+      name: "Short-Form Video Production Dublin",
+      serviceType: "Short-form video production for Reels, TikTok and YouTube Shorts",
+      description:
+        "Short-form video strategy, filming, editing, publishing and paid distribution for Dublin businesses.",
+      url: canonical,
+      provider: { "@id": "https://www.nextvisionstudio.com/#business" },
+      areaServed: [
+        { "@type": "City", name: "Dublin" },
+        { "@type": "AdministrativeArea", name: "Leinster" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Short-form video packages",
+        itemListElement: [
+          { "@type": "Offer", price: "800", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Content package" } },
+          { "@type": "Offer", price: "1250", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Growth package" } },
+          { "@type": "Offer", price: "1900", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Full Engine package" } },
+        ],
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
+        { "@type": "ListItem", position: 2, name: "Short-Form Video Production Dublin", item: canonical },
+      ],
+    },
+  ],
+};
+---
+
+<main class="sf-page">
+  <ShortFormHero />
+  <ShortFormProblem />
+  <ShortFormSystem />
+  <ShortFormResults />
+  <ShortFormClientProof />
+  <ShortFormPricing />
+  <ShortFormFounder />
+  <ShortFormConsultation />
+  <ShortFormFAQ />
+  <ShortFormFinalCTA />
+
+  <a class="sf-sticky-cta sf-track-booking" href="#free-consultation">
+    Book a Free Call
+  </a>
+</main>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+<script>
+  const initialiseShortFormTracking = () => {
+    document.querySelectorAll<HTMLElement>(".sf-track-booking").forEach((link) => {
+      if (link.dataset.tracked === "true") return;
+      link.dataset.tracked = "true";
+      link.addEventListener("click", () => {
+        (window as any).gtag?.("event", "strategy_call_click", {
+          page_location: window.location.href,
+        });
+        (window as any).dataLayer?.push({ event: "strategy_call_click" });
+      });
+    });
+
+    document.querySelectorAll<HTMLFormElement>("[data-consultation-form]").forEach((form) => {
+      if (form.dataset.tracked === "true") return;
+      form.dataset.tracked = "true";
+      form.addEventListener("submit", () => {
+        (window as any).gtag?.("event", "strategy_call_form_submit");
+        (window as any).dataLayer?.push({ event: "strategy_call_form_submit" });
+      });
+    });
+  };
+  initialiseShortFormTracking();
+  document.addEventListener("astro:page-load", initialiseShortFormTracking);
+</script>

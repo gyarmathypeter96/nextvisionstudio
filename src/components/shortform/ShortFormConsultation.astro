@@ -1,0 +1,68 @@
+---
+import { WEB3FORMS_ACCESS_KEY } from "../../config/forms";
+---
+
+<section class="sf-consultation" id="free-consultation" aria-labelledby="sf-consultation-title">
+  <div class="sf-consultation__intro">
+    <div class="sf-kicker">Free 15-minute strategy call</div>
+    <h2 id="sf-consultation-title">Get 3 Practical Video Ideas for Your Business</h2>
+    <p>
+      Tell me what you sell and where you are stuck. On the call, I will review
+      your current content and give you three ideas you can use — whether we work
+      together or not.
+    </p>
+    <ul>
+      <li>No sales script</li>
+      <li>No obligation</li>
+      <li>Honest advice for your current account size</li>
+    </ul>
+  </div>
+
+  <form
+    class="sf-consultation__form"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    data-consultation-form
+  >
+    <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+    <input
+      type="hidden"
+      name="redirect"
+      value="https://www.nextvisionstudio.com/quotesend/?submitted=1&source=short-form-consultation"
+    />
+    <input type="hidden" name="subject" value="New short-form strategy call request" />
+    <input type="hidden" name="from_name" value="NextVision Studio Website" />
+    <div class="sf-consultation__botcheck" aria-hidden="true">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <label>
+      <span>Name</span>
+      <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+    </label>
+    <label>
+      <span>Business email</span>
+      <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@business.ie" required />
+    </label>
+    <label>
+      <span>Phone number</span>
+      <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353" required />
+    </label>
+    <label>
+      <span>Business name</span>
+      <input type="text" name="business" autocomplete="organization" placeholder="Your business" required />
+    </label>
+    <label class="sf-consultation__wide">
+      <span>What would you like video to help with?</span>
+      <textarea name="message" rows="4" placeholder="More local awareness, enquiries, consistent content..." required></textarea>
+    </label>
+
+    <button type="submit" class="sf-button">
+      Request My Free Strategy Call
+    </button>
+    <p>
+      Your details are used only to arrange and respond to this consultation.
+      Read our <a href="/privacy-policy/">privacy policy</a>.
+    </p>
+  </form>
+</section>

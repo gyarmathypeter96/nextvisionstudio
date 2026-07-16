@@ -1,0 +1,36 @@
+---
+const clients = [
+  {
+    name: "VentSolve",
+    line: "Short-form business content designed to explain a technical service clearly.",
+  },
+  {
+    name: "Gut Fest",
+    line: "Fast event promotion built around energy, people and a clear reason to attend.",
+  },
+  {
+    name: "Perfect Clean",
+    line: "Consistent local-business content created to build recognition and trust.",
+  },
+];
+---
+
+<section class="sf-client-proof" aria-labelledby="sf-client-proof-title">
+  <header class="sf-section-head">
+    <div class="sf-kicker">Selected client work</div>
+    <h2 id="sf-client-proof-title">Made for Real Businesses. Not Marketing Awards.</h2>
+    <p>
+      Every project starts with one simple question: what should the right
+      customer understand, feel or do after watching?
+    </p>
+  </header>
+  <div class="sf-client-proof__grid">
+    {clients.map((client) => (
+      <article>
+        <span>NextVision Studio client</span>
+        <h3>{client.name}</h3>
+        <p>{client.line}</p>
+      </article>
+    ))}
+  </div>
+</section>

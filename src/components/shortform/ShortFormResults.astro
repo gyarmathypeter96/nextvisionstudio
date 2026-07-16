@@ -1,0 +1,88 @@
+---
+const work = [
+  {
+    id: "SUeoIgRtH0I",
+    title: "VentSolve",
+    caption: "Business short-form video built for clear, fast social communication",
+  },
+  {
+    id: "GTzSrbR4-k4",
+    title: "The Macaron Boutique",
+    caption: "Product-led vertical content designed for mobile attention",
+  },
+  {
+    id: "53-_kK95Eoc",
+    title: "Leroys Barking World",
+    caption: "Local business promo content made for social media",
+  },
+  {
+    id: "VMcywbhRMCc",
+    title: "Buga Ramen",
+    caption: "Restaurant short-form video focused on product and atmosphere",
+  },
+];
+---
+
+<section class="sf-results" id="short-form-work" aria-labelledby="sf-results-title">
+  <header class="sf-section-head">
+    <div class="sf-kicker">Real work. Honest context.</div>
+    <h2 id="sf-results-title">See It Work. Don’t Take Our Word For It.</h2>
+    <p>
+      We only publish numbers we can verify. No borrowed dashboards, no mystery
+      campaigns and no pretending paid reach was organic.
+    </p>
+  </header>
+
+  <div class="sf-results__stats" aria-label="NextVision Studio content statistics">
+    <div><strong>1,000,000+</strong><span>Total video views</span></div>
+    <div><strong>100+</strong><span>Pieces of content created</span></div>
+    <div><strong>1,000+</strong><span>Followers gained for clients</span></div>
+  </div>
+
+  <div class="sf-results__rail" aria-label="Selected short-form video work">
+    {work.map((item) => (
+      <article class="sf-video-card">
+        <button
+          type="button"
+          data-sf-video={item.id}
+          data-sf-video-title={item.title}
+          aria-label={"Play " + item.title + " short-form video on this page"}
+        >
+          <img
+            src={"/images/portfolio/" + item.id + ".webp"}
+            width="640"
+            height="360"
+            loading="lazy"
+            decoding="async"
+            alt={item.title + " short-form video production by NextVision Studio Dublin"}
+          />
+          <span class="sf-video-card__play" aria-hidden="true">▶</span>
+        </button>
+        <h3>{item.title}</h3>
+        <p>{item.caption}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const initialiseShortFormVideos = () => {
+    document.querySelectorAll<HTMLButtonElement>("[data-sf-video]").forEach((button) => {
+      if (button.dataset.ready === "true") return;
+      button.dataset.ready = "true";
+      button.addEventListener("click", () => {
+        const id = button.dataset.sfVideo;
+        if (!id) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1";
+        iframe.title = button.dataset.sfVideoTitle ?? "NextVision Studio short-form video";
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allowFullscreen = true;
+        button.replaceWith(iframe);
+      }, { once: true });
+    });
+  };
+  initialiseShortFormVideos();
+  document.addEventListener("astro:page-load", initialiseShortFormVideos);
+</script>

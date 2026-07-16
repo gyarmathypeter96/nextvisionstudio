@@ -1,0 +1,64 @@
+---
+const faqs = [
+  {
+    question: "How much does short-form video production cost in Dublin?",
+    answer:
+      "Our monthly short-form video packages start at €800 for six edited videos. The Growth package is €1,250 per month, while the Full Engine package is €1,900 per month plus ad spend. We publish the starting prices so you can decide whether a conversation makes sense before booking one.",
+  },
+  {
+    question: "Do I need to be on camera?",
+    answer:
+      "No. We can guide you through a relaxed talking-head format, or build videos around your work, products, customers, voiceover and natural B-roll. The right approach depends on what your audience needs to see and trust.",
+  },
+  {
+    question: "How fast will I see results?",
+    answer:
+      "Useful organic growth normally compounds over two to three months. Paid distribution can put the content in front of the right Dublin audience much faster, but the outcome still depends on the offer, targeting and follow-up. We report the real trend rather than promising a viral result.",
+  },
+  {
+    question: "Can you guarantee views or followers?",
+    answer:
+      "No — and be careful with anyone who says they can guarantee organic reach. Platforms control organic distribution. We guarantee consistent delivery, clear reporting and ongoing improvement toward the business goal you choose.",
+  },
+  {
+    question: "What if I tried video before and it did not work?",
+    answer:
+      "A video can look good and still fail because the message, opening hook, offer or distribution was weak. We review the whole path from the first second of the video to the action a viewer should take, then fix the missing part.",
+  },
+  {
+    question: "Do you provide short-form video production outside Dublin?",
+    answer:
+      "Yes. Dublin is our main service area, and we also work across North Dublin, Meath, Kildare and Louth. Other locations in Ireland can be discussed based on the production plan.",
+  },
+  {
+    question: "What is the minimum commitment?",
+    answer:
+      "Monthly packages have a three-month minimum. This gives us enough time to learn what your audience responds to, improve the approach and identify a useful performance trend. After that, the service continues monthly with 30 days’ notice.",
+  },
+];
+---
+
+<section class="sf-faq" id="short-form-faq" aria-labelledby="sf-faq-title">
+  <header class="sf-section-head">
+    <div class="sf-kicker">Straight answers</div>
+    <h2 id="sf-faq-title">Short-Form Video Production FAQ</h2>
+  </header>
+  <div class="sf-faq__list">
+    {faqs.map((faq, index) => (
+      <details open={index === 0}>
+        <summary>{faq.question}<span aria-hidden="true">+</span></summary>
+        <p>{faq.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+})} />

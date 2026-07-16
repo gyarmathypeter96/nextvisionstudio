@@ -1,0 +1,40 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Film",
+    text: "We come to you. One focused shoot day, professional gear and minimal disruption. You talk, we capture.",
+  },
+  {
+    number: "02",
+    title: "Edit",
+    text: "Scroll-stopping short-form videos with clear hooks, subtitles and pacing built for how people watch in 2026.",
+  },
+  {
+    number: "03",
+    title: "Amplify",
+    text: "The step most videographers skip. We put targeted distribution behind the best content so the right local people see it — and enquire.",
+  },
+];
+---
+
+<section class="sf-system" aria-labelledby="sf-system-title">
+  <header class="sf-section-head">
+    <div class="sf-kicker">The complete system</div>
+    <h2 id="sf-system-title">We Don’t Just Make Videos. We Make Them Work.</h2>
+  </header>
+
+  <ol class="sf-system__grid">
+    {steps.map((step) => (
+      <li>
+        <span>{step.number}</span>
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+      </li>
+    ))}
+  </ol>
+
+  <p class="sf-system__close">
+    Filming is a skill. Distribution is a system. <strong>We do both.</strong>
+  </p>
+</section>

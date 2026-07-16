@@ -1,12 +1,18 @@
 ---
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
+const isShortFormLanding = pathname === "/short-form-video-production-dublin/";
 
 const navigation = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services/" },
   { label: "About", href: "/about/" },
-  { label: "Contact Us", href: "/contact/", featured: true },
+  { label: "Blog", href: "/blog/" },
+  {
+    label: isShortFormLanding ? "Book a Free Call" : "Contact Us",
+    href: isShortFormLanding ? "#free-consultation" : "/contact/",
+    featured: true,
+  },
 ];
 
 const isCurrent = (href: string) =>

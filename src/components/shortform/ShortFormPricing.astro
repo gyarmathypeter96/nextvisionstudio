@@ -1,0 +1,87 @@
+---
+const packages = [
+  {
+    name: "Content",
+    price: "€800",
+    line: "Keeps your brand active and professional online.",
+    features: [
+      "1 shoot day per month",
+      "6 edited short-form videos",
+      "Subtitles, hooks and platform-ready formats",
+      "Posting and captions included",
+      "Monthly mini-report",
+    ],
+    honesty:
+      "This is a presence package. It keeps you visible and credible. It is not built for rapid growth.",
+  },
+  {
+    name: "Growth",
+    price: "€1,250",
+    line: "More content, shaped around what your audience responds to.",
+    popular: true,
+    features: [
+      "1 shoot day per month",
+      "10 edited short-form videos",
+      "Audience-focused concepts and hook design",
+      "Posting, captions and hashtag strategy",
+      "Detailed monthly report and next steps",
+    ],
+    honesty:
+      "Organic growth compounds over months, not days. We show you the trend line every month.",
+  },
+  {
+    name: "Full Engine",
+    price: "€1,900",
+    line: "Growth that does not depend on the algorithm’s mood.",
+    features: [
+      "2 shoot days per month",
+      "16 edited short-form videos",
+      "Meta ads targeting, testing and optimisation",
+      "Lead goals and monthly performance report",
+      "Reach, leads and cost-per-lead tracking",
+    ],
+    note: "Ad spend is billed separately. Minimum €300/month recommended.",
+    honesty:
+      "Paid distribution helps small accounts reach the right local people. No tricks — just targeting and testing.",
+  },
+];
+---
+
+<section class="sf-pricing" id="packages" aria-labelledby="sf-pricing-title">
+  <header class="sf-section-head">
+    <div class="sf-kicker">Transparent pricing</div>
+    <h2 id="sf-pricing-title">Simple Packages. Honest Outcomes.</h2>
+    <p>Founding client rates — locked for 12 months.</p>
+  </header>
+
+  <div class="sf-pricing__grid">
+    {packages.map((item) => (
+      <article class:list={["sf-price-card", { "sf-price-card--popular": item.popular }]}>
+        {item.popular && <span class="sf-price-card__badge">Most popular</span>}
+        <h3>{item.name}</h3>
+        <div class="sf-price-card__price">{item.price}<small>/month</small></div>
+        <p class="sf-price-card__line">{item.line}</p>
+        <ul>
+          {item.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+        {item.note && <p class="sf-price-card__note"><strong>{item.note}</strong></p>}
+        <p class="sf-price-card__honesty">{item.honesty}</p>
+        <a class="sf-button sf-track-booking" href="#free-consultation">Book a free call</a>
+      </article>
+    ))}
+  </div>
+
+  <div class="sf-pricing__terms">
+    <strong>Clear terms from day one.</strong>
+    <p>
+      All packages have a 3-month minimum, then continue monthly with 30 days’
+      notice. Why three months? Month one shows us what your audience responds
+      to. Month two lets us improve it. Month three shows a useful trend. Anyone
+      promising a guaranteed result in week two is not being honest with you.
+    </p>
+    <p>
+      Every month you receive a plain-English report showing what was made, who
+      saw it and what we will improve next.
+    </p>
+  </div>
+</section>

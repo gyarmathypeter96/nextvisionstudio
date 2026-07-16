@@ -3,17 +3,16 @@
     <header class="services__header">
       <div class="services__kicker">Our services</div>
 
-      <h2 id="services-title">Build Your Digital Presence</h2>
+      <h2 id="services-title">Content That Works Beyond the Post</h2>
 
       <p>
-        NextVision Studio helps Dublin businesses grow through professional
-        videography, photography, social media management and conversion-focused
-        website design.
+        We create the content, put the right distribution behind it and build the
+        digital journey that turns attention into real enquiries.
       </p>
     </header>
 
     <div class="services__grid">
-      <article class="service-card service-card--content" tabindex="0">
+      <a class="service-card service-card--content" href="/short-form-video-production-dublin/">
         <div class="service-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -26,16 +25,17 @@
         </div>
 
         <div class="service-card__copy">
-          <h3>Videography, Photography &amp; Content Creation</h3>
+          <h3>Short-Form Video &amp; Social Content</h3>
           <p>
-            Professional videography in Dublin, short-form video production,
-            brand photography, Reels, TikToks, Shorts and visual content created
-            to make your business impossible to ignore online.
+            Reels, TikToks, YouTube Shorts and brand photography planned and
+            produced for Dublin businesses. Clear ideas, professional filming and
+            content people will actually stop to watch.
           </p>
         </div>
-      </article>
+        <span class="service-card__link">Explore short-form video <span aria-hidden="true">↗</span></span>
+      </a>
 
-      <article class="service-card service-card--social" tabindex="0">
+      <a class="service-card service-card--social" href="/services/#advertising">
         <div class="service-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M4 13v-2a2 2 0 0 1 2-2h2l8-4v14l-8-4H6a2 2 0 0 1-2-2z"></path>
@@ -46,16 +46,17 @@
         </div>
 
         <div class="service-card__copy">
-          <h3>Social Media Management &amp; Paid Ads</h3>
+          <h3>Paid Distribution &amp; Social Management</h3>
           <p>
-            Strategic content calendars, captions, publishing support and social
-            media management, supported by Meta Ads and Google Ads designed to
-            generate attention, enquiries and measurable growth.
+            Good content should not depend on luck. We manage publishing and use
+            honest Meta and Google advertising to put your strongest message in
+            front of the right local audience.
           </p>
         </div>
-      </article>
+        <span class="service-card__link">Explore advertising <span aria-hidden="true">↗</span></span>
+      </a>
 
-      <article class="service-card service-card--web" tabindex="0">
+      <a class="service-card service-card--web" href="/webdesigner-dublin/">
         <div class="service-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <rect x="3" y="4" width="18" height="14" rx="2"></rect>
@@ -69,12 +70,13 @@
         <div class="service-card__copy">
           <h3>Website Design &amp; Development</h3>
           <p>
-            Modern, fast and conversion-focused websites for Dublin businesses,
-            designed to present your brand professionally, explain your services
-            clearly and turn visitors into leads and customers.
+            Fast, conversion-focused websites that make your business easy to
+            understand and trust. Clear pages, strong proof and one obvious next
+            step for every visitor.
           </p>
         </div>
-      </article>
+        <span class="service-card__link">Explore web design <span aria-hidden="true">↗</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -191,6 +193,8 @@
       background 360ms ease,
       box-shadow 360ms ease;
     -webkit-tap-highlight-color: transparent;
+    color: inherit;
+    text-decoration: none;
   }
 
   .service-card::after {
@@ -303,6 +307,20 @@
     font-size: 15.5px;
     font-weight: 500;
     line-height: 1.62;
+  }
+
+  .service-card__link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    margin-top: 26px;
+    align-items: center;
+    gap: 8px;
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
   }
 
   @media (max-width: 980px) {
