@@ -84,6 +84,9 @@ const photos = [
   },
 ];
 
+const imageRightsUrl =
+  "https://www.nextvisionstudio.com/image-licensing/";
+
 const gallerySchema = {
   "@context": "https://schema.org",
   "@type": "ImageGallery",
@@ -103,6 +106,10 @@ const gallerySchema = {
       name: "NextVision Studio",
       url: "https://www.nextvisionstudio.com/",
     },
+    creditText: "NextVision Studio",
+    copyrightNotice: "© NextVision Studio. All rights reserved.",
+    license: imageRightsUrl,
+    acquireLicensePage: `${imageRightsUrl}#request-permission`,
   })),
 };
 ---

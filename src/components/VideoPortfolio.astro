@@ -5,66 +5,77 @@ const videos = [
     title: "Gut Fest Promo Video",
     category: "Dublin Event Videography",
     orientation: "landscape",
+    uploadDate: "2026-06-06T08:44:33-07:00",
   },
   {
     id: "ganLqcBd5Eg",
     title: "Red Line ONE",
     category: "Concert Videography Dublin",
     orientation: "portrait",
+    uploadDate: "2026-06-12T10:00:01-07:00",
   },
   {
     id: "mYssEeIWuxM",
     title: "Cannonball Dublin 2026",
     category: "Automotive Event Video",
     orientation: "portrait",
+    uploadDate: "2026-06-11T10:00:35-07:00",
   },
   {
     id: "w2nOFnxvOL8",
     title: "Pogány Induló — Dublin Concert",
     category: "Live Music Videography",
     orientation: "portrait",
+    uploadDate: "2026-06-09T11:15:09-07:00",
   },
   {
     id: "GTzSrbR4-k4",
     title: "Macaron Boutique Promo",
     category: "Product Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T08:52:59-07:00",
   },
   {
     id: "53-_kK95Eoc",
     title: "Leroys Barking World Promo",
     category: "Social Media Content",
     orientation: "portrait",
+    uploadDate: "2026-06-06T08:52:34-07:00",
   },
   {
     id: "SUeoIgRtH0I",
     title: "VentSolve Promo Videography",
     category: "Brand Promo Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T07:01:39-07:00",
   },
   {
     id: "8ouFX2Nqe7o",
     title: "VentSolve ChatGPT Promo",
     category: "Promotional Content",
     orientation: "portrait",
+    uploadDate: "2026-06-06T07:00:15-07:00",
   },
   {
     id: "X68pQhtHIOY",
     title: "VentSolve Promo Video",
     category: "Short-Form Brand Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:59:53-07:00",
   },
   {
     id: "fLzjvPVHzAc",
     title: "Podcast Video",
     category: "Talking-Head Content",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:59:44-07:00",
   },
   {
     id: "2Q6jsrpyJUE",
     title: "AI Storytelling Video",
     category: "Creative Campaign",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:58:05-07:00",
   },
   {
     id: "lo7yFbvq6pU",
@@ -78,36 +89,42 @@ const videos = [
     title: "SiInk Promo Video",
     category: "Business Promo Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:49:35-07:00",
   },
   {
     id: "wADEq5-xi34",
     title: "Saxoo London Product Video",
     category: "Fashion Brand Content",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:48:19-07:00",
   },
   {
     id: "TeX-7ITDSQg",
     title: "Pekado Kebab Alicante",
     category: "Restaurant Short-Form Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:47:41-07:00",
   },
   {
     id: "LqePwDWaP8Y",
     title: "Eco Vent Turbo Corporate Video",
     category: "Corporate Video Production",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:47:19-07:00",
   },
   {
     id: "dnZDdtZYsNM",
     title: "Cyprus Drone Videography",
     category: "Aerial Video Production",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:47:00-07:00",
   },
   {
     id: "VMcywbhRMCc",
     title: "Buga Ramen",
     category: "Restaurant Promo Video",
     orientation: "portrait",
+    uploadDate: "2026-06-06T06:46:33-07:00",
   },
 ];
 
@@ -131,14 +148,19 @@ const thumbnailFor = (video: (typeof videos)[number]) =>
     ? "/images/portfolio/video-placeholder.svg"
     : `/images/portfolio/${video.id}.webp`;
 
+// One legacy YouTube Short is no longer publicly available. It remains visible
+// in the portfolio, but is intentionally excluded from VideoObject markup so
+// Google is not given structured data for an unavailable watch target.
+const indexableVideos = videos.filter((video) => "uploadDate" in video);
+
 const portfolioSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "NextVision Studio Video Production Portfolio",
   description:
     "Brand videos, event videography, promotional films and short-form social media video created by NextVision Studio in Dublin.",
-  numberOfItems: videos.length,
-  itemListElement: videos.map((video, index) => ({
+  numberOfItems: indexableVideos.length,
+  itemListElement: indexableVideos.map((video, index) => ({
     "@type": "ListItem",
     position: index + 1,
     item: {
@@ -146,6 +168,7 @@ const portfolioSchema = {
       name: video.title,
       description: `${video.category} created by NextVision Studio, a Dublin video production studio.`,
       thumbnailUrl: `https://www.nextvisionstudio.com${thumbnailFor(video)}`,
+      uploadDate: video.uploadDate,
       embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
       url: `https://www.youtube.com/watch?v=${video.id}`,
     },

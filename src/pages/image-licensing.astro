@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Image Copyright & Licensing | NextVision Studio"
+  description="Copyright, credit and permission information for photography and visual content created by NextVision Studio in Dublin."
+  canonical="https://www.nextvisionstudio.com/image-licensing/"
+>
+  <main class="licensing-page">
+    <article>
+      <header>
+        <div>Image rights</div>
+        <h1>Image Copyright &amp; Licensing</h1>
+        <p>
+          Rights and permission information for photography and visual content
+          published by NextVision Studio.
+        </p>
+      </header>
+
+      <section>
+        <h2>Copyright notice</h2>
+        <p>
+          Unless a caption states otherwise, photographs credited to NextVision
+          Studio are protected by copyright and are credited to NextVision Studio.
+          All rights are reserved.
+        </p>
+      </section>
+
+      <section>
+        <h2>Using our images</h2>
+        <p>
+          Viewing or downloading an image from this website does not grant a
+          licence to reproduce, publish, distribute, modify or use it commercially.
+          Written permission is required before using NextVision Studio imagery.
+          Existing client agreements and separately agreed usage rights remain
+          unchanged.
+        </p>
+      </section>
+
+      <section id="request-permission">
+        <h2>Request permission or a licence</h2>
+        <p>
+          To request image usage, email
+          <a href="mailto:hello@nextvisionstudio.com">hello@nextvisionstudio.com</a>
+          with the image URL, intended use, publication channels, duration and
+          territory. We will confirm whether permission is available and explain
+          any applicable credit or licensing terms.
+        </p>
+      </section>
+
+      <section>
+        <h2>Third-party rights</h2>
+        <p>
+          Client names, logos, products and other third-party marks shown in
+          portfolio work remain the property of their respective owners. Permission
+          from NextVision Studio does not replace any additional consent that may
+          be required from a depicted person, brand or rights holder.
+        </p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .licensing-page {
+    min-height: 100vh;
+    padding: 155px 24px 110px;
+    background:
+      radial-gradient(circle at 50% 5%, rgba(155, 210, 255, 0.1), transparent 26%),
+      #111111;
+    color: #ffffff;
+  }
+
+  .licensing-page article {
+    width: min(100%, 820px);
+    margin: 0 auto;
+  }
+
+  .licensing-page header {
+    margin-bottom: 60px;
+  }
+
+  .licensing-page header div {
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .licensing-page h1 {
+    margin: 18px 0;
+    font-size: clamp(48px, 8vw, 82px);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .licensing-page header p,
+  .licensing-page section p {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .licensing-page header p {
+    max-width: 650px;
+    margin: 0;
+  }
+
+  .licensing-page section {
+    padding: 30px 0;
+    border-top: 1px solid rgba(180, 220, 255, 0.11);
+    scroll-margin-top: 110px;
+  }
+
+  .licensing-page h2 {
+    margin: 0 0 13px;
+    font-size: 26px;
+    letter-spacing: -0.035em;
+  }
+
+  .licensing-page section p {
+    margin: 0;
+  }
+
+  .licensing-page a {
+    color: #cfeaff;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 650px) {
+    .licensing-page {
+      padding: 125px 18px 80px;
+    }
+  }
+</style>

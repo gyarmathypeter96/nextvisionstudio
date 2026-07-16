@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 
 const routes = [
-  { path: "", lastmod: "2026-07-15" },
+  { path: "", lastmod: "2026-07-16" },
   { path: "services/", lastmod: "2026-07-15" },
   { path: "about/", lastmod: "2026-07-15" },
   { path: "contact/", lastmod: "2026-07-15" },
@@ -17,6 +17,7 @@ const routes = [
     lastmod: "2026-07-15",
   },
   { path: "privacy-policy/", lastmod: "2026-07-15" },
+  { path: "image-licensing/", lastmod: "2026-07-16" },
 ];
 
 export const GET: APIRoute = () => {
