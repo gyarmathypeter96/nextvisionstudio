@@ -16,7 +16,7 @@ const routes = [
     path: "how-much-does-a-videographer-cost-in-dublin/",
     lastmod: "2026-07-15",
   },
-  { path: "privacy-policy/", lastmod: "2026-07-15" },
+  { path: "privacy-policy/", lastmod: "2026-07-16" },
   { path: "image-licensing/", lastmod: "2026-07-16" },
 ];
 
