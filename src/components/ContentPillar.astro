@@ -63,22 +63,22 @@
       </div>
     </div>
 
-    <aside class="video-card" aria-label="NextVision Studio platform guide video">
+    <aside class="video-card" aria-label="NextVision Studio Instagram platform guide">
       <div class="video-card__top">
         <span>Platform guide</span>
         <div class="video-card__badge">
           <i aria-hidden="true"></i>
-          YouTube Short
+          Instagram Reel
         </div>
       </div>
 
       <div class="video-card__frame">
-        <button
+        <a
           class="video-card__facade"
-          type="button"
-          data-youtube-id="OsGi6Zg4Lag"
-          data-video-title="Which social media platform is best for your business — NextVision Studio"
-          aria-label="Play video: Which social media platform is best for your business"
+          href="https://www.instagram.com/p/Da2M-s8D_TN/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Watch which social media platform is best for your business on Instagram"
         >
           <img
             src="/images/content/social-platform-guide.webp"
@@ -93,7 +93,7 @@
               <path d="M9 7.6v8.8L16.2 12 9 7.6z"></path>
             </svg>
           </span>
-        </button>
+        </a>
       </div>
 
       <p class="video-card__caption">
@@ -103,34 +103,6 @@
     </aside>
   </div>
 </section>
-
-<script>
-  const youtubeFacades = document.querySelectorAll<HTMLButtonElement>(
-    "[data-youtube-id]",
-  );
-
-  youtubeFacades.forEach((facade) => {
-    facade.addEventListener(
-      "click",
-      () => {
-        const videoId = facade.dataset.youtubeId;
-        if (!videoId) return;
-
-        const iframe = document.createElement("iframe");
-        iframe.className = "video-card__iframe";
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-        iframe.title = facade.dataset.videoTitle ?? "NextVision Studio video";
-        iframe.allow =
-          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        iframe.referrerPolicy = "strict-origin-when-cross-origin";
-        iframe.allowFullscreen = true;
-
-        facade.replaceWith(iframe);
-      },
-      { once: true },
-    );
-  });
-</script>
 
 <style>
   .content-pillar,
@@ -395,8 +367,7 @@
     box-shadow: 0 22px 58px rgba(0, 0, 0, 0.38);
   }
 
-  .video-card__facade,
-  .video-card__frame :global(.video-card__iframe) {
+  .video-card__facade {
     position: absolute;
     inset: 0;
     display: block;
@@ -411,6 +382,7 @@
     overflow: hidden;
     background: #05070a;
     cursor: pointer;
+    text-decoration: none;
   }
 
   .video-card__facade img {
