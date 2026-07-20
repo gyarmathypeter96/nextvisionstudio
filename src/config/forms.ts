@@ -1,2 +1,2 @@
-export const WEB3FORMS_ACCESS_KEY =
-  "1d61baf4-354c-4f29-bc23-564288766ff8";
+export const CRM_FORM_ENDPOINT =
+  "https://crm.nextvisionstudio.com/api/sites/nextvisionstudio.com/forms/default/submissions";

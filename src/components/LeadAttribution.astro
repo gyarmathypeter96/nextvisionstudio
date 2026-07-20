@@ -1,5 +1,5 @@
 <script>
-  const initialiseLeadAttribution = () => {
+  const initialiseCrmForms = () => {
     const storageKey = "nvs-lead-attribution";
     const query = new URLSearchParams(window.location.search);
     const trackedKeys = [
@@ -33,26 +33,87 @@
       sessionStorage.setItem(storageKey, JSON.stringify(attribution));
     } catch (_) {}
 
-    document
-      .querySelectorAll<HTMLFormElement>('form[action*="api.web3forms.com"]')
-      .forEach((form) => {
-        const values = {
-          ...attribution,
-          submission_page: window.location.href,
+    document.querySelectorAll<HTMLFormElement>("form[data-crm-form]").forEach((form) => {
+      if (form.dataset.crmBound === "true") return;
+      form.dataset.crmBound = "true";
+      const startedAt = Math.floor(Date.now() / 1000);
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+        const status = document.createElement("p");
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
+        status.dataset.crmFormStatus = "true";
+        form.querySelector("[data-crm-form-status]")?.remove();
+        submit?.insertAdjacentElement("afterend", status);
+        if (submit) submit.disabled = true;
+
+        const values = new FormData(form);
+        const read = (key: string) => String(values.get(key) || "").trim();
+        const excluded = new Set([
+          "name", "email", "phone", "company", "business", "business_name",
+          "service", "message", "value", "redirect", "subject", "from_name",
+          "form_type", "landing_page", "botcheck", "website",
+        ]);
+        const extraDetails: string[] = [];
+        for (const [key, value] of values.entries()) {
+          if (excluded.has(key) || !String(value).trim()) continue;
+          const label = key.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
+          extraDetails.push(`${label}: ${String(value).trim()}`);
+        }
+
+        const formType = read("form_type") || read("subject");
+        const messageParts = [read("message")];
+        if (extraDetails.length) messageParts.push(extraDetails.join("\n"));
+        const payload: Record<string, unknown> = {
+          name: read("name"),
+          email: read("email") || undefined,
+          phone: read("phone") || undefined,
+          company: read("company") || read("business") || read("business_name") || undefined,
+          service: read("service") || formType || "Website enquiry",
+          message: messageParts.filter(Boolean).join("\n\n") || undefined,
+          value: read("value") ? Number(read("value")) : undefined,
+          consent: true,
+          website: read("botcheck") || read("website"),
+          form_started_at: startedAt,
+          landing_page: window.location.href,
         };
 
-        Object.entries(values).forEach(([name, value]) => {
-          if (!value || form.elements.namedItem(name)) return;
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = name;
-          input.value = value;
-          form.append(input);
+        ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((key) => {
+          if (attribution[key]) payload[key] = attribution[key];
         });
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "Idempotency-Key": crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`,
+            },
+            body: JSON.stringify(payload),
+          });
+          const body = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            const errors = Object.values(body.errors || {}).flat();
+            throw new Error(String(errors[0] || body.message || "The form could not be submitted."));
+          }
+
+          status.textContent = "Thank you. Your enquiry has been received.";
+          const redirect = read("redirect");
+          if (redirect) window.location.assign(redirect);
+          else form.reset();
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
+          if (submit) submit.disabled = false;
+        }
       });
+    });
   };
 
-  initialiseLeadAttribution();
-  document.addEventListener("astro:page-load", initialiseLeadAttribution);
+  initialiseCrmForms();
+  document.addEventListener("astro:page-load", initialiseCrmForms);
 </script>
-

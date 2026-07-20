@@ -1,6 +1,6 @@
 ---
 import { WHATSAPP_URL } from "../../config/contact";
-import { WEB3FORMS_ACCESS_KEY } from "../../config/forms";
+import { CRM_FORM_ENDPOINT } from "../../config/forms";
 import type { LandingPageData } from "../../data/landingPages";
 
 interface Props {
@@ -31,8 +31,7 @@ const messageId = `${page.slug}-message`;
       </a>
     </div>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+    <form action={CRM_FORM_ENDPOINT} method="POST" data-crm-form>
       <input
         type="hidden"
         name="redirect"

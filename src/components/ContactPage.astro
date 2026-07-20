@@ -1,6 +1,6 @@
 ---
 import { WHATSAPP_URL } from "../config/contact";
-import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
+import { CRM_FORM_ENDPOINT } from "../config/forms";
 ---
 
 <section class="contact-page" aria-labelledby="contact-page-title">
@@ -48,10 +48,10 @@ import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
 
       <form
         class="contact-page__form"
-        action="https://api.web3forms.com/submit"
+        action={CRM_FORM_ENDPOINT}
         method="POST"
+        data-crm-form
       >
-        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
         <input
           type="hidden"
           name="redirect"

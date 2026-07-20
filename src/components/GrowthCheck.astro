@@ -1,5 +1,5 @@
 ---
-import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
+import { CRM_FORM_ENDPOINT } from "../config/forms";
 ---
 
 <section
@@ -18,11 +18,11 @@ import { WEB3FORMS_ACCESS_KEY } from "../config/forms";
 
   <form
     class="growth-check__form"
-    action="https://api.web3forms.com/submit"
+    action={CRM_FORM_ENDPOINT}
     method="POST"
     data-growth-check
+    data-crm-form
   >
-    <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
     <input
       type="hidden"
       name="redirect"
