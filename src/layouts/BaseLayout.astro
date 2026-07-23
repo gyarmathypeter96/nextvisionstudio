@@ -81,7 +81,7 @@ const websiteSchema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-IE">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -142,6 +142,17 @@ const websiteSchema = {
     box-sizing: border-box;
   }
 
+  :root {
+    /* One place to set the site's typeface. The design previously named
+       "Inter" but never loaded it, so every visitor fell back to Arial — this
+       is a real system stack that renders as SF Pro on Apple, Segoe on
+       Windows and Roboto on Android, at zero download cost and no render
+       delay. Swap this line for a self-hosted Inter later if the brand needs
+       that exact face. */
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+  }
+
   html {
     scroll-behavior: smooth;
     background: #111111;
@@ -153,7 +164,7 @@ const websiteSchema = {
     min-height: 100vh;
     background: #111111;
     color: #ffffff;
-    font-family: Inter, Arial, sans-serif;
+    font-family: var(--font-body);
   }
 
   img,

@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CONTACT_PHONE } from "../config/site";
+
+// A real page for a wrong URL. Without this, Vercel serves a generic host
+// 404, which reads as a broken site and can be indexed as a soft 404. noindex
+// keeps it out of search while still giving a visitor a way back.
+---
+
+<BaseLayout
+  title="Page not found | NextVision Studio"
+  description="That page could not be found. Head back to NextVision Studio's Dublin creative studio home page."
+  noindex={true}
+>
+  <main class="notfound">
+    <div class="notfound__inner">
+      <p class="notfound__eyebrow">Error 404</p>
+      <h1>This page took a wrong turn.</h1>
+      <p class="notfound__lead">
+        The link is broken or the page has moved. Nothing lost — here is the way
+        back.
+      </p>
+      <div class="notfound__actions">
+        <a class="notfound__btn notfound__btn--primary" href="/">Back to home</a>
+        <a class="notfound__btn" href="/services/">See what we do</a>
+        <a class="notfound__btn" href="/contact/">Talk to us</a>
+      </div>
+      <p class="notfound__call">
+        Prefer to talk? Call <a href="tel:+353894797055">{CONTACT_PHONE}</a>.
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 96px 24px;
+    text-align: center;
+  }
+
+  .notfound__inner {
+    max-width: 560px;
+  }
+
+  .notfound__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9aa0aa;
+  }
+
+  .notfound h1 {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    line-height: 1.05;
+  }
+
+  .notfound__lead {
+    margin: 0 auto 32px;
+    max-width: 440px;
+    color: #c7ccd4;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .notfound__btn {
+    padding: 13px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition:
+      background-color 0.16s ease,
+      border-color 0.16s ease,
+      transform 0.16s ease;
+  }
+
+  .notfound__btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .notfound__btn--primary {
+    background: #ffffff;
+    color: #111111;
+    border-color: #ffffff;
+  }
+
+  .notfound__btn--primary:hover {
+    background: #eaeaea;
+  }
+
+  .notfound__call {
+    margin: 0;
+    color: #9aa0aa;
+    font-size: 0.95rem;
+  }
+
+  .notfound__call a {
+    color: #ffffff;
+  }
+</style>
