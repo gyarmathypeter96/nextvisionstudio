@@ -10,6 +10,7 @@ interface Props {
 const { page } = Astro.props;
 const nameId = `${page.slug}-name`;
 const emailId = `${page.slug}-email`;
+const phoneId = `${page.slug}-phone`;
 const messageId = `${page.slug}-message`;
 ---
 
@@ -67,6 +68,19 @@ const messageId = `${page.slug}-message`;
           placeholder="you@example.com"
           autocomplete="email"
           inputmode="email"
+          required
+        />
+      </div>
+
+      <div class="landing-contact__field">
+        <label for={phoneId}>Phone number</label>
+        <input
+          id={phoneId}
+          type="tel"
+          name="phone"
+          placeholder="+353 89 479 7055"
+          autocomplete="tel"
+          inputmode="tel"
           required
         />
       </div>
