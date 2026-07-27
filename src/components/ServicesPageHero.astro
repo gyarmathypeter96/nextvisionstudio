@@ -25,13 +25,18 @@
 
   <div class="services-hero__inner">
     <div class="services-hero__kicker">NextVision Studio Dublin</div>
-    <h1 id="services-page-title">Services</h1>
+    <h1 id="services-page-title">Creative Services That Turn Attention Into Enquiries</h1>
     <div class="services-hero__beam" aria-hidden="true"></div>
 
     <p>
-      Three connected services to help your business look professional, reach the
-      right people and generate more enquiries online.
+      Content, advertising and websites designed around one outcome: making it
+      easier for the right customer to understand your business and get in touch.
     </p>
+
+    <div class="services-hero__actions">
+      <a class="services-hero__primary" href="/contact/">Tell us what you want to improve</a>
+      <a class="services-hero__secondary" href="#content-creation">Explore the services</a>
+    </div>
 
     <nav class="services-hero__anchors" aria-label="Services on this page">
       <a href="#content-creation">Content creation</a>
@@ -163,6 +168,52 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 9px;
+  }
+
+  .services-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .services-hero__actions a {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 22px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.055em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+  }
+
+  .services-hero__primary {
+    border: 1px solid rgba(207, 234, 255, 0.4);
+    background: rgba(155, 210, 255, 0.16);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  }
+
+  .services-hero__secondary {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .services-hero__actions a:hover {
+    border-color: rgba(207, 234, 255, 0.6);
+    background: rgba(155, 210, 255, 0.24);
+    transform: translateY(-2px);
+  }
+
+  .services-hero__actions a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
   }
 
   .services-hero__anchors a {
