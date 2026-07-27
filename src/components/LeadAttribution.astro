@@ -104,8 +104,23 @@
 
           status.textContent = "Thank you. Your enquiry has been received.";
           const redirect = read("redirect");
-          if (redirect) window.location.assign(redirect);
-          else form.reset();
+          const leadSource = redirect
+            ? new URL(redirect, window.location.origin).searchParams.get("source") || "website-form"
+            : "website-form";
+
+          // A lead is only measured after the CRM has accepted the submission.
+          window.gtag?.("event", "generate_lead", {
+            currency: "EUR",
+            value: 1,
+            lead_source: leadSource,
+            form_type: formType || "Website enquiry",
+          });
+
+          if (redirect) {
+            window.setTimeout(() => window.location.assign(redirect), 150);
+          } else {
+            form.reset();
+          }
         } catch (error) {
           status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
           if (submit) submit.disabled = false;
