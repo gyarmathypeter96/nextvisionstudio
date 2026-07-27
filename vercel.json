@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/home-3-2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/home-3-2-2-2/",
       "destination": "/contact/",
       "permanent": true
@@ -8,6 +13,46 @@
     {
       "source": "/home-2-2-2-2-2-2/",
       "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/home-2/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home-3/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home/default/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dsc04335/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/dsc00157/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/home/dsc03750/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/home/dsc04164/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/home-2-2-2-2-2-2-2/dsc00224/",
+      "destination": "/photography-dublin/",
       "permanent": true
     },
     {
@@ -42,4 +87,3 @@
     }
   ]
 }
-
