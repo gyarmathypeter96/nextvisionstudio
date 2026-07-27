@@ -60,28 +60,4 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
     }
   }
 
-  const isConfirmedLead =
-    window.location.pathname.replace(/\/+$/, "") === "/quotesend" &&
-    new URLSearchParams(window.location.search).get("submitted") === "1";
-
-  if (isConfirmedLead) {
-    let alreadyTracked = false;
-    try {
-      alreadyTracked = sessionStorage.getItem("nvs-lead-tracked") === "true";
-    } catch (_) {}
-
-    if (!alreadyTracked) {
-      window.gtag("event", "generate_lead", {
-        currency: "EUR",
-        value: 1,
-        lead_source:
-          new URLSearchParams(window.location.search).get("source") || "website-form",
-      });
-      window.dataLayer.push({ event: "quote_request_submitted" });
-
-      try {
-        sessionStorage.setItem("nvs-lead-tracked", "true");
-      } catch (_) {}
-    }
-  }
 </script>
