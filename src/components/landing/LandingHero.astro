@@ -23,6 +23,12 @@ const { page } = Astro.props;
         <a class="landing-hero__secondary" href="#landing-work">See relevant work</a>
       </div>
 
+      <p class="landing-hero__cta-note">
+        Tell us the result you want. We will recommend the clearest next step before you commit.
+      </p>
+
+      <p class="landing-hero__trust">{page.trustLine}</p>
+
       <ul class="landing-hero__points" aria-label="Service highlights">
         {page.heroPoints.map((point) => <li>{point}</li>)}
       </ul>
@@ -213,6 +219,23 @@ const { page } = Astro.props;
   .landing-hero__scroll:focus-visible {
     outline: 2px solid #cfeaff;
     outline-offset: 4px;
+  }
+
+  .landing-hero__cta-note,
+  .landing-hero__trust {
+    max-width: 640px;
+    margin: 15px 0 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .landing-hero__trust {
+    margin-top: 10px;
+    color: #cfeaff;
+    font-size: 12px;
+    font-weight: 800;
   }
 
   .landing-hero__points {
