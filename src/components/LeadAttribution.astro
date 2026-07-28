@@ -131,4 +131,17 @@
 
   initialiseCrmForms();
   document.addEventListener("astro:page-load", initialiseCrmForms);
+
+  document.addEventListener("click", (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
+    if (!link) return;
+
+    const href = link.href;
+    if (href.startsWith("tel:")) {
+      window.gtag?.("event", "click_call", { link_url: href });
+    }
+    if (href.includes("wa.me")) {
+      window.gtag?.("event", "click_whatsapp", { link_url: href });
+    }
+  });
 </script>
