@@ -1,4 +1,49 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(webp|jpg|jpeg|png|svg|ico|woff2|mp4)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/home-3-2/",
@@ -13,46 +58,6 @@
     {
       "source": "/home-2-2-2-2-2-2/",
       "destination": "/services/",
-      "permanent": true
-    },
-    {
-      "source": "/home-2/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/home-3/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/home/default/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/dsc04335/",
-      "destination": "/photography-dublin/",
-      "permanent": true
-    },
-    {
-      "source": "/dsc00157/",
-      "destination": "/photography-dublin/",
-      "permanent": true
-    },
-    {
-      "source": "/home/dsc03750/",
-      "destination": "/photography-dublin/",
-      "permanent": true
-    },
-    {
-      "source": "/home/dsc04164/",
-      "destination": "/photography-dublin/",
-      "permanent": true
-    },
-    {
-      "source": "/home-2-2-2-2-2-2-2/dsc00224/",
-      "destination": "/photography-dublin/",
       "permanent": true
     },
     {
