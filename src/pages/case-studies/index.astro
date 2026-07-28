@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = [
+  { client: "Gut Fest", title: "Gut Fest Event Videography Dublin", location: "Grand Canal Dock, Dublin", href: "/case-studies/gut-fest-event-videography-dublin/", image: "/images/portfolio/JVA_WxYY3p0.webp", alt: "Gut Fest event videography in Dublin" },
+  { client: "The Macaron Boutique", title: "The Macaron Boutique Product Video", location: "Alicante, Spain", href: "/case-studies/macaron-boutique-product-video/", image: "/images/portfolio/GTzSrbR4-k4.webp", alt: "The Macaron Boutique product video" },
+  { client: "Leroy's Barking World", title: "Leroy's Barking World Social Content", location: "Blessington, County Wicklow", href: "/case-studies/leroys-barking-world-social-content/", image: "/images/portfolio/53-_kK95Eoc.webp", alt: "Leroy's Barking World social media content" },
+  { client: "VentSolve", title: "VentSolve Content Production", location: "Dublin 15 and Ireland", href: "/case-studies/ventsolve-content-production/", image: "/images/portfolio/SUeoIgRtH0I.webp", alt: "VentSolve brand video production" },
+  { client: "SG Studios Dublin", title: "SG Studios Dublin Podcast Studio Content", location: "Ballycoolin, Dublin 15", href: "/case-studies/sg-studios-dublin-podcast-studio-content/", image: "/images/portfolio/fLzjvPVHzAc.webp", alt: "Podcast video content produced at SG Studios Dublin" },
+  { client: "Pogány Induló", title: "Pogány Induló Live Concert Video", location: "The Grand Social, Dublin 1", href: "/case-studies/pogany-indulo-live-concert-video/", image: "/images/portfolio/w2nOFnxvOL8.webp", alt: "Pogány Induló live concert video in Dublin" },
+];
+---
+
+<BaseLayout
+  title="Video Production Case Studies Dublin | NextVision Studio"
+  description="Real video production, social media content and event videography projects by NextVision Studio in Dublin, Ireland and abroad."
+  canonical="https://www.nextvisionstudio.com/case-studies/"
+>
+  <main class="case-index">
+    <section class="case-index__hero">
+      <p class="case-kicker">Selected work</p>
+      <h1>Real projects. Clear decisions. Finished work that earns attention.</h1>
+      <p>See how NextVision Studio approaches event videography, social content, product video and ongoing brand production for real clients.</p>
+    </section>
+
+    <section class="case-index__grid" aria-label="NextVision Studio project case studies">
+      {projects.map((project) => (
+        <a class="case-index__item" href={project.href}>
+          <img src={project.image} alt={project.alt} width="1280" height="720" loading="lazy" decoding="async" />
+          <div class="case-index__copy">
+            <p>{project.client}</p>
+            <h2>{project.title}</h2>
+            <span>{project.location}</span>
+            <strong>Read project</strong>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <section class="case-index__cta">
+      <div>
+        <p class="case-kicker">Your project</p>
+        <h2>Have a brief, a goal or just the first idea?</h2>
+      </div>
+      <a href="/contact/">Start a project</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .case-index, .case-index * { box-sizing: border-box; }
+  .case-index { background: #111111; color: #ffffff; }
+  .case-index__hero, .case-index__grid, .case-index__cta { width: min(100% - 48px, 1180px); margin: 0 auto; }
+  .case-index__hero { padding: 120px 0 74px; }
+  .case-kicker { margin: 0 0 18px; color: #b9dfff; font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+  .case-index h1 { max-width: 880px; margin: 0; font-size: clamp(44px, 6vw, 82px); line-height: .98; letter-spacing: 0; }
+  .case-index__hero > p:last-child { max-width: 620px; margin: 30px 0 0; color: rgba(255,255,255,.68); font-size: 19px; line-height: 1.65; }
+  .case-index__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-bottom: 110px; }
+  .case-index__item { display: block; color: inherit; text-decoration: none; border-top: 1px solid rgba(185,223,255,.18); }
+  .case-index__item img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-top: 24px; transition: transform 220ms ease; }
+  .case-index__item:hover img { transform: scale(1.015); }
+  .case-index__copy { padding: 24px 0 20px; }
+  .case-index__copy p { margin: 0 0 10px; color: #b9dfff; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+  .case-index__copy h2 { margin: 0; font-size: clamp(24px, 3vw, 37px); line-height: 1.05; }
+  .case-index__copy span { display: block; margin-top: 12px; color: rgba(255,255,255,.5); font-size: 14px; }
+  .case-index__copy strong { display: inline-flex; margin-top: 23px; color: #cfeaff; font-size: 13px; }
+  .case-index__cta { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 30px; padding: 80px 0 120px; border-top: 1px solid rgba(185,223,255,.13); }
+  .case-index__cta h2 { max-width: 620px; margin: 0; font-size: clamp(32px, 4vw, 56px); line-height: 1.02; }
+  .case-index__cta a { display: inline-flex; min-height: 48px; align-items: center; padding: 0 20px; background: #cfeaff; color: #111111; font-size: 13px; font-weight: 900; text-decoration: none; }
+  @media (max-width: 700px) { .case-index__grid { grid-template-columns: 1fr; } .case-index__cta { grid-template-columns: 1fr; align-items: start; } }
+  @media (max-width: 560px) { .case-index__hero, .case-index__grid, .case-index__cta { width: min(100% - 32px, 1180px); } .case-index__hero { padding: 74px 0 52px; } .case-index__grid { padding-bottom: 70px; } .case-index__cta { padding: 64px 0 84px; } }
+</style>
