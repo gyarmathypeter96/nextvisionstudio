@@ -1,0 +1,361 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface LinkItem {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  client: string;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  service: string;
+  heroImage: string;
+  heroAlt: string;
+  videoId?: string;
+  videoTitle?: string;
+  challenge: string;
+  deliverables: string[];
+  production: string[];
+  outcome: string;
+  clientResponse: string;
+  links: LinkItem[];
+  source?: LinkItem;
+}
+
+const props = Astro.props;
+const canonical = `https://www.nextvisionstudio.com${Astro.url.pathname}`;
+const videoUrl = props.videoId
+  ? `https://www.youtube.com/watch?v=${props.videoId}`
+  : undefined;
+
+const caseStudySchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: props.title,
+  description: props.description,
+  image: `https://www.nextvisionstudio.com${props.heroImage}`,
+  mainEntityOfPage: canonical,
+  author: {
+    "@type": "Organization",
+    name: "NextVision Studio",
+    url: "https://www.nextvisionstudio.com/",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "NextVision Studio",
+    url: "https://www.nextvisionstudio.com/",
+  },
+  about: props.client,
+  locationCreated: {
+    "@type": "Place",
+    name: props.location,
+  },
+};
+---
+
+<BaseLayout
+  title={`${props.title} | NextVision Studio`}
+  description={props.description}
+  canonical={canonical}
+  ogImage={props.heroImage}
+  preloadImage={props.heroImage}
+>
+  <main class="case-study-page">
+    <section class="case-study-hero">
+      <div class="case-study-hero__content">
+        <a class="case-study-back" href="/case-studies/">Project case studies</a>
+        <p class="case-study-kicker">Real project by NextVision Studio</p>
+        <h1>{props.title}</h1>
+        <p class="case-study-hero__intro">{props.description}</p>
+
+        <dl class="case-study-facts">
+          <div>
+            <dt>Client</dt>
+            <dd>{props.client}</dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>{props.location}</dd>
+          </div>
+          <div>
+            <dt>Project</dt>
+            <dd>{props.service}</dd>
+          </div>
+          <div>
+            <dt>Date</dt>
+            <dd>{props.date}</dd>
+          </div>
+        </dl>
+
+        <div class="case-study-actions">
+          {videoUrl && (
+            <a class="case-study-button case-study-button--primary" href={videoUrl} target="_blank" rel="noreferrer">
+              Watch the project
+            </a>
+          )}
+          <a class="case-study-button case-study-button--secondary" href="/contact/">
+            Start a similar project
+          </a>
+        </div>
+      </div>
+
+      <figure class="case-study-hero__media">
+        <img src={props.heroImage} alt={props.heroAlt} width="1280" height="720" fetchpriority="high" />
+      </figure>
+    </section>
+
+    <section class="case-study-section case-study-section--split">
+      <div class="case-study-section__heading">
+        <p class="case-study-kicker">The brief</p>
+        <h2>What the project needed to achieve</h2>
+      </div>
+      <div class="case-study-section__body">
+        <p>{props.challenge}</p>
+      </div>
+    </section>
+
+    <section class="case-study-section">
+      <div class="case-study-section__heading">
+        <p class="case-study-kicker">The work</p>
+        <h2>What I created</h2>
+      </div>
+      <div class="case-study-list-grid">
+        <div>
+          <h3>Deliverables</h3>
+          <ul>
+            {props.deliverables.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3>Production choices</h3>
+          <ul>
+            {props.production.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {props.videoId && (
+      <section class="case-study-video" aria-labelledby="case-study-video-title">
+        <div class="case-study-video__heading">
+          <p class="case-study-kicker">Watch the work</p>
+          <h2 id="case-study-video-title">{props.videoTitle ?? "Project video"}</h2>
+        </div>
+        <div class="case-study-video__frame">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${props.videoId}`}
+            title={props.videoTitle ?? props.title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    )}
+
+    <section class="case-study-section case-study-section--result">
+      <div class="case-study-section__heading">
+        <p class="case-study-kicker">The result</p>
+        <h2>A finished story that feels like the client</h2>
+      </div>
+      <div class="case-study-result">
+        <p>{props.outcome}</p>
+        <div class="case-study-feedback">
+          <p class="case-study-feedback__label">Client feedback</p>
+          <p>{props.clientResponse}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study-next" aria-labelledby="case-study-next-title">
+      <div>
+        <p class="case-study-kicker">Explore more</p>
+        <h2 id="case-study-next-title">Need content with a clear purpose?</h2>
+        <p>See the relevant service or send a short brief. I will recommend the simplest production plan for the result you want.</p>
+      </div>
+      <div class="case-study-next__links">
+        {props.links.map((link) => (
+          <a href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>
+            {link.label}
+          </a>
+        ))}
+        {props.source && <a href={props.source.href} target="_blank" rel="noreferrer">{props.source.label}</a>}
+      </div>
+    </section>
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(caseStudySchema)} />
+</BaseLayout>
+
+<style>
+  .case-study-page,
+  .case-study-page * { box-sizing: border-box; }
+
+  .case-study-page { background: #111111; color: #ffffff; }
+
+  .case-study-hero,
+  .case-study-section,
+  .case-study-video,
+  .case-study-next {
+    width: min(100% - 48px, 1180px);
+    margin: 0 auto;
+  }
+
+  .case-study-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+    align-items: center;
+    gap: clamp(42px, 7vw, 100px);
+    min-height: 720px;
+    padding: 100px 0 88px;
+  }
+
+  .case-study-back {
+    display: inline-flex;
+    margin-bottom: 32px;
+    color: #b9dfff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .case-study-back:hover { color: #ffffff; }
+
+  .case-study-kicker {
+    margin: 0 0 18px;
+    color: #b9dfff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .case-study-hero h1 {
+    max-width: 680px;
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(42px, 5vw, 76px);
+    line-height: .98;
+    letter-spacing: 0;
+  }
+
+  .case-study-hero__intro {
+    max-width: 620px;
+    margin: 28px 0 0;
+    color: rgba(255, 255, 255, .72);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .case-study-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 620px;
+    margin: 42px 0 0;
+    border-top: 1px solid rgba(185, 223, 255, .2);
+  }
+
+  .case-study-facts div {
+    padding: 17px 20px 17px 0;
+    border-bottom: 1px solid rgba(185, 223, 255, .14);
+  }
+
+  .case-study-facts dt {
+    margin-bottom: 7px;
+    color: rgba(255, 255, 255, .42);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .case-study-facts dd { margin: 0; color: rgba(255, 255, 255, .85); font-size: 14px; line-height: 1.45; }
+
+  .case-study-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+  .case-study-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 18px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .case-study-button--primary { border-color: #cfeaff; background: #cfeaff; color: #111111; }
+  .case-study-button:hover { transform: translateY(-2px); }
+
+  .case-study-hero__media { margin: 0; }
+
+  .case-study-hero__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid rgba(185, 223, 255, .2);
+  }
+
+  .case-study-section,
+  .case-study-video { padding: 108px 0; border-top: 1px solid rgba(185, 223, 255, .12); }
+
+  .case-study-section--split,
+  .case-study-section--result {
+    display: grid;
+    grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr);
+    gap: 80px;
+  }
+
+  .case-study-section h2,
+  .case-study-video h2,
+  .case-study-next h2 { max-width: 680px; margin: 0; color: #ffffff; font-size: clamp(30px, 4vw, 52px); line-height: 1.05; letter-spacing: 0; }
+  .case-study-section__body p,
+  .case-study-result > p { max-width: 760px; margin: 0; color: rgba(255, 255, 255, .74); font-size: 20px; line-height: 1.7; }
+
+  .case-study-list-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px; }
+  .case-study-list-grid h3 { margin: 0 0 20px; color: #ffffff; font-size: 18px; }
+  .case-study-list-grid ul { margin: 0; padding: 0; list-style: none; }
+  .case-study-list-grid li { padding: 0 0 16px 20px; color: rgba(255, 255, 255, .68); font-size: 16px; line-height: 1.6; position: relative; }
+  .case-study-list-grid li::before { content: ""; position: absolute; top: .7em; left: 0; width: 7px; height: 7px; background: #b9dfff; }
+
+  .case-study-video__heading { margin-bottom: 28px; }
+  .case-study-video__frame { aspect-ratio: 16 / 9; background: #08090a; }
+  .case-study-video__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+  .case-study-feedback { margin: 42px 0 0; padding: 26px 0 0 25px; border-left: 2px solid #b9dfff; }
+  .case-study-feedback__label { margin: 0 0 12px; color: #b9dfff; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+  .case-study-feedback > p:last-child { margin: 0; color: #ffffff; font-size: 20px; line-height: 1.55; }
+
+  .case-study-next { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .6fr); gap: 70px; padding: 90px 0 120px; }
+  .case-study-next p:not(.case-study-kicker) { max-width: 600px; margin: 22px 0 0; color: rgba(255, 255, 255, .62); font-size: 17px; line-height: 1.65; }
+  .case-study-next__links { display: grid; align-content: center; gap: 13px; }
+  .case-study-next__links a { color: #cfeaff; font-size: 15px; font-weight: 800; text-decoration: none; }
+  .case-study-next__links a:hover { color: #ffffff; }
+
+  @media (max-width: 800px) {
+    .case-study-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 64px; }
+    .case-study-hero__media { order: -1; }
+    .case-study-section--split, .case-study-section--result, .case-study-next { grid-template-columns: 1fr; gap: 32px; }
+    .case-study-list-grid { gap: 30px; }
+  }
+
+  @media (max-width: 560px) {
+    .case-study-hero, .case-study-section, .case-study-video, .case-study-next { width: min(100% - 32px, 1180px); }
+    .case-study-hero { padding: 48px 0 64px; }
+    .case-study-hero h1 { font-size: 42px; }
+    .case-study-hero__intro { font-size: 16px; }
+    .case-study-facts { grid-template-columns: 1fr; }
+    .case-study-section, .case-study-video { padding: 72px 0; }
+    .case-study-list-grid { grid-template-columns: 1fr; }
+    .case-study-next { padding: 70px 0 88px; }
+  }
+</style>
