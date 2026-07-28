@@ -7,11 +7,9 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   <div class="contact-page__inner">
     <header class="contact-page__header">
       <div class="contact-page__kicker">Start a project</div>
-      <h1 id="contact-page-title">Let’s Talk About What You Want to Create</h1>
+      <h1 id="contact-page-title">Let’s plan the right next move.</h1>
       <p>
-        Looking for videography, photography, social media content, advertising
-        or website design in Dublin? Send a few details and NextVision Studio
-        will reply with the clearest next step.
+        Looking for video production, commercial photography, social content or a new website in Dublin? Send a few details and we will come back with a clear next step.
       </p>
     </header>
 
@@ -99,11 +97,23 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             id="contact-page-phone"
             type="tel"
             name="phone"
-            placeholder="+353 89 479 7055"
+            placeholder="+353"
             autocomplete="tel"
             inputmode="tel"
             required
           />
+        </div>
+
+        <div class="contact-page__field">
+          <label for="contact-page-service">What do you need?</label>
+          <select id="contact-page-service" name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="Video production">Video production</option>
+            <option value="Commercial photography">Commercial photography</option>
+            <option value="Social media content">Social media content</option>
+            <option value="Website design">Website design</option>
+            <option value="Not sure yet">I am not sure yet</option>
+          </select>
         </div>
 
         <div class="contact-page__field">
@@ -305,7 +315,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   }
 
   .contact-page__field input,
-  .contact-page__field textarea {
+  .contact-page__field textarea,
+  .contact-page__field select {
     display: block;
     width: 100%;
     min-height: 56px;
@@ -332,7 +343,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   }
 
   .contact-page__field input:focus,
-  .contact-page__field textarea:focus {
+  .contact-page__field textarea:focus,
+  .contact-page__field select:focus {
     border-color: rgba(155, 210, 255, 0.58);
     background: rgba(255, 255, 255, 0.065);
     box-shadow: 0 0 0 4px rgba(155, 210, 255, 0.085);
@@ -450,7 +462,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
     }
 
     .contact-page__field input,
-    .contact-page__field textarea {
+    .contact-page__field textarea,
+    .contact-page__field select {
       font-size: 16px;
     }
   }
@@ -458,6 +471,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   @media (prefers-reduced-motion: reduce) {
     .contact-page__field input,
     .contact-page__field textarea,
+    .contact-page__field select,
     .contact-page__form button,
     .contact-page__form button::after {
       transition: none;
