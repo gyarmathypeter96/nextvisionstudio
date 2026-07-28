@@ -65,14 +65,14 @@ export const landingPages: Record<string, LandingPageData> = {
   videography: {
     slug: "videography-dublin",
     kind: "video",
-    metaTitle: "Videography Dublin | Video Production for Businesses",
+    metaTitle: "Video Production Dublin | Commercial Videography",
     metaDescription:
-      "Professional videography and video production in Dublin for brands, events, products and social media. Plan your project with NextVision Studio.",
+      "Commercial video production in Dublin for businesses, brands, events and campaigns. See relevant work and request a clear project recommendation.",
     eyebrow: "Videography Dublin",
-    headlineStart: "Video That Makes Your Brand",
-    headlineAccent: "Worth Watching",
+    headlineStart: "Commercial Video Production in",
+    headlineAccent: "Dublin",
     lead:
-      "NextVision Studio plans, films and edits professional video content for Dublin businesses — from brand films and event coverage to product videos, Reels and paid social creative.",
+      "NextVision Studio plans, films and edits commercial video for Dublin businesses: brand stories, product films, events and social campaigns with a job to do.",
     heroImage: {
       src: "/images/portfolio/JVA_WxYY3p0.webp",
       alt: "Professional event videography in Dublin by NextVision Studio",
@@ -80,7 +80,7 @@ export const landingPages: Record<string, LandingPageData> = {
       height: 360,
     },
     heroPoints: ["Strategy before filming", "Dublin-based production", "Platform-ready delivery"],
-    ctaLabel: "Plan your video project",
+    ctaLabel: "Get a video project recommendation",
     trustLine: "Video production built for websites, campaigns and social media",
     problemKicker: "More than a good-looking video",
     problemTitle: "Your audience needs a reason to stop, watch and remember.",
@@ -206,14 +206,14 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Photography Dublin | Professional Business Photographer",
+    metaTitle: "Commercial Photography Dublin | Business & Product Photographer",
     metaDescription:
-      "Professional photography in Dublin for products, brands, events, teams, food and social media. Explore the portfolio and request a clear quote.",
+      "Commercial photography in Dublin for products, brands, teams and events. See real work and get a clear quote for your next shoot.",
     eyebrow: "Photography Dublin",
-    headlineStart: "Photography That Makes Your Business",
-    headlineAccent: "Look Established",
+    headlineStart: "Commercial Photography in",
+    headlineAccent: "Dublin",
     lead:
-      "Professional photography for Dublin businesses that need consistent, premium images for websites, social media, campaigns, events and sales materials.",
+      "Professional photography for Dublin businesses that need credible images for websites, campaigns, product launches, social media and sales material.",
     heroImage: {
       src: "/images/photography/event-photography-dublin.webp",
       alt: "Professional event photographer in Dublin by NextVision Studio",
@@ -221,7 +221,7 @@ export const landingPages: Record<string, LandingPageData> = {
       height: 1800,
     },
     heroPoints: ["Brand-focused planning", "Professional editing", "Web and social formats"],
-    ctaLabel: "Plan your photography",
+    ctaLabel: "Get a photography quote",
     trustLine: "Commercial photography shaped around how your images will be used",
     problemKicker: "Make the first impression count",
     problemTitle: "People judge the quality of a business before they read the details.",
@@ -347,12 +347,12 @@ export const landingPages: Record<string, LandingPageData> = {
   webdesign: {
     slug: "webdesigner-dublin",
     kind: "web",
-    metaTitle: "Web Designer Dublin | Premium Business Websites",
+    metaTitle: "Web Designer Dublin | Websites That Generate Enquiries",
     metaDescription:
-      "Web designer in Dublin creating fast, responsive and SEO-friendly websites that explain your services clearly and turn visitors into enquiries.",
+      "Web designer in Dublin building fast, SEO-ready business websites with clear offers, proof and an easy path to enquiry.",
     eyebrow: "Web Designer Dublin",
-    headlineStart: "Websites That Turn Attention Into",
-    headlineAccent: "Real Enquiries",
+    headlineStart: "Websites that turn visits into",
+    headlineAccent: "enquiries",
     lead:
       "NextVision Studio designs and develops premium websites for Dublin businesses that need to look credible, explain their value clearly and make contacting them feel easy.",
     heroPoints: ["Mobile-first design", "SEO-friendly structure", "Clear conversion paths"],
@@ -470,9 +470,9 @@ export const landingPages: Record<string, LandingPageData> = {
   social: {
     slug: "social-media-content-creation-dublin",
     kind: "social",
-    metaTitle: "Social Media Content Creation Dublin | Video & Photo",
+    metaTitle: "Social Media Content Creation Dublin | Reels, Video & Photography",
     metaDescription:
-      "Social media content creation in Dublin for businesses that need consistent Reels, TikToks, Shorts, photography and campaign-ready video content.",
+      "Social media content creation in Dublin: Reels, TikToks, Shorts and photography planned around the offers your business needs to sell.",
     eyebrow: "Social Media Content Creation Dublin",
     headlineStart: "A Content System That Keeps Your Brand",
     headlineAccent: "Visible",
