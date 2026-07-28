@@ -5,11 +5,9 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
 <section class="contact" id="contact-form" aria-labelledby="contact-title">
   <header class="contact__header">
     <div class="contact__kicker">Start a project</div>
-    <h2 id="contact-title">Let’s Create Something That Gets Noticed</h2>
+    <h2 id="contact-title">Tell us what you need to achieve.</h2>
     <p>
-      Looking for a videographer in Dublin, professional photography, social
-      media content or a new website? Tell us what you have in mind and we’ll
-      get back to you with the next steps.
+      Tell us the service you need, the result you want and the timing you have in mind. We will come back with a useful next step, not a generic reply.
     </p>
   </header>
 
@@ -71,11 +69,23 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
         id="contact-phone"
         type="tel"
         name="phone"
-        placeholder="+353 89 479 7055"
+        placeholder="+353"
         autocomplete="tel"
         inputmode="tel"
         required
       />
+    </div>
+
+    <div class="contact__field">
+      <label for="contact-service">What do you need?</label>
+      <select id="contact-service" name="service" required>
+        <option value="" disabled selected>Select a service</option>
+        <option value="Video production">Video production</option>
+        <option value="Commercial photography">Commercial photography</option>
+        <option value="Social media content">Social media content</option>
+        <option value="Website design">Website design</option>
+        <option value="Not sure yet">I am not sure yet</option>
+      </select>
     </div>
 
     <div class="contact__field">
@@ -189,7 +199,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   }
 
   .contact__field input,
-  .contact__field textarea {
+  .contact__field textarea,
+  .contact__field select {
     display: block;
     width: 100%;
     min-height: 54px;
@@ -221,7 +232,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
   }
 
   .contact__field input:focus,
-  .contact__field textarea:focus {
+  .contact__field textarea:focus,
+  .contact__field select:focus {
     border-color: rgba(155, 210, 255, 0.58);
     background: rgba(255, 255, 255, 0.075);
     box-shadow:
