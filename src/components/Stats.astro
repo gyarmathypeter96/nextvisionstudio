@@ -1,19 +1,20 @@
 ---
 const stats = [
   {
-    label: "Total video views",
-    target: 1000000,
-    formattedValue: "1,000,000+",
+    label: "Leads generated for clients",
+    target: 500,
+    formattedValue: "500+",
+    suffix: "+",
   },
   {
-    label: "Pieces of content created",
+    label: "Average cost per lead on campaigns we manage",
+    formattedValue: "€5 to €6",
+  },
+  {
+    label: "Customers acquired from €1,000 of ad spend",
     target: 100,
     formattedValue: "100+",
-  },
-  {
-    label: "Followers gained for clients",
-    target: 1000,
-    formattedValue: "1,000+",
+    suffix: "+",
   },
 ];
 ---
@@ -29,15 +30,23 @@ const stats = [
       stats.map((stat) => (
         <div class="stats__item">
           <dt>{stat.label}</dt>
-          <dd
-            class="stats__number"
-            data-counter
-            data-target={stat.target}
-            data-suffix="+"
-            aria-label={`${stat.formattedValue} ${stat.label.toLowerCase()}`}
-          >
-            {stat.formattedValue}
-          </dd>
+          {
+            stat.target ? (
+              <dd
+                class="stats__number"
+                data-counter
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+                aria-label={`${stat.formattedValue} ${stat.label.toLowerCase()}`}
+              >
+                {stat.formattedValue}
+              </dd>
+            ) : (
+              <dd class="stats__number" aria-label={`${stat.formattedValue} ${stat.label.toLowerCase()}`}>
+                {stat.formattedValue}
+              </dd>
+            )
+          }
         </div>
       ))
     }

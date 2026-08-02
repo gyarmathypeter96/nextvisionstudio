@@ -442,7 +442,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "How much does a business website cost in Dublin?",
         answer:
-          "Website cost depends on the number of pages, content requirements, integrations and design scope. After reviewing your goal and current materials, we provide a clear project scope and quote.",
+          "Most business websites we build are between €1,450 and €2,450. Starter is €1,450 for up to 5 pages, Business is €2,450 for up to 10 pages with copywriting and local SEO. Custom builds and e-commerce start at €3,950. Send us your current site and goal and we will tell you which one you need.",
       },
       {
         question: "Will my new website be SEO-friendly?",

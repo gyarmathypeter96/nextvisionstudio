@@ -1,0 +1,142 @@
+<section class="trades" aria-labelledby="trades-title">
+  <div class="trades__inner">
+    <header>
+      <h2 id="trades-title">Built for Dublin home-service businesses</h2>
+      <p>Ventilation, cleaning, retrofit and trades. We already speak your language: condensation, callouts, quotes and seasonal demand.</p>
+    </header>
+
+    <div class="trades__grid">
+      <article>
+        <div class="trades__media">
+          <a href="/#portfolio"><img src="/images/portfolio/SUeoIgRtH0I.webp" alt="VentSolve video preview" width="640" height="360" loading="lazy" decoding="async" /></a>
+        </div>
+        <h3>VentSolve</h3>
+        <p>Ventilation and mould specialists, Dublin 15. Brand video, short-form social content and paid campaigns.</p>
+      </article>
+
+      <article>
+        <div class="trades__media">
+          <a href="/#portfolio"><img src="/images/portfolio/LqePwDWaP8Y.webp" alt="Eco Vent Turbo video preview" width="640" height="360" loading="lazy" decoding="async" /></a>
+        </div>
+        <h3>Eco Vent Turbo</h3>
+        <p>Corporate product video for a ventilation range.</p>
+      </article>
+
+      <article>
+        <div class="trades__media">
+          <a href="/#portfolio"><img src="/images/photography/thumbs/brand-photography-social-content-dublin.jpg" alt="Perfect Clean video preview" width="640" height="360" loading="lazy" decoding="async" /></a>
+        </div>
+        <h3>Perfect Clean</h3>
+        <p>Cleaning services. Social content and brand visuals.</p>
+      </article>
+    </div>
+
+    <p class="trades__closing">When something goes wrong in a customer's home, they call the business they already trust. Our job is to make that business you.</p>
+  </div>
+</section>
+
+<style>
+  .trades,
+  .trades * { box-sizing: border-box; }
+
+  .trades {
+    padding: 112px 24px 118px;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    background: linear-gradient(to bottom, #111111, #10151a 52%, #111111);
+    color: #ffffff;
+  }
+
+  .trades__inner {
+    width: min(100%, 1160px);
+    margin: 0 auto;
+  }
+
+  .trades header {
+    width: min(100%, 850px);
+    margin: 0 auto 54px;
+    text-align: center;
+  }
+
+  .trades h2 {
+    margin: 0;
+    font-size: clamp(43px, 5.8vw, 74px);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+    text-wrap: balance;
+  }
+
+  .trades header p {
+    margin: 23px auto 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 17px;
+    line-height: 1.62;
+  }
+
+  .trades__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .trades article {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.13);
+    border-radius: 22px;
+    background: #15191d;
+    box-shadow: 0 22px 58px rgba(0, 0, 0, 0.24);
+  }
+
+  .trades__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0d1114;
+  }
+
+  .trades__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .trades__media a { display: block; height: 100%; }
+
+  .trades article h3 {
+    margin: 25px 24px 10px;
+    font-size: 23px;
+    letter-spacing: -0.035em;
+  }
+
+  .trades article > p {
+    margin: 0;
+    padding: 0 24px 27px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .trades__closing {
+    width: min(100%, 820px);
+    margin: 45px auto 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(19px, 2.2vw, 25px);
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 850px) {
+    .trades__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .trades { padding: 86px 16px 92px; }
+    .trades header { margin-bottom: 42px; }
+  }
+</style>

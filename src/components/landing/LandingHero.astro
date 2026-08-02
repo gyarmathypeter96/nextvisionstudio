@@ -17,6 +17,7 @@ const { page } = Astro.props;
         {page.headlineStart} <span>{page.headlineAccent}</span>{page.headlineEnd && ` ${page.headlineEnd}`}
       </h1>
       <p class="landing-hero__lead">{page.lead}</p>
+      {page.slug === "webdesigner-dublin" && <p class="landing-hero__price">€1,450</p>}
 
       <div class="landing-hero__actions">
         <a class="landing-hero__primary" href="#landing-contact">{page.ctaLabel}</a>
@@ -168,6 +169,14 @@ const { page } = Astro.props;
     font-size: clamp(17px, 1.8vw, 20px);
     font-weight: 500;
     line-height: 1.63;
+  }
+
+  .landing-hero__price {
+    margin: 20px 0 0;
+    color: #ffffff;
+    font-size: clamp(29px, 3vw, 40px);
+    font-weight: 900;
+    line-height: 1;
   }
 
   .landing-hero__actions {

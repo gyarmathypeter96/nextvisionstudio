@@ -1,0 +1,336 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CRM_FORM_ENDPOINT } from "../../config/forms";
+---
+
+<BaseLayout
+  title="Website Design Quote Dublin | NextVision Studio"
+  description="A conversion-focused website for Dublin service businesses, live in three weeks from €1,450."
+  canonical="https://www.nextvisionstudio.com/website-design-quote/"
+  noindex={true}
+  minimal={true}
+>
+  <main class="quote-page">
+    <section class="quote-hero" aria-labelledby="quote-title">
+      <div class="quote-page__inner">
+        <h1 id="quote-title">A website your customers actually enquire through. Live in three weeks. From €1,450.</h1>
+        <p>Built for Dublin service businesses tired of a site that looks fine and does nothing.</p>
+        <a class="quote-page__cta" href="#quote-form">Get my website quote</a>
+      </div>
+    </section>
+
+    <section class="quote-fit" aria-labelledby="quote-fit-title">
+      <div class="quote-page__inner quote-page__narrow">
+        <h2 id="quote-fit-title">Who this is for</h2>
+        <ul>
+          <li>You run a service business in Dublin or the surrounding counties</li>
+          <li>Your average job is worth €500 or more</li>
+          <li>You can take on more work right now</li>
+        </ul>
+        <p>Not for you if you want the cheapest possible site. We are not that.</p>
+        <a class="quote-page__cta" href="#quote-form">Get my website quote</a>
+      </div>
+    </section>
+
+    <section class="quote-value" aria-labelledby="quote-value-title">
+      <div class="quote-page__inner quote-page__narrow">
+        <h2 id="quote-value-title">What you get</h2>
+        <dl>
+          <div><dt>5-page conversion-focused website</dt><dd>€1,450</dd></div>
+          <div><dt>Mobile-first build, under two seconds on 4G</dt><dd>included</dd></div>
+          <div><dt>Local SEO foundations for Dublin searches</dt><dd>€400</dd></div>
+          <div><dt>Copy written around your services</dt><dd>€300</dd></div>
+          <div><dt>Call, WhatsApp and form CTAs on every page</dt><dd>included</dd></div>
+          <div><dt>Summer bonus: 2 extra campaign landing pages, targets your choice</dt><dd>€700</dd></div>
+        </dl>
+        <p class="quote-value__total">Total value €2,850. Your price today: €1,450.</p>
+
+        <aside class="quote-guarantee">
+          <p>You approve the homepage design before the balance is due. If it is not right, we revise it until it is.</p>
+        </aside>
+
+        <p class="quote-deadline">Summer offer ends 31 August. After that the two bonus landing pages are €350 each.</p>
+        <a class="quote-page__cta" href="#quote-form">Get my website quote</a>
+      </div>
+    </section>
+
+    <section class="quote-form-section" aria-labelledby="quote-form-title">
+      <div class="quote-page__inner quote-page__narrow">
+        <h2 id="quote-form-title">Get my website quote</h2>
+        <form id="quote-form" action={CRM_FORM_ENDPOINT} method="POST" data-crm-form>
+          <input type="hidden" name="redirect" value="https://www.nextvisionstudio.com/website-design-quote/thanks/?submitted=1&source=website-design-quote" />
+          <input type="hidden" name="subject" value="New website design quote request" />
+          <input type="hidden" name="from_name" value="NextVision Studio Website" />
+          <input type="hidden" name="service" value="Website design and development in Dublin" />
+
+          <div class="quote-form__botcheck" aria-hidden="true">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+
+          <label>
+            <span>Business name</span>
+            <input type="text" name="business" autocomplete="organization" required />
+          </label>
+
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353" required />
+          </label>
+
+          <label>
+            <span>Current website (optional)</span>
+            <input type="url" name="current_website" autocomplete="url" inputmode="url" />
+          </label>
+
+          <label>
+            <span>What do you need most</span>
+            <select name="website_goal" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="More enquiries">more enquiries</option>
+              <option value="Look more professional">look more professional</option>
+              <option value="Both">both</option>
+            </select>
+          </label>
+
+          <button type="submit">Get my website quote</button>
+          <p>We reply within one working day. No pressure, no retainer, no sales call needed to get a price.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .quote-page,
+  .quote-page * { box-sizing: border-box; }
+
+  .quote-page {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .quote-page__inner {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+  }
+
+  .quote-page__narrow { width: min(100%, 900px); }
+
+  .quote-hero {
+    display: grid;
+    min-height: 86svh;
+    align-items: center;
+    padding: 150px 24px 100px;
+    background: radial-gradient(circle at 50% 36%, rgba(155, 210, 255, 0.12), transparent 30%), #111111;
+    text-align: center;
+  }
+
+  .quote-hero h1 {
+    max-width: 1060px;
+    margin: 0 auto;
+    font-size: clamp(52px, 7.6vw, 102px);
+    font-weight: 950;
+    letter-spacing: -0.07em;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  .quote-hero p {
+    width: min(100%, 700px);
+    margin: 28px auto 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.55;
+  }
+
+  .quote-page__cta,
+  .quote-form-section button {
+    display: inline-flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    padding: 0 30px;
+    border: 1px solid rgba(207, 234, 255, 0.48);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(155, 210, 255, 0.11)), rgba(255, 255, 255, 0.055);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .quote-page__cta:focus-visible,
+  .quote-form-section button:focus-visible,
+  .quote-form-section input:focus-visible,
+  .quote-form-section select:focus-visible {
+    outline: 3px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  .quote-fit,
+  .quote-value,
+  .quote-form-section { padding: 106px 24px; }
+
+  .quote-fit { background: #10151a; }
+  .quote-value { background: #111111; }
+  .quote-form-section { background: linear-gradient(to bottom, #10151a, #111111); }
+
+  .quote-fit h2,
+  .quote-value h2,
+  .quote-form-section h2 {
+    margin: 0 0 39px;
+    font-size: clamp(43px, 6vw, 70px);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+  }
+
+  .quote-fit ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: 13px;
+    list-style: none;
+  }
+
+  .quote-fit li {
+    padding: 19px 22px;
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .quote-fit > div > p {
+    margin: 27px 0 0;
+    color: #cfeaff;
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.55;
+  }
+
+  .quote-value dl {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 20px;
+    background: #15191d;
+  }
+
+  .quote-value dl div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    padding: 20px 23px;
+    gap: 28px;
+    border-bottom: 1px solid rgba(180, 220, 255, 0.1);
+  }
+
+  .quote-value dl div:last-child { border-bottom: 0; }
+  .quote-value dt { color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
+  .quote-value dd { margin: 0; color: #ffffff; font-weight: 850; white-space: nowrap; }
+
+  .quote-value__total {
+    margin: 18px 0 0;
+    padding: 24px;
+    border-radius: 18px;
+    background: #cfeaff;
+    color: #111111;
+    font-size: clamp(20px, 2.4vw, 27px);
+    font-weight: 900;
+    line-height: 1.4;
+  }
+
+  .quote-guarantee {
+    margin-top: 42px;
+    padding: 30px;
+    border: 1px solid rgba(180, 220, 255, 0.32);
+    border-radius: 20px;
+    background: rgba(155, 210, 255, 0.09);
+  }
+
+  .quote-guarantee p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .quote-deadline {
+    margin: 18px 0 0;
+    padding: 20px 23px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .quote-form-section h2 { text-align: center; }
+
+  .quote-form-section form {
+    display: grid;
+    padding: clamp(28px, 5vw, 48px);
+    gap: 20px;
+    border: 1px solid rgba(180, 220, 255, 0.17);
+    border-radius: 24px;
+    background: #15191d;
+  }
+
+  .quote-form__botcheck { display: none; }
+
+  .quote-form-section label {
+    display: grid;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .quote-form-section input,
+  .quote-form-section select {
+    width: 100%;
+    min-height: 55px;
+    padding: 14px 16px;
+    border: 1px solid rgba(180, 220, 255, 0.16);
+    border-radius: 14px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+  }
+
+  .quote-form-section button { width: 100%; margin-top: 4px; }
+
+  .quote-form-section form > p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    .quote-hero { min-height: 82svh; padding: 128px 16px 82px; }
+    .quote-hero h1 { font-size: clamp(46px, 13.2vw, 62px); }
+    .quote-fit,
+    .quote-value,
+    .quote-form-section { padding: 84px 16px; }
+    .quote-page__cta { width: 100%; }
+    .quote-value dl div { grid-template-columns: 1fr; gap: 8px; }
+    .quote-value dd { white-space: normal; }
+  }
+</style>

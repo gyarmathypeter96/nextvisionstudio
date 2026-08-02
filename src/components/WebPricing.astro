@@ -1,0 +1,190 @@
+<section class="web-pricing" aria-labelledby="web-pricing-title">
+  <div class="web-pricing__inner">
+    <header>
+      <h2 id="web-pricing-title">Website pricing</h2>
+      <p>Clear pricing, no discovery call needed to find out if we are in your range.</p>
+    </header>
+
+    <div class="web-pricing__grid">
+      <article>
+        <p class="web-pricing__name">STARTER</p>
+        <p class="web-pricing__price">€1,450</p>
+        <ul>
+          <li>Up to 5 pages</li>
+          <li>Mobile-first build, under 2s load</li>
+          <li>SEO foundations and metadata</li>
+          <li>Contact form, WhatsApp and call buttons</li>
+          <li>Live in 2 to 3 weeks</li>
+        </ul>
+      </article>
+
+      <article class="web-pricing__card--featured">
+        <span class="web-pricing__badge">Most popular</span>
+        <p class="web-pricing__name">BUSINESS</p>
+        <p class="web-pricing__price">€2,450</p>
+        <p class="web-pricing__includes">Everything in Starter, plus:</p>
+        <ul>
+          <li>Up to 10 pages</li>
+          <li>Copywriting for your services</li>
+          <li>Enquiry and booking flow</li>
+          <li>Local SEO pages for Dublin searches</li>
+        </ul>
+      </article>
+
+      <article>
+        <p class="web-pricing__name">PREMIUM</p>
+        <p class="web-pricing__price">from €3,950</p>
+        <ul>
+          <li>Custom build, e-commerce or integrations</li>
+          <li>Scoped after a short call</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="web-pricing__offer">Summer offer: book before 31 August and we build 2 extra campaign landing pages free, worth €700. You choose what they target.</p>
+  </div>
+</section>
+
+<style>
+  .web-pricing,
+  .web-pricing * { box-sizing: border-box; }
+
+  .web-pricing {
+    padding: 108px 24px;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .web-pricing__inner {
+    width: min(100%, 1160px);
+    margin: 0 auto;
+  }
+
+  .web-pricing header {
+    width: min(100%, 760px);
+    margin: 0 auto 52px;
+    text-align: center;
+  }
+
+  .web-pricing h2 {
+    margin: 0;
+    font-size: clamp(44px, 6vw, 76px);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+  }
+
+  .web-pricing header p {
+    margin: 22px auto 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .web-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .web-pricing article {
+    position: relative;
+    min-width: 0;
+    padding: 34px 30px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)), #15191d;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+  }
+
+  .web-pricing .web-pricing__card--featured {
+    border-color: rgba(180, 220, 255, 0.42);
+    background: linear-gradient(145deg, rgba(155, 210, 255, 0.12), rgba(255, 255, 255, 0.025)), #15191d;
+  }
+
+  .web-pricing__badge {
+    display: inline-flex;
+    margin-bottom: 23px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #cfeaff;
+    color: #111111;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .web-pricing__name {
+    margin: 0;
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .web-pricing__price {
+    margin: 13px 0 28px;
+    font-size: clamp(38px, 4vw, 53px);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .web-pricing__includes {
+    margin: -10px 0 16px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .web-pricing ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: 13px;
+    list-style: none;
+  }
+
+  .web-pricing li {
+    position: relative;
+    padding-left: 20px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .web-pricing li::before {
+    position: absolute;
+    top: 0.52em;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #9bd2ff;
+    content: "";
+  }
+
+  .web-pricing__offer {
+    margin: 18px 0 0;
+    padding: 22px 26px;
+    border: 1px solid rgba(180, 220, 255, 0.31);
+    border-radius: 18px;
+    background: rgba(155, 210, 255, 0.1);
+    color: #e7f6ff;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  @media (max-width: 850px) {
+    .web-pricing__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .web-pricing { padding: 86px 16px; }
+    .web-pricing article { padding: 29px 24px; }
+    .web-pricing__offer { padding: 20px; text-align: left; }
+  }
+</style>

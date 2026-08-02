@@ -1,0 +1,122 @@
+---
+const showTestimonials = false;
+---
+
+{showTestimonials && <section class="testimonials" aria-labelledby="testimonials-title">
+  <div class="testimonials__inner">
+    <h2 id="testimonials-title">What clients say</h2>
+
+    <div class="testimonials__rail" aria-label="Client testimonials">
+      <!-- TODO: Peter to supply real quote, name, business, photo -->
+      <article>
+        <div class="testimonials__photo" role="img" aria-label="Client photo placeholder"></div>
+        <blockquote><p>Client quote</p></blockquote>
+        <p class="testimonials__name">Client name</p>
+        <p class="testimonials__business">Business name</p>
+        <p class="testimonials__service">Service used</p>
+      </article>
+
+      <!-- TODO: Peter to supply real quote, name, business, photo -->
+      <article>
+        <div class="testimonials__photo" role="img" aria-label="Client photo placeholder"></div>
+        <blockquote><p>Client quote</p></blockquote>
+        <p class="testimonials__name">Client name</p>
+        <p class="testimonials__business">Business name</p>
+        <p class="testimonials__service">Service used</p>
+      </article>
+
+      <!-- TODO: Peter to supply real quote, name, business, photo -->
+      <article>
+        <div class="testimonials__photo" role="img" aria-label="Client photo placeholder"></div>
+        <blockquote><p>Client quote</p></blockquote>
+        <p class="testimonials__name">Client name</p>
+        <p class="testimonials__business">Business name</p>
+        <p class="testimonials__service">Service used</p>
+      </article>
+    </div>
+  </div>
+</section>}
+
+<style>
+  .testimonials,
+  .testimonials * { box-sizing: border-box; }
+
+  .testimonials {
+    padding: 106px 24px 112px;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    background: linear-gradient(to bottom, #10151a, #111111);
+    color: #ffffff;
+  }
+
+  .testimonials__inner {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+  }
+
+  .testimonials h2 {
+    margin: 0 0 49px;
+    font-size: clamp(43px, 5.8vw, 70px);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+    text-align: center;
+  }
+
+  .testimonials__rail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .testimonials article {
+    min-width: 0;
+    padding: 29px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)), #15191d;
+  }
+
+  .testimonials__photo {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(155, 210, 255, 0.1);
+  }
+
+  .testimonials blockquote { margin: 0 0 27px; }
+
+  .testimonials blockquote p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .testimonials__name,
+  .testimonials__business,
+  .testimonials__service { margin: 0; }
+
+  .testimonials__name { font-size: 15px; font-weight: 850; }
+  .testimonials__business { margin-top: 5px; color: rgba(255, 255, 255, 0.58); font-size: 13px; }
+  .testimonials__service { margin-top: 12px; color: #9bd2ff; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+
+  @media (max-width: 700px) {
+    .testimonials { padding: 86px 0 92px; overflow: hidden; }
+    .testimonials h2 { padding: 0 16px; }
+    .testimonials__rail {
+      grid-template-columns: none;
+      grid-auto-columns: minmax(285px, calc(100vw - 42px));
+      grid-auto-flow: column;
+      gap: 12px;
+      padding: 0 16px 18px;
+      overflow-x: auto;
+      scroll-padding-inline: 16px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+    .testimonials article { scroll-snap-align: start; }
+  }
+</style>

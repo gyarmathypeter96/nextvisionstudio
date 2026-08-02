@@ -1,0 +1,123 @@
+---
+const comparisons = [
+  ["Four seconds or more to load on mobile", "Under two seconds on 4G"],
+  ["Homepage says \"we do everything\"", "One clear offer above the fold"],
+  ["Contact form buried in the menu", "Call, WhatsApp and form on every screen"],
+  ["No prices and no proof", "Pricing, reviews and real project photos"],
+  ["Invisible on Google for local searches", "A dedicated page for each service and area"],
+  ["Built in 2014 and looks it", "Looks like a business worth €5,000 of your money"],
+];
+---
+
+<section class="web-comparison" aria-labelledby="web-comparison-title">
+  <div class="web-comparison__inner">
+    <header>
+      <h2 id="web-comparison-title">What actually changes</h2>
+      <p>This is the difference between a site that looks fine and a site that brings enquiries.</p>
+    </header>
+
+    <table>
+      <thead>
+        <tr><th scope="col">Before</th><th scope="col">After</th></tr>
+      </thead>
+      <tbody>
+        {comparisons.map(([before, after]) => (
+          <tr>
+            <td data-label="Before">{before}</td>
+            <td data-label="After">{after}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .web-comparison,
+  .web-comparison * { box-sizing: border-box; }
+
+  .web-comparison {
+    padding: 108px 24px;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .web-comparison__inner {
+    width: min(100%, 1040px);
+    margin: 0 auto;
+  }
+
+  .web-comparison header {
+    width: min(100%, 780px);
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+
+  .web-comparison h2 {
+    margin: 0;
+    font-size: clamp(44px, 6vw, 74px);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+  }
+
+  .web-comparison header p {
+    margin: 22px auto 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .web-comparison table {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-collapse: separate;
+    border-radius: 22px;
+    border-spacing: 0;
+    background: #15191d;
+  }
+
+  .web-comparison th,
+  .web-comparison td {
+    width: 50%;
+    padding: 21px 24px;
+    border-bottom: 1px solid rgba(180, 220, 255, 0.1);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .web-comparison th {
+    background: rgba(155, 210, 255, 0.1);
+    color: #cfeaff;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .web-comparison th + th,
+  .web-comparison td + td { border-left: 1px solid rgba(180, 220, 255, 0.1); }
+
+  .web-comparison td {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .web-comparison td:last-child { color: #ffffff; font-weight: 700; }
+  .web-comparison tbody tr:last-child td { border-bottom: 0; }
+
+  @media (max-width: 640px) {
+    .web-comparison { padding: 86px 16px; }
+    .web-comparison table,
+    .web-comparison tbody,
+    .web-comparison tr,
+    .web-comparison td { display: block; width: 100%; }
+    .web-comparison thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .web-comparison tr { padding: 5px 0; border-bottom: 1px solid rgba(180, 220, 255, 0.14); }
+    .web-comparison tbody tr:last-child { border-bottom: 0; }
+    .web-comparison td { border: 0; padding: 16px 20px; }
+    .web-comparison td + td { border-left: 0; }
+    .web-comparison td::before { display: block; margin-bottom: 6px; color: #9bd2ff; content: attr(data-label); font-size: 10px; font-weight: 900; text-transform: uppercase; }
+  }
+</style>

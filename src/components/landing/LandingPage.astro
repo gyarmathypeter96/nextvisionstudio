@@ -7,6 +7,10 @@ import LandingProof from "./LandingProof.astro";
 import LandingProcess from "./LandingProcess.astro";
 import LandingFAQ from "./LandingFAQ.astro";
 import LandingLeadForm from "./LandingLeadForm.astro";
+import WebPricing from "../WebPricing.astro";
+import TradesHomeServices from "../TradesHomeServices.astro";
+import WebBeforeAfter from "../WebBeforeAfter.astro";
+import Testimonials from "../Testimonials.astro";
 import type { LandingPageData } from "../../data/landingPages";
 
 interface Props {
@@ -15,6 +19,7 @@ interface Props {
 
 const { page } = Astro.props;
 const canonical = `https://www.nextvisionstudio.com/${page.slug}/`;
+const isWebDesignPage = page.slug === "webdesigner-dublin";
 
 const landingSchema = {
   "@context": "https://schema.org",
@@ -99,9 +104,13 @@ const landingSchema = {
 
 <main class="landing-page">
   <LandingHero page={page} />
+  {isWebDesignPage && <WebPricing />}
   <LandingTrust line={page.trustLine} />
+  {isWebDesignPage && <TradesHomeServices />}
   <LandingValue page={page} />
   <LandingDeliverables page={page} />
+  {isWebDesignPage && <WebBeforeAfter />}
+  {isWebDesignPage && <Testimonials />}
   <LandingProof page={page} />
   <LandingProcess page={page} />
   <LandingFAQ page={page} />
