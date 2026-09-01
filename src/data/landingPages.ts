@@ -442,7 +442,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "How much does a business website cost in Dublin?",
         answer:
-          "Most business websites we build are between €1,450 and €2,450. Starter is €1,450 for up to 5 pages, Business is €2,450 for up to 10 pages with copywriting and local SEO. Custom builds and e-commerce start at €3,950. Send us your current site and goal and we will tell you which one you need.",
+          "The right scope depends on your goals, pages, content and the conversion work your business needs. Send us your current site and goal and we will recommend the clearest next step before preparing a tailored quote.",
       },
       {
         question: "Will my new website be SEO-friendly?",
@@ -522,8 +522,8 @@ export const landingPages: Record<string, LandingPageData> = {
       "We focus campaign decisions on lead volume, cost and the quality of the conversations they create.",
     proofItems: [
       { tag: "Lead volume", title: "500+ leads generated", text: "Leads generated for clients through managed campaigns." },
-      { tag: "Cost efficiency", title: "€5 to €6 cost per lead", text: "Average cost per lead across relevant campaigns." },
-      { tag: "Customer growth", title: "100+ customers acquired", text: "Customers acquired from €1,000 of ad spend." },
+      { tag: "Cost efficiency", title: "Efficient cost per lead", text: "Campaign costs are monitored against lead quality and enquiry volume." },
+      { tag: "Customer growth", title: "100+ customers acquired", text: "Customer acquisition is tracked from campaign to enquiry and follow-up." },
     ],
     processTitle: "A paid campaign built around how customers actually enquire.",
     processText:
@@ -553,7 +553,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "How much ad spend do I need?",
         answer:
-          "We recommend a minimum ad spend of €300 per month, separate from management. The right budget depends on your service, location, competition and how many enquiries you need, so we set a sensible starting point before launch.",
+          "The right ad budget depends on your service, location, competition and how many enquiries you need. We will recommend a sensible starting point and keep management separate from the media budget.",
       },
       {
         question: "How soon will I see enquiries?",

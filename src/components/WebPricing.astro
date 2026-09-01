@@ -10,18 +10,18 @@ const isAds = variant === "ads";
 <section class="web-pricing" aria-labelledby="web-pricing-title">
   <div class="web-pricing__inner">
     <header>
-      <h2 id="web-pricing-title">{isAds ? "Pricing" : "Website pricing"}</h2>
-      <p>{isAds ? "Simple management pricing, with your ad spend kept separate and visible." : "Clear pricing, no discovery call needed to find out if we are in your range."}</p>
+      <h2 id="web-pricing-title">{isAds ? "Campaign scope" : "Website scope"}</h2>
+      <p>{isAds ? "A clear campaign scope, with your media budget kept separate." : "A clear scope, with the right level of support for your goals."}</p>
     </header>
 
     {isAds ? (
       <div class="web-pricing__grid web-pricing__grid--single">
         <article class="web-pricing__card--featured">
           <p class="web-pricing__name">PAID ADS MANAGEMENT</p>
-          <p class="web-pricing__price">From €450 <small>per month</small></p>
-          <p class="web-pricing__includes">Plus your ad spend</p>
+          <p class="web-pricing__price">Tailored to your goals</p>
+          <p class="web-pricing__includes">With your media budget kept separate</p>
           <ul>
-            <li>Minimum recommended ad spend: €300 per month</li>
+            <li>Campaign budget agreed around your goals</li>
             <li>No long contract</li>
             <li>Cancel with 30 days notice</li>
           </ul>
@@ -31,7 +31,7 @@ const isAds = variant === "ads";
       <div class="web-pricing__grid">
         <article>
         <p class="web-pricing__name">STARTER</p>
-        <p class="web-pricing__price">€1,450</p>
+        <p class="web-pricing__price">Tailored quote</p>
         <ul>
           <li>Up to 5 pages</li>
           <li>Mobile-first build, under 2s load</li>
@@ -44,7 +44,7 @@ const isAds = variant === "ads";
         <article class="web-pricing__card--featured">
         <span class="web-pricing__badge">Most popular</span>
         <p class="web-pricing__name">BUSINESS</p>
-        <p class="web-pricing__price">€2,450</p>
+        <p class="web-pricing__price">Tailored quote</p>
         <p class="web-pricing__includes">Everything in Starter, plus:</p>
         <ul>
           <li>Up to 10 pages</li>
@@ -56,7 +56,7 @@ const isAds = variant === "ads";
 
         <article>
         <p class="web-pricing__name">PREMIUM</p>
-        <p class="web-pricing__price">from €3,950</p>
+        <p class="web-pricing__price">Tailored scope</p>
         <ul>
           <li>Custom build, e-commerce or integrations</li>
           <li>Scoped after a short call</li>
@@ -65,7 +65,7 @@ const isAds = variant === "ads";
       </div>
     )}
 
-    {!isAds && <p class="web-pricing__offer">Summer offer: book before 31 August and we build 2 extra campaign landing pages free, worth €700. You choose what they target.</p>}
+    {!isAds && <p class="web-pricing__offer">Campaign landing pages can be added when they will improve the result.</p>}
   </div>
 </section>
 
