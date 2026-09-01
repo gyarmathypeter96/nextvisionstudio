@@ -137,6 +137,16 @@
     if (!link) return;
 
     const href = link.href;
+    const ctaPlacement = link.dataset.ctaPlacement;
+
+    if (ctaPlacement) {
+      window.gtag?.("event", "cta_click", {
+        cta_placement: ctaPlacement,
+        link_text: link.textContent?.trim().slice(0, 120) || "",
+        link_url: href,
+      });
+    }
+
     if (href.startsWith("tel:")) {
       window.gtag?.("event", "click_call", { link_url: href });
     }

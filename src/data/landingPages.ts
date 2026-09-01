@@ -9,6 +9,8 @@ export interface LandingProofItem extends LandingCard {
   alt?: string;
   width?: number;
   height?: number;
+  href?: string;
+  metric?: string;
 }
 
 export interface LandingFaqItem {
@@ -18,7 +20,7 @@ export interface LandingFaqItem {
 
 export interface LandingPageData {
   slug: string;
-  kind: "video" | "photo" | "web" | "social";
+  kind: "video" | "photo" | "web" | "social" | "ads";
   metaTitle: string;
   metaDescription: string;
   eyebrow: string;
@@ -65,115 +67,122 @@ export const landingPages: Record<string, LandingPageData> = {
   videography: {
     slug: "videography-dublin",
     kind: "video",
-    metaTitle: "Video Production Dublin | Commercial Videography",
+    metaTitle: "Video Production Dublin | Brand, Corporate & Social Video",
     metaDescription:
-      "Commercial video production in Dublin for businesses, brands, events and campaigns. See relevant work and request a clear project recommendation.",
-    eyebrow: "Videography Dublin",
-    headlineStart: "Commercial Video Production in",
-    headlineAccent: "Dublin",
+      "Dublin video production for brands that need one clear story and a useful library of campaign, website and social content. Plan your project with NextVision Studio.",
+    eyebrow: "Video production Dublin",
+    headlineStart: "Video that makes your business",
+    headlineAccent: "easier to choose",
     lead:
-      "NextVision Studio plans, films and edits commercial video for Dublin businesses: brand stories, product films, events and social campaigns with a job to do.",
+      "One planned production can give your website, campaigns and social channels the clear story they have been missing.",
     heroImage: {
       src: "/images/portfolio/JVA_WxYY3p0.webp",
       alt: "Professional event videography in Dublin by NextVision Studio",
       width: 640,
       height: 360,
     },
-    heroPoints: ["Strategy before filming", "Dublin-based production", "Platform-ready delivery"],
-    ctaLabel: "Get a video project recommendation",
-    trustLine: "Video production built for websites, campaigns and social media",
-    problemKicker: "More than a good-looking video",
-    problemTitle: "Your audience needs a reason to stop, watch and remember.",
+    heroPoints: ["Concept and script", "Filming in Dublin", "Every format delivered"],
+    ctaLabel: "Plan my video project",
+    trustLine: "Trusted for brand, event and social video production",
+    problemKicker: "The real problem",
+    problemTitle: "Your business does not need another video. It needs a useful video library.",
     problemText:
-      "A strong business video is not simply footage with music. It gives people context, builds trust and makes the next step feel clear. We shape the message and format before the camera comes out, so every shot has a job.",
+      "A one-off film disappears quickly. We plan the message, shoot with every channel in mind and turn the footage into assets your team can keep using.",
     outcomes: [
       {
-        title: "Hold attention",
-        text: "A clear opening and visual rhythm designed for how people actually watch online.",
+        title: "Make the offer clear",
+        text: "Show what you do, who it helps and why it matters without asking people to read a wall of text.",
       },
       {
-        title: "Explain your value",
-        text: "Story-led video that helps customers understand what makes your business different.",
+        title: "Build trust faster",
+        text: "Let customers see the people, process and proof behind the business before the first call.",
       },
       {
-        title: "Create reusable assets",
-        text: "A planned shoot can supply content for your website, social media and advertising.",
+        title: "Stop starting from zero",
+        text: "Create a connected bank of website video, campaign edits and social clips in one production.",
       },
     ],
-    deliverablesKicker: "Video production services",
-    deliverablesTitle: "The right format for the job — not one template for every brand.",
+    deliverablesKicker: "One shoot, more value",
+    deliverablesTitle: "A complete video system, shaped around where customers find you.",
     deliverablesText:
-      "Your video package is shaped around the channel, audience and action you want viewers to take.",
+      "We agree the useful outputs before filming, so the production creates more than one finished file.",
     deliverables: [
-      { title: "Brand & promotional video", text: "A polished story for your website, campaign or launch." },
-      { title: "Short-form social video", text: "Reels, TikToks and YouTube Shorts with strong hooks." },
-      { title: "Event videography", text: "Highlights, atmosphere and key moments captured in Dublin." },
-      { title: "Product video", text: "Details, demonstrations and lifestyle visuals that support sales." },
-      { title: "Corporate & talking-head video", text: "Professional interviews, explainers and business stories." },
-      { title: "Drone & aerial footage", text: "Cinematic scale for locations, property, events and campaigns." },
+      { title: "Brand film", text: "The clearest version of your story for your website, pitch or campaign." },
+      { title: "Service explainer", text: "A simple visual answer to what you do and why customers should care." },
+      { title: "Customer story", text: "Real proof told through a credible testimonial or case study." },
+      { title: "Campaign cut-downs", text: "Focused edits for paid social, landing pages and retargeting." },
+      { title: "Short social clips", text: "Strong hooks and concise edits for Reels, TikTok and YouTube Shorts." },
+      { title: "Event and behind the scenes", text: "The people, atmosphere and detail that make the business feel real." },
     ],
-    proofKicker: "Selected video work",
-    proofTitle: "Built for real businesses and real viewing habits.",
+    proofKicker: "Real project proof",
+    proofTitle: "Work that had a job after the edit was finished.",
     proofText:
-      "A small selection of video production created for events, products and business campaigns. View the full video portfolio for more work.",
+      "Three different briefs, each planned around a real business need and a clear place for the finished content to work.",
     proofItems: [
       {
         tag: "Event film",
-        title: "Gut Fest Promo",
-        text: "Fast-moving event videography shaped around energy and atmosphere.",
+        title: "Gut Fest Dublin",
+        text: "One event story plus short edits that connected education, food and the energy of the day.",
         image: "/images/portfolio/JVA_WxYY3p0.webp",
         alt: "Gut Fest event promo video produced by NextVision Studio",
         width: 640,
         height: 360,
+        href: "/case-studies/gut-fest-event-videography-dublin/",
+        metric: "Multi-format event campaign",
       },
       {
-        tag: "Product video",
-        title: "Macaron Boutique",
-        text: "Short-form product content designed for social media attention.",
-        image: "/images/portfolio/GTzSrbR4-k4.webp",
-        alt: "Product videography for Macaron Boutique",
+        tag: "Ongoing production",
+        title: "VentSolve",
+        text: "Brand, educational and internal video built as an ongoing content system, not an isolated shoot.",
+        image: "/images/portfolio/SUeoIgRtH0I.webp",
+        alt: "VentSolve brand video production by NextVision Studio",
         width: 640,
         height: 360,
+        href: "/case-studies/ventsolve-content-production/",
+        metric: "Content across the customer journey",
       },
       {
-        tag: "Corporate video",
-        title: "Eco Vent Turbo",
-        text: "A clear business video that makes a technical offer easier to understand.",
-        image: "/images/portfolio/LqePwDWaP8Y.webp",
-        alt: "Corporate video production for Eco Vent Turbo",
+        tag: "Studio promotion",
+        title: "SG Studios Dublin",
+        text: "Platform-native promotional content for Dublin's high-end podcast and video studio.",
+        image: "/images/portfolio/fLzjvPVHzAc.webp",
+        alt: "Podcast video content produced at SG Studios Dublin",
         width: 640,
         height: 360,
+        href: "/case-studies/sg-studios-dublin-podcast-studio-content/",
+        metric: "55,000 views on one TikTok promo",
       },
     ],
-    processTitle: "A clear video process from first idea to final export.",
+    processTitle: "A simple process that removes the production headache.",
     processText:
-      "You always know what is happening next, what we need from you and how the finished video will be used.",
+      "You bring the business knowledge. We turn it into a plan, direct the shoot and deliver every agreed format.",
     process: [
-      { title: "Discover", text: "We define the audience, message, goal and best video format." },
-      { title: "Plan", text: "The concept, shot list, schedule and production details are agreed." },
-      { title: "Create", text: "Filming and editing turn the plan into polished visual content." },
-      { title: "Deliver", text: "You receive the agreed formats for web, social media or advertising." },
+      { title: "Find the message", text: "We agree the audience, problem and action the video needs to support." },
+      { title: "Plan every output", text: "Concept, script, shot list and platform formats are clear before filming." },
+      { title: "Film with direction", text: "The shoot is calm, focused and managed around the agreed story." },
+      { title: "Edit for each channel", text: "You receive the main film and every planned cut-down ready to use." },
     ],
-    decisionTitle: "Not sure which kind of video you need?",
+    decisionTitle: "You do not need to arrive with a finished brief.",
     decisionText:
-      "Describe the result you want. We will recommend the simplest production plan that can achieve it — without adding formats you do not need.",
+      "Tell us what customers struggle to understand, what you are promoting and where the content needs to work. We will shape the simplest useful production plan.",
     relatedLinks: [
-      { label: "View the full video portfolio", href: "/#portfolio" },
-      { label: "Explore social media content", href: "/social-media-content-creation-dublin/" },
-      { label: "See photography services", href: "/photography-dublin/" },
+      { label: "Corporate video production Dublin", href: "/corporate-video-production-dublin/" },
+      { label: "Event videographer Dublin", href: "/event-videographer-dublin/" },
+      { label: "Short-form video production", href: "/short-form-video-production-dublin/" },
+      { label: "Videography cost guide", href: "/how-much-does-a-videographer-cost-in-dublin/" },
     ],
-    formTitle: "Tell us about your video project.",
+    formTitle: "What should video help your business do?",
     formText:
-      "Share your business, goal and rough timing. A finished brief is not required — we can help shape the right next step.",
+      "Share the goal, audience and rough timing. We will reply with a practical recommendation, not a generic package.",
     formSubject: "New Videography Dublin landing page enquiry",
     serviceType: "Videography and video production in Dublin",
     schemaDescription:
-      "Professional brand video, event videography, product video, corporate video and short-form social media video production in Dublin.",
+      "Strategic brand video, corporate video, event videography and short-form content production for businesses in Dublin.",
     faq: [
       {
         question: "What videography services do you provide in Dublin?",
         answer:
-          "NextVision Studio creates brand videos, promotional films, event coverage, product videos, corporate interviews, drone footage and short-form social media content for Dublin businesses.",
+          "NextVision Studio creates brand films, service explainers, customer stories, event coverage, product videos, corporate interviews and short-form social content for Dublin businesses.",
       },
       {
         question: "How much does videography in Dublin cost?",
@@ -183,7 +192,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "Can one filming day create several social media videos?",
         answer:
-          "Yes. When the concepts are planned in advance, one production session can create multiple short-form videos, supporting clips and still frames for a wider content campaign.",
+          "Yes. When the outputs are planned before filming, one production day can create a main film, campaign cut-downs and multiple short social clips.",
       },
       {
         question: "Do you help with video ideas and scripts?",
@@ -206,12 +215,12 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Commercial Photography Dublin | Business & Product Photographer",
+    metaTitle: "Commercial Photographer Dublin | Product & Brand Photography",
     metaDescription:
-      "Commercial photography in Dublin for products, brands, teams and events. See real work and get a clear quote for your next shoot.",
+      "Commercial photographer in Dublin for product, brand, corporate and event photography. Original images built for websites, campaigns and social media.",
     eyebrow: "Photography Dublin",
-    headlineStart: "Commercial Photography in",
-    headlineAccent: "Dublin",
+    headlineStart: "Commercial photography for",
+    headlineAccent: "Dublin businesses",
     lead:
       "Professional photography for Dublin businesses that need credible images for websites, campaigns, product launches, social media and sales material.",
     heroImage: {
@@ -299,7 +308,7 @@ export const landingPages: Record<string, LandingPageData> = {
     decisionText:
       "Tell us where the photographs will appear. We can plan a versatile image library for your website, Google profile, social media, ads and print without repeating the same setup.",
     relatedLinks: [
-      { label: "View the full photography portfolio", href: "/#photography-portfolio" },
+      { label: "View the photography work", href: "/photography-dublin/#landing-work" },
       { label: "Combine photography with video", href: "/videography-dublin/" },
       { label: "Explore website design", href: "/webdesigner-dublin/" },
     ],
@@ -442,7 +451,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "How much does a business website cost in Dublin?",
         answer:
-          "Most business websites we build are between €1,450 and €2,450. Starter is €1,450 for up to 5 pages, Business is €2,450 for up to 10 pages with copywriting and local SEO. Custom builds and e-commerce start at €3,950. Send us your current site and goal and we will tell you which one you need.",
+          "The right scope depends on your goals, pages, content and the conversion work your business needs. Send us your current site and goal and we will recommend the clearest next step before preparing a tailored quote.",
       },
       {
         question: "Will my new website be SEO-friendly?",
@@ -467,6 +476,112 @@ export const landingPages: Record<string, LandingPageData> = {
     ],
   },
 
+  ads: {
+    slug: "google-ads-meta-ads-dublin",
+    kind: "ads",
+    metaTitle: "Google Ads & Meta Ads Management Dublin | NextVision Studio",
+    metaDescription:
+      "Google Ads and Meta Ads managed for Dublin businesses. Campaigns, creative and reporting built around one number: enquiries.",
+    eyebrow: "Google Ads & Meta Ads Dublin",
+    headlineStart: "Google Ads and Meta Ads, managed around one",
+    headlineAccent: "number",
+    lead:
+      "Most agencies report on reach. We report on how many people contacted you.",
+    heroImage: {
+      src: "/images/portfolio/SUeoIgRtH0I.webp",
+      alt: "Campaign-ready video creative produced by NextVision Studio",
+      width: 640,
+      height: 360,
+    },
+    heroPoints: ["Campaigns built for enquiries", "Creative produced in house", "Clear monthly reporting"],
+    ctaLabel: "Plan your paid campaign",
+    trustLine: "Paid advertising for Dublin businesses that need enquiries, not vanity metrics",
+    problemKicker: "A campaign should lead somewhere useful",
+    problemTitle: "More visibility only matters when the right people get in touch.",
+    problemText:
+      "Paid advertising works best when the campaign, creative and landing page all point to one clear action. We manage the full path, so the money you spend is measured against enquiries rather than surface-level reach.",
+    outcomes: [
+      {
+        title: "Reach active demand",
+        text: "Google Search campaigns put your service in front of people already looking for it.",
+      },
+      {
+        title: "Create local demand",
+        text: "Meta campaigns on Facebook and Instagram make a clear offer visible to the right local audience.",
+      },
+      {
+        title: "Track the useful number",
+        text: "Reporting stays focused on enquiries, cost per lead and the next improvement to make.",
+      },
+    ],
+    deliverablesKicker: "What we manage",
+    deliverablesTitle: "The campaign, creative and conversion path in one place.",
+    deliverablesText:
+      "Every part of the campaign is built around making it easier for a potential customer to contact you.",
+    deliverables: [
+      { title: "Google Search campaigns", text: "For people actively looking for your service." },
+      { title: "Meta campaigns", text: "Facebook and Instagram campaigns that build local demand." },
+      { title: "Ad creative", text: "Video and static creative produced in house for your campaign." },
+      { title: "Landing pages", text: "Focused pages built to convert the traffic you are paying for." },
+      { title: "Monthly reporting", text: "Plain-English reporting, not a dashboard you never open." },
+    ],
+    proofKicker: "What gets measured",
+    proofTitle: "A clear path from click to qualified enquiry.",
+    proofText:
+      "Campaign decisions stay tied to the search, landing page and follow-up that created the enquiry.",
+    proofItems: [
+      { tag: "Search quality", title: "Protect the budget", text: "Search terms are reviewed so irrelevant clicks do not keep draining spend." },
+      { tag: "Conversion path", title: "Connect every step", text: "The ad, landing page, form and CRM are measured as one enquiry journey." },
+      { tag: "Useful reporting", title: "Know what happened", text: "Reporting shows enquiries, lead quality and the next decision in plain English." },
+    ],
+    processTitle: "A paid campaign built around how customers actually enquire.",
+    processText:
+      "We start with the offer and the action you want, then make the campaign simple enough to measure and improve.",
+    process: [
+      { title: "Set the goal", text: "We define the service, audience, offer and one conversion action." },
+      { title: "Build the campaign", text: "Campaign structure, tracking, creative and landing page are prepared together." },
+      { title: "Launch and learn", text: "Live data shows what earns attention and what turns it into enquiries." },
+      { title: "Improve", text: "Budget, creative and targeting are refined around the strongest signals." },
+    ],
+    decisionTitle: "Need more enquiries without guessing where your budget is going?",
+    decisionText:
+      "Tell us what you sell, where you work and what a new customer is worth. We will recommend a practical first campaign and the budget it needs.",
+    relatedLinks: [
+      { label: "Explore all digital services", href: "/services/" },
+      { label: "Build a conversion-focused website", href: "/webdesigner-dublin/" },
+      { label: "Create campaign-ready content", href: "/social-media-content-creation-dublin/" },
+    ],
+    formTitle: "Tell us what a new enquiry is worth to your business.",
+    formText:
+      "Share the service you want to promote, the areas you cover and whether you already run ads. We will recommend a practical next step.",
+    formSubject: "New Google Ads and Meta Ads Dublin landing page enquiry",
+    serviceType: "Google Ads and Meta Ads management in Dublin",
+    schemaDescription:
+      "Google Ads and Meta Ads campaign management, creative production, landing pages and plain-English reporting for Dublin businesses.",
+    faq: [
+      {
+        question: "How much ad spend do I need?",
+        answer:
+          "The right ad budget depends on your service, location, competition and how many enquiries you need. We will recommend a sensible starting point and keep management separate from the media budget.",
+      },
+      {
+        question: "How soon will I see enquiries?",
+        answer:
+          "Google Search campaigns can begin reaching people as soon as they are approved. We normally use the first few weeks to check search terms, creative and conversion data, then improve the campaign around the strongest signals.",
+      },
+      {
+        question: "Do you make the creative?",
+        answer:
+          "Yes. We can produce campaign-ready video, static creative and ad copy in house, then match it to the platform, offer and landing page.",
+      },
+      {
+        question: "Can I stop anytime?",
+        answer:
+          "There is no long contract. You can cancel management with 30 days notice, and your ad spend remains separate and under your control.",
+      },
+    ],
+  },
+
   social: {
     slug: "social-media-content-creation-dublin",
     kind: "social",
@@ -474,10 +589,10 @@ export const landingPages: Record<string, LandingPageData> = {
     metaDescription:
       "Social media content creation in Dublin: Reels, TikToks, Shorts and photography planned around the offers your business needs to sell.",
     eyebrow: "Social Media Content Creation Dublin",
-    headlineStart: "A Content System That Keeps Your Brand",
-    headlineAccent: "Visible",
+    headlineStart: "Social content your business can",
+    headlineAccent: "keep using",
     lead:
-      "NextVision Studio helps Dublin businesses plan and produce short-form videos, photography and branded social content without starting from zero every week.",
+      "Plan and batch-produce Reels, TikToks, Shorts and photography without inventing a new idea every week.",
     heroImage: {
       src: "/images/content/social-platform-guide.webp",
       alt: "Short-form social media content creation by NextVision Studio in Dublin",
@@ -490,7 +605,7 @@ export const landingPages: Record<string, LandingPageData> = {
     problemKicker: "Consistency without the weekly scramble",
     problemTitle: "Your business should not disappear because you ran out of content ideas.",
     problemText:
-      "Random posts make it difficult to build recognition or learn what works. A simple content system connects your business goals, recurring topics and production schedule — giving you a useful bank of videos and photos instead of one isolated post.",
+      "Random posts make it hard to build recognition or learn what works. A simple system turns business goals into a useful bank of videos and photos.",
     outcomes: [
       {
         title: "Stay recognisable",
@@ -563,9 +678,9 @@ export const landingPages: Record<string, LandingPageData> = {
     decisionText:
       "We can create the assets for your team to publish, or discuss a broader system including planning, posting support and paid campaigns. The right scope depends on what you can manage internally.",
     relatedLinks: [
-      { label: "View the short-form video portfolio", href: "/#portfolio-row-social" },
+      { label: "View short-form video production", href: "/short-form-video-production-dublin/" },
       { label: "Explore Dublin videography", href: "/videography-dublin/" },
-      { label: "See Meta & Google Ads support", href: "/services/#advertising" },
+      { label: "See Google Ads and Meta Ads support", href: "/google-ads-meta-ads-dublin/" },
     ],
     formTitle: "Tell us what makes content difficult right now.",
     formText:

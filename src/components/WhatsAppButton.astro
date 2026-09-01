@@ -9,6 +9,7 @@ import { WHATSAPP_URL } from "../config/contact";
   rel="noopener noreferrer"
   aria-label="Message NextVision Studio on WhatsApp"
   title="Message us on WhatsApp"
+  data-whatsapp-float
 >
   <svg viewBox="0 0 32 32" aria-hidden="true">
     <path
@@ -19,11 +20,30 @@ import { WHATSAPP_URL } from "../config/contact";
   <span>WhatsApp</span>
 </a>
 
+<script>
+  const initialiseWhatsAppButton = () => {
+    const button = document.querySelector<HTMLElement>("[data-whatsapp-float]");
+    const form = document.querySelector<HTMLElement>("#contact-form, #landing-contact");
+    if (!button || !form || button.dataset.formObserver === "true") return;
+
+    button.dataset.formObserver = "true";
+    const observer = new IntersectionObserver(
+      ([entry]) => button.classList.toggle("is-hidden", entry.isIntersecting),
+      { threshold: 0.08 },
+    );
+    observer.observe(form);
+  };
+
+  initialiseWhatsAppButton();
+  document.addEventListener("astro:page-load", initialiseWhatsAppButton);
+</script>
+
 <style>
   .whatsapp-float {
     position: fixed;
     bottom: max(18px, env(safe-area-inset-bottom));
-    left: max(18px, env(safe-area-inset-left));
+    left: auto !important;
+    right: max(18px, env(safe-area-inset-right));
     z-index: 100;
     display: flex;
     align-items: center;
@@ -74,10 +94,16 @@ import { WHATSAPP_URL } from "../config/contact";
     outline-offset: 4px;
   }
 
+  .whatsapp-float.is-hidden {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   @media (max-width: 720px) {
     .whatsapp-float {
       bottom: max(13px, env(safe-area-inset-bottom));
-      left: max(13px, env(safe-area-inset-left));
+      left: auto !important;
+      right: max(13px, env(safe-area-inset-right));
       width: 54px;
       height: 54px;
     }

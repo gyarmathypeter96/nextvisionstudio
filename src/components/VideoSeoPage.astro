@@ -1,0 +1,105 @@
+---
+import ContactForm from "./ContactForm.astro";
+import type { VideoSeoPageData } from "../data/videoSeoPages";
+
+interface Props { page: VideoSeoPageData }
+const { page } = Astro.props;
+const canonical = `https://www.nextvisionstudio.com/${page.slug}/`;
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: page.eyebrow,
+      description: page.metaDescription,
+      url: canonical,
+      areaServed: { "@type": "City", name: "Dublin" },
+      provider: { "@id": "https://www.nextvisionstudio.com/#business" },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: page.faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  ],
+};
+---
+
+<main class="video-seo">
+  <section class="video-seo__hero" aria-labelledby="video-seo-title">
+    <div>
+      <p>{page.eyebrow}</p>
+      <h1 id="video-seo-title">{page.title}</h1>
+      <span>{page.lead}</span>
+      <nav aria-label="Page actions">
+        <a href="#contact-form" data-cta-placement={`${page.slug}-hero`}>Discuss the project</a>
+        <a href="/videography-dublin/">Explore all video production</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="video-seo__problem" aria-labelledby="video-seo-problem">
+    <div class="video-seo__problem-copy">
+      <p>The business problem</p>
+      <h2 id="video-seo-problem">{page.problemTitle}</h2>
+      <span>{page.problemText}</span>
+    </div>
+    <div class="video-seo__benefits">
+      {page.benefits.map((benefit, index) => (
+        <article><small>0{index + 1}</small><h3>{benefit.title}</h3><p>{benefit.text}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="video-seo__project" aria-labelledby="video-seo-project">
+    <img src={page.project.image} alt={page.project.alt} width="640" height="360" loading="lazy" decoding="async" />
+    <div>
+      <p>Relevant project</p>
+      <h2 id="video-seo-project">{page.project.title}</h2>
+      <span>{page.project.text}</span>
+      <a href={page.project.href}>Read the full project <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="video-seo__faq" aria-labelledby="video-seo-faq">
+    <h2 id="video-seo-faq">Questions before filming.</h2>
+    <div>{page.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+  </section>
+
+  <ContactForm />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</main>
+
+<style>
+  .video-seo, .video-seo * { box-sizing: border-box; }
+  .video-seo { background: #0d0f11; color: #fff; }
+  .video-seo__hero { display: grid; min-height: 82svh; padding: 150px 24px 84px; place-items: center; background: linear-gradient(rgba(7,8,9,.28),rgba(7,8,9,.92)), url('/images/showreel/showreel-2025.webp') center/cover; }
+  .video-seo__hero > div { width: min(100%, 1060px); }
+  .video-seo__hero p, .video-seo__problem-copy > p, .video-seo__project div > p { margin: 0 0 18px; color: #f2c66d; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+  .video-seo__hero h1 { max-width: 900px; margin: 0; font-size: 72px; font-weight: 950; letter-spacing: 0; line-height: .98; }
+  .video-seo__hero > div > span { display: block; max-width: 680px; margin-top: 25px; color: rgba(255,255,255,.76); font-size: 19px; line-height: 1.6; }
+  .video-seo__hero nav { display: flex; flex-wrap: wrap; margin-top: 32px; gap: 10px; }
+  .video-seo__hero a { display: inline-flex; min-height: 52px; align-items: center; padding: 0 21px; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; font-size: 13px; font-weight: 900; text-decoration: none; }
+  .video-seo__hero a:first-child { border-color: #cfeaff; background: #cfeaff; color: #111; }
+  .video-seo__problem { display: grid; grid-template-columns: .9fr 1.1fr; width: min(100% - 48px, 1180px); margin: 0 auto; padding: 112px 0; gap: 80px; }
+  .video-seo h2 { margin: 0; font-size: 54px; letter-spacing: 0; line-height: 1; }
+  .video-seo__problem-copy > span, .video-seo__project div > span { display: block; margin-top: 24px; color: rgba(255,255,255,.65); font-size: 17px; line-height: 1.65; }
+  .video-seo__benefits { border-top: 1px solid rgba(255,255,255,.18); }
+  .video-seo__benefits article { padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+  .video-seo__benefits small { color: #9ad0aa; font-weight: 900; }
+  .video-seo__benefits h3 { margin: 10px 0 7px; font-size: 23px; }
+  .video-seo__benefits p { margin: 0; color: rgba(255,255,255,.6); line-height: 1.55; }
+  .video-seo__project { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; background: #17191b; }
+  .video-seo__project img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
+  .video-seo__project > div { padding: 70px; }
+  .video-seo__project a { display: inline-flex; margin-top: 25px; color: #cfeaff; font-weight: 900; text-decoration: none; }
+  .video-seo__faq { width: min(100% - 48px, 1000px); margin: 0 auto; padding: 110px 0; }
+  .video-seo__faq h2 { margin-bottom: 45px; }
+  .video-seo__faq details { padding: 22px 0; border-top: 1px solid rgba(255,255,255,.18); }
+  .video-seo__faq summary { cursor: pointer; font-size: 18px; font-weight: 850; }
+  .video-seo__faq details p { max-width: 760px; margin: 15px 0 0; color: rgba(255,255,255,.65); line-height: 1.65; }
+  @media (max-width: 760px) { .video-seo__hero { min-height: 78svh; padding: 126px 16px 56px; } .video-seo__hero h1 { font-size: 43px; } .video-seo__hero nav { display: grid; } .video-seo__hero a { justify-content: center; } .video-seo__problem, .video-seo__project { grid-template-columns: 1fr; } .video-seo__problem { width: min(100% - 32px, 1180px); padding: 82px 0; gap: 45px; } .video-seo h2 { font-size: 39px; } .video-seo__project img { min-height: 360px; } .video-seo__project > div { padding: 55px 16px 64px; } .video-seo__faq { width: min(100% - 32px, 1000px); padding: 82px 0; } }
+</style>

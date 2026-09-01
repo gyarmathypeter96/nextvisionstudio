@@ -1,11 +1,14 @@
 import type { APIRoute } from "astro";
 
 const routes = [
-  { path: "", lastmod: "2026-07-28" },
+  { path: "", lastmod: "2026-09-01" },
   { path: "services/", lastmod: "2026-07-15" },
   { path: "about/", lastmod: "2026-07-15" },
   { path: "contact/", lastmod: "2026-07-15" },
-  { path: "videography-dublin/", lastmod: "2026-07-28" },
+  { path: "videography-dublin/", lastmod: "2026-09-01" },
+  { path: "corporate-video-production-dublin/", lastmod: "2026-09-01" },
+  { path: "event-videographer-dublin/", lastmod: "2026-09-01" },
+  { path: "google-ads-meta-ads-dublin/", lastmod: "2026-09-01" },
   {
     path: "short-form-video-production-dublin/",
     lastmod: "2026-07-16",

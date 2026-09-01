@@ -1,0 +1,78 @@
+---
+const projects = [
+  {
+    title: "Gut Fest Dublin",
+    service: "Event video production",
+    result: "One event story and a bank of short edits for social media.",
+    image: "/images/portfolio/JVA_WxYY3p0.webp",
+    alt: "Gut Fest event video produced in Dublin by NextVision Studio",
+    href: "/case-studies/gut-fest-event-videography-dublin/",
+  },
+  {
+    title: "VentSolve",
+    service: "Ongoing business content",
+    result: "Brand, educational and campaign video used across the customer journey.",
+    image: "/images/portfolio/SUeoIgRtH0I.webp",
+    alt: "VentSolve business video production by NextVision Studio",
+    href: "/case-studies/ventsolve-content-production/",
+  },
+  {
+    title: "SG Studios Dublin",
+    service: "Studio promotion",
+    result: "Platform-native promotional content, including a TikTok promo with 55,000 views.",
+    image: "/images/portfolio/fLzjvPVHzAc.webp",
+    alt: "SG Studios Dublin promotional video produced by NextVision Studio",
+    href: "/case-studies/sg-studios-dublin-podcast-studio-content/",
+  },
+];
+---
+
+<section class="home-work" id="portfolio" aria-labelledby="home-work-title">
+  <div class="home-work__inner">
+    <header>
+      <div>
+        <p>Selected client work</p>
+        <h2 id="home-work-title">Proof before promises.</h2>
+      </div>
+      <a href="/case-studies/" data-cta-placement="case-studies-all">View all project stories <span aria-hidden="true">→</span></a>
+    </header>
+
+    <div class="home-work__grid">
+      {projects.map((project) => (
+        <a href={project.href} data-cta-placement="case-study">
+          <img src={project.image} alt={project.alt} width="640" height="360" loading="lazy" decoding="async" />
+          <div>
+            <span>{project.service}</span>
+            <h3>{project.title}</h3>
+            <p>{project.result}</p>
+            <small>Read the project <span aria-hidden="true">↗</span></small>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-work, .home-work * { box-sizing: border-box; }
+  .home-work { padding: 112px 24px 120px; background: #0d0f11; color: #fff; }
+  .home-work__inner { width: min(100%, 1180px); margin: 0 auto; }
+  .home-work header { display: flex; align-items: end; justify-content: space-between; margin-bottom: 48px; gap: 30px; }
+  .home-work header p { margin: 0 0 14px; color: #f2c66d; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+  .home-work h2 { margin: 0; font-size: 58px; font-weight: 950; letter-spacing: 0; line-height: 1; }
+  .home-work header > a { color: #cfeaff; font-size: 13px; font-weight: 900; text-decoration: none; }
+  .home-work__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .home-work__grid > a { position: relative; display: block; min-height: 500px; overflow: hidden; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; color: #fff; text-decoration: none; }
+  .home-work__grid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 320ms ease; }
+  .home-work__grid > a::after { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,5,6,.98), rgba(4,5,6,.08) 76%); content: ""; }
+  .home-work__grid > a:hover img { transform: scale(1.035); }
+  .home-work__grid > a > div { position: absolute; right: 24px; bottom: 25px; left: 24px; z-index: 2; }
+  .home-work__grid span { color: #f2c66d; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+  .home-work__grid h3 { margin: 10px 0; font-size: 28px; letter-spacing: 0; }
+  .home-work__grid p { margin: 0; color: rgba(255,255,255,.68); font-size: 14px; line-height: 1.55; }
+  .home-work__grid small { display: block; margin-top: 18px; color: #cfeaff; font-size: 12px; font-weight: 900; }
+  .home-work a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  @media (max-width: 850px) { .home-work__grid { grid-template-columns: 1fr; } .home-work__grid > a { min-height: 430px; } }
+  @media (max-width: 560px) { .home-work { padding: 82px 16px 90px; } .home-work header { display: grid; align-items: start; } .home-work h2 { font-size: 40px; } .home-work__grid > a { min-height: 410px; } }
+  @media (prefers-reduced-motion: reduce) { .home-work__grid img { transition: none; } }
+</style>

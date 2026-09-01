@@ -60,7 +60,7 @@ const messageId = `${page.slug}-message`;
       </div>
 
       <div class="landing-contact__field">
-        <label for={emailId}>Email</label>
+        <label for={emailId}>Email <span>(optional)</span></label>
         <input
           id={emailId}
           type="email"
@@ -68,7 +68,6 @@ const messageId = `${page.slug}-message`;
           placeholder="you@example.com"
           autocomplete="email"
           inputmode="email"
-          required
         />
       </div>
 
@@ -86,13 +85,12 @@ const messageId = `${page.slug}-message`;
       </div>
 
       <div class="landing-contact__field">
-        <label for={messageId}>Project details</label>
+        <label for={messageId}>Project details <span>(optional)</span></label>
         <textarea
           id={messageId}
           name="message"
           placeholder="What would you like to create or improve?"
           rows="7"
-          required
         ></textarea>
       </div>
 

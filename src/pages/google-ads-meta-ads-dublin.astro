@@ -3,14 +3,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LandingPage from "../components/landing/LandingPage.astro";
 import { landingPages } from "../data/landingPages";
 
-const page = landingPages.webdesign;
+const page = landingPages.ads;
 ---
 
 <BaseLayout
   title={page.metaTitle}
   description={page.metaDescription}
   canonical={`https://www.nextvisionstudio.com/${page.slug}/`}
-  ogImage="https://www.nextvisionstudio.com/images/brand/nextvision-studio-logo.webp"
+  ogImage={`https://www.nextvisionstudio.com${page.heroImage?.src}`}
 >
   <LandingPage page={page} />
 </BaseLayout>

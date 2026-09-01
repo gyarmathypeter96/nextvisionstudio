@@ -53,10 +53,9 @@ const websiteSchema = {
       name: SITE_NAME,
       url: `${SITE_URL}/`,
       image: socialImage,
-      logo: `${SITE_URL}/images/brand/nextvision-studio-logo.png`,
+      logo: `${SITE_URL}/images/brand/nextvision-studio-logo.webp`,
       email: CONTACT_EMAIL,
       telephone: CONTACT_PHONE_E164,
-      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Dublin",
@@ -76,6 +75,8 @@ const websiteSchema = {
         "Meta Ads",
         "Google Ads",
         "Website design Dublin",
+        "AI lead conversion",
+        "Business automation",
       ],
     },
   ],
@@ -134,7 +135,7 @@ const websiteSchema = {
       minimal ? (
         <div class="minimal-site-logo" aria-label="NextVision Studio">
           <img
-            src="/images/brand/nextvision-studio-logo.png"
+            src="/images/brand/nextvision-studio-logo.webp"
             width="500"
             height="500"
             alt="NextVision Studio"

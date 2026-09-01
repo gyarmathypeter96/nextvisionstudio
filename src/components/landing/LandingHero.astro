@@ -17,10 +17,11 @@ const { page } = Astro.props;
         {page.headlineStart} <span>{page.headlineAccent}</span>{page.headlineEnd && ` ${page.headlineEnd}`}
       </h1>
       <p class="landing-hero__lead">{page.lead}</p>
-      {page.slug === "webdesigner-dublin" && <p class="landing-hero__price">€1,450</p>}
 
       <div class="landing-hero__actions">
-        <a class="landing-hero__primary" href="#landing-contact">{page.ctaLabel}</a>
+        <a class="landing-hero__primary" href="#landing-contact" data-cta-placement={`${page.slug}-hero`}>
+          {page.ctaLabel}
+        </a>
         <a class="landing-hero__secondary" href="#landing-work">See relevant work</a>
       </div>
 
@@ -94,7 +95,7 @@ const { page } = Astro.props;
   .landing-hero {
     position: relative;
     min-height: 100svh;
-    padding: 156px 24px 106px;
+    padding: 126px 24px 86px;
     overflow: hidden;
     background:
       radial-gradient(circle at 78% 42%, rgba(155, 210, 255, 0.13), transparent 31%),
@@ -121,7 +122,7 @@ const { page } = Astro.props;
     grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.72fr);
     align-items: center;
     width: min(100%, 1200px);
-    min-height: calc(100svh - 262px);
+    min-height: calc(100svh - 212px);
     margin: 0 auto;
     gap: clamp(58px, 8vw, 110px);
   }
@@ -147,13 +148,13 @@ const { page } = Astro.props;
   }
 
   .landing-hero h1 {
-    max-width: 790px;
+    max-width: 740px;
     margin: 0;
     color: #ffffff;
-    font-size: clamp(62px, 7.7vw, 106px);
+    font-size: clamp(54px, 6.3vw, 86px);
     font-weight: 950;
-    letter-spacing: -0.077em;
-    line-height: 0.86;
+    letter-spacing: 0;
+    line-height: 0.9;
     text-wrap: balance;
   }
 
@@ -164,25 +165,17 @@ const { page } = Astro.props;
 
   .landing-hero__lead {
     max-width: 700px;
-    margin: 29px 0 0;
+    margin: 23px 0 0;
     color: rgba(255, 255, 255, 0.68);
     font-size: clamp(17px, 1.8vw, 20px);
     font-weight: 500;
     line-height: 1.63;
   }
 
-  .landing-hero__price {
-    margin: 20px 0 0;
-    color: #ffffff;
-    font-size: clamp(29px, 3vw, 40px);
-    font-weight: 900;
-    line-height: 1;
-  }
-
   .landing-hero__actions {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 34px;
+    margin-top: 27px;
     gap: 12px;
   }
 

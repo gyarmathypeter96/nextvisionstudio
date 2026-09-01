@@ -4,7 +4,6 @@ import ShortFormProblem from "./ShortFormProblem.astro";
 import ShortFormSystem from "./ShortFormSystem.astro";
 import ShortFormResults from "./ShortFormResults.astro";
 import ShortFormClientProof from "./ShortFormClientProof.astro";
-import ShortFormPricing from "./ShortFormPricing.astro";
 import ShortFormFounder from "./ShortFormFounder.astro";
 import ShortFormConsultation from "./ShortFormConsultation.astro";
 import ShortFormFAQ from "./ShortFormFAQ.astro";
@@ -28,15 +27,6 @@ const serviceSchema = {
         { "@type": "City", name: "Dublin" },
         { "@type": "AdministrativeArea", name: "Leinster" },
       ],
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Short-form video packages",
-        itemListElement: [
-          { "@type": "Offer", price: "800", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Content package" } },
-          { "@type": "Offer", price: "1250", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Growth package" } },
-          { "@type": "Offer", price: "1900", priceCurrency: "EUR", itemOffered: { "@type": "Service", name: "Full Engine package" } },
-        ],
-      },
     },
     {
       "@type": "BreadcrumbList",
@@ -55,7 +45,6 @@ const serviceSchema = {
   <ShortFormSystem />
   <ShortFormResults />
   <ShortFormClientProof />
-  <ShortFormPricing />
   <ShortFormFounder />
   <ShortFormConsultation />
   <ShortFormFAQ />
@@ -77,16 +66,6 @@ const serviceSchema = {
         (window as any).gtag?.("event", "strategy_call_click", {
           page_location: window.location.href,
         });
-        (window as any).dataLayer?.push({ event: "strategy_call_click" });
-      });
-    });
-
-    document.querySelectorAll<HTMLFormElement>("[data-consultation-form]").forEach((form) => {
-      if (form.dataset.tracked === "true") return;
-      form.dataset.tracked = "true";
-      form.addEventListener("submit", () => {
-        (window as any).gtag?.("event", "strategy_call_form_submit");
-        (window as any).dataLayer?.push({ event: "strategy_call_form_submit" });
       });
     });
   };

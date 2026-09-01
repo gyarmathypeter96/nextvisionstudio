@@ -1,0 +1,1160 @@
+---
+import type { LandingPageData } from "../../data/landingPages";
+import LandingFAQ from "./LandingFAQ.astro";
+import LandingLeadForm from "./LandingLeadForm.astro";
+
+interface Props {
+  page: LandingPageData;
+}
+
+const { page } = Astro.props;
+
+const clients = [
+  { name: "Gut Fest", src: "/images/clients/gut-fest.webp" },
+  { name: "Leroy's Barking World", src: "/images/clients/leroys-barking-world.webp" },
+  { name: "Pogány Induló", src: "/images/clients/pogany-indulo.webp" },
+  { name: "The Macaron Boutique", src: "/images/clients/the-macaron-boutique.webp" },
+  { name: "Saxoo London", src: "/images/clients/saxoo-london.webp" },
+  { name: "Perfect Clean", src: "/images/clients/perfect-clean.webp" },
+];
+---
+
+<section class="video-hero" aria-labelledby="video-hero-title">
+  <video
+    class="video-hero__media"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/images/showreel/showreel-2025.webp"
+    aria-hidden="true"
+    data-hero-video
+  >
+    <source src="/videos/showreel-preview.mp4" type="video/mp4" />
+  </video>
+  <div class="video-hero__shade" aria-hidden="true"></div>
+
+  <div class="video-shell video-hero__content">
+    <p class="video-kicker">{page.eyebrow}</p>
+    <h1 id="video-hero-title">
+      {page.headlineStart} <span>{page.headlineAccent}</span>
+    </h1>
+    <p class="video-hero__lead">{page.lead}</p>
+
+    <div class="video-actions">
+      <a class="video-button video-button--primary" href="#landing-contact" data-cta-placement="videography-hero">{page.ctaLabel}</a>
+      <a class="video-button video-button--secondary" href="#showreel">Watch the showreel</a>
+    </div>
+
+    <ul class="video-hero__points" aria-label="Video production highlights">
+      {page.heroPoints.map((point) => <li>{point}</li>)}
+    </ul>
+  </div>
+
+  <a class="video-hero__continue" href="#video-proof" aria-label="Continue to client proof">Scroll</a>
+</section>
+
+<section class="video-client-proof" id="video-proof" aria-labelledby="video-client-proof-title">
+  <div class="video-shell video-client-proof__inner">
+    <p id="video-client-proof-title">{page.trustLine}</p>
+    <ul aria-label="Selected NextVision Studio clients">
+      {clients.map((client) => (
+        <li>
+          <img src={client.src} width="500" height="500" alt={`${client.name} logo`} loading="lazy" decoding="async" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="video-problem" aria-labelledby="video-problem-title" data-video-reveal>
+  <div class="video-shell video-problem__inner">
+    <div class="video-problem__copy">
+      <p class="video-kicker">{page.problemKicker}</p>
+      <h2 id="video-problem-title">{page.problemTitle}</h2>
+      <p>{page.problemText}</p>
+      <a class="video-text-link" href="#landing-contact">Tell us what needs to change <span aria-hidden="true">→</span></a>
+    </div>
+
+    <ol class="video-problem__list">
+      {page.outcomes.map((outcome, index) => (
+        <li>
+          <span>0{index + 1}</span>
+          <div>
+            <h3>{outcome.title}</h3>
+            <p>{outcome.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="video-system" aria-labelledby="video-system-title" data-video-reveal>
+  <div class="video-shell">
+    <header class="video-section-head">
+      <div>
+        <p class="video-kicker">{page.deliverablesKicker}</p>
+        <h2 id="video-system-title">{page.deliverablesTitle}</h2>
+      </div>
+      <p>{page.deliverablesText}</p>
+    </header>
+
+    <div class="video-system__grid">
+      {page.deliverables.map((item, index) => (
+        <article>
+          <span>0{index + 1}</span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="video-showreel" id="showreel" aria-labelledby="video-showreel-title" data-video-reveal>
+  <div class="video-shell video-showreel__header">
+    <p class="video-kicker">Selected work in motion</p>
+    <h2 id="video-showreel-title">See the work before reading another claim.</h2>
+  </div>
+  <div class="video-showreel__frame">
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      poster="/images/showreel/showreel-2025.webp"
+      aria-label="NextVision Studio video production showreel"
+    >
+      <source src="/videos/showreel-2025.mp4" type="video/mp4" />
+    </video>
+  </div>
+</section>
+
+<section class="video-work" id="video-work" aria-labelledby="video-work-title" data-video-reveal>
+  <div class="video-shell">
+    <header class="video-section-head">
+      <div>
+        <p class="video-kicker">{page.proofKicker}</p>
+        <h2 id="video-work-title">{page.proofTitle}</h2>
+      </div>
+      <p>{page.proofText}</p>
+    </header>
+
+    <div class="video-work__grid">
+      {page.proofItems.map((item) => (
+        <a href={item.href || "/case-studies/"}>
+          <img src={item.image} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" />
+          <div class="video-work__copy">
+            <span>{item.tag}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            {item.metric && <strong>{item.metric}</strong>}
+            <small>Read the project <span aria-hidden="true">↗</span></small>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <a class="video-text-link video-work__all" href="/#portfolio">View the full video portfolio <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="video-process" aria-labelledby="video-process-title" data-video-reveal>
+  <div class="video-shell">
+    <header class="video-process__header">
+      <p class="video-kicker">From idea to useful assets</p>
+      <h2 id="video-process-title">{page.processTitle}</h2>
+      <p>{page.processText}</p>
+    </header>
+
+    <ol class="video-process__steps">
+      {page.process.map((step, index) => (
+        <li>
+          <span>0{index + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+
+    <aside class="video-process__decision">
+      <div>
+        <p class="video-kicker">Start with the problem</p>
+        <h3>{page.decisionTitle}</h3>
+        <p>{page.decisionText}</p>
+      </div>
+      <a class="video-button video-button--light" href="#landing-contact">Plan the right project</a>
+    </aside>
+  </div>
+</section>
+
+<section class="video-founder" aria-labelledby="video-founder-title" data-video-reveal>
+  <div class="video-shell video-founder__inner">
+    <img
+      src="/images/about/peter-gyarmathy.webp"
+      alt="Peter Gyarmathy, videographer and founder of NextVision Studio"
+      width="480"
+      height="480"
+      loading="lazy"
+      decoding="async"
+    />
+    <div>
+      <p class="video-kicker">Direct, founder-led production</p>
+      <h2 id="video-founder-title">You work with the person planning, filming and editing the project.</h2>
+      <p>
+        I am Peter, the filmmaker behind NextVision Studio. I keep the process clear, help shape the idea and stay close to every decision from the first call to the final export.
+      </p>
+      <a class="video-text-link" href="/about/">Meet Peter and see the approach <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<nav class="video-related" aria-label="Related video production services" data-video-reveal>
+  <div class="video-shell">
+    <p class="video-kicker">Explore by project type</p>
+    <div>
+      {page.relatedLinks.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+    </div>
+  </div>
+</nav>
+
+<LandingFAQ page={page} />
+<LandingLeadForm page={page} />
+
+<script>
+  const initialiseVideoLanding = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const heroVideo = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+
+    if (reduceMotion) heroVideo?.pause();
+
+    const sections = document.querySelectorAll<HTMLElement>("[data-video-reveal]");
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  };
+
+  initialiseVideoLanding();
+  document.addEventListener("astro:page-load", initialiseVideoLanding);
+</script>
+
+<style>
+  .video-hero,
+  .video-hero *,
+  .video-client-proof,
+  .video-client-proof *,
+  .video-problem,
+  .video-problem *,
+  .video-system,
+  .video-system *,
+  .video-showreel,
+  .video-showreel *,
+  .video-work,
+  .video-work *,
+  .video-process,
+  .video-process *,
+  .video-founder,
+  .video-founder *,
+  .video-related,
+  .video-related * {
+    box-sizing: border-box;
+  }
+
+  .video-shell {
+    width: min(100% - 48px, 1180px);
+    margin: 0 auto;
+  }
+
+  .video-kicker {
+    margin: 0 0 18px;
+    color: #f2c66d;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .video-hero {
+    position: relative;
+    display: flex;
+    min-height: 82svh;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #090a0b;
+    color: #ffffff;
+  }
+
+  .video-hero__media,
+  .video-hero__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-hero__media {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .video-hero__shade {
+    background:
+      linear-gradient(90deg, rgba(5, 6, 7, 0.92) 0%, rgba(5, 6, 7, 0.7) 45%, rgba(5, 6, 7, 0.12) 78%),
+      linear-gradient(0deg, rgba(5, 6, 7, 0.78) 0%, transparent 42%);
+  }
+
+  .video-hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 142px 0 48px;
+  }
+
+  .video-hero h1 {
+    max-width: 850px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 72px;
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .video-hero h1 span {
+    color: #cfeaff;
+  }
+
+  .video-hero__lead {
+    max-width: 650px;
+    margin: 26px 0 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  .video-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    gap: 10px;
+  }
+
+  .video-button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 21px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+  }
+
+  .video-button--primary {
+    border-color: #cfeaff;
+    background: #cfeaff;
+    color: #101214;
+  }
+
+  .video-button--secondary {
+    background: rgba(10, 11, 12, 0.42);
+    backdrop-filter: blur(10px);
+  }
+
+  .video-button--light {
+    flex: 0 0 auto;
+    border-color: #111111;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .video-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .video-button:focus-visible,
+  .video-text-link:focus-visible,
+  .video-work__grid a:focus-visible,
+  .video-hero__continue:focus-visible {
+    outline: 2px solid #f2c66d;
+    outline-offset: 4px;
+  }
+
+  .video-hero__points {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 28px 0 0;
+    padding: 0;
+    gap: 10px 24px;
+    list-style: none;
+  }
+
+  .video-hero__points li {
+    position: relative;
+    padding-left: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .video-hero__points li::before {
+    content: "";
+    position: absolute;
+    top: 0.48em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #9ad0aa;
+  }
+
+  .video-hero__continue {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    z-index: 3;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .video-client-proof {
+    padding: 35px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: #101214;
+    color: #ffffff;
+  }
+
+  .video-client-proof__inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .video-client-proof p {
+    margin: 0;
+    padding-left: 42px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1.45;
+  }
+
+  .video-client-proof ul {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+    list-style: none;
+  }
+
+  .video-client-proof li {
+    display: grid;
+    min-height: 52px;
+    place-items: center;
+  }
+
+  .video-client-proof img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 42px;
+    object-fit: contain;
+    opacity: 0.62;
+    filter: grayscale(1) brightness(1.35);
+    transition: opacity 180ms ease, filter 180ms ease;
+  }
+
+  .video-client-proof li:hover img {
+    opacity: 1;
+    filter: none;
+  }
+
+  .video-problem,
+  .video-system,
+  .video-work,
+  .video-process,
+  .video-founder {
+    color: #ffffff;
+  }
+
+  .video-related {
+    padding: 72px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: #0b0c0e;
+  }
+
+  .video-related > div > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .video-related a {
+    display: flex;
+    min-height: 68px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .video-related a span { color: #cfeaff; }
+
+  .video-problem {
+    padding: 118px 0;
+    background: #0b0c0e;
+  }
+
+  .video-problem__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(440px, 1.1fr);
+    align-items: start;
+    gap: 90px;
+  }
+
+  .video-problem h2,
+  .video-system h2,
+  .video-work h2,
+  .video-process h2,
+  .video-founder h2 {
+    margin: 0;
+    font-size: 56px;
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .video-problem__copy > p:not(.video-kicker),
+  .video-founder div > p:not(.video-kicker) {
+    margin: 24px 0 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .video-text-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 27px;
+    gap: 9px;
+    color: #cfeaff;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .video-text-link span {
+    transition: transform 180ms ease;
+  }
+
+  .video-text-link:hover span {
+    transform: translateX(4px);
+  }
+
+  .video-problem__list {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    list-style: none;
+  }
+
+  .video-problem__list li {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    padding: 27px 0;
+    gap: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .video-problem__list > li > span {
+    color: #9ad0aa;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .video-problem__list h3 {
+    margin: 0 0 8px;
+    font-size: 23px;
+    letter-spacing: 0;
+  }
+
+  .video-problem__list p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .video-system {
+    padding: 112px 0 122px;
+    background: #141618;
+  }
+
+  .video-section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+    align-items: end;
+    margin-bottom: 55px;
+    gap: 60px;
+  }
+
+  .video-section-head > p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .video-system__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .video-system__grid article {
+    min-height: 230px;
+    padding: 28px;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    background: #141618;
+    transition: background 180ms ease;
+  }
+
+  .video-system__grid article:hover {
+    background: #1b1e20;
+  }
+
+  .video-system__grid article > span {
+    color: #f2c66d;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .video-system__grid h3 {
+    margin: 53px 0 11px;
+    font-size: 23px;
+    letter-spacing: 0;
+  }
+
+  .video-system__grid p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .video-showreel {
+    padding: 110px 0 0;
+    overflow: hidden;
+    background: #f0eee9;
+    color: #111111;
+  }
+
+  .video-showreel .video-kicker {
+    color: #855b09;
+  }
+
+  .video-showreel h2 {
+    max-width: 760px;
+    margin: 0 0 45px;
+    font-size: 56px;
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .video-showreel__frame {
+    width: 100%;
+    background: #000000;
+  }
+
+  .video-showreel video {
+    display: block;
+    width: 100%;
+    max-height: 82svh;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #000000;
+  }
+
+  .video-work {
+    padding: 118px 0 126px;
+    background: #0b0c0e;
+  }
+
+  .video-work__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .video-work__grid > a {
+    position: relative;
+    display: block;
+    min-height: 540px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .video-work__grid img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 420ms ease;
+  }
+
+  .video-work__grid > a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(5, 6, 7, 0.98) 0%, rgba(5, 6, 7, 0.14) 72%);
+  }
+
+  .video-work__grid > a:hover img {
+    transform: scale(1.035);
+  }
+
+  .video-work__copy {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    left: 25px;
+    z-index: 2;
+  }
+
+  .video-work__copy > span {
+    color: #f2c66d;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .video-work__copy h3 {
+    margin: 11px 0 10px;
+    font-size: 29px;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .video-work__copy p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .video-work__copy strong {
+    display: block;
+    margin-top: 16px;
+    color: #9ad0aa;
+    font-size: 12px;
+  }
+
+  .video-work__copy small {
+    display: block;
+    margin-top: 20px;
+    color: #cfeaff;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .video-work__all {
+    margin-top: 31px;
+  }
+
+  .video-process {
+    padding: 118px 0 126px;
+    background: #f0eee9;
+    color: #111111;
+  }
+
+  .video-process .video-kicker {
+    color: #855b09;
+  }
+
+  .video-process__header {
+    max-width: 820px;
+    margin-bottom: 58px;
+  }
+
+  .video-process__header > p:last-child {
+    max-width: 650px;
+    margin: 24px 0 0;
+    color: rgba(17, 17, 17, 0.65);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .video-process__steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(17, 17, 17, 0.25);
+    list-style: none;
+  }
+
+  .video-process__steps li {
+    min-height: 245px;
+    padding: 28px 25px;
+    border-right: 1px solid rgba(17, 17, 17, 0.2);
+  }
+
+  .video-process__steps li:last-child {
+    border-right: 0;
+  }
+
+  .video-process__steps > li > span {
+    color: #855b09;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .video-process__steps h3 {
+    margin: 55px 0 11px;
+    font-size: 22px;
+    letter-spacing: 0;
+  }
+
+  .video-process__steps p {
+    margin: 0;
+    color: rgba(17, 17, 17, 0.63);
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .video-process__decision {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-top: 65px;
+    padding: 42px;
+    gap: 50px;
+    border: 1px solid rgba(17, 17, 17, 0.25);
+    border-radius: 6px;
+    background: #ffffff;
+  }
+
+  .video-process__decision h3 {
+    max-width: 680px;
+    margin: 0;
+    font-size: 38px;
+    letter-spacing: 0;
+    line-height: 1.04;
+  }
+
+  .video-process__decision div > p:last-child {
+    max-width: 720px;
+    margin: 18px 0 0;
+    color: rgba(17, 17, 17, 0.65);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .video-founder {
+    padding: 110px 0;
+    background: #16191b;
+  }
+
+  .video-founder__inner {
+    display: grid;
+    grid-template-columns: 390px 1fr;
+    align-items: center;
+    gap: 85px;
+  }
+
+  .video-founder img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  [data-video-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 520ms ease, transform 520ms ease;
+  }
+
+  [data-video-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 980px) {
+    .video-hero h1 {
+      font-size: 64px;
+    }
+
+    .video-problem__inner,
+    .video-section-head,
+    .video-founder__inner {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .video-founder__inner {
+      grid-template-columns: 300px 1fr;
+    }
+
+    .video-system__grid,
+    .video-work__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .video-work__grid > a:last-child {
+      grid-column: 1 / -1;
+      min-height: 430px;
+    }
+
+    .video-process__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .video-process__steps li {
+      border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+    }
+
+    .video-process__steps li:nth-child(2) {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .video-shell {
+      width: min(100% - 32px, 1180px);
+    }
+
+    .video-hero {
+      min-height: 82svh;
+    }
+
+    .video-hero__shade {
+      background:
+        linear-gradient(90deg, rgba(5, 6, 7, 0.84), rgba(5, 6, 7, 0.28)),
+        linear-gradient(0deg, rgba(5, 6, 7, 0.94) 0%, rgba(5, 6, 7, 0.24) 72%);
+    }
+
+    .video-hero__content {
+      padding: 118px 0 38px;
+    }
+
+    .video-hero h1 {
+      max-width: 620px;
+      font-size: 48px;
+      line-height: 0.98;
+    }
+
+    .video-hero__lead {
+      max-width: 540px;
+      font-size: 17px;
+    }
+
+    .video-hero__continue {
+      display: none;
+    }
+
+    .video-client-proof__inner {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .video-client-proof p {
+      padding-left: 58px;
+      text-align: left;
+    }
+
+    .video-client-proof ul {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .video-problem,
+    .video-system,
+    .video-work,
+    .video-process,
+    .video-founder,
+    .video-related {
+      padding: 86px 0;
+    }
+
+    .video-showreel {
+      padding-top: 86px;
+    }
+
+    .video-problem h2,
+    .video-system h2,
+    .video-work h2,
+    .video-process h2,
+    .video-founder h2,
+    .video-showreel h2 {
+      font-size: 44px;
+    }
+
+    .video-system__grid,
+    .video-work__grid,
+    .video-founder__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .video-work__grid > a,
+    .video-work__grid > a:last-child {
+      grid-column: auto;
+      min-height: 480px;
+    }
+
+    .video-founder img {
+      width: min(100%, 380px);
+    }
+
+    .video-process__decision {
+      grid-template-columns: 1fr;
+      align-items: start;
+      padding: 31px;
+      gap: 28px;
+    }
+
+    .video-related > div > div { grid-template-columns: 1fr; }
+    .video-related a { border-right: 0; }
+  }
+
+  @media (max-width: 520px) {
+    .video-hero {
+      min-height: 82svh;
+    }
+
+    .video-hero h1 {
+      font-size: 40px;
+    }
+
+    .video-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .video-button {
+      width: 100%;
+    }
+
+    .video-hero__points {
+      gap: 9px 16px;
+    }
+
+    .video-client-proof ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .video-problem h2,
+    .video-system h2,
+    .video-work h2,
+    .video-process h2,
+    .video-founder h2,
+    .video-showreel h2 {
+      font-size: 38px;
+    }
+
+    .video-problem__list li {
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+    }
+
+    .video-system__grid {
+      border-left: 0;
+    }
+
+    .video-system__grid article {
+      min-height: 200px;
+      padding: 24px 0;
+      border-right: 0;
+    }
+
+    .video-system__grid h3 {
+      margin-top: 38px;
+    }
+
+    .video-work__grid > a,
+    .video-work__grid > a:last-child {
+      min-height: 440px;
+    }
+
+    .video-process__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .video-process__steps li,
+    .video-process__steps li:nth-child(2) {
+      min-height: 210px;
+      padding: 25px 0;
+      border-right: 0;
+    }
+
+    .video-process__steps h3 {
+      margin-top: 38px;
+    }
+
+    .video-process__decision h3 {
+      font-size: 31px;
+    }
+
+    .video-process__decision {
+      padding: 25px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-video-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .video-button,
+    .video-text-link span,
+    .video-client-proof img,
+    .video-system__grid article,
+    .video-work__grid img {
+      transition: none;
+    }
+  }
+</style>

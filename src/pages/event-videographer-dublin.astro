@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VideoSeoPage from "../components/VideoSeoPage.astro";
+import { videoSeoPages } from "../data/videoSeoPages";
+const page = videoSeoPages.event;
+---
+<BaseLayout title={page.metaTitle} description={page.metaDescription} canonical={`https://www.nextvisionstudio.com/${page.slug}/`}>
+  <VideoSeoPage page={page} />
+</BaseLayout>

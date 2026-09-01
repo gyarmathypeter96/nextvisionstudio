@@ -10,7 +10,7 @@ const navigation = [
   { label: "Blog", href: "/blog/" },
   {
     label: isShortFormLanding ? "Book a Free Call" : "Contact Us",
-    href: isShortFormLanding ? "#free-consultation" : "/contact/",
+    href: isShortFormLanding ? "#free-consultation" : isHome ? "#contact-form" : "/contact/#contact-form",
     featured: true,
   },
 ];
@@ -26,7 +26,7 @@ const isCurrent = (href: string) =>
   <div class="site-header__inner">
     <a class="site-header__brand" href="/" aria-label="NextVision Studio home">
       <img
-        src="/images/brand/nextvision-studio-logo.png"
+        src="/images/brand/nextvision-studio-logo.webp"
         width="500"
         height="500"
         alt="NextVision Studio"
@@ -62,6 +62,7 @@ const isCurrent = (href: string) =>
               { "is-current": isCurrent(item.href) },
             ]}
             href={item.href}
+            data-cta-placement={item.featured ? "header" : undefined}
             aria-current={isCurrent(item.href) ? "page" : undefined}
           >
             {item.label}

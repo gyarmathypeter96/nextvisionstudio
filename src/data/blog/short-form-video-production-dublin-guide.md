@@ -135,7 +135,7 @@ Use tracking links and clear form attribution where possible. Our website, for e
 
 Pricing depends on planning, filming time, locations, the number of final videos, editing complexity and whether publishing or advertising management is included.
 
-At NextVision Studio, monthly packages currently start at €800 for six edited short-form videos. Larger packages add more content, deeper planning, reporting and paid distribution management.
+At NextVision Studio, the scope is built around the number of useful videos, production time and the support your team actually needs. A focused brief makes it possible to recommend the right production rhythm before preparing a tailored quote.
 
 Transparent pricing makes it easier to compare services, but compare the scope as well as the number:
 
@@ -147,7 +147,7 @@ Transparent pricing makes it easier to compare services, but compare the scope a
 - Does the report show enquiries or only views?
 - How many revisions are included?
 
-You can see the current scope and starting prices on our [short-form video packages page](/short-form-video-production-dublin/#packages).
+You can explore the production system on our [short-form video service page](/short-form-video-production-dublin/).
 
 ## Do you need to appear on camera?
 

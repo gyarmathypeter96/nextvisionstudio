@@ -72,8 +72,33 @@ const services = [
     ],
     primary: "Plan your website",
     secondary: "Get a free quote",
-    secondaryHref: "/contact/",
+    secondaryHref: "/contact/#contact-form",
     visual: "web",
+  },
+  {
+    id: "ai-automation",
+    number: "04",
+    title: "AI & Business Automation",
+    lead:
+      "A practical lead conversion system that captures enquiries, responds quickly and gives your sales team the context they need to follow up.",
+    points: [
+      {
+        title: "Lead capture and CRM",
+        text: "Website forms and campaign leads arrive in one clear pipeline with their original source.",
+      },
+      {
+        title: "Fast first response",
+        text: "Email, WhatsApp or an AI assistant can acknowledge the enquiry and collect the next useful detail.",
+      },
+      {
+        title: "Sales handover",
+        text: "Follow-up tasks, preferred call times and conversation notes stay visible to the person closing the lead.",
+      },
+    ],
+    primary: "Fix your lead follow-up",
+    secondary: "See the VentSolve project",
+    secondaryHref: "/case-studies/ventsolve-content-production/",
+    visual: "automation",
   },
 ];
 ---
@@ -81,8 +106,8 @@ const services = [
 <section class="service-pillars" aria-labelledby="service-pillars-title">
   <div class="service-pillars__inner">
     <header class="service-pillars__intro">
-      <div class="service-pillars__kicker">Three connected services</div>
-      <h2 id="service-pillars-title">Everything Your Brand Needs to Grow Online</h2>
+      <div class="service-pillars__kicker">Four connected services</div>
+      <h2 id="service-pillars-title">The system around a stronger enquiry</h2>
       <p>
         Content earns attention, advertising brings the right people closer and a
         strong website turns interest into enquiries.
@@ -118,7 +143,7 @@ const services = [
               </ul>
 
               <div class="service-pillar__actions">
-                <a class="service-pillar__primary" href="/contact/">
+                <a class="service-pillar__primary" href="/contact/#contact-form" data-cta-placement={`services-${service.id}`}>
                   {service.primary}
                 </a>
                 <a class="service-pillar__secondary" href={service.secondaryHref}>
@@ -171,6 +196,24 @@ const services = [
                   </div>
                   <div class="web-browser__cards">
                     <i></i><i></i><i></i>
+                  </div>
+                </div>
+              )}
+
+              {service.visual === "automation" && (
+                <div class="ads-dashboard">
+                  <div class="ads-dashboard__top">
+                    <i></i><i></i><i></i><span>Lead conversion system</span>
+                  </div>
+                  <div class="ads-dashboard__summary">
+                    <div><small>New lead</small><strong>Captured</strong></div>
+                    <div><small>Sales handover</small><strong>Ready</strong></div>
+                  </div>
+                  <div class="ads-dashboard__chart">
+                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="ads-dashboard__legend">
+                    <span>Form</span><span>CRM</span><span>Follow-up</span>
                   </div>
                 </div>
               )}
