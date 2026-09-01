@@ -51,6 +51,10 @@ const stats = [
       ))
     }
   </dl>
+  <p class="stats__context">
+    Selected campaign and growth metrics from work delivered for Irish businesses.
+    <a href="/case-studies/">See the project work <span aria-hidden="true">↗</span></a>
+  </p>
 </section>
 
 <script>
@@ -146,6 +150,24 @@ const stats = [
     margin: 0 auto;
     padding: 0;
     text-align: center;
+  }
+
+  .stats__context {
+    width: min(100%, 680px);
+    margin: 42px auto 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .stats__context a {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: 6px;
+    color: #cfeaff;
+    font-weight: 800;
+    text-decoration: none;
   }
 
   .stats__item {

@@ -1,12 +1,35 @@
+---
+interface Props {
+  variant?: "website" | "ads";
+}
+
+const { variant = "website" } = Astro.props;
+const isAds = variant === "ads";
+---
+
 <section class="web-pricing" aria-labelledby="web-pricing-title">
   <div class="web-pricing__inner">
     <header>
-      <h2 id="web-pricing-title">Website pricing</h2>
-      <p>Clear pricing, no discovery call needed to find out if we are in your range.</p>
+      <h2 id="web-pricing-title">{isAds ? "Pricing" : "Website pricing"}</h2>
+      <p>{isAds ? "Simple management pricing, with your ad spend kept separate and visible." : "Clear pricing, no discovery call needed to find out if we are in your range."}</p>
     </header>
 
-    <div class="web-pricing__grid">
-      <article>
+    {isAds ? (
+      <div class="web-pricing__grid web-pricing__grid--single">
+        <article class="web-pricing__card--featured">
+          <p class="web-pricing__name">PAID ADS MANAGEMENT</p>
+          <p class="web-pricing__price">From €450 <small>per month</small></p>
+          <p class="web-pricing__includes">Plus your ad spend</p>
+          <ul>
+            <li>Minimum recommended ad spend: €300 per month</li>
+            <li>No long contract</li>
+            <li>Cancel with 30 days notice</li>
+          </ul>
+        </article>
+      </div>
+    ) : (
+      <div class="web-pricing__grid">
+        <article>
         <p class="web-pricing__name">STARTER</p>
         <p class="web-pricing__price">€1,450</p>
         <ul>
@@ -18,7 +41,7 @@
         </ul>
       </article>
 
-      <article class="web-pricing__card--featured">
+        <article class="web-pricing__card--featured">
         <span class="web-pricing__badge">Most popular</span>
         <p class="web-pricing__name">BUSINESS</p>
         <p class="web-pricing__price">€2,450</p>
@@ -31,17 +54,18 @@
         </ul>
       </article>
 
-      <article>
+        <article>
         <p class="web-pricing__name">PREMIUM</p>
         <p class="web-pricing__price">from €3,950</p>
         <ul>
           <li>Custom build, e-commerce or integrations</li>
           <li>Scoped after a short call</li>
         </ul>
-      </article>
-    </div>
+        </article>
+      </div>
+    )}
 
-    <p class="web-pricing__offer">Summer offer: book before 31 August and we build 2 extra campaign landing pages free, worth €700. You choose what they target.</p>
+    {!isAds && <p class="web-pricing__offer">Summer offer: book before 31 August and we build 2 extra campaign landing pages free, worth €700. You choose what they target.</p>}
   </div>
 </section>
 
@@ -88,6 +112,11 @@
     gap: 14px;
   }
 
+  .web-pricing__grid--single {
+    grid-template-columns: minmax(0, 520px);
+    justify-content: center;
+  }
+
   .web-pricing article {
     position: relative;
     min-width: 0;
@@ -129,6 +158,13 @@
     font-weight: 900;
     letter-spacing: -0.05em;
     line-height: 1;
+  }
+
+  .web-pricing__price small {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.4em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   .web-pricing__includes {

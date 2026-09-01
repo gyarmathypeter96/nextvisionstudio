@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ServicesPageHero from "../components/ServicesPageHero.astro";
 import ServicePillars from "../components/ServicePillars.astro";
 import ServicesProcess from "../components/ServicesProcess.astro";
+import AISystems from "../components/AISystems.astro";
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -17,6 +18,7 @@ const serviceSchema = {
     "Social media content creation",
     "Meta Ads and Google Ads management",
     "Website design and development",
+    "AI development and business automation",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -49,19 +51,29 @@ const serviceSchema = {
             "Fast, responsive and SEO-friendly business websites designed to generate enquiries.",
         },
       },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Development and Business Automation Dublin",
+          description:
+            "Practical AI tools, lead workflows and business automation connected to the way a team already works.",
+        },
+      },
     ],
   },
 };
 ---
 
 <BaseLayout
-  title="Creative & Digital Services Dublin | NextVision Studio"
-  description="Social media content creation, Meta and Google Ads management, and premium website design for Dublin businesses from NextVision Studio."
+  title="Creative, Ads & AI Services Dublin | NextVision Studio"
+  description="Video, social content, Google Ads, Meta Ads, websites and AI automation for Dublin service businesses."
   canonical="https://www.nextvisionstudio.com/services/"
 >
   <main class="services-page">
     <ServicesPageHero />
     <ServicePillars />
+    <AISystems />
     <ServicesProcess />
   </main>
 

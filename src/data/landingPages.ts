@@ -18,7 +18,7 @@ export interface LandingFaqItem {
 
 export interface LandingPageData {
   slug: string;
-  kind: "video" | "photo" | "web" | "social";
+  kind: "video" | "photo" | "web" | "social" | "ads";
   metaTitle: string;
   metaDescription: string;
   eyebrow: string;
@@ -206,12 +206,12 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Commercial Photography Dublin | Business & Product Photographer",
+    metaTitle: "Commercial Photographer Dublin | Product & Brand Photography",
     metaDescription:
-      "Commercial photography in Dublin for products, brands, teams and events. See real work and get a clear quote for your next shoot.",
+      "Commercial photographer in Dublin for product, brand, corporate and event photography. Original images built for websites, campaigns and social media.",
     eyebrow: "Photography Dublin",
-    headlineStart: "Commercial Photography in",
-    headlineAccent: "Dublin",
+    headlineStart: "Commercial photography for",
+    headlineAccent: "Dublin businesses",
     lead:
       "Professional photography for Dublin businesses that need credible images for websites, campaigns, product launches, social media and sales material.",
     heroImage: {
@@ -463,6 +463,112 @@ export const landingPages: Record<string, LandingPageData> = {
         question: "How do I start a website project?",
         answer:
           "Send your current website, business goal, required pages and preferred timing. We will recommend a suitable scope and the clearest next step.",
+      },
+    ],
+  },
+
+  ads: {
+    slug: "google-ads-meta-ads-dublin",
+    kind: "ads",
+    metaTitle: "Google Ads & Meta Ads Management Dublin | NextVision Studio",
+    metaDescription:
+      "Google Ads and Meta Ads managed for Dublin businesses. Campaigns, creative and reporting built around one number: enquiries.",
+    eyebrow: "Google Ads & Meta Ads Dublin",
+    headlineStart: "Google Ads and Meta Ads, managed around one",
+    headlineAccent: "number",
+    lead:
+      "Most agencies report on reach. We report on how many people contacted you.",
+    heroImage: {
+      src: "/images/portfolio/SUeoIgRtH0I.webp",
+      alt: "Campaign-ready video creative produced by NextVision Studio",
+      width: 640,
+      height: 360,
+    },
+    heroPoints: ["Campaigns built for enquiries", "Creative produced in house", "Clear monthly reporting"],
+    ctaLabel: "Plan your paid campaign",
+    trustLine: "Paid advertising for Dublin businesses that need enquiries, not vanity metrics",
+    problemKicker: "A campaign should lead somewhere useful",
+    problemTitle: "More visibility only matters when the right people get in touch.",
+    problemText:
+      "Paid advertising works best when the campaign, creative and landing page all point to one clear action. We manage the full path, so the money you spend is measured against enquiries rather than surface-level reach.",
+    outcomes: [
+      {
+        title: "Reach active demand",
+        text: "Google Search campaigns put your service in front of people already looking for it.",
+      },
+      {
+        title: "Create local demand",
+        text: "Meta campaigns on Facebook and Instagram make a clear offer visible to the right local audience.",
+      },
+      {
+        title: "Track the useful number",
+        text: "Reporting stays focused on enquiries, cost per lead and the next improvement to make.",
+      },
+    ],
+    deliverablesKicker: "What we manage",
+    deliverablesTitle: "The campaign, creative and conversion path in one place.",
+    deliverablesText:
+      "Every part of the campaign is built around making it easier for a potential customer to contact you.",
+    deliverables: [
+      { title: "Google Search campaigns", text: "For people actively looking for your service." },
+      { title: "Meta campaigns", text: "Facebook and Instagram campaigns that build local demand." },
+      { title: "Ad creative", text: "Video and static creative produced in house for your campaign." },
+      { title: "Landing pages", text: "Focused pages built to convert the traffic you are paying for." },
+      { title: "Monthly reporting", text: "Plain-English reporting, not a dashboard you never open." },
+    ],
+    proofKicker: "Results from campaigns we run",
+    proofTitle: "Measured by the enquiries that matter to your business.",
+    proofText:
+      "We focus campaign decisions on lead volume, cost and the quality of the conversations they create.",
+    proofItems: [
+      { tag: "Lead volume", title: "500+ leads generated", text: "Leads generated for clients through managed campaigns." },
+      { tag: "Cost efficiency", title: "€5 to €6 cost per lead", text: "Average cost per lead across relevant campaigns." },
+      { tag: "Customer growth", title: "100+ customers acquired", text: "Customers acquired from €1,000 of ad spend." },
+    ],
+    processTitle: "A paid campaign built around how customers actually enquire.",
+    processText:
+      "We start with the offer and the action you want, then make the campaign simple enough to measure and improve.",
+    process: [
+      { title: "Set the goal", text: "We define the service, audience, offer and one conversion action." },
+      { title: "Build the campaign", text: "Campaign structure, tracking, creative and landing page are prepared together." },
+      { title: "Launch and learn", text: "Live data shows what earns attention and what turns it into enquiries." },
+      { title: "Improve", text: "Budget, creative and targeting are refined around the strongest signals." },
+    ],
+    decisionTitle: "Need more enquiries without guessing where your budget is going?",
+    decisionText:
+      "Tell us what you sell, where you work and what a new customer is worth. We will recommend a practical first campaign and the budget it needs.",
+    relatedLinks: [
+      { label: "Explore all digital services", href: "/services/" },
+      { label: "Build a conversion-focused website", href: "/webdesigner-dublin/" },
+      { label: "Create campaign-ready content", href: "/social-media-content-creation-dublin/" },
+    ],
+    formTitle: "Tell us what a new enquiry is worth to your business.",
+    formText:
+      "Share the service you want to promote, the areas you cover and whether you already run ads. We will recommend a practical next step.",
+    formSubject: "New Google Ads and Meta Ads Dublin landing page enquiry",
+    serviceType: "Google Ads and Meta Ads management in Dublin",
+    schemaDescription:
+      "Google Ads and Meta Ads campaign management, creative production, landing pages and plain-English reporting for Dublin businesses.",
+    faq: [
+      {
+        question: "How much ad spend do I need?",
+        answer:
+          "We recommend a minimum ad spend of €300 per month, separate from management. The right budget depends on your service, location, competition and how many enquiries you need, so we set a sensible starting point before launch.",
+      },
+      {
+        question: "How soon will I see enquiries?",
+        answer:
+          "Google Search campaigns can begin reaching people as soon as they are approved. We normally use the first few weeks to check search terms, creative and conversion data, then improve the campaign around the strongest signals.",
+      },
+      {
+        question: "Do you make the creative?",
+        answer:
+          "Yes. We can produce campaign-ready video, static creative and ad copy in house, then match it to the platform, offer and landing page.",
+      },
+      {
+        question: "Can I stop anytime?",
+        answer:
+          "There is no long contract. You can cancel management with 30 days notice, and your ad spend remains separate and under your control.",
       },
     ],
   },
