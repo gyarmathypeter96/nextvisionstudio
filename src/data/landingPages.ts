@@ -69,11 +69,11 @@ export const landingPages: Record<string, LandingPageData> = {
     metaDescription:
       "Video production in Dublin that helps businesses earn attention, explain their offer and create content that keeps working after the shoot.",
     eyebrow: "Video production Dublin",
-    headlineStart: "Video production for",
-    headlineAccent: "Dublin businesses",
-    headlineEnd: "",
+    headlineStart: "Dublin video",
+    headlineAccent: "production",
+    headlineEnd: "for businesses",
     lead:
-      "One video is not a growth plan. We plan, film and edit content that helps people trust you, understand your offer and take the next step.",
+      "We plan, film and edit content that makes your offer easier to trust and easier to choose.",
     heroImage: {
       src: "/images/portfolio/JVA_WxYY3p0.webp",
       alt: "Professional event videography in Dublin by NextVision Studio",
