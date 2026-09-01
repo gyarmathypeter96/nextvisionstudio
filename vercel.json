@@ -46,11 +46,6 @@
   ],
   "redirects": [
     {
-      "source": "/home/dsc04164/",
-      "destination": "/photography-dublin/",
-      "permanent": true
-    },
-    {
       "source": "/home-3-2/",
       "destination": "/",
       "permanent": true

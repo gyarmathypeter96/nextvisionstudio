@@ -8,11 +8,10 @@ const routes = [
   { path: "videography-dublin/", lastmod: "2026-07-28" },
   {
     path: "short-form-video-production-dublin/",
-    lastmod: "2026-09-01",
+    lastmod: "2026-07-16",
   },
-  { path: "photography-dublin/", lastmod: "2026-09-01" },
+  { path: "photography-dublin/", lastmod: "2026-07-28" },
   { path: "webdesigner-dublin/", lastmod: "2026-07-28" },
-  { path: "google-ads-meta-ads-dublin/", lastmod: "2026-08-31" },
   {
     path: "social-media-content-creation-dublin/",
     lastmod: "2026-07-28",

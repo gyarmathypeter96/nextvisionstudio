@@ -20,7 +20,6 @@ interface Props {
 const { page } = Astro.props;
 const canonical = `https://www.nextvisionstudio.com/${page.slug}/`;
 const isWebDesignPage = page.slug === "webdesigner-dublin";
-const isAdsPage = page.slug === "google-ads-meta-ads-dublin";
 
 const landingSchema = {
   "@context": "https://schema.org",
@@ -106,7 +105,6 @@ const landingSchema = {
 <main class="landing-page">
   <LandingHero page={page} />
   {isWebDesignPage && <WebPricing />}
-  {isAdsPage && <WebPricing variant="ads" />}
   <LandingTrust line={page.trustLine} />
   {isWebDesignPage && <TradesHomeServices />}
   <LandingValue page={page} />

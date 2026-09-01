@@ -2,7 +2,7 @@
 const packages = [
   {
     name: "Content",
-    price: "Tailored plan",
+    price: "€800",
     line: "Keeps your brand active and professional online.",
     features: [
       "1 shoot day per month",
@@ -16,7 +16,7 @@ const packages = [
   },
   {
     name: "Growth",
-    price: "Tailored plan",
+    price: "€1,250",
     line: "More content, shaped around what your audience responds to.",
     popular: true,
     features: [
@@ -31,7 +31,7 @@ const packages = [
   },
   {
     name: "Full Engine",
-    price: "Tailored plan",
+    price: "€1,900",
     line: "Growth that does not depend on the algorithm’s mood.",
     features: [
       "2 shoot days per month",
@@ -40,7 +40,7 @@ const packages = [
       "Lead goals and monthly performance report",
       "Reach, leads and cost-per-lead tracking",
     ],
-    note: "Media spend is billed separately and agreed around the campaign goal.",
+    note: "Ad spend is billed separately. Minimum €300/month recommended.",
     honesty:
       "Paid distribution helps small accounts reach the right local people. No tricks — just targeting and testing.",
   },
@@ -49,9 +49,9 @@ const packages = [
 
 <section class="sf-pricing" id="packages" aria-labelledby="sf-pricing-title">
   <header class="sf-section-head">
-  <div class="sf-kicker">Tailored packages</div>
+    <div class="sf-kicker">Transparent pricing</div>
     <h2 id="sf-pricing-title">Simple Packages. Honest Outcomes.</h2>
-    <p>Choose the level of support that fits your next stage.</p>
+    <p>Founding client rates — locked for 12 months.</p>
   </header>
 
   <div class="sf-pricing__grid">
@@ -59,7 +59,7 @@ const packages = [
       <article class:list={["sf-price-card", { "sf-price-card--popular": item.popular }]}>
         {item.popular && <span class="sf-price-card__badge">Most popular</span>}
         <h3>{item.name}</h3>
-        <div class="sf-price-card__price">{item.price}</div>
+        <div class="sf-price-card__price">{item.price}<small>/month</small></div>
         <p class="sf-price-card__line">{item.line}</p>
         <ul>
           {item.features.map((feature) => <li>{feature}</li>)}
