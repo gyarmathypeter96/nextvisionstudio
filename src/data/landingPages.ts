@@ -215,14 +215,14 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Commercial Photographer Dublin | Product & Brand Photography",
+    metaTitle: "Commercial Photographer Dublin | Studio, Product & Brand Photography",
     metaDescription:
-      "Commercial photographer in Dublin for product, brand, corporate and event photography. Original images built for websites, campaigns and social media.",
+      "Commercial studio photographer in Dublin for product, brand, corporate and event photography. Original images for websites, campaigns and social media.",
     eyebrow: "Photography Dublin",
     headlineStart: "Commercial photography for",
     headlineAccent: "Dublin businesses",
     lead:
-      "Professional photography for Dublin businesses that need credible images for websites, campaigns, product launches, social media and sales material.",
+      "Commercial studio, product and brand photography for Dublin businesses that need credible images for websites, campaigns and sales material.",
     heroImage: {
       src: "/images/photography/event-photography-dublin.webp",
       alt: "Professional event photographer in Dublin by NextVision Studio",
@@ -260,6 +260,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { title: "Corporate photography", text: "Professional people, teams, workplaces and business moments." },
       { title: "Event photography", text: "Atmosphere, speakers, guests and key moments captured naturally." },
       { title: "Food & hospitality", text: "Menu, venue and campaign imagery designed to create appetite." },
+      { title: "Commercial studio photography", text: "Controlled lighting and detail-led images for products, campaigns and brand assets." },
       { title: "Automotive photography", text: "Sharp exterior, interior, detail and lifestyle photographs." },
     ],
     proofKicker: "Photography portfolio",
@@ -318,7 +319,7 @@ export const landingPages: Record<string, LandingPageData> = {
     formSubject: "New Photography Dublin landing page enquiry",
     serviceType: "Professional photography in Dublin",
     schemaDescription:
-      "Professional product, brand, corporate, event, hospitality and automotive photography for businesses in Dublin.",
+      "Commercial studio, product, brand, corporate, event, hospitality and automotive photography for businesses in Dublin.",
     faq: [
       {
         question: "What photography services do you offer in Dublin?",

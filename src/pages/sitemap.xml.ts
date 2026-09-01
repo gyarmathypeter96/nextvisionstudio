@@ -13,7 +13,7 @@ const routes = [
     path: "short-form-video-production-dublin/",
     lastmod: "2026-07-16",
   },
-  { path: "photography-dublin/", lastmod: "2026-07-28" },
+  { path: "photography-dublin/", lastmod: "2026-09-01" },
   { path: "webdesigner-dublin/", lastmod: "2026-07-28" },
   {
     path: "social-media-content-creation-dublin/",
