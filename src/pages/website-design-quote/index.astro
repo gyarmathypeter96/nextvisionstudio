@@ -119,6 +119,8 @@ import { CRM_FORM_ENDPOINT } from "../../config/forms";
     margin: 0 auto;
   }
 
+  .quote-hero > .quote-page__inner { transform: translateY(-36px); }
+
   .quote-page__narrow { width: min(100%, 900px); }
 
   .quote-hero {
@@ -325,6 +327,7 @@ import { CRM_FORM_ENDPOINT } from "../../config/forms";
 
   @media (max-width: 560px) {
     .quote-hero { min-height: 82svh; padding: 128px 16px 82px; }
+    .quote-hero > .quote-page__inner { transform: translateY(-18px); }
     .quote-hero h1 { font-size: clamp(46px, 13.2vw, 62px); }
     .quote-fit,
     .quote-value,
