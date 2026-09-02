@@ -59,7 +59,7 @@ const clients = [
 
 <section class="clients" id="clients" aria-labelledby="clients-title">
   <div class="clients__inner">
-    <h2 id="clients-title">Our clients</h2>
+    <h2 id="clients-title">Selected clients</h2>
 
     <ul class="clients__grid" aria-label="Selected NextVision Studio clients">
       {
@@ -90,7 +90,7 @@ const clients = [
     position: relative;
     width: 100%;
     margin: 0;
-    padding: 88px 0 98px;
+    padding: 58px 0 64px;
     overflow: hidden;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -105,12 +105,12 @@ const clients = [
   }
 
   .clients h2 {
-    margin: 0 0 62px;
+    margin: 0 0 34px;
     color: #ffffff;
-    font-size: clamp(38px, 5vw, 62px);
+    font-size: clamp(28px, 3.5vw, 42px);
     font-weight: 800;
     line-height: 0.95;
-    letter-spacing: -0.055em;
+    letter-spacing: 0;
     text-align: center;
   }
 
@@ -194,7 +194,7 @@ const clients = [
 
   @media (max-width: 600px) {
     .clients {
-      padding: 68px 0 78px;
+      padding: 44px 0 50px;
     }
 
     .clients__inner {
@@ -202,13 +202,13 @@ const clients = [
     }
 
     .clients h2 {
-      margin-bottom: 46px;
-      font-size: clamp(36px, 10.5vw, 44px);
+      margin-bottom: 30px;
+      font-size: 30px;
     }
 
     .clients__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px 22px;
+      gap: 22px 20px;
     }
 
     .clients__item {

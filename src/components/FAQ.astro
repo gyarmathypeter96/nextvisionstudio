@@ -6,14 +6,9 @@ const faqItems = [
       "NextVision Studio helps Dublin businesses with professional videography, photography, short-form social media content, social media management, Meta Ads, Google Ads and premium website design and development. Services can be booked individually or combined into one clear content and marketing system.",
   },
   {
-    question: "Do you provide videography services in Dublin?",
+    question: "What videography services do you provide in Dublin?",
     answer:
-      "Yes. NextVision Studio provides videography and video production in Dublin for businesses, brands, events, restaurants and local service companies. We plan, film and edit professional video content for websites, social media, advertising and promotional campaigns.",
-  },
-  {
-    question: "What types of business videos do you create?",
-    answer:
-      "We create brand videos, event coverage, promotional videos, interviews, testimonials, product and hospitality content, Reels, TikTok videos, YouTube Shorts and paid social advertising creatives. Each project is planned around the audience, platform and business goal.",
+      "We create brand films, event coverage, interviews, testimonials, product videos, Reels, TikTok videos, YouTube Shorts and paid social creative. Each project is planned around the audience, platform and business goal.",
   },
   {
     question: "Can you manage Meta Ads and Google Ads?",
@@ -51,9 +46,6 @@ const faqSchema = {
     <header class="faq__header">
       <div class="faq__kicker">Frequently asked questions</div>
       <h2 id="faq-title">Clear answers before you get in touch</h2>
-      <p>
-        The essentials about video production, paid campaigns and website design in Dublin.
-      </p>
     </header>
 
     <div class="faq__grid">
@@ -70,10 +62,7 @@ const faqSchema = {
     </div>
 
     <aside class="faq__cta" aria-labelledby="faq-cta-title">
-      <h3 id="faq-cta-title">Ready to make the next step clear?</h3>
-      <p>
-        Tell us the result you need. We will recommend the simplest useful approach.
-      </p>
+      <h3 id="faq-cta-title">Ready to start?</h3>
       <a class="faq__button" href="#contact-form" data-cta-placement="faq">Start your project</a>
     </aside>
   </div>
@@ -91,7 +80,7 @@ const faqSchema = {
     position: relative;
     width: 100%;
     margin: -1px 0 0;
-    padding: 112px 24px 120px;
+    padding: 96px 24px 104px;
     overflow: hidden;
     border-top: 1px solid rgba(255, 255, 255, 0.055);
     background:
@@ -108,7 +97,7 @@ const faqSchema = {
 
   .faq__header {
     width: min(100%, 860px);
-    margin: 0 auto 58px;
+    margin: 0 auto 44px;
     text-align: center;
   }
 
@@ -132,9 +121,9 @@ const faqSchema = {
   .faq__header h2 {
     margin: 0;
     color: #ffffff;
-    font-size: clamp(44px, 5.6vw, 74px);
+    font-size: clamp(40px, 5vw, 60px);
     font-weight: 900;
-    letter-spacing: -0.06em;
+    letter-spacing: 0;
     line-height: 0.96;
     text-wrap: balance;
   }

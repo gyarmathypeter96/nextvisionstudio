@@ -12,12 +12,6 @@ const stats = [
     formattedValue: "1,000,000+",
     suffix: "+",
   },
-  {
-    label: "Detailed client project stories",
-    target: 6,
-    formattedValue: "6",
-    suffix: "",
-  },
 ];
 ---
 
@@ -132,7 +126,7 @@ const stats = [
   .stats {
     width: 100%;
     margin: 0;
-    padding: 82px 24px 92px;
+    padding: 52px 24px 62px;
     overflow: hidden;
 
     background: #111111;
@@ -141,8 +135,8 @@ const stats = [
 
   .stats__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 56px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px;
 
     width: min(100%, 1180px);
     margin: 0 auto;
@@ -174,11 +168,11 @@ const stats = [
     margin: 0;
     color: #ffffff;
 
-    font-size: clamp(54px, 6.5vw, 92px);
+    font-size: clamp(48px, 5.6vw, 72px);
     font-variant-numeric: tabular-nums;
     font-weight: 500;
     line-height: 0.95;
-    letter-spacing: -0.055em;
+    letter-spacing: 0;
     white-space: nowrap;
   }
 
@@ -202,29 +196,29 @@ const stats = [
 
   @media (max-width: 767px) {
     .stats {
-      padding: 62px 18px 72px;
+      padding: 42px 16px 50px;
     }
 
     .stats__grid {
-      grid-template-columns: 1fr;
-      gap: 48px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .stats__number {
-      font-size: clamp(46px, 14vw, 58px);
-      letter-spacing: -0.05em;
+      font-size: clamp(27px, 7.5vw, 32px);
+      letter-spacing: 0;
     }
 
     .stats__item dt {
-      margin-top: 12px;
-      font-size: 15px;
+      margin-top: 10px;
+      font-size: 12px;
     }
   }
 
   @media (max-width: 380px) {
     .stats__number {
-      font-size: 43px;
-      letter-spacing: -0.045em;
+      font-size: 27px;
+      letter-spacing: 0;
     }
   }
 

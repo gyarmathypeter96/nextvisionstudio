@@ -5,24 +5,24 @@ const services = [
     number: "01",
     title: "Social Media Content Creation",
     lead:
-      "Professional videography, photography and short-form content for Dublin businesses that want to look active, credible and memorable online.",
+      "Video, photography and short-form content planned around real business goals.",
     points: [
       {
-        title: "Content strategy",
-        text: "Clear ideas built around your audience, services and monthly business goals.",
+        title: "Strategy",
+        text: "Monthly ideas built around your audience and offers.",
       },
       {
-        title: "Filming and photography",
-        text: "Brand videos, Reels, Shorts, product photography and campaign visuals.",
+        title: "Production",
+        text: "Video, photography and short-form content.",
       },
       {
-        title: "Editing and delivery",
-        text: "Hooks, captions, music and platform-ready formats prepared for publishing.",
+        title: "Delivery",
+        text: "Edited, captioned and ready to publish.",
       },
     ],
-    primary: "Plan your content",
-    secondary: "View our portfolio",
-    secondaryHref: "/#portfolio",
+    primary: "Start a content project",
+    secondary: "Explore social content",
+    secondaryHref: "/social-media-content-creation-dublin/",
     visual: "content",
   },
   {
@@ -30,24 +30,24 @@ const services = [
     number: "02",
     title: "Meta & Google Ads Management",
     lead:
-      "Paid advertising for businesses that need more than boosted posts. We connect the right message, creative and audience with a clear campaign goal.",
+      "Google and Meta campaigns built around qualified enquiries, not boosted-post metrics.",
     points: [
       {
-        title: "Campaign planning",
-        text: "Goals, offers, audiences and budget are defined before the campaign goes live.",
+        title: "Planning",
+        text: "Offer, audience and budget defined before launch.",
       },
       {
-        title: "Ad creative support",
-        text: "Video, photography and copy designed for Meta Ads and Google campaigns.",
+        title: "Creative",
+        text: "Video, images and copy shaped for the campaign.",
       },
       {
-        title: "Ongoing optimisation",
-        text: "Performance is reviewed and campaigns are refined using real results.",
+        title: "Optimisation",
+        text: "Campaigns improved using real performance data.",
       },
     ],
-    primary: "Discuss advertising",
-    secondary: "See our process",
-    secondaryHref: "#our-process",
+    primary: "Start an ads project",
+    secondary: "Explore paid ads",
+    secondaryHref: "/google-ads-meta-ads-dublin/",
     visual: "ads",
   },
   {
@@ -55,24 +55,24 @@ const services = [
     number: "03",
     title: "Website Design & Development",
     lead:
-      "Modern, fast and conversion-focused websites that explain your business clearly, work beautifully on mobile and make it easy for customers to contact you.",
+      "Fast, mobile-first websites that explain your offer and make it easy to enquire.",
     points: [
       {
-        title: "Premium responsive design",
-        text: "Clean pages shaped around your brand and built for every screen size.",
+        title: "Design",
+        text: "Clear responsive pages shaped around your brand.",
       },
       {
-        title: "Clear conversion paths",
-        text: "Simple navigation and strong calls to action guide visitors towards an enquiry.",
+        title: "Conversion",
+        text: "Obvious next steps for every visitor.",
       },
       {
-        title: "SEO-friendly foundations",
-        text: "Fast performance, semantic content and search-ready technical structure.",
+        title: "SEO",
+        text: "Fast, semantic and search-ready foundations.",
       },
     ],
-    primary: "Plan your website",
-    secondary: "Get a free quote",
-    secondaryHref: "/contact/#contact-form",
+    primary: "Start a website project",
+    secondary: "Explore web design",
+    secondaryHref: "/webdesigner-dublin/",
     visual: "web",
   },
   {
@@ -80,19 +80,19 @@ const services = [
     number: "04",
     title: "AI & Business Automation",
     lead:
-      "A practical lead conversion system that captures enquiries, responds quickly and gives your sales team the context they need to follow up.",
+      "Lead capture, fast response and CRM handover in one practical system.",
     points: [
       {
-        title: "Lead capture and CRM",
-        text: "Website forms and campaign leads arrive in one clear pipeline with their original source.",
+        title: "Capture",
+        text: "Forms and campaign leads in one clear pipeline.",
       },
       {
-        title: "Fast first response",
-        text: "Email, WhatsApp or an AI assistant can acknowledge the enquiry and collect the next useful detail.",
+        title: "Response",
+        text: "Email, WhatsApp or an AI assistant.",
       },
       {
-        title: "Sales handover",
-        text: "Follow-up tasks, preferred call times and conversation notes stay visible to the person closing the lead.",
+        title: "Handover",
+        text: "Call time and notes ready for sales.",
       },
     ],
     primary: "Fix your lead follow-up",
@@ -107,11 +107,7 @@ const services = [
   <div class="service-pillars__inner">
     <header class="service-pillars__intro">
       <div class="service-pillars__kicker">Four connected services</div>
-      <h2 id="service-pillars-title">The system around a stronger enquiry</h2>
-      <p>
-        Content earns attention, advertising brings the right people closer and a
-        strong website turns interest into enquiries.
-      </p>
+      <h2 id="service-pillars-title">Choose the support you need</h2>
     </header>
 
     <div class="service-pillars__list">
@@ -233,7 +229,7 @@ const services = [
 
   .service-pillars {
     position: relative;
-    padding: 118px 24px 126px;
+    padding: 96px 24px 104px;
     overflow: hidden;
     background:
       radial-gradient(circle at 8% 18%, rgba(155, 210, 255, 0.07), transparent 23%),
@@ -249,7 +245,7 @@ const services = [
 
   .service-pillars__intro {
     width: min(100%, 900px);
-    margin: 0 auto 70px;
+    margin: 0 auto 48px;
     text-align: center;
   }
 
@@ -271,9 +267,9 @@ const services = [
   .service-pillars__intro h2 {
     margin: 0;
     color: #ffffff;
-    font-size: clamp(46px, 7vw, 82px);
+    font-size: clamp(42px, 5.8vw, 64px);
     font-weight: 950;
-    letter-spacing: -0.07em;
+    letter-spacing: 0;
     line-height: 0.94;
     text-wrap: balance;
   }
@@ -294,7 +290,7 @@ const services = [
   .service-pillar {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
-    padding: 92px 0;
+    padding: 72px 0;
     align-items: center;
     gap: clamp(48px, 7vw, 86px);
     border-bottom: 1px solid rgba(180, 220, 255, 0.08);
@@ -316,15 +312,15 @@ const services = [
   .service-pillar h3 {
     margin: 0;
     color: #ffffff;
-    font-size: clamp(42px, 5.5vw, 72px);
+    font-size: clamp(40px, 4.8vw, 60px);
     font-weight: 950;
-    letter-spacing: -0.065em;
+    letter-spacing: 0;
     line-height: 0.93;
     text-wrap: balance;
   }
 
   .service-pillar__lead {
-    margin: 26px 0 0;
+    margin: 20px 0 0;
     color: rgba(255, 255, 255, 0.72);
     font-size: clamp(16px, 1.8vw, 19px);
     font-weight: 520;
@@ -333,16 +329,16 @@ const services = [
 
   .service-pillar__points {
     display: grid;
-    margin: 32px 0 0;
+    margin: 24px 0 0;
     padding: 0;
-    gap: 12px;
+    gap: 9px;
     list-style: none;
   }
 
   .service-pillar__points li {
     display: grid;
     grid-template-columns: 34px 1fr;
-    padding: 18px 19px;
+    padding: 14px 16px;
     align-items: start;
     gap: 12px;
     border: 1px solid rgba(180, 220, 255, 0.11);
@@ -393,7 +389,7 @@ const services = [
 
   .service-pillar__actions {
     display: flex;
-    margin-top: 30px;
+    margin-top: 24px;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
@@ -452,7 +448,7 @@ const services = [
     position: relative;
     display: grid;
     min-width: 0;
-    min-height: 540px;
+    min-height: 470px;
     place-items: center;
   }
 
@@ -787,30 +783,30 @@ const services = [
     }
 
     .service-pillar__visual {
-      min-height: 500px;
+      min-height: 430px;
     }
   }
 
   @media (max-width: 600px) {
     .service-pillars {
-      padding: 84px 16px 90px;
+      padding: 72px 16px 78px;
     }
 
     .service-pillars__intro {
-      margin-bottom: 46px;
+      margin-bottom: 38px;
     }
 
     .service-pillars__intro h2 {
-      font-size: clamp(40px, 13vw, 57px);
+      font-size: clamp(38px, 11vw, 48px);
     }
 
     .service-pillar {
-      padding: 65px 0;
-      gap: 42px;
+      padding: 52px 0;
+      gap: 30px;
     }
 
     .service-pillar h3 {
-      font-size: clamp(37px, 12vw, 51px);
+      font-size: clamp(35px, 10.5vw, 44px);
     }
 
     .service-pillar__actions {
@@ -827,23 +823,23 @@ const services = [
     }
 
     .service-pillar__visual {
-      min-height: 455px;
+      min-height: 370px;
     }
 
     .content-device {
-      width: min(265px, 70vw);
+      width: min(210px, 58vw);
     }
 
     .content-photo {
-      width: 112px;
-      height: 148px;
+      width: 88px;
+      height: 118px;
     }
 
-    .content-photo--one { left: -56px; }
-    .content-photo--two { right: -56px; }
+    .content-photo--one { left: -44px; }
+    .content-photo--two { right: -44px; }
 
     .content-tile strong {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     .ads-dashboard,

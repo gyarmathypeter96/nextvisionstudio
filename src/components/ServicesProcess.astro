@@ -2,33 +2,23 @@
 const steps = [
   {
     number: "01",
-    title: "Discover",
-    text: "We learn about your business, audience, offer and the result you want to achieve.",
-    tags: ["Goals", "Audience", "Priorities"],
+    title: "Discover and plan",
+    text: "We define the goal, audience, offer and clearest route forward.",
   },
   {
     number: "02",
-    title: "Plan",
-    text: "We shape the content plan, campaign structure or website journey before production begins.",
-    tags: ["Clear scope", "Creative direction", "Timeline"],
+    title: "Create",
+    text: "We film, photograph, design, write and build the assets your project needs.",
   },
   {
     number: "03",
-    title: "Create",
-    text: "We film, photograph, design, write and build the assets your project needs.",
-    tags: ["Production", "Design", "Development"],
+    title: "Launch",
+    text: "The work goes live in the right formats, pages and channels.",
   },
   {
     number: "04",
-    title: "Launch",
-    text: "Your content, advertising campaign or website goes live in the right formats and channels.",
-    tags: ["Delivery", "Publishing", "Campaign setup"],
-  },
-  {
-    number: "05",
     title: "Improve",
-    text: "We review performance, learn from real results and refine the next step for stronger growth.",
-    tags: ["Measure", "Optimise", "Scale"],
+    text: "We review real results and refine the next useful step.",
   },
 ];
 ---
@@ -37,10 +27,9 @@ const steps = [
   <div class="services-process__inner">
     <header class="services-process__header">
       <div class="services-process__kicker">Our process</div>
-      <h2 id="process-title">A Clear Path From Idea to Growth</h2>
+      <h2 id="process-title">A clear path from idea to growth</h2>
       <p>
-        The same simple process keeps content, advertising and website projects
-        focused, organised and easy to understand.
+        Four steps keep every project focused and easy to understand.
       </p>
     </header>
 
@@ -63,9 +52,6 @@ const steps = [
               <div class="process-step__number">{step.number}</div>
               <h3>{step.title}</h3>
               <p>{step.text}</p>
-              <ul aria-label={`${step.title} includes`}>
-                {step.tags.map((tag) => <li>{tag}</li>)}
-              </ul>
             </div>
           </article>
         ))
@@ -73,11 +59,9 @@ const steps = [
     </div>
 
     <aside class="services-process__cta" aria-label="Start a project with NextVision Studio">
-      <div class="services-process__cta-label">Ready when you are</div>
-      <h3>Let’s Build the Right System for Your Business</h3>
+      <h3>Ready to improve something?</h3>
       <p>
-        Tell us what you want to improve and we’ll recommend the clearest mix of
-        content, advertising and web support.
+        Tell us the problem. We will recommend the simplest useful next step.
       </p>
       <a href="/contact/#contact-form" data-cta-placement="services-process"><span>Start your project</span></a>
     </aside>
@@ -193,9 +177,9 @@ const steps = [
   .services-process__header h2 {
     margin: 0;
     color: #ffffff;
-    font-size: clamp(46px, 7vw, 82px);
+    font-size: clamp(42px, 5.8vw, 64px);
     font-weight: 950;
-    letter-spacing: -0.07em;
+    letter-spacing: 0;
     line-height: 0.94;
     text-wrap: balance;
   }
@@ -245,7 +229,7 @@ const steps = [
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 250px;
+    min-height: 210px;
     align-items: center;
   }
 
@@ -295,7 +279,7 @@ const steps = [
 
   .process-step__card {
     position: relative;
-    padding: 27px;
+    padding: 24px;
     overflow: hidden;
     border: 1px solid rgba(180, 220, 255, 0.13);
     border-radius: 25px;
@@ -339,7 +323,7 @@ const steps = [
     color: #ffffff;
     font-size: clamp(29px, 3.4vw, 42px);
     font-weight: 900;
-    letter-spacing: -0.055em;
+    letter-spacing: 0;
     line-height: 0.95;
     text-transform: uppercase;
   }
@@ -372,7 +356,7 @@ const steps = [
 
   .services-process__cta {
     width: min(100%, 900px);
-    margin: 86px auto 0;
+    margin: 68px auto 0;
     padding: clamp(33px, 5vw, 52px);
     overflow: hidden;
     border: 1px solid rgba(180, 220, 255, 0.18);
@@ -391,9 +375,9 @@ const steps = [
     width: min(100%, 760px);
     margin: 0 auto;
     color: #ffffff;
-    font-size: clamp(36px, 5.5vw, 65px);
+    font-size: clamp(34px, 4.8vw, 54px);
     font-weight: 950;
-    letter-spacing: -0.07em;
+    letter-spacing: 0;
     line-height: 0.95;
     text-wrap: balance;
   }
@@ -497,15 +481,15 @@ const steps = [
 
   @media (max-width: 600px) {
     .services-process {
-      padding: 88px 15px 96px;
+      padding: 76px 15px 84px;
     }
 
     .services-process__header {
-      margin-bottom: 52px;
+      margin-bottom: 42px;
     }
 
     .services-process__header h2 {
-      font-size: clamp(40px, 13vw, 57px);
+      font-size: clamp(38px, 11vw, 48px);
     }
 
     .process-step {
@@ -518,7 +502,7 @@ const steps = [
     }
 
     .services-process__cta {
-      margin-top: 58px;
+      margin-top: 44px;
       padding: 34px 20px 29px;
       border-radius: 25px;
     }
