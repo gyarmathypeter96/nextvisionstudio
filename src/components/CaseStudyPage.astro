@@ -7,6 +7,14 @@ interface LinkItem {
   external?: boolean;
 }
 
+interface SocialVideo {
+  title: string;
+  platform: "TikTok" | "Instagram";
+  href: string;
+  image: string;
+  alt: string;
+}
+
 interface Props {
   client: string;
   title: string;
@@ -18,6 +26,7 @@ interface Props {
   heroAlt: string;
   videoId?: string;
   videoTitle?: string;
+  socialVideos?: SocialVideo[];
   challenge: string;
   deliverables: string[];
   production: string[];
@@ -32,6 +41,7 @@ const canonical = `https://www.nextvisionstudio.com${Astro.url.pathname}`;
 const videoUrl = props.videoId
   ? `https://www.youtube.com/watch?v=${props.videoId}`
   : undefined;
+const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href;
 
 const caseStudySchema = {
   "@context": "https://schema.org",
@@ -93,8 +103,8 @@ const caseStudySchema = {
         </dl>
 
         <div class="case-study-actions">
-          {videoUrl && (
-            <a class="case-study-button case-study-button--primary" href={videoUrl} target="_blank" rel="noreferrer">
+          {primaryVideoUrl && (
+            <a class="case-study-button case-study-button--primary" href={primaryVideoUrl} target="_blank" rel="noreferrer">
               Watch the project
             </a>
           )}
@@ -158,6 +168,28 @@ const caseStudySchema = {
       </section>
     )}
 
+    {props.socialVideos && props.socialVideos.length > 0 && (
+      <section class="case-study-social" aria-labelledby="case-study-social-title">
+        <div class="case-study-video__heading">
+          <p class="case-study-kicker">Watch the work</p>
+          <h2 id="case-study-social-title">Selected social videos</h2>
+        </div>
+        <div class="case-study-social__grid">
+          {props.socialVideos.map((video) => (
+            <a href={video.href} target="_blank" rel="noreferrer" aria-label={`Watch ${video.title} on ${video.platform}`}>
+              <img src={video.image} alt={video.alt} width="640" height="1138" loading="lazy" decoding="async" />
+              <span class="case-study-social__shade" aria-hidden="true"></span>
+              <span class="case-study-social__copy">
+                <small>{video.platform}</small>
+                <strong>{video.title}</strong>
+                <span>Watch the video</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     <section class="case-study-section case-study-section--result">
       <div class="case-study-section__heading">
         <p class="case-study-kicker">The result</p>
@@ -201,6 +233,7 @@ const caseStudySchema = {
   .case-study-hero,
   .case-study-section,
   .case-study-video,
+  .case-study-social,
   .case-study-next {
     width: min(100% - 48px, 1180px);
     margin: 0 auto;
@@ -306,7 +339,8 @@ const caseStudySchema = {
   }
 
   .case-study-section,
-  .case-study-video { padding: 108px 0; border-top: 1px solid rgba(185, 223, 255, .12); }
+  .case-study-video,
+  .case-study-social { padding: 108px 0; border-top: 1px solid rgba(185, 223, 255, .12); }
 
   .case-study-section--split,
   .case-study-section--result {
@@ -331,6 +365,39 @@ const caseStudySchema = {
   .case-study-video__frame { aspect-ratio: 16 / 9; background: #08090a; }
   .case-study-video__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 
+  .case-study-social__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .case-study-social__grid > a {
+    position: relative;
+    display: block;
+    aspect-ratio: 9 / 14;
+    overflow: hidden;
+    border: 1px solid rgba(185, 223, 255, .18);
+    border-radius: 6px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .case-study-social__grid img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+
+  .case-study-social__grid > a:hover img { transform: scale(1.035); }
+  .case-study-social__shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 7, 8, .98), rgba(5, 7, 8, .08) 72%); }
+  .case-study-social__copy { position: absolute; right: 22px; bottom: 22px; left: 22px; display: grid; gap: 8px; }
+  .case-study-social__copy small { color: #b9dfff; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+  .case-study-social__copy strong { font-size: 22px; line-height: 1.12; }
+  .case-study-social__copy > span { color: rgba(255, 255, 255, .7); font-size: 13px; font-weight: 800; }
+  .case-study-social__grid > a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+
   .case-study-feedback { margin: 42px 0 0; padding: 26px 0 0 25px; border-left: 2px solid #b9dfff; }
   .case-study-feedback__label { margin: 0 0 12px; color: #b9dfff; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
   .case-study-feedback > p:last-child { margin: 0; color: #ffffff; font-size: 20px; line-height: 1.55; }
@@ -346,16 +413,28 @@ const caseStudySchema = {
     .case-study-hero__media { order: -1; }
     .case-study-section--split, .case-study-section--result, .case-study-next { grid-template-columns: 1fr; gap: 32px; }
     .case-study-list-grid { gap: 30px; }
+    .case-study-social__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 560px) {
-    .case-study-hero, .case-study-section, .case-study-video, .case-study-next { width: min(100% - 32px, 1180px); }
+    .case-study-hero, .case-study-section, .case-study-video, .case-study-social, .case-study-next { width: min(100% - 32px, 1180px); }
     .case-study-hero { padding: 48px 0 64px; }
     .case-study-hero h1 { font-size: 42px; }
     .case-study-hero__intro { font-size: 16px; }
     .case-study-facts { grid-template-columns: 1fr; }
-    .case-study-section, .case-study-video { padding: 72px 0; }
+    .case-study-section, .case-study-video, .case-study-social { padding: 72px 0; }
     .case-study-list-grid { grid-template-columns: 1fr; }
+    .case-study-social__grid {
+      display: flex;
+      gap: 12px;
+      margin-right: -16px;
+      padding-right: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .case-study-social__grid::-webkit-scrollbar { display: none; }
+    .case-study-social__grid > a { flex: 0 0 min(78vw, 290px); scroll-snap-align: start; }
     .case-study-next { padding: 70px 0 88px; }
   }
 </style>

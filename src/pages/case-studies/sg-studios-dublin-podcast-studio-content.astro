@@ -11,8 +11,15 @@ import CaseStudyPage from "../../components/CaseStudyPage.astro";
   service="Promotional content, studio photography and YouTube production"
   heroImage="/images/portfolio/fLzjvPVHzAc.webp"
   heroAlt="Podcast video content produced at SG Studios Dublin"
-  videoId="fLzjvPVHzAc"
-  videoTitle="Podcast video produced at SG Studios Dublin"
+  socialVideos={[
+    {
+      title: "VentSolve content filmed at SG Studios",
+      platform: "TikTok",
+      href: "https://www.tiktok.com/@vent.solve/video/7640093880255319318",
+      image: "/images/portfolio/fLzjvPVHzAc.webp",
+      alt: "VentSolve social video filmed at SG Studios Dublin",
+    },
+  ]}
   challenge="SG Studios needed promotional work that showed creators and businesses what the space made possible: a polished setting for podcast recording, video production and brand content. The collaboration began while the studio was growing, so the content needed to feel confident, useful and native to the platforms where potential clients would discover it."
   deliverables={[
     "Instagram promotional content for the studio",
