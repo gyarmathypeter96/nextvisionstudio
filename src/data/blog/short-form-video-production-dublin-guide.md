@@ -1,5 +1,6 @@
 ---
 title: "Short-Form Video Production in Dublin: What Actually Brings Customers?"
+metaTitle: "Short-Form Video Production Dublin Guide | NextVision Studio"
 description: "A practical guide for Dublin businesses on Reels, TikTok, filming, distribution, costs and measuring enquiries — not just views."
 pubDate: 2026-07-16
 updatedDate: 2026-07-16

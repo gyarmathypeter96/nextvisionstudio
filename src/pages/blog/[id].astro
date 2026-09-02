@@ -50,7 +50,7 @@ const articleSchema = {
 ---
 
 <BaseLayout
-  title={post.data.title + " | NextVision Studio"}
+  title={post.data.metaTitle ?? post.data.title + " | NextVision Studio"}
   description={post.data.description}
   canonical={canonical}
   ogImage={post.data.heroImage}

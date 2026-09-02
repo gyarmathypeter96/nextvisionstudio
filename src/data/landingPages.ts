@@ -170,6 +170,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "Event videographer Dublin", href: "/event-videographer-dublin/" },
       { label: "Short-form video production", href: "/short-form-video-production-dublin/" },
       { label: "Videography cost guide", href: "/how-much-does-a-videographer-cost-in-dublin/" },
+      { label: "Video production planning guide", href: "/blog/business-video-production-planning-dublin/" },
     ],
     formTitle: "What should video help your business do?",
     formText:
@@ -311,6 +312,8 @@ export const landingPages: Record<string, LandingPageData> = {
     relatedLinks: [
       { label: "View the photography work", href: "/photography-dublin/#landing-work" },
       { label: "Combine photography with video", href: "/videography-dublin/" },
+      { label: "Commercial photography planning guide", href: "/blog/commercial-photography-shoot-planning-dublin/" },
+      { label: "Product photography shot list", href: "/blog/product-photography-shot-list-dublin/" },
       { label: "Explore website design", href: "/webdesigner-dublin/" },
     ],
     formTitle: "Tell us what you need photographed.",

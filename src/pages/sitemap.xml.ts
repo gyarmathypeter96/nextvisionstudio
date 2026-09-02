@@ -30,10 +30,22 @@ const routes = [
     path: "how-much-does-a-videographer-cost-in-dublin/",
     lastmod: "2026-07-15",
   },
-  { path: "blog/", lastmod: "2026-07-16" },
+  { path: "blog/", lastmod: "2026-09-02" },
   {
     path: "blog/short-form-video-production-dublin-guide/",
     lastmod: "2026-07-16",
+  },
+  {
+    path: "blog/commercial-photography-shoot-planning-dublin/",
+    lastmod: "2026-09-02",
+  },
+  {
+    path: "blog/product-photography-shot-list-dublin/",
+    lastmod: "2026-09-02",
+  },
+  {
+    path: "blog/business-video-production-planning-dublin/",
+    lastmod: "2026-09-02",
   },
   { path: "privacy-policy/", lastmod: "2026-07-16" },
   { path: "image-licensing/", lastmod: "2026-07-16" },
