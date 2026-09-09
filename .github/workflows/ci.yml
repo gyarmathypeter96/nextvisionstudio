@@ -19,4 +19,6 @@ jobs:
           node-version: 22.23.2
           cache: npm
       - run: npm ci
+      - name: Verify release metadata
+        run: node -e "const m=require('./release-manifest.json'); if(!m.production?.source_commit || !m.build?.lockfiles?.length) process.exit(1)"
       - run: npm run build
