@@ -1,12 +1,21 @@
 ---
-const locations = [
-  { name: "Washington, DC", x: 252, y: 190, labelX: 92, labelY: 164 },
-  { name: "Dublin", x: 573, y: 126, labelX: 500, labelY: 92 },
-  { name: "Alicante", x: 594, y: 194, labelX: 514, labelY: 238 },
-  { name: "Győr", x: 665, y: 152, labelX: 682, labelY: 127 },
-  { name: "Budapest", x: 681, y: 168, labelX: 700, labelY: 191 },
-  { name: "Cyprus", x: 744, y: 225, labelX: 765, labelY: 252 },
+// Coordinates use city centres. "Cyprus" is represented by Nicosia, the capital.
+// The map uses an equirectangular Natural Earth 1:110m land outline.
+const bounds = { west: -180, east: 180, north: 83.64513, south: -90 };
+const placeData = [
+  { name: "Washington, DC", latitude: 38.8951118, longitude: -77.0363658, key: "washington" },
+  { name: "Dublin", latitude: 53.333056, longitude: -6.248889, key: "dublin" },
+  { name: "Alicante", latitude: 38.34517, longitude: -0.48149, key: "alicante" },
+  { name: "Győr", latitude: 47.666667, longitude: 17.65, key: "gyor" },
+  { name: "Budapest", latitude: 47.49835, longitude: 19.04045, key: "budapest" },
+  { name: "Cyprus", latitude: 35.17283752, longitude: 33.35396865, key: "cyprus" },
 ];
+
+const locations = placeData.map((location) => ({
+  ...location,
+  x: ((location.longitude - bounds.west) / (bounds.east - bounds.west)) * 100,
+  y: ((bounds.north - location.latitude) / (bounds.north - bounds.south)) * 100,
+}));
 ---
 
 <section id="locations" class="locations" aria-labelledby="locations-title">
@@ -15,44 +24,50 @@ const locations = [
     <h2 id="locations-title">Places we work.<br />Stories we bring together.</h2>
   </header>
 
-  <div class="locations__map" role="img" aria-label="NextVision Studio production locations in Washington DC, Dublin, Alicante, Győr, Budapest and Cyprus">
-    <svg viewBox="0 0 1200 440" aria-hidden="true">
-      <g class="locations__grid"><path d="M0 110H1200M0 220H1200M0 330H1200M150 0V440M300 0V440M450 0V440M600 0V440M750 0V440M900 0V440M1050 0V440" /></g>
-      <g class="locations__land">
-        <path d="M105 104l65-35 83 14 62 42-5 45-44 13-20 52-42 8-31 56-36-30 13-47-29-36 18-40z" />
-        <path d="M333 80l60-25 62 14 35 34 50 2 22 24-11 31-40 4-33 24-30-1-28 25-54-9-26-40 19-28 14-45z" />
-        <path d="M573 105l35-12 30 21-9 32-23 10-22-17z" />
-        <path d="M602 148l71-12 62 25 45 1 37 35-11 43-38 9-43-11-31 15-50-21-22-41z" />
-        <path d="M656 240l65 4 46 41-25 74-64-9-39-57z" />
-        <path d="M770 113l105-17 117 41 82 8 79 48-14 51-82 8-58-22-64 31-69-10-45-48-42-11z" />
-        <path d="M1018 302l61 14 35 38-28 39-57-18-20-38z" />
-      </g>
+  <figure class="locations__map" aria-label="World map showing NextVision Studio production locations">
+    <img src="/images/maps/world-land.svg" width="1600" height="773" alt="" aria-hidden="true" loading="lazy" />
+    <ul class="locations__pins" aria-label="Production locations">
       {locations.map((location) => (
-        <g class="locations__pin">
-          <path class="locations__connector" d={`M${location.x} ${location.y} L${location.labelX} ${location.labelY}`} />
-          <circle cx={location.x} cy={location.y} r="9" />
-          <circle class="locations__pin-core" cx={location.x} cy={location.y} r="3" />
-          <text x={location.labelX} y={location.labelY}>{location.name}</text>
-        </g>
+        <li class={`locations__pin locations__pin--${location.key}`} style={`--x: ${location.x}%; --y: ${location.y}%;`}>
+          <i aria-hidden="true"></i>
+          <span>{location.name}</span>
+        </li>
       ))}
-    </svg>
-  </div>
+    </ul>
+  </figure>
+
+  <ul class="locations__legend" aria-label="Production locations list">
+    {locations.map((location) => <li>{location.name}</li>)}
+  </ul>
 </section>
 
 <style>
   .locations, .locations * { box-sizing: border-box; }
-  .locations { position: relative; padding: clamp(86px, 12vw, 154px) 24px clamp(80px, 11vw, 138px); overflow: hidden; background: #080711; color: #fff; }
-  .locations::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 48% 45%, rgba(58,132,255,.16), transparent 29%), radial-gradient(circle at 10% 8%, rgba(116,76,255,.11), transparent 28%); }
+  .locations { position: relative; padding: clamp(86px, 12vw, 154px) 24px clamp(80px, 11vw, 138px); overflow: hidden; background: #050505; color: #fff; }
+  .locations::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 48% 48%, rgba(24,132,255,.14), transparent 34%); }
   .locations__header { position: relative; width: min(100%, 920px); margin: 0 auto clamp(38px, 5vw, 70px); text-align: center; }
-  .locations__header p { margin: 0 0 20px; color: #8fc2ff; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+  .locations__header p { margin: 0 0 20px; color: #178aff; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
   .locations h2 { margin: 0; font-size: clamp(42px, 6vw, 82px); font-weight: 750; line-height: .94; letter-spacing: -.065em; text-wrap: balance; }
-  .locations__map { position: relative; width: min(100%, 1240px); margin: 0 auto; }
-  .locations svg { display: block; width: 100%; height: auto; overflow: visible; }
-  .locations__grid path { fill: none; stroke: rgba(255,255,255,.045); stroke-width: 1; }
-  .locations__land path { fill: rgba(230,238,255,.92); stroke: rgba(170,191,230,.42); stroke-width: 1; }
-  .locations__connector { fill: none; stroke: rgba(156,207,255,.48); stroke-width: 1; stroke-dasharray: 3 4; }
-  .locations__pin > circle:first-of-type { fill: #1586ff; filter: drop-shadow(0 0 9px rgba(50,157,255,.8)); }
-  .locations__pin-core { fill: #fff; }
-  .locations text { fill: rgba(255,255,255,.9); font-family: Inter, Arial, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
-  @media (max-width: 640px) { .locations { padding: 82px 14px 82px; } .locations__map { width: 155%; margin-left: -27.5%; } .locations text { font-size: 13px; } }
+  .locations__map { position: relative; width: min(100%, 1340px); margin: 0 auto; }
+  .locations__map > img { display: block; width: 100%; height: auto; opacity: .96; filter: invert(1) drop-shadow(0 24px 40px rgba(0,0,0,.4)); }
+  .locations__pins { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+  .locations__pin { position: absolute; top: var(--y); left: var(--x); width: 0; height: 0; }
+  .locations__pin i { position: absolute; z-index: 1; width: 15px; height: 15px; border: 4px solid #fff; border-radius: 50%; background: #178aff; box-shadow: 0 0 0 5px rgba(23,138,255,.22), 0 0 22px rgba(23,138,255,.9); transform: translate(-50%, -50%); }
+  .locations__pin span { position: absolute; z-index: 2; color: #fff; font-size: 15px; font-weight: 750; line-height: 1; letter-spacing: -.02em; white-space: nowrap; text-shadow: 0 1px 8px #000; }
+  .locations__pin--washington span { transform: translate(-111%, -18px); }
+  .locations__pin--dublin span { transform: translate(-62%, -29px); }
+  .locations__pin--alicante span { transform: translate(-88%, 19px); }
+  .locations__pin--gyor span { transform: translate(18px, -31px); }
+  .locations__pin--budapest span { transform: translate(20px, 12px); }
+  .locations__pin--cyprus span { transform: translate(20px, 18px); }
+  .locations__legend { display: none; }
+  @media (max-width: 700px) {
+    .locations { padding: 82px 17px; }
+    .locations__map { width: 146%; margin-left: -23%; }
+    .locations__pin span { display: none; }
+    .locations__pin i { width: 11px; height: 11px; border-width: 3px; }
+    .locations__legend { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; width: min(100%, 460px); margin: 34px auto 0; padding: 0; list-style: none; color: rgba(255,255,255,.82); font-size: 14px; font-weight: 650; }
+    .locations__legend li { display: flex; align-items: center; gap: 8px; }
+    .locations__legend li::before { content: ""; width: 8px; height: 8px; flex: 0 0 auto; border: 2px solid #fff; border-radius: 50%; background: #178aff; box-shadow: 0 0 9px rgba(23,138,255,.8); }
+  }
 </style>
