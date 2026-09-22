@@ -37,21 +37,28 @@
       }
     };
 
-    let attribution = readStoredObject(sessionStorage, storageKey);
+    let attribution: Record<string, string> = {};
+    const captureSessionAttribution = () => {
+      if (!analyticsConsentGranted()) return {};
 
-    trackedKeys.forEach((key) => {
-      const value = query.get(key);
-      if (value) attribution[key] = value.slice(0, 300);
-    });
+      const storedAttribution = readStoredObject(sessionStorage, storageKey);
+      trackedKeys.forEach((key) => {
+        const value = query.get(key);
+        if (value) storedAttribution[key] = value.slice(0, 300);
+      });
 
-    if (!attribution.landing_page) attribution.landing_page = window.location.href;
-    if (!attribution.initial_referrer && document.referrer) {
-      attribution.initial_referrer = document.referrer;
-    }
+      if (!storedAttribution.landing_page) storedAttribution.landing_page = window.location.href;
+      if (!storedAttribution.initial_referrer && document.referrer) {
+        storedAttribution.initial_referrer = document.referrer;
+      }
 
-    try {
-      sessionStorage.setItem(storageKey, JSON.stringify(attribution));
-    } catch (_) {}
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify(storedAttribution));
+      } catch (_) {}
+      return storedAttribution;
+    };
+
+    attribution = captureSessionAttribution();
 
     const captureFirstTouchAttribution = () => {
       if (!analyticsConsentGranted()) return {};
@@ -88,6 +95,7 @@
         if (formStarted) return;
         formStarted = true;
         startedAt = Math.floor(Date.now() / 1000);
+        attribution = captureSessionAttribution();
         firstTouchAttribution = captureFirstTouchAttribution();
         track("lead_form_start", {
           form_id: formId,
