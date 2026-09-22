@@ -1,416 +1,52 @@
 ---
-import { WHATSAPP_URL } from "../config/contact";
-
 const videoSchema = {
   "@context": "https://schema.org",
   "@type": "VideoObject",
   name: "NextVision Studio Showreel | Video Production Dublin",
-  description:
-    "A selection of commercial videography, branded content and video production work created by NextVision Studio in Dublin.",
-  thumbnailUrl:
-    "https://www.nextvisionstudio.com/images/showreel/showreel-2025.webp",
-  uploadDate: "2025-08-10",
-  duration: "PT44S",
+  description: "A selection of NextVision Studio video production work from Dublin and beyond.",
+  thumbnailUrl: "https://www.nextvisionstudio.com/images/showreel/showreel-2025.webp",
   contentUrl: "https://www.nextvisionstudio.com/videos/showreel-2025.mp4",
+  uploadDate: "2025-01-01",
 };
 ---
 
 <section class="showreel" id="showreel" aria-labelledby="showreel-title">
-  <header class="showreel__header">
-    <div class="showreel__label">Selected video production work</div>
-    <h2 id="showreel-title">Watch our showreel</h2>
-  </header>
-
-  <div class="showreel__frame">
-    <div class="showreel__video-wrap">
-      <video
-        controls
-        playsinline
-        preload="none"
-        poster="/images/showreel/showreel-2025.webp"
-        width="1280"
-        height="720"
-        title="NextVision Studio Showreel"
-        data-showreel-video
-        data-src="/videos/showreel-2025.mp4"
-      >
-        Your browser does not support the video tag.
+  <div class="showreel__inner">
+    <div class="showreel__film">
+      <video controls playsinline preload="metadata" poster="/images/showreel/showreel-2025.webp" aria-label="Play the NextVision Studio showreel">
+        <source src="/videos/showreel-2025.mp4" type="video/mp4" />
+        Your browser does not support HTML video.
       </video>
-      <button
-        class="showreel__play"
-        type="button"
-        aria-label="Play the NextVision Studio showreel"
-        data-showreel-play
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m9 7 8 5-8 5Z"></path>
-        </svg>
-        <span>Play showreel</span>
-      </button>
+    </div>
+
+    <div class="showreel__copy">
+      <p class="showreel__eyebrow">A quick look at the work</p>
+      <h2 id="showreel-title">More formats.<br />One clear standard.</h2>
+      <p>
+        From one defining film to a full campaign of cutdowns, we bring the thinking,
+        production and finish together—so your content is ready to earn attention everywhere it lands.
+      </p>
+      <a href="#contact-form" data-cta-placement="showreel">Start a conversation <span aria-hidden="true">↗</span></a>
     </div>
   </div>
-
-  <aside class="showreel__whatsapp" aria-labelledby="whatsapp-cta-title">
-    <div>
-      <h3 id="whatsapp-cta-title">Prefer WhatsApp?</h3>
-    </div>
-
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Start a WhatsApp conversation with NextVision Studio"
-    >
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path
-          fill="currentColor"
-          d="M16.04 3.2A12.75 12.75 0 0 0 5.2 22.65L3.4 29.2l6.7-1.76A12.8 12.8 0 1 0 16.04 3.2Zm0 23.42c-2.06 0-4.08-.56-5.83-1.62l-.42-.25-3.97 1.04 1.06-3.86-.27-.43a10.65 10.65 0 1 1 9.43 5.12Zm5.84-7.98c-.32-.16-1.9-.94-2.2-1.05-.29-.1-.5-.16-.71.16-.21.32-.82 1.05-1 1.26-.19.22-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59a9.62 9.62 0 0 1-1.78-2.21c-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.35-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.07 1.3 3.28c.16.21 2.24 3.42 5.42 4.8.76.32 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.9-.78 2.16-1.53.27-.75.27-1.4.19-1.53-.08-.14-.29-.22-.61-.38Z"
-        ></path>
-      </svg>
-      <span>Message us on WhatsApp</span>
-    </a>
-  </aside>
-
-  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
 </section>
 
-<script>
-  const setupShowreels = () => {
-    document.querySelectorAll<HTMLElement>(".showreel").forEach((section) => {
-      if (section.dataset.ready === "true") return;
-      section.dataset.ready = "true";
-
-      const video = section.querySelector<HTMLVideoElement>("[data-showreel-video]");
-      const playButton = section.querySelector<HTMLButtonElement>("[data-showreel-play]");
-      if (!video || !playButton) return;
-
-      const loadVideo = () => {
-        if (video.currentSrc || !video.dataset.src) return;
-        video.src = video.dataset.src;
-        video.load();
-      };
-
-      playButton.addEventListener("click", () => {
-        loadVideo();
-        video.play().catch(() => {});
-      });
-
-      video.addEventListener("play", () => {
-        playButton.hidden = true;
-      });
-    });
-  };
-
-  setupShowreels();
-  document.addEventListener("astro:page-load", setupShowreels);
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
 
 <style>
-  .showreel,
-  .showreel * {
-    box-sizing: border-box;
-  }
-
-  .showreel {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 108px 24px 118px;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
-    background:
-      radial-gradient(circle at 50% 34%, rgba(95, 165, 215, 0.11), transparent 31%),
-      #111111;
-    color: #ffffff;
-  }
-
-  .showreel__header {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 850px);
-    margin: 0 auto 46px;
-    text-align: center;
-  }
-
-  .showreel__label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 21px;
-    padding: 10px 17px;
-    border: 1px solid rgba(180, 220, 255, 0.28);
-    border-radius: 999px;
-    background: rgba(155, 210, 255, 0.08);
-    color: #cfeaff;
-    font-size: 12px;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .showreel__header h2 {
-    margin: 0;
-    color: #ffffff;
-    font-size: clamp(44px, 5.8vw, 78px);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.06em;
-    text-wrap: balance;
-  }
-
-  .showreel__header p {
-    width: min(100%, 680px);
-    margin: 22px auto 0;
-    color: rgba(255, 255, 255, 0.62);
-    font-size: clamp(16px, 1.55vw, 18px);
-    font-weight: 500;
-    line-height: 1.55;
-    text-wrap: balance;
-  }
-
-  .showreel__frame {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 1120px);
-    margin: 0 auto;
-    padding: 11px;
-    border: 1px solid transparent;
-    border-radius: 30px;
-    background:
-      linear-gradient(#14171a, #14171a) padding-box,
-      linear-gradient(
-          135deg,
-          rgba(210, 235, 255, 0.68),
-          rgba(130, 165, 190, 0.24),
-          rgba(255, 255, 255, 0.09)
-        ) border-box;
-    box-shadow:
-      0 0 30px rgba(155, 210, 255, 0.1),
-      0 26px 74px rgba(0, 0, 0, 0.5);
-    transition:
-      transform 280ms ease,
-      box-shadow 280ms ease;
-  }
-
-  .showreel__frame:hover {
-    box-shadow:
-      0 0 42px rgba(155, 210, 255, 0.16),
-      0 30px 82px rgba(0, 0, 0, 0.58);
-    transform: translateY(-4px);
-  }
-
-  .showreel__video-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border-radius: 21px;
-    background: #000000;
-  }
-
-  .showreel video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #000000;
-    object-fit: cover;
-  }
-
-  .showreel__play {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 50%;
-    display: grid;
-    width: 82px;
-    height: 82px;
-    padding: 0;
-    place-items: center;
-    border: 1px solid rgba(220, 238, 255, 0.72);
-    border-radius: 50%;
-    background: rgba(16, 22, 27, 0.72);
-    box-shadow:
-      inset 0 1px rgba(255, 255, 255, 0.28),
-      0 0 0 8px rgba(155, 210, 255, 0.07),
-      0 18px 46px rgba(0, 0, 0, 0.45);
-    color: #ffffff;
-    cursor: pointer;
-    transform: translate(-50%, -50%);
-    backdrop-filter: blur(16px) saturate(145%);
-    transition:
-      background 220ms ease,
-      box-shadow 220ms ease,
-      transform 220ms ease;
-  }
-
-  .showreel__play[hidden] {
-    display: none;
-  }
-
-  .showreel__play:hover {
-    background: rgba(38, 56, 70, 0.86);
-    box-shadow:
-      inset 0 1px rgba(255, 255, 255, 0.34),
-      0 0 0 11px rgba(155, 210, 255, 0.09),
-      0 20px 50px rgba(0, 0, 0, 0.5);
-    transform: translate(-50%, -50%) scale(1.06);
-  }
-
-  .showreel__play:focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 5px;
-  }
-
-  .showreel__play svg {
-    width: 34px;
-    height: 34px;
-    fill: currentColor;
-    transform: translateX(2px);
-  }
-
-  .showreel__play span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .showreel__whatsapp {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-    width: min(100%, 860px);
-    margin: 40px auto 0;
-    padding: 27px 28px 27px 32px;
-    overflow: hidden;
-    border: 1px solid rgba(37, 211, 102, 0.24);
-    border-radius: 25px;
-    background:
-      radial-gradient(circle at 82% 50%, rgba(37, 211, 102, 0.13), transparent 36%),
-      rgba(13, 20, 16, 0.76);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
-  }
-
-  .showreel__whatsapp > div {
-    max-width: 620px;
-  }
-
-  .showreel__whatsapp h3 {
-    margin: 0;
-    color: #31df72;
-    font-size: clamp(25px, 3vw, 36px);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.045em;
-  }
-
-  .showreel__whatsapp p {
-    margin: 9px 0 0;
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 15px;
-    font-weight: 550;
-    line-height: 1.5;
-  }
-
-  .showreel__whatsapp > a {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    width: 58px;
-    height: 58px;
-    border: 1px solid rgba(255, 255, 255, 0.46);
-    border-radius: 50%;
-    background: #25d366;
-    color: #ffffff;
-    box-shadow:
-      0 0 0 6px rgba(37, 211, 102, 0.09),
-      0 0 28px rgba(37, 211, 102, 0.25);
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease;
-  }
-
-  .showreel__whatsapp > a:hover {
-    box-shadow:
-      0 0 0 8px rgba(37, 211, 102, 0.11),
-      0 0 38px rgba(37, 211, 102, 0.38);
-    transform: scale(1.07);
-  }
-
-  .showreel__whatsapp > a:focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 4px;
-  }
-
-  .showreel__whatsapp svg {
-    width: 33px;
-    height: 33px;
-  }
-
-  .showreel__whatsapp a span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  @media (max-width: 767px) {
-    .showreel {
-      padding: 90px 16px 96px;
-    }
-
-    .showreel__header {
-      margin-bottom: 36px;
-    }
-
-    .showreel__header h2 {
-      font-size: clamp(39px, 11vw, 54px);
-    }
-
-    .showreel__frame {
-      padding: 7px;
-      border-radius: 22px;
-    }
-
-    .showreel__video-wrap {
-      border-radius: 15px;
-    }
-
-    .showreel__play {
-      width: 68px;
-      height: 68px;
-    }
-
-    .showreel__whatsapp {
-      flex-direction: column;
-      gap: 22px;
-      margin-top: 30px;
-      padding: 28px 20px;
-      border-radius: 22px;
-      text-align: center;
-    }
-
-    .showreel__whatsapp > a {
-      width: 60px;
-      height: 60px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .showreel__frame,
-    .showreel__whatsapp > a {
-      transition: none;
-    }
-  }
+  .showreel, .showreel * { box-sizing: border-box; }
+  .showreel { position: relative; padding: clamp(72px, 10vw, 144px) 24px; overflow: hidden; background: #111111; color: #fff; }
+  .showreel::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 15% 45%, rgba(154, 210, 255, .12), transparent 30%); }
+  .showreel__inner { position: relative; display: grid; grid-template-columns: minmax(0, 1.38fr) minmax(280px, .62fr); align-items: center; gap: clamp(36px, 7vw, 112px); width: min(100%, 1240px); margin: 0 auto; }
+  .showreel__film { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.16); border-radius: 4px; background: #060606; box-shadow: 0 36px 100px rgba(0,0,0,.44); }
+  .showreel__film::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(207,234,255,.13); pointer-events: none; }
+  .showreel video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .showreel__copy { max-width: 430px; }
+  .showreel__eyebrow { margin: 0 0 22px; color: #cfeaff; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+  .showreel h2 { margin: 0; font-size: clamp(42px, 5.5vw, 74px); font-weight: 800; line-height: .94; letter-spacing: -.065em; text-wrap: balance; }
+  .showreel__copy > p:not(.showreel__eyebrow) { margin: 28px 0 0; color: rgba(255,255,255,.68); font-size: clamp(17px, 1.75vw, 21px); line-height: 1.5; text-wrap: balance; }
+  .showreel__copy a { display: inline-flex; gap: 12px; align-items: center; margin-top: 34px; padding-bottom: 7px; border-bottom: 1px solid rgba(207,234,255,.7); color: #fff; font-size: 14px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; transition: color .2s ease, border-color .2s ease; }
+  .showreel__copy a:hover { border-color: #fff; color: #cfeaff; }
+  .showreel__copy a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 6px; }
+  @media (max-width: 820px) { .showreel { padding: 72px 18px 84px; } .showreel__inner { grid-template-columns: 1fr; gap: 42px; } .showreel__copy { max-width: 590px; } .showreel h2 { font-size: clamp(42px, 12vw, 64px); } }
 </style>

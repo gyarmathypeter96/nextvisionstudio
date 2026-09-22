@@ -1,0 +1,58 @@
+---
+const locations = [
+  { name: "Washington, DC", x: 252, y: 190, labelX: 92, labelY: 164 },
+  { name: "Dublin", x: 573, y: 126, labelX: 500, labelY: 92 },
+  { name: "Alicante", x: 594, y: 194, labelX: 514, labelY: 238 },
+  { name: "Győr", x: 665, y: 152, labelX: 682, labelY: 127 },
+  { name: "Budapest", x: 681, y: 168, labelX: 700, labelY: 191 },
+  { name: "Cyprus", x: 744, y: 225, labelX: 765, labelY: 252 },
+];
+---
+
+<section id="locations" class="locations" aria-labelledby="locations-title">
+  <header class="locations__header">
+    <p>From Dublin, outward</p>
+    <h2 id="locations-title">Places we work.<br />Stories we bring together.</h2>
+  </header>
+
+  <div class="locations__map" role="img" aria-label="NextVision Studio production locations in Washington DC, Dublin, Alicante, Győr, Budapest and Cyprus">
+    <svg viewBox="0 0 1200 440" aria-hidden="true">
+      <g class="locations__grid"><path d="M0 110H1200M0 220H1200M0 330H1200M150 0V440M300 0V440M450 0V440M600 0V440M750 0V440M900 0V440M1050 0V440" /></g>
+      <g class="locations__land">
+        <path d="M105 104l65-35 83 14 62 42-5 45-44 13-20 52-42 8-31 56-36-30 13-47-29-36 18-40z" />
+        <path d="M333 80l60-25 62 14 35 34 50 2 22 24-11 31-40 4-33 24-30-1-28 25-54-9-26-40 19-28 14-45z" />
+        <path d="M573 105l35-12 30 21-9 32-23 10-22-17z" />
+        <path d="M602 148l71-12 62 25 45 1 37 35-11 43-38 9-43-11-31 15-50-21-22-41z" />
+        <path d="M656 240l65 4 46 41-25 74-64-9-39-57z" />
+        <path d="M770 113l105-17 117 41 82 8 79 48-14 51-82 8-58-22-64 31-69-10-45-48-42-11z" />
+        <path d="M1018 302l61 14 35 38-28 39-57-18-20-38z" />
+      </g>
+      {locations.map((location) => (
+        <g class="locations__pin">
+          <path class="locations__connector" d={`M${location.x} ${location.y} L${location.labelX} ${location.labelY}`} />
+          <circle cx={location.x} cy={location.y} r="9" />
+          <circle class="locations__pin-core" cx={location.x} cy={location.y} r="3" />
+          <text x={location.labelX} y={location.labelY}>{location.name}</text>
+        </g>
+      ))}
+    </svg>
+  </div>
+</section>
+
+<style>
+  .locations, .locations * { box-sizing: border-box; }
+  .locations { position: relative; padding: clamp(86px, 12vw, 154px) 24px clamp(80px, 11vw, 138px); overflow: hidden; background: #080711; color: #fff; }
+  .locations::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 48% 45%, rgba(58,132,255,.16), transparent 29%), radial-gradient(circle at 10% 8%, rgba(116,76,255,.11), transparent 28%); }
+  .locations__header { position: relative; width: min(100%, 920px); margin: 0 auto clamp(38px, 5vw, 70px); text-align: center; }
+  .locations__header p { margin: 0 0 20px; color: #8fc2ff; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+  .locations h2 { margin: 0; font-size: clamp(42px, 6vw, 82px); font-weight: 750; line-height: .94; letter-spacing: -.065em; text-wrap: balance; }
+  .locations__map { position: relative; width: min(100%, 1240px); margin: 0 auto; }
+  .locations svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .locations__grid path { fill: none; stroke: rgba(255,255,255,.045); stroke-width: 1; }
+  .locations__land path { fill: rgba(230,238,255,.92); stroke: rgba(170,191,230,.42); stroke-width: 1; }
+  .locations__connector { fill: none; stroke: rgba(156,207,255,.48); stroke-width: 1; stroke-dasharray: 3 4; }
+  .locations__pin > circle:first-of-type { fill: #1586ff; filter: drop-shadow(0 0 9px rgba(50,157,255,.8)); }
+  .locations__pin-core { fill: #fff; }
+  .locations text { fill: rgba(255,255,255,.9); font-family: Inter, Arial, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+  @media (max-width: 640px) { .locations { padding: 82px 14px 82px; } .locations__map { width: 155%; margin-left: -27.5%; } .locations text { font-size: 13px; } }
+</style>
