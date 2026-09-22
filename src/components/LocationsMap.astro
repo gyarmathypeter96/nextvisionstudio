@@ -1,14 +1,15 @@
 ---
-// Coordinates use city centres. "Cyprus" is represented by Nicosia, the capital.
-// The map uses an equirectangular Natural Earth 1:110m land outline.
-const bounds = { west: -180, east: 180, north: 83.64513, south: -90 };
+// Coordinates use the United Nations Cartographic Section for capital cities,
+// GeoNames for Győr and Alicante, and the UN geographic centre of Cyprus.
+// The map uses an equirectangular Natural Earth 1:50m land outline.
+const bounds = { west: -180, east: 180, north: 83.599609375, south: -89.99892578125002 };
 const placeData = [
-  { name: "Washington, DC", latitude: 38.8951118, longitude: -77.0363658, key: "washington" },
-  { name: "Dublin", latitude: 53.333056, longitude: -6.248889, key: "dublin" },
+  { name: "Washington, DC", latitude: 38.819496155, longitude: -76.9131774226, key: "washington" },
+  { name: "Dublin", latitude: 53.4353409243, longitude: -6.21339893837, key: "dublin" },
   { name: "Alicante", latitude: 38.34517, longitude: -0.48149, key: "alicante" },
-  { name: "Győr", latitude: 47.666667, longitude: 17.65, key: "gyor" },
-  { name: "Budapest", latitude: 47.49835, longitude: 19.04045, key: "budapest" },
-  { name: "Cyprus", latitude: 35.17283752, longitude: 33.35396865, key: "cyprus" },
+  { name: "Győr", latitude: 47.6833322473, longitude: 17.6351165771, key: "gyor" },
+  { name: "Budapest", latitude: 47.4518547032, longitude: 19.136859969, key: "budapest" },
+  { name: "Cyprus", latitude: 35.126655, longitude: 33.425411, key: "cyprus" },
 ];
 
 const locations = placeData.map((location) => ({
@@ -25,7 +26,7 @@ const locations = placeData.map((location) => ({
   </header>
 
   <figure class="locations__map" aria-label="World map showing NextVision Studio production locations">
-    <img src="/images/maps/world-land.svg" width="1600" height="773" alt="" aria-hidden="true" loading="lazy" />
+    <img src="/images/maps/world-countries.svg" width="1600" height="773" alt="" aria-hidden="true" loading="lazy" />
     <ul class="locations__pins" aria-label="Production locations">
       {locations.map((location) => (
         <li class={`locations__pin locations__pin--${location.key}`} style={`--x: ${location.x}%; --y: ${location.y}%;`}>
@@ -45,11 +46,11 @@ const locations = placeData.map((location) => ({
   .locations, .locations * { box-sizing: border-box; }
   .locations { position: relative; padding: clamp(86px, 12vw, 154px) 24px clamp(80px, 11vw, 138px); overflow: hidden; background: #050505; color: #fff; }
   .locations::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 48% 48%, rgba(24,132,255,.14), transparent 34%); }
-  .locations__header { position: relative; width: min(100%, 920px); margin: 0 auto clamp(38px, 5vw, 70px); text-align: center; }
+  .locations__header { position: relative; z-index: 1; width: min(100%, 920px); margin: 0 auto clamp(38px, 5vw, 70px); text-align: center; }
   .locations__header p { margin: 0 0 20px; color: #178aff; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
   .locations h2 { margin: 0; font-size: clamp(42px, 6vw, 82px); font-weight: 750; line-height: .94; letter-spacing: -.065em; text-wrap: balance; }
-  .locations__map { position: relative; width: min(100%, 1340px); margin: 0 auto; }
-  .locations__map > img { display: block; width: 100%; height: auto; opacity: .96; filter: invert(1) drop-shadow(0 24px 40px rgba(0,0,0,.4)); }
+  .locations__map { position: relative; z-index: 1; width: min(100%, 1340px); margin: 0 auto; }
+  .locations__map > img { display: block; width: 100%; height: auto; opacity: .96; filter: drop-shadow(0 24px 40px rgba(0,0,0,.4)); }
   .locations__pins { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
   .locations__pin { position: absolute; top: var(--y); left: var(--x); width: 0; height: 0; }
   .locations__pin i { position: absolute; z-index: 1; width: 15px; height: 15px; border: 4px solid #fff; border-radius: 50%; background: #178aff; box-shadow: 0 0 0 5px rgba(23,138,255,.22), 0 0 22px rgba(23,138,255,.9); transform: translate(-50%, -50%); }
