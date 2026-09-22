@@ -68,7 +68,11 @@
         ad_personalization: granted ? "granted" : "denied",
       });
 
-      if (granted) window.nvsLoadGoogleTag?.();
+      if (granted) {
+        window.nvsLoadGoogleTag?.();
+        window.nvsLoadMetaPixel?.();
+        window.nvsLoadClarity?.();
+      }
       banner.hidden = true;
     };
 

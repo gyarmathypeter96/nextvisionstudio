@@ -128,28 +128,73 @@ const websiteSchema = {
     <meta name="theme-color" content="#111111" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <GoogleTag />
-    <!-- Microsoft Clarity -->
+    <!-- Optional analytics loaders. No third-party request is made before consent. -->
     <script is:inline>
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "ylqu4w3rot");
+      (() => {
+        const clarityProjectId = "ylqu4w3rot";
+        const metaPixelId = "657703057386811";
+
+        window.nvsLoadClarity = window.nvsLoadClarity || function () {
+          if (document.querySelector("script[data-nvs-clarity]")) return;
+
+          window.clarity = window.clarity || function () {
+            (window.clarity.q = window.clarity.q || []).push(arguments);
+          };
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = `https://www.clarity.ms/tag/${clarityProjectId}`;
+          script.dataset.nvsClarity = "true";
+          document.head.appendChild(script);
+        };
+
+        window.nvsLoadMetaPixel = window.nvsLoadMetaPixel || function () {
+          if (document.querySelector("script[data-nvs-meta-pixel]")) return;
+
+          const fbq = window.fbq = window.fbq || function () {
+            if (fbq.callMethod) {
+              fbq.callMethod.apply(fbq, arguments);
+            } else {
+              fbq.queue.push(arguments);
+            }
+          };
+
+          if (!window._fbq) window._fbq = fbq;
+          fbq.push = fbq;
+          fbq.loaded = true;
+          fbq.version = "2.0";
+          fbq.queue = fbq.queue || [];
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = "https://connect.facebook.net/en_US/fbevents.js";
+          script.dataset.nvsMetaPixel = "true";
+          document.head.appendChild(script);
+
+          fbq("init", metaPixelId);
+          fbq("track", "PageView");
+        };
+
+        let storedConsent = null;
+        try {
+          storedConsent = localStorage.getItem("nvs-cookie-consent");
+        } catch (_) {}
+
+        if (storedConsent !== "granted") return;
+
+        const loadOptionalAnalytics = () => {
+          window.nvsLoadClarity();
+          window.nvsLoadMetaPixel();
+        };
+
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadOptionalAnalytics, { timeout: 1800 });
+        } else {
+          window.setTimeout(loadOptionalAnalytics, 900);
+        }
+      })();
     </script>
-  
-    <!-- Meta Pixel -->
-    <script is:inline>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '657703057386811');
-      fbq('track', 'PageView');
-    </script></head>
+  </head>
 
   <body>
     {

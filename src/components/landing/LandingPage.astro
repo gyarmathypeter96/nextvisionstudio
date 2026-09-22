@@ -21,6 +21,20 @@ const { page } = Astro.props;
 const canonical = `https://www.nextvisionstudio.com/${page.slug}/`;
 const isWebDesignPage = page.slug === "webdesigner-dublin";
 const isVideoPage = page.slug === "videography-dublin";
+const videoServicePages = [
+  {
+    name: "Corporate Video Production Dublin",
+    url: "https://www.nextvisionstudio.com/corporate-video-production-dublin/",
+  },
+  {
+    name: "Event Videographer Dublin",
+    url: "https://www.nextvisionstudio.com/event-videographer-dublin/",
+  },
+  {
+    name: "Short-Form Video Production Dublin",
+    url: "https://www.nextvisionstudio.com/short-form-video-production-dublin/",
+  },
+];
 
 const landingSchema = {
   "@context": "https://schema.org",
@@ -33,6 +47,14 @@ const landingSchema = {
       description: page.metaDescription,
       about: { "@id": `${canonical}#service` },
       isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" },
+      ...(isVideoPage && {
+        hasPart: videoServicePages.map((servicePage) => ({
+          "@type": "WebPage",
+          "@id": `${servicePage.url}#webpage`,
+          url: servicePage.url,
+          name: servicePage.name,
+        })),
+      }),
     },
     {
       "@type": "Service",

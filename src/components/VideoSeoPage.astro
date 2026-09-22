@@ -9,7 +9,19 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      url: canonical,
+      name: page.metaTitle,
+      description: page.metaDescription,
+      mainEntity: { "@id": `${canonical}#service` },
+      isPartOf: {
+        "@id": "https://www.nextvisionstudio.com/videography-dublin/#webpage",
+      },
+    },
+    {
       "@type": "Service",
+      "@id": `${canonical}#service`,
       name: page.eyebrow,
       description: page.metaDescription,
       url: canonical,
@@ -18,11 +30,35 @@ const schema = {
     },
     {
       "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
       mainEntity: page.faq.map((item) => ({
         "@type": "Question",
         name: item.question,
         acceptedAnswer: { "@type": "Answer", text: item.answer },
       })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.nextvisionstudio.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Videography Dublin",
+          item: "https://www.nextvisionstudio.com/videography-dublin/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: page.eyebrow,
+          item: canonical,
+        },
+      ],
     },
   ],
 };

@@ -8,10 +8,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:indexability": "node scripts/check-indexability.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.0.9"
+    "astro": "^7.3.3"
   }
 }
