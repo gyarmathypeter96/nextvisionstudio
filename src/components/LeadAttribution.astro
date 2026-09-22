@@ -1,6 +1,21 @@
 <script>
+  const consentStorageKey = "nvs-cookie-consent";
+  const analyticsConsentGranted = () => {
+    try {
+      return localStorage.getItem(consentStorageKey) === "granted";
+    } catch (_) {
+      return false;
+    }
+  };
+
+  const track = (eventName: string, parameters: Record<string, string | number | undefined>) => {
+    if (!analyticsConsentGranted()) return;
+    window.gtag?.("event", eventName, parameters);
+  };
+
   const initialiseCrmForms = () => {
     const storageKey = "nvs-lead-attribution";
+    const firstTouchStorageKey = "nvs-first-touch-attribution";
     const query = new URLSearchParams(window.location.search);
     const trackedKeys = [
       "utm_source",
@@ -14,10 +29,15 @@
       "fbclid",
     ];
 
-    let attribution: Record<string, string> = {};
-    try {
-      attribution = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
-    } catch (_) {}
+    const readStoredObject = (storage: Storage, key: string) => {
+      try {
+        return JSON.parse(storage.getItem(key) || "{}") as Record<string, string>;
+      } catch (_) {
+        return {};
+      }
+    };
+
+    let attribution = readStoredObject(sessionStorage, storageKey);
 
     trackedKeys.forEach((key) => {
       const value = query.get(key);
@@ -33,14 +53,71 @@
       sessionStorage.setItem(storageKey, JSON.stringify(attribution));
     } catch (_) {}
 
-    document.querySelectorAll<HTMLFormElement>("form[data-crm-form]").forEach((form) => {
+    const captureFirstTouchAttribution = () => {
+      if (!analyticsConsentGranted()) return {};
+      const storedAttribution = readStoredObject(localStorage, firstTouchStorageKey);
+      if (storedAttribution.landing_page) return storedAttribution;
+
+      try {
+        localStorage.setItem(firstTouchStorageKey, JSON.stringify(attribution));
+      } catch (_) {}
+      return { ...attribution };
+    };
+
+    let firstTouchAttribution = captureFirstTouchAttribution();
+
+    document.querySelectorAll<HTMLFormElement>("form[data-crm-form]").forEach((form, index) => {
       if (form.dataset.crmBound === "true") return;
       form.dataset.crmBound = "true";
-      const startedAt = Math.floor(Date.now() / 1000);
+      let startedAt: number | undefined;
+      const redirectField = form.querySelector<HTMLInputElement>('input[name="redirect"]');
+      const leadSource = redirectField?.value
+        ? new URL(redirectField.value, window.location.origin).searchParams.get("source") || "website-form"
+        : "website-form";
+      const formId = form.dataset.formId || form.id || `form-${leadSource || index + 1}`;
+      let formStarted = false;
+      let validationErrorTracked = false;
+
+      const readFormType = () => {
+        const formTypeField = form.querySelector<HTMLInputElement>('input[name="form_type"]');
+        const subjectField = form.querySelector<HTMLInputElement>('input[name="subject"]');
+        return formTypeField?.value || subjectField?.value || "Website enquiry";
+      };
+
+      const markFormStarted = () => {
+        if (formStarted) return;
+        formStarted = true;
+        startedAt = Math.floor(Date.now() / 1000);
+        firstTouchAttribution = captureFirstTouchAttribution();
+        track("lead_form_start", {
+          form_id: formId,
+          form_type: readFormType(),
+          form_location: window.location.pathname,
+          lead_source: leadSource,
+        });
+      };
+
+      form.addEventListener("focusin", (event) => {
+        const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+        if (!target || target.type === "hidden" || target.name === "botcheck") return;
+        markFormStarted();
+      });
+
+      form.addEventListener("invalid", (event) => {
+        if (validationErrorTracked) return;
+        validationErrorTracked = true;
+        const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+        track("lead_form_validation_error", {
+          form_id: formId,
+          form_type: readFormType(),
+          field_type: target?.type || target?.tagName.toLowerCase() || "unknown",
+        });
+      }, true);
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
+        markFormStarted();
 
         const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
         const status = document.createElement("p");
@@ -66,6 +143,8 @@
         }
 
         const formType = read("form_type") || read("subject");
+        const serviceInterest = read("service") || formType || "Website enquiry";
+        const formDurationSeconds = Math.max(0, Math.floor(Date.now() / 1000) - (startedAt || Math.floor(Date.now() / 1000)));
         const messageParts = [read("message")];
         if (extraDetails.length) messageParts.push(extraDetails.join("\n"));
         const payload: Record<string, unknown> = {
@@ -78,13 +157,27 @@
           value: read("value") ? Number(read("value")) : undefined,
           consent: true,
           website: read("botcheck") || read("website"),
-          form_started_at: startedAt,
-          landing_page: window.location.href,
+          form_started_at: startedAt || Math.floor(Date.now() / 1000),
+          form_duration_seconds: formDurationSeconds,
+          form_id: formId,
+          form_type: formType || "Website enquiry",
+          form_source: leadSource,
+          form_page: window.location.href,
+          landing_page: attribution.landing_page || window.location.href,
+          initial_referrer: attribution.initial_referrer || undefined,
         };
 
-        ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((key) => {
+        trackedKeys.forEach((key) => {
           if (attribution[key]) payload[key] = attribution[key];
         });
+
+        if (firstTouchAttribution.landing_page) {
+          payload.first_touch_landing_page = firstTouchAttribution.landing_page;
+          payload.first_touch_referrer = firstTouchAttribution.initial_referrer || undefined;
+          ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((key) => {
+            if (firstTouchAttribution[key]) payload[`first_touch_${key}`] = firstTouchAttribution[key];
+          });
+        }
 
         try {
           const response = await fetch(form.action, {
@@ -104,16 +197,15 @@
 
           status.textContent = "Thank you. Your enquiry has been received.";
           const redirect = read("redirect");
-          const leadSource = redirect
-            ? new URL(redirect, window.location.origin).searchParams.get("source") || "website-form"
-            : "website-form";
 
           // A lead is only measured after the CRM has accepted the submission.
-          window.gtag?.("event", "generate_lead", {
-            currency: "EUR",
-            value: 1,
+          track("generate_lead", {
             lead_source: leadSource,
             form_type: formType || "Website enquiry",
+            form_id: formId,
+            form_location: window.location.pathname,
+            service_interest: serviceInterest,
+            form_duration_seconds: formDurationSeconds,
           });
 
           if (redirect) {
@@ -123,6 +215,11 @@
           }
         } catch (error) {
           status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
+          track("lead_form_error", {
+            form_id: formId,
+            form_type: formType || "Website enquiry",
+            error_type: "crm_submission_failed",
+          });
           if (submit) submit.disabled = false;
         }
       });
@@ -140,7 +237,7 @@
     const ctaPlacement = link.dataset.ctaPlacement;
 
     if (ctaPlacement) {
-      window.gtag?.("event", "cta_click", {
+      track("cta_click", {
         cta_placement: ctaPlacement,
         link_text: link.textContent?.trim().slice(0, 120) || "",
         link_url: href,
@@ -148,10 +245,10 @@
     }
 
     if (href.startsWith("tel:")) {
-      window.gtag?.("event", "click_call", { link_url: href });
+      track("click_call", { link_url: href });
     }
     if (href.includes("wa.me")) {
-      window.gtag?.("event", "click_whatsapp", { link_url: href });
+      track("click_whatsapp", { link_url: href });
     }
   });
 </script>
