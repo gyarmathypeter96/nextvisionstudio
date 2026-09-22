@@ -66,6 +66,31 @@
       "permanent": true
     },
     {
+      "source": "/social-media-creation-dublin/",
+      "destination": "/social-media-content-creation-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/home/dsc04164/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
+      "source": "/hello-world/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/hello-world/feed/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/feed/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
       "source": "/sitemap_index.xml",
       "destination": "/sitemap.xml",
       "permanent": true

@@ -30,12 +30,12 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
     wait_for_update: 500,
   });
 
-  window.gtag("js", new Date());
-  window.gtag("config", GOOGLE_TAG_ID);
-  window.gtag("config", GOOGLE_ADS_ID);
-
   window.nvsLoadGoogleTag = window.nvsLoadGoogleTag || function () {
     if (document.querySelector("script[data-nvs-google-tag]")) return;
+
+    window.gtag("js", new Date());
+    window.gtag("config", GOOGLE_TAG_ID);
+    window.gtag("config", GOOGLE_ADS_ID);
 
     const script = document.createElement("script");
     script.async = true;
