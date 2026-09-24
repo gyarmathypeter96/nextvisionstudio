@@ -14,10 +14,12 @@ const serviceSchema = {
     name: "Dublin",
   },
   serviceType: [
+    "Video production",
+    "Commercial photography",
     "Social media content creation",
     "Meta Ads and Google Ads management",
     "Website design and development",
-    "AI lead conversion and business automation",
+    "CRM implementation and lead automation",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -27,9 +29,27 @@ const serviceSchema = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
+          name: "Video Production Dublin",
+          url: "https://www.nextvisionstudio.com/videography-dublin/",
+          description: "Brand, corporate, event and short-form video production for Dublin businesses.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Commercial Photography Dublin",
+          url: "https://www.nextvisionstudio.com/photography-dublin/",
+          description: "Product, brand, event and business photography for Dublin companies.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
           name: "Social Media Content Creation Dublin",
-          description:
-            "Videography, photography and short-form social media content for Dublin businesses.",
+          url: "https://www.nextvisionstudio.com/social-media-content-creation-dublin/",
+          description: "Planned short-form social content and production for Dublin businesses.",
         },
       },
       {
@@ -37,6 +57,7 @@ const serviceSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Meta Ads and Google Ads Management",
+          url: "https://www.nextvisionstudio.com/google-ads-meta-ads-dublin/",
           description:
             "Paid advertising strategy, campaign setup, creative support and ongoing optimisation.",
         },
@@ -46,6 +67,7 @@ const serviceSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Website Design and Development Dublin",
+          url: "https://www.nextvisionstudio.com/webdesigner-dublin/",
           description:
             "Fast, responsive and SEO-friendly business websites designed to generate enquiries.",
         },
@@ -54,9 +76,9 @@ const serviceSchema = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "AI Lead Conversion and Business Automation",
-          description:
-            "CRM, lead response and sales follow-up automation for Dublin service businesses.",
+          name: "CRM and Lead Automation Dublin",
+          url: "https://www.nextvisionstudio.com/crm-lead-automation-dublin/",
+          description: "CRM setup, lead pipeline design and practical follow-up workflows for Dublin businesses.",
         },
       },
     ],
@@ -65,8 +87,8 @@ const serviceSchema = {
 ---
 
 <BaseLayout
-  title="Creative & Digital Services Dublin | NextVision Studio"
-  description="Social media content creation, Meta and Google Ads management, and premium website design for Dublin businesses from NextVision Studio."
+  title="Video, Photography & Digital Services Dublin | NextVision Studio"
+  description="Explore video production, commercial photography, social media content, Google and Meta Ads, website design, and CRM automation in Dublin."
   canonical="https://www.nextvisionstudio.com/services/"
 >
   <main class="services-page">

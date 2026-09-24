@@ -11,6 +11,8 @@ import TradesHomeServices from "../TradesHomeServices.astro";
 import WebBeforeAfter from "../WebBeforeAfter.astro";
 import Testimonials from "../Testimonials.astro";
 import VideoProductionLanding from "./VideoProductionLanding.astro";
+import SocialContentOffers from "./SocialContentOffers.astro";
+import SocialContentProcess from "./SocialContentProcess.astro";
 import type { LandingPageData } from "../../data/landingPages";
 
 interface Props {
@@ -132,14 +134,20 @@ const landingSchema = {
     ) : (
       <>
         <LandingHero page={page} />
-        <LandingTrust line={page.trustLine} />
+        {page.kind === "social" ? (
+          <SocialContentProcess />
+        ) : (
+          <LandingTrust line={page.trustLine} />
+        )}
+        {page.kind === "social" && <SocialContentOffers />}
+        {page.kind === "social" && <LandingValue page={page} />}
         {isWebDesignPage && <TradesHomeServices />}
-        <LandingValue page={page} />
-        <LandingDeliverables page={page} />
+        {page.kind !== "social" && <LandingValue page={page} />}
+        {page.kind !== "social" && <LandingDeliverables page={page} />}
         {isWebDesignPage && <WebBeforeAfter />}
         {isWebDesignPage && <Testimonials />}
-        <LandingProof page={page} />
-        <LandingProcess page={page} />
+        {page.kind !== "social" && <LandingProof page={page} />}
+        {page.kind !== "social" && <LandingProcess page={page} />}
         <LandingFAQ page={page} />
         <LandingLeadForm page={page} />
       </>

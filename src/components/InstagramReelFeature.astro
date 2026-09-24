@@ -1,0 +1,212 @@
+---
+interface Props {
+  variant: "social" | "video";
+}
+
+const { variant } = Astro.props;
+const reelUrl = "https://www.instagram.com/reel/Da2M-s8D_TN/";
+const embedUrl = `${reelUrl}embed/`;
+const copy = variant === "social"
+  ? {
+      kicker: "A real social-content example",
+      title: "A clear message, delivered by a real person.",
+      text: "See Peter explain how to choose the right social platform for your business. This Reel is a good example of direct-to-camera content made to feel personal, useful and easy to watch.",
+      aria: "Play the NextVision Studio social media advice Reel",
+    }
+  : {
+      kicker: "A real on-camera example",
+      title: "Good video starts with a human connection.",
+      text: "A direct-to-camera story can make advice feel personal and build trust before a first conversation. Watch this NextVision Studio Reel, filmed and shaped for vertical social viewing.",
+      aria: "Play the NextVision Studio talking-head video Reel",
+    };
+---
+
+<section class="reel-feature" aria-labelledby={`reel-feature-title-${variant}`}>
+  <div class="reel-feature__inner">
+    <div class="reel-feature__copy">
+      <p class="reel-feature__kicker">{copy.kicker}</p>
+      <h2 id={`reel-feature-title-${variant}`}>{copy.title}</h2>
+      <p>{copy.text}</p>
+      <a href={reelUrl} target="_blank" rel="noopener noreferrer">
+        View the Reel on Instagram <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="reel-feature__frame">
+      <button
+        class="reel-feature__facade"
+        type="button"
+        data-instagram-embed={embedUrl}
+        data-video-title={copy.aria}
+        aria-label={`${copy.aria} — load Instagram video`}
+      >
+        <img
+          src="/images/content/social-platform-guide.webp"
+          alt="Peter speaking to camera in a NextVision Studio social media advice video"
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="reel-feature__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 5.7v12.6L19 12 8.5 5.7z"></path></svg>
+        </span>
+        <span class="reel-feature__badge">Instagram Reel</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const setupInstagramReelFeatures = () => {
+    document.querySelectorAll<HTMLButtonElement>("[data-instagram-embed]").forEach((facade) => {
+      if (facade.dataset.ready === "true") return;
+      facade.dataset.ready = "true";
+
+      facade.addEventListener("click", () => {
+        const src = facade.dataset.instagramEmbed;
+        if (!src) return;
+
+        const iframe = document.createElement("iframe");
+        iframe.className = "reel-feature__iframe";
+        iframe.src = src;
+        iframe.title = facade.dataset.videoTitle ?? "NextVision Studio Instagram Reel";
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allowFullscreen = true;
+        iframe.loading = "lazy";
+        facade.replaceWith(iframe);
+      }, { once: true });
+    });
+  };
+
+  setupInstagramReelFeatures();
+  document.addEventListener("astro:page-load", setupInstagramReelFeatures);
+</script>
+
+<style>
+  .reel-feature,
+  .reel-feature * { box-sizing: border-box; }
+
+  .reel-feature {
+    padding: 96px 24px;
+    border-block: 1px solid rgba(255, 255, 255, 0.07);
+    background: radial-gradient(circle at 78% 42%, rgba(87, 164, 230, 0.08), transparent 34%), #111;
+    color: #fff;
+  }
+
+  .reel-feature__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+    align-items: center;
+    gap: clamp(40px, 8vw, 120px);
+    width: min(100%, 1120px);
+    margin-inline: auto;
+  }
+
+  .reel-feature__copy { max-width: 650px; }
+  .reel-feature__kicker {
+    margin: 0 0 16px;
+    color: #a8d7ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .reel-feature h2 {
+    margin: 0 0 22px;
+    font-size: clamp(36px, 5.2vw, 64px);
+    font-weight: 850;
+    letter-spacing: -.055em;
+    line-height: .98;
+    text-wrap: balance;
+  }
+  .reel-feature__copy > p:not(.reel-feature__kicker) {
+    max-width: 570px;
+    margin: 0 0 28px;
+    color: rgba(255, 255, 255, .65);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .reel-feature__copy > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid rgba(168, 215, 255, .62);
+    color: #f4f8fb;
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: .04em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .reel-feature__frame {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 650px;
+    overflow: hidden;
+    border: 1px solid rgba(168, 215, 255, .2);
+    border-radius: 24px;
+    background: #080a0c;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .42);
+  }
+  .reel-feature__facade,
+  .reel-feature__iframe {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: #080a0c;
+  }
+  .reel-feature__facade { cursor: pointer; }
+  .reel-feature__facade img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .88;
+    transition: opacity 180ms ease, transform 260ms ease;
+  }
+  .reel-feature__facade:hover img { opacity: 1; transform: scale(1.025); }
+  .reel-feature__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 66px;
+    height: 66px;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 50%;
+    background: rgba(7, 10, 13, .68);
+    color: white;
+    backdrop-filter: blur(8px);
+  }
+  .reel-feature__play svg { width: 28px; height: 28px; margin-left: 3px; }
+  .reel-feature__badge {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 999px;
+    background: rgba(7,10,13,.72);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .reel-feature__iframe { min-height: 100%; }
+
+  @media (max-width: 760px) {
+    .reel-feature { padding: 72px 20px; }
+    .reel-feature__inner { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+    .reel-feature__frame { width: min(100%, 330px); margin-inline: auto; }
+  }
+</style>

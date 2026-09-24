@@ -2,14 +2,31 @@
 const stats = [
   {
     label: "Average cost per lead from managed campaigns",
-    target: null,
+    start: 100,
+    target: 10,
+    prefix: "€",
     formattedValue: "€10",
     suffix: "",
   },
   {
     label: "Video views across published client work",
     target: 1000000,
+    prefix: "",
     formattedValue: "1,000,000+",
+    suffix: "+",
+  },
+  {
+    label: "Ad spend managed for client campaigns",
+    target: 10000,
+    prefix: "€",
+    formattedValue: "€10,000+",
+    suffix: "+",
+  },
+  {
+    label: "Social media content published",
+    target: 1000,
+    prefix: "",
+    formattedValue: "1,000+",
     suffix: "+",
   },
 ];
@@ -31,7 +48,9 @@ const stats = [
               <dd
                 class="stats__number"
                 data-counter
+                data-start={stat.start ?? 0}
                 data-target={stat.target}
+                data-prefix={stat.prefix}
                 data-suffix={stat.suffix}
                 aria-label={`${stat.formattedValue} ${stat.label.toLowerCase()}`}
               >
@@ -62,8 +81,9 @@ const stats = [
     const showFinalValues = () => {
       counters.forEach((counter) => {
         const target = Number(counter.getAttribute("data-target"));
+        const prefix = counter.getAttribute("data-prefix") ?? "";
         const suffix = counter.getAttribute("data-suffix") ?? "";
-        counter.textContent = `${numberFormatter.format(target)}${suffix}`;
+        counter.textContent = `${prefix}${numberFormatter.format(target)}${suffix}`;
       });
     };
 
@@ -74,6 +94,8 @@ const stats = [
       counter.classList.add("is-counting");
 
       const target = Number(counter.getAttribute("data-target"));
+      const start = Number(counter.getAttribute("data-start") ?? 0);
+      const prefix = counter.getAttribute("data-prefix") ?? "";
       const suffix = counter.getAttribute("data-suffix") ?? "";
       const duration = 1700;
       let startTime: number | undefined;
@@ -84,14 +106,16 @@ const stats = [
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
-        const currentValue = Math.floor(easedProgress * target);
+        const currentValue = start > target
+          ? Math.ceil(start - easedProgress * (start - target))
+          : Math.floor(easedProgress * target);
 
-        counter.textContent = `${numberFormatter.format(currentValue)}${suffix}`;
+        counter.textContent = `${prefix}${numberFormatter.format(currentValue)}${suffix}`;
 
         if (progress < 1) {
           window.requestAnimationFrame(updateCounter);
         } else {
-          counter.textContent = `${numberFormatter.format(target)}${suffix}`;
+          counter.textContent = `${prefix}${numberFormatter.format(target)}${suffix}`;
           counter.classList.remove("is-counting");
         }
       };

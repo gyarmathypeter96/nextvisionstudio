@@ -9,7 +9,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
       <div class="contact-page__kicker">Start a project</div>
       <h1 id="contact-page-title">Let’s plan the right next move.</h1>
       <p>
-        Looking for video production, commercial photography, social content or a new website in Dublin? Send a few details and we will come back with a clear next step.
+        Looking for video production, commercial photography, social content, paid ads, a new website or CRM automation in Dublin? Send a few details and we will come back with a clear next step.
       </p>
     </header>
 
@@ -113,6 +113,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             <option value="Commercial photography">Commercial photography</option>
             <option value="Social media content">Social media content</option>
             <option value="Website design">Website design</option>
+            <option value="CRM and lead automation">CRM and lead automation</option>
             <option value="Not sure yet">I am not sure yet</option>
           </select>
         </div>
@@ -135,6 +136,21 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
     </div>
   </div>
 </section>
+
+<script>
+  const preselectContactService = () => {
+    const requestedService = new URLSearchParams(window.location.search).get("service");
+    if (!requestedService) return;
+
+    const serviceField = document.querySelector<HTMLSelectElement>("#contact-page-service");
+    if (serviceField && Array.from(serviceField.options).some((option) => option.value === requestedService)) {
+      serviceField.value = requestedService;
+    }
+  };
+
+  preselectContactService();
+  document.addEventListener("astro:page-load", preselectContactService);
+</script>
 
 <style>
   .contact-page,

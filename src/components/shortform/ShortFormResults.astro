@@ -4,16 +4,19 @@ const work = [
     id: "SUeoIgRtH0I",
     title: "VentSolve",
     caption: "Business short-form video built for clear, fast social communication",
+    href: "/case-studies/ventsolve-content-production/",
   },
   {
     id: "GTzSrbR4-k4",
     title: "The Macaron Boutique",
     caption: "Product-led vertical content designed for mobile attention",
+    href: "/case-studies/macaron-boutique-product-video/",
   },
   {
     id: "53-_kK95Eoc",
     title: "Leroys Barking World",
     caption: "Local business promo content made for social media",
+    href: "/case-studies/leroys-barking-world-social-content/",
   },
   {
     id: "VMcywbhRMCc",
@@ -60,6 +63,7 @@ const work = [
         </button>
         <h3>{item.title}</h3>
         <p>{item.caption}</p>
+        {item.href && <a class="sf-video-card__project" href={item.href}>Read the project: {item.title} <span aria-hidden="true">↗</span></a>}
       </article>
     ))}
   </div>

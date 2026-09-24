@@ -19,13 +19,15 @@ const messageId = `${page.slug}-message`;
     <div class="landing-contact__copy">
       <div class="landing-contact__kicker">Free project conversation</div>
       <h2 id="landing-contact-title">{page.formTitle}</h2>
-      <p>{page.formText}</p>
+      {page.formText && <p>{page.formText}</p>}
 
-      <ul>
-        <li><span aria-hidden="true">✓</span> No finished brief required</li>
-        <li><span aria-hidden="true">✓</span> Clear scope before work begins</li>
-        <li><span aria-hidden="true">✓</span> Direct contact with NextVision Studio</li>
-      </ul>
+      {page.kind !== "social" && (
+        <ul>
+          <li><span aria-hidden="true">✓</span> No finished brief required</li>
+          <li><span aria-hidden="true">✓</span> Clear scope before work begins</li>
+          <li><span aria-hidden="true">✓</span> Direct contact with NextVision Studio</li>
+        </ul>
+      )}
 
       <a class="landing-contact__whatsapp" href={WHATSAPP_URL}>
         Prefer WhatsApp? Message us directly

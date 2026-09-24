@@ -1,0 +1,95 @@
+---
+const steps = [
+  { number: "01", title: "We Plan", text: "Content ideas, hooks, scripts and filming plan." },
+  { number: "02", title: "We Create", text: "Professional video production and photography at your business." },
+  { number: "03", title: "We Deliver", text: "Edited videos, captions and platform-ready content." },
+];
+---
+
+<section class="social-process" aria-labelledby="social-process-title">
+  <div class="social-process__inner">
+    <header>
+      <h2 id="social-process-title">We help create <span>Ready-to-Post Content.</span></h2>
+    </header>
+    <ol class="social-process__steps">
+      {steps.map((step) => (
+        <li>
+          <span class="social-process__number">{step.number}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .social-process,
+  .social-process * { box-sizing: border-box; }
+  .social-process {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 24px 96px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: radial-gradient(ellipse at 50% 0%, rgba(155,210,255,.07), transparent 55%), #111;
+    color: #fff;
+  }
+  .social-process__inner { width: min(100%, 1160px); margin: 0 auto; }
+  .social-process header { margin-bottom: 56px; }
+  .social-process h2 {
+    max-width: 1050px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(42px, 6.3vw, 78px);
+    font-weight: 850;
+    letter-spacing: -.06em;
+    line-height: .98;
+    text-wrap: balance;
+  }
+  .social-process h2 span { display: block; color: #fff; }
+  .social-process__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .social-process__steps li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-content: start;
+    min-height: 208px;
+    padding: 22px 22px 26px;
+    gap: 16px;
+    border: 1px solid rgba(180,220,255,.16);
+    border-top-color: rgba(180,220,255,.48);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+    transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+  }
+  .social-process__steps li:hover {
+    transform: translateY(-3px);
+    border-color: rgba(168,215,255,.42);
+    background: linear-gradient(145deg, rgba(168,215,255,.075), rgba(255,255,255,.018));
+  }
+  .social-process__number {
+    color: #a8d7ff;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+  .social-process h3 { margin: 0 0 12px; font-size: clamp(20px, 2vw, 25px); letter-spacing: -.035em; }
+  .social-process__steps p { max-width: 320px; margin: 0; color: rgba(255,255,255,.64); font-size: 15px; line-height: 1.65; }
+  @media (max-width: 760px) {
+    .social-process { padding: 76px 20px 80px; }
+    .social-process__steps { grid-template-columns: 1fr; }
+    .social-process__steps li { min-height: 0; padding: 20px 18px 22px; }
+    .social-process h2 { font-size: clamp(40px, 10vw, 58px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .social-process__steps li { transition: none; }
+  }
+</style>

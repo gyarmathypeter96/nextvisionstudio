@@ -8,13 +8,13 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<section class="landing-value" id="landing-value" aria-labelledby="landing-value-title">
+<section class:list={["landing-value", `landing-value--${page.kind}`]} id="landing-value" aria-labelledby="landing-value-title">
   <div class="landing-value__inner">
     <div class="landing-value__copy">
-      <div class="landing-section-kicker">{page.problemKicker}</div>
+      {page.problemKicker && <div class="landing-section-kicker">{page.problemKicker}</div>}
       <h2 id="landing-value-title">{page.problemTitle}</h2>
       <p>{page.problemText}</p>
-      <a href="#landing-contact">Get a clear recommendation <span aria-hidden="true">→</span></a>
+      {page.kind !== "social" && <a href="#landing-contact">Get a clear recommendation <span aria-hidden="true">→</span></a>}
     </div>
 
     <ol class="landing-value__outcomes">
@@ -24,7 +24,7 @@ const { page } = Astro.props;
             <span>0{index + 1}</span>
             <div>
               <h3>{outcome.title}</h3>
-              <p>{outcome.text}</p>
+              {outcome.text && <p>{outcome.text}</p>}
             </div>
           </li>
         ))
@@ -168,8 +168,96 @@ const { page } = Astro.props;
     line-height: 1.55;
   }
 
+  .landing-value--social {
+    padding-block: 96px;
+    background:
+      radial-gradient(circle at 14% 52%, rgba(155, 210, 255, 0.07), transparent 30%),
+      #111111;
+  }
+
+  .landing-value--social .landing-value__inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(54px, 8vw, 108px);
+  }
+
+  .landing-value--social .landing-value__copy > p {
+    max-width: 520px;
+    margin-top: 22px;
+    font-size: 17px;
+  }
+
+  .landing-value--social .landing-value__outcomes {
+    gap: 0;
+  }
+
+  .landing-value--social .landing-value__outcomes li {
+    position: relative;
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 22px 10px 22px 29px;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .landing-value--social .landing-value__outcomes li:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+  }
+
+  .landing-value--social .landing-value__outcomes li::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: #25c77a;
+    color: #07130c;
+    transform: translateY(-50%);
+  }
+
+  .landing-value--social .landing-value__outcomes li::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    width: 5px;
+    height: 8px;
+    border-right: 2px solid #07130c;
+    border-bottom: 2px solid #07130c;
+    transform: translateY(-68%) rotate(45deg);
+  }
+
+  .landing-value--social .landing-value__outcomes li:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: transparent;
+    transform: none;
+  }
+
+  .landing-value--social .landing-value__outcomes li > span,
+  .landing-value--social .landing-value__outcomes p {
+    display: none;
+  }
+
+  .landing-value--social .landing-value__outcomes h3 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+  }
+
   @media (max-width: 880px) {
     .landing-value__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .landing-value--social .landing-value__inner {
       grid-template-columns: 1fr;
     }
   }
@@ -181,6 +269,10 @@ const { page } = Astro.props;
 
     .landing-value h2 {
       font-size: clamp(40px, 12.4vw, 55px);
+    }
+
+    .landing-value--social {
+      padding-block: 78px;
     }
 
     .landing-value__outcomes li {

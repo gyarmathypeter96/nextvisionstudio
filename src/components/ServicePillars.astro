@@ -78,7 +78,7 @@ const services = [
   {
     id: "ai-automation",
     number: "04",
-    title: "AI & Business Automation",
+    title: "AI & CRM Lead Automation",
     lead:
       "Lead capture, fast response and CRM handover in one practical system.",
     points: [
@@ -96,19 +96,38 @@ const services = [
       },
     ],
     primary: "Fix your lead follow-up",
-    secondary: "See the VentSolve project",
-    secondaryHref: "/case-studies/ventsolve-content-production/",
+    secondary: "Explore CRM automation",
+    secondaryHref: "/crm-lead-automation-dublin/",
     visual: "automation",
   },
+];
+
+const serviceDirectory = [
+  { label: "Video production", text: "Brand, corporate, event and short-form video.", href: "/videography-dublin/" },
+  { label: "Commercial photography", text: "Product, brand, event and business photography.", href: "/photography-dublin/" },
+  { label: "Social media content", text: "Planned short-form content for social channels.", href: "/social-media-content-creation-dublin/" },
+  { label: "Google & Meta Ads", text: "Paid campaigns focused on qualified enquiries.", href: "/google-ads-meta-ads-dublin/" },
+  { label: "Website design", text: "Fast, conversion-focused business websites.", href: "/webdesigner-dublin/" },
+  { label: "AI & CRM automation", text: "Lead capture, pipeline setup and practical follow-up workflows.", href: "/crm-lead-automation-dublin/" },
 ];
 ---
 
 <section class="service-pillars" aria-labelledby="service-pillars-title">
   <div class="service-pillars__inner">
     <header class="service-pillars__intro">
-      <div class="service-pillars__kicker">Four connected services</div>
+      <div class="service-pillars__kicker">Connected services</div>
       <h2 id="service-pillars-title">Choose the support you need</h2>
+      <p>Explore each service directly, or combine the right pieces around one clear business goal.</p>
     </header>
+
+    <nav class="service-directory" aria-label="Explore individual services">
+      {serviceDirectory.map((service) => (
+        <a href={service.href}>
+          <span>{service.label}<span aria-hidden="true">↗</span></span>
+          <small>{service.text}</small>
+        </a>
+      ))}
+    </nav>
 
     <div class="service-pillars__list">
       {
@@ -285,6 +304,55 @@ const services = [
 
   .service-pillars__list {
     border-top: 1px solid rgba(180, 220, 255, 0.08);
+  }
+
+  .service-directory {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0 0 82px;
+    gap: 12px;
+  }
+
+  .service-directory a {
+    display: grid;
+    min-height: 112px;
+    padding: 20px 21px;
+    align-content: space-between;
+    gap: 16px;
+    border: 1px solid rgba(180, 220, 255, 0.13);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+    color: #ffffff;
+    text-decoration: none;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  .service-directory a:hover {
+    border-color: rgba(185, 223, 255, 0.38);
+    background: rgba(155, 210, 255, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .service-directory a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 3px;
+  }
+
+  .service-directory a > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 850;
+  }
+
+  .service-directory a > span > span { color: #cfeaff; }
+
+  .service-directory small {
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 12px;
+    line-height: 1.45;
   }
 
   .service-pillar {
@@ -759,6 +827,7 @@ const services = [
   }
 
   @media (max-width: 980px) {
+    .service-directory { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .service-pillar {
       grid-template-columns: 1fr;
       text-align: center;
@@ -788,6 +857,7 @@ const services = [
   }
 
   @media (max-width: 600px) {
+    .service-directory { grid-template-columns: 1fr; margin-bottom: 60px; }
     .service-pillars {
       padding: 72px 16px 78px;
     }

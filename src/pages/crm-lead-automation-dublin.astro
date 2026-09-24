@@ -1,0 +1,277 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const canonical = "https://www.nextvisionstudio.com/crm-lead-automation-dublin/";
+
+const crmSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${canonical}#service`,
+      name: "AI and CRM Automation Dublin",
+      serviceType: "CRM implementation and lead workflow automation",
+      description:
+        "Practical CRM setup for capturing enquiries, organising sales pipelines and creating configurable follow-up workflows for Dublin businesses.",
+      url: canonical,
+      provider: { "@id": "https://www.nextvisionstudio.com/#business" },
+      areaServed: { "@type": "City", name: "Dublin" },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.nextvisionstudio.com/services/" },
+        { "@type": "ListItem", position: 3, name: "CRM and Lead Automation", item: canonical },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What does CRM and lead automation include?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Depending on your setup, it can include enquiry capture, a clear pipeline, lead source tracking, assignment and next-step tasks, and configurable email or WhatsApp follow-up.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do I need AI to automate my CRM?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. Many useful improvements are straightforward CRM workflows. AI is considered only for tasks where it adds a clear, reviewable benefit.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can you work with my existing CRM?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The first step is to review your current tools, lead sources and follow-up process. The recommended setup depends on what your existing CRM supports and which integrations are available.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
+const steps = [
+  {
+    number: "01",
+    title: "Map the lead journey",
+    text: "We review where enquiries come from, who responds and what should happen next.",
+  },
+  {
+    number: "02",
+    title: "Set up the pipeline",
+    text: "Leads are organised into useful stages, with source and context available to the people following up.",
+  },
+  {
+    number: "03",
+    title: "Automate the right steps",
+    text: "Tasks, notifications and follow-up workflows can reduce manual hand-offs while keeping your team in control.",
+  },
+];
+
+const faqs = [
+  {
+    question: "What does CRM and lead automation include?",
+    answer:
+      "Depending on your setup, it can include enquiry capture, a clear pipeline, lead source tracking, assignment and next-step tasks, and configurable email or WhatsApp follow-up. We confirm integrations and exact scope before recommending changes.",
+  },
+  {
+    question: "Do I need AI to automate my CRM?",
+    answer:
+      "No. Many useful improvements are straightforward CRM workflows. AI is considered only for tasks where it adds a clear, reviewable benefit; your team stays responsible for customer decisions and communication.",
+  },
+  {
+    question: "Can you work with my existing CRM?",
+    answer:
+      "The first step is to review your current tools, lead sources and follow-up process. The recommended setup depends on what your existing CRM supports and which integrations are available.",
+  },
+  {
+    question: "Is this available outside Dublin?",
+    answer:
+      "Yes. NextVision Studio is based in Dublin and can plan CRM and lead workflow projects with businesses across Ireland remotely.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI & CRM Automation Dublin | NextVision Studio"
+  description="Connect enquiries to a clear CRM pipeline, organise follow-up tasks and automate practical lead workflows for Dublin businesses, with AI considered only where useful."
+  canonical={canonical}
+>
+  <main class="crm-page">
+    <section class="crm-hero" aria-labelledby="crm-title">
+      <div class="crm-hero__glow" aria-hidden="true"></div>
+      <div class="crm-hero__inner">
+        <a class="crm-breadcrumb" href="/services/">Services <span aria-hidden="true">/</span> CRM &amp; automation</a>
+        <p class="crm-eyebrow">CRM and lead automation · Dublin</p>
+        <h1 id="crm-title">AI &amp; CRM automation for Dublin businesses.</h1>
+        <p class="crm-hero__lead">
+          Bring incoming leads into one clear pipeline, know what needs attention next and automate the repeatable steps around your sales process.
+        </p>
+        <div class="crm-hero__actions">
+          <a class="crm-button" href="/contact/?service=CRM%20and%20lead%20automation#contact-form" data-cta-placement="crm-hero">Talk through your lead process <span aria-hidden="true">↗</span></a>
+          <a class="crm-text-link" href="#how-it-works">See how it works</a>
+        </div>
+        <div class="crm-hero__proof" aria-label="Core CRM capabilities">
+          <span>Lead capture</span><span>Pipeline visibility</span><span>Practical follow-up</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="crm-section crm-intro" aria-labelledby="crm-intro-title">
+      <div class="crm-section__label">A clear system, built around your team</div>
+      <div class="crm-intro__grid">
+        <h2 id="crm-intro-title">Less lead chasing. A clearer next step.</h2>
+        <div>
+          <p>
+            When website forms, calls and ad enquiries live in separate places, it is easy to lose context or leave a promising lead waiting. A practical CRM setup gives your team one place to see the enquiry, its source, its status and the next action.
+          </p>
+          <p>
+            We map the real process first, then configure the pipeline and automations to fit it. AI can be considered for specific tasks, but it is not added just for the label.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="crm-section crm-capabilities" aria-labelledby="crm-capabilities-title">
+      <div class="crm-section__label">What the system can support</div>
+      <h2 id="crm-capabilities-title">A useful pipeline from first enquiry to outcome.</h2>
+      <div class="crm-capabilities__grid">
+        <article>
+          <span>01</span>
+          <h3>Capture with context</h3>
+          <p>Bring enquiries into the CRM with the service, source and details your team needs to respond well.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>See the sales stages</h3>
+          <p>Track each opportunity through clear stages such as new, contacted, won or lost, and keep the follow-up visible.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Automate repeatable actions</h3>
+          <p>Set up practical tasks, notifications and follow-up workflows where your tools and customer permissions allow.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="crm-section crm-journey" aria-labelledby="crm-journey-title">
+      <div class="crm-section__label">One connected enquiry journey</div>
+      <div class="crm-journey__heading">
+        <h2 id="crm-journey-title">From the first ad click to a clear CRM follow-up.</h2>
+        <p>Keep the ad, landing page, form and lead record connected, so your team can see what came in and what needs to happen next.</p>
+      </div>
+      <figure class="crm-journey__figure">
+        <img
+          src="/images/crm/ad-to-crm-lead-journey.webp"
+          alt="A lead journey connecting Google and Meta ads to a landing page, enquiry form and CRM follow-up pipeline"
+          width="1150"
+          height="462"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Ad → landing page → enquiry form → CRM follow-up</figcaption>
+      </figure>
+    </section>
+
+    <section class="crm-section crm-process" id="how-it-works" aria-labelledby="crm-process-title">
+      <div class="crm-section__label">Our approach</div>
+      <h2 id="crm-process-title">Start with the process. Then choose the technology.</h2>
+      <ol>
+        {steps.map((step) => (
+          <li>
+            <span>{step.number}</span>
+            <div><h3>{step.title}</h3><p>{step.text}</p></div>
+          </li>
+        ))}
+      </ol>
+      <p class="crm-process__note">Integrations and AI features depend on your existing systems, access and the agreed scope. We confirm what is possible before implementation.</p>
+    </section>
+
+    <section class="crm-faq" aria-labelledby="crm-faq-title">
+      <div class="crm-section__label">Questions before you enquire</div>
+      <h2 id="crm-faq-title">CRM and lead automation FAQ</h2>
+      <div class="crm-faq__list">
+        {faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="crm-cta" aria-labelledby="crm-cta-title">
+      <div>
+        <p class="crm-section__label">A better follow-up process starts with a clear picture</p>
+        <h2 id="crm-cta-title">Tell us where leads come in and where they get stuck.</h2>
+      </div>
+      <a class="crm-button" href="/contact/?service=CRM%20and%20lead%20automation#contact-form" data-cta-placement="crm-final">Discuss CRM and automation <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(crmSchema)} />
+</BaseLayout>
+
+<style>
+  .crm-page, .crm-page * { box-sizing: border-box; }
+  .crm-page { overflow: hidden; background: #111; color: #fff; }
+  .crm-hero { position: relative; display: grid; min-height: 690px; padding: 152px 24px 92px; place-items: center; overflow: hidden; background: radial-gradient(circle at 76% 41%, rgba(155,210,255,.12), transparent 26%), linear-gradient(155deg,#111 0%,#11171c 55%,#111 100%); }
+  .crm-hero::after { position: absolute; inset: 0; background: linear-gradient(180deg,transparent 55%,#111 100%); content: ""; pointer-events: none; }
+  .crm-hero__glow { position: absolute; top: 44%; left: 72%; width: min(470px,70vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle,rgba(155,210,255,.12),transparent 68%); filter: blur(28px); }
+  .crm-hero__inner { position: relative; z-index: 1; width: min(100%,1120px); margin: 0 auto; }
+  .crm-breadcrumb { display: inline-flex; margin-bottom: 44px; gap: 12px; color: rgba(255,255,255,.56); font-size: 12px; text-decoration: none; }
+  .crm-breadcrumb:hover { color: #fff; }
+  .crm-eyebrow,.crm-section__label { color: #b9dfff; font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+  .crm-eyebrow { margin: 0 0 20px; }
+  .crm-hero h1 { max-width: 900px; margin: 0; font-size: clamp(52px,8vw,100px); font-weight: 930; letter-spacing: -.055em; line-height: .94; text-wrap: balance; }
+  .crm-hero__lead { max-width: 650px; margin: 27px 0 0; color: rgba(255,255,255,.66); font-size: clamp(17px,2vw,21px); line-height: 1.6; }
+  .crm-hero__actions { display: flex; margin-top: 34px; align-items: center; flex-wrap: wrap; gap: 22px; }
+  .crm-button { display: inline-flex; min-height: 52px; padding: 0 22px; align-items: center; justify-content: center; gap: 12px; border: 1px solid rgba(207,234,255,.26); border-radius: 999px; background: linear-gradient(135deg,rgba(255,255,255,.14),rgba(155,210,255,.09)); box-shadow: inset 0 1px 0 rgba(255,255,255,.14); color: #fff; font-size: 12px; font-weight: 850; text-decoration: none; transition: transform 180ms ease,border-color 180ms ease,background 180ms ease; }
+  .crm-button:hover { transform: translateY(-2px); border-color: rgba(207,234,255,.5); background: rgba(155,210,255,.14); }
+  .crm-button:focus-visible,.crm-text-link:focus-visible,.crm-breadcrumb:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  .crm-text-link { color: rgba(255,255,255,.72); font-size: 13px; font-weight: 750; text-decoration-color: rgba(207,234,255,.45); text-underline-offset: 5px; }
+  .crm-hero__proof { display: flex; margin-top: 66px; flex-wrap: wrap; gap: 10px; }
+  .crm-hero__proof span { padding: 10px 14px; border: 1px solid rgba(207,234,255,.12); border-radius: 999px; background: rgba(255,255,255,.035); color: rgba(255,255,255,.65); font-size: 11px; font-weight: 750; }
+  .crm-section,.crm-faq { width: min(100% - 48px,1120px); margin: 0 auto; padding: 108px 0; }
+  .crm-intro__grid { display: grid; margin-top: 27px; grid-template-columns: 1fr 1fr; gap: clamp(36px,8vw,110px); }
+  .crm-section h2,.crm-faq h2,.crm-cta h2 { margin: 0; font-size: clamp(36px,5.2vw,64px); font-weight: 900; letter-spacing: -.045em; line-height: 1; text-wrap: balance; }
+  .crm-intro__grid > div p { margin: 0 0 18px; color: rgba(255,255,255,.63); font-size: 16px; line-height: 1.75; }
+  .crm-capabilities { border-top: 1px solid rgba(185,223,255,.1); }
+  .crm-capabilities h2 { max-width: 760px; margin-top: 22px; }
+  .crm-capabilities__grid { display: grid; margin-top: 46px; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+  .crm-capabilities__grid article { min-height: 260px; padding: 26px; border: 1px solid rgba(185,223,255,.13); border-radius: 19px; background: linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); }
+  .crm-capabilities__grid article > span { color: #b9dfff; font-size: 11px; font-weight: 850; letter-spacing: .16em; }
+  .crm-capabilities__grid h3,.crm-process h3 { margin: 30px 0 12px; font-size: 22px; line-height: 1.12; }
+  .crm-capabilities__grid p,.crm-process li p { margin: 0; color: rgba(255,255,255,.58); font-size: 14px; line-height: 1.65; }
+  .crm-journey { border-top: 1px solid rgba(185,223,255,.1); }
+  .crm-journey__heading { display: grid; margin-top: 22px; align-items: end; grid-template-columns: minmax(0,1fr) minmax(280px,.58fr); gap: 50px; }
+  .crm-journey__heading p { margin: 0 0 4px; color: rgba(255,255,255,.6); font-size: 15px; line-height: 1.7; }
+  .crm-journey__figure { margin: 42px 0 0; padding: 12px; overflow: hidden; border: 1px solid rgba(185,223,255,.14); border-radius: 22px; background: linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)); }
+  .crm-journey__figure img { display: block; width: 100%; height: auto; border-radius: 13px; }
+  .crm-journey__figure figcaption { padding: 16px 8px 5px; color: rgba(255,255,255,.43); font-size: 11px; font-weight: 750; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
+  .crm-process { border-top: 1px solid rgba(185,223,255,.1); }
+  .crm-process h2 { max-width: 820px; margin-top: 22px; }
+  .crm-process ol { display: grid; margin: 45px 0 0; padding: 0; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; list-style: none; }
+  .crm-process li { display: grid; grid-template-columns: 42px 1fr; gap: 16px; }
+  .crm-process li > span { color: #b9dfff; font-size: 12px; font-weight: 850; letter-spacing: .12em; }
+  .crm-process h3 { margin: 0 0 10px; }
+  .crm-process__note { max-width: 790px; margin: 38px 0 0; padding-top: 20px; border-top: 1px solid rgba(185,223,255,.1); color: rgba(255,255,255,.4); font-size: 12px; line-height: 1.6; }
+  .crm-faq { border-top: 1px solid rgba(185,223,255,.1); }
+  .crm-faq h2 { margin-top: 22px; }
+  .crm-faq__list { display: grid; margin-top: 38px; gap: 10px; }
+  .crm-faq details { border: 1px solid rgba(185,223,255,.13); border-radius: 14px; background: rgba(255,255,255,.025); }
+  .crm-faq summary { padding: 20px 22px; color: #fff; cursor: pointer; font-size: 15px; font-weight: 800; }
+  .crm-faq summary:focus-visible { outline: 2px solid #cfeaff; outline-offset: -3px; }
+  .crm-faq details p { margin: 0; padding: 0 22px 22px; color: rgba(255,255,255,.6); font-size: 14px; line-height: 1.65; }
+  .crm-cta { display: grid; width: min(100% - 48px,1120px); margin: 0 auto; padding: 70px 0 118px; align-items: end; grid-template-columns: 1fr auto; gap: 36px; border-top: 1px solid rgba(185,223,255,.1); }
+  .crm-cta h2 { max-width: 770px; margin-top: 22px; }
+  @media (max-width: 760px) { .crm-intro__grid,.crm-journey__heading { grid-template-columns: 1fr; gap: 22px; } .crm-capabilities__grid,.crm-process ol { grid-template-columns: 1fr; } .crm-capabilities__grid article { min-height: 0; } .crm-capabilities__grid h3 { margin-top: 22px; } .crm-cta { grid-template-columns: 1fr; align-items: start; } }
+  @media (max-width: 560px) { .crm-hero { min-height: 650px; padding: 118px 20px 70px; } .crm-hero h1 { font-size: clamp(49px,14vw,72px); } .crm-hero__proof { margin-top: 47px; } .crm-section,.crm-faq { width: min(100% - 40px,1120px); padding: 78px 0; } .crm-cta { width: min(100% - 40px,1120px); padding: 60px 0 82px; } }
+  @media (prefers-reduced-motion: reduce) { .crm-button,.crm-capabilities__grid article { transition: none; } }
+</style>
