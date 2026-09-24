@@ -111,8 +111,8 @@ const guides = [
     .blog-index__hero { margin-bottom: 62px; }
     .blog-index h1 { font-size: clamp(48px, 14vw, 65px); }
     .blog-index__hero p { font-size: 16px; }
-    .blog-card { grid-template-columns: 1fr; border-radius: 23px; }
-    .blog-card > a { min-height: 250px; aspect-ratio: 16 / 10; }
+    .blog-card { grid-template-columns: minmax(0, 1fr); border-radius: 23px; }
+    .blog-card > a { width: 100%; min-width: 0; min-height: 250px; aspect-ratio: 16 / 10; }
     .blog-card__copy { padding: 28px 22px 32px; }
     .blog-card h3 { font-size: 34px; }
   }

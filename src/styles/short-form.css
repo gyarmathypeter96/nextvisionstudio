@@ -307,7 +307,7 @@
 .sf-client-proof__grid p {
   margin: 0;
   color: rgba(255, 255, 255, 0.63);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -673,7 +673,7 @@
   background: rgba(255,255,255,.055);
   color: #fff;
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .sf-consultation__form textarea { min-height: 120px; resize: vertical; }
@@ -829,7 +829,7 @@
   .sf-consultation__form > p { grid-column: auto; }
   .sf-faq__list { grid-template-columns: 1fr; }
   .sf-final__inner > p { font-size: 16px; }
-  .sf-sticky-cta { display: inline-flex; right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); }
+  .sf-sticky-cta { display: inline-flex; right: 80px; bottom: max(14px, env(safe-area-inset-bottom)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
