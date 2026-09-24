@@ -220,7 +220,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "photo",
     metaTitle: "Commercial Photography Dublin | Product, Studio & Brand",
     metaDescription:
-      "Commercial photographer in Dublin for product, brand and corporate photography that makes your business look the part. View the portfolio and request a quote.",
+      "Commercial photography in Dublin for products, teams and brands. See recent work and request a quote for images that fit your website, social media or campaign.",
     eyebrow: "Photography Dublin",
     headlineStart: "Commercial photography for",
     headlineAccent: "Dublin businesses",
