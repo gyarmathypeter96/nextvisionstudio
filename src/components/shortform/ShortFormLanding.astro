@@ -63,8 +63,18 @@ const serviceSchema = {
       if (link.dataset.tracked === "true") return;
       link.dataset.tracked = "true";
       link.addEventListener("click", () => {
+        try {
+          if (localStorage.getItem("nvs-cookie-consent") !== "granted") return;
+        } catch (_) {
+          return;
+        }
         (window as any).gtag?.("event", "strategy_call_click", {
           page_location: window.location.href,
+          cta_placement: link.classList.contains("sf-sticky-cta")
+            ? "short-form-sticky"
+            : link.closest(".sf-final")
+              ? "short-form-final"
+              : "short-form-hero",
         });
       });
     });

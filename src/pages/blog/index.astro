@@ -2,9 +2,31 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = await getCollection("blog");
+const guides = [
+  ...posts.map((post) => ({
+    href: `/blog/${post.id}/`,
+    title: post.data.title,
+    description: post.data.description,
+    category: post.data.category,
+    pubDate: post.data.pubDate,
+    readingTime: post.data.readingTime,
+    heroImage: post.data.heroImage,
+    heroAlt: post.data.heroAlt,
+    featured: post.data.featured,
+  })),
+  {
+    href: "/how-much-does-a-videographer-cost-in-dublin/",
+    title: "How Much Does a Business Videographer Cost in Dublin?",
+    description: "Indicative Dublin business video prices, what changes a quote and how to compare deliverables before you book.",
+    category: "Videography pricing",
+    pubDate: new Date("2026-06-19T00:00:00Z"),
+    readingTime: "8 minute read",
+    heroImage: "/images/portfolio/JVA_WxYY3p0.webp",
+    heroAlt: "Gut Fest video production in Dublin by NextVision Studio",
+    featured: false,
+  },
+].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 ---
 
 <BaseLayout
@@ -25,34 +47,34 @@ const posts = (await getCollection("blog")).sort(
     <section class="blog-index__posts" aria-labelledby="latest-articles">
       <div class="blog-index__heading">
         <h2 id="latest-articles">Latest articles</h2>
-        <span>{posts.length} {posts.length === 1 ? "guide" : "guides"}</span>
+        <span>{guides.length} {guides.length === 1 ? "guide" : "guides"}</span>
       </div>
 
       <div class="blog-index__grid">
-        {posts.map((post) => (
+        {guides.map((guide) => (
           <article class="blog-card">
-            <a href={"/blog/" + post.id + "/"} aria-label={"Read " + post.data.title}>
+            <a href={guide.href} aria-label={"Read " + guide.title}>
               <img
-                src={post.data.heroImage}
-                alt={post.data.heroAlt}
+                src={guide.heroImage}
+                alt={guide.heroAlt}
                 width="1280"
                 height="720"
-                loading={post.data.featured ? "eager" : "lazy"}
+                loading={guide.featured ? "eager" : "lazy"}
                 decoding="async"
               />
               <div class="blog-card__shade" aria-hidden="true"></div>
             </a>
             <div class="blog-card__copy">
               <div class="blog-card__meta">
-                <span>{post.data.category}</span>
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" })}
+                <span>{guide.category}</span>
+                <time datetime={guide.pubDate.toISOString()}>
+                  {guide.pubDate.toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" })}
                 </time>
-                <span>{post.data.readingTime}</span>
+                <span>{guide.readingTime}</span>
               </div>
-              <h3><a href={"/blog/" + post.id + "/"}>{post.data.title}</a></h3>
-              <p>{post.data.description}</p>
-              <a class="blog-card__read" href={"/blog/" + post.id + "/"}>Read the guide <span aria-hidden="true">↗</span></a>
+              <h3><a href={guide.href}>{guide.title}</a></h3>
+              <p>{guide.description}</p>
+              <a class="blog-card__read" href={guide.href}>Read the guide <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         ))}

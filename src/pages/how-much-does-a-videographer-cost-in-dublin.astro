@@ -27,7 +27,7 @@ const articleSchema = {
   "@graph": [
     {
       "@type": "Article",
-      headline: "How Much Does a Videographer Cost in Dublin? 2026 Business Guide",
+      headline: "How Much Does a Business Videographer Cost in Dublin? 2026 Guide",
       description:
         "A practical 2026 guide to videography pricing in Dublin, including short-form content, corporate video, events and the factors that influence a quote.",
       url: canonical,
@@ -69,6 +69,12 @@ const articleSchema = {
         {
           "@type": "ListItem",
           position: 2,
+          name: "Blog",
+          item: "https://www.nextvisionstudio.com/blog/",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
           name: "Videography cost guide",
           item: canonical,
         },
@@ -87,7 +93,7 @@ const articleSchema = {
 ---
 
 <BaseLayout
-  title="Videographer Cost Dublin 2026 | Pricing Guide"
+  title="Business Videographer Cost Dublin 2026 | Pricing Guide"
   description="How much does a videographer cost in Dublin in 2026? Compare indicative pricing for social videos, corporate video and event coverage, plus the factors that shape a quote."
   canonical={canonical}
   ogImage="https://www.nextvisionstudio.com/images/portfolio/JVA_WxYY3p0.webp"
@@ -96,10 +102,10 @@ const articleSchema = {
     <article>
       <header class="article-hero">
         <nav aria-label="Breadcrumb">
-          <a href="/">Home</a><span aria-hidden="true">/</span><span>Videography guide</span>
+          <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span>Videography guide</span>
         </nav>
         <div class="article-hero__kicker">Dublin videography guide · Updated 2026</div>
-        <h1>How Much Does a Videographer Cost in Dublin?</h1>
+        <h1>How Much Does a Business Videographer Cost in Dublin?</h1>
         <p class="article-hero__lead">
           A practical guide to video production pricing for Dublin businesses —
           from short-form social content to corporate films and event coverage.
@@ -124,6 +130,11 @@ const articleSchema = {
             The figures below are indicative market ranges, not fixed quotations.
             They are designed to help you prepare a realistic budget and compare
             proposals on more than price alone.
+          </p>
+          <p>
+            This guide covers video for businesses, events and campaigns. Wedding
+            videography has different schedules and deliverables, so its prices
+            are not directly comparable.
           </p>
 
           <h2>Typical videography prices in Dublin</h2>
@@ -153,7 +164,21 @@ const articleSchema = {
             <strong>Important:</strong> VAT, travel, actors, studio hire, specialist
             equipment, animation and additional revisions can change the total.
             Always compare the exact scope and deliverables in each quote.
+            <a href="/contact/#contact-form" data-cta-placement="videography-cost-price-range">
+              Request a quote for your project →
+            </a>
           </div>
+
+          <h2>See how the scope changes between real projects</h2>
+          <p>
+            A live event and an ongoing content programme need different plans.
+            Our <a href="/case-studies/gut-fest-event-videography-dublin/">Gut Fest event project</a>
+            combined a longer film with several short social edits. The
+            <a href="/case-studies/ventsolve-content-production/">VentSolve project</a>
+            shows how brand, educational and internal videos can form a connected
+            content library. These examples show the deliverables and production
+            choices behind a brief; they are not price quotes for those clients.
+          </p>
 
           <h2>What affects the final video production quote?</h2>
           <h3>Planning and creative development</h3>
@@ -293,6 +318,7 @@ const articleSchema = {
   .price-grid p { margin: 9px 0; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.45; }
   .price-grid strong { color: #fff; }
   .article-note { margin: 28px 0 0; padding: 20px 22px; border-left: 3px solid #9bd2ff; border-radius: 0 16px 16px 0; background: rgba(155,210,255,.07); color: rgba(255,255,255,.69); font-size: 14px; line-height: 1.6; }
+  .article-note a { display: inline-block; margin-left: 5px; color: #cfeaff; font-weight: 800; text-underline-offset: 3px; }
   .check-list { padding-left: 0; list-style: none; }
   .check-list li { position: relative; padding: 13px 0 13px 34px; border-bottom: 1px solid rgba(255,255,255,.07); }
   .check-list li::before { content: "✓"; position: absolute; left: 4px; color: #9bd2ff; font-weight: 900; }

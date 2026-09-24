@@ -47,7 +47,7 @@ const { page } = Astro.props;
       }
     </div>
 
-    <a class="landing-proof__link" href={page.relatedLinks[0].href}>
+    <a class="landing-proof__link" href={page.relatedLinks[0].href} data-cta-placement={`${page.slug}-proof`}>
       {page.relatedLinks[0].label} <span aria-hidden="true">↗</span>
     </a>
   </div>
@@ -142,6 +142,38 @@ const { page } = Astro.props;
     height: 100%;
     object-fit: cover;
     transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .landing-proof--photo article {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+  }
+
+  .landing-proof--ads .landing-proof__card--visual {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .landing-proof--ads .landing-proof__card--visual > img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    flex: 0 0 auto;
+    object-fit: contain;
+    background: #0d1117;
+  }
+
+  .landing-proof--ads .landing-proof__shade {
+    display: none;
+  }
+
+  .landing-proof--ads .landing-proof__copy {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    margin-top: auto;
+    padding: 23px 27px 27px;
   }
 
   .landing-proof--video article > img,
@@ -297,6 +329,18 @@ const { page } = Astro.props;
     .landing-proof article {
       min-height: 500px;
     }
+
+    .landing-proof--photo .landing-proof__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .landing-proof--photo article {
+      min-height: 0;
+    }
+
+    .landing-proof--ads .landing-proof__card--visual {
+      min-height: 0;
+    }
   }
 
   @media (max-width: 560px) {
@@ -311,6 +355,45 @@ const { page } = Astro.props;
     .landing-proof article {
       min-height: 440px;
       border-radius: 22px;
+    }
+
+    .landing-proof--photo .landing-proof__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .landing-proof--photo article {
+      min-height: 0;
+      border-radius: 17px;
+    }
+
+    .landing-proof--photo .landing-proof__copy {
+      right: 13px;
+      bottom: 13px;
+      left: 13px;
+    }
+
+    .landing-proof--photo .landing-proof__copy > span {
+      margin-bottom: 7px;
+      font-size: 8px;
+    }
+
+    .landing-proof--photo .landing-proof__copy h3 {
+      font-size: clamp(15px, 4vw, 19px);
+      line-height: 1.05;
+    }
+
+    .landing-proof--photo .landing-proof__copy p {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .landing-proof--ads .landing-proof__card--visual {
+      min-height: 0;
     }
 
     .landing-proof__copy {

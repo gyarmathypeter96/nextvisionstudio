@@ -3,9 +3,26 @@ const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 const isShortFormLanding = pathname === "/short-form-video-production-dublin/";
 
-const navigation = [
+const navigation: Array<{
+  label: string;
+  href: string;
+  featured?: boolean;
+  children?: Array<{ label: string; href: string }>;
+}> = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services/" },
+  {
+    label: "Services",
+    href: "/services/",
+    children: [
+      { label: "All services", href: "/services/" },
+      { label: "Video production", href: "/videography-dublin/" },
+      { label: "Photography", href: "/photography-dublin/" },
+      { label: "Social media content", href: "/social-media-content-creation-dublin/" },
+      { label: "Google & Meta Ads", href: "/google-ads-meta-ads-dublin/" },
+      { label: "Website design", href: "/webdesigner-dublin/" },
+      { label: "AI & CRM automation", href: "/crm-lead-automation-dublin/" },
+    ],
+  },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
   {
@@ -55,6 +72,26 @@ const isCurrent = (href: string) =>
     >
       {
         navigation.map((item) => (
+          item.children ? (
+            <details class="site-header__dropdown">
+              <summary
+                class:list={["site-header__link", { "is-current": isCurrent("/services/") || item.children.some((child) => child.href !== "/services/" && isCurrent(child.href)) }]}
+              >
+                {item.label}<span class="site-header__dropdown-caret" aria-hidden="true">⌄</span>
+              </summary>
+              <div class="site-header__dropdown-menu" aria-label="Service pages">
+                {item.children.map((child) => (
+                  <a
+                    class:list={["site-header__dropdown-link", { "is-current": isCurrent(child.href) }]}
+                    href={child.href}
+                    aria-current={isCurrent(child.href) ? "page" : undefined}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ) : (
           <a
             class:list={[
               "site-header__link",
@@ -67,6 +104,7 @@ const isCurrent = (href: string) =>
           >
             {item.label}
           </a>
+          )
         ))
       }
     </nav>
@@ -88,6 +126,9 @@ const isCurrent = (href: string) =>
 
       const closeMenu = () => {
         header.classList.remove("is-menu-open");
+        navigation?.querySelectorAll<HTMLDetailsElement>(".site-header__dropdown[open]").forEach((dropdown) => {
+          dropdown.open = false;
+        });
         toggle?.setAttribute("aria-expanded", "false");
         toggle?.setAttribute("aria-label", "Open navigation menu");
         document.documentElement.classList.remove("navigation-is-open");
@@ -109,9 +150,16 @@ const isCurrent = (href: string) =>
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && header.classList.contains("is-menu-open")) {
-          closeMenu();
-          toggle?.focus();
+        if (event.key === "Escape") {
+          const openDropdown = navigation?.querySelector<HTMLDetailsElement>(".site-header__dropdown[open]");
+          if (openDropdown) {
+            openDropdown.open = false;
+            openDropdown.querySelector("summary")?.focus();
+          }
+          if (header.classList.contains("is-menu-open")) {
+            closeMenu();
+            toggle?.focus();
+          }
         }
       });
 
@@ -223,6 +271,74 @@ const isCurrent = (href: string) =>
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(18px) saturate(145%);
     -webkit-backdrop-filter: blur(18px) saturate(145%);
+  }
+
+  .site-header__dropdown {
+    position: relative;
+  }
+
+  .site-header__dropdown > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .site-header__dropdown > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-header__dropdown-caret {
+    margin: -5px 0 0 7px;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 180ms ease;
+  }
+
+  .site-header__dropdown[open] .site-header__dropdown-caret {
+    transform: rotate(180deg);
+  }
+
+  .site-header__dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    display: grid;
+    width: max-content;
+    min-width: 245px;
+    max-height: min(72vh, 520px);
+    padding: 9px;
+    overflow-y: auto;
+    gap: 3px;
+    border: 1px solid rgba(207, 234, 255, 0.15);
+    border-radius: 18px;
+    background: rgba(10, 14, 17, 0.96);
+    box-shadow: 0 22px 58px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(20px) saturate(145%);
+    transform: translateX(-50%);
+  }
+
+  .site-header__dropdown-link {
+    display: flex;
+    min-height: 42px;
+    padding: 0 13px;
+    align-items: center;
+    border-radius: 11px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    font-weight: 720;
+    text-decoration: none;
+    transition: background 160ms ease, color 160ms ease;
+  }
+
+  .site-header__dropdown-link:hover,
+  .site-header__dropdown-link.is-current {
+    background: rgba(207, 234, 255, 0.09);
+    color: #ffffff;
+  }
+
+  .site-header__dropdown-link:focus-visible,
+  .site-header__dropdown > summary:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 3px;
   }
 
   .site-header__link {
@@ -382,6 +498,36 @@ const isCurrent = (href: string) =>
       font-size: 15px;
     }
 
+    .site-header__dropdown {
+      width: 100%;
+    }
+
+    .site-header__dropdown > summary {
+      justify-content: space-between;
+    }
+
+    .site-header__dropdown-menu {
+      position: static;
+      width: auto;
+      max-height: none;
+      min-width: 0;
+      margin: 1px 9px 6px;
+      padding: 5px;
+      border: 0;
+      border-left: 1px solid rgba(207, 234, 255, 0.2);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      transform: none;
+    }
+
+    .site-header__dropdown-link {
+      min-height: 43px;
+      padding: 0 14px;
+      font-size: 14px;
+    }
+
     .site-header__link.is-current::after {
       top: 50%;
       right: 15px;
@@ -404,6 +550,8 @@ const isCurrent = (href: string) =>
     .site-header__inner,
     .site-header__brand,
     .site-header__link,
+    .site-header__dropdown-caret,
+    .site-header__dropdown-link,
     .site-header__nav,
     .site-header__toggle span {
       transition: none;

@@ -9,6 +9,14 @@ const { page } = Astro.props;
 ---
 
 <section class:list={["landing-hero", `landing-hero--${page.kind}`]} aria-labelledby="landing-title">
+  {page.kind === "social" && (
+    <>
+      <video class="landing-hero__background-video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.66;z-index:0;pointer-events:none" autoplay muted loop playsinline preload="metadata" poster="/images/showreel/showreel-2025.webp" aria-hidden="true">
+        <source src="/videos/showreel-preview.mp4" type="video/mp4" />
+      </video>
+      <div class="landing-hero__video-shade" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,7,9,.86) 0%,rgba(5,7,9,.62) 58%,rgba(5,7,9,.5) 100%),linear-gradient(0deg,rgba(5,7,9,.8),transparent 60%)" aria-hidden="true"></div>
+    </>
+  )}
   <div class="landing-hero__grid" aria-hidden="true"></div>
   <div class="landing-hero__inner">
     <div class="landing-hero__copy">
@@ -22,21 +30,23 @@ const { page } = Astro.props;
         <a class="landing-hero__primary" href="#landing-contact" data-cta-placement={`${page.slug}-hero`}>
           {page.ctaLabel}
         </a>
-        <a class="landing-hero__secondary" href="#landing-work">See relevant work</a>
+        {page.kind !== "social" && <a class="landing-hero__secondary" href="#landing-work">See relevant work</a>}
       </div>
 
-      <p class="landing-hero__cta-note">
-        Tell us the result you want. We will recommend the clearest next step before you commit.
-      </p>
-
-      <p class="landing-hero__trust">{page.trustLine}</p>
-
-      <ul class="landing-hero__points" aria-label="Service highlights">
-        {page.heroPoints.map((point) => <li>{point}</li>)}
-      </ul>
+      {page.kind !== "social" && (
+        <>
+          <p class="landing-hero__cta-note">
+            Tell us the result you want. We will recommend the clearest next step before you commit.
+          </p>
+          <p class="landing-hero__trust">{page.trustLine}</p>
+          <ul class="landing-hero__points" aria-label="Service highlights">
+            {page.heroPoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </>
+      )}
     </div>
 
-    <div class="landing-hero__visual" aria-label={`${page.eyebrow} visual preview`}>
+    {page.kind !== "social" && <div class="landing-hero__visual" aria-label={`${page.eyebrow} visual preview`}>
       {
         page.kind === "web" ? (
           <div class="landing-browser" aria-hidden="true">
@@ -77,13 +87,15 @@ const { page } = Astro.props;
 
       <div class="landing-hero__float landing-hero__float--one">Dublin</div>
       <div class="landing-hero__float landing-hero__float--two">Strategy led</div>
-    </div>
+    </div>}
   </div>
 
-  <a class="landing-hero__scroll" href="#landing-value" aria-label="Continue to service details">
-    <span>Explore</span>
-    <i aria-hidden="true"></i>
-  </a>
+  {page.kind !== "social" && (
+    <a class="landing-hero__scroll" href="#landing-value" aria-label="Continue to service details">
+      <span>Explore</span>
+      <i aria-hidden="true"></i>
+    </a>
+  )}
 </section>
 
 <style>
@@ -274,6 +286,58 @@ const { page } = Astro.props;
     position: relative;
     width: min(100%, 470px);
     margin: 0 auto;
+  }
+
+  .landing-hero--social {
+    display: flex;
+    min-height: 88svh;
+    align-items: center;
+    padding-block: 150px 100px;
+    background: #07090b;
+  }
+
+  .landing-hero--social .landing-hero__background-video,
+  .landing-hero--social .landing-hero__video-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .landing-hero--social .landing-hero__background-video {
+    z-index: 0;
+    object-fit: cover;
+    object-position: center;
+    opacity: .66;
+  }
+
+  .landing-hero--social .landing-hero__video-shade {
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(5,7,9,.86) 0%, rgba(5,7,9,.62) 58%, rgba(5,7,9,.5) 100%), linear-gradient(0deg, rgba(5,7,9,.8), transparent 60%);
+  }
+
+  .landing-hero--social .landing-hero__grid {
+    z-index: 1;
+    opacity: .3;
+  }
+
+  .landing-hero--social .landing-hero__inner {
+    z-index: 2;
+    display: flex;
+    min-height: 0;
+    align-items: center;
+    width: min(100%, 1180px);
+  }
+
+  .landing-hero--social .landing-hero__copy {
+    width: min(100%, 960px);
+  }
+
+  .landing-hero--social h1 {
+    max-width: 940px;
+    font-size: clamp(54px, 7.4vw, 98px);
+    line-height: .96;
   }
 
   .landing-media,
@@ -540,6 +604,29 @@ const { page } = Astro.props;
       width: min(90%, 470px);
     }
 
+    .landing-hero--social {
+      min-height: 78svh;
+      padding: 150px 20px 100px;
+    }
+
+    .landing-hero--social .landing-hero__inner {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .landing-hero--social .landing-hero__copy {
+      width: min(100%, 850px);
+      text-align: left;
+    }
+
+    .landing-hero--social .landing-hero__lead {
+      margin-left: 0;
+    }
+
+    .landing-hero--social .landing-hero__actions {
+      justify-content: flex-start;
+    }
+
     .landing-hero__scroll {
       display: none;
     }
@@ -577,6 +664,27 @@ const { page } = Astro.props;
 
     .landing-hero__visual {
       width: calc(100% - 20px);
+    }
+
+    .landing-hero--social {
+      min-height: 82svh;
+      padding: 132px 20px 80px;
+    }
+
+    .landing-hero--social h1 {
+      font-size: clamp(46px, 13vw, 66px);
+      line-height: .96;
+    }
+
+    .landing-hero--social .landing-hero__lead {
+      max-width: 38rem;
+      margin-right: 0;
+      font-size: 16px;
+    }
+
+    .landing-hero--social .landing-hero__actions {
+      display: flex;
+      grid-template-columns: none;
     }
 
     .landing-media,

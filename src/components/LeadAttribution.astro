@@ -58,6 +58,15 @@
       return storedAttribution;
     };
 
+    const readGaClientId = () => {
+      if (!analyticsConsentGranted()) return undefined;
+      const match = document.cookie.match(/(?:^|;\s*)_ga=([^;]+)/);
+      if (!match) return undefined;
+      const parts = decodeURIComponent(match[1]).split(".");
+      const clientId = parts.length >= 4 ? `${parts[2]}.${parts[3]}` : "";
+      return /^\d{1,20}\.\d{1,20}$/.test(clientId) ? clientId : undefined;
+    };
+
     attribution = captureSessionAttribution();
 
     const captureFirstTouchAttribution = () => {
@@ -164,6 +173,9 @@
           message: messageParts.filter(Boolean).join("\n\n") || undefined,
           value: read("value") ? Number(read("value")) : undefined,
           consent: true,
+          analytics_consent: analyticsConsentGranted(),
+          ad_user_data_consent: analyticsConsentGranted(),
+          ga_client_id: readGaClientId(),
           website: read("botcheck") || read("website"),
           form_started_at: startedAt || Math.floor(Date.now() / 1000),
           form_duration_seconds: formDurationSeconds,
@@ -205,21 +217,35 @@
 
           status.textContent = "Thank you. Your enquiry has been received.";
           const redirect = read("redirect");
+          let finished = false;
+          const finish = () => {
+            if (finished) return;
+            finished = true;
+            if (redirect) {
+              window.location.assign(redirect);
+            } else {
+              form.reset();
+              if (submit) submit.disabled = false;
+            }
+          };
 
-          // A lead is only measured after the CRM has accepted the submission.
-          track("generate_lead", {
-            lead_source: leadSource,
-            form_type: formType || "Website enquiry",
-            form_id: formId,
-            form_location: window.location.pathname,
-            service_interest: serviceInterest,
-            form_duration_seconds: formDurationSeconds,
-          });
-
-          if (redirect) {
-            window.setTimeout(() => window.location.assign(redirect), 150);
+          // Count a lead only after the CRM accepts it, then allow the tag to send
+          // the event before leaving the page. The fallback handles blocked tags.
+          if (analyticsConsentGranted()) {
+            window.nvsLoadGoogleTag?.();
+            window.gtag?.("event", "generate_lead", {
+              lead_source: leadSource,
+              form_type: formType || "Website enquiry",
+              form_id: formId,
+              form_location: window.location.pathname,
+              service_interest: serviceInterest,
+              form_duration_seconds: formDurationSeconds,
+              event_callback: finish,
+              event_timeout: 1500,
+            });
+            window.setTimeout(finish, 1700);
           } else {
-            form.reset();
+            finish();
           }
         } catch (error) {
           status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";

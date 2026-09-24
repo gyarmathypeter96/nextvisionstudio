@@ -424,6 +424,21 @@
   line-height: 1.5;
 }
 
+.sf-video-card__project {
+  display: inline-block;
+  margin-top: 12px;
+  color: #cfeaff;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.sf-video-card__project:focus-visible {
+  outline: 2px solid #cfeaff;
+  outline-offset: 4px;
+}
+
 .sf-client-proof__grid article > span {
   color: var(--sf-blue);
   font-size: 9px;

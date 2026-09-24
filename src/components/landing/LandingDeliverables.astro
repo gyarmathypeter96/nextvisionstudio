@@ -8,7 +8,7 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<section class="landing-deliverables" aria-labelledby="landing-deliverables-title">
+<section class:list={["landing-deliverables", `landing-deliverables--${page.kind}`]} aria-labelledby="landing-deliverables-title">
   <div class="landing-deliverables__inner">
     <header>
       <div class="landing-deliverables__kicker">{page.deliverablesKicker}</div>
@@ -20,7 +20,7 @@ const { page } = Astro.props;
       {
         page.deliverables.map((item, index) => (
           <article>
-            <span>0{index + 1}</span>
+            {page.kind !== "social" && <span>0{index + 1}</span>}
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </article>
@@ -149,6 +149,46 @@ const { page } = Astro.props;
     line-height: 1.55;
   }
 
+  .landing-deliverables--social {
+    padding-block: 104px;
+    background: linear-gradient(to bottom, #111, #101316 52%, #111);
+  }
+
+  .landing-deliverables--social header {
+    margin-bottom: 48px;
+  }
+
+  .landing-deliverables--social h2 {
+    font-size: clamp(42px, 5.8vw, 68px);
+  }
+
+  .landing-deliverables--social .landing-deliverables__grid {
+    gap: 12px;
+  }
+
+  .landing-deliverables--social article {
+    min-height: 190px;
+    padding: 26px;
+    border-color: rgba(255,255,255,.1);
+    border-radius: 19px;
+    background: rgba(255,255,255,.025);
+    box-shadow: none;
+  }
+
+  .landing-deliverables--social article::after {
+    display: none;
+  }
+
+  .landing-deliverables--social article h3 {
+    margin-top: 30px;
+    font-size: 21px;
+  }
+
+  .landing-deliverables--social article p {
+    color: rgba(255,255,255,.58);
+    font-size: 13px;
+  }
+
   @media (max-width: 900px) {
     .landing-deliverables__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -179,6 +219,18 @@ const { page } = Astro.props;
     .landing-deliverables article {
       min-height: 200px;
       padding: 25px;
+    }
+
+    .landing-deliverables--social {
+      padding-block: 80px;
+    }
+
+    .landing-deliverables--social h2 {
+      font-size: clamp(39px, 11.5vw, 54px);
+    }
+
+    .landing-deliverables--social article {
+      min-height: 0;
     }
 
     .landing-deliverables article > span {

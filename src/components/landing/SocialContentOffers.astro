@@ -1,0 +1,217 @@
+---
+const offers = [
+  {
+    title: "Monthly social media content",
+    description: "A month of planned videos and photos, filmed and edited so your business has fresh content ready to share.",
+  },
+  {
+    title: "Content for your website",
+    description: "Professional video and photography that clearly shows your team, services and work to potential customers.",
+  },
+  {
+    title: "Social media ads creative",
+    description: "Short videos and images shaped around your offer, helping your ads catch attention and bring in enquiries.",
+  },
+];
+
+const videos = [
+  { title: "Peter's social media advice", thumbnail: "/images/content/social-platform-guide.webp", width: 1280, height: 720, type: "instagram", source: "https://www.instagram.com/reel/Da2M-s8D_TN/embed/" },
+  { title: "Leroy's Barking World", thumbnail: "/images/portfolio/53-_kK95Eoc.webp", width: 640, height: 360, type: "youtube", source: "53-_kK95Eoc" },
+  { title: "Buga Ramen", thumbnail: "/images/portfolio/VMcywbhRMCc.webp", width: 640, height: 360, type: "youtube", source: "VMcywbhRMCc" },
+  { title: "SG Studios Dublin", thumbnail: "/images/portfolio/fLzjvPVHzAc.webp", width: 640, height: 360, type: "youtube", source: "fLzjvPVHzAc" },
+];
+
+const photos = [
+  { title: "Brand photography", thumbnail: "/images/photography/thumbs/brand-photography-social-content-dublin.jpg", width: 506, height: 760, image: "/images/photography/brand-photography-social-content-dublin.webp", alt: "Brand photography for a Dublin business" },
+  { title: "Product photography", thumbnail: "/images/photography/thumbs/product-photography-dublin.jpg", width: 427, height: 760, image: "/images/photography/product-photography-dublin.webp", alt: "Product photography for a Dublin business" },
+  { title: "Hospitality photography", thumbnail: "/images/photography/thumbs/hospitality-brand-photography-dublin.jpg", width: 506, height: 760, image: "/images/photography/hospitality-brand-photography-dublin.webp", alt: "Hospitality brand photography in Dublin" },
+  { title: "Event photography", thumbnail: "/images/photography/thumbs/event-photography-dublin.jpg", width: 608, height: 760, image: "/images/photography/event-photography-dublin.webp", alt: "Live event photography in Dublin" },
+];
+---
+
+<section class="social-offers" aria-labelledby="social-offers-title">
+  <div class="social-offers__inner">
+    <header class="social-offers__header">
+      <h2 id="social-offers-title">What Can We Create for Your Business?</h2>
+    </header>
+
+    <div class="social-offers__grid">
+      {offers.map((offer) => (
+        <article class="social-offers__card">
+          <h3>{offer.title}</h3>
+          <p>{offer.description}</p>
+        </article>
+      ))}
+    </div>
+
+    <section class="social-work" aria-labelledby="social-work-videos-title">
+      <header class="social-work__heading">
+        <h3 id="social-work-videos-title">Video examples</h3>
+        <p>Tap any video to watch it here.</p>
+      </header>
+      <div class="social-work__videos">
+        {videos.map((video) => (
+          <button
+            class="social-work__video"
+            type="button"
+            data-work-video={video.source}
+            data-work-video-type={video.type}
+            data-work-video-title={video.title}
+            aria-label={`Play video: ${video.title}`}
+          >
+            <img src={video.thumbnail} alt="" width={video.width} height={video.height} loading="lazy" decoding="async" />
+            <span class="social-work__play" aria-hidden="true">▶</span>
+            <span class="social-work__caption">{video.title}</span>
+          </button>
+        ))}
+      </div>
+
+      <header class="social-work__heading social-work__heading--photos">
+        <h3>Photography examples</h3>
+        <p>Tap any image to view it larger.</p>
+      </header>
+      <div class="social-work__photos">
+        {photos.map((photo) => (
+          <button
+            class="social-work__photo"
+            type="button"
+            data-work-image={photo.image}
+            data-work-image-alt={photo.alt}
+            aria-label={`View larger: ${photo.title}`}
+          >
+            <img src={photo.thumbnail} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+            <span>{photo.title}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <dialog class="social-work__dialog" aria-label="Portfolio preview" data-work-dialog>
+    <button class="social-work__close" type="button" aria-label="Close preview" data-work-close>×</button>
+    <div class="social-work__dialog-media" data-work-dialog-media></div>
+  </dialog>
+</section>
+
+<script>
+  const setupSocialWorkGallery = () => {
+    const dialog = document.querySelector<HTMLDialogElement>("[data-work-dialog]");
+    const media = dialog?.querySelector<HTMLElement>("[data-work-dialog-media]");
+    const closeButton = dialog?.querySelector<HTMLButtonElement>("[data-work-close]");
+    if (!dialog || !media || dialog.dataset.ready === "true") return;
+    dialog.dataset.ready = "true";
+
+    document.querySelectorAll<HTMLButtonElement>("[data-work-video]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const source = button.dataset.workVideo;
+        if (!source) return;
+        const iframe = document.createElement("iframe");
+        iframe.title = button.dataset.workVideoTitle ?? "NextVision Studio video example";
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.src = button.dataset.workVideoType === "instagram"
+          ? source
+          : `https://www.youtube-nocookie.com/embed/${source}?autoplay=1&playsinline=1&rel=0`;
+        media.replaceChildren(iframe);
+        dialog.dataset.mode = "video";
+        dialog.showModal();
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>("[data-work-image]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const image = document.createElement("img");
+        image.src = button.dataset.workImage ?? "";
+        image.alt = button.dataset.workImageAlt ?? "NextVision Studio photography example";
+        media.replaceChildren(image);
+        dialog.dataset.mode = "image";
+        dialog.showModal();
+      });
+    });
+
+    closeButton?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      media.replaceChildren();
+    });
+  };
+
+  setupSocialWorkGallery();
+  document.addEventListener("astro:page-load", setupSocialWorkGallery);
+</script>
+
+<style>
+  .social-offers,
+  .social-offers * { box-sizing: border-box; }
+  .social-offers { padding: 96px 24px 110px; border-block: 1px solid rgba(255,255,255,.075); background: radial-gradient(circle at 50% 0, rgba(155,210,255,.06), transparent 34%), #111; color: #fff; }
+  .social-offers__inner { width: min(100%, 1160px); margin: 0 auto; }
+  .social-offers__header { width: min(100%, 900px); margin: 0 auto 42px; }
+  .social-offers h2 { margin: 0; font-size: clamp(39px, 5.4vw, 65px); font-weight: 850; letter-spacing: -.055em; line-height: .98; text-wrap: balance; }
+  .social-offers__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid rgba(255,255,255,.12); }
+  .social-offers__card { padding: 25px 26px 28px; }
+  .social-offers__card + .social-offers__card { border-left: 1px solid rgba(255,255,255,.1); }
+  .social-offers h3 { margin: 0 0 12px; color: #fff; font-size: clamp(20px, 2.1vw, 26px); font-weight: 720; letter-spacing: -.035em; line-height: 1.12; text-wrap: balance; }
+  .social-offers__card p { margin: 0; color: rgba(255,255,255,.62); font-size: 14px; line-height: 1.65; }
+
+  .social-work { margin-top: 76px; }
+  .social-work__heading { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 20px; gap: 20px; }
+  .social-work__heading h3 { margin: 0; color: #fff; font-size: 25px; font-weight: 720; letter-spacing: -.035em; }
+  .social-work__heading p { margin: 0; color: rgba(255,255,255,.46); font-size: 12px; }
+  .social-work__heading--photos { margin-top: 54px; }
+  .social-work__videos,
+  .social-work__photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
+  .social-work__video,
+  .social-work__photo { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid rgba(180,220,255,.14); border-radius: 16px; background: #090b0d; color: #fff; text-align: left; cursor: pointer; }
+  .social-work__video { aspect-ratio: 9 / 12; }
+  .social-work__video img,
+  .social-work__photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 260ms ease, opacity 260ms ease; }
+  .social-work__video img { position: absolute; inset: 0; }
+  .social-work__video::after,
+  .social-work__photo::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.82)); pointer-events: none; }
+  .social-work__play { position: absolute; top: 50%; left: 50%; display: grid; width: 54px; height: 54px; place-items: center; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; background: rgba(5,7,9,.54); color: #fff; font-size: 16px; transform: translate(-50%,-50%); backdrop-filter: blur(8px); }
+  .social-work__caption,
+  .social-work__photo > span { position: absolute; z-index: 1; right: 16px; bottom: 15px; left: 16px; color: #fff; font-size: 13px; font-weight: 700; }
+  .social-work__photo { aspect-ratio: 4 / 3; }
+  .social-work__photo img { position: absolute; inset: 0; }
+  .social-work__video:hover img,
+  .social-work__photo:hover img { transform: scale(1.045); opacity: .85; }
+  .social-work__video:focus-visible,
+  .social-work__photo:focus-visible,
+  .social-work__close:focus-visible { outline: 2px solid #a8d7ff; outline-offset: 3px; }
+
+  .social-work__dialog { position: fixed; width: min(92vw, 900px); max-width: none; max-height: 92vh; padding: 48px 20px 20px; overflow: visible; border: 1px solid rgba(180,220,255,.22); border-radius: 20px; background: #080a0c; color: #fff; box-shadow: 0 30px 90px rgba(0,0,0,.7); }
+  .social-work__dialog::backdrop { background: rgba(0,0,0,.82); backdrop-filter: blur(8px); }
+  .social-work__dialog[data-mode="video"] { width: min(92vw, 440px); padding: 42px 12px 12px; }
+  .social-work__close { position: absolute; top: 8px; right: 10px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; background: #181c20; color: #fff; font-size: 24px; cursor: pointer; }
+  .social-work__dialog-media { display: grid; place-items: center; }
+  .social-work__dialog[data-mode="video"] .social-work__dialog-media { aspect-ratio: 9 / 16; }
+  .social-work__dialog-media iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 12px; background: #000; }
+  .social-work__dialog[data-mode="image"] .social-work__dialog-media img { display: block; max-width: 100%; max-height: calc(92vh - 90px); object-fit: contain; }
+
+  @media (max-width: 900px) {
+    .social-offers__grid { grid-template-columns: 1fr; }
+    .social-offers__card { padding: 23px 0; }
+    .social-offers__card + .social-offers__card { border-top: 1px solid rgba(255,255,255,.1); border-left: 0; }
+    .social-work__videos,
+    .social-work__photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .social-offers { padding: 78px 16px 88px; }
+    .social-offers__header { margin-bottom: 27px; }
+    .social-work { margin-top: 54px; }
+    .social-work__heading { display: block; }
+    .social-work__heading p { margin-top: 6px; }
+    .social-work__videos,
+    .social-work__photos { gap: 9px; }
+    .social-work__caption,
+    .social-work__photo > span { right: 10px; bottom: 10px; left: 10px; font-size: 11px; }
+    .social-work__play { width: 42px; height: 42px; font-size: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .social-work__video img,
+    .social-work__photo img { transition: none; }
+  }
+</style>

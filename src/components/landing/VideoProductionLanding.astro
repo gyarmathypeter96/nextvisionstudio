@@ -2,6 +2,7 @@
 import type { LandingPageData } from "../../data/landingPages";
 import LandingFAQ from "./LandingFAQ.astro";
 import LandingLeadForm from "./LandingLeadForm.astro";
+import InstagramReelFeature from "../InstagramReelFeature.astro";
 
 interface Props {
   page: LandingPageData;
@@ -160,6 +161,8 @@ const clients = [
   </div>
 </section>
 
+<InstagramReelFeature variant="video" />
+
 <section class="video-process" aria-labelledby="video-process-title" data-video-reveal>
   <div class="video-shell">
     <header class="video-process__header">
@@ -282,7 +285,7 @@ const clients = [
 
   .video-kicker {
     margin: 0 0 18px;
-    color: #f2c66d;
+    color: #cfeaff;
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 0;
@@ -396,7 +399,7 @@ const clients = [
   .video-text-link:focus-visible,
   .video-work__grid a:focus-visible,
   .video-hero__continue:focus-visible {
-    outline: 2px solid #f2c66d;
+    outline: 2px solid #cfeaff;
     outline-offset: 4px;
   }
 
@@ -659,7 +662,7 @@ const clients = [
   }
 
   .video-system__grid article > span {
-    color: #f2c66d;
+    color: #cfeaff;
     font-size: 12px;
     font-weight: 900;
   }
@@ -680,12 +683,8 @@ const clients = [
   .video-showreel {
     padding: 110px 0 0;
     overflow: hidden;
-    background: #f0eee9;
-    color: #111111;
-  }
-
-  .video-showreel .video-kicker {
-    color: #855b09;
+    background: #111111;
+    color: #ffffff;
   }
 
   .video-showreel h2 {
@@ -763,7 +762,7 @@ const clients = [
   }
 
   .video-work__copy > span {
-    color: #f2c66d;
+    color: #cfeaff;
     font-size: 10px;
     font-weight: 900;
     text-transform: uppercase;
@@ -804,12 +803,8 @@ const clients = [
 
   .video-process {
     padding: 118px 0 126px;
-    background: #f0eee9;
-    color: #111111;
-  }
-
-  .video-process .video-kicker {
-    color: #855b09;
+    background: #111111;
+    color: #ffffff;
   }
 
   .video-process__header {
@@ -820,7 +815,7 @@ const clients = [
   .video-process__header > p:last-child {
     max-width: 650px;
     margin: 24px 0 0;
-    color: rgba(17, 17, 17, 0.65);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 17px;
     line-height: 1.65;
   }
@@ -830,14 +825,14 @@ const clients = [
     grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: 1px solid rgba(17, 17, 17, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
     list-style: none;
   }
 
   .video-process__steps li {
     min-height: 245px;
     padding: 28px 25px;
-    border-right: 1px solid rgba(17, 17, 17, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .video-process__steps li:last-child {
@@ -845,7 +840,7 @@ const clients = [
   }
 
   .video-process__steps > li > span {
-    color: #855b09;
+    color: #cfeaff;
     font-size: 12px;
     font-weight: 900;
   }
@@ -858,7 +853,7 @@ const clients = [
 
   .video-process__steps p {
     margin: 0;
-    color: rgba(17, 17, 17, 0.63);
+    color: rgba(255, 255, 255, 0.63);
     font-size: 14px;
     line-height: 1.58;
   }
@@ -870,9 +865,9 @@ const clients = [
     margin-top: 65px;
     padding: 42px;
     gap: 50px;
-    border: 1px solid rgba(17, 17, 17, 0.25);
+    border: 1px solid rgba(207, 234, 255, 0.2);
     border-radius: 6px;
-    background: #ffffff;
+    background: #171d22;
   }
 
   .video-process__decision h3 {
@@ -886,7 +881,7 @@ const clients = [
   .video-process__decision div > p:last-child {
     max-width: 720px;
     margin: 18px 0 0;
-    color: rgba(17, 17, 17, 0.65);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 15px;
     line-height: 1.6;
   }
