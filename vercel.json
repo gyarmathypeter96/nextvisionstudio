@@ -52,17 +52,17 @@
     },
     {
       "source": "/home-3-2-2-2/",
-      "destination": "/contact/",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/home-2-2-2-2-2-2/",
-      "destination": "/services/",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/category/uncategorized/",
-      "destination": "/how-much-does-a-videographer-cost-in-dublin/",
+      "destination": "/blog/",
       "permanent": true
     },
     {

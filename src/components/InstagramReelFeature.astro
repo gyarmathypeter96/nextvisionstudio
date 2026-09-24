@@ -14,7 +14,6 @@ const copy = variant === "social"
       aria: "Play the NextVision Studio social media advice Reel",
     }
   : {
-      kicker: "A real on-camera example",
       title: "Good video starts with a human connection.",
       text: "A direct-to-camera story can make advice feel personal and build trust before a first conversation. Watch this NextVision Studio Reel, filmed and shaped for vertical social viewing.",
       aria: "Play the NextVision Studio talking-head video Reel",
@@ -24,12 +23,14 @@ const copy = variant === "social"
 <section class="reel-feature" aria-labelledby={`reel-feature-title-${variant}`}>
   <div class="reel-feature__inner">
     <div class="reel-feature__copy">
-      <p class="reel-feature__kicker">{copy.kicker}</p>
+      {copy.kicker && <p class="reel-feature__kicker">{copy.kicker}</p>}
       <h2 id={`reel-feature-title-${variant}`}>{copy.title}</h2>
       <p>{copy.text}</p>
-      <a href={reelUrl} target="_blank" rel="noopener noreferrer">
-        View the Reel on Instagram <span aria-hidden="true">↗</span>
-      </a>
+      {variant === "social" && (
+        <a href={reelUrl} target="_blank" rel="noopener noreferrer">
+          View the Reel on Instagram <span aria-hidden="true">↗</span>
+        </a>
+      )}
     </div>
 
     <div class="reel-feature__frame">

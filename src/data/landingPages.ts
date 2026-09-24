@@ -74,20 +74,20 @@ export const landingPages: Record<string, LandingPageData> = {
     headlineStart: "Video that makes your business",
     headlineAccent: "easier to choose",
     lead:
-      "One planned production can give your website, campaigns and social channels the clear story they have been missing.",
+      "We plan your message, film a full day, then create channel-specific videos and ready-to-post edits to keep your website and social channels supplied long after the shoot.",
     heroImage: {
       src: "/images/portfolio/JVA_WxYY3p0.webp",
       alt: "Professional event videography in Dublin by NextVision Studio",
       width: 640,
       height: 360,
     },
-    heroPoints: ["Concept and script", "Filming in Dublin", "Every format delivered"],
+    heroPoints: [],
     ctaLabel: "Plan my video project",
     trustLine: "Trusted for brand, event and social video production",
     problemKicker: "The real problem",
     problemTitle: "Your business does not need another video. It needs a useful video library.",
     problemText:
-      "A one-off film disappears quickly. We plan the message, shoot with every channel in mind and turn the footage into assets your team can keep using.",
+      "We shape the plan with you, film everything in one focused day and prepare edits for the channels you use—ready for your team to post.",
     outcomes: [
       {
         title: "Make the offer clear",
@@ -220,7 +220,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "photo",
     metaTitle: "Commercial Photography Dublin | Product, Studio & Brand",
     metaDescription:
-      "Commercial photography in Dublin for products, brands, teams and events. Plan a studio-style or on-location shoot with edited images for your website, ads and social.",
+      "Commercial photographer in Dublin for product, brand and corporate photography that makes your business look the part. View the portfolio and request a quote.",
     eyebrow: "Photography Dublin",
     headlineStart: "Commercial photography for",
     headlineAccent: "Dublin businesses",
