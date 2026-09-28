@@ -8,6 +8,10 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
   is:inline
   define:vars={{ GOOGLE_TAG_ID, GOOGLE_ADS_ID, googleTagSource }}
 >
+  (() => {
+  const analyticsHosts = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
+  if (!analyticsHosts.includes(window.location.hostname)) return;
+
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () {
     window.dataLayer.push(arguments);
@@ -59,5 +63,5 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
       window.addEventListener("load", loadTagWhenIdle, { once: true });
     }
   }
-
+  })();
 </script>

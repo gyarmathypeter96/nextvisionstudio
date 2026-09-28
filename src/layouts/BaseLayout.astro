@@ -131,6 +131,9 @@ const websiteSchema = {
     <!-- Optional analytics loaders. No third-party request is made before consent. -->
     <script is:inline>
       (() => {
+        const analyticsHosts = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
+        if (!analyticsHosts.includes(window.location.hostname)) return;
+
         const clarityProjectId = "ylqu4w3rot";
         const metaPixelId = "657703057386811";
 
