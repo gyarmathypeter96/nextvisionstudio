@@ -1,6 +1,6 @@
 ---
 title: "How to Plan a Business Video Production in Dublin"
-metaTitle: "Business Video Production Guide Dublin | NextVision Studio"
+metaTitle: "How to Plan a Business Video Production | Dublin Guide"
 description: "A practical guide to planning business video production in Dublin, from the message and shot list to filming, delivery, distribution and measurement."
 pubDate: 2026-09-02
 updatedDate: 2026-09-02
@@ -11,10 +11,10 @@ heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
 heroAlt: "Business video production in Dublin planned and filmed by NextVision Studio"
 featured: false
 keywords:
-  - "video production Dublin"
-  - "business video production Dublin"
-  - "commercial videographer Dublin"
-  - "corporate video production Dublin"
+  - "how to plan a business video"
+  - "business video production planning"
+  - "video shoot planning checklist"
+  - "business video brief"
 ---
 
 A business video is expensive when nobody knows what it is meant to do.

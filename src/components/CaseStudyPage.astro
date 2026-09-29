@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { caseStudies } from "../data/caseStudies";
 
 interface LinkItem {
   label: string;
@@ -42,6 +43,7 @@ const videoUrl = props.videoId
   ? `https://www.youtube.com/watch?v=${props.videoId}`
   : undefined;
 const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href;
+const otherCaseStudies = caseStudies.filter((study) => study.href !== Astro.url.pathname);
 
 const caseStudySchema = {
   "@context": "https://schema.org",
@@ -157,13 +159,19 @@ const caseStudySchema = {
           <h2 id="case-study-video-title">{props.videoTitle ?? "Project video"}</h2>
         </div>
         <div class="case-study-video__frame">
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${props.videoId}`}
-            title={props.videoTitle ?? props.title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+          {/* The YouTube player (~1 MB) only loads after a click. */}
+          <button
+            type="button"
+            class="case-study-video__poster"
+            data-youtube-id={props.videoId}
+            data-youtube-title={props.videoTitle ?? props.title}
+            aria-label={`Play video: ${props.videoTitle ?? props.title}`}
+          >
+            <img src={props.heroImage} alt="" width="1280" height="720" loading="lazy" decoding="async" />
+            <span class="case-study-video__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+            </span>
+          </button>
         </div>
       </section>
     )}
@@ -217,12 +225,27 @@ const caseStudySchema = {
           </a>
         ))}
         {props.source && <a href={props.source.href} target="_blank" rel="noreferrer">{props.source.label}</a>}
+        <p class="case-study-next__label">More case studies</p>
+        {otherCaseStudies.map((study) => <a href={study.href}>{study.title}</a>)}
       </div>
     </section>
   </main>
 
   <script type="application/ld+json" set:html={JSON.stringify(caseStudySchema)} />
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-youtube-id]").forEach((poster) => {
+    poster.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${poster.dataset.youtubeId}?autoplay=1`;
+      iframe.title = poster.dataset.youtubeTitle || "Project video";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      poster.replaceWith(iframe);
+    }, { once: true });
+  });
+</script>
 
 <style>
   .case-study-page,
@@ -302,7 +325,7 @@ const caseStudySchema = {
 
   .case-study-facts dt {
     margin-bottom: 7px;
-    color: rgba(255, 255, 255, .42);
+    color: rgba(255, 255, 255, .58);
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -364,6 +387,12 @@ const caseStudySchema = {
   .case-study-video__heading { margin-bottom: 28px; }
   .case-study-video__frame { aspect-ratio: 16 / 9; background: #08090a; }
   .case-study-video__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .case-study-video__poster { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: #08090a; cursor: pointer; }
+  .case-study-video__poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .case-study-video__play { position: absolute; top: 50%; left: 50%; display: grid; width: 76px; height: 76px; place-items: center; border-radius: 50%; background: rgba(17, 17, 17, .78); color: #ffffff; transform: translate(-50%, -50%); transition: background 200ms ease, transform 200ms ease; }
+  .case-study-video__play svg { width: 32px; height: 32px; margin-left: 4px; fill: currentColor; }
+  .case-study-video__poster:hover .case-study-video__play { background: #cfeaff; color: #111111; transform: translate(-50%, -50%) scale(1.06); }
+  .case-study-video__poster:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
 
   .case-study-social__grid {
     display: grid;
@@ -407,6 +436,7 @@ const caseStudySchema = {
   .case-study-next__links { display: grid; align-content: center; gap: 13px; }
   .case-study-next__links a { color: #cfeaff; font-size: 15px; font-weight: 800; text-decoration: none; }
   .case-study-next__links a:hover { color: #ffffff; }
+  .case-study-next p.case-study-next__label { margin: 14px 0 0; color: rgba(255, 255, 255, .58); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
 
   @media (max-width: 800px) {
     .case-study-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 64px; }

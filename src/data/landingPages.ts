@@ -33,6 +33,8 @@ export interface LandingPageData {
     alt: string;
     width: number;
     height: number;
+    // Optional smaller variants so phones do not download the full-size image.
+    srcset?: string;
   };
   heroPoints: string[];
   ctaLabel: string;
@@ -231,6 +233,7 @@ export const landingPages: Record<string, LandingPageData> = {
       alt: "Professional event photographer in Dublin by NextVision Studio",
       width: 1440,
       height: 1800,
+      srcset: "/images/photography/event-photography-dublin-720.webp 720w, /images/photography/event-photography-dublin-1080.webp 1080w, /images/photography/event-photography-dublin.webp 1440w",
     },
     heroPoints: ["Brand-focused planning", "Professional editing", "Web and social formats"],
     ctaLabel: "Get a photography quote",

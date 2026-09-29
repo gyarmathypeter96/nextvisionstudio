@@ -1,71 +1,77 @@
 import type { APIRoute } from "astro";
+import { getCollection } from "astro:content";
+import { SITE_URL } from "../config/site";
 
-const routes = [
-  { path: "", lastmod: "2026-09-23" },
-  { path: "services/", lastmod: "2026-09-23" },
-  { path: "about/", lastmod: "2026-07-15" },
-  { path: "contact/", lastmod: "2026-09-23" },
-  { path: "videography-dublin/", lastmod: "2026-09-23" },
-  { path: "corporate-video-production-dublin/", lastmod: "2026-09-01" },
-  { path: "event-videographer-dublin/", lastmod: "2026-09-01" },
-  { path: "google-ads-meta-ads-dublin/", lastmod: "2026-09-23" },
-  {
-    path: "short-form-video-production-dublin/",
-    lastmod: "2026-09-23",
-  },
-  { path: "photography-dublin/", lastmod: "2026-09-23" },
-  { path: "webdesigner-dublin/", lastmod: "2026-07-28" },
-  {
-    path: "social-media-content-creation-dublin/",
-    lastmod: "2026-09-23",
-  },
-  { path: "crm-lead-automation-dublin/", lastmod: "2026-09-23" },
-  { path: "case-studies/", lastmod: "2026-07-28" },
-  { path: "case-studies/gut-fest-event-videography-dublin/", lastmod: "2026-07-28" },
-  { path: "case-studies/macaron-boutique-product-video/", lastmod: "2026-09-23" },
-  { path: "case-studies/leroys-barking-world-social-content/", lastmod: "2026-07-28" },
-  { path: "case-studies/ventsolve-content-production/", lastmod: "2026-09-23" },
-  { path: "case-studies/sg-studios-dublin-podcast-studio-content/", lastmod: "2026-09-23" },
-  { path: "case-studies/pogany-indulo-live-concert-video/", lastmod: "2026-07-28" },
-  {
-    path: "how-much-does-a-videographer-cost-in-dublin/",
-    lastmod: "2026-09-23",
-  },
-  { path: "blog/", lastmod: "2026-09-23" },
-  {
-    path: "blog/short-form-vs-long-form-video-dublin/",
-    lastmod: "2026-09-23",
-  },
-  {
-    path: "blog/why-short-form-video-captures-attention/",
-    lastmod: "2026-09-23",
-  },
-  {
-    path: "blog/short-form-video-production-dublin-guide/",
-    lastmod: "2026-07-16",
-  },
-  {
-    path: "blog/commercial-photography-shoot-planning-dublin/",
-    lastmod: "2026-09-02",
-  },
-  {
-    path: "blog/product-photography-shot-list-dublin/",
-    lastmod: "2026-09-02",
-  },
-  {
-    path: "blog/business-video-production-planning-dublin/",
-    lastmod: "2026-09-02",
-  },
-  { path: "privacy-policy/", lastmod: "2026-09-23" },
-  { path: "image-licensing/", lastmod: "2026-07-16" },
-];
+// Every .astro page in src/pages is discovered automatically, so a new page
+// cannot be left out of the sitemap by accident. Pages that render with
+// noindex must be listed here; `npm run check:indexability` fails the build
+// if this list and the rendered robots meta tags ever disagree.
+const noindexRoutes = new Set([
+  "404/",
+  "quotesend/",
+  "website-design-quote/",
+  "website-design-quote/thanks/",
+]);
 
-export const GET: APIRoute = () => {
-  const urls = routes
+// Last meaningful content update per route. Routes without an entry are still
+// listed, just without <lastmod>. Blog posts use their frontmatter dates.
+const lastModified: Record<string, string> = {
+  "": "2026-09-23",
+  "services/": "2026-09-23",
+  "about/": "2026-07-15",
+  "contact/": "2026-09-23",
+  "videography-dublin/": "2026-09-23",
+  "corporate-video-production-dublin/": "2026-09-01",
+  "event-videographer-dublin/": "2026-09-01",
+  "google-ads-meta-ads-dublin/": "2026-09-23",
+  "short-form-video-production-dublin/": "2026-09-23",
+  "photography-dublin/": "2026-09-23",
+  "webdesigner-dublin/": "2026-07-28",
+  "social-media-content-creation-dublin/": "2026-09-23",
+  "crm-lead-automation-dublin/": "2026-09-23",
+  "case-studies/": "2026-07-28",
+  "case-studies/gut-fest-event-videography-dublin/": "2026-07-28",
+  "case-studies/macaron-boutique-product-video/": "2026-09-23",
+  "case-studies/leroys-barking-world-social-content/": "2026-07-28",
+  "case-studies/ventsolve-content-production/": "2026-09-23",
+  "case-studies/sg-studios-dublin-podcast-studio-content/": "2026-09-23",
+  "case-studies/pogany-indulo-live-concert-video/": "2026-07-28",
+  "how-much-does-a-videographer-cost-in-dublin/": "2026-09-23",
+  "blog/": "2026-09-23",
+  "privacy-policy/": "2026-09-23",
+  "image-licensing/": "2026-07-16",
+};
+
+const pageFiles = Object.keys(import.meta.glob("./**/*.astro"));
+
+const routeFromFile = (file: string) =>
+  file
+    .replace(/^\.\//, "")
+    .replace(/\.astro$/, "")
+    .replace(/(^|\/)index$/, "")
+    .replace(/([^/])$/, "$1/");
+
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+
+export const GET: APIRoute = async () => {
+  const staticRoutes = pageFiles
+    .filter((file) => !file.includes("["))
+    .map(routeFromFile)
+    .filter((path) => !noindexRoutes.has(path))
+    .map((path) => ({ path, lastmod: lastModified[path] }));
+
+  const posts = await getCollection("blog");
+  const blogRoutes = posts.map((post) => ({
+    path: `blog/${post.id}/`,
+    lastmod: formatDate(post.data.updatedDate ?? post.data.pubDate),
+  }));
+
+  const urls = [...staticRoutes, ...blogRoutes]
+    .sort((a, b) => a.path.localeCompare(b.path))
     .map(
       (route) => `  <url>
-    <loc>https://www.nextvisionstudio.com/${route.path}</loc>
-    <lastmod>${route.lastmod}</lastmod>
+    <loc>${SITE_URL}/${route.path}</loc>${route.lastmod ? `
+    <lastmod>${route.lastmod}</lastmod>` : ""}
   </url>`,
     )
     .join("\n");
