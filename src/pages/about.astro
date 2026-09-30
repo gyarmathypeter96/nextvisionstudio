@@ -37,6 +37,13 @@ const aboutSchema = {
       image: "https://www.nextvisionstudio.com/images/about/peter-gyarmathy.webp",
       worksFor: { "@id": "https://www.nextvisionstudio.com/#business" },
     },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
+        { "@type": "ListItem", position: 2, name: "About", item: "https://www.nextvisionstudio.com/about/" },
+      ],
+    },
   ],
 };
 ---

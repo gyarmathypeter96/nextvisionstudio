@@ -347,6 +347,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "Product photography shot list", href: "/blog/product-photography-shot-list-dublin/" },
       { label: "Combine photography with video", href: "/videography-dublin/" },
       { label: "Explore website design", href: "/webdesigner-dublin/" },
+      { label: "Image licensing terms", href: "/image-licensing/" },
     ],
     formTitle: "Tell us what you need photographed.",
     formText:
@@ -470,6 +471,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "Explore all digital services", href: "/services/" },
       { label: "Add professional photography", href: "/photography-dublin/" },
       { label: "Plan social media content", href: "/social-media-content-creation-dublin/" },
+      { label: "Run Google Ads and Meta Ads", href: "/google-ads-meta-ads-dublin/" },
     ],
     formTitle: "Tell us what your website needs to achieve.",
     formText:
@@ -742,6 +744,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "See Google Ads and Meta Ads support", href: "/google-ads-meta-ads-dublin/" },
       { label: "Short-form vs long-form video guide", href: "/blog/short-form-vs-long-form-video-dublin/" },
       { label: "How short-form video earns attention", href: "/blog/why-short-form-video-captures-attention/" },
+      { label: "Short-form video production guide", href: "/blog/short-form-video-production-dublin-guide/" },
     ],
     formTitle: "Stop Guessing. Start Posting.",
     formText: "",
