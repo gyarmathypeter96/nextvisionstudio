@@ -45,8 +45,7 @@ const videoUrl = props.videoId
 const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href;
 const otherCaseStudies = caseStudies.filter((study) => study.href !== Astro.url.pathname);
 
-const caseStudySchema = {
-  "@context": "https://schema.org",
+const articleSchema = {
   "@type": "Article",
   headline: props.title,
   description: props.description,
@@ -67,6 +66,21 @@ const caseStudySchema = {
     "@type": "Place",
     name: props.location,
   },
+};
+
+const caseStudySchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    articleSchema,
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
+        { "@type": "ListItem", position: 2, name: "Case studies", item: "https://www.nextvisionstudio.com/case-studies/" },
+        { "@type": "ListItem", position: 3, name: props.title, item: canonical },
+      ],
+    },
+  ],
 };
 ---
 

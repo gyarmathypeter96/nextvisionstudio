@@ -3,6 +3,35 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { caseStudies } from "../../data/caseStudies";
 
 const projects = caseStudies;
+const canonical = "https://www.nextvisionstudio.com/case-studies/";
+const indexSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${canonical}#webpage`,
+      url: canonical,
+      name: "Video Production Case Studies Dublin",
+      isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" },
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `https://www.nextvisionstudio.com${project.href}`,
+          name: project.title,
+        })),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
+        { "@type": "ListItem", position: 2, name: "Case studies", item: canonical },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -10,6 +39,7 @@ const projects = caseStudies;
   description="Real video production, social media content and event videography projects by NextVision Studio in Dublin, Ireland and abroad."
   canonical="https://www.nextvisionstudio.com/case-studies/"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(indexSchema)} />
   <main class="case-index">
     <section class="case-index__hero">
       <p class="case-kicker">Selected work</p>

@@ -72,6 +72,11 @@
       "permanent": true
     },
     {
+      "source": "/dsc04335/",
+      "destination": "/photography-dublin/",
+      "permanent": true
+    },
+    {
       "source": "/home/dsc04164/",
       "destination": "/photography-dublin/",
       "permanent": true

@@ -29,10 +29,60 @@ const { page } = Astro.props;
         ))
       }
     </div>
+
+    {
+      page.kind === "social" && (
+        // Social pages skip LandingProof and LandingProcess, which render
+        // relatedLinks everywhere else, so the links live here instead.
+        <nav class="landing-faq__related" aria-label="Related NextVision Studio services">
+          <span>Continue exploring</span>
+          {page.relatedLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+        </nav>
+      )
+    }
   </div>
 </section>
 
 <style>
+  .landing-faq__related {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 48px;
+    gap: 10px;
+  }
+
+  .landing-faq__related span,
+  .landing-faq__related a {
+    padding: 11px 15px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .landing-faq__related span {
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .landing-faq__related a {
+    border: 1px solid rgba(180, 220, 255, 0.12);
+    color: rgba(255, 255, 255, 0.61);
+    text-decoration: none;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  .landing-faq__related a:hover {
+    border-color: rgba(180, 220, 255, 0.28);
+    color: #ffffff;
+  }
+
+  .landing-faq__related a:focus-visible {
+    outline: 2px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
   .landing-faq,
   .landing-faq * {
     box-sizing: border-box;
