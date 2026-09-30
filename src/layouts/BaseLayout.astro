@@ -2,7 +2,7 @@
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
-import GoogleTag from "../components/GoogleTag.astro";
+import TagManager from "../components/TagManager.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import LeadAttribution from "../components/LeadAttribution.astro";
 import {
@@ -129,76 +129,28 @@ const websiteSchema = {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#111111" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-    <GoogleTag />
-    <!-- Optional analytics loaders. No third-party request is made before consent. -->
+    <!-- A browser-local owner opt-out runs before every analytics loader. -->
     <script is:inline>
       (() => {
-        const analyticsHosts = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
-        if (!analyticsHosts.includes(window.location.hostname)) return;
+        const marker = "nvs-owner-optout";
+        const url = new URL(window.location.href);
+        const choice = url.searchParams.get("nvs_owner_optout");
+        let excluded = choice === "1";
 
-        const clarityProjectId = "ylqu4w3rot";
-        const metaPixelId = "657703057386611";
-
-        window.nvsLoadClarity = window.nvsLoadClarity || function () {
-          if (document.querySelector("script[data-nvs-clarity]")) return;
-
-          window.clarity = window.clarity || function () {
-            (window.clarity.q = window.clarity.q || []).push(arguments);
-          };
-
-          const script = document.createElement("script");
-          script.async = true;
-          script.src = `https://www.clarity.ms/tag/${clarityProjectId}`;
-          script.dataset.nvsClarity = "true";
-          document.head.appendChild(script);
-        };
-
-        window.nvsLoadMetaPixel = window.nvsLoadMetaPixel || function () {
-          if (document.querySelector("script[data-nvs-meta-pixel]")) return;
-
-          const fbq = window.fbq = window.fbq || function () {
-            if (fbq.callMethod) {
-              fbq.callMethod.apply(fbq, arguments);
-            } else {
-              fbq.queue.push(arguments);
-            }
-          };
-
-          if (!window._fbq) window._fbq = fbq;
-          fbq.push = fbq;
-          fbq.loaded = true;
-          fbq.version = "2.0";
-          fbq.queue = fbq.queue || [];
-
-          const script = document.createElement("script");
-          script.async = true;
-          script.src = "https://connect.facebook.net/en_US/fbevents.js";
-          script.dataset.nvsMetaPixel = "true";
-          document.head.appendChild(script);
-
-          fbq("init", metaPixelId);
-          fbq("track", "PageView");
-        };
-
-        let storedConsent = null;
         try {
-          storedConsent = localStorage.getItem("nvs-cookie-consent");
+          if (choice === "1") localStorage.setItem(marker, "1");
+          if (choice === "0") localStorage.removeItem(marker);
+          excluded = localStorage.getItem(marker) === "1";
         } catch (_) {}
 
-        if (storedConsent !== "granted") return;
-
-        const loadOptionalAnalytics = () => {
-          window.nvsLoadClarity();
-          window.nvsLoadMetaPixel();
-        };
-
-        if ("requestIdleCallback" in window) {
-          window.requestIdleCallback(loadOptionalAnalytics, { timeout: 1800 });
-        } else {
-          window.setTimeout(loadOptionalAnalytics, 900);
+        window.nvsTrackingExcluded = excluded;
+        if (choice === "1" || choice === "0") {
+          url.searchParams.delete("nvs_owner_optout");
+          history.replaceState(history.state, "", url.pathname + url.search + url.hash);
         }
       })();
     </script>
+    <TagManager />
   </head>
 
   <body>

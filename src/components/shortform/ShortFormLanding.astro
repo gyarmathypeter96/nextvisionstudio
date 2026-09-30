@@ -68,7 +68,8 @@ const serviceSchema = {
         } catch (_) {
           return;
         }
-        (window as any).gtag?.("event", "strategy_call_click", {
+        (window as any).dataLayer?.push({
+          event: "strategy_call_click",
           page_location: window.location.href,
           cta_placement: link.classList.contains("sf-sticky-cta")
             ? "short-form-sticky"
