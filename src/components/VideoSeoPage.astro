@@ -103,6 +103,10 @@ const schema = {
   <section class="video-seo__faq" aria-labelledby="video-seo-faq">
     <h2 id="video-seo-faq">Questions before filming.</h2>
     <div>{page.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+    <nav class="video-seo__related" aria-labelledby="video-seo-related">
+      <h3 id="video-seo-related">Related guides and projects</h3>
+      <ul>{page.related.map((link) => <li><a href={link.href}>{link.label} <span aria-hidden="true">→</span></a></li>)}</ul>
+    </nav>
   </section>
 
   <ContactForm />
@@ -137,5 +141,11 @@ const schema = {
   .video-seo__faq details { padding: 22px 0; border-top: 1px solid rgba(255,255,255,.18); }
   .video-seo__faq summary { cursor: pointer; font-size: 18px; font-weight: 850; }
   .video-seo__faq details p { max-width: 760px; margin: 15px 0 0; color: rgba(255,255,255,.65); line-height: 1.65; }
+  .video-seo__related { margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.18); }
+  .video-seo__related h3 { margin: 0 0 18px; color: #cfeaff; font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+  .video-seo__related ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; margin: 0; padding: 0; list-style: none; }
+  .video-seo__related a { color: rgba(255,255,255,.82); font-size: 15px; font-weight: 750; line-height: 1.5; text-decoration: none; }
+  .video-seo__related a:hover { color: #ffffff; }
+  @media (max-width: 760px) { .video-seo__related ul { grid-template-columns: 1fr; } }
   @media (max-width: 760px) { .video-seo__hero { min-height: 78svh; padding: 126px 16px 56px; } .video-seo__hero h1 { font-size: 43px; } .video-seo__hero nav { display: grid; } .video-seo__hero a { justify-content: center; } .video-seo__problem, .video-seo__project { grid-template-columns: 1fr; } .video-seo__problem { width: min(100% - 32px, 1180px); padding: 82px 0; gap: 45px; } .video-seo h2 { font-size: 39px; } .video-seo__project img { min-height: 360px; } .video-seo__project > div { padding: 55px 16px 64px; } .video-seo__faq { width: min(100% - 32px, 1000px); padding: 82px 0; } }
 </style>

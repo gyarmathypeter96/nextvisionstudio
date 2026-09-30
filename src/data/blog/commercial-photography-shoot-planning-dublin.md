@@ -1,6 +1,6 @@
 ---
 title: "How to Plan a Commercial Photography Shoot in Dublin"
-metaTitle: "Commercial Photography Guide Dublin | NextVision Studio"
+metaTitle: "How to Plan a Commercial Photography Shoot | Dublin Guide"
 description: "A practical commercial photography planning guide for Dublin businesses, covering the brief, shot list, location, usage and image delivery."
 pubDate: 2026-09-02
 updatedDate: 2026-09-02
@@ -11,10 +11,10 @@ heroImage: "/images/photography/corporate-photography-dublin.webp"
 heroAlt: "Commercial photography shoot for a Dublin business by NextVision Studio"
 featured: false
 keywords:
-  - "commercial photography Dublin"
-  - "commercial studio photography"
-  - "corporate photography Dublin"
-  - "advertising photography Dublin"
+  - "how to plan a commercial photography shoot"
+  - "commercial photography brief"
+  - "business photography shot list"
+  - "image usage and licensing"
 ---
 
 A commercial photography shoot should not begin with a camera. It should begin with a list of places where the images need to work.

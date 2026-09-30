@@ -1,6 +1,6 @@
 ---
 title: "Short-Form Video Production in Dublin: What Actually Brings Customers?"
-metaTitle: "Short-Form Video Production Dublin Guide | NextVision Studio"
+metaTitle: "Which Short-Form Videos Bring Customers? | Dublin Guide"
 description: "A practical guide for Dublin businesses on Reels, TikTok, filming, distribution, costs and measuring enquiries — not just views."
 pubDate: 2026-07-16
 updatedDate: 2026-07-16
@@ -11,9 +11,10 @@ heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
 heroAlt: "Short-form video production for a Dublin business by NextVision Studio"
 featured: true
 keywords:
-  - "short-form video production Dublin"
-  - "business Reels production Dublin"
-  - "social media content creation Dublin"
+  - "short-form video for business"
+  - "Reels and TikTok for Dublin businesses"
+  - "how short-form video brings customers"
+  - "measuring short-form video results"
 ---
 
 Short-form video can introduce a Dublin business to thousands of local people in less than a minute. It can also sit online with 150 views and produce nothing.

@@ -12,9 +12,8 @@ heroAlt: "A talking-head video being filmed for business and social media conten
 featured: false
 keywords:
   - "short-form vs long-form video"
-  - "short-form video Dublin"
   - "long-form video for business"
-  - "business video production Dublin"
+  - "when to use short-form video"
 ---
 
 Short-form and long-form video are two ways to tell a story, not two competing types of business. One helps a viewer notice an idea quickly. The other gives you room to explain it, show evidence and build a fuller relationship.

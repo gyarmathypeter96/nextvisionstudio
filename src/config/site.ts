@@ -5,3 +5,9 @@ export const CONTACT_PHONE = "+353 89 479 7055";
 export const CONTACT_PHONE_E164 = "+353894797055";
 export const GOOGLE_TAG_ID = "GT-55KDS6ZW";
 export const GOOGLE_ADS_ID = "AW-17461756469";
+
+// Official profiles of the business, used for schema.org sameAs and footer links.
+export const SOCIAL_PROFILES = [
+  { label: "Instagram", href: "https://www.instagram.com/nextvisionstudio/" },
+  { label: "Facebook", href: "https://www.facebook.com/218946454645781" },
+];

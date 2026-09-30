@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const popularPages = [
+  { label: "Video production Dublin", href: "/videography-dublin/" },
+  { label: "Short-form video production", href: "/short-form-video-production-dublin/" },
+  { label: "Commercial photography Dublin", href: "/photography-dublin/" },
+  { label: "Project case studies", href: "/case-studies/" },
+];
+---
+
+<BaseLayout
+  title="Page Not Found | NextVision Studio"
+  description="The page you were looking for could not be found. Explore NextVision Studio services, case studies and guides."
+  noindex={true}
+>
+  <main class="not-found">
+    <section class="not-found__card" aria-labelledby="not-found-title">
+      <div class="not-found__kicker">404</div>
+      <h1 id="not-found-title">Page not found</h1>
+      <p class="not-found__lead">
+        This page may have moved or no longer exists. Try one of the pages below
+        or head back to the homepage.
+      </p>
+
+      <nav class="not-found__links" aria-label="Popular pages">
+        {popularPages.map((page) => <a href={page.href}>{page.label}</a>)}
+      </nav>
+
+      <div class="not-found__actions">
+        <a class="not-found__primary" href="/">Back to homepage</a>
+        <a class="not-found__secondary" href="/contact/#contact-form">Contact us</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found,
+  .not-found * {
+    box-sizing: border-box;
+  }
+
+  .not-found {
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    padding: 120px 24px 72px;
+    background:
+      radial-gradient(circle at 50% 34%, rgba(155, 210, 255, 0.13), transparent 29%),
+      linear-gradient(160deg, #111111 0%, #10151a 52%, #111111 100%);
+    color: #ffffff;
+  }
+
+  .not-found__card {
+    width: min(100%, 720px);
+    padding: clamp(34px, 6vw, 60px);
+    border: 1px solid rgba(180, 220, 255, 0.2);
+    border-radius: 32px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025)),
+      rgba(18, 23, 27, 0.92);
+    box-shadow: 0 32px 100px rgba(0, 0, 0, 0.55);
+    text-align: center;
+  }
+
+  .not-found__kicker {
+    display: inline-flex;
+    margin-bottom: 19px;
+    padding: 9px 15px;
+    border: 1px solid rgba(180, 220, 255, 0.23);
+    border-radius: 999px;
+    background: rgba(155, 210, 255, 0.07);
+    color: #cfeaff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    line-height: 1;
+  }
+
+  .not-found h1 {
+    margin: 0;
+    font-size: clamp(42px, 7vw, 64px);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.98;
+  }
+
+  .not-found__lead {
+    width: min(100%, 560px);
+    margin: 22px auto 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(16px, 2.2vw, 18px);
+    line-height: 1.6;
+  }
+
+  .not-found__links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .not-found__links a {
+    padding: 14px 16px;
+    border: 1px solid rgba(180, 220, 255, 0.14);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #cfeaff;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .not-found__actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .not-found__actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .not-found__primary {
+    border: 1px solid rgba(210, 235, 255, 0.38);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .not-found__secondary {
+    border: 1px solid rgba(180, 220, 255, 0.15);
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .not-found a:hover {
+    border-color: rgba(210, 235, 255, 0.46);
+  }
+
+  .not-found a:focus-visible {
+    outline: 3px solid #cfeaff;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .not-found__links {
+      grid-template-columns: 1fr;
+    }
+
+    .not-found__actions {
+      flex-direction: column;
+    }
+  }
+</style>

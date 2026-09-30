@@ -69,6 +69,8 @@ const { page } = Astro.props;
           <div class="landing-media">
             <img
               src={page.heroImage?.src}
+              srcset={page.heroImage?.srcset}
+              sizes={page.heroImage?.srcset ? "(max-width: 920px) calc(100vw - 48px), 480px" : undefined}
               alt={page.heroImage?.alt}
               width={page.heroImage?.width}
               height={page.heroImage?.height}

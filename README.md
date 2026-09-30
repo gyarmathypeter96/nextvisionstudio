@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# NextVision Studio website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Marketing site for [www.nextvisionstudio.com](https://www.nextvisionstudio.com), built with [Astro](https://astro.build) as a fully static site and hosted on Vercel.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command                      | Action                                                   |
+| :--------------------------- | :------------------------------------------------------- |
+| `npm ci`                     | Install dependencies (Node 22.12+)                       |
+| `npm run dev`                | Start the dev server at `localhost:4321`                 |
+| `npm run build`              | Build the site to `./dist/`                              |
+| `npm run check:indexability` | Check the build for SEO/indexing problems (run after build) |
+| `npm run preview`            | Preview the production build locally                     |
 
-Inside of your Astro project, you'll see the following folders and files:
+CI (`.github/workflows/ci.yml`) runs `npm audit`, the build and the indexability check on every pull request.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Structure
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `src/pages/` – one file per route. Service pages live at the root (e.g. `videography-dublin.astro`), plus `blog/`, `case-studies/` and `website-design-quote/`.
+- `src/components/` – page sections. `landing/` powers the service landing pages, `shortform/` the short-form video page.
+- `src/data/` – page content: `landingPages.ts`, `videoSeoPages.ts` and the blog posts in `blog/*.md`.
+- `src/config/` – site-wide constants: contact details, tag IDs, social profiles and the CRM form endpoint.
+- `src/layouts/BaseLayout.astro` – shared `<head>`, metadata, JSON-LD business schema, consent-gated analytics.
+- `public/` – images, videos and icons served as-is.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## SEO notes
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `sitemap.xml` is generated from `src/pages` and the blog collection. New pages are added automatically; noindex pages must be listed in `noindexRoutes` in `src/pages/sitemap.xml.ts`.
+- Trailing slashes are enforced by both `astro.config.mjs` and `vercel.json`.
+- `npm run check:indexability` verifies canonicals, titles, descriptions, single H1s, internal links, image dimensions and sitemap/noindex consistency.
+- Google tag, Meta Pixel and Microsoft Clarity only load after cookie consent, and only on the production hostnames.

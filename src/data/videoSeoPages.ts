@@ -16,6 +16,7 @@ export interface VideoSeoPageData {
     href: string;
   };
   faq: Array<{ question: string; answer: string }>;
+  related: Array<{ label: string; href: string }>;
 }
 
 export const videoSeoPages: Record<string, VideoSeoPageData> = {
@@ -48,6 +49,13 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
       { question: "Can you help with the script?", answer: "Yes. We shape the message, interview questions, talking points and shot list before filming." },
       { question: "Can one shoot create several videos?", answer: "Yes. Planning every output before the shoot makes it possible to create a main film and multiple shorter edits from the same production." },
       { question: "Do you film outside Dublin?", answer: "Dublin is the main service area, and projects elsewhere in Ireland can be discussed when the brief requires it." },
+      { question: "How much does corporate video production cost in Dublin?", answer: "As an indicative Dublin guide, corporate and brand films typically cost around €800–€2,000+ with a freelancer and €1,500–€6,000+ with an agency or larger crew. The final quote depends on planning, filming time, crew, locations and the number of edits." },
+    ],
+    related: [
+      { label: "How much does a videographer cost in Dublin?", href: "/how-much-does-a-videographer-cost-in-dublin/" },
+      { label: "How to plan a business video production in Dublin", href: "/blog/business-video-production-planning-dublin/" },
+      { label: "Case study: SG Studios Dublin podcast studio content", href: "/case-studies/sg-studios-dublin-podcast-studio-content/" },
+      { label: "Event videography Dublin", href: "/event-videographer-dublin/" },
     ],
   },
   event: {
@@ -79,6 +87,13 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
       { question: "Can you deliver short social clips?", answer: "Yes. Vertical clips can be planned alongside the main highlight film and delivered ready for Reels, TikTok and Shorts." },
       { question: "Do you record speakers and interviews?", answer: "Yes. Speaker coverage and short attendee or organiser interviews can be included when agreed before the event." },
       { question: "How far ahead should I book?", answer: "Booking early gives us time to review the schedule and key moments, but short-notice availability can still be checked." },
+      { question: "How much does an event videographer cost in Dublin?", answer: "As an indicative Dublin guide, event coverage typically costs around €400–€900+ for freelancer day coverage and €700–€3,500+ for agency coverage. The final quote depends on the length of the event, crew, deliverables and turnaround." },
+    ],
+    related: [
+      { label: "How much does a videographer cost in Dublin?", href: "/how-much-does-a-videographer-cost-in-dublin/" },
+      { label: "Case study: Pogány Induló live concert video", href: "/case-studies/pogany-indulo-live-concert-video/" },
+      { label: "How to plan a business video production in Dublin", href: "/blog/business-video-production-planning-dublin/" },
+      { label: "Corporate video production Dublin", href: "/corporate-video-production-dublin/" },
     ],
   },
 };

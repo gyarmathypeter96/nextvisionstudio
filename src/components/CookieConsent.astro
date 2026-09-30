@@ -164,17 +164,34 @@
   }
 
   @media (max-width: 680px) {
+    /* Compact on phones so the banner covers as little of the page as possible. */
     .cookie-consent {
-      right: 12px;
-      bottom: 12px;
+      right: 8px;
+      bottom: 8px;
       grid-template-columns: 1fr;
-      width: calc(100vw - 24px);
-      gap: 16px;
+      width: calc(100vw - 16px);
+      padding: 12px 14px;
+      gap: 10px;
+      border-radius: 16px;
+    }
+
+    .cookie-consent strong {
+      font-size: 13px;
+    }
+
+    .cookie-consent p {
+      margin-top: 4px;
+      font-size: 11px;
+      line-height: 1.4;
     }
 
     .cookie-consent__actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
+    }
+
+    .cookie-consent button {
+      min-height: 38px;
     }
   }
 </style>

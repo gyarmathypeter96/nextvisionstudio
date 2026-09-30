@@ -19,12 +19,13 @@ const distDirectory = path.resolve("dist");
 const sitemap = await readFile(path.join(distDirectory, "sitemap.xml"), "utf8");
 const robots = await readFile(path.join(distDirectory, "robots.txt"), "utf8");
 
+const notFoundPath = path.join(distDirectory, "404.html");
 const htmlFiles = [];
 const collectHtmlFiles = async (directory) => {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const filePath = path.join(directory, entry.name);
     if (entry.isDirectory()) await collectHtmlFiles(filePath);
-    if (entry.isFile() && entry.name.endsWith(".html")) htmlFiles.push(filePath);
+    if (entry.isFile() && entry.name.endsWith(".html") && filePath !== notFoundPath) htmlFiles.push(filePath);
   }
 };
 
@@ -62,6 +63,14 @@ if (robots.includes("Disallow: /quotesend/")) {
 const thankYouHtml = await readFile(path.join(distDirectory, "quotesend", "index.html"), "utf8");
 if (!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(thankYouHtml)) {
   failures.push("/quotesend/ must remain noindex after removing the robots.txt block");
+}
+
+const notFoundHtml = await readFile(notFoundPath, "utf8").catch(() => "");
+if (!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(notFoundHtml)) {
+  failures.push("dist/404.html must exist and be noindex");
+}
+if (sitemap.includes("/404/")) {
+  failures.push("sitemap.xml must not list the 404 page");
 }
 
 const titles = new Map();

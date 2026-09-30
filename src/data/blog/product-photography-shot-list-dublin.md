@@ -11,10 +11,9 @@ heroImage: "/images/photography/product-photography-dublin.webp"
 heroAlt: "Professional product photography created for a Dublin business"
 featured: false
 keywords:
-  - "product photography Dublin"
-  - "professional product photography Dublin"
   - "product photography shot list"
-  - "commercial product photography studio"
+  - "product photos for websites and social media"
+  - "preparing products for a photoshoot"
 ---
 
 Good product photography removes doubt. It shows what the customer is buying, what makes it different and how it fits into their life.
