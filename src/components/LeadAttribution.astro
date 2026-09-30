@@ -14,6 +14,28 @@
     window.dataLayer?.push({ event: eventName, ...parameters });
   };
 
+  // A lead is pushed on the page the visitor lands on after submitting. Pushing
+  // it right before the redirect lost the event in iOS Safari, because GA4 had
+  // not sent its batch when the page unloaded.
+  const pendingLeadKey = "nvs-pending-lead";
+  const pushLead = (parameters: Record<string, string | number | undefined>) => {
+    if (!analyticsConsentGranted() || !window.dataLayer) return;
+    // Tag Manager sends this to GA4, Google Ads and Meta (as Lead).
+    window.nvsLoadTagManager?.();
+    window.dataLayer.push({ event: "generate_lead", ...parameters });
+  };
+  const flushPendingLead = () => {
+    let pending: string | null = null;
+    try {
+      pending = sessionStorage.getItem(pendingLeadKey);
+      sessionStorage.removeItem(pendingLeadKey);
+    } catch (_) {}
+    if (!pending) return;
+    try {
+      pushLead(JSON.parse(pending));
+    } catch (_) {}
+  };
+
   const initialiseCrmForms = () => {
     const storageKey = "nvs-lead-attribution";
     const firstTouchStorageKey = "nvs-first-touch-attribution";
@@ -218,37 +240,40 @@
 
           status.textContent = "Thank you. Your enquiry has been received.";
           const redirect = read("redirect");
-          let finished = false;
-          const finish = () => {
-            if (finished) return;
-            finished = true;
-            if (redirect) {
-              window.location.assign(redirect);
-            } else {
-              form.reset();
-              if (submit) submit.disabled = false;
-            }
+          // Count a lead only after the CRM accepts it.
+          const leadParameters = {
+            lead_source: leadSource,
+            form_type: formType || "Website enquiry",
+            form_id: formId,
+            form_location: window.location.pathname,
+            service_interest: serviceInterest,
+            form_duration_seconds: formDurationSeconds,
           };
 
-          // Count a lead only after the CRM accepts it, then allow the tag to send
-          // the event before leaving the page. The fallback handles blocked tags.
-          if (analyticsConsentGranted() && window.dataLayer) {
-            // Tag Manager sends this to GA4, Google Ads and Meta (as Lead).
-            window.nvsLoadTagManager?.();
-            window.dataLayer.push({
-              event: "generate_lead",
-              lead_source: leadSource,
-              form_type: formType || "Website enquiry",
-              form_id: formId,
-              form_location: window.location.pathname,
-              service_interest: serviceInterest,
-              form_duration_seconds: formDurationSeconds,
-              eventCallback: finish,
-              eventTimeout: 1500,
-            });
-            window.setTimeout(finish, 1700);
+          if (!redirect) {
+            pushLead(leadParameters);
+            form.reset();
+            if (submit) submit.disabled = false;
+            return;
+          }
+
+          let deferred = false;
+          try {
+            if (
+              analyticsConsentGranted() &&
+              new URL(redirect, window.location.href).origin === window.location.origin
+            ) {
+              sessionStorage.setItem(pendingLeadKey, JSON.stringify(leadParameters));
+              deferred = true;
+            }
+          } catch (_) {}
+
+          if (deferred || !analyticsConsentGranted()) {
+            window.location.assign(redirect);
           } else {
-            finish();
+            // The lead cannot travel to the next page, so give the tags time to send.
+            pushLead(leadParameters);
+            window.setTimeout(() => window.location.assign(redirect), 1500);
           }
         } catch (error) {
           status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
@@ -263,6 +288,7 @@
     });
   };
 
+  flushPendingLead();
   initialiseCrmForms();
   document.addEventListener("astro:page-load", initialiseCrmForms);
 
