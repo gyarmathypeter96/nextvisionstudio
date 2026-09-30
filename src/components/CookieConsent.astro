@@ -8,9 +8,9 @@
   <div>
     <strong>Analytics preferences</strong>
     <p>
-      We use optional Google Analytics and advertising measurement to understand
-      which pages and campaigns generate enquiries. Essential site features work
-      without these cookies. <a href="/privacy-policy/">Privacy policy</a>
+      We use optional Google Analytics, Google Ads, Meta Pixel and Microsoft
+      Clarity measurement to understand which pages and campaigns generate
+      enquiries. Essential site features work without these cookies. <a href="/privacy-policy/">Privacy policy</a>
     </p>
   </div>
   <div class="cookie-consent__actions">
@@ -68,10 +68,8 @@
         ad_personalization: granted ? "granted" : "denied",
       });
 
-      if (granted) {
-        window.nvsLoadGoogleTag?.();
-        window.nvsLoadMetaPixel?.();
-        window.nvsLoadClarity?.();
+      if (granted && !window.nvsTrackingExcluded) {
+        window.nvsLoadTagManager?.();
       }
       banner.hidden = true;
     };

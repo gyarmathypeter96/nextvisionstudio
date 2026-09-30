@@ -1,6 +1,7 @@
 <script>
   const consentStorageKey = "nvs-cookie-consent";
   const analyticsConsentGranted = () => {
+    if (window.nvsTrackingExcluded) return false;
     try {
       return localStorage.getItem(consentStorageKey) === "granted";
     } catch (_) {
@@ -10,7 +11,7 @@
 
   const track = (eventName: string, parameters: Record<string, string | number | undefined>) => {
     if (!analyticsConsentGranted()) return;
-    window.gtag?.("event", eventName, parameters);
+    window.dataLayer?.push({ event: eventName, ...parameters });
   };
 
   const initialiseCrmForms = () => {
@@ -231,22 +232,19 @@
 
           // Count a lead only after the CRM accepts it, then allow the tag to send
           // the event before leaving the page. The fallback handles blocked tags.
-          if (analyticsConsentGranted()) {
-            window.nvsLoadMetaPixel?.();
-            window.fbq?.("track", "Lead", {
-              content_name: formType || "Website enquiry",
-              content_category: serviceInterest,
-            });
-            window.nvsLoadGoogleTag?.();
-            window.gtag?.("event", "generate_lead", {
+          if (analyticsConsentGranted() && window.dataLayer) {
+            // Tag Manager sends this to GA4, Google Ads and Meta (as Lead).
+            window.nvsLoadTagManager?.();
+            window.dataLayer.push({
+              event: "generate_lead",
               lead_source: leadSource,
               form_type: formType || "Website enquiry",
               form_id: formId,
               form_location: window.location.pathname,
               service_interest: serviceInterest,
               form_duration_seconds: formDurationSeconds,
-              event_callback: finish,
-              event_timeout: 1500,
+              eventCallback: finish,
+              eventTimeout: 1500,
             });
             window.setTimeout(finish, 1700);
           } else {

@@ -1,16 +1,18 @@
 ---
-import { GOOGLE_ADS_ID, GOOGLE_TAG_ID } from "../config/site";
+import { GTM_CONTAINER_ID } from "../config/site";
 
-const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`;
+// Every measurement tag (GA4, Google Ads, Meta Pixel, Clarity) lives in this
+// Google Tag Manager container. The container loads only after consent.
+const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}`;
 ---
 
 <script
   is:inline
-  define:vars={{ GOOGLE_TAG_ID, GOOGLE_ADS_ID, googleTagSource }}
+  define:vars={{ tagManagerSource }}
 >
   (() => {
   const analyticsHosts = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
-  if (!analyticsHosts.includes(window.location.hostname)) return;
+  if (!analyticsHosts.includes(window.location.hostname) || window.nvsTrackingExcluded) return;
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () {
@@ -34,26 +36,25 @@ const googleTagSource = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TA
     wait_for_update: 500,
   });
 
-  window.nvsLoadGoogleTag = window.nvsLoadGoogleTag || function () {
-    if (document.querySelector("script[data-nvs-google-tag]")) return;
+  window.nvsLoadTagManager = window.nvsLoadTagManager || function () {
+    if (window.nvsTrackingExcluded) return;
+    if (document.querySelector("script[data-nvs-gtm]")) return;
 
-    window.gtag("js", new Date());
-    window.gtag("config", GOOGLE_TAG_ID);
-    window.gtag("config", GOOGLE_ADS_ID);
+    window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
 
     const script = document.createElement("script");
     script.async = true;
-    script.src = googleTagSource;
-    script.dataset.nvsGoogleTag = "true";
+    script.src = tagManagerSource;
+    script.dataset.nvsGtm = "true";
     document.head.appendChild(script);
   };
 
   if (consentGranted) {
     const loadTagWhenIdle = function () {
       if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(window.nvsLoadGoogleTag, { timeout: 1800 });
+        window.requestIdleCallback(window.nvsLoadTagManager, { timeout: 1800 });
       } else {
-        window.setTimeout(window.nvsLoadGoogleTag, 900);
+        window.setTimeout(window.nvsLoadTagManager, 900);
       }
     };
 
