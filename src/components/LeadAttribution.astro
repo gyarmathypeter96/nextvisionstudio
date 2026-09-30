@@ -232,6 +232,11 @@
           // Count a lead only after the CRM accepts it, then allow the tag to send
           // the event before leaving the page. The fallback handles blocked tags.
           if (analyticsConsentGranted()) {
+            window.nvsLoadMetaPixel?.();
+            window.fbq?.("track", "Lead", {
+              content_name: formType || "Website enquiry",
+              content_category: serviceInterest,
+            });
             window.nvsLoadGoogleTag?.();
             window.gtag?.("event", "generate_lead", {
               lead_source: leadSource,
