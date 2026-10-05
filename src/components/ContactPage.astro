@@ -1,4 +1,6 @@
 ---
+import { SERVICE_CATALOG } from "../config/services";
+import { SERVICE_AREA_TEXT } from "../config/site";
 import { WHATSAPP_URL } from "../config/contact";
 import { CRM_FORM_ENDPOINT } from "../config/forms";
 ---
@@ -24,8 +26,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
 
         <dl>
           <div>
-            <dt>Based in</dt>
-            <dd>Dublin, Ireland</dd>
+            <dt>Service area</dt>
+            <dd>{SERVICE_AREA_TEXT}</dd>
           </div>
           <div>
             <dt>WhatsApp</dt>
@@ -80,7 +82,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
         </div>
 
         <div class="contact-page__field">
-          <label for="contact-page-email">Email <span>(optional)</span></label>
+          <label for="contact-page-email">Email <span>(required)</span></label>
           <input
             id="contact-page-email"
             type="email"
@@ -88,6 +90,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             placeholder="you@example.com"
             autocomplete="email"
             inputmode="email"
+            required
           />
         </div>
 
@@ -108,23 +111,19 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
           <label for="contact-page-service">What do you need?</label>
           <select id="contact-page-service" name="service" required>
             <option value="" disabled selected>Select a service</option>
-            <option value="Video production">Video production</option>
-            <option value="Google Ads and Meta Ads">Google Ads and Meta Ads</option>
-            <option value="Commercial photography">Commercial photography</option>
-            <option value="Social media content">Social media content</option>
-            <option value="Website design">Website design</option>
-            <option value="CRM and lead automation">CRM and lead automation</option>
+            {SERVICE_CATALOG.map((service) => <option value={service.title}>{service.title}</option>)}
             <option value="Not sure yet">I am not sure yet</option>
           </select>
         </div>
 
         <div class="contact-page__field">
-          <label for="contact-page-message">Tell us about your project <span>(optional)</span></label>
+          <label for="contact-page-message">Tell us about your project <span>(required)</span></label>
           <textarea
             id="contact-page-message"
             name="message"
             placeholder="What would you like to create or improve?"
             rows="7"
+            required
           ></textarea>
         </div>
 

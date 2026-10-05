@@ -1,4 +1,5 @@
 ---
+import { serviceForPath } from "../config/services";
 const services = [
   {
     id: "content-creation",
@@ -126,7 +127,7 @@ const serviceDirectory = [
     <nav class="service-directory" aria-label="Explore individual services">
       {serviceDirectory.map((service) => (
         <a href={service.href}>
-          <span>{service.label}<span aria-hidden="true">↗</span></span>
+          <span>{serviceForPath(service.href)?.title ?? service.label}<span aria-hidden="true">↗</span></span>
           <small>{service.text}</small>
         </a>
       ))}
@@ -145,7 +146,7 @@ const serviceDirectory = [
           >
             <div class="service-pillar__copy">
               <div class="service-pillar__label">Service {service.number}</div>
-              <h3>{service.title}</h3>
+              <h3>{serviceForPath(service.secondaryHref)?.title ?? service.title}</h3>
               <p class="service-pillar__lead">{service.lead}</p>
 
               <ul class="service-pillar__points">

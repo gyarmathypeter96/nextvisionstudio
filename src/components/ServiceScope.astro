@@ -1,0 +1,40 @@
+---
+import { serviceScopes } from "../data/serviceScope";
+import { SERVICE_AREA_TEXT } from "../config/site";
+interface Props { slug: string; showProof?: boolean }
+const { slug, showProof = true } = Astro.props;
+const scope = serviceScopes[slug];
+---
+{scope && <section class="service-scope" aria-labelledby={`${slug}-scope-title`}>
+  <header>
+    <h2 id={`${slug}-scope-title`}>{scope.title}</h2>
+    <p>{scope.answer}</p>
+    <small>{SERVICE_AREA_TEXT} Other Irish locations can be discussed for the brief.</small>
+  </header>
+  <div class="service-scope__grid">
+    {scope.items.map((item) => <article><h3>{item.title}</h3><p>{item.text}</p></article>)}
+  </div>
+  {showProof && <aside class:list={{ "service-scope__proof": true, "service-scope__proof--image": !!scope.proof.image }}>
+    {scope.proof.image && <a class="service-scope__proof-image" href={scope.proof.href}><img src={scope.proof.image} alt={scope.proof.alt || scope.proof.title} width="640" height="360" loading="lazy" decoding="async" /></a>}
+    <div><h3>{scope.proof.title}</h3><p>{scope.proof.text}</p><a href={scope.proof.href}>See the project and production choices <span aria-hidden="true">→</span></a></div>
+  </aside>}
+  <div class="service-scope__cost"><h3>What shapes your quote?</h3><p>{scope.cost}</p>{slug === "photography-dublin" ? <a href="/image-licensing/">Understand photography usage and licensing</a> : <a href="/how-much-does-a-videographer-cost-in-dublin/">How to compare a production quote</a>}</div>
+</section>}
+<style>
+  .service-scope { box-sizing: border-box; width: min(100% - 48px, 1180px); margin: 0 auto; padding: 80px 0; color: #fff; }
+  .service-scope header { max-width: 880px; margin-bottom: 32px; }
+  .service-scope h2 { margin: 0 0 22px; font-size: clamp(34px, 4.3vw, 54px); line-height: 1.06; text-wrap: balance; }
+  .service-scope p { margin: 12px 0 0; color: rgba(255,255,255,.72); line-height: 1.7; font-size: 17px; }
+  .service-scope small { display: block; margin-top: 16px; color: #cfeaff; line-height: 1.6; }
+  .service-scope__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .service-scope article { padding: 26px; border: 1px solid rgba(180,220,255,.2); border-radius: 24px; background: linear-gradient(135deg,rgba(155,210,255,.075),rgba(255,255,255,.025)); }
+  .service-scope h3 { margin: 0; font-size: 22px; line-height: 1.25; }
+  .service-scope aside, .service-scope__cost { margin-top: 32px; padding: 30px 0; border-top: 1px solid rgba(180,220,255,.2); }
+  .service-scope aside p, .service-scope__cost p { max-width: 900px; }
+  .service-scope a { display: inline-block; margin-top: 18px; color: #cfeaff; font-weight: 750; line-height: 1.5; text-underline-offset: 5px; }
+  .service-scope__proof--image { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .service-scope a.service-scope__proof-image { margin: 0; }
+  .service-scope__proof-image img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid rgba(180,220,255,.22); border-radius: 24px; }
+  @media (max-width: 760px) { .service-scope__proof--image { grid-template-columns: 1fr; gap: 24px; } }
+  @media (max-width: 760px) { .service-scope { width: calc(100% - 32px); padding: 56px 0; } .service-scope__grid { grid-template-columns: 1fr; } .service-scope article { padding: 24px; } }
+</style>

@@ -1,4 +1,7 @@
 ---
+import ServiceScope from "../ServiceScope.astro";
+import { AREA_SERVED_SCHEMA, BUSINESS_ID, FOUNDER_ID } from "../../config/site";
+import { serviceForPath } from "../../config/services";
 import LandingHero from "./LandingHero.astro";
 import LandingTrust from "./LandingTrust.astro";
 import LandingValue from "./LandingValue.astro";
@@ -38,6 +41,17 @@ const videoServicePages = [
   },
 ];
 
+const portfolioImages = page.kind === "photo" ? page.proofItems.filter((item) => item.image).map((item, index) => ({
+  "@type": "ImageObject",
+  "@id": `${canonical}#portfolio-image-${index + 1}`,
+  name: item.title,
+  description: item.text,
+  contentUrl: new URL(item.image!, canonical).toString(),
+  width: item.width,
+  height: item.height,
+  creator: { "@id": FOUNDER_ID },
+})) : [];
+
 const landingSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -49,6 +63,7 @@ const landingSchema = {
       description: page.metaDescription,
       about: { "@id": `${canonical}#service` },
       isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" },
+      ...(portfolioImages.length && { image: portfolioImages.map((image) => ({ "@id": image["@id"] })) }),
       ...(isVideoPage && {
         hasPart: videoServicePages.map((servicePage) => ({
           "@type": "WebPage",
@@ -61,26 +76,12 @@ const landingSchema = {
     {
       "@type": "Service",
       "@id": `${canonical}#service`,
-      name: page.serviceType,
+      name: serviceForPath(`/${page.slug}/`)?.title ?? page.serviceType,
       description: page.schemaDescription,
       serviceType: page.serviceType,
       url: canonical,
-      areaServed: {
-        "@type": "City",
-        name: "Dublin",
-      },
-      provider: {
-        "@type": "ProfessionalService",
-        "@id": "https://www.nextvisionstudio.com/#business",
-        name: "NextVision Studio",
-        url: "https://www.nextvisionstudio.com/",
-        telephone: "+353894797055",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Dublin",
-          addressCountry: "IE",
-        },
-      },
+      areaServed: AREA_SERVED_SCHEMA,
+      provider: { "@id": BUSINESS_ID },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: `${page.serviceType} services`,
@@ -123,6 +124,7 @@ const landingSchema = {
         },
       ],
     },
+    ...portfolioImages,
   ],
 };
 ---
@@ -134,6 +136,7 @@ const landingSchema = {
     ) : (
       <>
         <LandingHero page={page} />
+        {page.kind === "photo" && <ServiceScope slug={page.slug} />}
         {page.kind === "social" ? (
           <SocialContentProcess />
         ) : (

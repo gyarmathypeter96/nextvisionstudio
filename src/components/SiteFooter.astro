@@ -1,5 +1,7 @@
 ---
 import { WHATSAPP_URL } from "../config/contact";
+import { SERVICE_CATALOG } from "../config/services";
+import { SERVICE_AREA_TEXT } from "../config/site";
 import { SOCIAL_PROFILES } from "../config/site";
 
 const currentYear = new Date().getFullYear();
@@ -19,8 +21,8 @@ const currentYear = new Date().getFullYear();
         />
       </a>
       <p>
-        Dublin studio for video, photography, social content, paid campaigns,
-        clear websites and simple ways to manage new enquiries.
+        Video and photography for Dublin businesses, with social content, paid
+        campaigns, websites and practical systems for managing new enquiries.
       </p>
     </div>
 
@@ -35,15 +37,7 @@ const currentYear = new Date().getFullYear();
       </div>
       <div>
         <p>Services</p>
-        <a href="/short-form-video-production-dublin/">Full service short form content production</a>
-        <a href="/videography-dublin/">Commercial &amp; brand film production</a>
-        <a href="/corporate-video-production-dublin/">Corporate video production</a>
-        <a href="/event-videographer-dublin/">Event videography</a>
-        <a href="/social-media-content-creation-dublin/">Social media content creation</a>
-        <a href="/google-ads-meta-ads-dublin/">Google &amp; Meta Ads</a>
-        <a href="/photography-dublin/">Photography</a>
-        <a href="/webdesigner-dublin/">Website design &amp; development</a>
-        <a href="/crm-lead-automation-dublin/">CRM &amp; AI automation</a>
+        {SERVICE_CATALOG.map((service) => <a href={service.href}>{service.title}</a>)}
       </div>
       <div>
         <p>Explore</p>
@@ -65,7 +59,7 @@ const currentYear = new Date().getFullYear();
         ))}
         <a href="/image-licensing/">Image licensing</a>
         <a href="/privacy-policy/">Privacy &amp; cookies</a>
-        <span>Dublin, Ireland</span>
+        <span>{SERVICE_AREA_TEXT}</span>
       </div>
     </nav>
   </div>

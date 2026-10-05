@@ -1,9 +1,10 @@
 ---
+import { SERVICE_CATALOG } from "../config/services";
 const faqItems = [
   {
     question: "What services does NextVision Studio offer?",
     answer:
-      "NextVision Studio helps Dublin businesses with professional video, photography, short videos for social media, social media management, Meta Ads, Google Ads and website design. You can book one service or combine a few to suit your business.",
+      `NextVision Studio provides ${SERVICE_CATALOG.map((service) => service.title).join(", ")} for Dublin businesses. You can book one service or combine a few. Publishing and account management are agreed separately from content production.`,
   },
   {
     question: "Can you help organise enquiries and reply to them sooner?",

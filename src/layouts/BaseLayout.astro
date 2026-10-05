@@ -11,7 +11,12 @@ import {
   SITE_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
+  AREA_SERVED_SCHEMA,
+  FOUNDER_ID,
+  FOUNDER_NAME,
+  ANALYTICS_HOSTS,
 } from "../config/site";
+import { SERVICE_CATALOG } from "../config/services";
 
 interface Props {
   title: string;
@@ -58,14 +63,15 @@ const websiteSchema = {
       email: CONTACT_EMAIL,
       telephone: CONTACT_PHONE_E164,
       sameAs: SOCIAL_PROFILES.map((profile) => profile.href),
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Dublin",
-        addressCountry: "IE",
-      },
-      areaServed: {
-        "@type": "City",
-        name: "Dublin",
+      areaServed: AREA_SERVED_SCHEMA,
+      founder: { "@id": FOUNDER_ID },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "NextVision Studio services",
+        itemListElement: SERVICE_CATALOG.map((service) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", "@id": `${SITE_URL}${service.href}#service`, name: service.title, url: `${SITE_URL}${service.href}` },
+        })),
       },
       knowsAbout: [
         "Short-form video production Dublin",
@@ -80,6 +86,14 @@ const websiteSchema = {
         "AI lead conversion",
         "Business automation",
       ],
+    },
+    {
+      "@type": "Person",
+      "@id": FOUNDER_ID,
+      name: FOUNDER_NAME,
+      url: `${SITE_URL}/about/`,
+      jobTitle: "Founder and filmmaker",
+      worksFor: { "@id": `${SITE_URL}/#business` },
     },
   ],
 };
@@ -130,7 +144,7 @@ const websiteSchema = {
     <meta name="theme-color" content="#111111" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <!-- A browser-local owner opt-out runs before every analytics loader. -->
-    <script is:inline>
+    <script is:inline define:vars={{ analyticsHosts: ANALYTICS_HOSTS }}>
       (() => {
         const marker = "nvs-owner-optout";
         const url = new URL(window.location.href);
@@ -143,7 +157,10 @@ const websiteSchema = {
           excluded = localStorage.getItem(marker) === "1";
         } catch (_) {}
 
-        window.nvsTrackingExcluded = excluded;
+        // The settings page must not record a visit while someone opts out.
+        const settingsPage = window.location.pathname.replace(/\/$/, "") === "/tracking-preferences";
+        window.nvsOwnerExcluded = excluded;
+        window.nvsTrackingExcluded = excluded || settingsPage || !analyticsHosts.includes(window.location.hostname);
         if (choice === "1" || choice === "0") {
           url.searchParams.delete("nvs_owner_optout");
           history.replaceState(history.state, "", url.pathname + url.search + url.hash);

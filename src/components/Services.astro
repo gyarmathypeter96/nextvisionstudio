@@ -1,4 +1,5 @@
 ---
+import { getService, type ServiceKey } from "../config/services";
 const services = [
   {
     key: "shortform",
@@ -66,7 +67,7 @@ const services = [
       "Let AI handle simple routine tasks.",
     ],
   },
-];
+].map((service) => ({ ...service, title: getService(service.key as ServiceKey).title, href: getService(service.key as ServiceKey).href }));
 ---
 
 <section class="services" id="services" aria-labelledby="services-title">

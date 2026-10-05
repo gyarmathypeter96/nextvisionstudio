@@ -1,4 +1,7 @@
 ---
+import ServiceScope from "../ServiceScope.astro";
+import { AREA_SERVED_SCHEMA } from "../../config/site";
+import { getService } from "../../config/services";
 import ShortFormHero from "./ShortFormHero.astro";
 import ShortFormProblem from "./ShortFormProblem.astro";
 import ShortFormSystem from "./ShortFormSystem.astro";
@@ -14,19 +17,17 @@ const canonical = "https://www.nextvisionstudio.com/short-form-video-production-
 const serviceSchema = {
   "@context": "https://schema.org",
   "@graph": [
+    { "@type": "WebPage", "@id": canonical + "#webpage", url: canonical, name: "Short Form Video Production in Dublin", mainEntity: { "@id": canonical + "#service" }, isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" } },
     {
       "@type": "Service",
       "@id": canonical + "#service",
-      name: "Short-Form Video Production Dublin",
+      name: getService("shortform").title,
       serviceType: "Short-form video production for Reels, TikTok and YouTube Shorts",
       description:
-        "Short-form video strategy, filming, editing, publishing and paid distribution for Dublin businesses.",
+        "Short video planning, filming and editing for Dublin businesses. Publishing, account management and paid promotion are separately agreed services.",
       url: canonical,
       provider: { "@id": "https://www.nextvisionstudio.com/#business" },
-      areaServed: [
-        { "@type": "City", name: "Dublin" },
-        { "@type": "AdministrativeArea", name: "Leinster" },
-      ],
+      areaServed: AREA_SERVED_SCHEMA,
     },
     {
       "@type": "BreadcrumbList",
@@ -43,6 +44,7 @@ const serviceSchema = {
   <ShortFormHero />
   <ShortFormProblem />
   <ShortFormSystem />
+  <ServiceScope slug="short-form-video-production-dublin" />
   <ShortFormResults />
   <ShortFormClientProof />
   <ShortFormFounder />
@@ -51,7 +53,7 @@ const serviceSchema = {
   <ShortFormFinalCTA />
 
   <a class="sf-sticky-cta sf-track-booking" href="#free-consultation">
-    Book a Free Call
+    Get a Free Consultation
   </a>
 </main>
 

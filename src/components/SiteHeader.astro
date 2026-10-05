@@ -1,4 +1,5 @@
 ---
+import { SERVICE_CATALOG } from "../config/services";
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 const isShortFormLanding = pathname === "/short-form-video-production-dublin/";
@@ -15,22 +16,14 @@ const navigation: Array<{
     href: "/services/",
     children: [
       { label: "All services", href: "/services/" },
-      { label: "Full service short form content production", href: "/short-form-video-production-dublin/" },
-      { label: "Commercial & brand film production", href: "/videography-dublin/" },
-      { label: "Corporate video production", href: "/corporate-video-production-dublin/" },
-      { label: "Event videography", href: "/event-videographer-dublin/" },
-      { label: "Social media content creation", href: "/social-media-content-creation-dublin/" },
-      { label: "Google & Meta Ads", href: "/google-ads-meta-ads-dublin/" },
-      { label: "Photography", href: "/photography-dublin/" },
-      { label: "Website design & development", href: "/webdesigner-dublin/" },
-      { label: "CRM & AI automation", href: "/crm-lead-automation-dublin/" },
+      ...SERVICE_CATALOG.map((service) => ({ label: service.title, href: service.href })),
     ],
   },
   { label: "Case studies", href: "/case-studies/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
   {
-    label: isShortFormLanding ? "Book a Free Call" : "Contact Us",
+    label: isShortFormLanding ? "Get a Free Consultation" : "Contact Us",
     href: isShortFormLanding ? "#free-consultation" : isHome ? "#contact-form" : "/contact/#contact-form",
     featured: true,
   },

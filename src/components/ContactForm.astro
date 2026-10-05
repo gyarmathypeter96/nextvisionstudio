@@ -1,5 +1,8 @@
 ---
 import { CRM_FORM_ENDPOINT } from "../config/forms";
+import { SERVICE_CATALOG, type ServiceKey } from "../config/services";
+interface Props { serviceKey?: ServiceKey; source?: string }
+const { serviceKey, source = "homepage-contact" } = Astro.props;
 ---
 
 <section class="contact" id="contact-form" aria-labelledby="contact-title">
@@ -17,7 +20,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
     <input
       type="hidden"
       name="redirect"
-      value={"https://www.nextvisionstudio.com/quotesend/?submitted=1&source=homepage-contact"}
+      value={`https://www.nextvisionstudio.com/quotesend/?submitted=1&source=${source}`}
     />
     <input
       type="hidden"
@@ -25,6 +28,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
       value="New project enquiry from the NextVision Studio website"
     />
     <input type="hidden" name="from_name" value="NextVision Studio Website" />
+    <input type="hidden" name="landing_page" value={Astro.url.pathname} />
 
     <div class="contact__botcheck" aria-hidden="true">
       <input
@@ -76,14 +80,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
     <div class="contact__field">
       <label for="contact-service">Which service do you need? <span>(required)</span></label>
       <select id="contact-service" name="service" required>
-        <option value="" disabled selected>Select a service</option>
-        <option value="Full service short form content production">Full service short form content production</option>
-        <option value="Commercial and brand film production">Commercial and brand film production</option>
-        <option value="Social media content creation">Social media content creation</option>
-        <option value="Google and Meta Ads">Google and Meta Ads</option>
-        <option value="Photography">Photography</option>
-        <option value="Website design and development">Website design and development</option>
-        <option value="CRM and AI automation">CRM and AI automation</option>
+        <option value="" disabled selected={!serviceKey}>Select a service</option>
+        {SERVICE_CATALOG.map((service) => <option value={service.title} selected={service.key === serviceKey}>{service.title}</option>)}
         <option value="Not sure yet">I am not sure yet</option>
       </select>
     </div>

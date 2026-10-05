@@ -1,5 +1,5 @@
 ---
-import { GTM_CONTAINER_ID } from "../config/site";
+import { GTM_CONTAINER_ID, ANALYTICS_HOSTS } from "../config/site";
 
 // Every measurement tag (GA4, Google Ads, Meta Pixel, Clarity) lives in this
 // Google Tag Manager container. The container loads only after consent.
@@ -8,10 +8,9 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
 
 <script
   is:inline
-  define:vars={{ tagManagerSource }}
+  define:vars={{ tagManagerSource, analyticsHosts: ANALYTICS_HOSTS }}
 >
   (() => {
-  const analyticsHosts = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
   if (!analyticsHosts.includes(window.location.hostname) || window.nvsTrackingExcluded) return;
 
   window.dataLayer = window.dataLayer || [];
@@ -38,6 +37,10 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
 
   window.nvsLoadTagManager = window.nvsLoadTagManager || function () {
     if (window.nvsTrackingExcluded) return;
+    // Recheck consent when a deferred loader actually runs.
+    try {
+      if (localStorage.getItem("nvs-cookie-consent") !== "granted") return;
+    } catch (_) { return; }
     if (document.querySelector("script[data-nvs-gtm]")) return;
 
     window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
