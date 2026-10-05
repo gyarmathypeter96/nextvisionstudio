@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ANALYTICS_HOSTS } from "../config/site";
+---
+<BaseLayout title="Your visit measurement preferences | NextVision Studio" description="Manage whether this browser is included in NextVision Studio website measurement." noindex minimal>
+  <main class="preferences">
+    <a href="/">NextVision Studio</a>
+    <h1>Keep your own visits out of the reports.</h1>
+    <p>This setting applies to this browser on this website. Set it separately on each device you use. Clearing browser storage removes it.</p>
+    <section aria-labelledby="status-title">
+      <h2 id="status-title">This browser</h2>
+      <p id="owner-status" role="status" aria-live="polite">Checking your preference…</p>
+      <p id="host-status"></p>
+      <div class="actions">
+        <button id="exclude-visits" type="button">Exclude my visits</button>
+        <button id="include-visits" type="button">Include my visits again</button>
+      </div>
+    </section>
+    <p class="note">This settings page is never measured. Local development and preview addresses are also excluded. Excluding visits does not prevent you from sending a real enquiry on the live website.</p>
+    <a href="/">Return to the website →</a>
+  </main>
+  <script define:vars={{ analyticsHosts: ANALYTICS_HOSTS }}>
+    const key = "nvs-owner-optout";
+    const status = document.getElementById("owner-status");
+    const render = () => {
+      try {
+        const excluded = localStorage.getItem(key) === "1";
+        window.nvsOwnerExcluded = excluded;
+        if (status) status.textContent = excluded ? "Your visits are excluded in this browser." : "Your visits are not individually excluded. Measurement on the live site still requires cookie consent.";
+      } catch (_) {
+        if (status) status.textContent = "Your browser has blocked storage. This preference cannot be saved here.";
+      }
+    };
+    const hostStatus = document.getElementById("host-status");
+    if (hostStatus) hostStatus.textContent = analyticsHosts.includes(location.hostname) ? "You are on the live website." : "You are on a preview. Visits and enquiry submissions from this preview are blocked.";
+    document.getElementById("exclude-visits")?.addEventListener("click", () => {
+      try { localStorage.setItem(key, "1"); } catch (_) {}
+      render();
+    });
+    document.getElementById("include-visits")?.addEventListener("click", () => {
+      try { localStorage.removeItem(key); } catch (_) {}
+      render();
+    });
+    render();
+  </script>
+</BaseLayout>
+<style>
+  .preferences { width: min(880px, calc(100% - 32px)); margin: 0 auto; padding: 64px 0; color: #fff; }
+  h1 { font-size: clamp(36px, 5vw, 62px); line-height: 1.06; text-wrap: balance; }
+  p { color: rgba(255,255,255,.75); line-height: 1.7; }
+  section { margin: 32px 0; padding: 28px; border: 1px solid rgba(180,220,255,.24); border-radius: 24px; background: rgba(180,220,255,.06); }
+  h2 { margin-top: 0; }
+  a { color: #cfeaff; text-underline-offset: 5px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  button { padding: 16px 24px; min-height: 48px; border: 1px solid rgba(180,220,255,.4); border-radius: 999px; background: #cfeaff; color: #111; font: inherit; font-weight: 700; cursor: pointer; }
+  #include-visits { background: transparent; color: #fff; }
+  button:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+  .note { font-size: 15px; }
+  @media (max-width: 500px) { section { padding: 20px; } button { width: 100%; } }
+</style>

@@ -1,3 +1,6 @@
+import { serviceForPath } from "../config/services";
+import { serviceScopes } from "./serviceScope";
+
 export interface LandingCard {
   title: string;
   text: string;
@@ -69,14 +72,14 @@ export const landingPages: Record<string, LandingPageData> = {
   videography: {
     slug: "videography-dublin",
     kind: "video",
-    metaTitle: "Video Production Dublin | Brand, Corporate & Social Video",
+    metaTitle: "Business Video Production Dublin | NextVision Studio",
     metaDescription:
-      "Dublin video production for brands that need one clear story and a useful library of campaign, website and social content. Plan your project with NextVision Studio.",
+      "Video production in Dublin for businesses. We plan, film and edit website videos, service explainers and social clips. View projects and request a quote.",
     eyebrow: "Video production Dublin",
-    headlineStart: "Video that makes your business",
-    headlineAccent: "easier to choose",
+    headlineStart: "Business Video Production",
+    headlineAccent: "in Dublin",
     lead:
-      "We plan your message, film a full day, then create channel-specific videos and ready-to-post edits to keep your website and social channels supplied long after the shoot.",
+      "Show customers what you do and why they should choose you. We plan, film and edit website videos, service explainers and social clips for Dublin businesses, with a clear next step for the viewer.",
     heroImage: {
       src: "/images/portfolio/JVA_WxYY3p0.webp",
       alt: "Professional event videography in Dublin by NextVision Studio",
@@ -84,12 +87,12 @@ export const landingPages: Record<string, LandingPageData> = {
       height: 360,
     },
     heroPoints: [],
-    ctaLabel: "Plan my video project",
+    ctaLabel: "Request a video quote",
     trustLine: "Trusted for brand, event and social video production",
     problemKicker: "The real problem",
     problemTitle: "Your business does not need another video. It needs a useful video library.",
     problemText:
-      "We shape the plan with you, film everything in one focused day and prepare edits for the channels you use—ready for your team to post.",
+      "We agree the message and the videos you need, plan the filming day and prepare edits for your website, social pages or ads. You know what is included before booking.",
     outcomes: [
       {
         title: "Make the offer clear",
@@ -152,7 +155,7 @@ export const landingPages: Record<string, LandingPageData> = {
         width: 640,
         height: 360,
         href: "/case-studies/sg-studios-dublin-podcast-studio-content/",
-        metric: "55,000 views on one TikTok promo",
+        metric: "Watch the studio promotion",
       },
     ],
     processTitle: "A simple process that removes the production headache.",
@@ -220,14 +223,14 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Commercial Photography Dublin | Product, Studio & Brand",
+    metaTitle: "Commercial Photographer Dublin | Product & Brand Photography",
     metaDescription:
-      "Commercial photography in Dublin for products, teams and brands. See recent work and request a quote for images that fit your website, social media or campaign.",
+      "Commercial photographer in Dublin for product, brand and team photography. View original work and request a quote for your website, social media or campaign.",
     eyebrow: "Photography Dublin",
-    headlineStart: "Commercial photography for",
-    headlineAccent: "Dublin businesses",
+    headlineStart: "Commercial Photography",
+    headlineAccent: "in Dublin",
     lead:
-      "Commercial studio, product and brand photography for Dublin businesses that need credible images for websites, campaigns and sales material.",
+      "Show your products, people and business at their best. We plan your photo session and deliver edited images for your website, social media, ads and sales material.",
     heroImage: {
       src: "/images/photography/event-photography-dublin.webp",
       alt: "Professional event photographer in Dublin by NextVision Studio",
@@ -235,7 +238,7 @@ export const landingPages: Record<string, LandingPageData> = {
       height: 1800,
       srcset: "/images/photography/event-photography-dublin-720.webp 720w, /images/photography/event-photography-dublin-1080.webp 1080w, /images/photography/event-photography-dublin.webp 1440w",
     },
-    heroPoints: ["Brand-focused planning", "Professional editing", "Web and social formats"],
+    heroPoints: ["A clear photo list", "Edited images", "Agreed usage rights"],
     ctaLabel: "Get a photography quote",
     trustLine: "Commercial photography shaped around how your images will be used",
     problemKicker: "Make the first impression count",
@@ -257,9 +260,9 @@ export const landingPages: Record<string, LandingPageData> = {
       },
     ],
     deliverablesKicker: "Photography services",
-    deliverablesTitle: "Professional images for every important customer touchpoint.",
+    deliverablesTitle: "Product, brand and team photography.",
     deliverablesText:
-      "The shot list is planned around where the photographs need to work, from a website hero to a social campaign.",
+      "Tell us what you need to show and where the photos will appear. We plan the images to fit your website, social pages or campaign.",
     deliverables: [
       { title: "Product photography", text: "Clean studio-style and lifestyle images that highlight detail." },
       { title: "Brand photography", text: "Original visuals that give your business a recognisable look." },
@@ -381,6 +384,16 @@ export const landingPages: Record<string, LandingPageData> = {
         question: "Will I receive photographs for web and social media?",
         answer:
           "The delivery formats are agreed before the shoot. Images can be prepared for websites, social media, digital advertising and high-resolution uses where required.",
+      },
+      {
+        question: "Do you provide a photo studio or photograph at our business?",
+        answer:
+          "We agree the best location for the image list. We can photograph at your business or arrange suitable studio space where needed. Studio hire is not automatically included; it is confirmed in the quote. We serve Dublin and North Dublin, including Balbriggan, Swords and Malahide.",
+      },
+      {
+        question: "What is included in a photography quote?",
+        answer:
+          "Your written proposal confirms shooting time, locations, edited image quantity, delivery date, included changes and usage rights. Any studio hire, styling, extra retouching or additional images are agreed separately if needed.",
       },
       {
         question: "How do I book a photography project?",
@@ -786,3 +799,21 @@ export const landingPages: Record<string, LandingPageData> = {
     ],
   },
 };
+
+
+// Keep enquiry labels, search descriptions and visible scope in agreement.
+for (const page of Object.values(landingPages)) {
+  if (page.slug === "videography-dublin") {
+    page.faq = page.faq.filter((item) => !["Do you help with video ideas and scripts?", "Can you film events outside Dublin?"].includes(item.question));
+  }
+  const service = serviceForPath(`/${page.slug}/`);
+  if (service) page.serviceType = service.title;
+  const scope = serviceScopes[page.slug];
+  if (scope) {
+    page.schemaDescription = scope.answer;
+    page.faq.push(
+      { question: "When will I receive the work, and how many changes are included?", answer: "The written proposal confirms the first review date, final delivery date and included revision rounds before you book. Extra versions, new filming or changes outside that scope are agreed separately." },
+      { question: "Do you serve North Dublin as well as Dublin city?", answer: "Yes. We serve Dublin and North Dublin, including Balbriggan, Swords and Malahide. Other Irish locations can be discussed; travel and location requirements are confirmed in your quote." },
+    );
+  }
+}

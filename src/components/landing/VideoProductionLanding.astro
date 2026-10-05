@@ -1,4 +1,6 @@
 ---
+import ServiceScope from "../ServiceScope.astro";
+import BusinessVideoExamples from "../BusinessVideoExamples.astro";
 import type { LandingPageData } from "../../data/landingPages";
 import LandingFAQ from "./LandingFAQ.astro";
 import LandingLeadForm from "./LandingLeadForm.astro";
@@ -45,7 +47,7 @@ const clients = [
 
     <div class="video-actions">
       <a class="video-button video-button--primary" href="#landing-contact" data-cta-placement="videography-hero"><span>{page.ctaLabel}</span></a>
-      <a class="video-button video-button--secondary" href="#showreel"><span>Watch the showreel</span></a>
+      <a class="video-text-link" href="#video-examples">See real project videos <span aria-hidden="true">↓</span></a>
     </div>
 
   </div>
@@ -66,126 +68,10 @@ const clients = [
   </div>
 </section>
 
-<section class="video-problem" aria-labelledby="video-problem-title" data-video-reveal>
-  <div class="video-shell video-problem__inner">
-    <div class="video-problem__copy">
-      <p class="video-kicker">{page.problemKicker}</p>
-      <h2 id="video-problem-title">{page.problemTitle}</h2>
-      <p>{page.problemText}</p>
-    </div>
-
-    <ol class="video-problem__list">
-      {page.outcomes.map((outcome, index) => (
-        <li>
-          <span>0{index + 1}</span>
-          <div>
-            <h3>{outcome.title}</h3>
-            <p>{outcome.text}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </div>
-</section>
+<BusinessVideoExamples />
+<ServiceScope slug={page.slug} />
 
 <InstagramReelFeature variant="video" />
-
-<section class="video-system" aria-labelledby="video-system-title" data-video-reveal>
-  <div class="video-shell">
-    <header class="video-section-head">
-      <div>
-        <p class="video-kicker">{page.deliverablesKicker}</p>
-        <h2 id="video-system-title">{page.deliverablesTitle}</h2>
-      </div>
-      <p>{page.deliverablesText}</p>
-    </header>
-
-    <div class="video-system__grid">
-      {page.deliverables.map((item, index) => (
-        <article>
-          <span>0{index + 1}</span>
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-
-<section class="video-showreel" id="showreel" aria-labelledby="video-showreel-title" data-video-reveal>
-  <div class="video-shell video-showreel__header">
-    <p class="video-kicker">Selected work in motion</p>
-    <h2 id="video-showreel-title">See the work before reading another claim.</h2>
-  </div>
-  <div class="video-showreel__frame">
-    <video
-      controls
-      playsinline
-      preload="metadata"
-      poster="/images/showreel/showreel-2025.webp"
-      aria-label="NextVision Studio video production showreel"
-    >
-      <source src="/videos/showreel-2025.mp4" type="video/mp4" />
-    </video>
-  </div>
-</section>
-
-<section class="video-work" id="video-work" aria-labelledby="video-work-title" data-video-reveal>
-  <div class="video-shell">
-    <header class="video-section-head">
-      <div>
-        <p class="video-kicker">{page.proofKicker}</p>
-        <h2 id="video-work-title">{page.proofTitle}</h2>
-      </div>
-      <p>{page.proofText}</p>
-    </header>
-
-    <div class="video-work__grid">
-      {page.proofItems.map((item) => (
-        <a href={item.href || "/case-studies/"}>
-          <img src={item.image} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" />
-          <div class="video-work__copy">
-            <span>{item.tag}</span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-            {item.metric && <strong>{item.metric}</strong>}
-            <small>Read the project <span aria-hidden="true">↗</span></small>
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <a class="video-text-link video-work__all" href="/#portfolio">View the full video portfolio <span aria-hidden="true">→</span></a>
-  </div>
-</section>
-
-<section class="video-process" aria-labelledby="video-process-title" data-video-reveal>
-  <div class="video-shell">
-    <header class="video-process__header">
-      <h2 id="video-process-title">{page.processTitle}</h2>
-      <p>{page.processText}</p>
-    </header>
-
-    <ol class="video-process__steps">
-      {page.process.map((step, index) => (
-        <li>
-          <span>0{index + 1}</span>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
-        </li>
-      ))}
-    </ol>
-
-    <aside class="video-process__decision">
-      <div>
-        <p class="video-kicker">Start with the problem</p>
-        <h3>{page.decisionTitle}</h3>
-        <p>{page.decisionText}</p>
-      </div>
-      <a class="video-button video-button--light" href="#landing-contact"><span>Plan the right project</span></a>
-    </aside>
-  </div>
-</section>
 
 <section class="video-founder" aria-labelledby="video-founder-title" data-video-reveal>
   <div class="video-shell video-founder__inner">

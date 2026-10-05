@@ -1,4 +1,5 @@
 ---
+import { serviceForPath } from "../../config/services";
 import { WHATSAPP_URL } from "../../config/contact";
 import { CRM_FORM_ENDPOINT } from "../../config/forms";
 import type { LandingPageData } from "../../data/landingPages";
@@ -43,7 +44,7 @@ const messageId = `${page.slug}-message`;
       <input type="hidden" name="subject" value={page.formSubject} />
       <input type="hidden" name="from_name" value="NextVision Studio Website" />
       <input type="hidden" name="landing_page" value={`/${page.slug}/`} />
-      <input type="hidden" name="service" value={page.serviceType} />
+      <input type="hidden" name="service" value={serviceForPath(`/${page.slug}/`)?.title ?? page.serviceType} />
 
       <div class="landing-contact__botcheck" aria-hidden="true">
         <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
@@ -62,7 +63,7 @@ const messageId = `${page.slug}-message`;
       </div>
 
       <div class="landing-contact__field">
-        <label for={emailId}>Email <span>(optional)</span></label>
+        <label for={emailId}>Email <span>(required)</span></label>
         <input
           id={emailId}
           type="email"
@@ -70,6 +71,7 @@ const messageId = `${page.slug}-message`;
           placeholder="you@example.com"
           autocomplete="email"
           inputmode="email"
+          required
         />
       </div>
 
@@ -87,16 +89,17 @@ const messageId = `${page.slug}-message`;
       </div>
 
       <div class="landing-contact__field">
-        <label for={messageId}>Project details <span>(optional)</span></label>
+        <label for={messageId}>Project details <span>(required)</span></label>
         <textarea
           id={messageId}
           name="message"
           placeholder="What would you like to create or improve?"
           rows="7"
+          required
         ></textarea>
       </div>
 
-      <button type="submit"><span>Request a project recommendation</span></button>
+      <button type="submit"><span>Request a project quote</span></button>
       <p class="landing-contact__privacy">
         Your details are used only to respond to this enquiry.
       </p>

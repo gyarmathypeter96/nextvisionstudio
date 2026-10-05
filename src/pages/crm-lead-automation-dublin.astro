@@ -1,4 +1,6 @@
 ---
+import { AREA_SERVED_SCHEMA } from "../config/site";
+import { getService } from "../config/services";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const canonical = "https://www.nextvisionstudio.com/crm-lead-automation-dublin/";
@@ -9,13 +11,13 @@ const crmSchema = {
     {
       "@type": "Service",
       "@id": `${canonical}#service`,
-      name: "AI and CRM Automation Dublin",
+      name: getService("crm").title,
       serviceType: "CRM implementation and lead workflow automation",
       description:
         "Practical CRM setup for capturing enquiries, organising sales pipelines and creating configurable follow-up workflows for Dublin businesses.",
       url: canonical,
       provider: { "@id": "https://www.nextvisionstudio.com/#business" },
-      areaServed: { "@type": "City", name: "Dublin" },
+      areaServed: AREA_SERVED_SCHEMA,
     },
     {
       "@type": "BreadcrumbList",

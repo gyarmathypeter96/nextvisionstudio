@@ -1,4 +1,5 @@
 ---
+import { BUSINESS_ID, FOUNDER_ID } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { caseStudies } from "../data/caseStudies";
 
@@ -35,6 +36,9 @@ interface Props {
   clientResponse: string;
   links: LinkItem[];
   source?: LinkItem;
+  details?: Array<{ title: string; text: string }>;
+  measurementNote?: string;
+  resultTitle?: string;
 }
 
 const props = Astro.props;
@@ -51,16 +55,8 @@ const articleSchema = {
   description: props.description,
   image: `https://www.nextvisionstudio.com${props.heroImage}`,
   mainEntityOfPage: canonical,
-  author: {
-    "@type": "Organization",
-    name: "NextVision Studio",
-    url: "https://www.nextvisionstudio.com/",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "NextVision Studio",
-    url: "https://www.nextvisionstudio.com/",
-  },
+  author: { "@id": FOUNDER_ID },
+  publisher: { "@id": BUSINESS_ID },
   about: props.client,
   locationCreated: {
     "@type": "Place",
@@ -212,13 +208,16 @@ const caseStudySchema = {
       </section>
     )}
 
+    {props.details?.map((detail) => <section class="case-study-section case-study-section--split"><div class="case-study-section__heading"><h2>{detail.title}</h2></div><div class="case-study-section__body"><p>{detail.text}</p></div></section>)}
+
     <section class="case-study-section case-study-section--result">
       <div class="case-study-section__heading">
         <p class="case-study-kicker">The result</p>
-        <h2>A finished story that feels like the client</h2>
+        <h2>{props.resultTitle ?? "A finished story that feels like the client"}</h2>
       </div>
       <div class="case-study-result">
         <p>{props.outcome}</p>
+        {props.measurementNote && <p>{props.measurementNote}</p>}
         <div class="case-study-feedback">
           <p class="case-study-feedback__label">Client feedback</p>
           <p>{props.clientResponse}</p>
