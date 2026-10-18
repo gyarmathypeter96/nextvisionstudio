@@ -5,6 +5,9 @@ const siteUrl = "https://www.nextvisionstudio.com";
 const routes = [
   "/about/",
   "/blog/business-video-production-planning-dublin/",
+  "/blog/content-day-or-business-video/",
+  "/blog/compare-business-video-quotes/",
+  "/blog/customer-questions-into-business-videos/",
   "/blog/commercial-photography-shoot-planning-dublin/",
   "/blog/product-photography-shot-list-dublin/",
   "/image-licensing/",

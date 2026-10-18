@@ -1,0 +1,51 @@
+---
+const projects = [
+  {
+    client: "VentSolve",
+    title: "Help customers understand a technical service",
+    text: "Promotional films, customer education and internal training have different audiences. See how the ongoing VentSolve project separates those messages and uses video to explain the business.",
+    image: "/images/portfolio/SUeoIgRtH0I.webp",
+    href: "/case-studies/ventsolve-content-production/",
+    evidence: "Public brand film and social video examples",
+  },
+  {
+    client: "Leroy’s Barking World",
+    title: "Turn everyday work into useful short videos",
+    text: "For this dog grooming business in Blessington, planned scripts and filming added professional short videos alongside the owner’s own phone content. The aim was to keep the business’s personality visible.",
+    image: "/images/portfolio/53-_kK95Eoc.webp",
+    href: "/case-studies/leroys-barking-world-social-content/",
+    evidence: "Public Instagram example and production approach",
+  },
+];
+---
+<section class="video-project-proof" aria-labelledby="video-project-proof-title">
+  <header><h2 id="video-project-proof-title">See how we approached two real briefs.</h2><p>Open each project to see what the client needed, what we created and the public work.</p></header>
+  <div class="video-project-proof__grid">
+    {projects.map((project) => <article>
+      <a class="video-project-proof__image" href={project.href}><img src={project.image} alt={`${project.client} content produced by NextVision Studio`} width="640" height="360" loading="lazy" decoding="async" /></a>
+      <div class="video-project-proof__copy"><span>{project.client}</span><h3>{project.title}</h3><p>{project.text}</p><small>{project.evidence}</small><a href={project.href}>Read the full case study</a></div>
+    </article>)}
+  </div>
+  <p class="video-project-proof__note">These examples show the work and production decisions. We do not present unverified views, leads or sales as a measured result.</p>
+  <a class="video-project-proof__lesson" href="/blog/customer-questions-into-business-videos/">Read the lessons from these two projects</a>
+</section>
+<style>
+  .video-project-proof, .video-project-proof * { box-sizing: border-box; }
+  .video-project-proof { width: min(100% - 48px,1180px); margin: 0 auto; padding: 24px 0 72px; color: #fff; }
+  header { max-width: 880px; margin-bottom: 30px; }
+  h2 { margin: 0; font-size: clamp(34px,4.3vw,54px); line-height: 1.06; text-wrap: balance; }
+  p { color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.7; }
+  .video-project-proof__grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+  article { min-width: 0; overflow: hidden; border: 1px solid rgba(180,220,255,.2); border-radius: 26px; background: #171b1f; }
+  .video-project-proof__image { display: block; }
+  img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+  .video-project-proof__copy { padding: 28px; }
+  span, small { display: block; color: #cfeaff; font-size: 13px; line-height: 1.6; }
+  h3 { margin: 12px 0 18px; font-size: clamp(26px,3vw,34px); line-height: 1.15; }
+  small { color: rgba(255,255,255,.6); margin: 22px 0 8px; }
+  a { color: #cfeaff; text-underline-offset: 5px; }
+  .video-project-proof__copy > a, .video-project-proof__lesson { display: inline-block; padding: 10px 0; font-weight: 750; line-height: 1.5; }
+  .video-project-proof__note { font-size: 13px; margin-bottom: 0; }
+  a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 5px; }
+  @media (max-width: 760px) { .video-project-proof { width: calc(100% - 32px); padding-bottom: 48px; } .video-project-proof__grid { grid-template-columns: 1fr; } .video-project-proof__copy { padding: 24px; } p { font-size: 16px; } }
+</style>

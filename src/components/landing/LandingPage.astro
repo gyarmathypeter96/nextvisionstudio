@@ -17,6 +17,7 @@ import VideoProductionLanding from "./VideoProductionLanding.astro";
 import SocialContentOffers from "./SocialContentOffers.astro";
 import SocialContentProcess from "./SocialContentProcess.astro";
 import type { LandingPageData } from "../../data/landingPages";
+import { businessVideoOffers } from "../../data/businessVideoOffers";
 
 interface Props {
   page: LandingPageData;
@@ -85,7 +86,7 @@ const landingSchema = {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: `${page.serviceType} services`,
-        itemListElement: page.deliverables.map((item) => ({
+        itemListElement: (isVideoPage ? businessVideoOffers : page.deliverables).map((item) => ({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
