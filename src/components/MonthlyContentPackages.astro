@@ -1,0 +1,102 @@
+---
+import { monthlyContentPackages } from "../data/monthlyContentPackages";
+---
+
+<section class="content-packages" id="content-packages" aria-labelledby="content-packages-title">
+  <header class="content-packages__heading">
+    <p class="content-packages__eyebrow">Monthly content. Made simple.</p>
+    <h2 id="content-packages-title">One shoot. Your next month of content.</h2>
+    <p>We plan the ideas, film at your business and edit your videos. Choose the pace that suits you.</p>
+  </header>
+
+  <div class="content-packages__grid">
+    {monthlyContentPackages.map((plan) => (
+      <article class:list={["content-plan", { "content-plan--featured": plan.featured }]} data-monthly-plan={plan.id} aria-labelledby={`plan-${plan.id}-title`}>
+        {plan.featured && <>
+          <span class="content-plan__popular">Most popular</span>
+          <svg class="content-plan__web" viewBox="0 0 160 160" fill="none" aria-hidden="true" focusable="false">
+            <path d="M160 0H0M160 0V160M160 0 0 160M160 0 12 58M160 0 102 148M160 0 66 18M160 0 142 94" />
+            <path d="M128 0Q130 11 137 23Q147 29 160 32M94 0Q99 20 113 47Q136 59 160 66M57 0Q66 31 87 73Q124 91 160 103M15 0Q30 43 58 102Q106 130 160 148M137 23Q120 22 130 12M113 47Q88 44 105 22M87 73Q52 69 76 33M58 102Q14 99 43 46" />
+          </svg>
+        </>}
+        <div class="content-plan__top">
+          <span class="content-plan__index" aria-hidden="true">0{monthlyContentPackages.indexOf(plan) + 1}</span>
+          {plan.featured && <span class="content-plan__season"><span aria-hidden="true">✦</span> Halloween offer</span>}
+        </div>
+        <h3 id={`plan-${plan.id}-title`}>{plan.name}</h3>
+        <p class="content-plan__description">{plan.description}</p>
+        <p class="content-plan__price"><strong>€{plan.price.toLocaleString("en-IE")}</strong><span>/ month <small>+ VAT</small></span></p>
+        <div class="content-plan__includes">
+          <p>Every month, you get</p>
+          <ul>
+            <li>Strategic content planning</li>
+            <li>Half day filming at your business</li>
+            <li><strong>{plan.videos} short form videos</strong>, edited and ready to post</li>
+          </ul>
+        </div>
+        <a class="content-plan__cta" href="#contact-form" data-content-plan={plan.id} data-content-plan-name={plan.name} data-content-plan-price={plan.price} data-cta-placement={`monthly-package-${plan.id}`}>{plan.cta}<span aria-hidden="true">↗</span></a>
+      </article>
+    ))}
+  </div>
+  <p class="content-packages__note">All prices exclude VAT. These packages cover content production, not posting, account management or paid ads. Filming hours, video lengths, formats and included changes are confirmed in your quote.</p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("[data-content-plan]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const form = document.querySelector<HTMLFormElement>("#contact-form form");
+      const service = form?.querySelector<HTMLSelectElement>('[name="service"]');
+      const packageField = form?.querySelector<HTMLInputElement>('[name="content_package"]');
+      const summary = document.querySelector<HTMLElement>("[data-package-summary]");
+      const name = link.dataset.contentPlanName;
+      const price = link.dataset.contentPlanPrice;
+      if (!form || !service || !packageField || !summary || !name || !price) return;
+      service.value = "Monthly Social Media Content";
+      service.dispatchEvent(new Event("change", { bubbles: true }));
+      packageField.value = `${name}: EUR ${price} + VAT per month`;
+      const label = summary.querySelector<HTMLElement>("[data-package-label]");
+      if (label) label.textContent = `${name} · €${Number(price).toLocaleString("en-IE")} + VAT / month`;
+      summary.hidden = false;
+    });
+  });
+</script>
+
+<style>
+  .content-packages, .content-packages * { box-sizing: border-box; }
+  .content-packages { position: relative; width: min(100% - 48px, 1260px); margin: 0 auto; padding: 20px 0 100px; color: #fff; scroll-margin-top: 110px; }
+  .content-packages__heading { max-width: 760px; margin-bottom: 54px; }
+  .content-packages__eyebrow { margin: 0 0 18px; color: #cfeaff; font-size: 11px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+  h2 { margin: 0; font-size: clamp(36px, 4.6vw, 61px); font-weight: 650; line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
+  .content-packages__heading > p:last-child { max-width: 620px; margin: 22px 0 0; color: rgba(255,255,255,.65); font-size: 17px; line-height: 1.7; }
+  .content-packages__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
+  .content-plan { position: relative; display: flex; min-width: 0; flex-direction: column; padding: clamp(25px, 3vw, 38px); border: 1px solid rgba(180,220,255,.18); border-radius: 26px; background: linear-gradient(150deg,rgba(255,255,255,.025),transparent 65%),#14191d; }
+  .content-plan--featured { isolation: isolate; border-color: rgba(178,222,255,.64); background: radial-gradient(ellipse at 85% 0,rgba(135,190,255,.17),transparent 62%),linear-gradient(155deg,#1b2834,#141a20 65%); box-shadow: 0 0 24px rgba(130,198,255,.13),0 0 65px rgba(130,198,255,.08),inset 0 1px 0 rgba(255,255,255,.09); }
+  .content-plan--featured::before { content: ""; position: absolute; z-index: -1; inset: -7px; border: 1px solid rgba(165,210,255,.16); border-radius: 32px; box-shadow: 0 0 30px rgba(131,190,255,.14),0 0 65px rgba(162,133,225,.12); pointer-events: none; animation: content-halo 5s ease-in-out infinite; }
+  .content-plan__popular { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: #cfeaff; color: #111a22; font-size: 10px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+  .content-plan__web { position: absolute; top: 0; right: 0; z-index: -1; width: 145px; height: 145px; border-top-right-radius: 26px; color: #cfeaff; stroke: currentColor; stroke-width: .65; opacity: .24; pointer-events: none; }
+  .content-plan__top { display: flex; min-height: 26px; align-items: center; justify-content: space-between; gap: 10px; margin: 7px 0 28px; }
+  .content-plan__index { color: rgba(207,234,255,.5); font-size: 12px; font-weight: 650; letter-spacing: .08em; }
+  .content-plan__season { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid rgba(207,234,255,.15); border-radius: 999px; background: rgba(10,16,22,.4); color: #cfeaff; font-size: 10px; white-space: nowrap; }
+  .content-plan__season > span { color: #dccdff; font-size: 13px; }
+  h3 { position: relative; margin: 0; font-size: clamp(24px,2.35vw,30px); font-weight: 650; letter-spacing: -.035em; line-height: 1.14; }
+  .content-plan__description { min-height: 54px; margin: 15px 0 0; color: rgba(255,255,255,.62); font-size: 14px; line-height: 1.7; }
+  .content-plan__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin: 30px 0; }
+  .content-plan__price > strong { color: #fff; font-size: clamp(43px,4.3vw,58px); font-weight: 650; letter-spacing: -.05em; line-height: 1; }
+  .content-plan__price > span { color: rgba(255,255,255,.6); font-size: 12px; line-height: 1.6; }
+  .content-plan__price small { display: block; color: rgba(207,234,255,.8); font-size: 10px; }
+  .content-plan__includes { flex: 1; padding-top: 24px; border-top: 1px solid rgba(207,234,255,.12); }
+  .content-plan__includes > p { margin: 0; color: rgba(255,255,255,.8); font-size: 11px; font-weight: 700; }
+  ul { display: grid; gap: 15px; margin: 22px 0 34px; padding: 0; list-style: none; }
+  li { position: relative; padding-left: 23px; color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.65; }
+  li::before { content: "✓"; position: absolute; top: 0; left: 0; color: #cfeaff; font-weight: 750; }
+  li strong { color: #fff; font-weight: 650; }
+  .content-plan__cta { display: flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 17px; border: 1px solid rgba(207,234,255,.25); border-radius: 999px; background: rgba(207,234,255,.04); box-shadow: inset 0 1px 0 rgba(255,255,255,.055); color: #fff; font-size: 12px; font-weight: 750; line-height: 1.5; text-decoration: none; transition: background .2s ease,border-color .2s ease; }
+  .content-plan--featured .content-plan__cta { border-color: #cfeaff; background: #cfeaff; color: #101a23; }
+  .content-plan__cta:hover { border-color: #cfeaff; background: rgba(207,234,255,.13); }
+  .content-plan--featured .content-plan__cta:hover { background: #e2f3ff; }
+  .content-plan__cta:focus-visible { outline: 2px solid #cfeaff; outline-offset: 5px; }
+  .content-packages__note { max-width: 880px; margin: 26px 0 0; color: rgba(255,255,255,.45); font-size: 11px; line-height: 1.8; }
+  @keyframes content-halo { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+  @media (max-width: 900px) { .content-packages { width: min(calc(100% - 32px),560px); padding: 12px 0 64px; } .content-packages__heading { margin-bottom: 42px; } .content-packages__grid { grid-template-columns: 1fr; gap: 30px; } .content-plan { padding: 28px; } .content-plan__top { min-height: 26px; flex-wrap: nowrap; } h3 { font-size: 29px; } .content-plan__description { min-height: 0; } .content-plan__price > strong { font-size: 53px; } .content-plan__web { width: 155px; height: 155px; } }
+  @media (prefers-reduced-motion: reduce) { .content-plan--featured::before { animation: none; opacity: .75; } .content-plan__cta { transition: none; } }
+</style>
