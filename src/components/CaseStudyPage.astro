@@ -11,6 +11,7 @@ interface LinkItem {
 
 interface SocialVideo {
   title: string;
+  metaTitle?: string;
   platform: "TikTok" | "Instagram";
   href: string;
   image: string;
@@ -81,7 +82,7 @@ const caseStudySchema = {
 ---
 
 <BaseLayout
-  title={`${props.title} | NextVision Studio`}
+  title={props.metaTitle ?? `${props.title} | NextVision Studio`}
   description={props.description}
   canonical={canonical}
   ogImage={props.heroImage}

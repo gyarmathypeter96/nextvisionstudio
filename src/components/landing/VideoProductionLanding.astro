@@ -1,6 +1,8 @@
 ---
 import ServiceScope from "../ServiceScope.astro";
 import BusinessVideoExamples from "../BusinessVideoExamples.astro";
+import BusinessVideoOffers from "../BusinessVideoOffers.astro";
+import BusinessVideoProof from "../BusinessVideoProof.astro";
 import type { LandingPageData } from "../../data/landingPages";
 import LandingFAQ from "./LandingFAQ.astro";
 import LandingLeadForm from "./LandingLeadForm.astro";
@@ -68,8 +70,10 @@ const clients = [
   </div>
 </section>
 
+<BusinessVideoOffers />
 <BusinessVideoExamples />
-<ServiceScope slug={page.slug} />
+<ServiceScope slug={page.slug} showProof={false} />
+<BusinessVideoProof />
 
 <InstagramReelFeature variant="video" />
 

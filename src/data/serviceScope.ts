@@ -18,7 +18,7 @@ export const serviceScopes: Record<string, ServiceScope> = {
       { title: "Ready to use", text: "Receive edited files for the agreed website, social or advertising channels. Posting, campaign management and raw footage are separate unless listed in your proposal." },
       { title: "A clear next step", text: "Choose what viewers should do next, such as enquire, request a quote or learn about a service. Reach alone is not evidence of new customers." },
     ],
-    cost: "A focused shoot with a few edits needs less production time than a film with several locations, people and versions. Planning, filming time, crew, edit count, captions, usage and delivery urgency shape the quote. We agree the scope and price in writing, rather than publishing a one size fits all rate.",
+    cost: "Our price guide lists filming, editing, ad video and monthly content options. Filming and editing are separate unless your package includes both. Locations, crew, video lengths, captions, usage and delivery urgency can change the scope. The written quote confirms what is included and any extras before booking.",
     proof: { title: "VentSolve: help customers understand the service", text: "VentSolve needed promotional videos, customer education and internal training. We planned content around real ventilation and mould removal questions, then adapted the message for public marketing and team learning. See the public work and how each video was used.", href: "/case-studies/ventsolve-content-production/", image: "/images/portfolio/SUeoIgRtH0I.webp", alt: "VentSolve business video project by NextVision Studio" },
   },
   "photography-dublin": {

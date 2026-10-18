@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import MarketPriceComparison from "../components/MarketPriceComparison.astro";
+import { BUSINESS_ID, FOUNDER_ID } from "../config/site";
 
 const canonical =
   "https://www.nextvisionstudio.com/how-much-does-a-videographer-cost-in-dublin/";
@@ -8,7 +10,22 @@ const faq = [
   {
     question: "How much does a videographer cost in Dublin?",
     answer:
-      "Dublin videography prices vary by format, filming time, crew, equipment and editing. Short-form projects may begin in the hundreds of euro, while larger corporate or campaign productions can cost several thousand euro.",
+      "NextVision Studio charges €250 plus VAT for half day shooting and €450 plus VAT for full day shooting. These are filming rates; editing is separate. Your written quote confirms filming hours, locations, delivery and any extras.",
+  },
+  {
+    question: "How much does editing short videos cost?",
+    answer:
+      "NextVision Studio charges €600 plus VAT for 8 short video edits or €800 plus VAT for 12 short video edits. These packages cover editing only. Filming is booked and priced separately.",
+  },
+  {
+    question: "What is included in Ultimate Organic Social Content?",
+    answer:
+      "The NextVision Studio Ultimate Organic Social Content package costs €1,200 plus VAT per month. It includes social media content, management and strategy, with 12 short videos and 4 photos each month. Advertising spend and paid campaign management are separate.",
+  },
+  {
+    question: "How much does a set of social video ads cost?",
+    answer:
+      "NextVision Studio offers 4 short videos for ads for €500 plus VAT. This is video production; advertising spend and campaign management are separate. The quote confirms the filming requirements and finished video formats.",
   },
   {
     question: "What is normally included in a videography quote?",
@@ -35,21 +52,12 @@ const articleSchema = {
       image:
         "https://www.nextvisionstudio.com/images/portfolio/JVA_WxYY3p0.webp",
       datePublished: "2026-06-19",
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-18",
       author: {
-        "@type": "Person",
-        name: "Peter Gyarmathy",
-        url: "https://www.nextvisionstudio.com/about/",
+        "@id": FOUNDER_ID,
       },
       publisher: {
-        "@type": "ProfessionalService",
-        "@id": "https://www.nextvisionstudio.com/#business",
-        name: "NextVision Studio",
-        url: "https://www.nextvisionstudio.com/",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://www.nextvisionstudio.com/images/brand/nextvision-studio-logo.webp",
-        },
+        "@id": BUSINESS_ID,
       },
       about: [
         "Videography Dublin",
@@ -94,7 +102,7 @@ const articleSchema = {
 
 <BaseLayout
   title="Business Videographer Cost Dublin 2026 | Pricing Guide"
-  description="How much does a videographer cost in Dublin in 2026? Understand the scope, filming, editing and usage that shape a business video quote. Compare proposals before booking."
+  description="NextVision Studio Dublin filming from €250 + VAT, short video editing and monthly social content packages. See prices, inclusions and request your production plan."
   canonical={canonical}
   ogImage="https://www.nextvisionstudio.com/images/portfolio/JVA_WxYY3p0.webp"
 >
@@ -107,12 +115,12 @@ const articleSchema = {
         <div class="article-hero__kicker">Dublin videography guide · Updated 2026</div>
         <h1>How Much Does a Business Videographer Cost in Dublin?</h1>
         <p class="article-hero__lead">
-          A practical guide to video production pricing for Dublin businesses —
-          from short-form social content to corporate films and event coverage.
+          Clear NextVision Studio prices for filming, short video editing and
+          monthly social content. Choose the work your business needs.
         </p>
         <div class="article-hero__meta">
           <span>By Peter Gyarmathy</span>
-          <span>Updated 1 October 2026</span>
+          <span>Updated 18 October 2026</span>
           <span>8 minute read</span>
         </div>
       </header>
@@ -121,19 +129,33 @@ const articleSchema = {
         <div class="article-content">
           <p>
             If you are planning professional video content, the first sensible
-            question is usually: <strong>how much will the project cost?</strong>
+            question is usually: <strong>how much will the project cost?</strong>{" "}
             There is no single Dublin videography price because a two-hour social
             content shoot and a multi-location brand film require very different
             levels of planning, filming and editing.
           </p>
           <p>
-            This guide explains relative production scope rather than publishing fixed prices or unverified market rates. Use it to prepare your brief and compare proposals on more than the total alone.
+            At NextVision Studio, half day shooting costs <strong>€250 + VAT</strong>
+            and full day shooting costs <strong>€450 + VAT</strong>. Editing is
+            priced separately. Our full monthly organic social content package
+            is <strong>€1,200 + VAT</strong>, including strategy, management,
+            12 short videos and 4 photos.
           </p>
           <p>
             This guide covers video for businesses, events and campaigns. Wedding
             videography has different schedules and deliverables, so its prices
             are not directly comparable.
           </p>
+
+          <section class="article-note article-offer" aria-labelledby="nextvision-plan-title">
+            <h2 id="nextvision-plan-title">What would your project look like with NextVision?</h2>
+            <p>Choose a <strong>Content Day</strong> for several short social videos, or a <strong>Business Video</strong> to explain a service on your website. We agree the ideas, filming and finished edits in one proposal.</p>
+            <a href="/videography-dublin/#video-offers" data-cta-placement="videography-cost-offers">Compare our two production options</a>
+            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-early-enquiry">Ask for a quote for your project</a>
+            <a href="#nextvision-prices">See all NextVision prices</a>
+          </section>
+
+          <MarketPriceComparison />
 
           <h2>How production scope affects your budget</h2>
           <div class="price-grid" aria-label="Video production scope comparison">
@@ -159,10 +181,11 @@ const articleSchema = {
           </div>
 
           <div class="article-note">
-            <strong>Important:</strong> VAT, travel, actors, studio hire, specialist
-            equipment, animation and additional revisions can change the total.
+            <strong>Important:</strong> All NextVision prices shown exclude VAT.
+            Travel, actors, studio hire, specialist equipment, animation and
+            additional revisions can change the total.
             Always compare the exact scope and deliverables in each quote.
-            <a href="/contact/#contact-form" data-cta-placement="videography-cost-price-range">
+            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-price-range">
               Request a quote for your project →
             </a>
           </div>
@@ -219,7 +242,7 @@ const articleSchema = {
           <p>
             NextVision Studio can plan a connected batch for Reels, TikTok,
             YouTube Shorts, LinkedIn, paid advertising and your website. Explore
-            our <a href="/videography-dublin/">videography services in Dublin</a>
+            our <a href="/videography-dublin/#video-offers">Content Day and Business Video options in Dublin</a>
             and <a href="/social-media-content-creation-dublin/">social media content creation</a>.
           </p>
 
@@ -244,6 +267,7 @@ const articleSchema = {
             <li>Review relevant work created for a similar audience or platform.</li>
             <li>Make sure the usage rights match your website and advertising plans.</li>
           </ul>
+          <p>Use our <a href="/blog/compare-business-video-quotes/">business video quote checklist</a> to compare the same work across proposals. If you are deciding between short social clips and a main website film, read <a href="/blog/content-day-or-business-video/">which production option fits your business</a>.</p>
 
           <h2>Frequently asked questions</h2>
           <div class="article-faq">
@@ -262,7 +286,7 @@ const articleSchema = {
               Share your audience, preferred timing and where the content will be
               used. We will recommend a practical production plan and transparent quote.
             </p>
-            <a href="/contact/#contact-form" data-cta-placement="videography-cost-guide">Request a videography quote</a>
+            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-guide">Request my video production plan</a>
           </section>
         </div>
 
@@ -270,14 +294,16 @@ const articleSchema = {
           <div>
             <span>Quick answer</span>
             <p>
-              Dublin videography can range from a few hundred euro for focused
-              short-form production to several thousand for a larger corporate,
-              event or campaign project.
+              Filming, editing and monthly account management are different
+              services. Compare the finished work and what is included before
+              comparing prices.
             </p>
           </div>
           <nav aria-label="Related services">
             <span>Related pages</span>
-            <a href="/videography-dublin/">Videography Dublin</a>
+            <a href="#nextvision-prices">NextVision Studio prices</a>
+            <a href="#published-prices">Compare indicative budgets</a>
+            <a href="/videography-dublin/#video-offers">Content Day and Business Video</a>
             <a href="/#portfolio">Video portfolio</a>
             <a href="/services/">All services</a>
             <a href="/contact/#contact-form">Contact NextVision Studio</a>
@@ -317,6 +343,10 @@ const articleSchema = {
   .price-grid strong { color: #fff; }
   .article-note { margin: 28px 0 0; padding: 20px 22px; border-left: 3px solid #9bd2ff; border-radius: 0 16px 16px 0; background: rgba(155,210,255,.07); color: rgba(255,255,255,.69); font-size: 14px; line-height: 1.6; }
   .article-note a { display: inline-block; margin-left: 5px; color: #cfeaff; font-weight: 800; text-underline-offset: 3px; }
+  .article-offer { padding: 28px; border: 1px solid rgba(180,220,255,.24); border-radius: 24px; background: linear-gradient(135deg,rgba(155,210,255,.1),rgba(255,255,255,.025)); }
+  .article-content .article-offer h2 { margin: 0 0 18px; font-size: clamp(27px,3vw,36px); }
+  .article-offer p { margin: 0 0 16px; font-size: 16px; }
+  .article-offer a { display: block; width: fit-content; margin: 0; padding: 10px 0; line-height: 1.5; }
   .check-list { padding-left: 0; list-style: none; }
   .check-list li { position: relative; padding: 13px 0 13px 34px; border-bottom: 1px solid rgba(255,255,255,.07); }
   .check-list li::before { content: "✓"; position: absolute; left: 4px; color: #9bd2ff; font-weight: 900; }

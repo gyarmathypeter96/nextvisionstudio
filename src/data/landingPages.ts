@@ -171,6 +171,9 @@ export const landingPages: Record<string, LandingPageData> = {
     decisionText:
       "Tell us what customers struggle to understand, what you are promoting and where the content needs to work. We will shape the simplest useful production plan.",
     relatedLinks: [
+      { label: "Content Day or Business Video?", href: "/blog/content-day-or-business-video/" },
+      { label: "What should a video quote include?", href: "/blog/compare-business-video-quotes/" },
+      { label: "Lessons from two client projects", href: "/blog/customer-questions-into-business-videos/" },
       { label: "Corporate video production Dublin", href: "/corporate-video-production-dublin/" },
       { label: "Event videographer Dublin", href: "/event-videographer-dublin/" },
       { label: "Short-form video production", href: "/short-form-video-production-dublin/" },
@@ -181,7 +184,7 @@ export const landingPages: Record<string, LandingPageData> = {
     ],
     formTitle: "What should video help your business do?",
     formText:
-      "Share the goal, audience and rough timing. We will reply with a practical recommendation, not a generic package.",
+      "Tell us if you need a Content Day, a Business Video or help choosing. Share where the videos will be used and when you need them. We will recommend the filming and editing scope for your quote.",
     formSubject: "New Videography Dublin landing page enquiry",
     serviceType: "Videography and video production in Dublin",
     schemaDescription:
@@ -200,7 +203,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "Can one filming day create several social media videos?",
         answer:
-          "Yes. When the outputs are planned before filming, one production day can create a main film, campaign cut-downs and multiple short social clips.",
+          "A planned filming day can provide footage for several videos. The number, lengths and versions depend on the brief and are confirmed in your proposal before booking.",
       },
       {
         question: "Do you help with video ideas and scripts?",
@@ -661,15 +664,15 @@ export const landingPages: Record<string, LandingPageData> = {
   social: {
     slug: "social-media-content-creation-dublin",
     kind: "social",
-    metaTitle: "Social Media Content Creation Dublin | Reels, Video & Photography",
+    metaTitle: "Monthly Social Media Content Dublin | NextVision Studio",
     metaDescription:
-      "Social media content creation in Dublin: Reels, TikToks, Shorts and photography planned around the offers your business needs to sell.",
-    eyebrow: "Social Media Content Creation Dublin",
-    headlineStart: "One Filming Day.",
-    headlineAccent: "Weeks of Content",
-    headlineEnd: "for Your Business.",
+      "Monthly social media content for Dublin businesses. Regular ideas, filming, photography and editing, with a fresh batch of videos and photos ready to share.",
+    eyebrow: "Monthly Social Media Content Dublin",
+    headlineStart: "Monthly Social Media Content",
+    headlineAccent: "for Dublin Businesses.",
+    headlineEnd: "",
     lead:
-      "Professional Reels, TikToks, Shorts and photography — planned, filmed and edited for your business, without the weekly content scramble.",
+      "We plan, film and edit a fresh batch of videos and photos each month, so your business has consistent content ready to share.",
     heroImage: {
       src: "/images/content/social-platform-guide.webp",
       alt: "Short-form social media content creation by NextVision Studio in Dublin",
@@ -677,12 +680,12 @@ export const landingPages: Record<string, LandingPageData> = {
       height: 1920,
     },
     heroPoints: ["Ideas matched to your audience", "Batch filming", "Platform-ready edits"],
-    ctaLabel: "Get your content plan",
+    ctaLabel: "Plan my monthly content",
     trustLine: "",
     problemKicker: "",
     problemTitle: "Stop Wondering What to Post Next.",
     problemText:
-      "We plan and create your content in batches, so you have professional videos ready when you need them.",
+      "A regular plan and filming session keep your content moving, with fresh videos and photos ready for the month ahead.",
     outcomes: [
       {
         title: "Less time spent planning posts",
@@ -759,17 +762,17 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "How short-form video earns attention", href: "/blog/why-short-form-video-captures-attention/" },
       { label: "Short-form video production guide", href: "/blog/short-form-video-production-dublin-guide/" },
     ],
-    formTitle: "Stop Guessing. Start Posting.",
+    formTitle: "Your Next Month of Content Starts Here.",
     formText: "",
     formSubject: "New Social Media Content Creation Dublin landing page enquiry",
     serviceType: "Social media content creation in Dublin",
     schemaDescription:
-      "Short-form video, Reels, TikTok, YouTube Shorts, social photography and campaign content creation for Dublin businesses.",
+      "Monthly planning, recurring filming, photography and editing for Dublin businesses. Fresh videos and photos are delivered ready to publish; posting, account management and paid ads are agreed separately.",
     faq: [
       {
-        question: "What is included in social media content creation?",
+        question: "What is included in monthly social media content production?",
         answer:
-          "Depending on the project, it can include content planning, hooks, filming, photography, editing, subtitles and delivery in platform-ready formats for Reels, TikTok, YouTube Shorts and paid social.",
+          "We agree a recurring plan for ideas, filming, photography and editing. Each monthly proposal confirms the filming time, number of finished videos and photos, formats, delivery dates and included changes. You receive the finished files ready to share.",
       },
       {
         question: "Do you create content for Dublin businesses on location?",
@@ -777,14 +780,14 @@ export const landingPages: Record<string, LandingPageData> = {
           "Yes. We can film and photograph at your business, venue, event or another suitable Dublin location agreed during planning.",
       },
       {
-        question: "Can you create several videos in one session?",
+        question: "How does the monthly content plan work?",
         answer:
-          "Yes. Batch production is often the most efficient approach. The number of useful videos depends on their complexity, locations, setups and how well the ideas are prepared.",
+          "We choose the topics and priorities for the next month, prepare the filming session and create the agreed videos and photos together. We then edit and deliver the batch, and use your feedback to plan the next one. The schedule is confirmed before work begins.",
       },
       {
         question: "Do you manage social media accounts too?",
         answer:
-          "Content creation can be delivered as a standalone service. Broader planning, posting support, Meta Ads and Google Ads can also be discussed when your business needs a more connected system.",
+          "This service focuses on making your monthly content. Posting, replying to comments, account management and paid ads are available as additional support only when included in your proposal. You can also publish the files yourself.",
       },
       {
         question: "Can the same content be used for ads?",
@@ -792,9 +795,9 @@ export const landingPages: Record<string, LandingPageData> = {
           "Some assets can support both organic and paid campaigns, but advertising creative often benefits from a more direct hook, offer and call to action. We plan these differences before filming.",
       },
       {
-        question: "How do I start a social media content project?",
+        question: "Can I book a single filming project instead?",
         answer:
-          "Send your business type, platforms, current challenge and preferred timing. We will suggest a focused first content plan or production session.",
+          "Yes. Our Short Form Video Production service is for an individual content batch, launch or campaign. Monthly Social Media Content is for businesses that want regular planning and fresh videos and photos each month. We will help you choose the right option.",
       },
     ],
   },

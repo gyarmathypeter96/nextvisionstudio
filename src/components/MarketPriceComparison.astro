@@ -1,0 +1,124 @@
+---
+import { marketPricingExamples, nextVisionPrices } from "../data/marketPricing";
+const stages = [
+  { title: "Ideas", text: "Choose the message and plan what to film." },
+  { title: "Filming", text: "Capture your people, products and work." },
+  { title: "Editing", text: "Shape the footage into your agreed videos." },
+  { title: "Delivery", text: "Receive finished files ready to publish." },
+];
+---
+
+<section class="market-pricing" aria-labelledby="market-pricing-title" id="published-prices">
+  <h2 id="market-pricing-title">A smaller budget for your next shoot.</h2>
+  <p class="market-pricing__intro">Our half day shooting rate is €250 + VAT and a full day is €450 + VAT. Compare our options with the indicative budgets below, then choose the filming and content you need.</p>
+  <div class="market-pricing__table-wrap">
+    <table data-market-price-comparison>
+      <caption>Indicative comparison budgets supplied by NextVision Studio. These are illustrative alternatives, not verified market averages or quotes from a named company.</caption>
+      <thead><tr><th scope="col">Work or package</th><th scope="col">Other providers: indicative budget</th><th scope="col">NextVision Studio</th></tr></thead>
+      <tbody>
+        {marketPricingExamples.map((example) => (
+          <tr data-market-price-example>
+            <th scope="row">{example.item}</th>
+            <td data-label="Indicative alternative budget">
+              <strong>{example.price}</strong>
+              <span>{example.unit}</span>
+            </td>
+            <td class="market-pricing__nextvision" data-label="NextVision Studio"><strong>{example.nextvisionPrice}</strong><span>{example.nextvision}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="market-pricing__note">Individual quotes vary with the work included. Filming, editing and account management are different services, so compare the scope as well as the price. Our 8 video editing package does not include filming. Paid advertising spend is separate.</p>
+
+  <section class="own-prices" id="nextvision-prices" aria-labelledby="own-prices-title">
+    <h3 id="own-prices-title">NextVision Studio prices</h3>
+    <p>Book filming or editing separately, choose a set of ad videos, or get a full monthly organic content plan.</p>
+    <div class="own-prices__grid">
+      {nextVisionPrices.map((offer) => <article class:list={{ "own-prices__card": true, "own-prices__card--featured": offer.featured }} data-nextvision-price={offer.id}>
+        {offer.featured && <span class="own-prices__badge">Content, strategy and management</span>}
+        <h4>{offer.title}</h4>
+        <p class="own-prices__amount">{offer.price} <span>{offer.vat}</span></p>
+        <small>{offer.unit}</small>
+        <p>{offer.description}</p>
+        <a href={offer.id === "ultimate-organic" ? "/social-media-content-creation-dublin/#landing-contact" : "/videography-dublin/#landing-contact"} data-cta-placement={`price-${offer.id}`}>Ask about this option</a>
+      </article>)}
+    </div>
+    <p class="market-pricing__note">Your quote confirms filming hours, locations, video lengths, formats, delivery dates and included changes. Studio hire, specialist crew, travel and other extras are agreed before booking.</p>
+  </section>
+
+  <section class="production-plan" aria-labelledby="production-plan-title">
+    <span class="production-plan__label">NextVision Studio</span>
+    <h3 id="production-plan-title">One plan. One quote. Content ready to use.</h3>
+    <ol>
+      {stages.map((stage, index) => (
+        <li><span aria-hidden="true">0{index + 1}</span><h4>{stage.title}</h4><p>{stage.text}</p></li>
+      ))}
+    </ol>
+    <p>We put the ideas, filming, editing and handover in one clear proposal. Your quote confirms the video count, formats, delivery dates and included changes. Extra locations, specialist production, posting and ads are added only when agreed.</p>
+    <a class="production-plan__cta" href="/videography-dublin/#video-offers" data-cta-placement="market-price-comparison">See my production options <span aria-hidden="true">↗</span></a>
+  </section>
+</section>
+
+<style>
+  .market-pricing { margin: 56px 0; min-width: 0; }
+  .market-pricing h2 { margin: 0 0 18px; font-size: clamp(31px, 4vw, 46px); line-height: 1.05; letter-spacing: -.045em; }
+  .market-pricing__intro { color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.7; }
+  .market-pricing__table-wrap { margin-top: 26px; border: 1px solid rgba(180,220,255,.19); border-radius: 22px; overflow: hidden; background: #171d22; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; line-height: 1.55; }
+  caption { padding: 18px 20px; color: rgba(255,255,255,.58); text-align: left; caption-side: bottom; background: rgba(255,255,255,.025); }
+  thead th { background: rgba(155,210,255,.08); color: #cfeaff; font-size: 12px; }
+  th, td { padding: 19px 17px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+  tbody th { width: 28%; color: #fff; font-weight: 750; }
+  tbody tr + tr { border-top: 1px solid rgba(180,220,255,.12); }
+  td { color: rgba(255,255,255,.7); }
+  td strong { display: block; color: #fff; font-size: 16px; font-weight: 800; }
+  td > span { display: block; margin-top: 5px; }
+  td a { display: inline-flex; gap: 5px; margin-top: 8px; color: #cfeaff; text-underline-offset: 3px; }
+  .market-pricing__nextvision { background: rgba(155,210,255,.035); }
+  .market-pricing__note { color: rgba(255,255,255,.57); font-size: 12px; line-height: 1.7; margin: 16px 0 30px; }
+  .own-prices { margin: 42px 0; scroll-margin-top: 110px; }
+  .own-prices > h3 { margin: 0 0 18px; color: #fff; font-size: clamp(28px,3.3vw,38px); line-height: 1.1; }
+  .own-prices > p { color: rgba(255,255,255,.72); font-size: 16px; line-height: 1.7; }
+  .own-prices__grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 24px; }
+  .own-prices__card { min-width: 0; display: flex; flex-direction: column; padding: 25px; border: 1px solid rgba(180,220,255,.2); border-radius: 22px; background: #171d22; }
+  .own-prices__card--featured { grid-column: 1 / -1; border-color: rgba(207,234,255,.5); background: radial-gradient(ellipse at 100% 0,rgba(155,210,255,.17),transparent 70%),#171d22; }
+  .own-prices__badge { color: #cfeaff; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
+  .own-prices__card h4 { margin: 0; color: #fff; font-size: 23px; line-height: 1.2; }
+  .own-prices__card p { color: rgba(255,255,255,.72); font-size: 14px; line-height: 1.7; }
+  .own-prices__card .own-prices__amount { color: #fff; margin: 22px 0 5px; font-size: 38px; font-weight: 850; line-height: 1.15; }
+  .own-prices__amount span { display: block; margin-top: 7px; color: #cfeaff; font-size: 13px; font-weight: 650; line-height: 1.5; }
+  .own-prices__card small { color: rgba(255,255,255,.6); font-size: 12px; line-height: 1.6; }
+  .own-prices__card a { align-self: flex-start; margin-top: auto; padding: 12px 0; color: #cfeaff; font-size: 14px; font-weight: 800; text-underline-offset: 4px; }
+  .own-prices a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  .production-plan { padding: clamp(24px, 4vw, 36px); border: 1px solid rgba(180,220,255,.25); border-radius: 24px; background: radial-gradient(ellipse at 100% 0, rgba(155,210,255,.12), transparent 65%), #171d22; }
+  .production-plan__label { color: #cfeaff; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .production-plan h3 { margin: 14px 0 26px; color: #fff; font-size: clamp(25px, 3vw, 34px); line-height: 1.1; letter-spacing: -.04em; }
+  .production-plan ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; padding: 0; margin: 0; list-style: none; }
+  .production-plan li > span { color: #cfeaff; font-size: 12px; font-weight: 800; }
+  .production-plan h4 { margin: 7px 0; font-size: 19px; }
+  .production-plan p { color: rgba(255,255,255,.69); font-size: 14px; line-height: 1.7; }
+  .production-plan li p { margin: 0; }
+  .production-plan > p { margin: 28px 0 0; }
+  .production-plan__cta { display: inline-flex; justify-content: space-between; gap: 20px; align-items: center; margin-top: 22px; padding: 15px 22px; border: 1px solid rgba(180,220,255,.34); border-radius: 999px; background: rgba(155,210,255,.1); color: #fff; font-size: 13px; font-weight: 800; text-decoration: none; }
+  .production-plan__cta:hover { background: rgba(155,210,255,.17); }
+  .production-plan__cta:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+  @media (max-width: 720px) {
+    .own-prices__grid { grid-template-columns: 1fr; }
+    table, tbody { display: block; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    tbody th { display: block; width: auto; grid-column: 1 / -1; padding: 20px 17px 8px; font-size: 15px; }
+    td { display: block; min-width: 0; padding-top: 9px; }
+    td::before { content: attr(data-label); display: block; margin-bottom: 9px; color: #cfeaff; font-size: 11px; font-weight: 800; }
+    caption { display: block; }
+    .market-pricing__nextvision { border-radius: 12px 0 0; }
+    td strong { font-size: 16px; }
+  }
+  @media (max-width: 380px) {
+    .production-plan ol { grid-template-columns: 1fr; }
+    th, td { padding-left: 12px; padding-right: 12px; }
+    .production-plan__cta { width: 100%; }
+  }
+</style>
