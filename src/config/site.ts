@@ -17,4 +17,5 @@ export const FOUNDER_ID = `${SITE_URL}/#peter-gyarmathy`;
 export const SOCIAL_PROFILES = [
   { label: "Instagram", href: "https://www.instagram.com/nextvisionstudio/" },
   { label: "Facebook", href: "https://www.facebook.com/218946454645781" },
+  { label: "Google Maps", href: "https://www.google.com/maps?cid=5668999914518187498" },
 ];

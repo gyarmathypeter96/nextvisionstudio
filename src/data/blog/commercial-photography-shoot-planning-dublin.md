@@ -80,7 +80,7 @@ Aim for a mix of wide, medium and close images. Repeating the same framing creat
 
 ## Decide between studio and location photography
 
-Commercial studio photography gives control over light, background and consistency. It is well suited to products, portraits and advertising images that need a clean visual standard.
+[Commercial studio photography](/photography-dublin/) gives control over light, background and consistency. It is well suited to products, portraits and advertising images that need a clean visual standard.
 
 Location photography shows the real environment. It can make a service, team or hospitality business feel more believable because customers see where and how the work happens.
 
