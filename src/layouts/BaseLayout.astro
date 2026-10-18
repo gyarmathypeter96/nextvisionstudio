@@ -171,6 +171,15 @@ const websiteSchema = {
   </head>
 
   <body>
+    <!-- Render the original logo artwork without its black matte. No raster
+         re-generation or replacement of the brand drawing is needed. -->
+    <svg class="logo-filters" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="0" height="0">
+      <defs>
+        <filter id="nvs-logo-transparency" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  4 4 4 0 -0.06" />
+        </filter>
+      </defs>
+    </svg>
     {
       minimal ? (
         <div class="minimal-site-logo" aria-label="NextVision Studio">
@@ -213,6 +222,19 @@ const websiteSchema = {
     font-family: Inter, Arial, sans-serif;
   }
 
+  .logo-filters { position: absolute; width: 0; height: 0; pointer-events: none; }
+
+  /* Only Saxoo's existing artwork needs its circular matte removed and the
+     inner wordmark enlarged. Keep all other client marks unchanged. These
+     asset-specific filters must survive the section's grayscale/hover rules. */
+  body :is(.clients__item, .landing-trust li, .video-client-proof li) img[src="/images/clients/saxoo-london.png"] {
+    filter: url("#nvs-logo-transparency") brightness(1.55) !important;
+    mask-image: radial-gradient(circle closest-side, #000 76%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle closest-side, #000 76%, transparent 80%);
+    transform: scale(2) !important;
+    opacity: .9 !important;
+  }
+
   img,
   video,
   iframe {
@@ -237,5 +259,6 @@ const websiteSchema = {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    filter: url("#nvs-logo-transparency");
   }
 </style>

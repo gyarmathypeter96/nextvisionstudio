@@ -29,6 +29,12 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     />
     <input type="hidden" name="from_name" value="NextVision Studio Website" />
     <input type="hidden" name="landing_page" value={Astro.url.pathname} />
+    <input type="hidden" name="content_package" value="" />
+    <div class="contact__package" data-package-summary hidden role="status" aria-live="polite">
+      <span>Your selected package</span>
+      <strong data-package-label></strong>
+      <button type="button" data-clear-package>Clear selection</button>
+    </div>
 
     <div class="contact__botcheck" aria-hidden="true">
       <input
@@ -107,6 +113,28 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
   </form>
 </section>
 
+<script>
+  document.querySelectorAll<HTMLSelectElement>('#contact-form [name="service"]').forEach((service) => {
+    service.addEventListener("change", () => {
+      if (service.value === "Monthly Social Media Content") return;
+      const form = service.closest("form");
+      const field = form?.querySelector<HTMLInputElement>('[name="content_package"]');
+      const summary = form?.querySelector<HTMLElement>("[data-package-summary]");
+      if (field) field.value = "";
+      if (summary) summary.hidden = true;
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>("[data-clear-package]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const form = button.closest("form");
+      const field = form?.querySelector<HTMLInputElement>('[name="content_package"]');
+      const summary = form?.querySelector<HTMLElement>("[data-package-summary]");
+      if (field) field.value = "";
+      if (summary) summary.hidden = true;
+    });
+  });
+</script>
+
 <style>
   .contact,
   .contact * {
@@ -184,6 +212,12 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     display: none;
   }
 
+  .contact__package[hidden] { display: none; }
+  .contact__package { display: grid; gap: 8px; padding: 20px; margin-bottom: 28px; border: 1px solid rgba(180,220,255,.3); border-radius: 16px; background: rgba(155,210,255,.06); }
+  .contact__package > span { color: #cfeaff; font-size: 11px; }
+  .contact__package > strong { font-size: 16px; line-height: 1.5; }
+  .contact__package > button { width: fit-content; min-height: 44px; padding: 10px 0; margin: 0; border: 0; background: none; color: rgba(255,255,255,.65); font-size: 12px; text-decoration: underline; box-shadow: none; }
+
   .contact__field {
     margin-bottom: 18px;
   }
@@ -245,7 +279,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       0 0 24px rgba(155, 210, 255, 0.1);
   }
 
-  .contact__form button {
+  .contact__form button[type="submit"] {
     position: relative;
     display: flex;
     align-items: center;
@@ -281,7 +315,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       box-shadow 280ms ease;
   }
 
-  .contact__form button::after {
+  .contact__form button[type="submit"]::after {
     content: "";
     position: absolute;
     top: -70%;
@@ -301,12 +335,12 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     transition: left 750ms ease;
   }
 
-  .contact__form button span {
+  .contact__form button[type="submit"] span {
     position: relative;
     z-index: 1;
   }
 
-  .contact__form button:hover {
+  .contact__form button[type="submit"]:hover {
     background:
       linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(155, 210, 255, 0.16)),
       rgba(255, 255, 255, 0.12);
@@ -317,7 +351,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     transform: translateY(-2px);
   }
 
-  .contact__form button:hover::after {
+  .contact__form button[type="submit"]:hover::after {
     left: 130%;
   }
 
