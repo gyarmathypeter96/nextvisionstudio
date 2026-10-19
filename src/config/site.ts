@@ -13,6 +13,9 @@ export const FOUNDER_NAME = "Peter Gyarmathy";
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const FOUNDER_ID = `${SITE_URL}/#peter-gyarmathy`;
 
+// Google Maps listing, which shows the star rating and reviews.
+export const GOOGLE_REVIEWS_URL = "https://www.google.com/maps?cid=5668999914518187498";
+
 // Official profiles of the business, used for schema.org sameAs and footer links.
 export const SOCIAL_PROFILES = [
   { label: "Instagram", href: "https://www.instagram.com/nextvisionstudio/" },

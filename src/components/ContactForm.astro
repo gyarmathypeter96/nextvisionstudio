@@ -1,14 +1,17 @@
 ---
 import { CRM_FORM_ENDPOINT } from "../config/forms";
 import { SERVICE_CATALOG, type ServiceKey } from "../config/services";
+import { GOOGLE_REVIEWS_URL } from "../config/site";
 interface Props { serviceKey?: ServiceKey; source?: string }
 const { serviceKey, source = "homepage-contact" } = Astro.props;
+// Service pages quote per brief and must not show prices; the home page shows
+// the owner-approved monthly package price.
 ---
 
 <section class="contact" id="contact-form" aria-labelledby="contact-title">
   <header class="contact__header">
-    <h2 id="contact-title">Tell us what you need to achieve.</h2>
-    <p>Choose a service and share a little about your project. A sentence or two is enough.</p>
+    <h2 id="contact-title">Get a video quote in 60 seconds.</h2>
+    <p>Three short steps. We reply with a clear plan and price, usually within one working day.</p>
   </header>
 
   <form
@@ -16,7 +19,9 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     action={CRM_FORM_ENDPOINT}
     method="POST"
     data-crm-form
+    data-quote-steps
   >
+    <p class="contact__progress" data-step-progress aria-live="polite" hidden>Step <span data-step-current>1</span> of 3</p>
     <input
       type="hidden"
       name="redirect"
@@ -45,67 +50,71 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       />
     </div>
 
-    <div class="contact__field">
-      <label for="contact-name">Name <span>(required)</span></label>
-      <input
-        id="contact-name"
-        type="text"
-        name="name"
-        placeholder="Your name"
-        autocomplete="name"
-        required
-      />
-    </div>
+    <fieldset class="contact__step" data-step="1" data-step-name="project">
+      <legend>What do you need?</legend>
+      <div class="contact__field">
+        <label for="contact-service">Which service do you need? <span>(required)</span></label>
+        <select id="contact-service" name="service" required>
+          <option value="" disabled selected={!serviceKey}>Select a service</option>
+          {SERVICE_CATALOG.map((service) => <option value={service.title} selected={service.key === serviceKey}>{service.title}</option>)}
+          <option value="Not sure yet">I am not sure yet</option>
+        </select>
+      </div>
+      <div class="contact__field">
+        <span class="contact__label" id="contact-timeline-label">When do you need it?</span>
+        <div class="contact__choices" role="radiogroup" aria-labelledby="contact-timeline-label">
+          <label><input type="radio" name="timeline" value="As soon as possible" /> As soon as possible</label>
+          <label><input type="radio" name="timeline" value="Within 1-2 months" /> Within 1–2 months</label>
+          <label><input type="radio" name="timeline" value="Just planning" /> Just planning</label>
+        </div>
+      </div>
+      <button type="button" class="contact__next" data-step-next hidden>Next</button>
+    </fieldset>
 
-    <div class="contact__field">
-      <label for="contact-email">Email <span>(required)</span></label>
-      <input
-        id="contact-email"
-        type="email"
-        name="email"
-        placeholder="you@example.com"
-        autocomplete="email"
-        inputmode="email"
-        required
-      />
-    </div>
+    <fieldset class="contact__step" data-step="2" data-step-name="details">
+      <legend>Your project</legend>
+      <div class="contact__field">
+        <label for="contact-message">A little about your project <span>(required)</span></label>
+        <textarea
+          id="contact-message"
+          name="message"
+          placeholder="For example: 4 Reels a month for our clinic, or a 2-minute video for our website."
+          rows="4"
+          required
+        ></textarea>
+      </div>
+      <div class="contact__nav">
+        <button type="button" class="contact__back" data-step-back hidden>Back</button>
+        <button type="button" class="contact__next" data-step-next hidden>Next</button>
+      </div>
+    </fieldset>
 
-    <div class="contact__field">
-      <label for="contact-phone">Phone number <span>(required)</span></label>
-      <input
-        id="contact-phone"
-        type="tel"
-        name="phone"
-        placeholder="+353"
-        autocomplete="tel"
-        inputmode="tel"
-        required
-      />
-    </div>
-
-    <div class="contact__field">
-      <label for="contact-service">Which service do you need? <span>(required)</span></label>
-      <select id="contact-service" name="service" required>
-        <option value="" disabled selected={!serviceKey}>Select a service</option>
-        {SERVICE_CATALOG.map((service) => <option value={service.title} selected={service.key === serviceKey}>{service.title}</option>)}
-        <option value="Not sure yet">I am not sure yet</option>
-      </select>
-    </div>
-
-    <div class="contact__field">
-      <label for="contact-message">A little about your project <span>(required)</span></label>
-      <textarea
-        id="contact-message"
-        name="message"
-        placeholder="What are you looking for? A sentence or two is enough."
-        rows="6"
-        required
-      ></textarea>
-    </div>
-
-    <button type="submit">
-      <span>Request a free consultation</span>
-    </button>
+    <fieldset class="contact__step" data-step="3" data-step-name="contact">
+      <legend>Where should we send your quote?</legend>
+      <div class="contact__field">
+        <label for="contact-name">Name <span>(required)</span></label>
+        <input id="contact-name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
+      </div>
+      <div class="contact__field">
+        <label for="contact-email">Email <span>(required)</span></label>
+        <input id="contact-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required />
+      </div>
+      <div class="contact__field">
+        <label for="contact-phone">Phone number <span>(required)</span></label>
+        <input id="contact-phone" type="tel" name="phone" placeholder="+353" autocomplete="tel" inputmode="tel" required />
+      </div>
+      <div class="contact__nav">
+        <button type="button" class="contact__back" data-step-back hidden>Back</button>
+        <button type="submit">
+          <span>Get my quote</span>
+        </button>
+      </div>
+      <ul class="contact__trust">
+        <li><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">★ 5.0 on Google (3 reviews)</a></li>
+        {!serviceKey && <li>Monthly video packages from €500 + VAT</li>}
+        <li>No obligation. We reply within one working day.</li>
+      </ul>
+    </fieldset>
 
     <p class="contact__privacy">
       Your details are used only to respond to your enquiry.
@@ -132,6 +141,56 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       if (field) field.value = "";
       if (summary) summary.hidden = true;
     });
+  });
+
+  // Progressive enhancement: without JavaScript every step is visible and the
+  // form posts as before. Submission and measurement stay in LeadAttribution.
+  document.querySelectorAll<HTMLFormElement>("form[data-quote-steps]").forEach((form) => {
+    const steps = [...form.querySelectorAll<HTMLFieldSetElement>("[data-step]")];
+    const progress = form.querySelector<HTMLElement>("[data-step-progress]");
+    const current = form.querySelector<HTMLElement>("[data-step-current]");
+    let active = 0;
+
+    const show = (index: number, focus = true) => {
+      active = index;
+      steps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex === index));
+      if (current) current.textContent = String(index + 1);
+      if (focus) steps[index].querySelector<HTMLElement>("input:not([type=hidden]), select, textarea")?.focus({ preventScroll: true });
+    };
+
+    const stepIsValid = (step: HTMLFieldSetElement) =>
+      [...step.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("input, select, textarea")]
+        .every((field) => field.reportValidity());
+
+    form.querySelectorAll<HTMLButtonElement>("[data-step-next]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!stepIsValid(steps[active])) return;
+        const next = Math.min(active + 1, steps.length - 1);
+        show(next);
+        form.dispatchEvent(new CustomEvent("nvs:form-step", {
+          detail: { step: next + 1, stepName: steps[next].dataset.stepName || "" },
+        }));
+      });
+    });
+    form.querySelectorAll<HTMLButtonElement>("[data-step-back]").forEach((button) => {
+      button.addEventListener("click", () => show(Math.max(active - 1, 0)));
+    });
+
+    // A required field on a hidden step would block submit without a visible
+    // message, so open the step that holds it.
+    form.addEventListener("invalid", (event) => {
+      const step = (event.target as Element).closest<HTMLFieldSetElement>("[data-step]");
+      const index = step ? steps.indexOf(step) : -1;
+      if (index >= 0 && index !== active) {
+        show(index, false);
+        setTimeout(() => (event.target as HTMLInputElement).reportValidity());
+      }
+    }, true);
+
+    form.querySelectorAll<HTMLElement>("[data-step-next], [data-step-back]").forEach((button) => { button.hidden = false; });
+    if (progress) progress.hidden = false;
+    form.classList.add("is-stepped");
+    show(0, false);
   });
 </script>
 
@@ -405,4 +464,25 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       transition: none;
     }
   }
+
+  .contact__step { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .contact__step + .contact__step { margin-top: 8px; }
+  .contact__step legend { margin: 0 0 18px; padding: 0; color: #ffffff; font-size: 20px; font-weight: 800; }
+  .contact__form.is-stepped .contact__step { display: none; }
+  .contact__form.is-stepped .contact__step.is-active { display: block; }
+  .contact__progress[hidden] { display: none; }
+  .contact__progress { margin: 0 0 14px; color: #cfeaff; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .contact__label { display: block; margin-bottom: 10px; color: rgba(255,255,255,.82); font-size: 14px; font-weight: 700; }
+  .contact__choices { display: flex; flex-wrap: wrap; gap: 10px; }
+  .contact__choices label { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin: 0; padding: 12px 16px; border: 1px solid rgba(180,220,255,.18); border-radius: 999px; background: rgba(255,255,255,.04); color: #ffffff; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .contact__choices label:has(input:checked) { border-color: rgba(155,210,255,.7); background: rgba(155,210,255,.12); }
+  .contact__field .contact__choices input { display: inline-block; width: 18px; min-height: 0; height: 18px; margin: 0; padding: 0; accent-color: #9bd2ff; }
+  .contact__nav { display: flex; gap: 12px; align-items: stretch; }
+  .contact__nav > button[type="submit"] { flex: 1; }
+  .contact__next, .contact__back { min-height: 58px; padding: 0 26px; border: 1px solid rgba(180,220,255,.3); border-radius: 999px; background: rgba(155,210,255,.12); color: #ffffff; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; }
+  .contact__next { flex: 1; width: 100%; background: #cfeaff; color: #111a22; }
+  .contact__back { background: transparent; }
+  .contact__next[hidden], .contact__back[hidden] { display: none; }
+  .contact__trust { display: grid; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; color: rgba(255,255,255,.7); font-size: 14px; text-align: center; }
+  .contact__trust a { color: #cfeaff; font-weight: 700; }
 </style>
