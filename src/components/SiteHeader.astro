@@ -1,5 +1,5 @@
 ---
-import { SERVICE_CATALOG } from "../config/services";
+import { MAIN_NAV_SERVICES } from "../config/services";
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 const isShortFormLanding = pathname === "/short-form-video-production-dublin/";
@@ -16,7 +16,7 @@ const navigation: Array<{
     href: "/services/",
     children: [
       { label: "All services", href: "/services/" },
-      ...SERVICE_CATALOG.map((service) => ({ label: service.title, href: service.href })),
+      ...MAIN_NAV_SERVICES.map((service) => ({ label: service.title, href: service.href })),
     ],
   },
   { label: "Case studies", href: "/case-studies/" },

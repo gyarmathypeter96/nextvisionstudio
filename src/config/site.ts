@@ -6,7 +6,8 @@ export const CONTACT_PHONE_E164 = "+353894797055";
 export const GTM_CONTAINER_ID = "GTM-PL34N8WF";
 export const ANALYTICS_HOSTS = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
 // Service coverage is not a claim that the business has an office in each town.
-export const SERVICE_AREAS = ["Dublin", "North Dublin", "Balbriggan", "Swords", "Malahide"];
+// Matches the service area on the Google Business Profile.
+export const SERVICE_AREAS = ["Dublin", "North Dublin", "Balbriggan", "Swords", "Malahide", "Donabate", "Portmarnock"];
 export const SERVICE_AREA_TEXT = "Serving Dublin and North Dublin, including Balbriggan, Swords and Malahide.";
 export const AREA_SERVED_SCHEMA = SERVICE_AREAS.map((name) => ({ "@type": "Place", name }));
 export const FOUNDER_NAME = "Peter Gyarmathy";
@@ -17,5 +18,6 @@ export const FOUNDER_ID = `${SITE_URL}/#peter-gyarmathy`;
 export const SOCIAL_PROFILES = [
   { label: "Instagram", href: "https://www.instagram.com/nextvisionstudio/" },
   { label: "Facebook", href: "https://www.facebook.com/218946454645781" },
+  { label: "TikTok", href: "https://www.tiktok.com/@gyarmathypter" },
   { label: "Google Maps", href: "https://www.google.com/maps?cid=5668999914518187498" },
 ];
