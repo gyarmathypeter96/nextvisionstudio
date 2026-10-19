@@ -15,6 +15,8 @@ export const FOUNDER_ID = `${SITE_URL}/#peter-gyarmathy`;
 
 // Google Maps listing, which shows the star rating and reviews.
 export const GOOGLE_REVIEWS_URL = "https://www.google.com/maps?cid=5668999914518187498";
+// Copied from the Business Profile on 19 Oct 2026. Update it when reviews change.
+export const GOOGLE_RATING = { value: "5.0", count: 3 };
 
 // Official profiles of the business, used for schema.org sameAs and footer links.
 export const SOCIAL_PROFILES = [

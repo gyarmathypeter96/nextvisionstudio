@@ -1,7 +1,7 @@
 ---
 import { CRM_FORM_ENDPOINT } from "../config/forms";
 import { SERVICE_CATALOG, type ServiceKey } from "../config/services";
-import { GOOGLE_REVIEWS_URL } from "../config/site";
+import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "../config/site";
 interface Props { serviceKey?: ServiceKey; source?: string }
 const { serviceKey, source = "homepage-contact" } = Astro.props;
 // Service pages quote per brief and must not show prices; the home page shows
@@ -110,7 +110,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
         </button>
       </div>
       <ul class="contact__trust">
-        <li><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">★ 5.0 on Google (3 reviews)</a></li>
+        <li><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">★ {GOOGLE_RATING.value} on Google ({GOOGLE_RATING.count} reviews)</a></li>
         {!serviceKey && <li>Monthly video packages from €500 + VAT</li>}
         <li>No obligation. We reply within one working day.</li>
       </ul>
