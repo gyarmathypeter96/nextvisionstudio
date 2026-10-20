@@ -17,7 +17,7 @@ const noindexRoutes = new Set([
 // Last meaningful content update per route. Routes without an entry are still
 // listed, just without <lastmod>. Blog posts use their frontmatter dates.
 const lastModified: Record<string, string> = {
-  "": "2026-10-01",
+  "": "2026-10-19",
   "services/": "2026-10-01",
   "about/": "2026-10-01",
   "contact/": "2026-10-01",

@@ -12,5 +12,10 @@ export const SERVICE_CATALOG = [
 ] as const;
 
 export type ServiceKey = typeof SERVICE_CATALOG[number]["key"];
+
+// Video is the main offer. These pages stay live and in the footer, the
+// services page and the enquiry form, but not in the header menu.
+const SECONDARY_SERVICE_KEYS: ReadonlySet<ServiceKey> = new Set(["photography", "crm"]);
+export const MAIN_NAV_SERVICES = SERVICE_CATALOG.filter((service) => !SECONDARY_SERVICE_KEYS.has(service.key));
 export const getService = (key: ServiceKey) => SERVICE_CATALOG.find((service) => service.key === key)!;
 export const serviceForPath = (path: string) => SERVICE_CATALOG.find((service) => service.href === path);

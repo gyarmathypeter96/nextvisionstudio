@@ -9,7 +9,8 @@ The evidence column is from Google Search Console (domain property
 
 | Keyword group | Target page | Pages Google currently shows for it | Notes |
 |---|---|---|---|
-| video production dublin, business video production dublin | `/videography-dublin/` | corporate 260 impr. / pos 50.5; short-form 202 / 92.6; social 87 / 85.4 | The target page was "Discovered – currently not indexed" on 18 Oct 2026 and has never been crawled. Indexing requested again. |
+| video production dublin, video production company dublin | `/` | corporate 260 impr. / pos 50.5; short-form 202 / 92.6; social 87 / 85.4 | Changed on 19 Oct 2026 (owner-approved). On google.ie the top 10 for this query is mostly home pages titled "Video Production (Company) Dublin". Our home page gets the most clicks on the site (14 clicks, pos 4.2, last 28 days). |
+| business video production dublin | `/videography-dublin/` | – | Still "Discovered – currently not indexed" on 19 Oct 2026; Search Console says the URL has never been crawled. Indexing requested on 18 and 19 Oct. If it is still not indexed on 9 Nov 2026, merge it into `/corporate-video-production-dublin/` with a 301. |
 | videographer dublin | `/videography-dublin/` | pricing guide 33 / 10.1; /blog/ 30 / 39.3; event 29 / 48.7; photography 26 / 58.8 | Cost questions belong to the pricing guide (next row). |
 | videographer cost / price dublin | `/how-much-does-a-videographer-cost-in-dublin/` | pricing guide | Best-ranking money topic (positions 4–12). |
 | corporate video production dublin | `/corporate-video-production-dublin/` | corporate 253 / 40.2 | Already the only real ranking page. |
@@ -21,7 +22,7 @@ The evidence column is from Google Search Console (domain property
 | web designer dublin, web design dublin | `/webdesigner-dublin/` | webdesigner 276 / 57.6 | |
 | google ads dublin, google ads agency dublin | `/google-ads-meta-ads-dublin/` | ads 247 / 44.8 | |
 | social media content creation dublin | `/social-media-content-creation-dublin/` | social 55 / 41.8; short-form 23 / 81.3 | |
-| content studio dublin | `/` | home | |
+| content studio dublin | `/` | home 19 impr. / pos 7.2 (last 28 days, 19 Oct) | The home page title no longer says "Content Studio"; watch this query. |
 
 ## Rules
 

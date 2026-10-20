@@ -25,7 +25,7 @@ for (const service of services) {
   const business = nodes.filter((node) => node["@id"] === "https://www.nextvisionstudio.com/#business");
   assert.equal(business.length, 1, `Duplicate business definition on ${service.key}`);
   assert.equal(business[0]["@type"], "Organization", "Use the address-free organization entity consistently");
-  assert.deepEqual(business[0].areaServed.map((area) => area.name), ["Dublin", "North Dublin", "Balbriggan", "Swords", "Malahide"]);
+  assert.deepEqual(business[0].areaServed.map((area) => area.name), ["Dublin", "North Dublin", "Balbriggan", "Swords", "Malahide", "Donabate", "Portmarnock"]);
   assert.ok(!business[0].address, "Do not publish an unconfirmed physical address");
   const serviceNode = nodes.find((node) => node["@id"] === `https://www.nextvisionstudio.com${service.href}#service`);
   assert.equal(serviceNode?.name, service.title, `Service schema mismatch on ${service.key}`);

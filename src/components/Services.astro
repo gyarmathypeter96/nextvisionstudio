@@ -24,32 +24,32 @@ const services = [
     ],
   },
   {
-    key: "social",
-    href: "/social-media-content-creation-dublin/",
-    title: "Social Media Content and Management",
-    introduction: "Keep your social pages useful and consistent with planned content made for your business.",
+    key: "event",
+    href: "/event-videographer-dublin/",
+    title: "Event Videography",
+    introduction: "Turn a conference, launch or live performance into a highlight film and social edits you can keep using.",
     benefits: [
-      "Plan posts around your offers and audience.",
-      "Create videos, photos and captions in batches.",
-      "Keep your pages active with content ready to publish.",
+      "Plan the moments that matter before the day.",
+      "Film the room, the speakers and the people.",
+      "Get a highlight film plus short social cuts.",
     ],
   },
   {
-    key: "photography",
-    href: "/photography-dublin/",
-    title: "Professional Photography",
-    introduction: "Give your brand a clear, consistent look with photos made for your website and social media.",
+    key: "corporate",
+    href: "/corporate-video-production-dublin/",
+    title: "Corporate Video Production",
+    introduction: "Explain your service, train your team or share a customer story with a clear, professional video.",
     benefits: [
-      "Show your products, people and place.",
-      "Build a useful library of images.",
-      "Receive edited photos ready to use.",
+      "Service explainers and customer stories.",
+      "Interviews and training videos.",
+      "Edits sized for your website and sales calls.",
     ],
   },
   {
     key: "web",
     href: "/webdesigner-dublin/",
     title: "Website Design and Development",
-    introduction: "Make it easy for people to understand what you offer and take the next step.",
+    introduction: "Give your videos a home that makes it easy for people to understand what you offer and get in touch.",
     benefits: [
       "A clear layout for phones and computers.",
       "Simple pages that answer customer questions.",
@@ -57,14 +57,14 @@ const services = [
     ],
   },
   {
-    key: "crm",
-    href: "/crm-lead-automation-dublin/",
-    title: "CRM and AI Automation",
-    introduction: "Spend less time on repeat tasks and make it easier to respond to every new enquiry.",
+    key: "ads",
+    href: "/google-ads-meta-ads-dublin/",
+    title: "Google and Meta Ads Management",
+    introduction: "Put your videos in front of the right people in Dublin with campaigns measured by enquiries.",
     benefits: [
-      "Keep contacts and enquiries organised.",
-      "Send quick, helpful follow up messages.",
-      "Let AI handle simple routine tasks.",
+      "Campaigns built around your videos and offers.",
+      "Google Ads and Meta Ads managed together.",
+      "Simple reporting on enquiries, not just clicks.",
     ],
   },
 ].map((service) => ({ ...service, title: getService(service.key as ServiceKey).title, href: getService(service.key as ServiceKey).href }));
@@ -76,13 +76,13 @@ const services = [
       <h2 id="services-title">Our Services, Made to a Higher Standard</h2>
       <div class="services__intro">
         <p>
-          In a crowded market, quality content is a real advantage. Useful video,
-          photography and campaigns help people understand your business and trust
-          what you offer.
+          In a crowded market, quality video is a real advantage. Short-form clips
+          and business videos help people understand your business and trust what
+          you offer.
         </p>
         <p>
-          We make videos, photos, websites and ads that help your business get noticed,
-          earn trust and bring in enquiries. Every project starts with a clear goal.
+          We plan, film and edit videos for Dublin businesses, then help you use them on
+          your website and in ads to bring in enquiries. Every project starts with a clear goal.
         </p>
       </div>
     </header>
@@ -238,14 +238,14 @@ const services = [
     --card-accent: 130, 180, 220;
   }
 
-  .service-card--social {
-    --card-image: url("/images/home-services/google-meta-ads-bg.webp");
-    --card-accent: 130, 180, 220;
+  .service-card--event {
+    --card-image: url("/images/photography/event-photography-dublin-1080.webp");
+    --card-accent: 190, 225, 255;
   }
 
-  .service-card--photography {
-    --card-image: url("/images/photography/brand-photography-social-content-dublin.webp");
-    --card-accent: 190, 225, 255;
+  .service-card--corporate {
+    --card-image: url("/images/photography/corporate-photography-dublin.webp");
+    --card-accent: 130, 180, 220;
   }
 
   .service-card--web {
@@ -253,8 +253,8 @@ const services = [
     --card-accent: 190, 225, 255;
   }
 
-  .service-card--crm {
-    --card-image: url("/images/home-services/crm-lead-bg.webp");
+  .service-card--ads {
+    --card-image: url("/images/home-services/google-meta-ads-bg.webp");
     --card-accent: 130, 180, 220;
   }
 
