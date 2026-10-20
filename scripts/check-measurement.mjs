@@ -66,6 +66,7 @@ function form(redirect = "/quotesend/?source=video") {
       return name && name in values ? { value: values[name] } : null;
     },
     submit: () => listeners.get("submit")({ preventDefault() {} }), button,
+    step: (detail) => listeners.get("nvs:form-step")({ detail }),
   };
   return instance;
 }
@@ -107,6 +108,18 @@ test("denied consent blocks loader, lead event and attribution, not enquiry deli
   env.window.nvsLoadTagManager(); env.runForms(); await f.submit();
   assert.equal(env.appended.length, 0); assert.equal(env.leads().length, 0); assert.equal(env.requests.length, 1);
   assert.equal(env.session.getItem("nvs-lead-attribution"), null);
+});
+test("quote form steps are measured only with consent and carry no personal data", () => {
+  const steps = (consent) => {
+    const f = form(); const env = fixture({ consent, forms: [f] }); env.runForms();
+    f.step({ step: 2, stepName: "details" });
+    return (env.window.dataLayer ?? []).filter((item) => item.event === "lead_form_step");
+  };
+  const granted = steps("granted");
+  assert.equal(granted.length, 1);
+  assert.equal(granted[0].step_number, 2); assert.equal(granted[0].step_name, "details"); assert.equal(granted[0].form_id, "fixture-form");
+  assert.ok(!JSON.stringify(granted).includes("synthetic@example.invalid"));
+  assert.equal(steps("denied").length, 0);
 });
 test("revoked consent is rechecked by an already deferred GTM loader", () => {
   const env = fixture(); env.localStorage.setItem("nvs-cookie-consent", "denied");

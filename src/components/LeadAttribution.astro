@@ -158,6 +158,19 @@
         markFormStarted();
       });
 
+      // Multi-step forms announce each step they open (see ContactForm).
+      form.addEventListener("nvs:form-step", (event) => {
+        const detail = (event as CustomEvent<{ step?: number; stepName?: string }>).detail || {};
+        markFormStarted();
+        track("lead_form_step", {
+          form_id: formId,
+          form_type: readFormType(),
+          step_number: detail.step,
+          step_name: detail.stepName,
+          lead_source: leadSource,
+        });
+      });
+
       form.addEventListener("invalid", (event) => {
         if (validationErrorTracked) return;
         validationErrorTracked = true;
