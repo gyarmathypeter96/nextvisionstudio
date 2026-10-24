@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MarketPriceComparison from "../components/MarketPriceComparison.astro";
+import NextVisionPrices from "../components/NextVisionPrices.astro";
+import ContactForm from "../components/ContactForm.astro";
 import { BUSINESS_ID, FOUNDER_ID } from "../config/site";
 
 const canonical =
@@ -13,9 +15,9 @@ const faq = [
       "NextVision Studio charges €250 plus VAT for half day shooting and €450 plus VAT for full day shooting. These are filming rates; editing is separate. Your written quote confirms filming hours, locations, delivery and any extras.",
   },
   {
-    question: "How much does editing short videos cost?",
+    question: "How much do monthly short video packages cost?",
     answer:
-      "NextVision Studio charges €600 plus VAT for 8 short video edits or €800 plus VAT for 12 short video edits. These packages cover editing only. Filming is booked and priced separately.",
+      "NextVision Studio monthly packages cost €350 plus VAT for 4 short videos, €450 plus VAT for 8 and €600 plus VAT for 12. Each month includes content planning and a half day shoot at your business. Publishing and account management are separate.",
   },
   {
     question: "What is included in Ultimate Organic Social Content?",
@@ -52,7 +54,7 @@ const articleSchema = {
       image:
         "https://www.nextvisionstudio.com/images/portfolio/JVA_WxYY3p0.webp",
       datePublished: "2026-06-19",
-      dateModified: "2026-10-18",
+      dateModified: "2026-10-24",
       author: {
         "@id": FOUNDER_ID,
       },
@@ -102,7 +104,7 @@ const articleSchema = {
 
 <BaseLayout
   title="Business Videographer Cost Dublin 2026 | Pricing Guide"
-  description="NextVision Studio Dublin filming from €250 + VAT, short video editing and monthly social content packages. See prices, inclusions and request your production plan."
+  description="Videographer prices in Dublin: half day filming €250, full day €450, monthly short video packages from €350 (all + VAT). See what each price includes."
   canonical={canonical}
   ogImage="https://www.nextvisionstudio.com/images/portfolio/JVA_WxYY3p0.webp"
 >
@@ -115,12 +117,12 @@ const articleSchema = {
         <div class="article-hero__kicker">Dublin videography guide · Updated 2026</div>
         <h1>How Much Does a Business Videographer Cost in Dublin?</h1>
         <p class="article-hero__lead">
-          Clear NextVision Studio prices for filming, short video editing and
-          monthly social content. Choose the work your business needs.
+          NextVision Studio prices for filming, monthly short videos and
+          managed social content, with what each price includes.
         </p>
         <div class="article-hero__meta">
           <span>By Peter Gyarmathy</span>
-          <span>Updated 18 October 2026</span>
+          <span>Updated 24 October 2026</span>
           <span>8 minute read</span>
         </div>
       </header>
@@ -135,11 +137,11 @@ const articleSchema = {
             levels of planning, filming and editing.
           </p>
           <p>
-            At NextVision Studio, half day shooting costs <strong>€250 + VAT</strong>
-            and full day shooting costs <strong>€450 + VAT</strong>. Editing is
-            priced separately. Our full monthly organic social content package
-            is <strong>€1,200 + VAT</strong>, including strategy, management,
-            12 short videos and 4 photos.
+            At NextVision Studio, half day shooting costs <strong>€250 + VAT</strong>{" "}
+            and full day shooting costs <strong>€450 + VAT</strong>. Monthly short
+            video packages start at <strong>€350 + VAT</strong> for 4 videos,
+            including content planning and a half day shoot. Managed organic social
+            content is <strong>€1,200 + VAT</strong> a month.
           </p>
           <p>
             This guide covers video for businesses, events and campaigns. Wedding
@@ -147,12 +149,12 @@ const articleSchema = {
             are not directly comparable.
           </p>
 
+          <NextVisionPrices />
           <section class="article-note article-offer" aria-labelledby="nextvision-plan-title">
             <h2 id="nextvision-plan-title">What would your project look like with NextVision?</h2>
             <p>Choose a <strong>Content Day</strong> for several short social videos, or a <strong>Business Video</strong> to explain a service on your website. We agree the ideas, filming and finished edits in one proposal.</p>
             <a href="/videography-dublin/#video-offers" data-cta-placement="videography-cost-offers">Compare our two production options</a>
-            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-early-enquiry">Ask for a quote for your project</a>
-            <a href="#nextvision-prices">See all NextVision prices</a>
+            <a href="#contact-form" data-cta-placement="videography-cost-early-enquiry">Get a quote for your project</a>
           </section>
 
           <MarketPriceComparison />
@@ -185,8 +187,8 @@ const articleSchema = {
             Travel, actors, studio hire, specialist equipment, animation and
             additional revisions can change the total.
             Always compare the exact scope and deliverables in each quote.
-            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-price-range">
-              Request a quote for your project →
+            <a href="#contact-form" data-cta-placement="videography-cost-price-range">
+              Get a quote for your project →
             </a>
           </div>
 
@@ -279,24 +281,14 @@ const articleSchema = {
             ))}
           </div>
 
-          <section class="article-cta" aria-labelledby="article-cta-title">
-            <span>Get a clear project scope</span>
-            <h2 id="article-cta-title">Tell us what the video needs to achieve.</h2>
-            <p>
-              Share your audience, preferred timing and where the content will be
-              used. We will recommend a practical production plan and transparent quote.
-            </p>
-            <a href="/videography-dublin/#landing-contact" data-cta-placement="videography-cost-guide">Request my video production plan</a>
-          </section>
         </div>
 
         <aside class="article-sidebar" aria-label="Article summary">
           <div>
             <span>Quick answer</span>
             <p>
-              Filming, editing and monthly account management are different
-              services. Compare the finished work and what is included before
-              comparing prices.
+              Half day filming €250, full day €450, monthly short videos from
+              €350 a month, all + VAT. Compare what is included as well as the price.
             </p>
           </div>
           <nav aria-label="Related services">
@@ -307,11 +299,12 @@ const articleSchema = {
             <a href="/corporate-video-production-dublin/">Business and corporate video production</a>
             <a href="/#portfolio">Video portfolio</a>
             <a href="/services/">All services</a>
-            <a href="/contact/#contact-form">Contact NextVision Studio</a>
+            <a href="#contact-form">Get a quote</a>
           </nav>
         </aside>
       </div>
     </article>
+    <ContactForm source="how-much-does-a-videographer-cost-in-dublin" />
   </main>
 
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
@@ -320,29 +313,29 @@ const articleSchema = {
 <style>
   .article-page,
   .article-page * { box-sizing: border-box; }
-  .article-page { min-height: 100vh; padding: 150px 24px 120px; background: radial-gradient(circle at 50% 8%, rgba(88, 151, 195, 0.13), transparent 28%), #111111; color: #fff; }
+  .article-page { min-height: 100vh; padding: 150px 24px 0; background: radial-gradient(circle at 50% 8%, rgba(88, 151, 195, 0.13), transparent 28%), #111111; color: #fff; }
   .article-page article { width: min(100%, 1120px); margin: 0 auto; }
   .article-hero { width: min(100%, 900px); margin: 0 auto 76px; text-align: center; }
-  .article-hero nav { display: flex; justify-content: center; gap: 9px; margin-bottom: 24px; color: rgba(255,255,255,.42); font-size: 12px; }
+  .article-hero nav { display: flex; justify-content: center; gap: 9px; margin-bottom: 24px; color: rgba(255,255,255,.62); font-size: 12px; }
   .article-hero nav a { color: #cfeaff; text-decoration: none; }
   .article-hero__kicker { display: inline-flex; margin-bottom: 21px; padding: 9px 15px; border: 1px solid rgba(180,220,255,.26); border-radius: 999px; background: rgba(155,210,255,.07); color: #cfeaff; font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
   .article-hero h1 { margin: 0; font-size: clamp(52px, 8vw, 96px); font-weight: 950; line-height: .96; letter-spacing: -.065em; text-wrap: balance; }
   .article-hero__lead { width: min(100%, 760px); margin: 27px auto 0; color: rgba(255,255,255,.68); font-size: clamp(17px, 2.2vw, 21px); line-height: 1.55; text-wrap: balance; }
-  .article-hero__meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; margin-top: 25px; color: rgba(255,255,255,.4); font-size: 12px; }
+  .article-hero__meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; margin-top: 25px; color: rgba(255,255,255,.62); font-size: 12px; }
   .article-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; align-items: start; gap: 72px; }
   .article-content { min-width: 0; }
-  .article-content > p, .article-content > ul { color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.78; }
+  .article-content > p, .article-content > ul { color: rgba(255,255,255,.7); font-size: 17px; line-height: 1.78; text-wrap: pretty; }
   .article-content > p:first-child { color: rgba(255,255,255,.9); font-size: 20px; }
   .article-content h2 { margin: 72px 0 20px; font-size: clamp(31px, 4vw, 46px); line-height: 1.05; letter-spacing: -.045em; }
   .article-content h3 { margin: 35px 0 9px; font-size: 21px; letter-spacing: -.025em; }
   .article-content a { color: #cfeaff; text-underline-offset: 4px; }
   .price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 30px 0; }
   .price-grid section { padding: 24px; border: 1px solid rgba(180,220,255,.15); border-radius: 22px; background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.022)), #171d22; }
-  .price-grid section > span, .article-sidebar span, .article-cta > span { color: #cfeaff; font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+  .price-grid section > span, .article-sidebar span { color: #cfeaff; font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
   .price-grid h3 { margin: 12px 0 20px; font-size: 20px; }
-  .price-grid p { margin: 9px 0; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.45; }
+  .price-grid p { margin: 9px 0; color: rgba(255,255,255,.66); font-size: 14px; line-height: 1.5; }
   .price-grid strong { color: #fff; }
-  .article-note { margin: 28px 0 0; padding: 20px 22px; border-left: 3px solid #9bd2ff; border-radius: 0 16px 16px 0; background: rgba(155,210,255,.07); color: rgba(255,255,255,.69); font-size: 14px; line-height: 1.6; }
+  .article-note { margin: 28px 0 0; padding: 20px 22px; border: 1px solid rgba(180,220,255,.2); border-radius: 16px; background: rgba(155,210,255,.07); color: rgba(255,255,255,.74); font-size: 15px; line-height: 1.6; }
   .article-note a { display: inline-block; margin-left: 5px; color: #cfeaff; font-weight: 800; text-underline-offset: 3px; }
   .article-offer { padding: 28px; border: 1px solid rgba(180,220,255,.24); border-radius: 24px; background: linear-gradient(135deg,rgba(155,210,255,.1),rgba(255,255,255,.025)); }
   .article-content .article-offer h2 { margin: 0 0 18px; font-size: clamp(27px,3vw,36px); }
@@ -355,10 +348,6 @@ const articleSchema = {
   .article-faq details { border: 1px solid rgba(180,220,255,.13); border-radius: 17px; background: rgba(255,255,255,.035); }
   .article-faq summary { padding: 20px; cursor: pointer; font-weight: 750; }
   .article-faq p { margin: 0; padding: 0 20px 20px; color: rgba(255,255,255,.62); line-height: 1.65; }
-  .article-cta { margin-top: 72px; padding: clamp(30px, 5vw, 52px); border: 1px solid rgba(180,220,255,.21); border-radius: 28px; background: radial-gradient(circle at 80% 0, rgba(155,210,255,.12), transparent 40%), #171d22; }
-  .article-cta h2 { margin: 16px 0; }
-  .article-cta p { color: rgba(255,255,255,.65); line-height: 1.65; }
-  .article-cta a { display: inline-flex; margin-top: 10px; padding: 15px 22px; border: 1px solid rgba(180,220,255,.34); border-radius: 999px; background: rgba(155,210,255,.1); color: #fff; font-size: 12px; font-weight: 900; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
   .article-sidebar { position: sticky; top: 120px; display: grid; gap: 14px; }
   .article-sidebar > div, .article-sidebar nav { padding: 24px; border: 1px solid rgba(180,220,255,.13); border-radius: 20px; background: rgba(23,29,34,.8); }
   .article-sidebar p { margin: 13px 0 0; color: rgba(255,255,255,.62); font-size: 13px; line-height: 1.65; }
@@ -366,5 +355,5 @@ const articleSchema = {
   .article-sidebar nav span { margin-bottom: 4px; }
   .article-sidebar nav a { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; }
   @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; gap: 48px; } .article-sidebar { position: static; grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 720px) { .article-page { padding: 125px 17px 90px; } .article-hero { margin-bottom: 52px; } .article-hero h1 { font-size: clamp(44px, 13vw, 65px); } .article-layout { gap: 36px; } .price-grid { grid-template-columns: 1fr; } .article-content h2 { margin-top: 54px; } .article-sidebar { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .article-page { padding: 125px 17px 0; } .article-hero { margin-bottom: 52px; } .article-hero h1 { font-size: clamp(44px, 13vw, 65px); } .article-layout { gap: 36px; } .price-grid { grid-template-columns: 1fr; } .article-content h2 { margin-top: 54px; } .article-sidebar { grid-template-columns: 1fr; } }
 </style>

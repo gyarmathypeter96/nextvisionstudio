@@ -1,10 +1,10 @@
-// Owner-approved monthly production packages. These are not editing-only rates
+// Owner-approved monthly production packages (prices updated 24 October 2026). These are not editing-only rates
 // or the separate managed-social package. All three include a half day shoot.
 export const monthlyContentPackages = [
   {
     id: "starter",
     name: "Starter Package",
-    price: 500,
+    price: 350,
     videos: 4,
     description: "A focused start for your business on social media.",
     cta: "Choose Starter",
@@ -13,7 +13,7 @@ export const monthlyContentPackages = [
   {
     id: "monthly",
     name: "Full Monthly Content",
-    price: 700,
+    price: 450,
     videos: 8,
     description: "A steady flow of content, without planning every post yourself.",
     cta: "Choose Monthly Content",
@@ -22,7 +22,7 @@ export const monthlyContentPackages = [
   {
     id: "growth",
     name: "Growth Package",
-    price: 1000,
+    price: 600,
     videos: 12,
     description: "More videos to share more of what your business does.",
     cta: "Choose Growth",

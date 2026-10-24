@@ -1,0 +1,83 @@
+---
+import { nextVisionPrices } from "../data/marketPricing";
+
+// Most-chosen monthly tier, matching the "Most popular" card on the home page.
+const popularVideos = 8;
+---
+
+<section class="own-prices" id="nextvision-prices" aria-labelledby="own-prices-title">
+  <h2 id="own-prices-title">NextVision Studio prices</h2>
+  <p>All prices exclude VAT. Your written quote confirms filming hours, locations, video lengths, formats, delivery dates and included changes.</p>
+  <div class="own-prices__grid">
+    {nextVisionPrices.map((offer) => {
+      const tiers = "tiers" in offer ? offer.tiers : undefined;
+      return (
+        <article
+          class:list={{ "own-prices__card": true, "own-prices__card--wide": Boolean(tiers), "own-prices__card--featured": "featured" in offer && offer.featured }}
+          data-nextvision-price={offer.id}
+          aria-labelledby={`price-${offer.id}-title`}
+        >
+          {"featured" in offer && offer.featured && <span class="own-prices__badge">Content, strategy and management</span>}
+          <h3 id={`price-${offer.id}-title`}>{offer.title}</h3>
+          {tiers ? (
+            <>
+              <p>{offer.description}</p>
+              <ul class="own-prices__tiers">
+                {tiers.map((tier) => (
+                  <li class:list={{ "own-prices__tier--popular": tier.videos === popularVideos }}>
+                    <strong>{tier.price}</strong>
+                    <span>{tier.videos} short videos</span>
+                    {tier.videos === popularVideos && <em>Most popular</em>}
+                  </li>
+                ))}
+              </ul>
+              <small>Per month + VAT</small>
+              <a href="/#content-packages" data-cta-placement={`price-${offer.id}`}>Compare the three packages</a>
+            </>
+          ) : (
+            <>
+              <p class="own-prices__amount">{offer.price} <span>{offer.vat}</span></p>
+              <small>{offer.unit}</small>
+              <p>{offer.description}</p>
+              <a href={offer.id === "ultimate-organic" ? "/social-media-content-creation-dublin/#landing-contact" : "#contact-form"} data-cta-placement={`price-${offer.id}`}>Get a quote</a>
+            </>
+          )}
+        </article>
+      );
+    })}
+  </div>
+  <p class="own-prices__note">Studio hire, specialist crew, travel and other extras are agreed before booking.</p>
+</section>
+
+<style>
+  .own-prices, .own-prices * { box-sizing: border-box; }
+  .own-prices { margin: 48px 0 56px; scroll-margin-top: 110px; }
+  .own-prices > h2 { margin: 0 0 16px; color: #fff; font-size: clamp(31px, 4vw, 46px); line-height: 1.05; letter-spacing: -.045em; }
+  .own-prices > p { margin: 0; color: rgba(255,255,255,.72); font-size: 17px; line-height: 1.7; }
+  .own-prices__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+  .own-prices__card { min-width: 0; display: flex; flex-direction: column; padding: 25px; border: 1px solid rgba(180,220,255,.2); border-radius: 22px; background: #171d22; }
+  .own-prices__card--wide { grid-column: 1 / -1; border-color: rgba(207,234,255,.5); background: radial-gradient(ellipse at 100% 0, rgba(155,210,255,.17), transparent 70%), #171d22; }
+  .own-prices__card--featured { border-color: rgba(207,234,255,.36); }
+  .own-prices__badge { margin-bottom: 12px; color: #cfeaff; font-size: 13px; font-weight: 800; }
+  .own-prices__card h3 { margin: 0; color: #fff; font-size: 23px; line-height: 1.2; }
+  .own-prices__card p { color: rgba(255,255,255,.74); font-size: 15px; line-height: 1.65; }
+  .own-prices__card .own-prices__amount { margin: 22px 0 5px; color: #fff; font-size: 38px; font-weight: 850; line-height: 1.15; }
+  .own-prices__amount span { display: block; margin-top: 7px; color: #cfeaff; font-size: 14px; font-weight: 650; line-height: 1.5; }
+  .own-prices__card small { color: rgba(255,255,255,.64); font-size: 13px; line-height: 1.6; }
+  .own-prices__tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 6px 0 14px; padding: 0; list-style: none; }
+  .own-prices__tiers li { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 18px; border: 1px solid rgba(180,220,255,.16); border-radius: 16px; background: rgba(155,210,255,.05); }
+  .own-prices__tiers strong { color: #fff; font-size: clamp(28px, 3.4vw, 36px); font-weight: 850; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .own-prices__tiers span { color: rgba(255,255,255,.76); font-size: 15px; line-height: 1.4; }
+  .own-prices__tiers em { color: #cfeaff; font-size: 13px; font-style: normal; font-weight: 750; }
+  .own-prices__tiers .own-prices__tier--popular { border-color: rgba(207,234,255,.55); background: rgba(155,210,255,.1); }
+  .own-prices__card a { align-self: flex-start; margin-top: auto; padding: 12px 0; color: #cfeaff; font-size: 15px; font-weight: 800; text-underline-offset: 4px; }
+  .own-prices__card a:hover { color: #fff; }
+  .own-prices a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  .own-prices__note { margin: 16px 0 0; color: rgba(255,255,255,.62); font-size: 14px; line-height: 1.7; }
+  @media (max-width: 720px) {
+    .own-prices__grid { grid-template-columns: 1fr; }
+    .own-prices__tiers { gap: 8px; }
+    .own-prices__tiers li { padding: 14px 12px; }
+    .own-prices__tiers span { font-size: 14px; }
+  }
+</style>

@@ -1,7 +1,20 @@
-// NextVision prices supplied by the owner on 18 October 2026.
+// NextVision prices supplied by the owner on 18 October 2026; monthly packages updated 24 October 2026.
 // Alternative budgets are owner-supplied illustrations, not surveyed averages.
 // Editing-only work must never be presented as filming plus account management.
 export const nextVisionPrices = [
+  {
+    id: "monthly-videos",
+    title: "Monthly short videos",
+    price: "From €350",
+    vat: "+ VAT",
+    unit: "Per month",
+    description: "Content planning and a half day shoot at your business every month. Publishing and account management are separate.",
+    tiers: [
+      { videos: 4, price: "€350" },
+      { videos: 8, price: "€450" },
+      { videos: 12, price: "€600" },
+    ],
+  },
   {
     id: "half-day",
     title: "Half day shooting",
@@ -17,22 +30,6 @@ export const nextVisionPrices = [
     vat: "+ VAT",
     unit: "Per filming day",
     description: "A full day filming session. Edited videos are priced separately.",
-  },
-  {
-    id: "eight-edits",
-    title: "8 short video edits",
-    price: "€600",
-    vat: "+ VAT",
-    unit: "Per editing package",
-    description: "Editing for 8 short videos. Filming is a separate booking.",
-  },
-  {
-    id: "twelve-shorts",
-    title: "12 short video edits",
-    price: "€800",
-    vat: "+ VAT",
-    unit: "Per editing package",
-    description: "Editing for 12 short videos. Filming is a separate booking.",
   },
   {
     id: "ultimate-organic",
@@ -72,8 +69,8 @@ export const marketPricingExamples = [
     item: "Monthly content: 8 short videos with basic editing",
     price: "Approx. €1,500 + VAT / month",
     unit: "Illustrative monthly content budget",
-    nextvisionPrice: "€1,050 + VAT combined",
-    nextvision: "Example content batch: full day shooting (€450) plus 8 short video edits (€600). Publishing and account management are separate.",
+    nextvisionPrice: "€450 + VAT / month",
+    nextvision: "Full Monthly Content: content planning, a half day shoot and 8 edited short videos. Publishing and account management are separate.",
   },
   {
     item: "Full social media content and management",

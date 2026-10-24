@@ -4,6 +4,7 @@ import { AREA_SERVED_SCHEMA } from "../config/site";
 import { serviceForPath } from "../config/services";
 import { serviceScopes } from "../data/serviceScope";
 import ContactForm from "./ContactForm.astro";
+import BusinessVideoExamples from "./BusinessVideoExamples.astro";
 import type { VideoSeoPageData } from "../data/videoSeoPages";
 
 interface Props { page: VideoSeoPageData }
@@ -89,15 +90,19 @@ const schema = {
 
   <ServiceScope slug={page.slug} showProof={false} />
 
-  <section class="video-seo__project" aria-labelledby="video-seo-project">
-    <img src={page.project.image} alt={page.project.alt} width="640" height="360" loading="lazy" decoding="async" />
-    <div>
-      <p>Relevant project</p>
-      <h2 id="video-seo-project">{page.project.title}</h2>
-      <span>{page.project.text}</span>
-      <a href={page.project.href}>Read the full project <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
+  {page.showExamples ? (
+    <BusinessVideoExamples />
+  ) : (
+    <section class="video-seo__project" aria-labelledby="video-seo-project">
+      <img src={page.project.image} alt={page.project.alt} width="640" height="360" loading="lazy" decoding="async" />
+      <div>
+        <p>Relevant project</p>
+        <h2 id="video-seo-project">{page.project.title}</h2>
+        <span>{page.project.text}</span>
+        <a href={page.project.href}>Read the full project <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  )}
 
   <section class="video-seo__faq" aria-labelledby="video-seo-faq">
     <h2 id="video-seo-faq">Questions before filming.</h2>

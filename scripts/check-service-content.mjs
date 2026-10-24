@@ -68,32 +68,30 @@ for (const competitor of ["nexera.ie", "sgstudios.ie", "thrivemarketing.ie", "se
   assert.ok(!costGuide.includes(competitor), `Pricing page must not name or link to a competitor: ${competitor}`);
 }
 assert.ok(!/"@type":"(?:LocalBusiness|ProfessionalService)"/.test(costGuide), "Cost guide must not redefine an address-free local-business publisher");
-assert.equal([...costGuide.matchAll(/data-nextvision-price=/g)].length, 6, "All six owner-approved NextVision options must be visible");
+assert.equal([...costGuide.matchAll(/data-nextvision-price=/g)].length, 5, "All five owner-approved NextVision options must be visible");
 for (const [id, amount, scope] of [
+  ["monthly-videos", "€350", "half day shoot"],
   ["half-day", "€250", "Edited videos are priced separately"],
   ["full-day", "€450", "Edited videos are priced separately"],
-  ["eight-edits", "€600", "Editing for 8 short videos"],
-  ["twelve-shorts", "€800", "Editing for 12 short videos"],
   ["ultimate-organic", "€1,200", "12 short videos and 4 photos each month"],
   ["ad-creative", "€500", "4 short videos created for paid social ads"],
 ]) {
   const card = costGuide.match(new RegExp(`<article[^>]*data-nextvision-price="${id}"[\\s\\S]*?<\\/article>`))?.[0];
-  assert.ok(card?.includes(amount) && card.includes("+ VAT") && card.includes(scope), `Incorrect approved price or scope for ${id}`);
+  assert.ok(card?.includes(amount) && card.includes("VAT") && card.includes(scope), `Incorrect approved price or scope for ${id}`);
+}
+const monthlyPrices = costGuide.match(/<article[^>]*data-nextvision-price="monthly-videos"[\s\S]*?<\/article>/)?.[0];
+for (const [videos, amount] of [[4, "€350"], [8, "€450"], [12, "€600"]]) {
+  assert.ok(monthlyPrices?.includes(amount) && monthlyPrices.includes(`${videos} short videos`), `Monthly package missing: ${videos} videos at ${amount}`);
 }
 assert.ok(costGuide.includes("All NextVision prices shown exclude VAT"));
-const editPrice = (id) => {
-  const card = costGuide.match(new RegExp(`<article[^>]*data-nextvision-price="${id}"[\\s\\S]*?<\\/article>`))?.[0];
-  return Number(card?.match(/class="own-prices__amount"[^>]*>€([\d,]+)/)?.[1].replaceAll(",", ""));
-};
-assert.ok(editPrice("twelve-shorts") / 12 < editPrice("eight-edits") / 8, "The 12 video editing package must have a lower per-video price than the 8 video package");
-assert.ok(costGuide.includes("€1,050 + VAT combined"), "The filming plus 8 edits comparison must use the updated sum");
+assert.ok(costGuide.includes("€450 + VAT / month"), "The 8 video comparison must use the Full Monthly Content price");
 const monthlyCard = costGuide.match(/<article[^>]*data-nextvision-price="ultimate-organic"[\s\S]*?<\/article>/)?.[0];
 assert.ok(monthlyCard?.includes('href="/social-media-content-creation-dublin/#landing-contact"'), "The managed monthly package must lead to the monthly content enquiry form");
 const llms = await read("dist/llms.txt");
-for (const amount of ["€250", "€450", "€600", "€800", "€1,200", "€500"]) {
+for (const amount of ["€250", "€450", "€350", "€600", "€1,200", "€500"]) {
   assert.ok(llms.includes(`${amount} + VAT`), `Public AI summary has a stale or missing approved price: ${amount}`);
 }
-assert.ok(llms.includes("12 short video edits"), "Public AI summary must identify the 12 video package as editing only");
+assert.ok(llms.includes("4 short videos €350, 8 short videos €450, 12 short videos €600"), "Public AI summary must list the monthly package prices");
 for (const service of listedServices) assert.ok(llms.includes(`https://www.nextvisionstudio.com${service.href}`), `llms.txt is missing ${service.key}`);
 assert.ok(!llms.includes("https://www.nextvisionstudio.com/videography-dublin/"), "llms.txt must not list the noindex video landing page");
 assert.ok(!llms.includes("GTM-") && !llms.includes("nvs_owner_optout"), "llms.txt must contain only public business information");
@@ -113,7 +111,7 @@ for (const caseRoute of ["ventsolve-content-production", "leroys-barking-world-s
 const offerLink = 'href="/videography-dublin/#video-offers"';
 const enquiryLink = 'href="/videography-dublin/#landing-contact"';
 assert.ok(costGuide.indexOf(offerLink) < costGuide.indexOf("data-market-price-comparison"), "Readers must see the NextVision offer path before the market price table");
-assert.ok(costGuide.includes(enquiryLink), "The pricing guide must lead to the service-specific form");
+assert.ok(costGuide.includes('href="#contact-form"') && costGuide.includes("data-quote-steps"), "The pricing guide must lead to its own three-step quote form");
 const blogIndex = await html("blog/");
 const newGuides = ["content-day-or-business-video", "compare-business-video-quotes", "customer-questions-into-business-videos"];
 for (const slug of newGuides) {

@@ -235,11 +235,11 @@ export const landingPages: Record<string, LandingPageData> = {
     lead:
       "Show your products, people and business at their best. We plan your photo session and deliver edited images for your website, social media, ads and sales material.",
     heroImage: {
-      src: "/images/photography/event-photography-dublin.webp",
-      alt: "Professional event photographer in Dublin by NextVision Studio",
-      width: 1440,
+      src: "/images/photography/product-photography-dublin.webp",
+      alt: "Product photography in Dublin: a printed greeting card photographed by NextVision Studio",
+      width: 1013,
       height: 1800,
-      srcset: "/images/photography/event-photography-dublin-720.webp 720w, /images/photography/event-photography-dublin-1080.webp 1080w, /images/photography/event-photography-dublin.webp 1440w",
+      srcset: "/images/photography/product-photography-dublin-720.webp 720w, /images/photography/product-photography-dublin.webp 1013w",
     },
     heroPoints: ["A clear photo list", "Edited images", "Agreed usage rights"],
     ctaLabel: "Get a photography quote",
