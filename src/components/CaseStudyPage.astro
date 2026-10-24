@@ -400,7 +400,7 @@ const caseStudySchema = {
 
   .case-study-video__heading { margin-bottom: 28px; }
   .case-study-video__frame { aspect-ratio: 16 / 9; background: #08090a; }
-  .case-study-video__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .case-study-video__frame :global(iframe) { display: block; width: 100%; height: 100%; border: 0; }
   .case-study-video__poster { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: #08090a; cursor: pointer; }
   .case-study-video__poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .case-study-video__play { position: absolute; top: 50%; left: 50%; display: grid; width: 76px; height: 76px; place-items: center; border-radius: 50%; background: rgba(17, 17, 17, .78); color: #ffffff; transform: translate(-50%, -50%); transition: background 200ms ease, transform 200ms ease; }
