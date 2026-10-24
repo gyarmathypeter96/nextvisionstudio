@@ -17,11 +17,14 @@ export interface VideoSeoPageData {
   };
   faq: Array<{ question: string; answer: string }>;
   related: Array<{ label: string; href: string }>;
+  // Show three real project videos instead of the single project block.
+  showExamples?: boolean;
 }
 
 export const videoSeoPages: Record<string, VideoSeoPageData> = {
   corporate: {
     slug: "corporate-video-production-dublin",
+    showExamples: true,
     metaTitle: "Corporate Video Production & Videography Dublin | NextVision",
     metaDescription:
       "Corporate and business video production by a Dublin videographer: service explainers, customer stories, training films and social edits. Get a clear quote.",

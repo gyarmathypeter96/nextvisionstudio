@@ -19,7 +19,7 @@ Short Form Video Production covers an individual batch, launch or campaign. Mont
 
 ## NextVision Studio prices
 
-${nextVisionPrices.map((offer) => `- ${offer.title}: ${offer.price} ${offer.vat}, ${offer.unit.toLowerCase()}. ${offer.description}`).join("\n")}
+${nextVisionPrices.map((offer) => `- ${offer.title}: ${offer.price} ${offer.vat}, ${offer.unit.toLowerCase()}. ${offer.description}${"tiers" in offer && offer.tiers ? ` ${offer.tiers.map((tier) => `${tier.videos} short videos ${tier.price}`).join(", ")} + VAT per month.` : ""}`).join("\n")}
 
 These are NextVision Studio prices. All exclude VAT. Filming and editing are separate unless included in the package. Confirm filming hours, locations, video lengths, delivery dates, changes and extras in the written quote.
 
