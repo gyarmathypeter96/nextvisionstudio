@@ -148,7 +148,7 @@ Alongside the priority photographs, capture:
 
 Evergreen photographs give the team something credible to use between larger campaigns. They also reduce the temptation to fill important pages with generic stock images.
 
-If video is also needed, planning both together can make better use of the location, people and preparation. See how [photography and video can work as one production](/videography-dublin/).
+If video is also needed, planning both together can make better use of the location, people and preparation. See how [photography and video can work as one production](/corporate-video-production-dublin/).
 
 ## Common commercial photography mistakes
 

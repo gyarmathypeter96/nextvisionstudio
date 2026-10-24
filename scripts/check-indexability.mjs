@@ -13,7 +13,7 @@ const routes = [
   "/image-licensing/",
   "/services/",
   "/crm-lead-automation-dublin/",
-  "/videography-dublin/",
+  "/corporate-video-production-dublin/",
   "/photography-dublin/",
   "/short-form-video-production-dublin/",
 ];
@@ -71,6 +71,15 @@ if (!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(thankYouHtml)) {
 const notFoundHtml = await readFile(notFoundPath, "utf8").catch(() => "");
 if (!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(notFoundHtml)) {
   failures.push("dist/404.html must exist and be noindex");
+}
+// The video landing page converts offers and direct enquiries; organic search
+// for business and corporate video goes to /corporate-video-production-dublin/.
+const videoLandingHtml = await readFile(path.join(distDirectory, "videography-dublin", "index.html"), "utf8");
+if (!/<meta\s+name="robots"\s+content="noindex, follow"/i.test(videoLandingHtml)) {
+  failures.push("/videography-dublin/ must be noindex, follow");
+}
+if (sitemap.includes("/videography-dublin/")) {
+  failures.push("sitemap.xml must not list the noindex /videography-dublin/ landing page");
 }
 if (sitemap.includes("/404/")) {
   failures.push("sitemap.xml must not list the 404 page");

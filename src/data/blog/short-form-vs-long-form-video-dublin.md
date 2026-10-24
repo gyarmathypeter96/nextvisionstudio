@@ -61,7 +61,7 @@ Choose a longer video when a viewer needs context before trusting the message. T
 
 Long-form can also become a useful source for shorter content. A well-planned interview may include several distinct answers. Each can be edited into a standalone clip, provided the edit preserves the question or context needed to make the answer understandable.
 
-Our [Dublin video production service](/videography-dublin/) can plan the main story and the intended cut-downs together, so the shoot captures what each format will need.
+Our [Dublin video production service](/corporate-video-production-dublin/) can plan the main story and the intended cut-downs together, so the shoot captures what each format will need.
 
 ## How to use both formats together
 
@@ -95,4 +95,4 @@ Ask three questions before choosing a format:
 
 If one idea can answer those questions quickly, begin with a short video. If the viewer needs evidence, nuance or a story, give it more room and create shorter supporting clips as well.
 
-Tell us what your audience needs to understand and where you plan to publish. We can recommend a practical [video production plan for your business](/videography-dublin/) before filming begins.
+Tell us what your audience needs to understand and where you plan to publish. We can recommend a practical [video production plan for your business](/corporate-video-production-dublin/) before filming begins.

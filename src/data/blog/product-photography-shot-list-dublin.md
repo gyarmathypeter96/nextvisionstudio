@@ -69,7 +69,7 @@ Consider photographing:
 
 Do not photograph details just to increase the image count. Each close-up should answer a question, prove quality or support a claim made in the product copy.
 
-If a feature is difficult to explain in one still image, plan a short demonstration video during the same production. A connected [video production shoot](/videography-dublin/) can show movement, setup and use while the products and lighting are already prepared.
+If a feature is difficult to explain in one still image, plan a short demonstration video during the same production. A connected [video production shoot](/corporate-video-production-dublin/) can show movement, setup and use while the products and lighting are already prepared.
 
 ## Include scale and context
 

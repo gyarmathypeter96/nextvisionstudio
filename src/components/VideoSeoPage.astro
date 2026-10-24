@@ -20,9 +20,7 @@ const schema = {
       name: page.metaTitle,
       description: serviceScopes[page.slug]?.answer ?? page.metaDescription,
       mainEntity: { "@id": `${canonical}#service` },
-      isPartOf: {
-        "@id": "https://www.nextvisionstudio.com/videography-dublin/#webpage",
-      },
+      isPartOf: { "@id": "https://www.nextvisionstudio.com/#website" },
     },
     {
       "@type": "Service",
@@ -54,13 +52,7 @@ const schema = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Videography Dublin",
-          item: "https://www.nextvisionstudio.com/videography-dublin/",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: page.eyebrow,
+          name: service?.title ?? page.eyebrow,
           item: canonical,
         },
       ],
@@ -77,7 +69,7 @@ const schema = {
       <span>{page.lead}</span>
       <nav aria-label="Page actions">
         <a href="#contact-form" data-cta-placement={`${page.slug}-hero`}>Discuss the project</a>
-        <a href="/videography-dublin/">Business video production in Dublin</a>
+        <a href="/videography-dublin/#video-offers" data-cta-placement={`${page.slug}-offers`}>Compare Content Day and Business Video</a>
       </nav>
     </div>
   </section>
@@ -126,7 +118,7 @@ const schema = {
   .video-seo__hero { display: grid; min-height: 82svh; padding: 150px 24px 84px; place-items: center; background: linear-gradient(rgba(7,8,9,.28),rgba(7,8,9,.92)), url('/images/showreel/showreel-2025.webp') center/cover; }
   .video-seo__hero > div { width: min(100%, 1060px); }
   .video-seo__hero p, .video-seo__problem-copy > p, .video-seo__project div > p { margin: 0 0 18px; color: #cfeaff; font-size: 11px; font-weight: 900; text-transform: uppercase; }
-  .video-seo__hero h1 { max-width: 900px; margin: 0; font-size: 72px; font-weight: 950; letter-spacing: 0; line-height: .98; }
+  .video-seo__hero h1 { max-width: 900px; margin: 0; font-size: 72px; font-weight: 950; letter-spacing: 0; line-height: .98; text-wrap: balance; }
   .video-seo__hero > div > span { display: block; max-width: 680px; margin-top: 25px; color: rgba(255,255,255,.76); font-size: 19px; line-height: 1.6; }
   .video-seo__hero nav { display: flex; flex-wrap: wrap; margin-top: 32px; gap: 10px; }
   .video-seo__hero a { display: inline-flex; min-height: 52px; align-items: center; padding: 0 21px; border: 1px solid rgba(255,255,255,.3); border-radius: 4px; font-size: 13px; font-weight: 900; text-decoration: none; }

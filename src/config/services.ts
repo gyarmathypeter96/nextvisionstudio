@@ -1,7 +1,7 @@
 // One vocabulary for navigation, enquiry forms and structured service data.
 export const SERVICE_CATALOG = [
   { key: "shortform", title: "Short Form Video Production", href: "/short-form-video-production-dublin/" },
-  { key: "video", title: "Business Video Production", href: "/videography-dublin/" },
+  { key: "video", title: "Business Video Production", href: "/videography-dublin/", listed: false },
   { key: "corporate", title: "Corporate Video Production", href: "/corporate-video-production-dublin/" },
   { key: "event", title: "Event Videography", href: "/event-videographer-dublin/" },
   { key: "social", title: "Monthly Social Media Content", href: "/social-media-content-creation-dublin/" },
@@ -13,9 +13,13 @@ export const SERVICE_CATALOG = [
 
 export type ServiceKey = typeof SERVICE_CATALOG[number]["key"];
 
+// The "video" entry is a noindex landing page. It stays an enquiry-form option
+// but is left out of navigation, the footer, llms.txt and structured data.
+export const LISTED_SERVICES = SERVICE_CATALOG.filter((service) => !("listed" in service && service.listed === false));
+
 // Video is the main offer. These pages stay live and in the footer, the
 // services page and the enquiry form, but not in the header menu.
 const SECONDARY_SERVICE_KEYS: ReadonlySet<ServiceKey> = new Set(["photography", "crm"]);
-export const MAIN_NAV_SERVICES = SERVICE_CATALOG.filter((service) => !SECONDARY_SERVICE_KEYS.has(service.key));
+export const MAIN_NAV_SERVICES = LISTED_SERVICES.filter((service) => !SECONDARY_SERVICE_KEYS.has(service.key));
 export const getService = (key: ServiceKey) => SERVICE_CATALOG.find((service) => service.key === key)!;
 export const serviceForPath = (path: string) => SERVICE_CATALOG.find((service) => service.href === path);

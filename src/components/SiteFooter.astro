@@ -1,6 +1,6 @@
 ---
 import { WHATSAPP_URL } from "../config/contact";
-import { SERVICE_CATALOG } from "../config/services";
+import { LISTED_SERVICES } from "../config/services";
 import { SERVICE_AREA_TEXT } from "../config/site";
 import { SOCIAL_PROFILES } from "../config/site";
 
@@ -37,7 +37,7 @@ const currentYear = new Date().getFullYear();
       </div>
       <div>
         <p>Services</p>
-        {SERVICE_CATALOG.map((service) => <a href={service.href}>{service.title}</a>)}
+        {LISTED_SERVICES.map((service) => <a href={service.href}>{service.title}</a>)}
       </div>
       <div>
         <p>Explore</p>

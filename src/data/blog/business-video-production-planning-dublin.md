@@ -23,7 +23,7 @@ The camera arrives, the team gives a general introduction, some attractive foota
 
 A better production begins with the customer problem, the message and the places where the footage will work. The shoot can then create a main film, shorter campaign edits and useful supporting clips from one plan.
 
-This guide explains how to plan a [business video production in Dublin](/videography-dublin/) without turning the process into a full-time job for your team.
+This guide explains how to plan a [business video production in Dublin](/corporate-video-production-dublin/) without turning the process into a full-time job for your team.
 
 ## Give the video one clear job
 
@@ -44,7 +44,7 @@ A business video may need to:
 
 Choose one primary job. A video can support other goals, but the main decision keeps the message focused.
 
-Our [video production service in Dublin](/videography-dublin/) uses this goal to shape the concept, script and final list of deliverables.
+Our [video production service in Dublin](/corporate-video-production-dublin/) uses this goal to shape the concept, script and final list of deliverables.
 
 ## Define the audience before writing the script
 

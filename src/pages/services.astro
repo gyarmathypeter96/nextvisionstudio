@@ -1,5 +1,5 @@
 ---
-import { SERVICE_CATALOG } from "../config/services";
+import { LISTED_SERVICES } from "../config/services";
 import { SITE_URL } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ServicesPageHero from "../components/ServicesPageHero.astro";
@@ -15,7 +15,7 @@ const serviceSchema = {
   about: { "@id": `${SITE_URL}/#business` },
   mainEntity: {
     "@type": "ItemList",
-    itemListElement: SERVICE_CATALOG.map((service, index) => ({ "@type": "ListItem", position: index + 1, name: service.title, url: `${SITE_URL}${service.href}` })),
+    itemListElement: LISTED_SERVICES.map((service, index) => ({ "@type": "ListItem", position: index + 1, name: service.title, url: `${SITE_URL}${service.href}` })),
   },
 };
 ---

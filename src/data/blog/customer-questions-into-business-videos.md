@@ -42,7 +42,7 @@ Bring the questions you answer on sales calls. Choose the question that most oft
 
 For example, a planned service explanation could cover who the service suits, what happens during the work and what the customer should do next. That is a suggested structure for a new brief, not a transcript or an additional claim about the VentSolve project.
 
-Our [business video production in Dublin](/videography-dublin/#video-offers) covers this kind of service explanation. A larger training or interview brief can be planned through [corporate video production](/corporate-video-production-dublin/).
+Our [business and corporate video production in Dublin](/corporate-video-production-dublin/) covers this kind of service explanation, as well as larger training or interview briefs.
 
 ## Leroy’s Barking World needed to keep its personality
 
