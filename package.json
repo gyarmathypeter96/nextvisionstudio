@@ -11,6 +11,7 @@
     "check:indexability": "node scripts/check-indexability.mjs",
     "check:service-content": "node scripts/check-service-content.mjs",
     "check:measurement": "node --test scripts/check-measurement.mjs",
+    "check:motion": "node --test scripts/check-background-motion.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
