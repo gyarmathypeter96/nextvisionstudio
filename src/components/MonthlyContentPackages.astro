@@ -83,7 +83,7 @@ import { monthlyContentPackages } from "../data/monthlyContentPackages";
   .content-plan__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin: 30px 0; }
   .content-plan__price > strong { color: #fff; font-size: clamp(43px,4.3vw,58px); font-weight: 650; letter-spacing: -.05em; line-height: 1; }
   .content-plan__price > span { color: rgba(255,255,255,.6); font-size: 12px; line-height: 1.6; }
-  .content-plan__price small { display: block; color: rgba(207,234,255,.8); font-size: 10px; }
+  .content-plan__price small { display: block; color: rgba(207,234,255,.8); font-size: 12px; }
   .content-plan__includes { flex: 1; padding-top: 24px; border-top: 1px solid rgba(207,234,255,.12); }
   .content-plan__includes > p { margin: 0; color: rgba(255,255,255,.8); font-size: 11px; font-weight: 700; }
   ul { display: grid; gap: 15px; margin: 22px 0 34px; padding: 0; list-style: none; }
@@ -95,7 +95,7 @@ import { monthlyContentPackages } from "../data/monthlyContentPackages";
   .content-plan__cta:hover { border-color: #cfeaff; background: rgba(207,234,255,.13); }
   .content-plan--featured .content-plan__cta:hover { background: #e2f3ff; }
   .content-plan__cta:focus-visible { outline: 2px solid #cfeaff; outline-offset: 5px; }
-  .content-packages__note { max-width: 880px; margin: 26px 0 0; color: rgba(255,255,255,.45); font-size: 11px; line-height: 1.8; }
+  .content-packages__note { max-width: 78ch; margin: 26px 0 0; color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.7; }
   @keyframes content-halo { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
   @media (max-width: 900px) { .content-packages { width: min(calc(100% - 32px),560px); padding: 12px 0 64px; } .content-packages__heading { margin-bottom: 42px; } .content-packages__grid { grid-template-columns: 1fr; gap: 30px; } .content-plan { padding: 28px; } .content-plan__top { min-height: 26px; flex-wrap: nowrap; } h3 { font-size: 29px; } .content-plan__description { min-height: 0; } .content-plan__price > strong { font-size: 53px; } .content-plan__web { width: 155px; height: 155px; } }
   @media (prefers-reduced-motion: reduce) { .content-plan--featured::before { animation: none; opacity: .75; } .content-plan__cta { transition: none; } }
