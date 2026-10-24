@@ -187,12 +187,12 @@ const photos = [
 
   .social-work__dialog { position: fixed; width: min(92vw, 900px); max-width: none; max-height: 92vh; padding: 48px 20px 20px; overflow: visible; border: 1px solid rgba(180,220,255,.22); border-radius: 20px; background: #080a0c; color: #fff; box-shadow: 0 30px 90px rgba(0,0,0,.7); }
   .social-work__dialog::backdrop { background: rgba(0,0,0,.82); backdrop-filter: blur(8px); }
-  .social-work__dialog[data-mode="video"] { width: min(92vw, 440px); padding: 42px 12px 12px; }
+  .social-work__dialog[data-mode="video"] { width: min(92vw, 440px, calc((92vh - 56px) * 9 / 16 + 26px)); padding: 42px 12px 12px; }
   .social-work__close { position: absolute; top: 8px; right: 10px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; background: #181c20; color: #fff; font-size: 24px; cursor: pointer; }
   .social-work__dialog-media { display: grid; place-items: center; }
   .social-work__dialog[data-mode="video"] .social-work__dialog-media { aspect-ratio: 9 / 16; }
-  .social-work__dialog-media iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 12px; background: #000; }
-  .social-work__dialog[data-mode="image"] .social-work__dialog-media img { display: block; max-width: 100%; max-height: calc(92vh - 90px); object-fit: contain; }
+  .social-work__dialog-media :global(iframe) { display: block; width: 100%; height: 100%; border: 0; border-radius: 12px; background: #000; }
+  .social-work__dialog[data-mode="image"] .social-work__dialog-media :global(img) { display: block; max-width: 100%; max-height: calc(92vh - 90px); object-fit: contain; }
 
   @media (max-width: 900px) {
     .social-offers__grid { grid-template-columns: 1fr; }

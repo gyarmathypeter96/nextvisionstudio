@@ -41,10 +41,11 @@ const projects = [
   .business-examples__grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; }
   .business-examples article { min-width: 0; border: 1px solid rgba(180,220,255,.2); border-radius: 24px; overflow: hidden; background: #171b1f; padding-bottom: 24px; }
   .business-examples__player { aspect-ratio: 16 / 9; background: #080a0c; }
-  .business-examples__player button { position: relative; width: 100%; height: 100%; padding: 0; border: 0; color: #fff; background: transparent; cursor: pointer; }
+  .business-examples__player button { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; color: #fff; background: transparent; cursor: pointer; }
   .business-examples__player img { width: 100%; height: 100%; object-fit: cover; }
   .business-examples__player button > span { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%,-50%); display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(207,234,255,.55); background: rgba(10,17,24,.7); backdrop-filter: blur(12px); }
-  .business-examples__player iframe { width: 100%; height: 100%; border: 0; }
+  /* Runtime-created players do not receive Astro's scoped style attribute. */
+  .business-examples__player :global(iframe) { display: block; width: 100%; height: 100%; border: 0; }
   .business-examples small, .business-examples h3, .business-examples article p, .business-examples article a { display: block; margin: 16px 24px 0; }
   .business-examples small { color: #cfeaff; font-weight: 750; }
   .business-examples h3 { font-size: 23px; margin-top: 8px; }

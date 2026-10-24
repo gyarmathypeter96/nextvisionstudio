@@ -25,3 +25,4 @@ jobs:
       - run: npm run check:service-content
       - run: npm run check:measurement
       - run: npm run check:motion
+      - run: node scripts/check-home-packages.mjs
