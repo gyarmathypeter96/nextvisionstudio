@@ -10,11 +10,11 @@ The evidence column is from Google Search Console (domain property
 | Keyword group | Target page | Pages Google currently shows for it | Notes |
 |---|---|---|---|
 | video production dublin, video production company dublin | `/` | corporate 260 impr. / pos 50.5; short-form 202 / 92.6; social 87 / 85.4 | Changed on 19 Oct 2026 (owner-approved). On google.ie the top 10 for this query is mostly home pages titled "Video Production (Company) Dublin". Our home page gets the most clicks on the site (14 clicks, pos 4.2, last 28 days). |
-| business video production dublin | `/videography-dublin/` | – | Still "Discovered – currently not indexed" on 19 Oct 2026; Search Console says the URL has never been crawled. Indexing requested on 18 and 19 Oct. If it is still not indexed on 9 Nov 2026, merge it into `/corporate-video-production-dublin/` with a 301. |
-| videographer dublin | `/videography-dublin/` | pricing guide 33 / 10.1; /blog/ 30 / 39.3; event 29 / 48.7; photography 26 / 58.8 | Cost questions belong to the pricing guide (next row). |
+| business video production dublin | `/corporate-video-production-dublin/` | – | Moved here on 24 Oct 2026 (owner-approved). `/videography-dublin/` stayed "Discovered – currently not indexed" after three indexing requests. It is now a `noindex, follow` conversion landing page (offers and quote form), not an organic target. |
+| videographer dublin, videography dublin, commercial videographer dublin | `/corporate-video-production-dublin/` | "videograph…" group 489 impr. / pos 38.2, 0 clicks (3 months, read 24 Oct 2026): videography dublin 92, commercial videographer dublin 51, videographer dublin 36, videographer dublin prices 25 | Moved from `/videography-dublin/` on 24 Oct 2026. Cost questions belong to the pricing guide (next row). |
 | videographer cost / price dublin | `/how-much-does-a-videographer-cost-in-dublin/` | pricing guide | Best-ranking money topic (positions 4–12). |
-| corporate video production dublin | `/corporate-video-production-dublin/` | corporate 253 / 40.2 | Already the only real ranking page. |
-| short-form video, reels, tiktok production dublin | `/short-form-video-production-dublin/` | short-form | Links to `/videography-dublin/` for longer films. |
+| corporate video production dublin | `/corporate-video-production-dublin/` | corporate 253 / 40.2; "corporate…" group 565 impr. / pos 45.1, about 280 of them video queries (3 months, read 24 Oct 2026) | The only indexed, ranking video page. Title and H1 changed on 24 Oct 2026 (owner-approved) to also cover videography, videographer and business video: title "Corporate Video Production & Videography Dublin \| NextVision", H1 "Corporate & Business Video Production in Dublin". Check positions on 7 Nov 2026. |
+| short-form video, reels, tiktok production dublin | `/short-form-video-production-dublin/` | short-form | Links to `/corporate-video-production-dublin/` for longer films. |
 | event videographer dublin | `/event-videographer-dublin/` | event | |
 | commercial photography dublin | `/photography-dublin/` | photography 874 / 42.2; shoot-planning post 65 / 13.9 | The guide ranks better than the service page; it links to the service page. |
 | commercial studio photography, studio commercial photography | `/photography-dublin/` | photography 172 / 21.4; shoot-planning post 25 / 10.0 | Closest page-one opportunity. |
@@ -26,6 +26,10 @@ The evidence column is from Google Search Console (domain property
 
 ## Rules
 
+- `/videography-dublin/` is a `noindex, follow` landing page. Offer and quote
+  CTAs ("compare the options", "request a quote") may link to it. Body-text SEO
+  links about business video, videography or videographers go to
+  `/corporate-video-production-dublin/`.
 - Do not change the `<title>` or H1 of a target page unless Search Console shows
   the page is targeting the wrong query. An earlier Search Console export showed
   five title variants for both `/videography-dublin/` and `/photography-dublin/`

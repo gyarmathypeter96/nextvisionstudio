@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { CONTACT_EMAIL, CONTACT_PHONE, SERVICE_AREA_TEXT, SITE_NAME, SITE_URL } from "../config/site";
-import { SERVICE_CATALOG } from "../config/services";
+import { LISTED_SERVICES } from "../config/services";
 import { nextVisionPrices } from "../data/marketPricing";
 
 // A public Markdown summary of the same business and routes shown on the site.
@@ -13,7 +13,7 @@ ${SERVICE_AREA_TEXT} These are service areas, not claims of offices in each loca
 
 ## Services
 
-${SERVICE_CATALOG.map((service) => `- [${service.title}](${SITE_URL}${service.href})`).join("\n")}
+${LISTED_SERVICES.map((service) => `- [${service.title}](${SITE_URL}${service.href})`).join("\n")}
 
 Short Form Video Production covers an individual batch, launch or campaign. Monthly Social Media Content covers recurring planning, filming, photography and editing. Production deliverables and timing are agreed in the proposal. Publishing, account management and paid advertising are separate unless explicitly included.
 

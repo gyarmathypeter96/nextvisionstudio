@@ -4,8 +4,10 @@ import { readFile } from "node:fs/promises";
 const read = (file) => readFile(file, "utf8");
 const html = (route) => read(`dist/${route}index.html`);
 const catalogSource = await read("src/config/services.ts");
-const services = [...catalogSource.matchAll(/key: "([^"]+)", title: "([^"]+)", href: "([^"]+)"/g)]
-  .map(([, key, title, href]) => ({ key, title, href }));
+const services = [...catalogSource.matchAll(/key: "([^"]+)", title: "([^"]+)", href: "([^"]+)"(, listed: false)?/g)]
+  .map(([, key, title, href, unlisted]) => ({ key, title, href, listed: !unlisted }));
+const listedServices = services.filter((s) => s.listed);
+assert.deepEqual(services.filter((s) => !s.listed).map((s) => s.key), ["video"], "Only the noindex video landing page is unlisted");
 assert.equal(services.length, 9);
 assert.equal(new Set(services.map((s) => s.href)).size, 9);
 
@@ -14,7 +16,7 @@ for (const service of services) {
   const document = await html(service.href.slice(1));
   documents.set(service.key, document);
   assert.ok(document.includes(service.title), `Missing canonical service label: ${service.key}`);
-  for (const other of services) {
+  for (const other of listedServices) {
     assert.ok(document.includes(`href="${other.href}"`), `Missing navigation mapping ${service.key} → ${other.key}`);
   }
   const scripts = [...document.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
@@ -92,7 +94,8 @@ for (const amount of ["€250", "€450", "€600", "€800", "€1,200", "€50
   assert.ok(llms.includes(`${amount} + VAT`), `Public AI summary has a stale or missing approved price: ${amount}`);
 }
 assert.ok(llms.includes("12 short video edits"), "Public AI summary must identify the 12 video package as editing only");
-for (const service of services) assert.ok(llms.includes(`https://www.nextvisionstudio.com${service.href}`), `llms.txt is missing ${service.key}`);
+for (const service of listedServices) assert.ok(llms.includes(`https://www.nextvisionstudio.com${service.href}`), `llms.txt is missing ${service.key}`);
+assert.ok(!llms.includes("https://www.nextvisionstudio.com/videography-dublin/"), "llms.txt must not list the noindex video landing page");
 assert.ok(!llms.includes("GTM-") && !llms.includes("nvs_owner_optout"), "llms.txt must contain only public business information");
 
 const videoPage = documents.get("video");

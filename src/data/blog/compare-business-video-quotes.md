@@ -70,6 +70,6 @@ If one proposal excludes something, ask for the price of adding it before decidi
 
 We agree the ideas, filming, editing and delivery in one proposal. Your scope confirms the video count, formats, dates and included changes. Publishing, advertising and account management are added only when agreed.
 
-Use the [Business Video Production page](/videography-dublin/) to watch original work and see the options. The enquiry form on that page already identifies the service as Business Video Production.
+See [business and corporate video production in Dublin](/corporate-video-production-dublin/) for original work and the kinds of videos we plan. The quote link below opens a form that already identifies the service as Business Video Production.
 
 [Request a quote with a clear video scope](/videography-dublin/#landing-contact)

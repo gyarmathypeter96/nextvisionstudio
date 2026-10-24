@@ -22,11 +22,11 @@ export interface VideoSeoPageData {
 export const videoSeoPages: Record<string, VideoSeoPageData> = {
   corporate: {
     slug: "corporate-video-production-dublin",
-    metaTitle: "Corporate Video Production Dublin | NextVision Studio",
+    metaTitle: "Corporate Video Production & Videography Dublin | NextVision",
     metaDescription:
-      "Corporate video production in Dublin for service explainers, customer stories, training and business campaigns. Planned, filmed and edited by NextVision Studio.",
-    eyebrow: "Corporate video production Dublin",
-    title: "Corporate Video Production in Dublin.",
+      "Corporate and business video production by a Dublin videographer: service explainers, customer stories, training films and social edits. Get a clear quote.",
+    eyebrow: "Videographer Dublin · corporate & business video",
+    title: "Corporate & Business Video Production in Dublin",
     lead:
       "Turn complex services, internal knowledge and customer proof into clear video your team can use across sales, training and marketing.",
     problemTitle: "Important information is often trapped in calls, documents and presentations.",

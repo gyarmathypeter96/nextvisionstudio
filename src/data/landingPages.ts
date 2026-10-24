@@ -351,7 +351,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "Plan a photography shoot", href: "#landing-contact" },
       { label: "Commercial photography planning guide", href: "/blog/commercial-photography-shoot-planning-dublin/" },
       { label: "Product photography shot list", href: "/blog/product-photography-shot-list-dublin/" },
-      { label: "Combine photography with video", href: "/videography-dublin/" },
+      { label: "Combine photography with video", href: "/corporate-video-production-dublin/" },
       { label: "Explore website design", href: "/webdesigner-dublin/" },
       { label: "Image licensing terms", href: "/image-licensing/" },
     ],
@@ -756,7 +756,7 @@ export const landingPages: Record<string, LandingPageData> = {
       "Tell us what you do and what you want to promote. We will help you choose a practical place to start.",
     relatedLinks: [
       { label: "View short-form video production", href: "/short-form-video-production-dublin/" },
-      { label: "Explore Dublin videography", href: "/videography-dublin/" },
+      { label: "Explore business video production", href: "/corporate-video-production-dublin/" },
       { label: "See Google Ads and Meta Ads support", href: "/google-ads-meta-ads-dublin/" },
       { label: "Short-form vs long-form video guide", href: "/blog/short-form-vs-long-form-video-dublin/" },
       { label: "How short-form video earns attention", href: "/blog/why-short-form-video-captures-attention/" },

@@ -4,6 +4,8 @@ import LandingPage from "../components/landing/LandingPage.astro";
 import { landingPages } from "../data/landingPages";
 
 const page = landingPages.videography;
+// Conversion landing page for offers and direct enquiries. Organic search for
+// business and corporate video goes to /corporate-video-production-dublin/.
 ---
 
 <BaseLayout
@@ -11,6 +13,8 @@ const page = landingPages.videography;
   description={page.metaDescription}
   canonical={`https://www.nextvisionstudio.com/${page.slug}/`}
   ogImage={`https://www.nextvisionstudio.com${page.heroImage?.src}`}
+  noindex
+  followLinks
 >
   <LandingPage page={page} />
 </BaseLayout>

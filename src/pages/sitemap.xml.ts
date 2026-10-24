@@ -10,6 +10,7 @@ const noindexRoutes = new Set([
   "404/",
   "quotesend/",
   "tracking-preferences/",
+  "videography-dublin/",
   "website-design-quote/",
   "website-design-quote/thanks/",
 ]);
@@ -21,8 +22,7 @@ const lastModified: Record<string, string> = {
   "services/": "2026-10-01",
   "about/": "2026-10-01",
   "contact/": "2026-10-01",
-  "videography-dublin/": "2026-10-18",
-  "corporate-video-production-dublin/": "2026-10-01",
+  "corporate-video-production-dublin/": "2026-10-24",
   "event-videographer-dublin/": "2026-10-01",
   "google-ads-meta-ads-dublin/": "2026-09-23",
   "short-form-video-production-dublin/": "2026-10-15",
