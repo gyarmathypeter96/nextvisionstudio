@@ -24,3 +24,4 @@ jobs:
       - run: npm run check:indexability
       - run: npm run check:service-content
       - run: npm run check:measurement
+      - run: npm run check:motion

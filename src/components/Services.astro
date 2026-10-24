@@ -87,7 +87,7 @@ const services = [
           <div class="service-card__copy">
             <div class="service-card__counter" aria-label={`Service ${index + 1} of ${services.length}`}>
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <span aria-hidden="true">/ 06</span>
+              <span aria-hidden="true">/ {String(services.length).padStart(2, "0")}</span>
             </div>
             <h3>{service.title}</h3>
             <p>{service.introduction}</p>

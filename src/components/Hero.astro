@@ -1,11 +1,15 @@
-<section class="nvs-astronaut-header" aria-labelledby="hero-title">
+---
+import BackgroundMotionControl from "./BackgroundMotionControl.astro";
+---
+
+<section class="nvs-astronaut-header" aria-labelledby="hero-title" data-background-motion data-motion-paused="true">
   <video
+    id="hero-background-video"
     class="nvs-astronaut-video"
-    autoplay
     muted
     loop
     playsinline
-    preload="auto"
+    preload="none"
     poster="/images/hero/hero-poster.webp"
     width="1280"
     height="720"
@@ -24,7 +28,7 @@
 
   <div class="nvs-astronaut-content">
     <h1 id="hero-title">
-      <span>Video production in Dublin</span>
+      <span>Video production in Dublin</span>{" "}
       <span>for local businesses.</span>
     </h1>
 
@@ -39,6 +43,9 @@
       <a href="#services" class="nvs-liquid-cta nvs-liquid-cta--compact nvs-liquid-cta--secondary">
         <span>Services</span>
       </a>
+    </div>
+    <div class="nvs-hero-motion">
+      <BackgroundMotionControl controls="hero-background-video" playLabel="Play background video" pauseLabel="Pause background video" />
     </div>
   </div>
 </section>
@@ -83,6 +90,8 @@
     object-fit: cover;
     object-position: center;
   }
+
+  .nvs-hero-motion { min-height: 44px; margin-top: 20px; }
 
   .nvs-astronaut-overlay {
     position: absolute;
@@ -421,6 +430,14 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .nvs-astronaut-header {
+      background-image: url("/images/hero/hero-poster.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .nvs-astronaut-video { display: none; }
+
     .nvs-liquid-cta,
     .nvs-liquid-cta::after {
       transition: none;

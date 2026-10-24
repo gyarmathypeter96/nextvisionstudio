@@ -1,0 +1,69 @@
+---
+interface Props {
+  controls: string;
+  playLabel: string;
+  pauseLabel: string;
+}
+const { controls, playLabel, pauseLabel } = Astro.props;
+---
+
+<button class="motion-toggle" type="button" aria-controls={controls} data-motion-toggle data-play-label={playLabel} data-pause-label={pauseLabel} hidden>
+  <span data-motion-label>{playLabel}</span>
+</button>
+
+<script>
+  const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll<HTMLElement>("[data-background-motion]").forEach((section) => {
+    const button = section.querySelector<HTMLButtonElement>("[data-motion-toggle]");
+    const label = button?.querySelector<HTMLElement>("[data-motion-label]");
+    if (!button || !label) return;
+    const video = section.querySelector<HTMLVideoElement>("video");
+    let userPaused = false;
+    let revision = 0;
+
+    const updateLabel = () => {
+      const paused = video ? video.paused : section.dataset.motionPaused !== "false";
+      label.textContent = (paused ? button.dataset.playLabel : button.dataset.pauseLabel) || "";
+    };
+
+    const sync = () => {
+      const attempt = ++revision;
+      const play = !preference.matches && !userPaused && !document.hidden;
+      section.dataset.motionPaused = String(!play);
+      section.dataset.motionReady = "true";
+      // Reduced-motion visitors get a static background without a redundant control.
+      button.hidden = preference.matches;
+      if (video) {
+        if (play) {
+          video.play().catch(() => {
+            // A superseded play request can reject when the tab or preference changes.
+            if (attempt !== revision) return;
+            userPaused = true;
+            sync();
+          });
+        } else {
+          video.pause();
+        }
+      }
+      updateLabel();
+    };
+
+    button.addEventListener("click", () => {
+      userPaused = video ? !video.paused : section.dataset.motionPaused === "false";
+      sync();
+    });
+    video?.addEventListener("play", updateLabel);
+    video?.addEventListener("pause", updateLabel);
+    preference.addEventListener("change", sync);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+  });
+</script>
+
+<style>
+  .motion-toggle { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 10px 16px; border: 1px solid #8c9aa5; border-radius: 999px; background: #111; color: #fff; font: inherit; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; }
+  .motion-toggle[hidden] { display: none; }
+  .motion-toggle:hover { background: #26313a; }
+  .motion-toggle:focus-visible { outline: 3px solid #cfeaff; outline-offset: 4px; }
+</style>
