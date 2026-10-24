@@ -55,7 +55,7 @@ Our [VentSolve case study](/case-studies/ventsolve-content-production/) shows pu
 
 ## Send each supplier the same brief
 
-You can use this short checklist when requesting proposals:
+A brief is easier to write after you have planned the video. Our [guide to planning a business video production](/blog/business-video-production-planning-dublin/) covers the message, shot list and distribution. You can then use this short checklist when requesting proposals:
 
 1. The service, product or event being filmed.
 2. The audience and what the viewer should do afterwards.
