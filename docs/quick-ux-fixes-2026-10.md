@@ -13,13 +13,17 @@ The homepage's looping decorative video and client-logo animation had no pause c
 
 Google Ads campaigns are currently paused and are planned for later use. Tracking code and GTM configuration are retained; this change does not start campaigns or resolve the separate Ads conversion diagnostic. Verify conversion delivery before campaign launch.
 
+The existing CI dependency audit also flagged three transitive dependencies. The lockfile updates only `undici` 8.11.0 → 8.12.3, `vite` 8.1.4 → 8.1.6 and `zod` 4.6.5 → 4.6.7, within the existing Astro dependency ranges. The Astro version and dependency manifest are unchanged. A clean install and audit pass with zero reported vulnerabilities.
+
 ## Validation
 
 - `npm run build`
+- `npm ci` and `npm audit --audit-level=high` — zero reported vulnerabilities
 - `npm run check:indexability` — 37 HTML pages
 - `npm run check:service-content`
 - `npm run check:measurement` — 29 tests
 - `npm run check:motion` — 6 tests, executing the actual shipped controller offline
+- The motion regressions also run in Website CI.
 - Impeccable source detector over all six changed Astro components/pages — no findings
 - Production-build browser checks at 1280px, 390px and 320px: no document overflow; video and logo pause/resume work, including Enter/Space activation; package selection carries into Step 2; confirmation copy/noindex verified; no observed browser warnings/errors.
 
