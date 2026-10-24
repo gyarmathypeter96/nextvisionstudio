@@ -17,7 +17,7 @@ keywords:
 
 Choose a Content Day when you need several short videos around your business, products or customer questions. Choose a Business Video when you need one clear explanation of your company or service for a website, proposal or sales conversation.
 
-You can combine them when the filming plan allows it. The finished video list must be agreed before the shoot, because a full website film and a batch of short social videos need different preparation and editing time.
+You can combine them when the filming plan allows it. If you are still deciding what the videos should do, read [how to plan a business video production](/blog/business-video-production-planning-dublin/) first. The finished video list must be agreed before the shoot, because a full website film and a batch of short social videos need different preparation and editing time.
 
 [Compare NextVision’s Content Day and Business Video options](/videography-dublin/#video-offers).
 

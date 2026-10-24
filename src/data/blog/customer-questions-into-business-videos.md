@@ -62,7 +62,7 @@ A [planned Content Day](/short-form-video-production-dublin/) fits a defined bat
 
 ## Decide what the viewer should do after watching
 
-A service video can sit beside the relevant website enquiry form. A short social video may ask the viewer to visit the service page or send a message. Give each video a next step that matches what it explains.
+A service video can sit beside the relevant website enquiry form. A short social video may ask the viewer to visit the service page or send a message. Give each video a next step that matches what it explains. Our guide to [planning a business video production](/blog/business-video-production-planning-dublin/) shows how to write that step into the brief before filming.
 
 Before quoting a new project, we need to know where the content will be used, who can appear and the date it is needed. That determines the filming plan and edits more usefully than choosing a camera first.
 
