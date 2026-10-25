@@ -1,0 +1,26 @@
+name: Publish scheduled blog articles
+
+on:
+  schedule:
+    - cron: "15 0 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the Vercel deploy hook
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "::error::Add the VERCEL_DEPLOY_HOOK_URL repository secret to enable scheduled blog publication."
+            exit 1
+          fi
+      - name: Build the current scheduled content on Vercel
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: curl --silent --show-error --fail-with-body --request POST "$VERCEL_DEPLOY_HOOK_URL"

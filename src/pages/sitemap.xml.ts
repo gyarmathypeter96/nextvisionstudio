@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { isBlogPostPublished } from "../lib/blogPublication";
 import { SITE_URL } from "../config/site";
 
 // Every .astro page in src/pages is discovered automatically, so a new page
@@ -68,7 +69,7 @@ export const GET: APIRoute = async () => {
     .filter((path) => !noindexRoutes.has(path))
     .map((path) => ({ path, lastmod: lastModified[path] }));
 
-  const posts = await getCollection("blog");
+  const posts = (await getCollection("blog")).filter((post) => isBlogPostPublished(post.data));
   const blogRoutes = posts.map((post) => ({
     path: `blog/${post.id}/`,
     lastmod: formatDate(post.data.updatedDate ?? post.data.pubDate),

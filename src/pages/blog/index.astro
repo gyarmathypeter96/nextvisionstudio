@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isBlogPostPublished } from "../../lib/blogPublication";
 
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).filter((post) => isBlogPostPublished(post.data));
 const guides = [
   ...posts.map((post) => ({
     href: `/blog/${post.id}/`,
