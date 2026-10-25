@@ -191,4 +191,8 @@ A good commercial photographer should be able to explain why an image is being c
 
 Book the agreed image set through our [commercial photography service in Dublin](/photography-dublin/). If motion is needed to explain the product, use the [product video cost guide](/blog/product-video-cost-ireland/) and plan a [short-form video batch](/short-form-video-production-dublin/) alongside the stills. A recurring requirement can fit [monthly content production](/social-media-content-creation-dublin/). Our [Malahide filming guide](/videographer-malahide/) includes preparation questions for customer-facing premises.
 
+## A combined video and image delivery
+
+The [Amber Oxygen Therapy project](/case-studies/amber-oxygen-therapy-video-production/) delivered six images alongside twelve short videos. For a similar shoot, list the required photographs separately from the video subjects so both are planned. The image count in that project is a specific delivery, not an automatic inclusion in every video package.
+
 [Plan a commercial photography shoot for your Dublin business](/photography-dublin/#landing-contact).

@@ -53,4 +53,8 @@ Send your website, the film’s purpose, likely speakers, filming location and p
 
 NextVision serves businesses across Dublin and North Dublin. See filming arrangements in [Swords](/videographer-swords/), [Malahide](/videographer-malahide/) and [Balbriggan](/videographer-balbriggan/). Location and travel are confirmed in your quote.
 
+## Budget around the number of explanations
+
+The [Balbriggan Braces production](/case-studies/balbriggan-braces-dental-videos/) involved twelve longer videos and sixteen shorts, organised by speaker and topic. The [Perfect Clean project](/case-studies/perfect-clean-video-advertising/) focused on owner-led advertising creative and the work process. Neither client's fee is disclosed here. The comparison is about editing scope: agree what must be explained, who is speaking and the actual finished video list.
+
 [Discuss a corporate video with a clear filming and editing scope](/corporate-video-production-dublin/#contact-form)

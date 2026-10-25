@@ -78,4 +78,8 @@ If you want to judge whether this approach suits your business, watch the exampl
 
 A detailed explanation can fit [corporate video production in Dublin](/corporate-video-production-dublin/), while individual answers can become [short-form videos](/short-form-video-production-dublin/). For a regular series, use [monthly social content production](/social-media-content-creation-dublin/). If you want the new enquiries organised after publication, explore [CRM and lead automation](/crm-lead-automation-dublin/). First compare the [filming and editing budget](/blog/corporate-video-cost-dublin/) for the actual output list.
 
+## A dental series with a longer and a shorter answer
+
+The [Balbriggan Braces patient-education project](/case-studies/balbriggan-braces-dental-videos/) included twelve longer videos and sixteen short edits. Subjects such as aligners, retainers and implants were kept identifiable in the handover. The useful decision was which questions needed a fuller explanation and which could stand alone as short pieces. The [Amber Oxygen Therapy series](/case-studies/amber-oxygen-therapy-video-production/) offers a different example, with separate short videos introducing different aspects of the business.
+
 [Plan a video around your business](/videography-dublin/#landing-contact)

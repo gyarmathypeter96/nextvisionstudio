@@ -1,14 +1,19 @@
+import { clientCaseStudyMedia } from "./clientCaseStudyMedia";
+
 export interface CaseStudySummary {
   client: string;
   title: string;
   location: string;
   href: string;
-  image: string;
+  image?: string;
   alt: string;
 }
 
 // Shared by the case study index and the "more case studies" links on each project.
 export const caseStudies: CaseStudySummary[] = [
+  { client: "Amber Oxygen Therapy", title: "Amber Oxygen Therapy: A Short-Form Video Series", location: "On-location content production", href: "/case-studies/amber-oxygen-therapy-video-production/", image: clientCaseStudyMedia.amber.hero?.src, alt: clientCaseStudyMedia.amber.hero?.alt ?? "" },
+  { client: "Balbriggan Braces", title: "Balbriggan Braces: Patient Education in Long and Short Form", location: "Balbriggan, County Dublin", href: "/case-studies/balbriggan-braces-dental-videos/", image: clientCaseStudyMedia.braces.hero?.src, alt: clientCaseStudyMedia.braces.hero?.alt ?? "" },
+  { client: "Perfect Clean", title: "Perfect Clean: The Work, the Owner and the Customer", location: "Cleaning business video production", href: "/case-studies/perfect-clean-video-advertising/", image: clientCaseStudyMedia.perfectClean.hero?.src, alt: clientCaseStudyMedia.perfectClean.hero?.alt ?? "" },
   { client: "Gut Fest", title: "Gut Fest Event Videography Dublin", location: "Grand Canal Dock, Dublin", href: "/case-studies/gut-fest-event-videography-dublin/", image: "/images/portfolio/JVA_WxYY3p0.webp", alt: "Gut Fest event videography in Dublin" },
   { client: "The Macaron Boutique", title: "The Macaron Boutique Product Video", location: "Alicante, Spain", href: "/case-studies/macaron-boutique-product-video/", image: "/images/portfolio/GTzSrbR4-k4.webp", alt: "The Macaron Boutique product video" },
   { client: "Leroy's Barking World", title: "Leroy's Barking World Social Content", location: "Blessington, County Wicklow", href: "/case-studies/leroys-barking-world-social-content/", image: "/images/portfolio/53-_kK95Eoc.webp", alt: "Leroy's Barking World social media content" },

@@ -244,4 +244,8 @@ You do not need a finished script. A good producer should turn this information 
 
 A one-off interview or service explanation belongs in a [corporate video production brief](/corporate-video-production-dublin/). A batch for Reels and TikTok fits [short-form video production](/short-form-video-production-dublin/); a continuing programme fits [monthly social media content](/social-media-content-creation-dublin/). Compare the [corporate video cost breakdown](/blog/corporate-video-cost-dublin/) before requesting a quote. For a nearby shoot, see our [Swords filming arrangements](/videographer-swords/).
 
+## Plan the speaker and the supporting work together
+
+In the [Perfect Clean owner-led advertising project](/case-studies/perfect-clean-video-advertising/), the owner spoke while the creative also showed the cleaning work process. The message centred on personal customer attention. A filming brief can start with that same pairing: what the speaker needs to explain and which part of the work makes it visible. For a larger topic list, the [Balbriggan Braces video collection](/case-studies/balbriggan-braces-dental-videos/) shows the difference between longer subject-based videos and shorter individual answers.
+
 [Plan a business video production that keeps working after launch](/videography-dublin/#landing-contact).

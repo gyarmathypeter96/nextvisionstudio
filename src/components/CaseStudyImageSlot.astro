@@ -1,0 +1,18 @@
+---
+import type { CaseStudyImage } from "../data/clientCaseStudyMedia";
+interface Props { image?: CaseStudyImage; label: string; note: string; assetKey: string }
+const { image, label, note, assetKey } = Astro.props;
+---
+<figure class="project-image-slot" data-case-media-slot={assetKey}>
+  {image ? <><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />{image.caption && <figcaption>{image.caption}</figcaption>}</>
+  : <div><strong>{label}</strong><p>{note}</p></div>}
+</figure>
+<style>
+  figure { margin: 42px 0; }
+  figure > div { display: grid; min-height: 210px; align-content: center; padding: 28px; border: 1px dashed rgba(185,223,255,.35); background: #171b1f; }
+  strong { color: #b9dfff; font-size: 17px; }
+  p, figcaption { color: rgba(255,255,255,.72); font-size: 15px; line-height: 1.7; }
+  p { margin-bottom: 0; }
+  img { display: block; width: 100%; height: auto; }
+  figcaption { margin-top: 12px; }
+</style>

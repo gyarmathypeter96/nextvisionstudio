@@ -72,4 +72,8 @@ Tell us what you sell, where the videos will appear and when you need them. Incl
 
 Compare [corporate video production costs](/blog/corporate-video-cost-dublin/) when one main explanation is the priority. For a product campaign, the [product video cost guide](/blog/product-video-cost-ireland/) separates a defined advertising package from a larger demonstration film. For live coverage, our [event videographer service](/event-videographer-dublin/) needs a venue timetable and final edit list. See [filming in Balbriggan](/videographer-balbriggan/) for a local production-planning example.
 
+## Three different shapes of client delivery
+
+The [Amber Oxygen Therapy production batch](/case-studies/amber-oxygen-therapy-video-production/) comprised twelve short videos and six images. [Balbriggan Braces](/case-studies/balbriggan-braces-dental-videos/) received a longer educational collection alongside sixteen short edits. The [Perfect Clean advertising creative](/case-studies/perfect-clean-video-advertising/) connected the owner, the work process and the customer-focused message. These are different content jobs, so compare the required outputs before choosing a filming format.
+
 [Get a plan for your content day or business video](/videography-dublin/#landing-contact)

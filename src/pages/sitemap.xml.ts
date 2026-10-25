@@ -13,6 +13,10 @@ const noindexRoutes = new Set([
   "videography-dublin/",
   "website-design-quote/",
   "website-design-quote/thanks/",
+  // Private working drafts: enable indexability only when Peter approves release.
+  "case-studies/amber-oxygen-therapy-video-production/",
+  "case-studies/balbriggan-braces-dental-videos/",
+  "case-studies/perfect-clean-video-advertising/",
 ]);
 
 // Last meaningful content update per route. Routes without an entry are still

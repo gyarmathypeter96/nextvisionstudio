@@ -1,10 +1,13 @@
 ---
 import { localAreas } from "../data/serviceAreas";
-interface Props { topic?: "video" | "photo" | "digital" }
-const { topic = "video" } = Astro.props;
+interface Props { topic?: "video" | "photo" | "digital"; showClientCases?: boolean }
+const { topic = "video", showClientCases = true } = Astro.props;
 ---
 <section class="service-resources" aria-label="Related planning guides and service areas">
   <h2>Plan the scope before booking</h2>
+  {showClientCases && (topic === "video" ? <p>See how the scope changes in actual client work: <a href="/case-studies/balbriggan-braces-dental-videos/">longer explanations and short patient-education videos for Balbriggan Braces</a>, a <a href="/case-studies/amber-oxygen-therapy-video-production/">twelve-video series with images for Amber Oxygen Therapy</a>, and <a href="/case-studies/perfect-clean-video-advertising/">owner-led advertising creative for Perfect Clean</a>.</p>
+  : topic === "photo" ? <p>The <a href="/case-studies/amber-oxygen-therapy-video-production/">Amber Oxygen Therapy video and photography project</a> combined twelve short videos with six images in one delivery. The agreed still-image list should be part of a combined shoot brief.</p>
+  : <p>The <a href="/case-studies/perfect-clean-video-advertising/">Perfect Clean advertising creative</a> shows the production side of a campaign: the work process, the owner speaking and a customer-focused message.</p>)}
   {topic === "photo" ? <p>Prepare the <a href="/blog/product-photography-shot-list-dublin/">product photography shot list</a> or a <a href="/blog/commercial-photography-shoot-planning-dublin/">commercial photo shoot plan</a>. If your product also needs a demonstration, compare the <a href="/blog/product-video-cost-ireland/">product video budget</a> and <a href="/short-form-video-production-dublin/">short-form production service</a>.</p>
   : topic === "digital" ? <p>Connect the campaign to the actual production: choose <a href="/short-form-video-production-dublin/">short-form video</a>, <a href="/social-media-content-creation-dublin/">monthly social content</a> or a <a href="/corporate-video-production-dublin/">business film</a>. Compare the <a href="/how-much-does-a-videographer-cost-in-dublin/">published videography prices</a> and keep production, publishing and advertising scope clear.</p>
   : <p>Compare <a href="/blog/corporate-video-cost-dublin/">corporate video costs in Dublin</a>, <a href="/blog/product-video-cost-ireland/">product video production costs</a> and <a href="/blog/event-videographer-prices-dublin/">event videographer prices</a>. Use the <a href="/blog/business-video-production-planning-dublin/">business video planning guide</a> and <a href="/blog/compare-business-video-quotes/">quote comparison checklist</a> to agree the actual deliverables.</p>}

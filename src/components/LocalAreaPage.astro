@@ -18,6 +18,7 @@ const schema = { "@context": "https://schema.org", "@type": "Service", "@id": `$
       <a class="button" href="#contact-form">Plan your shoot in {area.name}</a>
     </header>
     <div class="local-content">
+      {area.name === "Balbriggan" && <section><h2>A video project for a Balbriggan practice</h2><p>The <a href="/case-studies/balbriggan-braces-dental-videos/">Balbriggan Braces dental video project</a> brought together twelve longer videos and sixteen short edits. The subjects covered orthodontic and implant questions, with the longer collection organised by speaker. It is a local example of planning several explanations within one defined production.</p></section>}
       {area.sections.map((section) => <section><h2>{section.title}</h2>{section.paragraphs.map((text) => <p>{text}</p>)}</section>)}
       <figure><a href={area.caseHref}><img src={area.caseImage} alt={area.caseAlt} width="640" height="360" loading="lazy" decoding="async" /></a><figcaption><a href={area.caseHref}>{area.caseLabel}</a></figcaption></figure>
       <section><h2>Choose the right video production service</h2><p>For one main explanation, explore <a href="/corporate-video-production-dublin/">corporate and business video production</a>. For a launch or a defined vertical batch, use <a href="/short-form-video-production-dublin/">short-form video production</a>. For regular filming and editing, compare <a href="/social-media-content-creation-dublin/">monthly social media content</a>.</p>

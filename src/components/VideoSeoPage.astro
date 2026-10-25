@@ -98,7 +98,7 @@ const schema = {
     </nav>
   </section>
 
-  <ServiceResources />
+  <ServiceResources showClientCases={page.slug !== "event-videographer-dublin"} />
   <ContactForm serviceKey={service?.key} source={page.slug} />
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </main>
