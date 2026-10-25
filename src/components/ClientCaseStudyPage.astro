@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { BUSINESS_ID, FOUNDER_ID, SITE_URL } from "../config/site";
+import { caseStudies } from "../data/caseStudies";
+import type { CaseStudyImage } from "../data/clientCaseStudyMedia";
+
+interface Props {
+  client: string;
+  title: string;
+  metaTitle: string;
+  description: string;
+  intro: string;
+  service: string;
+  location?: string;
+  hero: CaseStudyImage;
+  serviceHref: string;
+  serviceLabel: string;
+  previewOnly?: boolean;
+}
+const { client, title, metaTitle, description, intro, service, location, hero, serviceHref, serviceLabel, previewOnly = true } = Astro.props;
+const canonical = `${SITE_URL}${Astro.url.pathname}`;
+const clientRoutes = ["/case-studies/amber-oxygen-therapy-video-production/", "/case-studies/balbriggan-braces-dental-videos/", "/case-studies/perfect-clean-video-advertising/"];
+const related = caseStudies.filter((study) => clientRoutes.includes(study.href) && study.href !== Astro.url.pathname);
+const article = {
+  "@context": "https://schema.org", "@type": "Article", headline: title, description,
+  image: `${SITE_URL}${hero.src}`, mainEntityOfPage: canonical,
+  author: { "@id": FOUNDER_ID }, publisher: { "@id": BUSINESS_ID }, about: client,
+  ...(location ? { locationCreated: { "@type": "Place", name: location } } : {}),
+};
+---
+<BaseLayout title={metaTitle} description={description} canonical={canonical} ogImage={hero.src} preloadImage={hero.src} noindex={previewOnly} followLinks={previewOnly}>
+  <main class="client-study">
+    <article>
+      <header class="client-hero">
+        <div class="client-hero__copy">
+          <nav aria-label="Project navigation"><a href="/case-studies/">All case studies</a>{previewOnly && <span>Draft preview</span>}</nav>
+          <h1>{title}</h1>
+          <p class="client-hero__intro">{intro}</p>
+          <p class="client-hero__scope">{service}{location && <> · {location}</>}</p>
+          <a class="client-button" href="/contact/#contact-form" data-cta-placement="client-case-study-hero">Plan a similar shoot</a>
+        </div>
+        <figure class="client-hero__media">
+          <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />
+          {hero.caption && <figcaption>{hero.caption}</figcaption>}
+        </figure>
+      </header>
+      <div class="client-story"><slot /></div>
+    </article>
+
+    <section class="client-next" aria-labelledby="client-next-title">
+      <h2 id="client-next-title">Have a similar project in mind?</h2>
+      <p>Send the subject, filming location and where you want to use the finished videos.</p>
+      <div><a class="client-button" href="/contact/#contact-form" data-cta-placement="client-case-study-end">Discuss your project</a><a class="client-service-link" href={serviceHref}>{serviceLabel}</a></div>
+    </section>
+
+    <section class="client-related" aria-labelledby="client-related-title">
+      <h2 id="client-related-title">More client work</h2>
+      <div class="client-related__grid">
+        {related.map((study) => <a href={study.href}>
+          {study.image && <img src={study.image} alt={study.alt} width="800" height="600" loading="lazy" decoding="async" />}
+          <h3>{study.title}</h3>
+        </a>)}
+      </div>
+    </section>
+    <script type="application/ld+json" set:html={JSON.stringify(article)} />
+  </main>
+</BaseLayout>
+
+<style>
+  .client-study, .client-study * { box-sizing: border-box; }
+  .client-study { background: #111; color: #fff; padding: 144px 24px 96px; }
+  .client-hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; gap: 72px; width: min(100%,1120px); margin: 0 auto 80px; }
+  .client-hero nav { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 32px; font-size: 13px; }
+  .client-hero nav a { color: #cfeaff; text-underline-offset: 4px; }
+  .client-hero nav span { color: #b6b6b6; }
+  h1 { margin: 0; font-size: clamp(36px,4.4vw,60px); line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
+  .client-hero__intro { margin: 26px 0 20px; color: #ddd; font-size: 20px; line-height: 1.65; }
+  .client-hero__scope { margin: 0 0 30px; color: #b6b6b6; font-size: 14px; line-height: 1.6; }
+  .client-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 13px 22px; border-radius: 7px; background: #cfeaff; color: #111; font-size: 14px; font-weight: 750; text-decoration: none; transition: background-color .15s ease; }
+  .client-button:hover { background: #fff; }
+  figure { margin: 0; }
+  .client-hero__media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: 10px; }
+  figcaption { margin-top: 12px; color: #b6b6b6; font-size: 12px; line-height: 1.6; }
+  .client-story { width: min(100%,70ch); margin: 0 auto; font-size: 18px; }
+  .client-story :global(section) { margin-top: 48px; }
+  .client-story :global(h2), .client-next h2, .client-related h2 { margin: 0 0 20px; font-size: clamp(27px,3vw,36px); line-height: 1.18; letter-spacing: -.015em; text-wrap: balance; }
+  .client-story :global(h3) { margin: 28px 0 10px; font-size: 21px; line-height: 1.35; }
+  .client-story :global(p), .client-story :global(li) { color: #d1d1d1; font-size: 18px; line-height: 1.8; }
+  .client-story :global(p) { margin: 0 0 20px; }
+  .client-story :global(ul) { padding-left: 22px; }
+  .client-story :global(li) { padding-left: 3px; margin-bottom: 10px; }
+  .client-story :global(a), .client-service-link { color: #cfeaff; text-underline-offset: 4px; }
+  .client-story :global(.client-image-pair) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin: 36px 0 44px; }
+  .client-story :global(.client-image-pair figure) { margin: 0; }
+  .client-story :global(.client-image-pair img) { border-radius: 8px; }
+  .client-next { width: min(100%,740px); margin: 56px auto 0; padding-top: 36px; border-top: 1px solid #333; }
+  .client-next p { max-width: 60ch; color: #d1d1d1; font-size: 17px; line-height: 1.75; margin: 0 0 24px; }
+  .client-next > div { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+  .client-service-link { font-size: 15px; }
+  .client-related { width: min(100%,1120px); margin: 80px auto 0; }
+  .client-related__grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px; }
+  .client-related__grid a { color: #fff; text-decoration: none; }
+  .client-related img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 35%; border-radius: 8px; }
+  .client-related h3 { margin: 16px 0 0; font-size: 21px; line-height: 1.35; }
+  a:focus-visible, .client-story :global(a:focus-visible) { outline: 3px solid #cfeaff; outline-offset: 5px; border-radius: 3px; }
+  .client-study ::selection { background: #cfeaff; color: #111; }
+  @media(max-width:900px) { .client-hero { gap: 40px; } }
+  @media(max-width:700px) {
+    .client-study { padding: 122px 16px 64px; }
+    .client-hero { grid-template-columns: minmax(0,1fr); gap: 32px; margin-bottom: 44px; }
+    .client-hero nav { margin-bottom: 24px; }
+    h1 { font-size: clamp(34px,8.8vw,46px); }
+    .client-hero__intro { font-size: 18px; margin-top: 20px; }
+    .client-hero__scope { margin-bottom: 24px; }
+    .client-hero__media img { max-height: 560px; }
+    .client-story :global(p), .client-story :global(li) { font-size: 17px; line-height: 1.75; }
+    .client-story :global(.client-image-pair) { gap: 16px; margin: 28px 0 36px; }
+    .client-related { margin-top: 56px; }
+    .client-related__grid { gap: 18px; }
+    .client-related h3 { font-size: 17px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .client-button { transition: none; } }
+</style>

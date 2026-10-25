@@ -1,82 +1,51 @@
 ---
-import CaseStudyPage from "../../components/CaseStudyPage.astro";
+import ClientCaseStudyPage from "../../components/ClientCaseStudyPage.astro";
 import CaseStudyImageSlot from "../../components/CaseStudyImageSlot.astro";
 import { clientCaseStudyMedia } from "../../data/clientCaseStudyMedia";
 const media = clientCaseStudyMedia.braces;
 ---
-
-<CaseStudyPage
+<ClientCaseStudyPage
   previewOnly={true}
-  heroImage={media.hero?.src}
-  heroAlt={media.hero?.alt}
-  heroWidth={media.hero?.width}
-  heroHeight={media.hero?.height}
   client="Balbriggan Braces"
   title="Balbriggan Braces: 28 Patient-Education Videos"
   metaTitle="Balbriggan Braces Dental Video Case Study | NextVision"
   description="A dental video production project in Balbriggan: twelve longer videos and sixteen short edits covering orthodontic and implant topics, organised by speaker and subject."
+  intro="Twelve longer explanations and sixteen short edits, covering orthodontic and implant questions with three speakers."
+  service="Patient-education video production"
   location="Balbriggan, County Dublin"
-  date="Delivered October 2026"
-  service="Patient-education video production and short edits"
-  challenge="The project covered several speakers and a wide range of dental questions. It needed longer explanations that kept each subject together, alongside shorter pieces focused on one question at a time. The finished material also had to be organised so the practice could find the right video without searching through every export."
-  deliverables={[
-    "Twelve longer videos grouped by three speakers",
-    "Sixteen final short-form edits in a separate collection",
-    "Subject-based videos covering aligners, braces, retainers and implants",
-    "A named handover structure separating longer videos from shorts",
-  ]}
-  production={[
-    "A subject-led series rather than one general practice introduction",
-    "Longer explanations and shorter question-led pieces",
-    "Consistent separation of speakers and topics in the delivery",
-    "A shared set of content for the practice to review and select from",
-  ]}
-  resultTitle="Twenty-eight videos, organised around the subject."
-  outcome="Twelve longer videos and sixteen short edits were uploaded and checked in the handover. The longer collection was grouped by speaker; the short edits were placed together with descriptive filenames. The practice received a defined set of material for review."
-  links={[
-    { label: "Video production in Balbriggan", href: "/videographer-balbriggan/" },
-    { label: "Business explainers and interview-led films", href: "/corporate-video-production-dublin/" },
-    { label: "Short-form video production", href: "/short-form-video-production-dublin/" },
-    { label: "Corporate video costs and editing scope", href: "/blog/corporate-video-cost-dublin/" },
-    { label: "Planning a business video shoot", href: "/blog/business-video-production-planning-dublin/" },
-  ]}
+  hero={media.hero}
+  serviceHref="/corporate-video-production-dublin/"
+  serviceLabel="Explore business video production"
 >
-  <section id="the-shape-of-the-series">
-    <h2>A library of explanations, with two lengths of answer</h2>
-    <p>The Balbriggan Braces project contains twelve longer videos and sixteen short edits. That split matters more than the total. A longer piece has space to keep a subject together. A short video gives one question a clear focus without requiring the viewer to work through a broader explanation.</p>
-    <p>The longer collection was delivered in three speaker groups: five videos with James, three with Jenny and four with Rebecca. The subjects range from aligners and retainers to orthodontic appliances and implant care. The structure gives the practice several ways to find a relevant piece: by the person speaking, the topic or the length of the video.</p>
-    <p>For a practice considering a similar project, this is a different brief from a single welcome film. It sits between <a href="/corporate-video-production-dublin/">interview-led business video production</a> and a <a href="/short-form-video-production-dublin/">series of focused short videos</a>. The longer and shorter pieces should each be listed in the proposal.</p>
+  <section id="the-project">
+    <h2>Long explanations and focused short videos</h2>
+    <p>The Balbriggan Braces project covered a range of patient questions. The longer videos keep each subject together; the short edits give individual questions their own space.</p>
   </section>
 
-  <CaseStudyImageSlot image={media.detail} assetKey="braces:detail" label="Image position · The people behind the explanations" note="A selected practice photograph or approved frame of a speaker will sit here. No patient or treatment image is included at this stage." />
-
-  <section id="orthodontic-topics">
-    <h2>The orthodontic subjects were specific</h2>
-    <p>James's longer videos covered aligners, cleaning braces, wax and food, the orthodontic journey and retainers. Those are distinct subjects with their own questions. Someone looking for a retainer explanation should not have to search through a general introduction to every treatment offered by the practice.</p>
-    <p>The short collection includes more focused topics from that part of the project: an aligner routine, orthodontic wax, interdental brushes, hot drinks and aligners, retainer care and foods that can affect brackets. These are descriptions of the videos in the delivery, rather than care instructions on this page. The explanations belong to the practice's speakers and need to stay in their proper context.</p>
-    <p>Jenny's longer collection covered an expander, a face mask and a twin block. Short pieces addressed related individual questions, including crossbite and the handling of appliances. A recognisable topic in the title makes the difference between a usable content library and a folder of vaguely named files.</p>
+  <section id="the-topics">
+    <h2>Three speakers, distinct subjects</h2>
+    <ul>
+      <li><strong>James:</strong> five longer videos covering aligners, cleaning braces, wax and food, the orthodontic journey and retainers.</li>
+      <li><strong>Jenny:</strong> three longer videos about an expander, a face mask and a twin block.</li>
+      <li><strong>Rebecca:</strong> four longer videos covering dental implants, surgery, after-surgery information, and the implant crown and care.</li>
+    </ul>
+    <p>The short collection focuses on narrower topics, including an aligner routine, orthodontic wax, retainer care, crossbite and implant parts. The clinical explanations come from the practice's speakers.</p>
   </section>
 
-  <section id="implant-topics">
-    <h2>The implant material had its own sequence</h2>
-    <p>Rebecca's four longer videos covered dental implants, implant surgery, after-surgery information, and the implant crown and care. The short collection includes separate pieces about implant parts, care around implants, after-surgery information, night guards and the stages of the implant process.</p>
-    <p>Those subject boundaries give each piece a clear purpose. A short introduction to the parts of an implant is not the same as a longer explanation of the overall process. Keeping the two distinct helps the practice choose a video that fits the question being asked.</p>
-    <p>The production lesson is about organisation and communication. In the <a href="/blog/customer-questions-into-business-videos/">guide to turning customer questions into videos</a>, the same starting point applies to other businesses: name the question first, then decide how much explanation it needs. Here, the clinical information remains the practice's responsibility; the case study concerns how that information was presented in video.</p>
-  </section>
+  <div class="client-image-pair">
+    <CaseStudyImageSlot image={media.detail} assetKey="braces:detail" />
+    <CaseStudyImageSlot image={media.work} assetKey="braces:work" />
+  </div>
 
-  <CaseStudyImageSlot image={media.work} assetKey="braces:work" label="Image position · A longer explanation and its short counterpart" note="Two selected frames can later show the difference between the longer presentation and a short edit. Public video examples will be added only when the right files and links have been selected." />
+  <section id="the-edit">
+    <h2>Making the explanations visible</h2>
+    <p>The finished short videos combine the speakers with dental models, close-ups and on-screen graphics. In the aligner video, a timing graphic supports James's explanation. In the crossbite piece, a dental illustration sits alongside the demonstration.</p>
+    <p>This is the connection between <a href="/corporate-video-production-dublin/">a longer business explanation</a> and <a href="/short-form-video-production-dublin/">a focused short edit</a>: the subject stays clear, while the amount of detail changes with the format.</p>
+  </section>
 
   <section id="the-handover">
-    <h2>The handover was part of making the work useful</h2>
-    <p>The twelve longer videos were separated into named speaker folders. The sixteen final shorts were delivered together in their own folder. Each had a descriptive name identifying its subject. The upload was checked against the final local files, including the file count and sizes.</p>
-    <p>This is a practical detail, but it affects what happens after editing. A practice reviewing twenty-eight pieces needs to be able to identify the right one, compare related subjects and give feedback on a specific file. A clear handover reduces the amount of explanation needed just to locate the work.</p>
-    <p>The same consideration belongs in the original brief. Our <a href="/blog/business-video-production-planning-dublin/">business video planning guide</a> covers the preparation, while the <a href="/blog/compare-business-video-quotes/">quote comparison checklist</a> helps define the final video list, review rounds and delivery. The <a href="/blog/corporate-video-cost-dublin/">corporate video cost guide</a> explains why filming time alone does not describe the cost of a multi-edit project.</p>
+    <h2>A collection the practice can find its way around</h2>
+    <p>The twelve longer videos were delivered in named speaker folders. The shorts were kept together with descriptive filenames. The upload was checked against the final files before handover in October 2026.</p>
+    <p>For a similar project, start with the questions and the person best placed to explain each one. Our <a href="/blog/business-video-production-planning-dublin/">video planning guide</a> helps shape that list. This project also gives local businesses a concrete example of <a href="/videographer-balbriggan/">video production in Balbriggan</a>.</p>
   </section>
-
-  <section id="local-production">
-    <h2>A local example for businesses in Balbriggan</h2>
-    <p>This is a Balbriggan client project, with a specific set of educational material behind it. It gives businesses looking for <a href="/videographer-balbriggan/">video production in Balbriggan</a> a closer example of what a multi-topic brief can involve. The right comparison is the scope and organisation of the work, rather than assuming every local business needs twenty-eight videos.</p>
-    <p>The <a href="/case-studies/amber-oxygen-therapy-video-production/">Amber Oxygen Therapy project</a> uses a shorter social-first series with accompanying images. The <a href="/case-studies/perfect-clean-video-advertising/">Perfect Clean project</a> takes an advertising direction, built around the work and the owner. Each begins with the information a viewer needs, but the resulting video list is different.</p>
-    <p>If your organisation has several people answering recurring questions, start by collecting those subjects and identifying who should explain each one. Then <a href="/contact/#contact-form">send a brief for a planned video series</a>. The useful first decision is which subjects need a full explanation and which can stand alone as short pieces.</p>
-  </section>
-</CaseStudyPage>
+</ClientCaseStudyPage>

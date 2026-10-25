@@ -36,7 +36,6 @@ const indexSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(indexSchema)} />
   <main class="case-index">
     <section class="case-index__hero">
-      <p class="case-kicker">Selected work</p>
       <h1>Real projects. Clear decisions. Finished work that earns attention.</h1>
       <p>See how NextVision Studio approaches event videography, social content, product video and ongoing brand production for real clients.</p>
     </section>
@@ -46,7 +45,6 @@ const indexSchema = {
         <a class="case-index__item" href={project.href}>
           {project.image ? <img src={project.image} alt={project.alt} width="1280" height="720" loading="lazy" decoding="async" /> : <div class="case-index__media-pending"><span>Project preview</span><strong>{project.client}</strong><small>Selected image to follow</small></div>}
           <div class="case-index__copy">
-            <p>{project.client}</p>
             <h2>{project.title}</h2>
             <span>{project.location}</span>
             <strong>Read project</strong>
@@ -69,13 +67,13 @@ const indexSchema = {
   .case-index, .case-index * { box-sizing: border-box; }
   .case-index { background: #111111; color: #ffffff; }
   .case-index__hero, .case-index__grid, .case-index__cta { width: min(100% - 48px, 1180px); margin: 0 auto; }
-  .case-index__hero { padding: 120px 0 74px; }
+  .case-index__hero { padding: 132px 0 48px; }
   .case-kicker { margin: 0 0 18px; color: #b9dfff; font-size: 11px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
-  .case-index h1 { max-width: 880px; margin: 0; font-size: clamp(44px, 6vw, 82px); line-height: .98; letter-spacing: 0; }
+  .case-index h1 { max-width: 880px; margin: 0; font-size: clamp(36px, 5.2vw, 64px); line-height: 1.08; letter-spacing: -.025em; text-wrap: balance; }
   .case-index__hero > p:last-child { max-width: 620px; margin: 30px 0 0; color: rgba(255,255,255,.68); font-size: 19px; line-height: 1.65; }
   .case-index__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-bottom: 110px; }
   .case-index__item { display: block; color: inherit; text-decoration: none; border-top: 1px solid rgba(185,223,255,.18); }
-  .case-index__item img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-top: 24px; transition: transform 220ms ease; }
+  .case-index__item img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 30%; margin-top: 24px; border-radius: 8px; transition: transform 220ms ease; }
   .case-index__media-pending { display: flex; flex-direction: column; justify-content: center; aspect-ratio: 16 / 9; margin-top: 24px; padding: 28px; border: 1px dashed rgba(185,223,255,.35); background: #171b1f; }
   .case-index__media-pending span, .case-index__media-pending small { color: #b9dfff; font-size: 12px; }
   .case-index__media-pending strong { margin: 22px 0; font-size: clamp(26px,4vw,43px); line-height: 1.05; }

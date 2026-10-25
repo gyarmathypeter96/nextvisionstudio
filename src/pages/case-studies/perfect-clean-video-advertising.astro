@@ -1,80 +1,46 @@
 ---
-import CaseStudyPage from "../../components/CaseStudyPage.astro";
+import ClientCaseStudyPage from "../../components/ClientCaseStudyPage.astro";
 import CaseStudyImageSlot from "../../components/CaseStudyImageSlot.astro";
 import { clientCaseStudyMedia } from "../../data/clientCaseStudyMedia";
 const media = clientCaseStudyMedia.perfectClean;
 ---
-
-<CaseStudyPage
+<ClientCaseStudyPage
   previewOnly={true}
-  heroImage={media.hero?.src}
-  heroAlt={media.hero?.alt}
-  heroWidth={media.hero?.width}
-  heroHeight={media.hero?.height}
   client="Perfect Clean"
   title="Perfect Clean: Show the Work, Hear From the Owner"
   metaTitle="Perfect Clean Video Advertising Case Study | NextVision"
   description="Video advertising creative for Perfect Clean, combining the cleaning work process with the owner's explanation and a customer-focused message."
+  intro="Advertising creative built around the work process, the owner speaking and personal attention to the customer."
   service="Owner-led video and advertising creative"
-  challenge="The creative needed to make Perfect Clean's approach visible: show the work process, give the owner a voice and communicate that the customer receives personal attention. It had to work as advertising material, with a clear reason to consider the business."
-  deliverables={[
-    "Video creative used for advertising",
-    "Material showing the cleaning work process",
-    "The owner speaking about the business and its approach",
-    "A customer-focused message connecting the service to the person booking it",
-  ]}
-  production={[
-    "The work process as the visual subject",
-    "The owner's own explanation as a voice for the business",
-    "A clear relationship between the service and customer attention",
-    "Advertising creative with a specific business message",
-  ]}
-  resultTitle="Advertising material with a person and a process behind it."
-  outcome="The project produced video creative used in advertising for Perfect Clean. The central subjects were the work process, the owner's explanation and the attention given to each customer. This case study describes that creative work; it does not attach an unverified lead or revenue figure to it."
-  links={[
-    { label: "Short-form video and advertising creative", href: "/short-form-video-production-dublin/" },
-    { label: "Business films and owner-led explanations", href: "/corporate-video-production-dublin/" },
-    { label: "Google and Meta advertising services", href: "/google-ads-meta-ads-dublin/" },
-    { label: "Website design for business enquiries", href: "/webdesigner-dublin/" },
-    { label: "Planning the filming and editing scope", href: "/blog/corporate-video-cost-dublin/" },
-  ]}
+  hero={media.hero}
+  serviceHref="/short-form-video-production-dublin/"
+  serviceLabel="Explore advertising video production"
 >
-  <section id="customer-focus">
-    <h2>The customer was the point of the message</h2>
-    <p>For Perfect Clean, I filmed the work process and the owner speaking about the business. The videos were used as advertising creative. The message behind them was that the customer is a person who deserves attention, not just the next job on a list.</p>
-    <p>That gives the film a specific subject. It is not enough to say that a cleaning company works hard or cares about quality; a viewer needs something they can see and a person they can listen to. In this project, the cleaning work and the owner speaking supplied those two parts of the creative.</p>
-    <p>For another service business, that is a useful way to approach <a href="/corporate-video-production-dublin/">an owner-led business video</a>. Begin with the promise the business wants to explain. Then decide which part of the work can make that promise more concrete on screen.</p>
+  <section id="the-project">
+    <h2>A person behind the service</h2>
+    <p>For Perfect Clean, I filmed the work process and the owner speaking about the business. The videos were used as advertising creative.</p>
+    <p>The message centred on how the company treats its customers: each person should receive attention and feel that their needs have been understood. The owner gave that message a direct voice.</p>
   </section>
 
-  <CaseStudyImageSlot image={media.detail} assetKey="perfectClean:detail" label="Image position · The owner" note="A selected frame or photograph of the Perfect Clean owner will support this part of the story. The image will be supplied by Peter." />
-
-  <section id="the-owner-speaking">
-    <h2>The owner gave the business a voice</h2>
-    <p>The owner spoke in the videos. That matters because the message comes from someone representing the business directly. A potential customer can hear how the person behind the company describes the work, rather than having every point supplied by a caption or an outside narrator.</p>
-    <p>The content centred on customer focus. The useful relationship is between what the owner says and what the viewer sees of the work. The explanation gives the service a point of view; the process gives that explanation something visible to refer to.</p>
-    <p>Planning that relationship is part of the filming brief. The <a href="/blog/business-video-production-planning-dublin/">business video planning guide</a> sets out how to define the audience, message and supporting footage. If a business has several recurring questions to answer, the <a href="/blog/customer-questions-into-business-videos/">customer-question video guide</a> is a practical way to turn them into separate subjects.</p>
+  <section id="the-creative">
+    <h2>The owner and the work in the same story</h2>
+    <p>The owner speaks directly to camera in an office setting. The finished ads pair that explanation with supporting scenes and captions, keeping his message at the centre of the creative.</p>
   </section>
 
-  <section id="showing-the-process">
-    <h2>The work process gave the creative something to show</h2>
-    <p>The Perfect Clean videos showed the work process. For a service a customer cannot assess by looking at a product on a shelf, process footage can give the explanation a concrete setting. The subject becomes the work being carried out, rather than a general claim about the company.</p>
-    <p>This changes the kind of material worth planning. A business needs to identify the part of the job that helps a customer understand its approach. That might be a sequence, a detail or an explanation from the person doing the work. Which of those belongs in a film depends on the actual job and the message agreed for that production.</p>
-    <p>The <a href="/case-studies/ventsolve-content-production/">VentSolve content project</a> is another example of a service business needing to explain practical work. The subject is different, but the communication question is related: what does a potential customer need to understand before making an enquiry?</p>
+  <div class="client-image-pair">
+    <CaseStudyImageSlot image={media.detail} assetKey="perfectClean:detail" />
+    <CaseStudyImageSlot image={media.work} assetKey="perfectClean:work" />
+  </div>
+
+  <section id="advertising-use">
+    <h2>Made for advertising</h2>
+    <p>The videos were used to introduce Perfect Clean through paid creative. The production brief focused on the message, the owner and the work that could support the explanation.</p>
+    <p>For a similar project, <a href="/short-form-video-production-dublin/">short-form video production</a> defines the filming and finished edits. <a href="/google-ads-meta-ads-dublin/">Campaign management</a> covers how advertising is run. The two scopes can be planned together around a clear audience and next step.</p>
   </section>
 
-  <CaseStudyImageSlot image={media.work} assetKey="perfectClean:work" label="Image position · The work process" note="Selected Perfect Clean work photographs or approved frames will show the actual process. This space is reserved for that client's material." />
-
-  <section id="creative-for-advertising">
-    <h2>The videos were made to be used in advertising</h2>
-    <p>These were advertising creatives, so the owner and the work process had to communicate a reason to consider Perfect Clean. The customer-focused message connects those elements: who is speaking, what work is being shown and how the business wants a customer to feel about making contact.</p>
-    <p>A creative brief should name that job before listing camera shots. Our <a href="/short-form-video-production-dublin/">short-form video production service</a> covers focused video content, while <a href="/google-ads-meta-ads-dublin/">Google and Meta advertising management</a> covers a different part of the work. Producing an advert and operating a campaign are separate scopes, even when they support the same business goal.</p>
-    <p>The destination also needs to continue the message. A visitor should be able to find the service and the next step after the advert. For a new project, that can lead to a separate discussion about <a href="/webdesigner-dublin/">the business website</a> or <a href="/crm-lead-automation-dublin/">how new enquiries are handled</a>. Those are connected services, not extra deliverables being claimed for this video production.</p>
+  <section id="planning-a-similar-shoot">
+    <h2>Start with what your customer needs to hear</h2>
+    <p>Choose the question, who will answer it and which part of the work helps explain the answer. In this project, those choices connected the owner, the cleaning process and personal customer attention.</p>
+    <p>The <a href="/blog/customer-questions-into-business-videos/">customer-question guide</a> helps turn that starting point into a brief. For a more detailed introduction, explore <a href="/corporate-video-production-dublin/">an owner-led business film</a>.</p>
   </section>
-
-  <section id="defining-a-similar-project">
-    <h2>What to take into a similar filming brief</h2>
-    <p>Start with three things: the customer question, the person who can answer it and the work that makes the answer visible. For Perfect Clean, those parts came together around the owner, the cleaning process and personal customer attention.</p>
-    <p>If you need several messages over time, compare <a href="/social-media-content-creation-dublin/">a regular content production plan</a> with a one-off brief. Use the <a href="/blog/compare-business-video-quotes/">video quote checklist</a> to agree the number of edits, formats and review rounds. The <a href="/how-much-does-a-videographer-cost-in-dublin/">published videographer prices</a> are a starting point for discussing scope, rather than a disclosed price for the Perfect Clean project.</p>
-    <p>For other approaches, see the <a href="/case-studies/amber-oxygen-therapy-video-production/">Amber Oxygen Therapy short-video series</a> and the <a href="/case-studies/balbriggan-braces-dental-videos/">Balbriggan Braces long- and short-form education project</a>. To plan an owner-led advert for your business, <a href="/contact/#contact-form">send Peter the message and the work you want to show</a>.</p>
-  </section>
-</CaseStudyPage>
+</ClientCaseStudyPage>

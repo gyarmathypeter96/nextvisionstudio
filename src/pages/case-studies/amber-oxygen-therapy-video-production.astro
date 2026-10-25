@@ -1,80 +1,46 @@
 ---
-import CaseStudyPage from "../../components/CaseStudyPage.astro";
+import ClientCaseStudyPage from "../../components/ClientCaseStudyPage.astro";
 import CaseStudyImageSlot from "../../components/CaseStudyImageSlot.astro";
 import { clientCaseStudyMedia } from "../../data/clientCaseStudyMedia";
 const media = clientCaseStudyMedia.amber;
 ---
-
-<CaseStudyPage
+<ClientCaseStudyPage
   previewOnly={true}
-  heroImage={media.hero?.src}
-  heroAlt={media.hero?.alt}
-  heroWidth={media.hero?.width}
-  heroHeight={media.hero?.height}
   client="Amber Oxygen Therapy"
   title="Amber Oxygen Therapy: A Short-Form Video Series"
   metaTitle="Amber Oxygen Therapy Video Case Study | NextVision Studio"
   description="A short-form video and photography project for Amber Oxygen Therapy: twelve edited videos, six images and a series built around different questions and details."
-  date="October 2026 delivery"
+  intro="Twelve short videos and six photographs, introducing the space, the experience and the details at Amber Oxygen Therapy."
   service="Short-form video and photography"
-  challenge="An oxygen therapy business has a lot to explain before someone recognises what they are looking at. The project needed a set of short videos that could introduce Amber from several angles, rather than relying on one film to cover the entire experience."
-  deliverables={[
-    "Twelve short-form videos delivered as a production batch",
-    "Six accompanying images",
-    "Separate edits including First Session, Look Inside and The Little Details",
-    "An Instagram-oriented edit set, with a main Reel and shorter pieces",
-  ]}
-  production={[
-    "A series of separate subjects within one client project",
-    "Short edits that can be understood without watching the whole set",
-    "Video and still-image outputs in the same handover",
-    "Different creative entry points for introducing the business",
-  ]}
-  resultTitle="A set of finished content, with room for different questions."
-  outcome="The delivered work comprised twelve short videos and six images. The useful result is a range of individual pieces Amber can select from, rather than one video that has to introduce every aspect of the business."
-  links={[
-    { label: "Short-form video production in Dublin", href: "/short-form-video-production-dublin/" },
-    { label: "Monthly video and social content", href: "/social-media-content-creation-dublin/" },
-    { label: "Commercial photography alongside video", href: "/photography-dublin/" },
-    { label: "Plan a business video shoot", href: "/blog/business-video-production-planning-dublin/" },
-    { label: "Published videographer prices", href: "/how-much-does-a-videographer-cost-in-dublin/" },
-  ]}
+  hero={media.hero}
+  serviceHref="/short-form-video-production-dublin/"
+  serviceLabel="Explore short-form production"
 >
-  <section id="a-series-with-separate-jobs">
-    <h2>One business does not mean one subject</h2>
-    <p>I delivered twelve short videos and six images for Amber Oxygen Therapy. The short videos had separate subjects, including a first session, a look inside and the details of the experience. That gave Amber several ways to introduce the business instead of relying on one broad overview.</p>
-    <p>The Amber delivery was a batch of twelve short videos with six images. Within that set, pieces titled <em>First Session</em>, <em>Look Inside</em> and <em>The Little Details</em> give the series recognisably different subjects. They are useful distinctions: an introduction, an invitation to look closer and a more focused observation about the business.</p>
-    <p>This is the practical reason to choose <a href="/short-form-video-production-dublin/">a planned short-form video shoot</a>. The output can cover several small questions instead of repeatedly cutting down the same broad introduction. Each piece needs a reason to exist on its own.</p>
+  <section id="the-project">
+    <h2>A closer look at the business</h2>
+    <p>The project brought together short videos and photographs for Amber's social content, covering several aspects of the business in one batch.</p>
+    <p>The photographs show the chamber interior, the seats and the surrounding details. They give someone seeing Amber for the first time a clear view of the setting.</p>
   </section>
 
-  <CaseStudyImageSlot image={media.detail} assetKey="amber:detail" label="Image position · The location" note="A selected Amber photograph or approved frame showing the space. The final image and its description will be added here." />
-
-  <section id="different-entry-points">
-    <h2>What the edit set tells us about the approach</h2>
-    <p>The series also includes pieces named <em>By the Numbers</em>, <em>Better Together</em>, <em>Watch the Pressure</em> and <em>Your Next Pause</em>. These titles take different routes into the same subject: a specific detail, a shared experience or a moment of attention. A business can have a consistent identity without every post beginning with the same sentence.</p>
-    <p>A subject such as a first session needs a clear introduction. A detail-led piece can be narrower. Giving those subjects their own edits leaves more room for the information that belongs in each one. It also makes selecting a video easier: choose the piece that matches the question or the message for that post.</p>
-    <p>The <a href="/blog/customer-questions-into-business-videos/">customer-question approach to business videos</a> is useful here. Start with a question someone might have before contacting the business, then keep the answer focused. A longer company introduction has a different job; that is covered by our <a href="/corporate-video-production-dublin/">business and corporate video production service</a>.</p>
+  <section id="the-series">
+    <h2>One subject in each edit</h2>
+    <p>The series includes <em>First Session</em>, <em>Look Inside</em> and <em>The Little Details</em>. Each has its own subject, so Amber can choose a piece that fits the message of a particular post.</p>
+    <p>Other edits take a more specific angle, including <em>By the Numbers</em>, <em>Watch the Pressure</em> and <em>Your Next Pause</em>. Together, they form a set of separate introductions and details the business can use over time.</p>
   </section>
 
-  <section id="video-and-images">
-    <h2>Six images alongside the twelve videos</h2>
-    <p>The images were part of the handover, not a replacement for the videos. Still photographs and short edits serve different needs. An image can introduce the space in a post, while a video can carry a sequence or a spoken explanation. Having both available gives the client more than one way to present the same business.</p>
-    <p>For a similar brief, the image list should be agreed alongside the video list. A room photograph, a portrait and a detailed close-up need different attention. Our <a href="/blog/commercial-photography-shoot-planning-dublin/">commercial shoot planning guide</a> explains what to prepare, while the <a href="/photography-dublin/">photography service</a> sets out how stills can fit into a separate or combined production.</p>
-    <p>The Amber package described here is this project's delivery. It should not be read as the contents of every NextVision booking. The video count, images, filming time and finished formats belong in the individual proposal.</p>
+  <div class="client-image-pair">
+    <CaseStudyImageSlot image={media.detail} assetKey="amber:detail" />
+    <CaseStudyImageSlot image={media.work} assetKey="amber:work" />
+  </div>
+
+  <section id="the-photographs">
+    <h2>Photographs to use alongside the videos</h2>
+    <p>The six images were part of the delivery. They provide still material for posts and give the business a consistent selection of photographs from the same project.</p>
+    <p>For a similar shoot, the <a href="/photography-dublin/">photography list</a> can be planned alongside the video subjects. Agreeing the image count and the kinds of shots needed keeps both parts of the production clear.</p>
   </section>
 
-  <CaseStudyImageSlot image={media.work} assetKey="amber:work" label="Image position · A detail from the series" note="A second approved photograph or frame can connect the written explanation to one of the finished pieces. No sample from another client is used." />
-
-  <section id="using-the-batch">
-    <h2>A production batch and a publishing plan are separate decisions</h2>
-    <p>Twelve finished videos create a choice of material. They do not determine a publishing schedule by themselves. The next decision is which subject belongs with the business's current message, what the accompanying copy needs to say and where the viewer can find more information.</p>
-    <p>A one-off batch can be enough for a specific period or introduction. If the business needs a continuing supply of new subjects, <a href="/social-media-content-creation-dublin/">monthly social content production</a> is a separate conversation. Filming, editing, publishing and managing an account each need a clear scope; they should not be assumed from the number of delivered files.</p>
-    <p>That distinction is also useful when comparing <a href="/blog/content-day-or-business-video/">a content day with a main business film</a>. Begin with what the viewer needs to understand, then decide whether it calls for several short pieces, a longer explanation or a combination.</p>
+  <section id="planning-a-similar-shoot">
+    <h2>Planning a similar shoot</h2>
+    <p>A defined batch suits a business introducing several subjects at once. A <a href="/social-media-content-creation-dublin/">regular content plan</a> can support recurring filming and new topics. The <a href="/blog/content-day-or-business-video/">content day and business video guide</a> explains the difference between a short-video batch and one main film.</p>
   </section>
-
-  <section id="related-projects">
-    <h2>How this connects to the other client work</h2>
-    <p>The <a href="/case-studies/balbriggan-braces-dental-videos/">Balbriggan Braces patient-education project</a> takes a different shape: longer subject-based videos alongside sixteen short edits. The <a href="/case-studies/perfect-clean-video-advertising/">Perfect Clean advertising project</a> centres on the owner, the work process and customer attention. They share a need for clear communication, but the finished content has different jobs.</p>
-    <p>For your own brief, send the business, the questions people ask and the places the content will appear. Use the <a href="/blog/compare-business-video-quotes/">video quote checklist</a> to compare the proposed deliverables, or <a href="/contact/#contact-form">discuss a video and photography project</a> with Peter.</p>
-  </section>
-</CaseStudyPage>
+</ClientCaseStudyPage>
