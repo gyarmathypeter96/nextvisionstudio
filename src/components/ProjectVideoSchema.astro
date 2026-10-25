@@ -1,0 +1,6 @@
+---
+import { projectVideoSchema } from "../data/projectVideos";
+interface Props { ids: string[] }
+const schemas = [...new Set(Astro.props.ids)].map(projectVideoSchema).filter(Boolean);
+---
+{schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}

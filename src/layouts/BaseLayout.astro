@@ -45,6 +45,20 @@ const socialImage = ogImage
   ? new URL(ogImage, SITE_URL).toString()
   : `${SITE_URL}/images/showreel/showreel-2025.webp`;
 
+const breadcrumbParents = Astro.url.pathname.startsWith("/blog/") && Astro.url.pathname !== "/blog/"
+  ? [{ name: "Blog", item: `${SITE_URL}/blog/` }]
+  : Astro.url.pathname.startsWith("/case-studies/") && Astro.url.pathname !== "/case-studies/"
+    ? [{ name: "Case studies", item: `${SITE_URL}/case-studies/` }]
+    : Astro.url.pathname.startsWith("/videographer-") && Astro.url.pathname !== "/videographer-dublin/"
+      ? [{ name: "Service areas", item: `${SITE_URL}/areas/` }] : [];
+const breadcrumbItems = [{ name: "Home", item: `${SITE_URL}/` }, ...breadcrumbParents,
+  { name: title.replace(/ \| NextVision Studio$/, ""), item: canonicalUrl }];
+const breadcrumbSchema = {
+  "@context": "https://schema.org", "@type": "BreadcrumbList",
+  "@id": `${canonicalUrl}#breadcrumbs`,
+  itemListElement: breadcrumbItems.map((item, index) => ({ "@type": "ListItem", position: index + 1, ...item })),
+};
+
 const websiteSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -57,7 +71,10 @@ const websiteSchema = {
       publisher: { "@id": `${SITE_URL}/#business` },
     },
     {
-      "@type": "Organization",
+      "@type": ["Organization", "ProfessionalService"],
+      // Public town only: a service-area business, with no street address exposed.
+      address: { "@type": "PostalAddress", addressLocality: "Balbriggan", addressRegion: "County Dublin", addressCountry: "IE" },
+      description: "Video production, photography and digital services for businesses in Dublin and North Dublin. Filming takes place on location.",
       "@id": `${SITE_URL}/#business`,
       name: SITE_NAME,
       url: `${SITE_URL}/`,
@@ -146,6 +163,7 @@ const websiteSchema = {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#111111" />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {!noindex && Astro.url.pathname !== "/" && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
     <!-- A browser-local owner opt-out runs before every analytics loader. -->
     <script is:inline define:vars={{ analyticsHosts: ANALYTICS_HOSTS }}>
       (() => {

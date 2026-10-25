@@ -3,7 +3,7 @@ title: "Short-Form vs Long-Form Video: What Should Your Business Use?"
 metaTitle: "Short-Form vs Long-Form Video for Business | Dublin Guide"
 description: "Learn the difference between short-form and long-form video, when each format works best and how Dublin businesses can use them together."
 pubDate: 2026-09-23
-updatedDate: 2026-09-23
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Video Strategy"
 readingTime: "7 min read"
@@ -96,3 +96,7 @@ Ask three questions before choosing a format:
 If one idea can answer those questions quickly, begin with a short video. If the viewer needs evidence, nuance or a story, give it more room and create shorter supporting clips as well.
 
 Tell us what your audience needs to understand and where you plan to publish. We can recommend a practical [video production plan for your business](/corporate-video-production-dublin/) before filming begins.
+
+## Choose the production that matches the format
+
+A longer interview or explanation fits [corporate video production](/corporate-video-production-dublin/). A defined vertical batch fits [short-form video production in Dublin](/short-form-video-production-dublin/); repeat batches fit [monthly social content](/social-media-content-creation-dublin/). Live footage needs an [event videographer](/event-videographer-dublin/) and an agreed coverage plan. Compare the [corporate filming and editing costs](/blog/corporate-video-cost-dublin/) before deciding how many versions to commission.

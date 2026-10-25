@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localAreas } from "../data/serviceAreas";
+---
+<BaseLayout title="Video Production in North Dublin | NextVision Service Areas" description="Plan on-location filming in Swords, Malahide and Balbriggan. NextVision Studio serves Dublin and North Dublin with business video, Reels and event coverage.">
+<main class="areas-page"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <span>Service areas</span></nav><h1>On-location video production across North Dublin</h1>
+<p>NextVision Studio is based in Balbriggan and films at businesses and agreed locations across Dublin and North Dublin. Choose an area guide for practical questions to prepare before requesting a quote. These are service areas, not a directory of NextVision offices.</p>
+{localAreas.map((area) => <section><h2><a href={`/${area.slug}/`}>Videographer in {area.name}</a></h2><p>{area.lead}</p></section>)}
+<section><h2>Choose the service before the filming location</h2><p>A main explanation belongs in a <a href="/corporate-video-production-dublin/">business video brief</a>; a batch of vertical videos fits <a href="/short-form-video-production-dublin/">short-form production</a>; recurring shoots fit <a href="/social-media-content-creation-dublin/">monthly social content</a>. For live coverage, see <a href="/event-videographer-dublin/">event videography</a>.</p>
+<p>We also serve Donabate, Portmarnock and Dublin City. Other Irish locations can be discussed. Your quote confirms travel, access and the actual production requirements. Compare the <a href="/how-much-does-a-videographer-cost-in-dublin/">videography price guide</a> or <a href="/contact/#contact-form">send your filming brief</a>.</p></section></main>
+</BaseLayout>
+<style>.areas-page { width:min(100% - 48px,900px); margin:auto; padding:150px 0 100px; } h1 { font-size:clamp(38px,6vw,68px); line-height:1.07; text-wrap:balance; } h2 { font-size:28px; margin-top:45px; } p { color:rgba(255,255,255,.76); font-size:18px; line-height:1.8; } a { color:#cfeaff; text-underline-offset:4px; } nav { font-size:14px; } @media(max-width:640px){.areas-page{width:calc(100% - 32px);padding-top:125px;}}</style>

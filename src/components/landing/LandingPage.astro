@@ -1,4 +1,5 @@
 ---
+import ServiceResources from "../ServiceResources.astro";
 import ServiceScope from "../ServiceScope.astro";
 import { AREA_SERVED_SCHEMA, BUSINESS_ID, FOUNDER_ID } from "../../config/site";
 import { serviceForPath } from "../../config/services";
@@ -108,23 +109,7 @@ const landingSchema = {
         },
       })),
     },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.nextvisionstudio.com/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: page.eyebrow,
-          item: canonical,
-        },
-      ],
-    },
+
     ...portfolioImages,
   ],
 };
@@ -153,6 +138,7 @@ const landingSchema = {
         {page.kind !== "social" && <LandingProof page={page} />}
         {page.kind !== "social" && <LandingProcess page={page} />}
         <LandingFAQ page={page} />
+        <ServiceResources topic={page.kind === "photo" ? "photo" : page.kind === "social" ? "video" : "digital"} />
         <LandingLeadForm page={page} />
       </>
     )

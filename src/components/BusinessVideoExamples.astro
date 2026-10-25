@@ -1,9 +1,12 @@
 ---
-const projects = [
+import ProjectVideoSchema from "./ProjectVideoSchema.astro";
+interface Props { event?: boolean }
+const businessProjects = [
   { title: "VentSolve", type: "Explain a service", id: "SUeoIgRtH0I", href: "/case-studies/ventsolve-content-production/", text: "A promotional film for an Irish ventilation and mould removal business." },
   { title: "SG Studios Dublin", type: "Introduce a business", id: "fLzjvPVHzAc", href: "/case-studies/sg-studios-dublin-podcast-studio-content/", text: "Promotional content showing a Dublin podcast and video studio." },
   { title: "The Macaron Boutique", type: "Show a product", id: "GTzSrbR4-k4", href: "/case-studies/macaron-boutique-product-video/", text: "A product film for a boutique in Alicante, showing food, detail and the brand experience." },
 ];
+const projects = Astro.props.event ? [{ title: "Gut Fest", type: "Event film", id: "JVA_WxYY3p0", href: "/case-studies/gut-fest-event-videography-dublin/", text: "A Dublin event film connecting food, people and activities. Read the brief and production choices behind the work." }] : businessProjects;
 ---
 <section class="business-examples" id="video-examples" aria-labelledby="business-examples-title">
   <header><h2 id="business-examples-title">Real businesses. Videos with a purpose.</h2><p>Watch the work, then see the brief and production choices behind each project.</p></header>
@@ -21,6 +24,7 @@ const projects = [
   </div>
   <p class="business-examples__note">Playing a video loads the YouTube player. No player loads before you click.</p>
 </section>
+<ProjectVideoSchema ids={projects.map((item) => item.id)} />
 <script>
   document.querySelectorAll<HTMLButtonElement>("[data-business-video]").forEach((button) => {
     button.addEventListener("click", () => {

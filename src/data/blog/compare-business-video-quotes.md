@@ -3,6 +3,7 @@ title: "What Should a Business Video Quote Include?"
 metaTitle: "Compare Business Video Quotes | Dublin Buyer’s Checklist"
 description: "Compare filming time, edited videos, changes and usage before choosing a videographer. A practical checklist for a clear business video quote in Dublin."
 pubDate: 2026-10-18
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Buying video"
 readingTime: "4 min read"
@@ -71,5 +72,10 @@ If one proposal excludes something, ask for the price of adding it before decidi
 We agree the ideas, filming, editing and delivery in one proposal. Your scope confirms the video count, formats, dates and included changes. Publishing, advertising and account management are added only when agreed.
 
 See [business and corporate video production in Dublin](/corporate-video-production-dublin/) for original work and the kinds of videos we plan. The quote link below opens a form that already identifies the service as Business Video Production.
+
+
+## Compare the right production category
+
+Use the [corporate video cost guide](/blog/corporate-video-cost-dublin/) for interviews and explainers, or the [event videographer price guide](/blog/event-videographer-prices-dublin/) for live coverage. A one-off [short-form video production](/short-form-video-production-dublin/) proposal should be compared with another defined batch; [monthly social media production](/social-media-content-creation-dublin/) covers recurring work. See the [North Dublin service areas](/areas/) before confirming the location.
 
 [Request a quote with a clear video scope](/videography-dublin/#landing-contact)

@@ -26,9 +26,10 @@ for (const service of services) {
   });
   const business = nodes.filter((node) => node["@id"] === "https://www.nextvisionstudio.com/#business");
   assert.equal(business.length, 1, `Duplicate business definition on ${service.key}`);
-  assert.equal(business[0]["@type"], "Organization", "Use the address-free organization entity consistently");
+  assert.deepEqual(business[0]["@type"], ["Organization", "ProfessionalService"], "One consistent service-area business identity");
   assert.deepEqual(business[0].areaServed.map((area) => area.name), ["Dublin", "North Dublin", "Balbriggan", "Swords", "Malahide", "Donabate", "Portmarnock"]);
-  assert.ok(!business[0].address, "Do not publish an unconfirmed physical address");
+  assert.equal(business[0].address.addressLocality, "Balbriggan");
+  assert.ok(!business[0].address.streetAddress && !business[0].address.postalCode, "Keep the hidden street address private");
   const serviceNode = nodes.find((node) => node["@id"] === `https://www.nextvisionstudio.com${service.href}#service`);
   assert.equal(serviceNode?.name, service.title, `Service schema mismatch on ${service.key}`);
 }
@@ -60,6 +61,7 @@ for (const route of ["case-studies/ventsolve-content-production/", "case-studies
   assert.ok(document.includes("measurement") || document.includes("measure"), "Case study must separate work from business outcomes");
   assert.ok(document.includes("https://www.nextvisionstudio.com/#peter-gyarmathy"));
 }
+const businessIdentityCount = (document) => [...document.matchAll(/"@id":"https:\/\/www\.nextvisionstudio\.com\/#business","name":/g)].length;
 const costGuide = await html("how-much-does-a-videographer-cost-in-dublin/");
 assert.ok(costGuide.includes("data-market-price-comparison"), "Alternative budgets must remain a clearly labelled comparison");
 assert.equal([...costGuide.matchAll(/data-market-price-example/g)].length, 4);
@@ -67,7 +69,7 @@ assert.ok(costGuide.includes("not verified market averages"), "Owner-supplied il
 for (const competitor of ["nexera.ie", "sgstudios.ie", "thrivemarketing.ie", "sesa.ie", "Nexera Studio", "Thrive Marketing", "SESA Media", "SG Studios event filming"]) {
   assert.ok(!costGuide.includes(competitor), `Pricing page must not name or link to a competitor: ${competitor}`);
 }
-assert.ok(!/"@type":"(?:LocalBusiness|ProfessionalService)"/.test(costGuide), "Cost guide must not redefine an address-free local-business publisher");
+assert.equal(businessIdentityCount(costGuide), 1, "Cost guide must use the shared business identity");
 assert.equal([...costGuide.matchAll(/data-nextvision-price=/g)].length, 5, "All five owner-approved NextVision options must be visible");
 for (const [id, amount, scope] of [
   ["monthly-videos", "€350", "half day shoot"],

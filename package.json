@@ -13,7 +13,8 @@
     "check:measurement": "node --test scripts/check-measurement.mjs",
     "check:motion": "node --test scripts/check-background-motion.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:seo-growth": "node scripts/check-seo-growth.mjs"
   },
   "dependencies": {
     "astro": "^7.3.3"

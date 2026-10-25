@@ -1,6 +1,7 @@
 ---
 import { LISTED_SERVICES } from "../config/services";
 import { SITE_URL } from "../config/site";
+import ServiceResources from "../components/ServiceResources.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ServicesPageHero from "../components/ServicesPageHero.astro";
 import ServicePillars from "../components/ServicePillars.astro";
@@ -29,6 +30,7 @@ const serviceSchema = {
     <ServicesPageHero />
     <ServicePillars />
     <ServicesProcess />
+    <ServiceResources />
   </main>
 
   <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />

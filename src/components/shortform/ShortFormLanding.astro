@@ -1,4 +1,5 @@
 ---
+import ServiceResources from "../ServiceResources.astro";
 import ServiceScope from "../ServiceScope.astro";
 import { AREA_SERVED_SCHEMA } from "../../config/site";
 import { getService } from "../../config/services";
@@ -29,13 +30,7 @@ const serviceSchema = {
       provider: { "@id": "https://www.nextvisionstudio.com/#business" },
       areaServed: AREA_SERVED_SCHEMA,
     },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
-        { "@type": "ListItem", position: 2, name: "Short-Form Video Production Dublin", item: canonical },
-      ],
-    },
+
   ],
 };
 ---
@@ -50,6 +45,7 @@ const serviceSchema = {
   <ShortFormFounder />
   <ShortFormConsultation />
   <ShortFormFAQ />
+  <ServiceResources />
   <ShortFormFinalCTA />
 
   <a class="sf-sticky-cta sf-track-booking" href="#free-consultation">

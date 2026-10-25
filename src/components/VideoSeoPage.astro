@@ -1,4 +1,5 @@
 ---
+import ServiceResources from "./ServiceResources.astro";
 import ServiceScope from "./ServiceScope.astro";
 import { AREA_SERVED_SCHEMA } from "../config/site";
 import { serviceForPath } from "../config/services";
@@ -41,23 +42,7 @@ const schema = {
         acceptedAnswer: { "@type": "Answer", text: item.answer },
       })),
     },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.nextvisionstudio.com/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: service?.title ?? page.eyebrow,
-          item: canonical,
-        },
-      ],
-    },
+
   ],
 };
 ---
@@ -90,8 +75,8 @@ const schema = {
 
   <ServiceScope slug={page.slug} showProof={false} />
 
-  {page.showExamples ? (
-    <BusinessVideoExamples />
+  {page.showExamples || page.slug === "event-videographer-dublin" ? (
+    <BusinessVideoExamples event={page.slug === "event-videographer-dublin"} />
   ) : (
     <section class="video-seo__project" aria-labelledby="video-seo-project">
       <img src={page.project.image} alt={page.project.alt} width="640" height="360" loading="lazy" decoding="async" />
@@ -113,6 +98,7 @@ const schema = {
     </nav>
   </section>
 
+  <ServiceResources />
   <ContactForm serviceKey={service?.key} source={page.slug} />
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </main>

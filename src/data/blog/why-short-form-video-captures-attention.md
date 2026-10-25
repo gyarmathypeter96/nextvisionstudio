@@ -3,7 +3,7 @@ title: "Why Short-Form Video Matters on Social Media — and How to Hold Attenti
 metaTitle: "Why Short-Form Video Matters on Social Media | Dublin"
 description: "See how short-form video helps businesses communicate on social media, and learn practical ways to earn attention with a clear hook, story and next step."
 pubDate: 2026-09-23
-updatedDate: 2026-09-23
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Social Media Content"
 readingTime: "8 min read"
@@ -99,3 +99,7 @@ YouTube’s [audience-retention guide](https://support.google.com/youtube/answer
 - Do you know which metric will tell you whether it helped?
 
 Planning, filming and editing can make this repeatable. Explore our [social media content creation in Dublin](/social-media-content-creation-dublin/) for batch-produced Reels, TikToks, Shorts and photography, or see the [short-form video production service](/short-form-video-production-dublin/) for dedicated vertical video work.
+
+## Give that attention somewhere useful to go
+
+Start with a defined [short-form video production brief](/short-form-video-production-dublin/) and a clear audience. A regular series can use [monthly social media content](/social-media-content-creation-dublin/), with [Google and Meta Ads management](/google-ads-meta-ads-dublin/) agreed separately if paid distribution is needed. Check the [product video cost guide](/blog/product-video-cost-ireland/) before commissioning advertising variants. A clear [business website](/webdesigner-dublin/) should explain the offer and make the next step easy.

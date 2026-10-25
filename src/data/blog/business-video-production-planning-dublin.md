@@ -3,7 +3,7 @@ title: "How to Plan a Business Video Production in Dublin"
 metaTitle: "How to Plan a Business Video Production | Dublin Guide"
 description: "A practical guide to planning business video production in Dublin, from the message and shot list to filming, delivery, distribution and measurement."
 pubDate: 2026-09-02
-updatedDate: 2026-09-02
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Video Production"
 readingTime: "9 min read"
@@ -238,5 +238,10 @@ Send this information to the production partner:
 - the person responsible for approval.
 
 You do not need a finished script. A good producer should turn this information into a practical recommendation and tell you what is unnecessary.
+
+
+## Choose the service that fits your plan
+
+A one-off interview or service explanation belongs in a [corporate video production brief](/corporate-video-production-dublin/). A batch for Reels and TikTok fits [short-form video production](/short-form-video-production-dublin/); a continuing programme fits [monthly social media content](/social-media-content-creation-dublin/). Compare the [corporate video cost breakdown](/blog/corporate-video-cost-dublin/) before requesting a quote. For a nearby shoot, see our [Swords filming arrangements](/videographer-swords/).
 
 [Plan a business video production that keeps working after launch](/videography-dublin/#landing-contact).

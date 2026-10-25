@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "./ContactForm.astro";
+import { localAreas } from "../data/serviceAreas";
+import { SITE_URL, BUSINESS_ID } from "../config/site";
+interface Props { area: typeof localAreas[number] }
+const { area } = Astro.props;
+const canonical = `${SITE_URL}/${area.slug}/`;
+const schema = { "@context": "https://schema.org", "@type": "Service", "@id": `${canonical}#service`,
+  name: `Business video production in ${area.name}`, serviceType: "On-location video production",
+  description: area.description, url: canonical, provider: { "@id": BUSINESS_ID },
+  areaServed: { "@type": "Place", name: `${area.name}, County Dublin, Ireland` } };
+---
+<BaseLayout title={area.title} description={area.description} canonical={canonical} ogImage={area.caseImage}>
+  <main class="local-page">
+    <header><nav aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/areas/">Service areas</a><span>/</span><span>{area.name}</span></nav>
+      <p class="eyebrow">On-location production · North Dublin</p><h1>{area.heading}</h1><p class="lead">{area.lead}</p>
+      <a class="button" href="#contact-form">Plan your shoot in {area.name}</a>
+    </header>
+    <div class="local-content">
+      {area.sections.map((section) => <section><h2>{section.title}</h2>{section.paragraphs.map((text) => <p>{text}</p>)}</section>)}
+      <figure><a href={area.caseHref}><img src={area.caseImage} alt={area.caseAlt} width="640" height="360" loading="lazy" decoding="async" /></a><figcaption><a href={area.caseHref}>{area.caseLabel}</a></figcaption></figure>
+      <section><h2>Choose the right video production service</h2><p>For one main explanation, explore <a href="/corporate-video-production-dublin/">corporate and business video production</a>. For a launch or a defined vertical batch, use <a href="/short-form-video-production-dublin/">short-form video production</a>. For regular filming and editing, compare <a href="/social-media-content-creation-dublin/">monthly social media content</a>.</p>
+        <p>Live coverage has a separate <a href="/event-videographer-dublin/">event videography scope</a>. Stills can be agreed through our <a href="/photography-dublin/">commercial photography service</a>; they are not included automatically with a video booking.</p></section>
+      <section><h2>What will filming in {area.name} cost?</h2><p>Compare the published <a href="/how-much-does-a-videographer-cost-in-dublin/">NextVision videographer prices</a>, then use the relevant <a href="/blog/corporate-video-cost-dublin/">corporate video budget</a>, <a href="/blog/product-video-cost-ireland/">product video cost</a> or <a href="/blog/event-videographer-prices-dublin/">event video price guide</a>. Filming-only rates and edited packages cover different work. Your quote confirms the actual location, filming hours, finished edits and any travel.</p></section>
+      <section><h2>Prepare a brief for your shoot</h2><p>{area.brief}</p><p>Use the <a href="/blog/business-video-production-planning-dublin/">business video planning guide</a> and <a href="/blog/compare-business-video-quotes/">video quote checklist</a> if you are still deciding what the finished production should include.</p></section>
+      <section><h2>Filming across North Dublin</h2><p>See the <a href="/areas/">North Dublin filming areas</a> and practical arrangements for {localAreas.filter((other) => other.slug !== area.slug).map((other, index) => <>{index > 0 ? " and " : ""}<a href={`/${other.slug}/`}>video production in {other.name}</a></>)}. All shoots take place at an agreed location.</p></section>
+    </div>
+    <ContactForm serviceKey="corporate" source={area.slug} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </main>
+</BaseLayout>
+<style>
+.local-page { background:#111; color:#fff; padding:145px 24px 0; }
+.local-page > header, .local-content { width:min(100%,900px); margin:0 auto; }
+.local-page nav { display:flex; flex-wrap:wrap; gap:10px; font-size:13px; color:#cfeaff; }
+.eyebrow { margin-top:40px; color:#cfeaff; font-size:13px; letter-spacing:.06em; }
+h1 { font-size:clamp(40px,6vw,72px); line-height:1.05; letter-spacing:-.04em; margin:22px 0; text-wrap:balance; }
+.lead { font-size:21px; line-height:1.6; color:rgba(255,255,255,.78); }
+.button { display:inline-flex; padding:17px 24px; margin:12px 0 20px; border-radius:8px; color:#111; background:#cfeaff; font-weight:750; text-decoration:none; }
+.local-content { padding:24px 0 60px; } section { margin-top:48px; } h2 { font-size:clamp(28px,4vw,40px); line-height:1.15; text-wrap:balance; }
+.local-content p { font-size:17px; line-height:1.8; color:rgba(255,255,255,.76); } a { color:#cfeaff; text-underline-offset:4px; }
+a:focus-visible { outline:3px solid #cfeaff; outline-offset:5px; } figure { margin:42px 0; } figure img { display:block; width:100%; height:auto; border-radius:12px; } figcaption { margin-top:15px; line-height:1.6; }
+@media(max-width:640px) { .local-page { padding:125px 16px 0; } .lead { font-size:18px; } }
+</style>

@@ -1,0 +1,13 @@
+---
+import { localAreas } from "../data/serviceAreas";
+interface Props { topic?: "video" | "photo" | "digital" }
+const { topic = "video" } = Astro.props;
+---
+<section class="service-resources" aria-label="Related planning guides and service areas">
+  <h2>Plan the scope before booking</h2>
+  {topic === "photo" ? <p>Prepare the <a href="/blog/product-photography-shot-list-dublin/">product photography shot list</a> or a <a href="/blog/commercial-photography-shoot-planning-dublin/">commercial photo shoot plan</a>. If your product also needs a demonstration, compare the <a href="/blog/product-video-cost-ireland/">product video budget</a> and <a href="/short-form-video-production-dublin/">short-form production service</a>.</p>
+  : topic === "digital" ? <p>Connect the campaign to the actual production: choose <a href="/short-form-video-production-dublin/">short-form video</a>, <a href="/social-media-content-creation-dublin/">monthly social content</a> or a <a href="/corporate-video-production-dublin/">business film</a>. Compare the <a href="/how-much-does-a-videographer-cost-in-dublin/">published videography prices</a> and keep production, publishing and advertising scope clear.</p>
+  : <p>Compare <a href="/blog/corporate-video-cost-dublin/">corporate video costs in Dublin</a>, <a href="/blog/product-video-cost-ireland/">product video production costs</a> and <a href="/blog/event-videographer-prices-dublin/">event videographer prices</a>. Use the <a href="/blog/business-video-production-planning-dublin/">business video planning guide</a> and <a href="/blog/compare-business-video-quotes/">quote comparison checklist</a> to agree the actual deliverables.</p>}
+  <p>For an on-location shoot, see the arrangements for {localAreas.map((area,index) => <>{index > 0 ? (index === localAreas.length - 1 ? " and " : ", ") : ""}<a href={`/${area.slug}/`}>video production in {area.name}</a></>)}. View <a href="/areas/">all service areas</a>; filming locations and travel are confirmed before booking.</p>
+</section>
+<style>.service-resources { width:min(100% - 48px,1000px); margin:0 auto; padding:55px 0; border-top:1px solid rgba(207,234,255,.18); } h2 { font-size:clamp(28px,4vw,40px); line-height:1.15; } p { color:rgba(255,255,255,.76); font-size:17px; line-height:1.85; } a { color:#cfeaff; text-underline-offset:4px; } a:focus-visible {outline:3px solid #cfeaff;outline-offset:4px;} @media(max-width:640px){.service-resources{width:calc(100% - 32px);padding:40px 0;}}</style>

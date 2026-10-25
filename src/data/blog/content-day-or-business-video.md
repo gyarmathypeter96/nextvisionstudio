@@ -3,6 +3,7 @@ title: "Content Day or Business Video: Which Does Your Business Need?"
 metaTitle: "Content Day or Business Video? | Dublin Buyer’s Guide"
 description: "Choose a content day for short social videos or a business film for your website. See what to agree before filming, with original NextVision project examples."
 pubDate: 2026-10-18
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Buying video"
 readingTime: "5 min read"
@@ -65,5 +66,10 @@ The [Dublin videographer cost guide](/how-much-does-a-videographer-cost-in-dubli
 ## What should you send us first?
 
 Tell us what you sell, where the videos will appear and when you need them. Include a link to your website or social profile and any example you like. If you are unsure which option fits, we can recommend a production plan before quoting.
+
+
+## Match the budget to the finished work
+
+Compare [corporate video production costs](/blog/corporate-video-cost-dublin/) when one main explanation is the priority. For a product campaign, the [product video cost guide](/blog/product-video-cost-ireland/) separates a defined advertising package from a larger demonstration film. For live coverage, our [event videographer service](/event-videographer-dublin/) needs a venue timetable and final edit list. See [filming in Balbriggan](/videographer-balbriggan/) for a local production-planning example.
 
 [Get a plan for your content day or business video](/videography-dublin/#landing-contact)

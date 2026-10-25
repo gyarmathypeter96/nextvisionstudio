@@ -2,7 +2,7 @@
 import { WHATSAPP_URL } from "../config/contact";
 import { LISTED_SERVICES } from "../config/services";
 import { SERVICE_AREA_TEXT } from "../config/site";
-import { SOCIAL_PROFILES } from "../config/site";
+import { GOOGLE_REVIEW_REQUEST_URL, SOCIAL_PROFILES } from "../config/site";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -31,6 +31,7 @@ const currentYear = new Date().getFullYear();
         <p>Pages</p>
         <a href="/">Home</a>
         <a href="/services/">Services</a>
+        <a href="/areas/">North Dublin filming areas</a>
         <a href="/about/">About</a>
         <a href="/blog/">Blog</a>
         <a href="/contact/#contact-form">Contact</a>
@@ -58,9 +59,10 @@ const currentYear = new Date().getFullYear();
         {SOCIAL_PROFILES.map((profile) => (
           <a href={profile.href} target="_blank" rel="noopener me">{profile.label}</a>
         ))}
+        <a href={GOOGLE_REVIEW_REQUEST_URL} target="_blank" rel="noopener">Worked with us? Share your experience on Google</a>
         <a href="/image-licensing/">Image licensing</a>
         <a href="/privacy-policy/">Privacy &amp; cookies</a>
-        <span>{SERVICE_AREA_TEXT}</span>
+        <span>Based in Balbriggan. Filming on location. {SERVICE_AREA_TEXT}</span>
       </div>
     </nav>
   </div>

@@ -3,6 +3,7 @@ title: "Turning Customer Questions into Videos: Two NextVision Projects"
 metaTitle: "Customer Questions into Videos | NextVision Project Notes"
 description: "How NextVision approached VentSolve and Leroy’s Barking World: different customer questions, planned filming and public video examples you can inspect."
 pubDate: 2026-10-18
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Our work"
 readingTime: "5 min read"
@@ -71,5 +72,10 @@ Before quoting a new project, we need to know where the content will be used, wh
 The linked films show the creative work, and the case studies explain the brief and production choices. We are not publishing audited booking, revenue or advertising return figures for either project. A similar project would need its own enquiry and sales measurement.
 
 If you want to judge whether this approach suits your business, watch the examples first. Then tell us which customer question your own video needs to answer.
+
+
+## Turn those questions into a production brief
+
+A detailed explanation can fit [corporate video production in Dublin](/corporate-video-production-dublin/), while individual answers can become [short-form videos](/short-form-video-production-dublin/). For a regular series, use [monthly social content production](/social-media-content-creation-dublin/). If you want the new enquiries organised after publication, explore [CRM and lead automation](/crm-lead-automation-dublin/). First compare the [filming and editing budget](/blog/corporate-video-cost-dublin/) for the actual output list.
 
 [Plan a video around your business](/videography-dublin/#landing-contact)

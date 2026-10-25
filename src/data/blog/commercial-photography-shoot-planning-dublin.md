@@ -3,7 +3,7 @@ title: "How to Plan a Commercial Photography Shoot in Dublin"
 metaTitle: "How to Plan a Commercial Photography Shoot | Dublin Guide"
 description: "A practical commercial photography planning guide for Dublin businesses, covering the brief, shot list, location, usage and image delivery."
 pubDate: 2026-09-02
-updatedDate: 2026-09-02
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Commercial Photography"
 readingTime: "8 min read"
@@ -185,5 +185,10 @@ The photographer can then challenge gaps, group similar setups and recommend wha
 Portfolio quality matters, but the working process matters too. Ask how the photographer will prepare the shot list, manage the schedule and deliver files for different channels.
 
 A good commercial photographer should be able to explain why an image is being created and where it will work. That makes the shoot easier to approve internally and far more useful after delivery.
+
+
+## Connect your photographs to the wider production
+
+Book the agreed image set through our [commercial photography service in Dublin](/photography-dublin/). If motion is needed to explain the product, use the [product video cost guide](/blog/product-video-cost-ireland/) and plan a [short-form video batch](/short-form-video-production-dublin/) alongside the stills. A recurring requirement can fit [monthly content production](/social-media-content-creation-dublin/). Our [Malahide filming guide](/videographer-malahide/) includes preparation questions for customer-facing premises.
 
 [Plan a commercial photography shoot for your Dublin business](/photography-dublin/#landing-contact).

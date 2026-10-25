@@ -3,7 +3,7 @@ title: "Short-Form Video Production in Dublin: What Actually Brings Customers?"
 metaTitle: "Which Short-Form Videos Bring Customers? | Dublin Guide"
 description: "A practical guide for Dublin businesses on Reels, TikTok, filming, distribution, costs and measuring enquiries — not just views."
 pubDate: 2026-07-16
-updatedDate: 2026-07-16
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Short-Form Video"
 readingTime: "8 min read"
@@ -219,5 +219,10 @@ You can explore more of our [social media content creation in Dublin](/social-me
 You do not need a finished brief. Start with the result the business needs.
 
 If you would like an honest view of your current content, book a free 15-minute strategy call. We will look at what you are posting and give you three practical video ideas you can use — even if we never work together.
+
+
+## Choose a practical next step
+
+For one launch or campaign, explore [short-form video production in Dublin](/short-form-video-production-dublin/). For repeated filming, compare [monthly social media content](/social-media-content-creation-dublin/). A longer service explanation belongs on the [corporate video production page](/corporate-video-production-dublin/); paid distribution has a separate [Google and Meta Ads scope](/google-ads-meta-ads-dublin/). The [product video budget guide](/blog/product-video-cost-ireland/) explains how advertising versions affect the production.
 
 [Book a free short-form video strategy call](/short-form-video-production-dublin/#free-consultation).

@@ -3,7 +3,7 @@ title: "Product Photography Shot List for Dublin Businesses"
 metaTitle: "Product Photography Shot List Dublin | NextVision Studio"
 description: "A practical product photography shot list for Dublin businesses, with the images, formats and preparation needed for websites, campaigns and social media."
 pubDate: 2026-09-02
-updatedDate: 2026-09-02
+updatedDate: 2026-10-25
 author: "Peter Gyarmathy"
 category: "Product Photography"
 readingTime: "7 min read"
@@ -185,5 +185,10 @@ Send this information with the enquiry:
 - usage and campaign plans.
 
 You do not need to make every creative decision alone. A good photographer will use the list to recommend the simplest setup that covers the real business need.
+
+
+## Add movement only where it answers a question
+
+A still-image list belongs in a [commercial photography brief](/photography-dublin/). For setup, texture in motion or a demonstration, plan [short-form product videos](/short-form-video-production-dublin/) and use the [product video cost guide](/blog/product-video-cost-ireland/) to compare the scope. A changing range may need [monthly content production](/social-media-content-creation-dublin/). Share where the assets will be used with your [website designer](/webdesigner-dublin/) so images and video fit the actual page.
 
 [Build a product photography shot list for your Dublin business](/photography-dublin/#landing-contact).

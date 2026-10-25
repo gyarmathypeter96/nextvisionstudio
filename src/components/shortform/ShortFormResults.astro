@@ -1,4 +1,5 @@
 ---
+import ProjectVideoSchema from "../ProjectVideoSchema.astro";
 const work = [
   {
     id: "SUeoIgRtH0I",
@@ -69,6 +70,7 @@ const work = [
   </div>
 </section>
 
+<ProjectVideoSchema ids={work.map((item) => item.id)} />
 <script>
   const initialiseShortFormVideos = () => {
     document.querySelectorAll<HTMLButtonElement>("[data-sf-video]").forEach((button) => {

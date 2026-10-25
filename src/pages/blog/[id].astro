@@ -37,14 +37,7 @@ const articleSchema = {
       keywords: post.data.keywords.join(", "),
       inLanguage: "en-IE",
     },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.nextvisionstudio.com/" },
-        { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.nextvisionstudio.com/blog/" },
-        { "@type": "ListItem", position: 3, name: post.data.title, item: canonical },
-      ],
-    },
+
   ],
 };
 ---
@@ -67,6 +60,7 @@ const articleSchema = {
           <time datetime={post.data.pubDate.toISOString()}>
             {post.data.pubDate.toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" })}
           </time>
+          {post.data.updatedDate && <span>Updated <time datetime={post.data.updatedDate.toISOString()}>{post.data.updatedDate.toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" })}</time></span>}
           <span>{post.data.readingTime}</span>
         </div>
       </header>

@@ -30,7 +30,20 @@ These are NextVision Studio prices. All exclude VAT. Filming and editing are sep
 - [Leroy's Barking World project](${SITE_URL}/case-studies/leroys-barking-world-social-content/): Social video production for a local business.
 - [Photography portfolio](${SITE_URL}/photography-dublin/): Product, brand, people and event photography.
 
+## Local filming arrangements
+
+- [North Dublin service areas](${SITE_URL}/areas/)
+- [Videographer in Swords](${SITE_URL}/videographer-swords/)
+- [Videographer in Malahide](${SITE_URL}/videographer-malahide/)
+- [Videographer in Balbriggan](${SITE_URL}/videographer-balbriggan/)
+
+These pages describe on-location services. They do not represent separate offices.
+
 ## Guides
+
+- [Corporate video cost Dublin](${SITE_URL}/blog/corporate-video-cost-dublin/)
+- [Product video cost Ireland](${SITE_URL}/blog/product-video-cost-ireland/)
+- [Event videographer prices Dublin](${SITE_URL}/blog/event-videographer-prices-dublin/)
 
 - [Business videography prices](${SITE_URL}/how-much-does-a-videographer-cost-in-dublin/): NextVision filming, editing, ad video and monthly social content prices, with separately labelled illustrative alternative budgets.
 - [Plan a business video](${SITE_URL}/blog/business-video-production-planning-dublin/)

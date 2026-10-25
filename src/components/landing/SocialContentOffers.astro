@@ -1,4 +1,5 @@
 ---
+import ProjectVideoSchema from "../ProjectVideoSchema.astro";
 const offers = [
   {
     title: "Videos for the month ahead",
@@ -93,6 +94,8 @@ const photos = [
     <div class="social-work__dialog-media" data-work-dialog-media></div>
   </dialog>
 </section>
+
+<ProjectVideoSchema ids={videos.filter((video) => video.type === "youtube").map((video) => video.source)} />
 
 <script>
   const setupSocialWorkGallery = () => {
