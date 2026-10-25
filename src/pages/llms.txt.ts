@@ -26,6 +26,9 @@ These are NextVision Studio prices. All exclude VAT. Filming and editing are sep
 ## Original work
 
 - [Case studies](${SITE_URL}/case-studies/): Original client projects and production choices.
+- [Amber Oxygen Therapy project](${SITE_URL}/case-studies/amber-oxygen-therapy-video-production/): Twelve short videos and six photographs.
+- [Balbriggan Braces project](${SITE_URL}/case-studies/balbriggan-braces-dental-videos/): Twelve longer patient-education videos and sixteen short edits.
+- [Perfect Clean project](${SITE_URL}/case-studies/perfect-clean-video-advertising/): Owner-led advertising creative and the work process.
 - [VentSolve project](${SITE_URL}/case-studies/ventsolve-content-production/): Business video, customer education and training.
 - [Leroy's Barking World project](${SITE_URL}/case-studies/leroys-barking-world-social-content/): Social video production for a local business.
 - [Photography portfolio](${SITE_URL}/photography-dublin/): Product, brand, people and event photography.

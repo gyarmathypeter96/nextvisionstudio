@@ -25,6 +25,7 @@ const article = {
   "@context": "https://schema.org", "@type": "Article", headline: title, description,
   image: `${SITE_URL}${hero.src}`, mainEntityOfPage: canonical,
   author: { "@id": FOUNDER_ID }, publisher: { "@id": BUSINESS_ID }, about: client,
+  datePublished: "2026-10-25", dateModified: "2026-10-25",
   ...(location ? { locationCreated: { "@type": "Place", name: location } } : {}),
 };
 ---

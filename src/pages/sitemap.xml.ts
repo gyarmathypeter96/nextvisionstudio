@@ -13,10 +13,6 @@ const noindexRoutes = new Set([
   "videography-dublin/",
   "website-design-quote/",
   "website-design-quote/thanks/",
-  // Private working drafts: enable indexability only when Peter approves release.
-  "case-studies/amber-oxygen-therapy-video-production/",
-  "case-studies/balbriggan-braces-dental-videos/",
-  "case-studies/perfect-clean-video-advertising/",
 ]);
 
 // Last meaningful content update per route. Routes without an entry are still
@@ -38,7 +34,10 @@ const lastModified: Record<string, string> = {
   "webdesigner-dublin/": "2026-10-25",
   "social-media-content-creation-dublin/": "2026-10-25",
   "crm-lead-automation-dublin/": "2026-09-23",
-  "case-studies/": "2026-07-28",
+  "case-studies/": "2026-10-25",
+  "case-studies/amber-oxygen-therapy-video-production/": "2026-10-25",
+  "case-studies/balbriggan-braces-dental-videos/": "2026-10-25",
+  "case-studies/perfect-clean-video-advertising/": "2026-10-25",
   "case-studies/gut-fest-event-videography-dublin/": "2026-07-28",
   "case-studies/macaron-boutique-product-video/": "2026-09-23",
   "case-studies/leroys-barking-world-social-content/": "2026-10-18",
