@@ -1,12 +1,12 @@
 ---
 title: "What Should a Monthly Short-Form Video Package Include?"
 metaTitle: "What a Monthly Short-Form Video Package Should Include | NextVision"
-description: "A practical checklist for monthly short-form video: planning, filming, finished edits, formats, review and the work that stays outside the package."
+description: "Compare monthly video packages by planning, filming time, finished edits, formats, revisions and publishing. See NextVision's current Dublin package scope."
 pubDate: 2026-11-01
 publishAt: 2026-11-01T00:00:00+00:00
 author: "Peter Gyarmathy"
 category: "Short-form video"
-readingTime: "5 min read"
+readingTime: "8 min read"
 heroImage: "/images/portfolio/53-_kK95Eoc.webp"
 heroAlt: "A social video project for Leroy's Barking World, planned around the people and routines of the business"
 featured: false
@@ -16,61 +16,100 @@ keywords:
   - "social media video content"
 ---
 
-A monthly video package should leave you with a clear list of finished videos and a workable plan for using them. “A day of filming” is not enough detail to compare two proposals. One quote may include planning, filming and eight edited vertical videos; another may cover only the filming time.
+A monthly short-form video package should state what is planned, how much filming time is included, how many edited videos you receive and what happens after delivery. Those details let you compare the real work behind a quote instead of comparing two headline prices that cover different things.
 
-At NextVision, the monthly production options currently include content planning, a half day at your business and a set number of edited short videos: four, eight or twelve. The published monthly prices are €350, €450 and €600 plus VAT respectively. Those are production packages. Posting, account management and paid advertising are separate services.
+NextVision's current monthly production packages include content planning, a half day at your business and a set number of finished short videos. The published options are four videos for €350, eight for €450 or twelve for €600, plus VAT. They cover video production. Posting, social account management and paid advertising are scoped separately.
 
-If you are comparing a [monthly content plan](/social-media-content-creation-dublin/) with a one-off [short-form video production project](/short-form-video-production-dublin/), start by asking what will be delivered at the end.
+If you need an ongoing supply of videos, start with the [monthly social media content service](/social-media-content-creation-dublin/). If you only need one defined batch, compare it with [short-form video production in Dublin](/short-form-video-production-dublin/).
 
-## 1. A plan for what each video needs to do
+## What should the package include?
 
-Planning is the part that prevents a filming day from turning into a long list of disconnected clips. Choose a real audience, a useful topic and the next step you want a viewer to understand. A video might answer one common question, show how a service works, introduce a member of the team or make an offer easier to understand.
+At minimum, ask for these items in writing:
 
-The topics should come from your customers and your business, not a calendar full of made-up “content ideas”. For VentSolve, technical services needed plain explanations because a new customer might not know which problem to ask about. For Perfect Clean, the owner’s explanation and the work itself supported a message about personal attention. Those are different briefs, even though both can become short videos.
+1. **Planning:** topics, audience, message and preparation before filming.
+2. **Filming:** time, location, people and any extra setup included.
+3. **Finished edits:** number, length and aspect ratio of completed videos.
+4. **Post-production:** captions, graphics, music and colour or sound work.
+5. **Review:** how feedback is collected and how many revision rounds are included.
+6. **Delivery and usage:** file formats, handover date and where you may use the videos.
+7. **Ongoing support:** whether the provider also publishes, manages accounts or runs ads.
 
-Write down the topics and the person who can speak about them. If a subject needs a demonstration, make sure the product or equipment is available. If several people need to appear, agree who can make time. A [business video production plan](/blog/business-video-production-planning-dublin/) helps turn those decisions into a brief.
+The last point causes many misunderstandings. A folder of ready-to-post videos is not the same service as a person logging into your accounts, writing captions, scheduling posts and replying to customers. Likewise, making an advert is separate from managing the campaign budget and reporting enquiries. NextVision lists [content creation](/social-media-content-creation-dublin/) and [Google and Meta Ads management](/google-ads-meta-ads-dublin/) as related but separately scoped work.
 
-## 2. An agreed filming time and location
+## Why does planning belong in a monthly package?
 
-Ask how much time is included, where it takes place and whether travel changes the quote. A half day at one business is different from several locations, a busy event or multiple demonstrations that need to be reset.
+Planning gives each edit a job. A month of videos can answer common customer questions, introduce the people behind the service, demonstrate a process, explain a product detail or support a specific offer. Without that plan, the filming day may produce plenty of material but little that your audience has a reason to watch.
 
-The surroundings matter because they affect sound, light and how comfortable people feel. We may choose a quieter room for an explanation, then gather supporting footage in the place where the service happens. That lets the edit show both the person speaking and the work they are describing.
+Start with real questions. What do customers ask before they book? What do they misunderstand? What do they need to prepare? Which part of the service is difficult to picture from a website paragraph? Those questions can become concise topics. Our [customer-question guide](/blog/customer-questions-into-business-videos/) shows how to turn them into a useful video list, while the [business video planning guide](/blog/business-video-production-planning-dublin/) covers the brief, message and delivery plan for a larger project.
 
-If photographs are also needed, agree that before the day. The number of final images, subjects and intended uses should appear in the scope. The [commercial photography service](/photography-dublin/) can be planned alongside video, as in the [Amber Oxygen Therapy project](/case-studies/amber-oxygen-therapy-video-production/), which included twelve short videos and six images.
+The topic should fit the person answering it. A business owner might explain how the company works. A technician may be better placed to demonstrate a detail. A customer story needs a willing participant and permission to use their words. This makes preparation a shared task: the producer shapes the questions and structure, while the business confirms that the details are accurate.
 
-## 3. A number of finished edits, not just recorded material
+For a technical service, one short video usually works best when it answers one question in plain language. VentSolve's wider project includes public promotion, customer education and separate internal training, because each has a different audience. The [VentSolve case study](/case-studies/ventsolve-content-production/) gives a real example of why the purpose should be chosen before deciding how many videos to make.
 
-The package should state how many completed videos you receive. It should also say whether those edits are vertical, horizontal or supplied in more than one version. Raw footage is not the same thing as a ready-to-post video: selecting moments, shaping a beginning and end, balancing sound, adding captions and exporting the right size all take time.
+## What does a half day of filming cover?
 
-For a simple monthly plan, the number of finished videos is often the easiest comparison:
+A half day is a time allowance, not a promise to record a limitless number of finished videos. It gives the team a defined window to prepare the location, record planned topics and collect supporting footage. The finished quantity still depends on the number of people, locations, demonstrations and edits required.
 
-* Starter: four short-form videos each month.
-* Full Monthly Content: eight short-form videos each month.
-* Growth: twelve short-form videos each month.
+Eight concise answers recorded in one room are different from eight videos that each need a new location, product setup or demonstration. Allow time for a person to settle into speaking, for a process to be shown clearly and for details that will support the edit. A useful plan groups related topics together so the business is not constantly stopping to rearrange the room or switch context.
 
-All three include planning and a half day of filming. The [current package details](/#content-packages) explain the listed scope. A larger interview, product demonstration or longer website film may need a separate quote. See the [Dublin videographer price guide](/how-much-does-a-videographer-cost-in-dublin/) for the difference between filming rates and finished content packages.
+If the brief needs several locations or a long interview, the half-day package may not be the right fit. The [content day versus business film guide](/blog/content-day-or-business-video/) explains the difference between a batch of social edits and a longer company or service film. For a project needing more than short-form content, explore [corporate video production](/corporate-video-production-dublin/) or compare the [corporate video budget guide](/blog/corporate-video-cost-dublin/).
 
-## 4. Captions, versions and review
+## How many videos should you choose?
 
-Confirm whether captions, graphics, music licensing, alternate openings and platform-specific exports are included. Then agree who reviews the first edit, how feedback is collected and how many changes are covered. If feedback arrives as separate messages from several people, small changes can become a second round of editing.
+Choose the quantity you can use consistently and the topics you can support with accurate information. Four videos may be enough to introduce a service and answer its main questions. Eight allow a wider mix of explanations, people and examples. Twelve give a business more topics to share, provided each one has a clear purpose.
 
-One useful reviewer and one set of notes usually keeps the process simpler. A good review asks whether the message is accurate, the names and details are correct, and the edit reflects the agreed brief. It does not restart the creative direction after the finished version is ready.
+| NextVision package | Finished short videos | Published price |
+|---|---:|---:|
+| Starter Package | 4 per month | €350 + VAT |
+| Full Monthly Content | 8 per month | €450 + VAT |
+| Growth Package | 12 per month | €600 + VAT |
 
-## 5. Publishing and advertising are separate decisions
+Each current option includes content planning and a half day of filming at your business. The [package section on the home page](/#content-packages) has the current scope. Your quote confirms exact lengths, formats, filming requirements and included changes. For other video budgets, see the [Dublin videographer price guide](/how-much-does-a-videographer-cost-in-dublin/), the [product video cost guide for Ireland](/blog/product-video-cost-ireland/) and [event videographer prices](/blog/event-videographer-prices-dublin/).
 
-Receiving a folder of finished videos does not automatically mean someone will post them, respond to comments or manage a campaign. NextVision’s production packages cover content creation. [Social account support](/social-media-content-creation-dublin/) and [Google or Meta advertising](/google-ads-meta-ads-dublin/) need their own scope, access and measurement plan.
+Do not pick a higher quantity because a bigger number looks like better value. If the business only has four useful customer questions this month, a smaller set of thoughtful edits may serve it better. If there are twelve genuinely different topics, a larger package can make sense. The [short-form versus long-form guide](/blog/short-form-vs-long-form-video-dublin/) can help decide whether you need a series of short answers, one fuller explanation or both.
 
-That separation can be useful. You may already have someone on your team who publishes content, or you may want a production partner to manage the wider journey. The [Perfect Clean advertising project](/case-studies/perfect-clean-video-advertising/) shows how video creative can be prepared for paid use. Campaign management is a different job from making the creative.
+## What counts as a finished video?
 
-## A short checklist before you agree
+Ask whether “video” means recorded footage, a rough cut or a completed file ready for the channel you named. A finished short edit usually involves selecting the useful material, shaping a clear opening and ending, balancing sound, adding agreed captions or graphics and exporting the final dimensions.
 
-Ask the provider to confirm:
+The proposal should list the formats. A vertical edit for Instagram Reels or TikTok differs from a horizontal video for a website page. If you need both versions, ask whether they are included or treated as separate edits. A change in crop may be simple for one piece and require a different framing decision for another.
 
-1. The topics and planning included.
-2. Filming time, locations and people required.
-3. The number and format of finished videos.
-4. Captions, photographs, alternate versions and usage rights.
-5. The review process and included changes.
-6. Whether posting, account management or advertising is included.
+Also clarify captions, branded text, music, logos, calls to action and review rounds. If one person sends consolidated notes, the editor can work from a clear decision. Feedback from several people arriving at different times can add rounds and delay delivery. The [business video quote checklist](/blog/compare-business-video-quotes/) gives you questions to compare proposals before work starts.
 
-If you want a proposal, share the channels you use, the customers you want to reach and the questions they ask most often. We can then recommend a sensible starting scope through the [NextVision contact page](/contact/#contact-form), whether that is one focused project or a [monthly content plan](/social-media-content-creation-dublin/).
+## Can a monthly video package include photography?
+
+It can, if the scope includes a stated number of finished images and the time needed to create them. Photography is not automatically included in a video price. Say what the images are for: a service page, a team introduction, product listings, a campaign or social posts. That changes which subjects and formats will be useful.
+
+Video and still images can be planned in one production when the schedule allows both. The [Amber Oxygen Therapy project](/case-studies/amber-oxygen-therapy-video-production/) included twelve short videos and six photographs. The page shows how the stills supported the video series. For a dedicated image brief, see [commercial photography in Dublin](/photography-dublin/) and the [commercial photography planning guide](/blog/commercial-photography-shoot-planning-dublin/).
+
+## What is normally outside a production package?
+
+NextVision's published monthly packages cover video production. They do not automatically include account posting, comment moderation, an advertising budget, campaign management, raw footage, additional locations, extra filming hours or every possible alternate version. If you need any of those, put them in the brief so they can be priced and scheduled clearly.
+
+Some businesses have an employee or agency who can publish the finished files. Others want one provider to plan creative, run paid campaigns and organise incoming enquiries. The latter can be scoped as a connected path: [video and photography](/short-form-video-production-dublin/), [campaign management](/google-ads-meta-ads-dublin/) and [CRM or lead automation](/crm-lead-automation-dublin/). The [Perfect Clean advertising case study](/case-studies/perfect-clean-video-advertising/) shows video creative prepared for paid use; it does not claim that video production and campaign management are the same task.
+
+## How do you decide whether monthly content is right?
+
+A recurring package suits a business that has useful topics to share, people available to contribute and a reason to publish throughout the year. A single launch, event or new service may call for one focused project instead. If you are still choosing the format, compare the [content day and business video options](/blog/content-day-or-business-video/) and consider whether a [one-off short-form project](/short-form-video-production-dublin/) meets the need.
+
+Before asking for a quote, note the channel, the audience, the next few customer questions, who can appear and the date you need the first files. Add any photography, accessibility or language requirements. If you do not know how many videos to request, say so. A proposal can recommend a starting quantity once the work is clear.
+
+### Frequently asked questions
+
+#### Does a monthly short-form video package include posting?
+
+Not automatically. NextVision's monthly production packages include planning, a half day of filming and the stated number of edited videos. Posting and account management need a separate agreement; see the [social media content service](/social-media-content-creation-dublin/) for that scope.
+
+#### How many videos do you get from a half day?
+
+The package quantity is agreed in advance: the current options include four, eight or twelve finished short videos. The half day is filming time. The complexity of each topic, people and locations affects what can be planned and edited.
+
+#### Can the same videos be used in paid ads?
+
+They can be produced for paid use when the brief says so. The creative, landing page and campaign should share a clear audience and next step. The [Google and Meta Ads service](/google-ads-meta-ads-dublin/) covers campaign management separately.
+
+#### Can I request a mix of video and photos?
+
+Yes, if the image count and delivery requirements are agreed in the proposal. The [photography service](/photography-dublin/) and the [Amber Oxygen Therapy case study](/case-studies/amber-oxygen-therapy-video-production/) show how stills can support a video project.
+
+Share your business, channels and the questions customers ask most often through the [NextVision contact page](/contact/#contact-form). We can recommend a sensible production scope before confirming a quote.
