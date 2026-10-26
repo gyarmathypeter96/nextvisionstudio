@@ -13,6 +13,7 @@
       Clarity measurement to understand which pages and campaigns generate
       enquiries. Essential site features work without these cookies. <a href="/privacy-policy/">Privacy policy</a>
     </p>
+    <p data-cookie-status role="status"></p>
   </div>
   <div class="cookie-consent__actions">
     <button
@@ -41,6 +42,13 @@
   const initialiseCookieConsent = () => {
     const banner = document.querySelector("[data-cookie-consent]");
     if (!banner) return;
+    const updateStatus = () => {
+      const status = banner.querySelector("[data-cookie-status]");
+      const choice = readCookieConsent();
+      if (status) status.textContent = choice === "granted" ? "Your current choice: analytics accepted."
+        : choice === "denied" ? "Your current choice: essential only." : "Choose your cookie preference.";
+    };
+    updateStatus();
 
     if (banner.dataset.choiceMade === "true") {
       banner.hidden = true;
@@ -62,6 +70,8 @@
           granted ? "granted" : "denied",
         );
       } catch (_) {}
+
+      updateStatus();
 
       window.gtag?.("consent", "update", {
         analytics_storage: granted ? "granted" : "denied",
@@ -106,6 +116,10 @@
     const banner = document.querySelector("[data-cookie-consent]");
     if (!banner) return;
     banner.dataset.choiceMade = "false";
+    const status = banner.querySelector("[data-cookie-status]");
+    const choice = readCookieConsent();
+    if (status) status.textContent = choice === "granted" ? "Your current choice: analytics accepted."
+      : choice === "denied" ? "Your current choice: essential only." : "Choose your cookie preference.";
     banner.hidden = false;
     banner.querySelector("[data-cookie-essential]")?.focus();
   });
