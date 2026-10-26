@@ -74,7 +74,7 @@ const isCurrent = (href: string) =>
               <summary
                 class:list={["site-header__link", { "is-current": isCurrent("/services/") || item.children.some((child) => child.href !== "/services/" && isCurrent(child.href)) }]}
               >
-                {item.label}<span class="site-header__dropdown-caret" aria-hidden="true">⌄</span>
+                {item.label}<svg class="site-header__dropdown-caret" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
               </summary>
               <div class="site-header__dropdown-menu" aria-label="Service pages">
                 {item.children.map((child) => (
@@ -276,6 +276,7 @@ const isCurrent = (href: string) =>
   .site-header__dropdown > summary {
     cursor: pointer;
     list-style: none;
+    align-items: center;
   }
 
   .site-header__dropdown > summary::-webkit-details-marker {
@@ -283,9 +284,17 @@ const isCurrent = (href: string) =>
   }
 
   .site-header__dropdown-caret {
-    margin: -5px 0 0 7px;
-    font-size: 16px;
-    line-height: 1;
+    display: block;
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 7px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: center;
     transition: transform 180ms ease;
   }
 

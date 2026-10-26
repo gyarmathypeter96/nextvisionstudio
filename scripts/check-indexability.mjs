@@ -123,6 +123,16 @@ for (const page of renderedPages) {
       continue;
     }
     if (url.hostname !== "www.nextvisionstudio.com" && url.hostname !== "nextvisionstudio.com") continue;
+    // A gallery or native-video fallback can link directly to a built file.
+    // Check that file on disk instead of treating it as a trailing-slash page.
+    if (path.extname(url.pathname) && !url.pathname.endsWith("/")) {
+      try {
+        await access(path.join(distDirectory, decodeURIComponent(url.pathname)));
+      } catch {
+        failures.push(`${route} links to a missing file: ${href}`);
+      }
+      continue;
+    }
     const targetRoute = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
     const target = pagesByRoute.get(targetRoute);
     if (!target) {

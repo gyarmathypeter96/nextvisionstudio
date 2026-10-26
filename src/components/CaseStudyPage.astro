@@ -45,6 +45,11 @@ interface Props {
   details?: Array<{ title: string; text: string }>;
   measurementNote?: string;
   resultTitle?: string;
+  publishedDate?: string;
+  related?: string[];
+  contents?: Array<{ text: string; slug: string }>;
+  gallery?: Array<{ src: string; alt: string; width: number; height: number; caption?: string }>;
+  localVideos?: Array<{ src: string; poster: string; title: string; width: number; height: number; duration: string }>;
 }
 
 const props = Astro.props;
@@ -52,8 +57,8 @@ const canonical = `https://www.nextvisionstudio.com${Astro.url.pathname}`;
 const videoUrl = props.videoId
   ? `https://www.youtube.com/watch?v=${props.videoId}`
   : undefined;
-const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href;
-const otherCaseStudies = caseStudies.filter((study) => study.href !== Astro.url.pathname);
+const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href ?? (props.localVideos?.length ? "#case-native-title" : undefined);
+const otherCaseStudies = caseStudies.filter((study) => study.href !== Astro.url.pathname && (!props.related?.length || props.related.includes(study.href))).slice(0, 4);
 
 const articleSchema = {
   "@type": "Article",
@@ -64,6 +69,7 @@ const articleSchema = {
   author: { "@id": FOUNDER_ID },
   publisher: { "@id": BUSINESS_ID },
   about: props.client,
+  ...(props.publishedDate ? { datePublished: props.publishedDate, dateModified: props.publishedDate } : {}),
   ...(props.location ? { locationCreated: {
     "@type": "Place",
     name: props.location,
@@ -74,7 +80,13 @@ const caseStudySchema = {
   "@context": "https://schema.org",
   "@graph": [
     articleSchema,
-
+    ...(props.localVideos ?? []).map((video) => ({
+      "@type": "VideoObject", name: video.title, description: props.description,
+      thumbnailUrl: `https://www.nextvisionstudio.com${video.poster}`,
+      contentUrl: `https://www.nextvisionstudio.com${video.src}`,
+      uploadDate: props.publishedDate, duration: video.duration,
+      creator: { "@id": FOUNDER_ID },
+    })),
   ],
 };
 ---
@@ -118,7 +130,7 @@ const caseStudySchema = {
 
         <div class="case-study-actions">
           {primaryVideoUrl && (
-            <a class="case-study-button case-study-button--primary" href={primaryVideoUrl} target="_blank" rel="noreferrer">
+            <a class="case-study-button case-study-button--primary" href={primaryVideoUrl} target={primaryVideoUrl.startsWith("#") ? undefined : "_blank"} rel={primaryVideoUrl.startsWith("#") ? undefined : "noreferrer"}>
               Watch the project
             </a>
           )}
@@ -128,7 +140,7 @@ const caseStudySchema = {
         </div>
       </div>
 
-      <figure class:list={["case-study-hero__media", { "case-study-hero__media--pending": !props.heroImage }]}>
+      <figure class:list={["case-study-hero__media", { "case-study-hero__media--pending": !props.heroImage, "case-study-hero__media--portrait": (props.heroWidth ?? 1280) < (props.heroHeight ?? 720) }]}>
         {props.heroImage ? <img src={props.heroImage} alt={props.heroAlt} width={props.heroWidth ?? 1280} height={props.heroHeight ?? 720} fetchpriority="high" /> : <div class="case-study-media-pending"><span>NextVision Studio / Client work</span><strong>{props.client}</strong><p>Project photograph to follow</p></div>}
       </figure>
     </section>
@@ -210,7 +222,32 @@ const caseStudySchema = {
       </section>
     )}
 
+    {props.localVideos && props.localVideos.length > 0 && <section class="case-study-native" aria-labelledby="case-native-title">
+      <h2 id="case-native-title">Watch the finished work</h2>
+      <div class="case-study-native__grid">
+        {props.localVideos.map((video) => <figure>
+          <video controls playsinline preload="none" poster={video.poster} width={video.width} height={video.height} aria-label={video.title}>
+            <source src={video.src} type="video/mp4" />
+            <a href={video.src}>Watch {video.title}</a>
+          </video>
+          <figcaption>{video.title}</figcaption>
+        </figure>)}
+      </div>
+    </section>}
+
+    {props.gallery && props.gallery.length > 0 && <section class="case-study-gallery" aria-labelledby="case-gallery-title">
+      <h2 id="case-gallery-title">Selected images from the project</h2>
+      <div class="case-study-gallery__grid">
+        {props.gallery.map((image) => <figure>
+          <a href={image.src} target="_blank" rel="noreferrer" aria-label={`Open photograph: ${image.alt}`}><img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" /></a>
+          {image.caption && <figcaption>{image.caption}</figcaption>}
+        </figure>)}
+      </div>
+    </section>}
+
     {props.details?.map((detail) => <section class="case-study-section case-study-section--split"><div class="case-study-section__heading"><h2>{detail.title}</h2></div><div class="case-study-section__body"><p>{detail.text}</p></div></section>)}
+
+    {props.contents && props.contents.length > 0 && <nav class="case-study-contents" aria-label="In this case study"><p>In this case study</p><ul>{props.contents.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
 
     {Astro.slots.has("default") && <div class="case-study-story"><slot /></div>}
 
@@ -275,13 +312,28 @@ const caseStudySchema = {
   .case-study-media-pending span { color: #b9dfff; font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
   .case-study-media-pending strong { margin: 30px 0 20px; font-size: clamp(30px,4vw,52px); line-height: 1.06; overflow-wrap: anywhere; }
   .case-study-media-pending p { color: rgba(255,255,255,.65); font-size: 14px; }
-  .case-study-story { width: min(100% - 48px, 900px); margin: 0 auto; padding: 0 0 80px; }
+  .case-study-story { width: min(100% - 48px, 760px); margin: 0 auto; padding: 0 0 80px; }
   .case-study-story :global(section) { padding-top: 64px; border-top: 1px solid rgba(185,223,255,.15); margin-top: 50px; scroll-margin-top: 110px; }
   .case-study-story :global(h2) { font-size: clamp(30px,4vw,46px); line-height: 1.12; margin: 0 0 28px; text-wrap: balance; }
   .case-study-story :global(h3) { font-size: 23px; margin-top: 35px; }
   .case-study-story :global(p), .case-study-story :global(li) { font-size: 18px; line-height: 1.85; color: rgba(255,255,255,.76); }
   .case-study-story :global(a) { color: #cfeaff; text-underline-offset: 4px; }
   .case-study-story :global(a:focus-visible) { outline: 2px solid #cfeaff; outline-offset: 4px; }
+  .case-study-story :global(h2[id]) { scroll-margin-top: 120px; }
+  .case-study-contents, .case-study-native, .case-study-gallery { width: min(100% - 48px, 1180px); margin: 0 auto 70px; }
+  .case-study-contents { max-width: 760px; padding: 24px 0; border-block: 1px solid rgba(185,223,255,.18); }
+  .case-study-contents p { margin: 0 0 16px; font-weight: 700; }
+  .case-study-contents ul { columns: 2; padding-left: 20px; margin: 0; }
+  .case-study-contents li { padding: 5px 10px 5px 0; break-inside: avoid; font-size: 15px; line-height: 1.6; }
+  .case-study-contents a { color: #cfeaff; text-underline-offset: 4px; }
+  .case-study-native h2, .case-study-gallery h2 { font-size: clamp(29px,4vw,42px); margin: 0 0 28px; scroll-margin-top: 120px; }
+  .case-study-native__grid, .case-study-gallery__grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,260px),1fr)); gap: 28px; align-items: start; }
+  .case-study-native figure, .case-study-gallery figure { margin: 0; min-width: 0; }
+  .case-study-native figure { width: 100%; max-width: 360px; justify-self: center; }
+  .case-study-native video { display: block; width: 100%; height: auto; max-height: 650px; aspect-ratio: 9 / 16; object-fit: contain; background: #060708; border-radius: 12px; }
+  .case-study-gallery img { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .case-study-native figcaption, .case-study-gallery figcaption { margin-top: 12px; color: rgba(255,255,255,.64); font-size: 14px; line-height: 1.6; }
+  @media (max-width: 620px) { .case-study-contents ul { columns: 1; } .case-study-contents, .case-study-native, .case-study-gallery { width: calc(100% - 32px); } }
 
   .case-study-hero,
   .case-study-section,
@@ -386,10 +438,13 @@ const caseStudySchema = {
   .case-study-hero__media img {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     border: 1px solid rgba(185, 223, 255, .2);
   }
+
+  .case-study-hero__media--portrait img { aspect-ratio: 4 / 5; object-position: 50% 35%; max-height: 650px; }
 
   .case-study-section,
   .case-study-video,

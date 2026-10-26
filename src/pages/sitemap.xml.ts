@@ -23,9 +23,9 @@ const lastModified: Record<string, string> = {
   "videographer-swords/": "2026-10-25",
   "videographer-malahide/": "2026-10-25",
   "videographer-balbriggan/": "2026-10-25",
-  "": "2026-10-25",
+  "": "2026-10-26",
   "services/": "2026-10-25",
-  "about/": "2026-10-01",
+  "about/": "2026-10-26",
   "contact/": "2026-10-01",
   "corporate-video-production-dublin/": "2026-10-25",
   "event-videographer-dublin/": "2026-10-25",
@@ -35,7 +35,7 @@ const lastModified: Record<string, string> = {
   "webdesigner-dublin/": "2026-10-25",
   "social-media-content-creation-dublin/": "2026-10-25",
   "crm-lead-automation-dublin/": "2026-09-23",
-  "case-studies/": "2026-10-25",
+  "case-studies/": "2026-10-26",
   "case-studies/amber-oxygen-therapy-video-production/": "2026-10-25",
   "case-studies/balbriggan-braces-dental-videos/": "2026-10-25",
   "case-studies/perfect-clean-video-advertising/": "2026-10-25",
@@ -75,7 +75,10 @@ export const GET: APIRoute = async () => {
     lastmod: formatDate(post.data.updatedDate ?? post.data.pubDate),
   }));
 
-  const urls = [...staticRoutes, ...blogRoutes]
+  const projects = await getCollection("projects");
+  const projectRoutes = projects.map((project) => ({ path: `case-studies/${project.id}/`, lastmod: project.data.publishedDate.slice(0, 10) }));
+
+  const urls = [...staticRoutes, ...blogRoutes, ...projectRoutes]
     .sort((a, b) => a.path.localeCompare(b.path))
     .map(
       (route) => `  <url>

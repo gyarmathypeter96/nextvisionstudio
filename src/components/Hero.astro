@@ -44,9 +44,10 @@ import BackgroundMotionControl from "./BackgroundMotionControl.astro";
         <span>Services</span>
       </a>
     </div>
-    <div class="nvs-hero-motion">
-      <BackgroundMotionControl controls="hero-background-video" playLabel="Play background video" pauseLabel="Pause background video" />
-    </div>
+
+  </div>
+  <div class="nvs-hero-motion">
+    <BackgroundMotionControl controls="hero-background-video" playLabel="Play background video" pauseLabel="Pause background video" iconOnly />
   </div>
 </section>
 
@@ -91,7 +92,7 @@ import BackgroundMotionControl from "./BackgroundMotionControl.astro";
     object-position: center;
   }
 
-  .nvs-hero-motion { min-height: 44px; margin-top: 20px; }
+  .nvs-hero-motion { position: absolute; z-index: 4; left: 24px; bottom: 24px; }
 
   .nvs-astronaut-overlay {
     position: absolute;

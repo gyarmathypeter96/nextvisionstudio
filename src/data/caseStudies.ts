@@ -1,3 +1,4 @@
+import { expandedCaseStudies } from "./expandedCaseStudies";
 import { clientCaseStudyMedia } from "./clientCaseStudyMedia";
 
 export interface CaseStudySummary {
@@ -11,6 +12,7 @@ export interface CaseStudySummary {
 
 // Shared by the case study index and the "more case studies" links on each project.
 export const caseStudies: CaseStudySummary[] = [
+  ...expandedCaseStudies,
   { client: "Amber Oxygen Therapy", title: "Amber Oxygen Therapy: A Short-Form Video Series", location: "On-location content production", href: "/case-studies/amber-oxygen-therapy-video-production/", image: clientCaseStudyMedia.amber.hero?.src, alt: clientCaseStudyMedia.amber.hero?.alt ?? "" },
   { client: "Balbriggan Braces", title: "Balbriggan Braces: Patient Education in Long and Short Form", location: "Balbriggan, County Dublin", href: "/case-studies/balbriggan-braces-dental-videos/", image: clientCaseStudyMedia.braces.hero?.src, alt: clientCaseStudyMedia.braces.hero?.alt ?? "" },
   { client: "Perfect Clean", title: "Perfect Clean: The Work, the Owner and the Customer", location: "Cleaning business video production", href: "/case-studies/perfect-clean-video-advertising/", image: clientCaseStudyMedia.perfectClean.hero?.src, alt: clientCaseStudyMedia.perfectClean.hero?.alt ?? "" },

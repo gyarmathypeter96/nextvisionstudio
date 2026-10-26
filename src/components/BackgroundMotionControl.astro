@@ -3,11 +3,13 @@ interface Props {
   controls: string;
   playLabel: string;
   pauseLabel: string;
+  iconOnly?: boolean;
 }
-const { controls, playLabel, pauseLabel } = Astro.props;
+const { controls, playLabel, pauseLabel, iconOnly = false } = Astro.props;
 ---
 
-<button class="motion-toggle" type="button" aria-controls={controls} data-motion-toggle data-play-label={playLabel} data-pause-label={pauseLabel} hidden>
+<button class:list={["motion-toggle", { "motion-toggle--icon": iconOnly }]} type="button" aria-controls={controls} data-motion-toggle data-play-label={playLabel} data-pause-label={pauseLabel} hidden>
+  {iconOnly && <svg class="motion-toggle__icon" viewBox="0 0 24 24" aria-hidden="true"><path class="motion-toggle__pause" d="M8 6v12M16 6v12" /><path class="motion-toggle__play" d="m9 6 9 6-9 6Z" /></svg>}
   <span data-motion-label>{playLabel}</span>
 </button>
 
@@ -63,6 +65,12 @@ const { controls, playLabel, pauseLabel } = Astro.props;
 
 <style>
   .motion-toggle { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 10px 16px; border: 1px solid #8c9aa5; border-radius: 999px; background: #111; color: #fff; font: inherit; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; }
+  .motion-toggle--icon { width: 44px; height: 44px; padding: 10px; background: rgba(10,14,17,.55); border-color: rgba(207,234,255,.3); backdrop-filter: blur(10px); }
+  .motion-toggle--icon [data-motion-label] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .motion-toggle__icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .motion-toggle__play { display: none; }
+  :global([data-motion-paused="true"]) .motion-toggle__pause { display: none; }
+  :global([data-motion-paused="true"]) .motion-toggle__play { display: block; }
   .motion-toggle[hidden] { display: none; }
   .motion-toggle:hover { background: #26313a; }
   .motion-toggle:focus-visible { outline: 3px solid #cfeaff; outline-offset: 4px; }

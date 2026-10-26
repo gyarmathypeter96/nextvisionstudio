@@ -1,0 +1,16 @@
+---
+import { getCollection, render } from "astro:content";
+import CaseStudyPage from "../../components/CaseStudyPage.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content, headings } = await render(project);
+---
+
+<CaseStudyPage {...project.data} contents={headings.filter((heading) => heading.depth === 2)}>
+  <Content />
+</CaseStudyPage>

@@ -22,6 +22,8 @@ const aboutSchema = {
       jobTitle: "Founder and filmmaker",
       image: "https://www.nextvisionstudio.com/images/about/peter-gyarmathy.webp",
       worksFor: { "@id": "https://www.nextvisionstudio.com/#business" },
+      alumniOf: [{ "@type": "CollegeOrUniversity", name: "Budapest Business University" }, { "@type": "CollegeOrUniversity", name: "Hudson County Community College" }],
+      hasCredential: [{ "@type": "EducationalOccupationalCredential", name: "BSc in Trade and Marketing" }, { "@type": "EducationalOccupationalCredential", name: "MSc in Management and Leadership" }],
     },
 
   ],
@@ -29,8 +31,8 @@ const aboutSchema = {
 ---
 
 <BaseLayout
-  title="About NextVision Studio | Dublin Creative Studio"
-  description="Meet Peter Gyarmathy and discover NextVision Studio, a Dublin creative studio for videography, photography, social media, ads and premium websites."
+  title="Peter Gyarmathy | Filmmaker & Photographer Dublin | NextVision"
+  description="Meet Peter Gyarmathy: filmmaker and photographer serving Dublin, with a marketing BSc, management MSc and creative study in the New York area."
   canonical="https://www.nextvisionstudio.com/about/"
 >
   <main class="about-page">

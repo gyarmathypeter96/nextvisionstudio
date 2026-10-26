@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { CONTACT_EMAIL, CONTACT_PHONE, SERVICE_AREA_TEXT, SITE_NAME, SITE_URL } from "../config/site";
 import { LISTED_SERVICES } from "../config/services";
+import { expandedCaseStudies } from "../data/expandedCaseStudies";
 import { nextVisionPrices } from "../data/marketPricing";
 
 // A public Markdown summary of the same business and routes shown on the site.
@@ -31,6 +32,7 @@ These are NextVision Studio prices. All exclude VAT. Filming and editing are sep
 - [Perfect Clean project](${SITE_URL}/case-studies/perfect-clean-video-advertising/): Owner-led advertising creative and the work process.
 - [VentSolve project](${SITE_URL}/case-studies/ventsolve-content-production/): Business video, customer education and training.
 - [Leroy's Barking World project](${SITE_URL}/case-studies/leroys-barking-world-social-content/): Social video production for a local business.
+${expandedCaseStudies.map((project) => `- [${project.title}](${SITE_URL}${project.href}): ${project.location}.`).join("\n")}
 - [Photography portfolio](${SITE_URL}/photography-dublin/): Product, brand, people and event photography.
 
 ## Local filming arrangements

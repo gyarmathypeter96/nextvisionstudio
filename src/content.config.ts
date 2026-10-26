@@ -21,4 +21,24 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const projectImage = z.object({
+  src: z.string(), alt: z.string(), width: z.number(), height: z.number(), caption: z.string().optional(),
+});
+
+const projects = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/projects" }),
+  schema: z.object({
+    client: z.string(), title: z.string(), metaTitle: z.string(), description: z.string(),
+    location: z.string().optional(), date: z.string().optional(), service: z.string(),
+    heroImage: z.string(), heroAlt: z.string(), heroWidth: z.number(), heroHeight: z.number(),
+    challenge: z.string(), deliverables: z.array(z.string()), production: z.array(z.string()),
+    outcome: z.string(), resultTitle: z.string().optional(),
+    links: z.array(z.object({ label: z.string(), href: z.string() })),
+    gallery: z.array(projectImage).default([]),
+    localVideos: z.array(z.object({ src: z.string(), poster: z.string(), title: z.string(), width: z.number(), height: z.number(), duration: z.string() })).default([]),
+    publishedDate: z.string(),
+    related: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { blog, projects };
