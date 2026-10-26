@@ -4,6 +4,7 @@ export const CONTACT_EMAIL = "hello@nextvisionstudio.com";
 export const CONTACT_PHONE = "+353 89 479 7055";
 export const CONTACT_PHONE_E164 = "+353894797055";
 export const GTM_CONTAINER_ID = "GTM-PL34N8WF";
+export const GA4_MEASUREMENT_ID = "G-KNFH3LFFLY";
 export const ANALYTICS_HOSTS = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
 // Service coverage is not a claim that the business has an office in each town.
 // Matches the service area on the Google Business Profile.

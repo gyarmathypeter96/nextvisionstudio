@@ -15,6 +15,7 @@
   const track = (eventName: string, parameters: Record<string, string | number | undefined>) => {
     if (!analyticsConsentGranted()) return;
     window.dataLayer?.push({ event: eventName, ...parameters });
+    window.clarity?.("event", eventName);
   };
 
   // A lead is pushed on the page the visitor lands on after submitting. Pushing
@@ -34,6 +35,7 @@
     try { sessionStorage.setItem(sentLeadKey, JSON.stringify([...sent, id].slice(-100))); } catch (_) {}
     // Tag Manager sends this to GA4, Google Ads and Meta (as Lead).
     window.nvsLoadTagManager?.();
+    window.clarity?.("event", "generate_lead");
     window.dataLayer.push({ event: "generate_lead", ...parameters, ...(callback ? { eventCallback: callback, eventTimeout: 2000 } : {}) });
     return true;
   };
@@ -139,7 +141,7 @@
       };
 
       const markFormStarted = () => {
-        if (formStarted) return;
+        if (formStarted || !analyticsConsentGranted()) return;
         formStarted = true;
         startedAt = Math.floor(Date.now() / 1000);
         attribution = captureSessionAttribution();
@@ -172,7 +174,7 @@
       });
 
       form.addEventListener("invalid", (event) => {
-        if (validationErrorTracked) return;
+        if (validationErrorTracked || !analyticsConsentGranted()) return;
         validationErrorTracked = true;
         const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
         track("lead_form_validation_error", {

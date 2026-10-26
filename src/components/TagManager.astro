@@ -18,6 +18,19 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
     window.dataLayer.push(arguments);
   };
 
+  // Deliberate QA runs remain identifiable in GA4, including automatic events.
+  // This sets no visitor identity and never bypasses consent or owner exclusion.
+  try {
+    const debugChoice = new URL(location.href).searchParams.get("nvs_debug");
+    if (debugChoice === "1") sessionStorage.setItem("nvs-measurement-qa", "1");
+    if (debugChoice === "0") sessionStorage.removeItem("nvs-measurement-qa");
+    if (sessionStorage.getItem("nvs-measurement-qa") === "1") {
+      window.gtag("set", { debug_mode: true, traffic_type: "qa", measurement_traffic: "qa" });
+    } else {
+      window.gtag("set", { measurement_traffic: "visitor" });
+    }
+  } catch (_) {}
+
   let storedConsent = null;
   try {
     storedConsent = localStorage.getItem("nvs-cookie-consent");
@@ -53,19 +66,9 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
   };
 
   if (consentGranted) {
-    const loadTagWhenIdle = function () {
-      if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(window.nvsLoadTagManager, { timeout: 1800 });
-      } else {
-        window.setTimeout(window.nvsLoadTagManager, 900);
-      }
-    };
-
-    if (document.readyState === "complete") {
-      loadTagWhenIdle();
-    } else {
-      window.addEventListener("load", loadTagWhenIdle, { once: true });
-    }
+    // The script is already asynchronous. Waiting for window.load plus idle
+    // loses short consented visits while large images/video are loading.
+    window.nvsLoadTagManager();
   }
   })();
 </script>

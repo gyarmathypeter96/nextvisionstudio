@@ -20,7 +20,7 @@ const store = (initial = {}) => {
   const values = new Map(Object.entries(initial));
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, String(value)), removeItem: (key) => values.delete(key) };
 };
-function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/", consent = "granted", owner = false, session = store(), forms = [], response, local } = {}) {
+function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/", consent = "granted", owner = false, session = store(), forms = [], response, local, readyState = "complete" } = {}) {
   const localStorage = local ?? store({ "nvs-cookie-consent": consent, ...(owner ? { "nvs-owner-optout": "1" } : {}) });
   const location = new URL(url);
   const redirects = [];
@@ -30,7 +30,7 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
   const idle = [];
   const listeners = new Map();
   const document = {
-    readyState: "complete", referrer: "", cookie: "",
+    readyState, referrer: "", cookie: "",
     querySelector: (selector) => selector === "script[data-nvs-gtm]" ? appended.find((node) => node.dataset.nvsGtm) : null,
     querySelectorAll: () => forms,
     createElement: () => ({ dataset: {}, setAttribute() {}, textContent: "", remove() {} }),
@@ -67,6 +67,7 @@ function form(redirect = "/quotesend/?source=video") {
     },
     submit: () => listeners.get("submit")({ preventDefault() {} }), button,
     step: (detail) => listeners.get("nvs:form-step")({ detail }),
+    focus: () => listeners.get("focusin")({ target: { type: "text", name: "name" } }),
   };
   return instance;
 }
@@ -121,9 +122,9 @@ test("quote form steps are measured only with consent and carry no personal data
   assert.ok(!JSON.stringify(granted).includes("synthetic@example.invalid"));
   assert.equal(steps("denied").length, 0);
 });
-test("revoked consent is rechecked by an already deferred GTM loader", () => {
-  const env = fixture(); env.localStorage.setItem("nvs-cookie-consent", "denied");
-  env.idle.forEach((callback) => callback()); assert.equal(env.appended.length, 0);
+test("loader rechecks consent when called later", () => {
+  const env = fixture({ consent: "denied" }); env.window.nvsLoadTagManager();
+  assert.equal(env.appended.length, 0);
 });
 for (const body of [{}, { submission_id: 12, status: "rejected" }, { submission_id: 12, status: "failed" }, { submission_id: 0, status: "received" }]) {
   test(`HTTP success without an accepted CRM receipt is not a lead: ${JSON.stringify(body)}`, async () => {
@@ -183,4 +184,16 @@ test("a queued receipt on a different page is not prematurely counted or discard
 test("deduplication falls back to memory when session storage is blocked", async () => {
   const blocked = { getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); }, removeItem() { throw new Error("blocked"); } };
   const f = form(""); const env = fixture({ forms: [f], session: blocked }); env.runForms(); await f.submit(); await f.submit(); assert.equal(env.leads().length, 1);
+});
+
+test("returning consented visitor starts measurement before the load event", () => {
+  const env = fixture({ readyState: "loading" });
+  assert.equal(env.appended.length, 1, "Do not lose short visits while images and videos are still loading");
+});
+
+test("form focus before consent does not suppress a later consented form start", () => {
+  const f = form(); const env = fixture({ consent: "denied", forms: [f] }); env.runForms();
+  f.focus(); assert.equal((env.window.dataLayer || []).filter(e => e.event === "lead_form_start").length, 0);
+  env.localStorage.setItem("nvs-cookie-consent", "granted"); f.focus(); f.focus();
+  assert.equal(env.window.dataLayer.filter(e => e.event === "lead_form_start").length, 1);
 });
