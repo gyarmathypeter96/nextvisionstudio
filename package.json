@@ -17,6 +17,6 @@
     "check:seo-growth": "node scripts/check-seo-growth.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.3"
+    "astro": "^7.4.2"
   }
 }
