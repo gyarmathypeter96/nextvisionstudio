@@ -11,7 +11,7 @@ const { page } = Astro.props;
 <section class:list={["landing-value", `landing-value--${page.kind}`]} id="landing-value" aria-labelledby="landing-value-title">
   <div class="landing-value__inner">
     <div class="landing-value__copy">
-      {page.problemKicker && <div class="landing-section-kicker">{page.problemKicker}</div>}
+
       <h2 id="landing-value-title">{page.problemTitle}</h2>
       <p>{page.problemText}</p>
       {page.kind !== "social" && <a href="#landing-contact">Get a clear recommendation <span aria-hidden="true">→</span></a>}

@@ -11,7 +11,7 @@ const { page } = Astro.props;
 <section class="landing-process" aria-labelledby="landing-process-title">
   <div class="landing-process__inner">
     <header>
-      <div class="landing-process__kicker">How it works</div>
+
       <h2 id="landing-process-title">{page.processTitle}</h2>
       <p>{page.processText}</p>
     </header>
@@ -20,7 +20,7 @@ const { page } = Astro.props;
       {
         page.process.map((step, index) => (
           <li>
-            <span>0{index + 1}</span>
+
             <h3>{step.title}</h3>
             <p>{step.text}</p>
           </li>
@@ -30,7 +30,7 @@ const { page } = Astro.props;
 
     <aside class="landing-process__decision">
       <div>
-        <small>A useful first conversation</small>
+
         <h3>{page.decisionTitle}</h3>
         <p>{page.decisionText}</p>
       </div>
@@ -368,4 +368,12 @@ const { page } = Astro.props;
       transition: none;
     }
   }
+</style>
+
+<style>
+.landing-process__steps { display:block; list-style:decimal; padding-left:24px; }
+.landing-process__steps::before { display:none; }
+.landing-process__steps li { display:list-item; min-height:0; padding:0 0 28px 8px; border:0; border-radius:0; background:none; box-shadow:none; }
+.landing-process__steps li::marker { color:#c4cbd2; font-size:18px; font-weight:500; }
+.landing-process__steps li p { max-width:70ch; }
 </style>

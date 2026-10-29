@@ -23,7 +23,7 @@ const copy = variant === "social"
 <section class="reel-feature" aria-labelledby={`reel-feature-title-${variant}`}>
   <div class="reel-feature__inner">
     <div class="reel-feature__copy">
-      {copy.kicker && <p class="reel-feature__kicker">{copy.kicker}</p>}
+
       <h2 id={`reel-feature-title-${variant}`}>{copy.title}</h2>
       <p>{copy.text}</p>
       {variant === "social" && (

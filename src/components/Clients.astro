@@ -1,5 +1,5 @@
 ---
-import BackgroundMotionControl from "./BackgroundMotionControl.astro";
+
 
 const clients: { name: string; src: string; width: number; height: number; href?: string }[] = [
   { name: "Gut Fest", src: "/images/clients/gut-fest.webp", href: "/case-studies/gut-fest-event-videography-dublin/", width: 500, height: 500 },
@@ -14,45 +14,21 @@ const clients: { name: string; src: string; width: number; height: number; href?
 ];
 ---
 
-<section class="clients" id="clients" aria-labelledby="clients-title" data-background-motion data-motion-paused="true">
-  <h2 id="clients-title">Trusted by Dublin and worldwide brands</h2>
-  <div class="clients__motion">
-    <BackgroundMotionControl controls="client-logos" playLabel="Play client logos" pauseLabel="Pause client logos" />
-  </div>
-  <div class="clients__marquee" aria-label="Selected NextVision Studio clients">
-    <div class="clients__track" id="client-logos">
-      {[...clients, ...clients].map((client, index) => (
-        <div class="clients__item" aria-hidden={index >= clients.length ? "true" : undefined}>
-          <a href={client.href ?? "/case-studies/"} tabindex={index >= clients.length ? -1 : undefined} aria-label={`View ${client.name} project${client.href ? "" : " portfolio"}`}><img src={client.src} alt={index >= clients.length ? "" : `${client.name} logo`} width={client.width} height={client.height} loading={index < 5 ? "eager" : "lazy"} decoding="async" /></a>
-        </div>
-      ))}
-    </div>
-  </div>
+<section class="clients" id="clients" aria-labelledby="clients-title">
+  <h2 id="clients-title">Some of the businesses I have worked with</h2>
+  <ul class="clients__grid">
+    {clients.map(client => <li><a href={client.href ?? "/case-studies/"} aria-label={`View ${client.name} project${client.href ? "" : " portfolio"}`}><img src={client.src} alt={`${client.name} logo`} width={client.width} height={client.height} loading="lazy" decoding="async" /></a></li>)}
+  </ul>
 </section>
-
 <style>
-  .clients, .clients * { box-sizing: border-box; }
-  .clients { position: relative; padding: 56px 0 66px; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.1); background: #111; color: #fff; }
-  .clients h2 { width: min(100%, 980px); margin: 0 auto 24px; padding: 0 24px; color: rgba(255,255,255,.77); font-size: clamp(11px, 1.15vw, 14px); font-weight: 850; letter-spacing: .15em; line-height: 1.3; text-align: center; text-transform: uppercase; }
-  .clients__motion { display: flex; min-height: 44px; justify-content: center; margin-bottom: 26px; }
-  .clients__marquee { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
-  .clients__track { display: flex; width: max-content; align-items: center; animation: clients-marquee 48s linear infinite; animation-play-state: paused; }
-  .clients[data-motion-paused="false"] .clients__track { animation-play-state: running; }
-  .clients:not([data-motion-ready]) .clients__marquee { mask-image: none; }
-  .clients:not([data-motion-ready]) .clients__track { width: 100%; flex-wrap: wrap; justify-content: center; animation: none; }
-  .clients:not([data-motion-ready]) .clients__item[aria-hidden="true"] { display: none; }
-  .clients__item { display: grid; flex: 0 0 clamp(145px, 13vw, 220px); height: 78px; padding: 0 26px; place-items: center; }
-  .clients__item a { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 6px; }
-  .clients__item a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
-  .clients__marquee:focus-within .clients__track { animation-play-state: paused; }
-  .clients__item img { display: block; width: auto; max-width: 100%; height: auto; max-height: 54px; object-fit: contain; opacity: .68; filter: grayscale(1) saturate(0) brightness(1.3); transition: opacity .2s ease, filter .2s ease; }
-  .clients__item:hover img { opacity: 1; filter: grayscale(0) brightness(1); }
-  @keyframes clients-marquee { to { transform: translateX(-50%); } }
-  @media (max-width: 640px) { .clients { padding: 44px 0 50px; } .clients h2 { margin-bottom: 31px; font-size: 10px; } .clients__item { flex-basis: 132px; height: 58px; padding: 0 20px; } .clients__item img { max-height: 40px; } .clients__track { animation-duration: 34s; } }
-  @media (prefers-reduced-motion: reduce) {
-    .clients__motion { display: none; }
-    .clients__marquee { mask-image: none; }
-    .clients__track { width: 100%; flex-wrap: wrap; justify-content: center; animation: none; }
-    .clients__item[aria-hidden="true"] { display: none; }
-  }
+.clients { padding:60px 24px; background:#111; color:#fff; }
+.clients h2 { max-width:1180px; margin:0 auto 30px; font-size:clamp(23px,3vw,32px); line-height:1.3; font-weight:600; }
+.clients__grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:20px; max-width:1180px; padding:0; margin:auto; list-style:none; }
+.clients li { min-width:0; }
+.clients a { display:grid; place-items:center; min-height:92px; border-radius:8px; }
+.clients a:focus-visible { outline:2px solid #cfeaff; outline-offset:4px; }
+.clients img { display:block; max-width:140px; width:100%; height:auto; max-height:62px; object-fit:contain; filter:grayscale(1); opacity:.8; }
+.clients a:hover img { filter:none; opacity:1; }
+@media(max-width:700px) { .clients__grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; } .clients img { max-width:96px; max-height:48px; } }
+@media(max-width:380px) { .clients__grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 </style>

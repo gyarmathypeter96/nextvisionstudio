@@ -104,7 +104,7 @@ const faqs = [
     <ServiceHero serviceKey="crm" />
 
     <section class="crm-section crm-intro" aria-labelledby="crm-intro-title">
-      <div class="crm-section__label">A clear system, built around your team</div>
+
       <div class="crm-intro__grid">
         <h2 id="crm-intro-title">Less lead chasing. A clearer next step.</h2>
         <div>
@@ -119,21 +119,21 @@ const faqs = [
     </section>
 
     <section class="crm-section crm-capabilities" aria-labelledby="crm-capabilities-title">
-      <div class="crm-section__label">What the system can support</div>
+
       <h2 id="crm-capabilities-title">A useful pipeline from first enquiry to outcome.</h2>
       <div class="crm-capabilities__grid">
         <article>
-          <span>01</span>
+
           <h3>Capture with context</h3>
           <p>Bring enquiries into the CRM with the service, source and details your team needs to respond well.</p>
         </article>
         <article>
-          <span>02</span>
+
           <h3>See the sales stages</h3>
           <p>Track each opportunity through clear stages such as new, contacted, won or lost, and keep the follow-up visible.</p>
         </article>
         <article>
-          <span>03</span>
+
           <h3>Automate repeatable actions</h3>
           <p>Set up practical tasks, notifications and follow-up workflows where your tools and customer permissions allow.</p>
         </article>
@@ -141,7 +141,7 @@ const faqs = [
     </section>
 
     <section class="crm-section crm-journey" aria-labelledby="crm-journey-title">
-      <div class="crm-section__label">One connected enquiry journey</div>
+
       <div class="crm-journey__heading">
         <h2 id="crm-journey-title">From the first ad click to a clear CRM follow-up.</h2>
         <p>Keep the ad, landing page, form and lead record connected, so your team can see what came in and what needs to happen next.</p>
@@ -160,12 +160,12 @@ const faqs = [
     </section>
 
     <section class="crm-section crm-process" id="how-it-works" aria-labelledby="crm-process-title">
-      <div class="crm-section__label">Our approach</div>
+
       <h2 id="crm-process-title">Start with the process. Then choose the technology.</h2>
       <ol>
         {steps.map((step) => (
           <li>
-            <span>{step.number}</span>
+
             <div><h3>{step.title}</h3><p>{step.text}</p></div>
           </li>
         ))}
@@ -174,7 +174,7 @@ const faqs = [
     </section>
 
     <section class="crm-faq" aria-labelledby="crm-faq-title">
-      <div class="crm-section__label">Questions before you enquire</div>
+
       <h2 id="crm-faq-title">CRM and lead automation FAQ</h2>
       <div class="crm-faq__list">
         {faqs.map((faq, index) => (
@@ -188,10 +188,10 @@ const faqs = [
 
     <section class="crm-cta" aria-labelledby="crm-cta-title">
       <div>
-        <p class="crm-section__label">A better follow-up process starts with a clear picture</p>
+
         <h2 id="crm-cta-title">Tell us where leads come in and where they get stuck.</h2>
       </div>
-      <a class="crm-button" href="/contact/?service=CRM%20and%20lead%20automation#contact-form" data-cta-placement="crm-final">Discuss CRM and automation <span aria-hidden="true">↗</span></a>
+      <a class="crm-button" href="/contact/?service=CRM%20and%20lead%20automation#contact-form" data-cta-placement="crm-final">Discuss CRM and automation</a>
     </section>
   </main>
   <script type="application/ld+json" set:html={JSON.stringify(crmSchema)} />
@@ -236,9 +236,9 @@ const faqs = [
   .crm-journey__figure figcaption { padding: 16px 8px 5px; color: rgba(255,255,255,.43); font-size: 11px; font-weight: 750; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
   .crm-process { border-top: 1px solid rgba(185,223,255,.1); }
   .crm-process h2 { max-width: 820px; margin-top: 22px; }
-  .crm-process ol { display: grid; margin: 45px 0 0; padding: 0; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; list-style: none; }
-  .crm-process li { display: grid; grid-template-columns: 42px 1fr; gap: 16px; }
-  .crm-process li > span { color: #b9dfff; font-size: 12px; font-weight: 850; letter-spacing: .12em; }
+  .crm-process ol { display: grid; margin: 45px 0 0; padding: 0; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; list-style: decimal; padding-left: 1.5rem; }
+  .crm-process li { display: list-item; padding-left: 7px; }
+  .crm-process li::marker { color: #b9dfff; font-size: 12px; font-weight: 850; letter-spacing: .12em; }
   .crm-process h3 { margin: 0 0 10px; }
   .crm-process__note { max-width: 790px; margin: 38px 0 0; padding-top: 20px; border-top: 1px solid rgba(185,223,255,.1); color: rgba(255,255,255,.58); font-size: 12px; line-height: 1.6; }
   .crm-faq { border-top: 1px solid rgba(185,223,255,.1); }

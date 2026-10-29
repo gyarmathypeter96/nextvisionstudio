@@ -118,7 +118,7 @@ const serviceDirectory = [
 <section class="service-pillars" aria-labelledby="service-pillars-title">
   <div class="service-pillars__inner">
     <header class="service-pillars__intro">
-      <div class="service-pillars__kicker">Connected services</div>
+
       <h2 id="service-pillars-title">Choose the support you need</h2>
       <p>Explore each service directly, or combine the right pieces around one clear business goal.</p>
     </header>
@@ -144,7 +144,7 @@ const serviceDirectory = [
             id={service.id}
           >
             <div class="service-pillar__copy">
-              <div class="service-pillar__label">Service {service.number}</div>
+
               <h3>{serviceForPath(service.secondaryHref)?.title ?? service.title}</h3>
               <p class="service-pillar__lead">{service.lead}</p>
 

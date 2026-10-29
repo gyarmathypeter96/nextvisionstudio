@@ -105,7 +105,7 @@ const caseStudySchema = {
     <section class="case-study-hero">
       <div class="case-study-hero__content">
         <a class="case-study-back" href="/case-studies/">Project case studies</a>
-        <p class="case-study-kicker">Real project by NextVision Studio</p>
+
         <h1>{props.title}</h1>
         <p class="case-study-hero__intro">{props.description}</p>
 
@@ -147,7 +147,7 @@ const caseStudySchema = {
 
     <section class="case-study-section case-study-section--split">
       <div class="case-study-section__heading">
-        <p class="case-study-kicker">The brief</p>
+
         <h2>What the project needed to achieve</h2>
       </div>
       <div class="case-study-section__body">
@@ -157,7 +157,7 @@ const caseStudySchema = {
 
     <section class="case-study-section">
       <div class="case-study-section__heading">
-        <p class="case-study-kicker">The work</p>
+
         <h2>What I created</h2>
       </div>
       <div class="case-study-list-grid">
@@ -179,7 +179,7 @@ const caseStudySchema = {
     {props.videoId && (
       <section class="case-study-video" aria-labelledby="case-study-video-title">
         <div class="case-study-video__heading">
-          <p class="case-study-kicker">Watch the work</p>
+
           <h2 id="case-study-video-title">{props.videoTitle ?? "Project video"}</h2>
         </div>
         <div class="case-study-video__frame">
@@ -203,7 +203,7 @@ const caseStudySchema = {
     {props.socialVideos && props.socialVideos.length > 0 && (
       <section class="case-study-social" aria-labelledby="case-study-social-title">
         <div class="case-study-video__heading">
-          <p class="case-study-kicker">Watch the work</p>
+
           <h2 id="case-study-social-title">Selected social videos</h2>
         </div>
         <div class="case-study-social__grid">
@@ -253,14 +253,14 @@ const caseStudySchema = {
 
     <section class="case-study-section case-study-section--result">
       <div class="case-study-section__heading">
-        <p class="case-study-kicker">The result</p>
+
         <h2>{props.resultTitle ?? "A finished story that feels like the client"}</h2>
       </div>
       <div class="case-study-result">
         <p>{props.outcome}</p>
         {props.measurementNote && <p>{props.measurementNote}</p>}
         {props.clientResponse && <div class="case-study-feedback">
-          <p class="case-study-feedback__label">Client feedback</p>
+
           <p>{props.clientResponse}</p>
         </div>}
       </div>
@@ -268,7 +268,7 @@ const caseStudySchema = {
 
     <section class="case-study-next" aria-labelledby="case-study-next-title">
       <div>
-        <p class="case-study-kicker">Explore more</p>
+
         <h2 id="case-study-next-title">Need content with a clear purpose?</h2>
         <p>See the relevant service or send a short brief. I will recommend the simplest production plan for the result you want.</p>
       </div>
@@ -279,7 +279,7 @@ const caseStudySchema = {
           </a>
         ))}
         {props.source && <a href={props.source.href} target="_blank" rel="noreferrer">{props.source.label}</a>}
-        <p class="case-study-next__label">More case studies</p>
+
         {otherCaseStudies.map((study) => <a href={study.href}>{study.title}</a>)}
       </div>
     </section>

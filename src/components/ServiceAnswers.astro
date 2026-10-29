@@ -1,0 +1,41 @@
+---
+import { getService } from '../config/services';
+import { serviceQuestions } from '../data/serviceQuestions';
+import { serviceScopes } from '../data/serviceScope';
+interface Props { serviceKey: keyof typeof serviceQuestions; }
+const { serviceKey } = Astro.props;
+const service = getService(serviceKey);
+const question = serviceQuestions[serviceKey];
+const scope = serviceScopes[service.href.slice(1,-1)];
+const cost = question.cost || scope?.cost;
+const answer = 'answer' in question ? question.answer : scope?.answer;
+const items = 'items' in question ? question.items : scope?.items ?? [];
+const videoService = ['shortform','corporate','event','social'].includes(serviceKey);
+---
+<section class="service-answers" aria-label={`${service.title} costs and scope`}>
+  <h2>How much does {question.noun} cost?</h2>
+  <p>{cost}</p>
+  {videoService && <p><a href="/how-much-does-a-videographer-cost-in-dublin/">How to compare a production quote</a></p>}
+  <h2>What is included in your {serviceKey === 'crm' ? 'CRM' : 'project'} quote?</h2>
+  <p>{answer}</p>
+  {items.map(item=><div class="service-answers__item"><h3>{item.title}</h3><p>{item.text}</p></div>)}
+  <h2>What should you send before we start?</h2>
+  <p>{question.prepare}</p>
+  <nav aria-label={`${service.title} planning links`}>
+    {question.links.map(link=><a href={link.href}>{link.label}</a>)}
+  </nav>
+  <p class="service-answers__next"><a href="#service-enquiry-form">Ask about your project</a></p>
+</section>
+<style>
+.service-answers { box-sizing:border-box; width:min(100% - 48px,900px); margin:0 auto; padding:70px 0 85px; color:#f5f7f9; }
+.service-answers h2 { max-width:26ch; margin:48px 0 20px; font-size:clamp(29px,3.5vw,42px); line-height:1.16; letter-spacing:-.025em; font-weight:650; text-wrap:balance; }
+.service-answers h2:first-child { margin-top:0; }
+.service-answers h3 { margin:27px 0 10px; font-size:21px; line-height:1.35; font-weight:600; }
+.service-answers p { max-width:72ch; margin:0 0 18px; color:#bec5cc; font-size:17px; line-height:1.8; }
+.service-answers nav { display:flex; flex-direction:column; align-items:flex-start; gap:13px; margin-top:25px; }
+.service-answers a { color:#cfeaff; text-decoration:none; line-height:1.6; font-size:16px; }
+.service-answers a:hover { color:#fff; }
+.service-answers a:focus-visible { outline:2px solid #cfeaff; outline-offset:4px; }
+.service-answers .service-answers__next { margin-top:32px; }
+@media(max-width:600px) { .service-answers { width:calc(100% - 36px); padding:50px 0 60px; } .service-answers h2 { margin-top:38px; } }
+</style>

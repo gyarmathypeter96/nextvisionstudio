@@ -1,0 +1,119 @@
+---
+import { getCollection } from 'astro:content';
+import { BUSINESS_ID, SITE_URL } from '../config/site';
+interface Props { id?: string; }
+const { id = 'social-video-work' } = Astro.props;
+const choices = [
+  {slug:'buga-ramen-alicante-restaurant-video',text:'Japanese-inspired atmosphere and food in Alicante.'},
+  {slug:'saxoo-london-fashion-video',text:'Clothing, movement and the mood of a new collection.'},
+  {slug:'uri-muri-bar-video-photography',text:'A drink taking shape, from preparation to presentation.'},
+  {slug:'pekado-kebab-alicante-video',text:'A new restaurant, its exterior and the food inside.'},
+  {slug:'red-line-events-techno-video',text:'The light, performers and energy of a techno night.'},
+];
+const projects = await getCollection('projects');
+const films = choices.map(choice=>{
+  const project = projects.find(project=>project.id===choice.slug)!;
+  return { ...choice, client:project.data.client, video:project.data.localVideos[0], published:project.data.publishedDate };
+});
+const schema = { '@context':'https://schema.org', '@graph':films.map(film=>({
+  '@type':'VideoObject', name:film.video.title, description:film.text,
+  contentUrl:new URL(film.video.src,SITE_URL).toString(), thumbnailUrl:new URL(film.video.poster,SITE_URL).toString(),
+  uploadDate:film.published, duration:film.video.duration, publisher:{'@id':BUSINESS_ID},
+}))};
+---
+<section class="social-films" id={id} aria-labelledby={`${id}-title`} data-social-carousel>
+  <header class="social-films__heading">
+    <div><h2 id={`${id}-title`}>Videos made for social media</h2><p>Food, fashion, drinks and events. Watch the work, then explore how each project was made.</p></div>
+    <nav aria-label="Browse social videos"><button type="button" data-reel-previous aria-label="Previous social video"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7" /></svg></button><button type="button" data-reel-next aria-label="Next social video"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7" /></svg></button></nav>
+  </header>
+  <ol class="social-films__rail" tabindex="0" aria-label="Swipe or scroll to explore five original client videos">
+    {films.map((film,index)=><li class:list={['social-films__item',{'is-current':index===0}]}>
+      <div class="social-films__phone">
+        <video playsinline preload="none" width={film.video.width} height={film.video.height} poster={film.video.poster} title={film.video.title} aria-label={film.video.title}>
+          <source src={film.video.src} type="video/mp4" />Your browser does not support video playback.
+        </video>
+        <button class="social-films__play" type="button" aria-label={`Play ${film.client} social video`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg></button>
+        <noscript><a href={film.video.src}>Watch the {film.client} video</a></noscript>
+      </div>
+      <h3>{film.client}</h3><p>{film.text}</p><a href={`/case-studies/${film.slug}/`}>Explore the {film.client} project</a>
+    </li>)}
+  </ol>
+</section>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script>
+  const initialiseSocialCarousels = () => {
+    document.querySelectorAll<HTMLElement>('[data-social-carousel]').forEach(section=>{
+      if(section.dataset.ready) return;
+      section.dataset.ready='true';
+      const rail=section.querySelector<HTMLOListElement>('.social-films__rail')!;
+      const items=Array.from(rail.querySelectorAll<HTMLElement>('.social-films__item'));
+      const videos=Array.from(section.querySelectorAll<HTMLVideoElement>('video'));
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+      let current=0;
+      const previous=section.querySelector<HTMLButtonElement>('[data-reel-previous]')!;
+      const next=section.querySelector<HTMLButtonElement>('[data-reel-next]')!;
+      const updateNavigation=()=>{
+        previous.disabled=rail.scrollLeft<=1;
+        next.disabled=rail.scrollLeft>=rail.scrollWidth-rail.clientWidth-1;
+      };
+      updateNavigation();
+      window.addEventListener('resize',updateNavigation,{passive:true});
+      const show=(index:number)=>{
+        current=Math.max(0,Math.min(items.length-1,index));
+        rail.scrollTo({left:items[current].offsetLeft-parseFloat(getComputedStyle(rail).paddingLeft),behavior:reduced.matches?'auto':'smooth'});
+      };
+      section.querySelector('[data-reel-previous]')?.addEventListener('click',()=>show(current-1));
+      section.querySelector('[data-reel-next]')?.addEventListener('click',()=>show(current+1));
+      let frame=0;
+      rail.addEventListener('scroll',()=>{
+        if(frame) return;
+        frame=requestAnimationFrame(()=>{
+          frame=0;
+          let distance=Infinity;
+          items.forEach((item,index)=>{const value=Math.abs(item.offsetLeft-parseFloat(getComputedStyle(rail).paddingLeft)-rail.scrollLeft);if(value<distance){current=index;distance=value;}});
+          items.forEach((item,index)=>item.classList.toggle('is-current',index===current));
+          updateNavigation();
+        });
+      },{passive:true});
+      videos.forEach(video=>{
+        const button=video.parentElement?.querySelector<HTMLButtonElement>('.social-films__play');
+        button?.addEventListener('click',()=>{
+          video.controls=true;
+          video.preload='metadata';
+          video.tabIndex=0;
+          video.play().then(()=>{button.hidden=true;video.focus({preventScroll:true});}).catch(()=>{button.hidden=false;button.setAttribute('aria-label','Try playing this video again');});
+        });
+        video.addEventListener('play',()=>{if(button)button.hidden=true;videos.forEach(other=>{if(other!==video)other.pause();});});
+      });
+      if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)(entry.target as HTMLVideoElement).pause();}),{threshold:.3});videos.forEach(video=>observer.observe(video));}
+      document.addEventListener('visibilitychange',()=>{if(document.hidden)videos.forEach(video=>video.pause());});
+    });
+  };
+  initialiseSocialCarousels();
+  document.addEventListener('astro:page-load',initialiseSocialCarousels);
+</script>
+<style>
+.social-films,.social-films * { box-sizing:border-box; }
+.social-films { scroll-margin-top:110px; width:100%; overflow:hidden; padding:82px 0; background:#101214; color:#f5f7f9; }
+.social-films__heading { display:flex; align-items:end; justify-content:space-between; gap:24px; max-width:1180px; width:calc(100% - 48px); margin:0 auto 34px; }
+.social-films h2 { max-width:22ch; font-size:clamp(31px,4vw,48px); font-weight:650; line-height:1.12; letter-spacing:-.025em; margin:0 0 18px; text-wrap:balance; }
+.social-films__heading p { max-width:60ch; color:#bfc6cd; font-size:17px; line-height:1.7; margin:0; }
+.social-films nav { display:flex; gap:10px; flex-shrink:0; }
+.social-films button { display:grid; place-items:center; width:46px; height:46px; padding:0; border:1px solid #57616b; border-radius:50%; background:#191f24; color:#f5f7f9; cursor:pointer; }
+.social-films button svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.social-films button:not(:disabled):hover { background:#303b44; }
+.social-films button:disabled { opacity:.4; cursor:default; }
+.social-films__rail { position:relative; display:flex; gap:28px; overflow-x:auto; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scroll-padding-inline:max(24px,calc((100vw - 1180px)/2)); padding:12px max(24px,calc((100vw - 1180px)/2)) 26px; margin:0; list-style:none; scrollbar-color:#57616b #101214; scrollbar-width:thin; }
+.social-films__item { position:relative; min-width:0; flex:0 0 270px; scroll-snap-align:start; }
+.social-films__phone { position:relative; padding:7px; background:#080a0c; border:1px solid #48525a; border-radius:30px; }
+.social-films video { display:block; width:100%; height:auto; aspect-ratio:9/16; object-fit:contain; border-radius:23px; background:#000; }
+.social-films .social-films__play { position:absolute; left:20px; bottom:20px; width:54px; height:54px; background:#0d131bea; border-color:#cfeaff; }
+.social-films .social-films__play[hidden] { display:none; }
+.social-films__play svg path { fill:currentColor; stroke:none; }
+.social-films h3 { margin:20px 0 9px; font-size:21px; font-weight:650; }
+.social-films__item p { margin:0 0 12px; color:#bfc6cd; font-size:15px; line-height:1.6; }
+.social-films a { color:#cfeaff; font-size:14px; text-decoration:none; line-height:1.6; }
+.social-films a:hover { color:#fff; }
+.social-films :is(a,button,video,.social-films__rail):focus-visible { outline:2px solid #cfeaff; outline-offset:4px; }
+@media(max-width:600px) { .social-films { padding:58px 0; } .social-films__heading { width:calc(100% - 36px); align-items:start; flex-direction:column; } .social-films__item { flex-basis:min(78vw,300px); } .social-films__rail { gap:20px; padding-inline:18px; scroll-padding-inline:18px; } }
+</style>

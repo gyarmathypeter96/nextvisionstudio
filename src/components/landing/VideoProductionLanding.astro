@@ -41,7 +41,7 @@ const clients = [
   <div class="video-hero__shade" aria-hidden="true"></div>
 
   <div class="video-shell video-hero__content">
-    <p class="video-kicker">{page.eyebrow}</p>
+
     <h1 id="video-hero-title">
       {page.headlineStart} <span>{page.headlineAccent}</span>
     </h1>
@@ -88,7 +88,7 @@ const clients = [
       decoding="async"
     />
     <div>
-      <p class="video-kicker">Direct, founder-led production</p>
+
       <h2 id="video-founder-title">You work with the person planning, filming and editing the project.</h2>
       <p>
         I am Peter, the filmmaker behind NextVision Studio. I keep the process clear, help shape the idea and stay close to every decision from the first call to the final export.
@@ -100,7 +100,7 @@ const clients = [
 
 <nav class="video-related" aria-label="Related video production services" data-video-reveal>
   <div class="video-shell">
-    <p class="video-kicker">Explore by project type</p>
+
     <div>
       {page.relatedLinks.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
     </div>

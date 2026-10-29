@@ -1,25 +1,19 @@
 ---
 const stages = [
   {
-    number: "01",
-    label: "Get noticed",
     title: "Video and photography",
     description: "Create clear, useful content that shows what you do and gives people a reason to remember you.",
     links: [
-      { label: "Video", href: "/short-form-video-production-dublin/" },
+      { label: "Videography", href: "/short-form-video-production-dublin/" },
       { label: "Photography", href: "/photography-dublin/" },
     ],
   },
   {
-    number: "02",
-    label: "Reach the right people",
     title: "Google and Meta ads",
     description: "Put the strongest message in front of a relevant audience, then measure the enquiries that follow.",
     links: [{ label: "Advertising", href: "/google-ads-meta-ads-dublin/" }],
   },
   {
-    number: "03",
-    label: "Follow up well",
     title: "CRM and automation",
     description: "Keep new enquiries in one clear process, with useful next steps for your team and timely follow-up for customers.",
     links: [{ label: "CRM and lead automation", href: "/crm-lead-automation-dublin/" }],
@@ -29,7 +23,7 @@ const stages = [
 
 <section class="process" id="how-we-work" aria-labelledby="process-title">
   <div class="process__heading">
-    <p class="process__eyebrow">A connected customer journey</p>
+
     <h2 id="process-title">From first impression to follow-up.</h2>
     <p>We can help shape the full path: useful content, well-planned advertising and a clear way to handle the enquiries it creates. Start at the stage your business needs most.</p>
   </div>
@@ -37,8 +31,8 @@ const stages = [
   <ol class="process__steps">
     {stages.map((stage, index) => (
       <li class="process__step">
-        <span class="process__number">{stage.number}</span>
-        <p class="process__label">{stage.label}</p>
+
+
         <h3>{stage.title}</h3>
         <p class="process__description">{stage.description}</p>
         <nav aria-label={`${stage.title} services`}>

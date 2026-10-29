@@ -36,7 +36,7 @@ for (const service of services) {
 
 for (const key of ["video", "photography", "shortform", "corporate"]) {
   const document = documents.get(key);
-  assert.ok(document.includes("What shapes your quote?"), `Missing quote explanation: ${key}`);
+  assert.ok(/What shapes your quote\?|How much does [^<]+ cost\?/.test(document), `Missing cost explanation: ${key}`);
   assert.ok(document.includes("revision"), `Missing revision scope: ${key}`);
   assert.ok(!/€\s*\d/.test(document), `Concrete service price on ${key}`);
   assert.ok(document.includes("FAQPage"), `Missing visible FAQ markup: ${key}`);

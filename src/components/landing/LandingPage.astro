@@ -1,6 +1,7 @@
 ---
+import SocialVideoGallery from "../SocialVideoGallery.astro";
 import ServiceResources from "../ServiceResources.astro";
-import ServiceScope from "../ServiceScope.astro";
+
 import { AREA_SERVED_SCHEMA, BUSINESS_ID, FOUNDER_ID } from "../../config/site";
 import { serviceForPath } from "../../config/services";
 import ServiceHero from "../ServiceHero.astro";
@@ -126,12 +127,13 @@ const landingSchema = {
     ) : (
       <>
         <ServiceHero serviceKey={serviceForPath(`/${page.slug}/`)!.key as "photography" | "web" | "social" | "ads"} />
-        {page.kind === "photo" && <ServiceScope slug={page.slug} />}
+
         {page.kind === "social" ? (
           <SocialContentProcess />
         ) : (
           <LandingTrust line={page.trustLine} />
         )}
+        {page.kind === "social" && <SocialVideoGallery />}
         {page.kind === "social" && <SocialContentOffers />}
         {page.kind === "social" && <LandingValue page={page} />}
         {isWebDesignPage && <TradesHomeServices />}

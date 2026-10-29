@@ -1,7 +1,7 @@
 ---
 import ServiceHero from "./ServiceHero.astro";
 import ServiceResources from "./ServiceResources.astro";
-import ServiceScope from "./ServiceScope.astro";
+
 import { AREA_SERVED_SCHEMA } from "../config/site";
 import { serviceForPath } from "../config/services";
 import { serviceScopes } from "../data/serviceScope";
@@ -53,7 +53,7 @@ const schema = {
 
   <section class="video-seo__problem" aria-labelledby="video-seo-problem">
     <div class="video-seo__problem-copy">
-      <p>The business problem</p>
+
       <h2 id="video-seo-problem">{page.problemTitle}</h2>
       <span>{page.problemText}</span>
     </div>
@@ -64,7 +64,7 @@ const schema = {
     </div>
   </section>
 
-  <ServiceScope slug={page.slug} showProof={false} />
+
 
   {page.showExamples || page.slug === "event-videographer-dublin" ? (
     <BusinessVideoExamples event={page.slug === "event-videographer-dublin"} />
@@ -72,7 +72,7 @@ const schema = {
     <section class="video-seo__project" aria-labelledby="video-seo-project">
       <img src={page.project.image} alt={page.project.alt} width="640" height="360" loading="lazy" decoding="async" />
       <div>
-        <p>Relevant project</p>
+
         <h2 id="video-seo-project">{page.project.title}</h2>
         <span>{page.project.text}</span>
         <a href={page.project.href}>Read the full project <span aria-hidden="true">→</span></a>

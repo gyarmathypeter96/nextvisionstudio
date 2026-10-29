@@ -14,7 +14,7 @@ const schema = { "@context": "https://schema.org", "@type": "Service", "@id": `$
 <BaseLayout title={area.title} description={area.description} canonical={canonical} ogImage={area.caseImage}>
   <main class="local-page">
     <header><nav aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/areas/">Service areas</a><span>/</span><span>{area.name}</span></nav>
-      <p class="eyebrow">On-location production · North Dublin</p><h1>{area.heading}</h1><p class="lead">{area.lead}</p>
+      <h1>{area.heading}</h1><p class="lead">{area.lead}</p>
       <a class="button" href="#contact-form">Plan your shoot in {area.name}</a>
     </header>
     <div class="local-content">
