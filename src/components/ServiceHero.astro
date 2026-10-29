@@ -1,0 +1,8 @@
+---
+import ServiceEnquiryHero from './ServiceEnquiryHero.astro';
+import { getService, type ServiceKey } from '../config/services';
+import { serviceEnquiryContent } from '../data/serviceEnquiryContent';
+interface Props { serviceKey: Exclude<ServiceKey, 'video'>; }
+const { serviceKey } = Astro.props;
+---
+<ServiceEnquiryHero service={getService(serviceKey)} content={serviceEnquiryContent[serviceKey]} preview={false} />

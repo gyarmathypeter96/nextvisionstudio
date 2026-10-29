@@ -3,7 +3,7 @@ import ServiceResources from "../ServiceResources.astro";
 import ServiceScope from "../ServiceScope.astro";
 import { AREA_SERVED_SCHEMA, BUSINESS_ID, FOUNDER_ID } from "../../config/site";
 import { serviceForPath } from "../../config/services";
-import LandingHero from "./LandingHero.astro";
+import ServiceHero from "../ServiceHero.astro";
 import LandingTrust from "./LandingTrust.astro";
 import LandingValue from "./LandingValue.astro";
 import LandingDeliverables from "./LandingDeliverables.astro";
@@ -125,7 +125,7 @@ const landingSchema = {
       <VideoProductionLanding page={page} />
     ) : (
       <>
-        <LandingHero page={page} />
+        <ServiceHero serviceKey={serviceForPath(`/${page.slug}/`)!.key as "photography" | "web" | "social" | "ads"} />
         {page.kind === "photo" && <ServiceScope slug={page.slug} />}
         {page.kind === "social" ? (
           <SocialContentProcess />

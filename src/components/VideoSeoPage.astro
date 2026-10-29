@@ -1,4 +1,5 @@
 ---
+import ServiceHero from "./ServiceHero.astro";
 import ServiceResources from "./ServiceResources.astro";
 import ServiceScope from "./ServiceScope.astro";
 import { AREA_SERVED_SCHEMA } from "../config/site";
@@ -48,17 +49,7 @@ const schema = {
 ---
 
 <main class="video-seo">
-  <section class="video-seo__hero" aria-labelledby="video-seo-title">
-    <div>
-      <p>{page.eyebrow}</p>
-      <h1 id="video-seo-title">{page.title}</h1>
-      <span>{page.lead}</span>
-      <nav aria-label="Page actions">
-        <a href="#contact-form" data-cta-placement={`${page.slug}-hero`}>Discuss the project</a>
-        <a href="/videography-dublin/#video-offers" data-cta-placement={`${page.slug}-offers`}>Compare Content Day and Business Video</a>
-      </nav>
-    </div>
-  </section>
+  <ServiceHero serviceKey={service!.key as "corporate" | "event"} />
 
   <section class="video-seo__problem" aria-labelledby="video-seo-problem">
     <div class="video-seo__problem-copy">

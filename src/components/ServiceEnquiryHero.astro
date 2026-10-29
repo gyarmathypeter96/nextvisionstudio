@@ -1,0 +1,95 @@
+---
+import { CRM_FORM_ENDPOINT } from '../config/forms';
+import { WHATSAPP_URL } from '../config/contact';
+interface Props {
+  service: { title: string; href: string; key: string };
+  content: { heading: string; text: string; points: string[]; example: string; exampleHref: string };
+  preview?: boolean;
+}
+const { service, content, preview = true } = Astro.props;
+const id = `enquiry-${service.key}`;
+---
+<section class:list={["service-enquiry", {"service-enquiry--live": !preview}]} aria-labelledby={`${id}-title`}>
+  <div class="service-enquiry__layout">
+    <div class="service-enquiry__copy">
+      <p class="service-enquiry__location">NextVision Studio · Dublin & North Dublin</p>
+      <h1 id={`${id}-title`}>{content.heading}</h1>
+      <p class="service-enquiry__intro">{content.text}</p>
+      <h2>How I can help</h2>
+      <ul>{content.points.map(point => <li><span aria-hidden="true">✓</span>{point}</li>)}</ul>
+      <a class="service-enquiry__example" href={content.exampleHref}>Explore the work: {content.example}</a>
+      <a class="service-enquiry__whatsapp" href={WHATSAPP_URL}>Prefer a conversation? Message me on <span>WhatsApp</span></a>
+    </div>
+    <div class="service-enquiry__panel" id="service-enquiry-form">
+      <h2 id={`${id}-form-title`}>Let’s plan your project.</h2>
+      <p class="service-enquiry__form-intro">Tell me what you need. I’ll reply with a clear next step and what to include in your quote.</p>
+      <p class="service-enquiry__selected">{service.title}</p>
+      <form action={CRM_FORM_ENDPOINT} method="POST" id={`${id}-form`} data-crm-form={preview ? undefined : true} data-enquiry-preview={preview ? true : undefined} aria-labelledby={`${id}-form-title`}>
+        <input type="hidden" name="redirect" value={`https://www.nextvisionstudio.com/quotesend/?submitted=1&source=${service.href.split('/').filter(Boolean)[0]}`} />
+        <input type="hidden" name="subject" value={`${service.title} enquiry`} />
+        <input type="hidden" name="from_name" value="NextVision Studio Website" />
+        <input type="hidden" name="landing_page" value={service.href} />
+        <input type="hidden" name="service" value={service.title} />
+        <div hidden aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></div>
+        <div class="service-enquiry__fields">
+          <div><label for={`${id}-name`}>Your name <span>(required)</span></label><input id={`${id}-name`} name="name" type="text" autocomplete="name" placeholder="Your name" required /></div>
+          <div><label for={`${id}-email`}>Email <span>(required)</span></label><input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@company.ie" required /></div>
+          <div class="service-enquiry__wide"><label for={`${id}-phone`}>Phone <span>(required)</span></label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" placeholder="+353" required /></div>
+          <div class="service-enquiry__wide"><label for={`${id}-message`}>A little about your project <span>(required)</span></label><textarea id={`${id}-message`} name="message" rows="3" placeholder="What would you like to create or improve? Include a date if you have one." required></textarea></div>
+        </div>
+        <button type="submit">Request my quote</button>
+        <p class="service-enquiry__privacy">No obligation. Your details are used only to respond to your enquiry.</p>
+        {preview && <p class="service-enquiry__preview-status" role="status" aria-live="polite"></p>}
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-enquiry-preview]').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const status = form.querySelector<HTMLElement>('[role="status"]');
+      if (status) status.textContent = 'Preview checked. Nothing was sent to the CRM.';
+    });
+  });
+</script>
+<style>
+  .service-enquiry, .service-enquiry * { box-sizing:border-box; }
+  .service-enquiry { padding:50px 28px 72px; background:radial-gradient(ellipse at 85% 12%,#1a242b 0,transparent 48%),#111; color:#f6f8fa; }
+  .service-enquiry.service-enquiry--live { padding-top:150px; }
+  #service-enquiry-form { scroll-margin-top:115px; }
+  .service-enquiry__layout { width:min(100%,1232px); margin:auto; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:clamp(38px,6vw,84px); align-items:center; }
+  .service-enquiry__location { color:#b0bbc4; font-size:13px; margin:0 0 23px; }
+  h1 { font-size:clamp(40px,4.3vw,62px); line-height:1.06; letter-spacing:-.045em; font-weight:800; margin:0; max-width:16ch; text-wrap:balance; }
+  .service-enquiry__intro { color:#bbc4cb; font-size:17px; line-height:1.65; max-width:51ch; margin:24px 0 28px; }
+  .service-enquiry__copy h2 { font-size:17px; font-weight:700; margin:0 0 15px; }
+  ul { list-style:none; padding:0; margin:0; display:grid; gap:13px; }
+  li { display:flex; gap:12px; color:#d6dce1; font-size:15px; line-height:1.55; }
+  li span { color:#cfeaff; flex-shrink:0; }
+  .service-enquiry__example,.service-enquiry__whatsapp { display:block; width:fit-content; line-height:1.6; text-decoration:none; font-size:14px; padding-block:5px; }
+  .service-enquiry__example { margin-top:26px; color:#cfeaff; }
+  .service-enquiry__whatsapp { margin-top:8px; color:#b0bbc4; }
+  .service-enquiry__whatsapp span { color:#8ce9ae; font-weight:650; }
+  .service-enquiry__example:hover { color:#fff; }
+  .service-enquiry__whatsapp:hover span { color:#b4f7cb; }
+  .service-enquiry__panel { padding:30px; border:1px solid #3b4852; border-radius:24px; background:#171c21; box-shadow:0 24px 65px #0003; }
+  .service-enquiry__panel h2 { margin:0; font-size:29px; line-height:1.15; font-weight:750; letter-spacing:-.035em; }
+  .service-enquiry__form-intro { color:#b0bbc4; font-size:14px; line-height:1.6; margin:12px 0 17px; max-width:48ch; }
+  .service-enquiry__selected { color:#cfeaff; padding:0 0 16px; margin:0 0 20px; border-bottom:1px solid #35404a; font-size:13px; font-weight:600; }
+  .service-enquiry__fields { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .service-enquiry__wide { grid-column:1/-1; }
+  label { display:block; font-size:13px; font-weight:600; margin-bottom:8px; color:#f6f8fa; }
+  label span { font-size:11px; font-weight:400; color:#b0bbc4; }
+  input:not([type=hidden]):not([type=checkbox]),textarea { width:100%; min-height:48px; padding:12px 13px; border:1px solid #46525c; background:#11161b; border-radius:9px; color:#f6f8fa; font:inherit; font-size:16px; }
+  textarea { min-height:92px; resize:vertical; line-height:1.5; }
+  input::placeholder,textarea::placeholder { color:#9da8b2; opacity:1; }
+  input:focus-visible,textarea:focus-visible { outline:2px solid #cfeaff; outline-offset:2px; }
+  button { width:100%; border:1px solid #cfeaff; border-radius:999px; min-height:52px; padding:13px 20px; background:#cfeaff; color:#152430; font:inherit; font-size:15px; font-weight:750; margin-top:20px; cursor:pointer; }
+  button:hover { background:#e4f4ff; }
+  button:focus-visible,a:focus-visible { outline:2px solid #cfeaff; outline-offset:5px; }
+  .service-enquiry__privacy { margin:13px 0 0; color:#b0bbc4; font-size:11px; line-height:1.6; text-align:center; }
+  .service-enquiry__preview-status { color:#cfeaff; font-size:13px; line-height:1.5; margin:12px 0 0; }
+  .service-enquiry__preview-status:empty { display:none; }
+  @media(max-width:850px) { .service-enquiry.service-enquiry--live { padding-top:132px; } .service-enquiry__layout { grid-template-columns:1fr; gap:32px; max-width:620px; } h1 { max-width:17ch; font-size:44px; } .service-enquiry { padding:36px 22px 56px; } }
+  @media(max-width:480px) { .service-enquiry.service-enquiry--live { padding-top:118px; } .service-enquiry { padding:30px 18px 45px; } h1 { font-size:39px; } .service-enquiry__panel { padding:23px 19px; border-radius:20px; } .service-enquiry__fields { grid-template-columns:1fr; } .service-enquiry__intro { font-size:16px; } .service-enquiry__panel h2 { font-size:26px; } }
+</style>

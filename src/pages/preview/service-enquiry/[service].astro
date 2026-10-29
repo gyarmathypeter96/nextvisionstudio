@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceEnquiryHero from '../../../components/ServiceEnquiryHero.astro';
+import { serviceEnquiryContent } from '../../../data/serviceEnquiryContent';
+import { LISTED_SERVICES } from '../../../config/services';
+export function getStaticPaths() {
+  return import.meta.env.DEV ? LISTED_SERVICES.map(service => ({params:{service:service.key},props:{service}})) : [];
+}
+const { service } = Astro.props;
+
+---
+<BaseLayout title={`${service.title} – design preview`} description="Local review of the proposed service enquiry layout." noindex>
+  <aside class="design-review">
+    <p><strong>Péter, ez helyi terv.</strong> Nem éles. A próbaküldés nem hoz létre CRM-rekordot.</p>
+    <nav aria-label="Szolgáltatás előnézetek">{LISTED_SERVICES.map(item=><a aria-current={service.key===item.key?'page':undefined} href={`/preview/service-enquiry/${item.key}/`}>{item.title}</a>)}</nav>
+  </aside>
+  <ServiceEnquiryHero service={service} content={serviceEnquiryContent[service.key]} preview />
+</BaseLayout>
+<style>
+.design-review { padding:115px 28px 20px; background:#111; color:#b0bbc4; border-bottom:1px solid #2c343b; }
+.design-review p,.design-review nav { max-width:1232px; margin:0 auto; font-size:12px; line-height:1.6; }
+.design-review nav { display:flex; flex-wrap:wrap; gap:7px 18px; margin-top:12px; }
+.design-review a { color:#b0bbc4; text-underline-offset:4px; }
+.design-review a[aria-current] { color:#cfeaff; }
+.design-review a:focus-visible { outline:2px solid #cfeaff; outline-offset:3px; }
+@media(max-width:600px) { .design-review { padding:110px 18px 18px; } .design-review nav { gap:6px 14px; } }
+</style>

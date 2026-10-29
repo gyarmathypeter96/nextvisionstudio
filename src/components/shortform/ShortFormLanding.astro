@@ -3,7 +3,7 @@ import ServiceResources from "../ServiceResources.astro";
 import ServiceScope from "../ServiceScope.astro";
 import { AREA_SERVED_SCHEMA } from "../../config/site";
 import { getService } from "../../config/services";
-import ShortFormHero from "./ShortFormHero.astro";
+import ServiceHero from "../ServiceHero.astro";
 import ShortFormProblem from "./ShortFormProblem.astro";
 import ShortFormSystem from "./ShortFormSystem.astro";
 import ShortFormResults from "./ShortFormResults.astro";
@@ -36,7 +36,12 @@ const serviceSchema = {
 ---
 
 <main class="sf-page">
-  <ShortFormHero />
+  <ServiceHero serviceKey="shortform" />
+  <section class="sf-hero-showreel" aria-label="NextVision short-form video showreel">
+    <video controls playsinline preload="none" poster="/images/showreel/showreel-2025.webp" width="1280" height="720" title="NextVision Studio short-form video production showreel">
+      <source src="/videos/showreel-2025.mp4" type="video/mp4" />
+    </video>
+  </section>
   <ShortFormProblem />
   <ShortFormSystem />
   <ServiceScope slug="short-form-video-production-dublin" />
@@ -81,3 +86,5 @@ const serviceSchema = {
   initialiseShortFormTracking();
   document.addEventListener("astro:page-load", initialiseShortFormTracking);
 </script>
+
+<style>.sf-hero-showreel { padding:40px 24px 70px; background:#111; } .sf-hero-showreel video { display:block; width:min(100%,1000px); height:auto; margin:auto; border-radius:20px; }</style>
