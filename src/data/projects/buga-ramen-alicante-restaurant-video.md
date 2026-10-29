@@ -139,3 +139,8 @@ If photographs are required as well, I list them separately so there is time to 
 A restaurant should know where its film will appear and what a viewer should do after watching. That might mean opening a menu, finding the location or making an enquiry. The destination needs to match the content. If the film introduces the setting, a page with photographs, practical information and the menu provides a sensible continuation.
 
 Paid distribution can be planned around the creative when required through [Google and Meta Ads management](/google-ads-meta-ads-dublin/). It needs its own audience, budget and measurement plan. For a production proposal, the [video quote checklist](/blog/compare-business-video-quotes/) helps identify formats, review rounds and usage before booking. You can also read [about my background and approach](/about/) or [send me your restaurant brief](/contact/#contact-form), including the location and what makes the place distinctive.
+
+
+## Watch the finished restaurant film
+
+[Watch the Buga Ramen Alicante film on its dedicated video page](/watch/buga-ramen-alicante/), or explore the production choices and related restaurant projects above.

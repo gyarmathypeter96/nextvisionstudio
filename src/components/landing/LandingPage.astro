@@ -52,6 +52,10 @@ const portfolioImages = page.kind === "photo" ? page.proofItems.filter((item) =>
   width: item.width,
   height: item.height,
   creator: { "@id": FOUNDER_ID },
+  creditText: "NextVision Studio",
+  copyrightNotice: "© NextVision Studio. All rights reserved.",
+  license: "https://www.nextvisionstudio.com/image-licensing/",
+  acquireLicensePage: "https://www.nextvisionstudio.com/image-licensing/#request-permission",
 })) : [];
 
 const landingSchema = {

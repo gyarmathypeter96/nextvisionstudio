@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const url = "https://www.nextvisionstudio.com/watch/buga-ramen-alicante/";
+const video = {
+  "@context": "https://schema.org", "@type": "VideoObject", "@id": `${url}#video`,
+  name: "Buga Ramen: Japan in Alicante — restaurant film",
+  description: "Watch NextVision Studio’s restaurant film for Buga Ramen in Alicante: ramen, food details and a Japanese-inspired interior connected in a 48-second visual story.",
+  thumbnailUrl: "https://www.nextvisionstudio.com/images/case-studies/buga-ramen-alicante.webp",
+  contentUrl: "https://www.nextvisionstudio.com/videos/case-studies/buga-ramen-alicante.mp4",
+  uploadDate: "2026-10-26T10:33:54+00:00", duration: "PT48.32S",
+  mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  publisher: { "@id": "https://www.nextvisionstudio.com/#business" }
+};
+---
+<BaseLayout title="Watch Buga Ramen Alicante Restaurant Film | NextVision" description={video.description} canonical={url} ogImage={video.thumbnailUrl}>
+  <main>
+    <h1>Buga Ramen: Japan in Alicante</h1>
+    <video controls playsinline preload="metadata" poster="/images/case-studies/buga-ramen-alicante.webp" width="720" height="1280" aria-label="Buga Ramen Alicante restaurant film">
+      <source src="/videos/case-studies/buga-ramen-alicante.mp4" type="video/mp4" />
+      <a href="/videos/case-studies/buga-ramen-alicante.mp4">Play the restaurant film</a>
+    </video>
+    <p class="caption">Alicante, Spain · Restaurant film · 48 seconds · NextVision Studio</p>
+    <p>The brief was to capture the change of atmosphere as you step inside: lanterns, illustrations and food bringing Buga Ramen’s Japanese-inspired setting together. Watch the finished film above, then read about the creative decisions behind it.</p>
+    <nav aria-label="About this film">
+      <a href="/case-studies/buga-ramen-alicante-restaurant-video/">Read the Buga Ramen case study</a>
+      <a href="/short-form-video-production-dublin/">Short-form video production</a>
+      <a href="/contact/#contact-form">Discuss a restaurant video</a>
+    </nav>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(video)} />
+</BaseLayout>
+<style>
+  main { max-width: 1000px; margin: auto; padding: 115px 24px 64px; color: #fff; }
+  h1 { font-size: clamp(26px,4vw,42px); margin: 0 0 22px; }
+  video { display: block; width: 100%; height: min(65svh, 660px); object-fit: contain; background: #050505; border-radius: 12px; }
+  p { max-width: 720px; line-height: 1.7; color: #d6e0e8; }
+  .caption { font-size: 14px; color: #aeb9c2; }
+  nav { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 25px; }
+  a { color: #cfeaff; text-underline-offset: 4px; }
+</style>
