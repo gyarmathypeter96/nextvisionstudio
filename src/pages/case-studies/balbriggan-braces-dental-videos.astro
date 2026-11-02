@@ -7,16 +7,33 @@ const media = clientCaseStudyMedia.braces;
 <ClientCaseStudyPage
   previewOnly={false}
   client="Balbriggan Braces"
-  title="Balbriggan Braces: 28 Patient-Education Videos"
+  title="Dental videos that make patient education engaging."
   metaTitle="Balbriggan Braces Dental Video Case Study | NextVision"
   description="A dental video production project in Balbriggan: twelve longer videos and sixteen short edits covering orthodontic and implant topics, organised by speaker and subject."
-  intro="Twelve longer explanations and sixteen short edits, covering orthodontic and implant questions with three speakers."
+  intro="A patient education video library for Balbriggan Braces: detailed explanations and short social videos that bring clinical expertise to life."
   service="Patient-education video production"
   location="Balbriggan, County Dublin"
   hero={media.hero}
   serviceHref="/corporate-video-production-dublin/"
   serviceLabel="Explore business video production"
 >
+  <section class="dental-video-section" aria-labelledby="dental-long-title">
+    <h2 id="dental-long-title">Patient education, explained in detail.</h2>
+    <p>Longer videos give the clinical team space to explain treatments and aftercare in their own words. These examples show the depth and care a practice can bring to patient communication.</p>
+    <div class="dental-videos dental-videos--long">
+      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-surgery.mp4" type="video/mp4" /></video><figcaption>Implant surgery · a patient education film</figcaption></figure>
+      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-care.mp4" type="video/mp4" /></video><figcaption>Implant crowns and care · a patient education film</figcaption></figure>
+    </div>
+  </section>
+  <section class="dental-video-section" aria-labelledby="dental-short-title">
+    <h2 id="dental-short-title">Short videos that bring expertise to social media.</h2>
+    <p>Focused explanations, demonstrations and graphics turn common patient questions into useful social content. The practice’s own clinicians remain at the centre of each story.</p>
+    <div class="dental-videos dental-videos--short">
+      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-aligner-video.webp"><source src="/videos/case-studies/balbriggan-braces.mp4" type="video/mp4" /></video><figcaption>The aligner routine · short-form video</figcaption></figure>
+      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-crossbite-video.webp"><source src="/videos/dental-preview/crossbite.mp4" type="video/mp4" /></video><figcaption>Understanding a crossbite · short-form video</figcaption></figure>
+      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-parts.mp4" type="video/mp4" /></video><figcaption>Implant parts · short-form video</figcaption></figure>
+    </div>
+  </section>
   <section id="the-project">
     <h2>Long explanations and focused short videos</h2>
     <p>The Balbriggan Braces project covered a range of patient questions. The longer videos keep each subject together; the short edits give individual questions their own space.</p>
@@ -49,3 +66,15 @@ const media = clientCaseStudyMedia.braces;
     <p>For a similar project, start with the questions and the person best placed to explain each one. Our <a href="/blog/business-video-production-planning-dublin/">video planning guide</a> helps shape that list. This project also gives local businesses a concrete example of <a href="/videographer-balbriggan/">video production in Balbriggan</a>.</p>
   </section>
 </ClientCaseStudyPage>
+
+<style>
+.dental-video-section { margin: 0 0 72px; }
+.dental-videos { display:grid; gap:20px; margin-top:28px; }
+.dental-videos--long { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.dental-videos--short { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.dental-videos figure { margin:0; min-width:0; }
+.dental-videos video { display:block; width:100%; aspect-ratio:9/16; object-fit:contain; background:#07090b; border-radius:16px; }
+.dental-videos--long video { aspect-ratio:16/9; }
+.dental-videos figcaption { color:#d4dee5; font-size:14px; line-height:1.5; margin-top:12px; }
+@media(max-width:650px){.dental-videos--long{grid-template-columns:1fr}.dental-videos--short{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
