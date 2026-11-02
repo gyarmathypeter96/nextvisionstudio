@@ -18,7 +18,7 @@ keywords:
 
 A monthly short-form video package should state what is planned, how much filming time is included, how many edited videos you receive and what happens after delivery. Those details let you compare the real work behind a quote instead of comparing two headline prices that cover different things.
 
-NextVision's current monthly production packages include content planning, a half day at your business and a set number of finished short videos. The published options are four videos for €350, eight for €450 or twelve for €600, plus VAT. They cover video production. Posting, social account management and paid advertising are scoped separately.
+NextVision's current monthly production packages include content planning, a half day at your business and a set number of finished short videos. The published options are four videos for €350, eight for €550 or twelve for €750. They cover video production. Posting, social account management and paid advertising are scoped separately.
 
 If you need an ongoing supply of videos, start with the [monthly social media content service](/social-media-content-creation-dublin/). If you only need one defined batch, compare it with [short-form video production in Dublin](/short-form-video-production-dublin/).
 
@@ -60,9 +60,9 @@ Choose the quantity you can use consistently and the topics you can support with
 
 | NextVision package | Finished short videos | Published price |
 |---|---:|---:|
-| Starter Package | 4 per month | €350 + VAT |
-| Full Monthly Content | 8 per month | €450 + VAT |
-| Growth Package | 12 per month | €600 + VAT |
+| Starter Video | 4 per month | €350 |
+| Full Monthly Content | 8 per month | €550 |
+| Growth Video | 12 per month | €750 |
 
 Each current option includes content planning and a half day of filming at your business. The [package section on the home page](/#content-packages) has the current scope. Your quote confirms exact lengths, formats, filming requirements and included changes. For other video budgets, see the [Dublin videographer price guide](/how-much-does-a-videographer-cost-in-dublin/), the [product video cost guide for Ireland](/blog/product-video-cost-ireland/) and [event videographer prices](/blog/event-videographer-prices-dublin/).
 

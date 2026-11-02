@@ -3,7 +3,7 @@
 export const monthlyContentPackages = [
   {
     id: "starter",
-    name: "Starter Package",
+    name: "Starter Video",
     price: 350,
     videos: 4,
     description: "A focused start for your business on social media.",
@@ -13,7 +13,8 @@ export const monthlyContentPackages = [
   {
     id: "monthly",
     name: "Full Monthly Content",
-    price: 450,
+    price: 550,
+    salePrice: 450,
     videos: 8,
     description: "A steady flow of content, without planning every post yourself.",
     cta: "Choose Monthly Content",
@@ -21,8 +22,8 @@ export const monthlyContentPackages = [
   },
   {
     id: "growth",
-    name: "Growth Package",
-    price: 600,
+    name: "Growth Video",
+    price: 750,
     videos: 12,
     description: "More videos to share more of what your business does.",
     cta: "Choose Growth",

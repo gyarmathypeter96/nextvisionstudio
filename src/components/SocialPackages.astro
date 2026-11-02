@@ -1,0 +1,44 @@
+---
+const plans = [{"name": "Starter Social", "price": 490, "videos": 4, "photos": 4, "posts": 8}, {"name": "Grow Social", "price": 690, "videos": 4, "photos": 8, "posts": 12}, {"name": "Full House Social", "price": 990, "videos": 8, "photos": 8, "posts": 16}];
+---
+<section class="content-packages" id="social-packages" aria-labelledby="social-packages-title"><header class="content-packages__heading"><h2 id="social-packages-title">Your monthly social media content, created and published.</h2><p>On-location video and photography, planning, editing and posting for Dublin businesses. Choose the amount of original content you need each month.</p></header><div class="content-packages__grid">{plans.map((plan,index)=><article class:list={["content-plan",{"content-plan--featured":index===1}]}><h3>{plan.name}</h3><p class="content-plan__description">{plan.posts} original posts each month</p><p class="content-plan__price"><strong>€{plan.price.toLocaleString('en-IE')}</strong><span>/ month</span></p><div class="content-plan__includes"><ul><li>{plan.videos} short-form videos</li><li>{plan.photos} edited photographs / static image posts</li><li>Content planning and on-location production</li><li>Editing aligned with your brand and current social formats</li><li>We write the captions, schedule and publish your content across all your social platforms</li></ul></div><a class="content-plan__cta" href="#service-enquiry-form" data-managed-package={plan.name}>Ask about {plan.name}</a></article>)}</div><p class="content-packages__note">Post counts mean original pieces of content, adapted and shared across all your social platforms. Cross-posting one piece does not create an extra original post. Paid advertising is separate. We confirm channels, access, filming arrangements and approval steps before booking.</p></section>
+<script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'OfferCatalog',name:'Managed monthly social media packages Dublin',itemListElement:plans.map(plan=>({'@type':'Offer',name:plan.name,price:plan.price,priceCurrency:'EUR',url:'https://www.nextvisionstudio.com/social-media-content-creation-dublin/#social-packages',description:`Per month: ${plan.videos} short videos and ${plan.photos} photos, planning, on-location production, editing and done-for-you publishing across all your social platforms.`,seller:{'@id':'https://www.nextvisionstudio.com/#business'}}))})} />
+<script>document.querySelectorAll<HTMLAnchorElement>('[data-managed-package]').forEach(link=>link.addEventListener('click',()=>{const form=document.querySelector<HTMLFormElement>('#enquiry-social-form');const field=form?.querySelector<HTMLInputElement>('[name="message"]');if(field)field.value=`Monthly managed social enquiry: ${link.dataset.managedPackage}`;}));</script><style>
+  .content-packages, .content-packages * { box-sizing: border-box; }
+  .content-packages { position: relative; width: min(100% - 48px, 1260px); margin: 0 auto; padding: 20px 0 100px; color: #fff; scroll-margin-top: 110px; }
+  .content-packages__heading { max-width: 760px; margin-bottom: 54px; }
+  .content-packages__eyebrow { margin: 0 0 18px; color: #cfeaff; font-size: 11px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+  h2 { margin: 0; font-size: clamp(36px, 4.6vw, 61px); font-weight: 650; line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
+  .content-packages__heading > p:last-child { max-width: 620px; margin: 22px 0 0; color: rgba(255,255,255,.65); font-size: 17px; line-height: 1.7; }
+  .content-packages__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
+  .content-plan { position: relative; display: flex; min-width: 0; flex-direction: column; padding: clamp(25px, 3vw, 38px); border: 1px solid rgba(180,220,255,.18); border-radius: 26px; background: linear-gradient(150deg,rgba(255,255,255,.025),transparent 65%),#14191d; }
+  .content-plan--featured { isolation: isolate; border-color: rgba(178,222,255,.64); background: radial-gradient(ellipse at 85% 0,rgba(135,190,255,.17),transparent 62%),linear-gradient(155deg,#1b2834,#141a20 65%); box-shadow: 0 0 24px rgba(130,198,255,.13),0 0 65px rgba(130,198,255,.08),inset 0 1px 0 rgba(255,255,255,.09); }
+  .content-plan--featured::before { content: ""; position: absolute; z-index: -1; inset: -7px; border: 1px solid rgba(165,210,255,.16); border-radius: 32px; box-shadow: 0 0 30px rgba(131,190,255,.14),0 0 65px rgba(162,133,225,.12); pointer-events: none; animation: content-halo 5s ease-in-out infinite; }
+  .content-plan__popular { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: #cfeaff; color: #111a22; font-size: 10px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+  .content-plan__gift { position: absolute; top: 0; right: 0; z-index: -1; width: 145px; height: 145px; border-top-right-radius: 26px; color: #cfeaff; stroke: currentColor; stroke-width: 2; opacity: .35; pointer-events: none; }
+  .content-plan__top { display: flex; min-height: 26px; align-items: center; justify-content: space-between; gap: 10px; margin: 7px 0 28px; }
+  .content-plan__index { color: rgba(207,234,255,.5); font-size: 12px; font-weight: 650; letter-spacing: .08em; }
+  .content-plan__season { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid rgba(207,234,255,.15); border-radius: 999px; background: rgba(10,16,22,.4); color: #cfeaff; font-size: 10px; white-space: nowrap; }
+  .content-plan__season > span { color: #dccdff; font-size: 13px; }
+  h3 { position: relative; margin: 0; font-size: clamp(24px,2.35vw,30px); font-weight: 650; letter-spacing: -.035em; line-height: 1.14; }
+  .content-plan__description { min-height: 54px; margin: 15px 0 0; color: rgba(255,255,255,.62); font-size: 14px; line-height: 1.7; }
+  .content-plan__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin: 30px 0; }
+  .content-plan__price > strong { color: #fff; font-size: clamp(43px,4.3vw,58px); font-weight: 650; letter-spacing: -.05em; line-height: 1; }
+  .content-plan__price > span { color: rgba(255,255,255,.6); font-size: 12px; line-height: 1.6; }
+  .content-plan__price small { display: block; color: rgba(207,234,255,.8); font-size: 12px; }
+  .content-plan__includes { flex: 1; padding-top: 24px; border-top: 1px solid rgba(207,234,255,.12); }
+  .content-plan__includes > p { margin: 0; color: rgba(255,255,255,.8); font-size: 11px; font-weight: 700; }
+  ul { display: grid; gap: 15px; margin: 22px 0 34px; padding: 0; list-style: none; }
+  li { position: relative; padding-left: 23px; color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.65; }
+  li::before { content: "✓"; position: absolute; top: 0; left: 0; color: #cfeaff; font-weight: 750; }
+  li strong { color: #fff; font-weight: 650; }
+  .content-plan__cta { display: flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 17px; border: 1px solid rgba(207,234,255,.25); border-radius: 999px; background: rgba(207,234,255,.04); box-shadow: inset 0 1px 0 rgba(255,255,255,.055); color: #fff; font-size: 12px; font-weight: 750; line-height: 1.5; text-decoration: none; transition: background .2s ease,border-color .2s ease; }
+  .content-plan--featured .content-plan__cta { border-color: #cfeaff; background: #cfeaff; color: #101a23; }
+  .content-plan__cta:hover { border-color: #cfeaff; background: rgba(207,234,255,.13); }
+  .content-plan--featured .content-plan__cta:hover { background: #e2f3ff; }
+  .content-plan__cta:focus-visible { outline: 2px solid #cfeaff; outline-offset: 5px; }
+  .content-packages__note { max-width: 78ch; margin: 26px 0 0; color: rgba(255,255,255,.75); font-size: 14px; line-height: 1.7; }
+  @keyframes content-halo { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+  @media (max-width: 900px) { .content-packages { width: min(calc(100% - 32px),560px); padding: 12px 0 64px; } .content-packages__heading { margin-bottom: 42px; } .content-packages__grid { grid-template-columns: 1fr; gap: 30px; } .content-plan { padding: 28px; } .content-plan__top { min-height: 26px; flex-wrap: nowrap; } h3 { font-size: 29px; } .content-plan__description { min-height: 0; } .content-plan__price > strong { font-size: 53px; } .content-plan__gift { width: 155px; height: 155px; } }
+  @media (prefers-reduced-motion: reduce) { .content-plan--featured::before { animation: none; opacity: .75; } .content-plan__cta { transition: none; } }
+</style>

@@ -48,7 +48,7 @@ for(const name of ['swords','malahide','balbriggan']){
 }
 for(const slug of ['corporate-video-cost-dublin','product-video-cost-ireland','event-videographer-prices-dublin']){
  const route=`/blog/${slug}/`;assert.ok(pages.has(route));
- assert.ok(pages.get(route).includes('VAT')&&(pages.get(route).includes('Editing is separate')||pages.get(route).includes('editing separate')),`${route}: clear tax and editing scope`);
+ assert.ok(! /\bVAT\b/.test(pages.get(route))&&(pages.get(route).includes('Editing is separate')||pages.get(route).includes('editing separate')),`${route}: clear tax and editing scope`);
 }
 const summary=await readFile('dist/llms.txt','utf8');
 for(const name of ['swords','malahide','balbriggan'])assert.ok(summary.includes(`/videographer-${name}/`));

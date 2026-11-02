@@ -35,6 +35,16 @@ const services = [
     ],
   },
   {
+    key: "photography",
+    introduction: "Original photographs of your people, products and workplace, ready for your website and social channels.",
+    benefits: ["Product, team and workplace photography.", "Plan photographs alongside your video shoot.", "Receive selected, edited images ready to use."],
+  },
+  {
+    key: "crm",
+    introduction: "Keep enquiries organised and make follow-up easier with CRM workflows and practical AI automation.",
+    benefits: ["Capture enquiries in one organised pipeline.", "Set up reminders and follow-up workflows.", "Automate repeat tasks where it helps your business."],
+  },
+  {
     key: "web",
     href: "/webdesigner-dublin/",
     title: "Website Design and Development",
@@ -89,6 +99,7 @@ const services = [
               <span>{String(index + 1).padStart(2, "0")}</span>
               <span aria-hidden="true">/ {String(services.length).padStart(2, "0")}</span>
             </div>
+            {["photography", "crm", "web", "ads"].includes(service.key) && <span class="service-card__category">Additional service</span>}
             <h3>{service.title}</h3>
             <p>{service.introduction}</p>
             <ul>
@@ -102,6 +113,7 @@ const services = [
 </section>
 
 <style>
+.service-card__category { display:block; margin-bottom:12px; color:#cfeaff; font-size:14px; }
   .services,
   .services * {
     box-sizing: border-box;

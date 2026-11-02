@@ -13,7 +13,7 @@ keywords:
   - "event videographer prices dublin"
 ---
 
-Event videography needs a price for the coverage **and** the finished edits. NextVision’s published filming rates are **€250 + VAT for a half day** and **€450 + VAT for a full day**. Editing is separate. These are filming rates, not all-inclusive prices for recording an entire event, multiple cameras or a highlight film.
+Event videography needs a price for the coverage **and** the finished edits. NextVision’s published filming rates are **€250 for a half day** and **€450 for a full day**. Editing is separate. These are filming rates, not all-inclusive prices for recording an entire event, multiple cameras or a highlight film.
 
 Your event schedule, sound requirements and deliverable list determine the proposal. See the [event videographer service in Dublin](/event-videographer-dublin/) for relevant work, and the [overall videographer pricing guide](/how-much-does-a-videographer-cost-in-dublin/) for the published NextVision options.
 

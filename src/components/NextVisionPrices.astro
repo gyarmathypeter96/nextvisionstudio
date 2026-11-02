@@ -7,7 +7,7 @@ const popularVideos = 8;
 
 <section class="own-prices" id="nextvision-prices" aria-labelledby="own-prices-title">
   <h2 id="own-prices-title">NextVision Studio prices</h2>
-  <p>All prices exclude VAT. Your written quote confirms filming hours, locations, video lengths, formats, delivery dates and included changes.</p>
+  <p>Your written quote confirms filming hours, locations, video lengths, formats, delivery dates and included changes.</p>
   <div class="own-prices__grid">
     {nextVisionPrices.map((offer) => {
       const tiers = "tiers" in offer ? offer.tiers : undefined;
@@ -31,7 +31,7 @@ const popularVideos = 8;
                   </li>
                 ))}
               </ul>
-              <small>Per month + VAT</small>
+              <small>Per month</small>
               <a href="/#content-packages" data-cta-placement={`price-${offer.id}`}>Compare the three packages</a>
             </>
           ) : (
