@@ -30,7 +30,7 @@ assert.ok(source.includes('summary.hidden = false'));
 assert.ok(source.includes('service.value = "Monthly Social Media Content"'));
 const oldPrices = await readFile(new URL('../dist/how-much-does-a-videographer-cost-in-dublin/index.html',import.meta.url),'utf8');
 for (const [videos, amount] of [[4,'€350'],[8,'€550'],[12,'€750']]) assert.ok(oldPrices.includes(amount) && oldPrices.includes(`${videos} short videos`), `Pricing guide must show the ${videos} video monthly package at ${amount}`);
-assert.ok(oldPrices.includes('€1,500'), 'Managed social price must remain intact');
+assert.ok(oldPrices.includes('€1,490'), 'Managed social price must remain intact');
 assert.ok(!oldPrices.includes('12 short video edits') && !oldPrices.includes('8 short video edits'), 'Editing-only packages must not undercut the monthly packages');
 const formHtml = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
 assert.ok(formHtml.includes('Monthly video packages from €350'), 'Quote form must show the new starting price');

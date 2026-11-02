@@ -75,7 +75,7 @@ for (const [id, amount, scope] of [
   ["monthly-videos", "€350", "half day shoot"],
   ["half-day", "€250", "Edited videos are priced separately"],
   ["full-day", "€450", "Edited videos are priced separately"],
-  ["ultimate-organic", "€1,500", "12 short videos and 4 photos each month"],
+  ["ultimate-organic", "€1,490", "12 short videos and 4 photos each month"],
   ["ad-creative", "€500", "4 short videos created for paid social ads"],
 ]) {
   const card = costGuide.match(new RegExp(`<article[^>]*data-nextvision-price="${id}"[\\s\\S]*?<\\/article>`))?.[0];
@@ -90,7 +90,7 @@ assert.ok(costGuide.includes("€550 / month"), "The 8 video comparison must use
 const monthlyCard = costGuide.match(/<article[^>]*data-nextvision-price="ultimate-organic"[\s\S]*?<\/article>/)?.[0];
 assert.ok(monthlyCard?.includes('href="/social-media-content-creation-dublin/#landing-contact"'), "The managed monthly package must lead to the monthly content enquiry form");
 const llms = await read("dist/llms.txt");
-for (const amount of ["€250", "€450", "€350", "€750", "€1,500", "€500"]) {
+for (const amount of ["€250", "€450", "€350", "€750", "€1,490", "€500"]) {
   assert.ok(llms.includes(amount), `Public AI summary has a stale or missing approved price: ${amount}`);
 }
 assert.ok(llms.includes("4 short videos €350, 8 short videos €550, 12 short videos €750"), "Public AI summary must list the monthly package prices");

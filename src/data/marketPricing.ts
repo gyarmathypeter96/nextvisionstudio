@@ -34,7 +34,7 @@ export const nextVisionPrices = [
   {
     id: "ultimate-organic",
     title: "Ultimate Organic Social Content",
-    price: "€1,500",
+    price: "€1,490",
     vat: "",
     unit: "Per month",
     description: "Social media content, management and strategy, with 12 short videos and 4 photos each month. Advertising spend and paid campaign management are separate.",
@@ -76,7 +76,7 @@ export const marketPricingExamples = [
     item: "Full social media content and management",
     price: "Approx. €2,000 to €3,000 / month",
     unit: "Illustrative managed content budget",
-    nextvisionPrice: "€1,500 / month",
+    nextvisionPrice: "€1,490 / month",
     nextvision: "Ultimate Organic Social Content: strategy, management, 12 short videos and 4 photos each month.",
   },
 ];
