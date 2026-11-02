@@ -13,9 +13,9 @@ keywords:
   - "product video cost ireland"
 ---
 
-A product video is priced around what must be demonstrated, how the product is filmed and how many finished edits you need. NextVision’s published **4 short videos for ads package is €500 + VAT**. That is a defined advertising-video package, not a fixed price for every product film. A detailed demonstration or larger product range needs its own quote.
+A product video is priced around what must be demonstrated, how the product is filmed and how many finished edits you need. NextVision’s published **4 short videos for ads package is €500**. That is a defined advertising-video package, not a fixed price for every product film. A detailed demonstration or larger product range needs its own quote.
 
-For filming-only work, the published rates are €250 + VAT for a half day and €450 + VAT for a full day, with editing separate. The [full NextVision videography price guide](/how-much-does-a-videographer-cost-in-dublin/) explains the differences. We are based in North Dublin; work elsewhere in Ireland and any travel are agreed for the brief.
+For filming-only work, the published rates are €250 for a half day and €450 for a full day, with editing separate. The [full NextVision videography price guide](/how-much-does-a-videographer-cost-in-dublin/) explains the differences. We are based in North Dublin; work elsewhere in Ireland and any travel are agreed for the brief.
 
 ## Decide what the customer needs to understand
 

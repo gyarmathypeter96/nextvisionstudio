@@ -1,25 +1,17 @@
 ---
 
-const clients: { name: string; src: string; width: number; height: number; href?: string }[] = [
-  { name: "Gut Fest", src: "/images/clients/gut-fest.webp", href: "/case-studies/gut-fest-event-videography-dublin/", width: 500, height: 500 },
-  { name: "Saxoo London", src: "/images/clients/saxoo-london.png", href: "/case-studies/saxoo-london-fashion-video/", width: 280, height: 280 },
-  { name: "Emo Night Brooklyn", src: "/images/clients/emo-night-brooklyn.webp", width: 500, height: 500 },
-  { name: "Leroy's Barking World", src: "/images/clients/leroys-barking-world.webp", href: "/case-studies/leroys-barking-world-social-content/", width: 500, height: 500 },
-  { name: "Muri Pub and More", src: "/images/clients/muri-pub-and-more.webp", href: "/case-studies/uri-muri-bar-video-photography/", width: 500, height: 500 },
-  { name: "The Macaron Boutique", src: "/images/clients/the-macaron-boutique.webp", href: "/case-studies/macaron-boutique-product-video/", width: 500, height: 500 },
-  { name: "Japanese calligraphy client", src: "/images/clients/client-logo-07.webp", width: 500, height: 500 },
-  { name: "Perfect Clean", src: "/images/clients/perfect-clean.webp", href: "/case-studies/perfect-clean-video-advertising/", width: 517, height: 483 },
-  { name: "Pogány Induló", src: "/images/clients/pogany-indulo.webp", href: "/case-studies/pogany-indulo-live-concert-video/", width: 666, height: 375 },
-];
+interface Props { title?: string; }
+const { title = "Trusted by Irish businesses" } = Astro.props;
+const clients = [{"name": "Perfect Clean", "src": "/images/clients/perfect-clean.webp", "href": "/case-studies/perfect-clean-video-advertising/", "width": 500, "height": 200}, {"name": "VentSolve", "src": "/images/clients/ventsolve.webp", "href": "/case-studies/ventsolve-content-production/", "width": 500, "height": 200}, {"name": "Amber Oxygen Therapy", "src": "/images/clients/amber-oxygen.svg", "href": "/case-studies/amber-oxygen-therapy-video-production/", "width": 500, "height": 200}, {"name": "Balbriggan Braces", "src": "/images/clients/balbriggan-braces.png", "href": "/case-studies/balbriggan-braces-dental-videos/", "width": 500, "height": 200}, {"name": "Gut Fest", "src": "/images/clients/gut-fest.webp", "href": "/case-studies/gut-fest-event-videography-dublin/", "width": 500, "height": 200}, {"name": "Leroy’s Barking World", "src": "/images/clients/leroys-barking-world.webp", "href": "/case-studies/leroys-barking-world-social-content/", "width": 500, "height": 200}, {"name": "Red Line Events", "src": "/images/clients/red-line-events.png", "href": "/case-studies/red-line-events-techno-video/", "width": 500, "height": 200}];
 ---
 
 <section class="clients" id="clients" aria-labelledby="clients-title">
-  <h2 id="clients-title">Some of the businesses I have worked with</h2>
-  <div class="clients__marquee" aria-label="Selected NextVision Studio clients">
+  <h2 id="clients-title">{title}</h2>
+  <div class="clients__marquee" aria-label="Irish businesses NextVision Studio has worked with">
     <div class="clients__track" id="client-logos">
       {[...clients, ...clients].map((client, index) => (
         <div class="clients__item" aria-hidden={index >= clients.length ? "true" : undefined}>
-          <a href={client.href ?? "/case-studies/"} tabindex={index >= clients.length ? -1 : undefined} aria-label={`View ${client.name} project${client.href ? "" : " portfolio"}`}><img src={client.src} alt={index >= clients.length ? "" : `${client.name} logo`} width={client.width} height={client.height} loading={index < 5 ? "eager" : "lazy"} decoding="async" /></a>
+          <a href={client.href ?? "/case-studies/"} tabindex={index >= clients.length ? -1 : undefined} aria-label={`View ${client.name} project${client.href ? "" : " portfolio"}`}><img src={client.src} alt={index >= clients.length ? "" : `${client.name} logo`} width={client.width} height={client.height} loading="eager" decoding="async" /></a>
         </div>
       ))}
     </div>
@@ -37,6 +29,7 @@ const clients: { name: string; src: string; width: number; height: number; href?
   .clients__item a:focus-visible { outline: 2px solid #cfeaff; outline-offset: 4px; }
   .clients__marquee:hover .clients__track, .clients__marquee:focus-within .clients__track { animation-play-state: paused; }
   .clients__item img { display: block; width: auto; max-width: 100%; height: auto; max-height: 54px; object-fit: contain; opacity: .68; filter: grayscale(1) saturate(0) brightness(1.3); transition: opacity .2s ease, filter .2s ease; }
+  .clients__item img[src="/images/clients/red-line-events.png"] { background:#fff; border-radius:4px; opacity:1; filter:invert(1); }
   .clients__item:hover img { opacity: 1; filter: grayscale(0) brightness(1); }
   @keyframes clients-marquee { to { transform: translateX(-50%); } }
   @media (max-width: 640px) { .clients { padding: 44px 0 50px; } .clients h2 { margin-bottom: 31px; } .clients__item { flex-basis: 132px; height: 58px; padding: 0 20px; } .clients__item img { max-height: 40px; } .clients__track { animation-duration: 34s; } }

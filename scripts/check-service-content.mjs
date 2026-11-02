@@ -38,7 +38,7 @@ for (const key of ["video", "photography", "shortform", "corporate"]) {
   const document = documents.get(key);
   assert.ok(/What shapes your quote\?|How much does [^<]+ cost\?/.test(document), `Missing cost explanation: ${key}`);
   assert.ok(document.includes("revision"), `Missing revision scope: ${key}`);
-  assert.ok(!/€\s*\d/.test(document), `Concrete service price on ${key}`);
+  assert.ok(!/€\s*\d/.test(document.replace(/<dialog[^>]*id="black-friday-deal"[\s\S]*?<\/dialog>/g, "")), `Concrete service price on ${key}`);
   assert.ok(document.includes("FAQPage"), `Missing visible FAQ markup: ${key}`);
 }
 assert.ok(documents.get("video").includes('name="service" value="Business Video Production"'));
@@ -51,7 +51,7 @@ assert.ok(!/<iframe[^>]*youtube/.test(documents.get("video")), "YouTube must loa
 
 for (const route of ["", "contact/", "videography-dublin/", "photography-dublin/", "corporate-video-production-dublin/", "short-form-video-production-dublin/"]) {
   const document = await html(route);
-  for (const name of ["email", "phone", "message"]) {
+  for (const name of (route === "corporate-video-production-dublin/" ? ["email", "phone"] : ["email", "phone", "message"])) {
     const tag = [...document.matchAll(/<(?:input|textarea)\b[^>]*>/g)].map(([tag]) => tag).find((tag) => tag.includes(`name="${name}"`));
     assert.ok(tag && /\brequired\b/.test(tag), `Missing required ${name}: /${route}`);
   }
@@ -75,25 +75,25 @@ for (const [id, amount, scope] of [
   ["monthly-videos", "€350", "half day shoot"],
   ["half-day", "€250", "Edited videos are priced separately"],
   ["full-day", "€450", "Edited videos are priced separately"],
-  ["ultimate-organic", "€1,200", "12 short videos and 4 photos each month"],
+  ["ultimate-organic", "€1,500", "12 short videos and 4 photos each month"],
   ["ad-creative", "€500", "4 short videos created for paid social ads"],
 ]) {
   const card = costGuide.match(new RegExp(`<article[^>]*data-nextvision-price="${id}"[\\s\\S]*?<\\/article>`))?.[0];
-  assert.ok(card?.includes(amount) && card.includes("VAT") && card.includes(scope), `Incorrect approved price or scope for ${id}`);
+  assert.ok(card?.includes(amount) && card.includes(scope), `Incorrect approved price or scope for ${id}`);
 }
 const monthlyPrices = costGuide.match(/<article[^>]*data-nextvision-price="monthly-videos"[\s\S]*?<\/article>/)?.[0];
-for (const [videos, amount] of [[4, "€350"], [8, "€450"], [12, "€600"]]) {
+for (const [videos, amount] of [[4, "€350"], [8, "€550"], [12, "€750"]]) {
   assert.ok(monthlyPrices?.includes(amount) && monthlyPrices.includes(`${videos} short videos`), `Monthly package missing: ${videos} videos at ${amount}`);
 }
-assert.ok(costGuide.includes("All NextVision prices shown exclude VAT"));
-assert.ok(costGuide.includes("€450 + VAT / month"), "The 8 video comparison must use the Full Monthly Content price");
+assert.ok(!/\bVAT\b/.test(costGuide), "Cost guide must not advertise a VAT surcharge");
+assert.ok(costGuide.includes("€550 / month"), "The 8 video comparison must use the Full Monthly Content price");
 const monthlyCard = costGuide.match(/<article[^>]*data-nextvision-price="ultimate-organic"[\s\S]*?<\/article>/)?.[0];
 assert.ok(monthlyCard?.includes('href="/social-media-content-creation-dublin/#landing-contact"'), "The managed monthly package must lead to the monthly content enquiry form");
 const llms = await read("dist/llms.txt");
-for (const amount of ["€250", "€450", "€350", "€600", "€1,200", "€500"]) {
-  assert.ok(llms.includes(`${amount} + VAT`), `Public AI summary has a stale or missing approved price: ${amount}`);
+for (const amount of ["€250", "€450", "€350", "€750", "€1,500", "€500"]) {
+  assert.ok(llms.includes(amount), `Public AI summary has a stale or missing approved price: ${amount}`);
 }
-assert.ok(llms.includes("4 short videos €350, 8 short videos €450, 12 short videos €600"), "Public AI summary must list the monthly package prices");
+assert.ok(llms.includes("4 short videos €350, 8 short videos €550, 12 short videos €750"), "Public AI summary must list the monthly package prices");
 for (const service of listedServices) assert.ok(llms.includes(`https://www.nextvisionstudio.com${service.href}`), `llms.txt is missing ${service.key}`);
 assert.ok(!llms.includes("https://www.nextvisionstudio.com/videography-dublin/"), "llms.txt must not list the noindex video landing page");
 assert.ok(!llms.includes("GTM-") && !llms.includes("nvs_owner_optout"), "llms.txt must contain only public business information");

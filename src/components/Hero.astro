@@ -1,12 +1,13 @@
 ---
-import BackgroundMotionControl from "./BackgroundMotionControl.astro";
+
 ---
 
-<section class="nvs-astronaut-header" aria-labelledby="hero-title" data-background-motion data-motion-paused="true">
+<section class="nvs-astronaut-header" aria-labelledby="hero-title">
   <video
     id="hero-background-video"
     class="nvs-astronaut-video"
     muted
+    autoplay
     loop
     playsinline
     preload="none"
@@ -15,12 +16,7 @@ import BackgroundMotionControl from "./BackgroundMotionControl.astro";
     height="720"
     aria-hidden="true"
   >
-    <source
-      src="/videos/hero-video-mobile.mp4"
-      type="video/mp4"
-      media="(max-width: 767px)"
-    />
-    <source src="/videos/hero-video-desktop.mp4" type="video/mp4" />
+    <source src="/videos/showreel-preview.mp4" type="video/mp4" />
   </video>
 
   <div class="nvs-astronaut-overlay" aria-hidden="true"></div>
@@ -46,11 +42,24 @@ import BackgroundMotionControl from "./BackgroundMotionControl.astro";
     </div>
 
   </div>
-  <div class="nvs-hero-motion">
-    <BackgroundMotionControl controls="hero-background-video" playLabel="Play background video" pauseLabel="Pause background video" iconOnly />
-  </div>
 </section>
 
+<script>
+  const heroVideo = document.querySelector<HTMLVideoElement>('#hero-background-video');
+  if (heroVideo && new URLSearchParams(window.location.search).get('hero') === 'original') {
+    heroVideo.src = window.matchMedia('(max-width: 767px)').matches ? '/videos/hero-video-mobile.mp4' : '/videos/hero-video-desktop.mp4';
+    heroVideo.load();
+  }
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncHero = () => {
+    if (!heroVideo) return;
+    if (preference.matches || document.hidden) heroVideo.pause();
+    else heroVideo.play().catch(() => {});
+  };
+  preference.addEventListener('change', syncHero);
+  document.addEventListener('visibilitychange', syncHero);
+  syncHero();
+</script>
 <style>
   .nvs-astronaut-header,
   .nvs-astronaut-header * {

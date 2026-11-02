@@ -13,7 +13,7 @@ keywords:
   - "corporate video cost dublin"
 ---
 
-A corporate video needs a quote for the whole production, not just a camera booking. NextVision Studio’s published filming rates are **€250 + VAT for a half day** and **€450 + VAT for a full day**. Editing is separate. A finished corporate film is quoted around the speakers, locations, preparation and final versions you need.
+A corporate video needs a quote for the whole production, not just a camera booking. NextVision Studio’s published filming rates are **€250 for a half day** and **€450 for a full day**. Editing is separate. A finished corporate film is quoted around the speakers, locations, preparation and final versions you need.
 
 Those rates are our filming prices, not an estimate of the entire Dublin market. For all current options, use the [Dublin videographer pricing guide](/how-much-does-a-videographer-cost-in-dublin/). For the actual service and examples, start with [corporate video production in Dublin](/corporate-video-production-dublin/).
 
@@ -43,7 +43,7 @@ The project page shows public work and production choices. Its client-specific f
 
 ## Would a monthly video package be a better fit?
 
-If you need a recurring batch of short social videos rather than one main corporate film, compare [monthly social media content production](/social-media-content-creation-dublin/). NextVision’s monthly video packages are €350 for 4, €450 for 8 or €600 for 12 short videos, all + VAT, including planning and a half day shoot. Posting and account management are separate.
+If you need a recurring batch of short social videos rather than one main corporate film, compare [monthly social media content production](/social-media-content-creation-dublin/). NextVision’s monthly video packages are €350 for 4, €550 for 8 or €750 for 12 short videos, all, including planning and a half day shoot. Posting and account management are separate.
 
 A corporate interview can sometimes be planned alongside [short-form video production](/short-form-video-production-dublin/), but the written proposal must list both sets of deliverables. Do not assume a monthly short-video package includes a long corporate film.
 

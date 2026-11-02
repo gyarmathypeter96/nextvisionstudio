@@ -11,7 +11,7 @@ const offers = [
   },
   {
     title: "Versions for your campaigns",
-    description: "Agree the short edits, captions and formats you need for the month. Posting and ad management can be added separately.",
+    description: "Agree the short edits, captions and formats you need for the month. Publishing is included in the managed social packages below. Paid advertising is separate.",
   },
 ];
 
@@ -33,7 +33,7 @@ const photos = [
 <section class="social-offers" aria-labelledby="social-offers-title">
   <div class="social-offers__inner">
     <header class="social-offers__header">
-      <h2 id="social-offers-title">What Can We Create for Your Business?</h2>
+      <h2 id="social-offers-title">Original photography for your social channels</h2>
       <p>A regular content plan, one focused production session and a fresh batch ready to share. Need a single project? <a href="/short-form-video-production-dublin/">Explore short form video production.</a></p>
     </header>
 
@@ -47,27 +47,6 @@ const photos = [
     </div>
 
     <section class="social-work" aria-labelledby="social-work-videos-title">
-      <header class="social-work__heading">
-        <h3 id="social-work-videos-title">Video examples</h3>
-        <p>Tap any video to watch it here.</p>
-      </header>
-      <div class="social-work__videos">
-        {videos.map((video) => (
-          <button
-            class="social-work__video"
-            type="button"
-            data-work-video={video.source}
-            data-work-video-type={video.type}
-            data-work-video-title={video.title}
-            aria-label={`Play video: ${video.title}`}
-          >
-            <img src={video.thumbnail} alt="" width={video.width} height={video.height} loading="lazy" decoding="async" />
-            <span class="social-work__play" aria-hidden="true">▶</span>
-            <span class="social-work__caption">{video.title}</span>
-          </button>
-        ))}
-      </div>
-
       <header class="social-work__heading social-work__heading--photos">
         <h3>Photography examples</h3>
         <p>Tap any image to view it larger.</p>
@@ -95,7 +74,7 @@ const photos = [
   </dialog>
 </section>
 
-<ProjectVideoSchema ids={videos.filter((video) => video.type === "youtube").map((video) => video.source)} />
+
 
 <script>
   const setupSocialWorkGallery = () => {

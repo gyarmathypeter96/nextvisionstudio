@@ -8,4 +8,4 @@ const { serviceKey } = Astro.props;
 ---
 <ServiceEnquiryHero service={getService(serviceKey)} content={serviceEnquiryContent[serviceKey]} preview={false} />
 
-<ServiceAnswers serviceKey={serviceKey} />
+{serviceKey !== "social" && <ServiceAnswers serviceKey={serviceKey} />}

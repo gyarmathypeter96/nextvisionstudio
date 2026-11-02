@@ -767,12 +767,12 @@ export const landingPages: Record<string, LandingPageData> = {
     formSubject: "New Social Media Content Creation Dublin landing page enquiry",
     serviceType: "Social media content creation in Dublin",
     schemaDescription:
-      "Monthly planning, recurring filming, photography and editing for Dublin businesses. Fresh videos and photos are delivered ready to publish; posting, account management and paid ads are agreed separately.",
+      "Monthly planning, recurring filming, photography and editing for Dublin businesses. Managed monthly packages include videos, photographs and publishing. Paid advertising is agreed separately.",
     faq: [
       {
         question: "What is included in monthly social media content production?",
         answer:
-          "We agree a recurring plan for ideas, filming, photography and editing. Each monthly proposal confirms the filming time, number of finished videos and photos, formats, delivery dates and included changes. You receive the finished files ready to share.",
+          "We agree a recurring plan for ideas, filming, photography and editing. Choose Starter at €490 for 4 videos and 4 photos, Grow at €690 for 4 videos and 8 photos, or Full House at €990 for 8 videos and 8 photos per month. Managed packages include publishing across all your social platforms. The proposal confirms filming time, formats, delivery dates and included changes.",
       },
       {
         question: "Do you create content for Dublin businesses on location?",
@@ -787,7 +787,7 @@ export const landingPages: Record<string, LandingPageData> = {
       {
         question: "Do you manage social media accounts too?",
         answer:
-          "This service focuses on making your monthly content. Posting, replying to comments, account management and paid ads are available as additional support only when included in your proposal. You can also publish the files yourself.",
+          "The managed social packages include planning, on-location content production, editing, captions and publishing across all your social platforms. Replying to comments and messages and paid advertising are separate unless included in your written proposal. If you prefer to publish yourself, choose a production-only package.",
       },
       {
         question: "Can the same content be used for ads?",
