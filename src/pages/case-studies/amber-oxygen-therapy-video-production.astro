@@ -28,6 +28,31 @@ const media = clientCaseStudyMedia.amber;
     <p>Other edits take a more specific angle, including <em>By the Numbers</em>, <em>Watch the Pressure</em> and <em>Your Next Pause</em>. Together, they form a set of separate introductions and details the business can use over time.</p>
   </section>
 
+  <section id="video-examples" aria-labelledby="video-examples-title">
+    <h2 id="video-examples-title">Watch three short-form examples</h2>
+    <p>These selected edits show how the series gives the business different ways to introduce a first session, the chamber and smaller details of the experience.</p>
+    <div class="amber-videos">
+      <figure>
+        <video controls playsinline preload="none" poster="/images/case-studies/amber-first-session-poster.jpg" aria-label="First Session: what to expect at Amber Oxygen Therapy">
+          <source src="/videos/case-studies/amber-first-session.mp4" type="video/mp4" />
+        </video>
+        <figcaption>First Session · what to expect</figcaption>
+      </figure>
+      <figure>
+        <video controls playsinline preload="none" poster="/images/case-studies/amber-look-inside-poster.jpg" aria-label="Look Inside: a short tour of the Amber Oxygen chamber">
+          <source src="/videos/case-studies/amber-look-inside.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Look Inside · the chamber</figcaption>
+      </figure>
+      <figure>
+        <video controls playsinline preload="none" poster="/images/case-studies/amber-little-details-poster.jpg" aria-label="The Little Details: features of the Amber Oxygen experience">
+          <source src="/videos/case-studies/amber-little-details.mp4" type="video/mp4" />
+        </video>
+        <figcaption>The Little Details · the experience</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <div class="client-image-pair">
     <CaseStudyImageSlot image={media.detail} assetKey="amber:detail" />
     <CaseStudyImageSlot image={media.work} assetKey="amber:work" />
@@ -44,3 +69,11 @@ const media = clientCaseStudyMedia.amber;
     <p>A defined batch suits a business introducing several subjects at once. A <a href="/social-media-content-creation-dublin/">regular content plan</a> can support recurring filming and new topics. The <a href="/blog/content-day-or-business-video/">content day and business video guide</a> explains the difference between a short-video batch and one main film.</p>
   </section>
 </ClientCaseStudyPage>
+
+<style>
+  .amber-videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 28px 0 12px; }
+  .amber-videos figure { margin: 0; min-width: 0; }
+  .amber-videos video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #07090b; border-radius: 16px; }
+  .amber-videos figcaption { color: #d4dee5; font-size: 14px; line-height: 1.5; margin-top: 12px; }
+  @media (max-width: 650px) { .amber-videos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+</style>
