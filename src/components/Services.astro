@@ -249,6 +249,13 @@ const services = [
     --card-accent: 130, 180, 220;
   }
 
+  .service-card--corporate::before {
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: 12% 30%;
+    background-color: #111;
+  }
+
   .service-card--web {
     --card-image: url("/images/home-services/website-design-bg.webp");
     --card-accent: 190, 225, 255;
@@ -393,6 +400,7 @@ const services = [
     }
 
     .service-card::before { inset: 0; }
+    .service-card--corporate::before { background-size: cover; background-position: center 22%; }
     .service-card::after {
       background: linear-gradient(180deg, rgba(8, 10, 13, 0.05) 0%, rgba(17, 17, 17, 0.7) 42%, #111111 56%, #111111 100%);
     }
