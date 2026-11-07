@@ -1,19 +1,28 @@
 ---
-import ProjectVideoSchema from "./ProjectVideoSchema.astro";
+import { projectVideoSchema } from "../data/projectVideos";
+import { SITE_URL } from "../config/site";
 
 interface Props { id?: string; }
 const { id = 'social-video-work' } = Astro.props;
 const films = [
- {slug:'ventsolve-content-production',client:'VentSolve',text:'Service and brand video production for an Irish business.', youtube:'SUeoIgRtH0I',video:{poster:'/images/portfolio/SUeoIgRtH0I.webp',title:'VentSolve business video'}},
- {slug:'gut-fest-event-videography-dublin',client:'Gut Fest Dublin',text:'Event videography at Bolands Mills in Dublin.',youtube:'JVA_WxYY3p0',video:{poster:'/images/portfolio/JVA_WxYY3p0.webp',title:'Gut Fest Dublin event film'}},
+ {slug:'ventsolve-content-production',client:'VentSolve',text:'Service and brand video production for an Irish business.',video:{src:'/videos/case-studies/ventsolve.mp4',poster:'/images/portfolio/SUeoIgRtH0I.webp',title:'VentSolve business video',width:720,height:1280}},
+ {slug:'gut-fest-event-videography-dublin',client:'Gut Fest Dublin',text:'Event videography at Bolands Mills in Dublin.',video:{src:'/videos/case-studies/gut-fest.mp4',poster:'/images/portfolio/JVA_WxYY3p0.webp',title:'Gut Fest Dublin event film',width:720,height:1280}},
  {slug:'balbriggan-braces-dental-videos',client:'Balbriggan Braces',text:'Patient education videos filmed in Balbriggan, North Dublin.',video:{src:'/videos/case-studies/balbriggan-braces.mp4',poster:'/images/case-studies/balbriggan-braces-aligner-video.webp',title:'Balbriggan Braces patient education video',width:720,height:1280}},
  {slug:'perfect-clean-video-advertising',client:'Perfect Clean',text:'Owner-led video content for an Irish cleaning business.',video:{src:'/videos/case-studies/perfect-clean.mp4',poster:'/images/case-studies/perfect-clean-owner.webp',title:'Perfect Clean business video',width:720,height:1280}},
- {slug:'leroys-barking-world-social-content',client:"Leroy’s Barking World",text:'Short-form social video for a dog grooming business in Blessington, County Wicklow.',youtube:'53-_kK95Eoc',video:{poster:'/images/portfolio/53-_kK95Eoc.webp',title:'Leroy’s Barking World social video'}},
+ {slug:'leroys-barking-world-social-content',client:"Leroy’s Barking World",text:'Short-form social video for a dog grooming business in Blessington, County Wicklow.',video:{src:'/videos/case-studies/leroys-barking-world.mp4',poster:'/images/portfolio/53-_kK95Eoc.webp',title:'Leroy’s Barking World social video',width:720,height:1280}},
 ];
+const localSchemas = [
+  ['SUeoIgRtH0I', '/videos/case-studies/ventsolve.mp4'],
+  ['JVA_WxYY3p0', '/videos/case-studies/gut-fest.mp4'],
+  ['53-_kK95Eoc', '/videos/case-studies/leroys-barking-world.mp4'],
+].map(([id, path]) => {
+  const { embedUrl, ...schema } = projectVideoSchema(id)!;
+  return { ...schema, contentUrl: new URL(path, SITE_URL).href };
+});
 
 
 ---
-<ProjectVideoSchema ids={["SUeoIgRtH0I", "JVA_WxYY3p0", "53-_kK95Eoc"]} />
+{localSchemas.map(schema => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
 <section class="social-films" id={id} aria-labelledby={`${id}-title`} data-social-carousel>
   <header class="social-films__heading">
     <div><h2 id={`${id}-title`}>Video production for Dublin and Irish businesses</h2><p>From North Dublin patient education to Dublin events and Irish service businesses. Watch our video work and explore the projects behind it.</p></div>
@@ -22,11 +31,11 @@ const films = [
   <ol class="social-films__rail" tabindex="0" aria-label="Swipe or scroll to explore five original client videos">
     {films.map((film,index)=><li class:list={['social-films__item',{'is-current':index===0}]}>
       <div class="social-films__phone">
-        {film.youtube ? <button class="home-youtube" type="button" data-home-youtube={film.youtube} aria-label={`Play ${film.client} video on YouTube`}><img src={film.video.poster} alt={film.video.title} loading="lazy" width="720" height="1280" /><span>Play video</span></button> : <><video playsinline preload="none" width={film.video.width} height={film.video.height} poster={film.video.poster} title={film.video.title} aria-label={film.video.title}>
+        <video playsinline preload="none" width={film.video.width} height={film.video.height} poster={film.video.poster} title={film.video.title} aria-label={film.video.title}>
           <source src={film.video.src} type="video/mp4" />Your browser does not support video playback.
         </video>
         <button class="social-films__play" type="button" aria-label={`Play ${film.client} social video`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg></button>
-        <noscript><a href={film.video.src}>Watch the {film.client} video</a></noscript></>}
+        <noscript><a href={film.video.src}>Watch the {film.client} video</a></noscript>
       </div>
       <h3>{film.client}</h3><p>{film.text}</p><a href={`/case-studies/${film.slug}/`}>Explore the {film.client} project</a>
     </li>)}
@@ -34,15 +43,6 @@ const films = [
 </section>
 
 <script>
- document.querySelectorAll<HTMLButtonElement>('[data-home-youtube]').forEach(button => button.addEventListener('click', () => {
- const iframe = document.createElement('iframe');
- iframe.src = `https://www.youtube-nocookie.com/embed/${button.dataset.homeYoutube}?autoplay=1`;
- iframe.title = button.getAttribute('aria-label') || 'Client video';
- iframe.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
- iframe.allowFullscreen = true;
- button.replaceWith(iframe);
- }, {once:true}));
-
   const initialiseSocialCarousels = () => {
     document.querySelectorAll<HTMLElement>('[data-social-carousel]').forEach(section=>{
       if(section.dataset.ready) return;
