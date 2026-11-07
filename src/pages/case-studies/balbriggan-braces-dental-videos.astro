@@ -3,6 +3,20 @@ import ClientCaseStudyPage from "../../components/ClientCaseStudyPage.astro";
 import CaseStudyImageSlot from "../../components/CaseStudyImageSlot.astro";
 import { clientCaseStudyMedia } from "../../data/clientCaseStudyMedia";
 const media = clientCaseStudyMedia.braces;
+const longVideos = [
+  { title: "Implant surgery", speaker: "Rebecca", src: "/videos/dental-preview/implant-surgery.mp4", poster: "/images/case-studies/balbriggan-braces-rebecca.webp" },
+  { title: "Implant crowns and care", speaker: "Rebecca", src: "/videos/dental-preview/implant-care.mp4", poster: "/images/case-studies/long-implant-care-poster.jpg" },
+  { title: "Aligner treatment", speaker: "James", src: "/videos/dental-preview/james-aligners.mp4", poster: "/images/case-studies/long-james-aligners-poster.jpg" },
+  { title: "Retainers after orthodontic treatment", speaker: "James", src: "/videos/dental-preview/james-retainers.mp4", poster: "/images/case-studies/long-james-retainers-poster.jpg" },
+];
+const shortVideos = [
+  { title: "The 22-hour aligner routine", src: "/videos/case-studies/balbriggan-braces.mp4", poster: "/images/case-studies/balbriggan-braces-aligner-video.webp" },
+  { title: "Understanding a crossbite", src: "/videos/dental-preview/crossbite.mp4", poster: "/images/case-studies/balbriggan-braces-crossbite-video.webp" },
+  { title: "Implant parts", src: "/videos/dental-preview/implant-parts.mp4", poster: "/images/case-studies/balbriggan-braces-rebecca.webp" },
+  { title: "Orthodontic wax", src: "/videos/dental-preview/short-orthodontic-wax.mp4", poster: "/images/case-studies/short-orthodontic-wax-poster.jpg" },
+  { title: "Interdental brushes", src: "/videos/dental-preview/short-interdental-brushes.mp4", poster: "/images/case-studies/short-interdental-brushes-poster.jpg" },
+  { title: "Implant treatment in three stages", src: "/videos/dental-preview/short-implant-stages.mp4", poster: "/images/case-studies/short-implant-stages-poster.jpg" },
+];
 ---
 <ClientCaseStudyPage
   previewOnly={false}
@@ -18,20 +32,31 @@ const media = clientCaseStudyMedia.braces;
   serviceLabel="Explore business video production"
 >
   <section class="dental-video-section" aria-labelledby="dental-long-title">
-    <h2 id="dental-long-title">Patient education, explained in detail.</h2>
-    <p>We gave the clinical team room to explain treatments and aftercare clearly, in their own words. Longer videos make detailed information easier to revisit before or after an appointment.</p>
+    <h2 id="dental-long-title">Long-form patient education, explained in detail.</h2>
+    <p>These four examples come from a collection of twelve longer videos. They give the clinical team room to explain orthodontic and implant topics clearly, in their own words.</p>
     <div class="dental-videos dental-videos--long">
-      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-surgery.mp4" type="video/mp4" /></video><figcaption>Implant surgery · a patient education film</figcaption></figure>
-      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-care.mp4" type="video/mp4" /></video><figcaption>Implant crowns and care · a patient education film</figcaption></figure>
+      {longVideos.map((video) => (
+        <figure>
+          <video controls playsinline preload="none" poster={video.poster} aria-label={`${video.title}, presented by ${video.speaker}`}>
+            <source src={video.src} type="video/mp4" />
+          </video>
+          <figcaption>{video.title} · presented by {video.speaker}</figcaption>
+        </figure>
+      ))}
     </div>
   </section>
   <section class="dental-video-section" aria-labelledby="dental-short-title">
-    <h2 id="dental-short-title">Short videos that bring expertise to social media.</h2>
-    <p>Focused explanations, demonstrations and graphics turn common patient questions into useful social content. The practice’s own clinicians remain at the centre of each story.</p>
+    <h2 id="dental-short-title">Short-form videos for social media.</h2>
+    <p>These six examples come from sixteen finished short edits. Each answers one focused question with a clinician-led explanation, demonstration or graphic.</p>
     <div class="dental-videos dental-videos--short">
-      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-aligner-video.webp"><source src="/videos/case-studies/balbriggan-braces.mp4" type="video/mp4" /></video><figcaption>The aligner routine · short-form video</figcaption></figure>
-      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-crossbite-video.webp"><source src="/videos/dental-preview/crossbite.mp4" type="video/mp4" /></video><figcaption>Understanding a crossbite · short-form video</figcaption></figure>
-      <figure><video controls playsinline preload="none" poster="/images/case-studies/balbriggan-braces-rebecca.webp"><source src="/videos/dental-preview/implant-parts.mp4" type="video/mp4" /></video><figcaption>Implant parts · short-form video</figcaption></figure>
+      {shortVideos.map((video) => (
+        <figure>
+          <video controls playsinline preload="none" poster={video.poster} aria-label={video.title}>
+            <source src={video.src} type="video/mp4" />
+          </video>
+          <figcaption>{video.title} · short-form video</figcaption>
+        </figure>
+      ))}
     </div>
   </section>
   <section id="the-project">
