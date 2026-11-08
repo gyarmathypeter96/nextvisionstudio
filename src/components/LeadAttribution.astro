@@ -1,6 +1,6 @@
 <script>
-  import { ANALYTICS_HOSTS } from "../config/site";
-  import { acceptedReceipt, pendingLeadKey, sentLeadKey, readPendingLead, safeThankYouPath, thankYouPaths, type LeadParameters } from "../lib/lead-receipts";
+  import { ANALYTICS_HOSTS, GA4_MEASUREMENT_ID } from "../config/site";
+  import { acceptedReceipt, pendingLeadKey, sentLeadKey, readPendingLead, safeThankYouPath, thankYouPaths, type LeadParameters, type PendingLead } from "../lib/lead-receipts";
   const productionHost = ANALYTICS_HOSTS.includes(window.location.hostname);
   const consentStorageKey = "nvs-cookie-consent";
   const analyticsConsentGranted = () => {
@@ -36,18 +36,55 @@
     // Tag Manager sends this to GA4, Google Ads and Meta (as Lead).
     window.nvsLoadTagManager?.();
     window.clarity?.("event", "generate_lead");
+    detail("lead_processed", parameters);
     window.dataLayer.push({ event: "generate_lead", ...parameters, ...(callback ? { eventCallback: callback, eventTimeout: 2000 } : {}) });
     return true;
   };
+  const detail = (name: string, parameters: Record<string, string | number | undefined>) => {
+    if (!analyticsConsentGranted()) return;
+    const qa = (() => { try { return sessionStorage.getItem("nvs-measurement-qa") === "1"; } catch (_) { return false; } })();
+    window.gtag?.("event", name, { send_to: GA4_MEASUREMENT_ID, page_path: window.location.pathname, measurement_traffic: qa ? "qa" : "visitor", measurement_version: "20261108", ...(qa ? { debug_mode: true, traffic_type: "qa" } : {}), ...parameters });
+    window.clarity?.("event", name);
+  };
+  const clearPending = (id: unknown) => {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(pendingLeadKey) || "null");
+      if (saved?.parameters?.lead_id === id) sessionStorage.removeItem(pendingLeadKey);
+    } catch (_) {}
+  };
+  const confirmLead = async (pending: PendingLead) => {
+    for (let attempt = 0; attempt < 15 && Date.now() < pending.expiresAt; attempt++) {
+      if (!analyticsConsentGranted()) return;
+      if (pending.confirmed) {
+        pushLead({ ...pending.parameters, crm_submission_status: "processed" });
+        clearPending(pending.parameters.lead_id);
+        return;
+      }
+      if (!pending.statusUrl) return; // Legacy CRM acceptance never becomes a guessed conversion.
+      try {
+        const response = await fetch(pending.statusUrl, { headers: { Accept: "application/json" }, cache: "no-store", credentials: "omit" });
+        const body = await response.json();
+        if (!response.ok) { if ([403, 404].includes(response.status)) { clearPending(pending.parameters.lead_id); return; } }
+        else if (String(body.submission_id) === String(pending.parameters.lead_id).replace("nvs-form-", "")) {
+          if (["rejected", "failed"].includes(body.status)) { clearPending(pending.parameters.lead_id); return; }
+          const receipt = acceptedReceipt(body);
+          if (receipt?.leadCreated) {
+            pushLead({ ...pending.parameters, crm_submission_status: "processed" });
+            clearPending(pending.parameters.lead_id);
+            return;
+          }
+        }
+      } catch (_) { /* A transient receipt failure must not turn into a false lead. */ }
+      await new Promise(resolve => window.setTimeout(resolve, 2000));
+    }
+    // Keep the signed pending receipt for a refresh within its short lifetime.
+  };
   const flushPendingLead = () => {
     if (!thankYouPaths.includes(window.location.pathname)) return;
-    let pending: string | null = null;
-    try {
-      pending = sessionStorage.getItem(pendingLeadKey);
-      sessionStorage.removeItem(pendingLeadKey);
-    } catch (_) {}
-    const receipt = readPendingLead(pending, window.location.pathname);
-    if (receipt) pushLead(receipt.parameters);
+    let raw: string | null = null;
+    try { raw = sessionStorage.getItem(pendingLeadKey); } catch (_) {}
+    const receipt = readPendingLead(raw, window.location.pathname);
+    if (receipt) void confirmLead(receipt);
   };
 
   const initialiseCrmForms = () => {
@@ -146,6 +183,7 @@
         startedAt = Math.floor(Date.now() / 1000);
         attribution = captureSessionAttribution();
         firstTouchAttribution = captureFirstTouchAttribution();
+        detail("form_begin", { form_id: formId, form_type: readFormType(), form_location: window.location.pathname });
         track("lead_form_start", {
           form_id: formId,
           form_type: readFormType(),
@@ -162,13 +200,14 @@
 
       // Multi-step forms announce each step they open (see ContactForm).
       form.addEventListener("nvs:form-step", (event) => {
-        const detail = (event as CustomEvent<{ step?: number; stepName?: string }>).detail || {};
+        const stepDetail = (event as CustomEvent<{ step?: number; stepName?: string }>).detail || {};
         markFormStarted();
+        detail("form_step_view", { form_id: formId, step_number: stepDetail.step, step_name: stepDetail.stepName });
         track("lead_form_step", {
           form_id: formId,
           form_type: readFormType(),
-          step_number: detail.step,
-          step_name: detail.stepName,
+          step_number: stepDetail.step,
+          step_name: stepDetail.stepName,
           lead_source: leadSource,
         });
       });
@@ -177,10 +216,15 @@
         if (validationErrorTracked || !analyticsConsentGranted()) return;
         validationErrorTracked = true;
         const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+        detail("form_validation", { form_id: formId, form_location: window.location.pathname,
+          field_name: target?.name?.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80) || "unknown",
+          error_type: target?.validity?.valueMissing ? "required" : target?.validity?.typeMismatch ? "format" : "constraint" });
         track("lead_form_validation_error", {
           form_id: formId,
           form_type: readFormType(),
           field_type: target?.type || target?.tagName.toLowerCase() || "unknown",
+          field_name: target?.name?.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80) || "unknown",
+          error_type: target?.validity?.valueMissing ? "required" : target?.validity?.typeMismatch ? "format" : "constraint",
         });
       }, true);
 
@@ -201,6 +245,7 @@
         if (!form.reportValidity()) return;
         markFormStarted();
         submitting = true;
+        detail("form_submit_attempt", { form_id: formId, form_type: readFormType(), form_location: window.location.pathname });
 
         const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
         const status = document.createElement("p");
@@ -227,7 +272,7 @@
 
         const formType = read("form_type") || read("subject");
         const serviceInterest = read("service") || formType || "Website enquiry";
-        const formDurationSeconds = Math.max(0, Math.floor(Date.now() / 1000) - (startedAt || Math.floor(Date.now() / 1000)));
+        const formDurationSeconds = Math.min(86400, Math.max(0, Math.floor(Date.now() / 1000) - (startedAt || Math.floor(Date.now() / 1000))));
         const messageParts = [read("message")];
         if (extraDetails.length) messageParts.push(extraDetails.join("\n"));
         const payload: Record<string, unknown> = {
@@ -250,7 +295,8 @@
           form_source: leadSource,
           form_page: window.location.origin + window.location.pathname,
           landing_page: attribution.landing_page || window.location.origin + window.location.pathname,
-          initial_referrer: attribution.initial_referrer || undefined,
+          referrer: attribution.initial_referrer || undefined,
+          measurement_traffic: (() => { try { return sessionStorage.getItem("nvs-measurement-qa") === "1" ? "qa" : "visitor"; } catch (_) { return "visitor"; } })(),
         };
 
         trackedKeys.forEach((key) => {
@@ -304,40 +350,30 @@
             form_duration_seconds: formDurationSeconds,
           };
 
+          detail("form_submission_received", { form_id: formId, form_location: window.location.pathname, crm_submission_status: receipt.status });
+          const pending: PendingLead = {
+            version: 2,
+            destination: safeThankYouPath(redirect, window.location.origin) || "/quotesend/",
+            expiresAt: Date.now() + 15 * 60 * 1000,
+            parameters: leadParameters,
+            statusUrl: receipt.statusUrl,
+            confirmed: receipt.leadCreated,
+          };
           if (!redirect) {
-            pushLead(leadParameters);
-            form.reset();
-            attemptIdentity = "";
-            attemptKey = "";
-            submitting = false;
+            void confirmLead(pending);
+            form.reset(); attemptIdentity = ""; attemptKey = ""; submitting = false;
             if (submit) submit.disabled = false;
             return;
           }
-
           let deferred = false;
           try {
-            if (
-              analyticsConsentGranted() &&
-              safeThankYouPath(redirect, window.location.origin)
-            ) {
-              sessionStorage.setItem(pendingLeadKey, JSON.stringify({
-                version: 1,
-                destination: safeThankYouPath(redirect, window.location.origin),
-                expiresAt: Date.now() + 15 * 60 * 1000,
-                parameters: leadParameters,
-              }));
+            if (analyticsConsentGranted() && safeThankYouPath(redirect, window.location.origin)) {
+              sessionStorage.setItem(pendingLeadKey, JSON.stringify(pending));
               deferred = true;
             }
           } catch (_) {}
-
-          if (deferred || !analyticsConsentGranted()) {
-            window.location.assign(redirect);
-          } else {
-            // The lead cannot travel to the next page, so give the tags time to send.
-            const navigate = () => window.location.assign(redirect);
-            pushLead(leadParameters, navigate);
-            window.setTimeout(navigate, 2000);
-          }
+          if (!deferred && analyticsConsentGranted()) void confirmLead(pending);
+          window.location.assign(redirect);
         } catch (error) {
           status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
           track("lead_form_error", {
@@ -379,9 +415,11 @@
     }
 
     if (href.startsWith("tel:")) {
+      detail("contact_intent", { contact_method: "phone", form_location: window.location.pathname });
       track("click_call", { link_url: href });
     }
     if (href.includes("wa.me")) {
+      detail("contact_intent", { contact_method: "whatsapp", form_location: window.location.pathname });
       track("click_whatsapp", { link_url: href });
     }
   });

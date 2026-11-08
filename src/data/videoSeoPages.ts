@@ -25,13 +25,13 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
   corporate: {
     slug: "corporate-video-production-dublin",
     showExamples: true,
-    metaTitle: "Corporate Video Production & Videography Dublin | NextVision",
+    metaTitle: "Corporate Video Production Dublin | Business Films & Interviews",
     metaDescription:
-      "Corporate and business video production by a Dublin videographer: service explainers, customer stories, training films and social edits. Get a clear quote.",
+      "Corporate video production in Dublin: service explainers, interviews and training films. See real VentSolve work, plan your deliverables and request a quote.",
     eyebrow: "Videographer Dublin · corporate & business video",
     title: "Corporate & Business Video Production in Dublin",
     lead:
-      "Turn complex services, internal knowledge and customer proof into clear video your team can use across sales, training and marketing.",
+      "Corporate video production in Dublin for service explainers, interviews, customer stories and training. We plan the message, film your team and agree the main film and shorter edits before production.",
     problemTitle: "Important information is often trapped in calls, documents and presentations.",
     problemText:
       "A planned corporate video gives customers and staff a consistent explanation, delivered by the people who know the business best.",

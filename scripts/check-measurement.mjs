@@ -44,7 +44,7 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
     entries() { return this.values.entries(); }
   }, fetch: async (...args) => {
     requests.push(args);
-    return response ? response(...args) : { ok: true, json: async () => ({ submission_id: 123, status: "received" }) };
+    return response ? response(...args) : { ok: true, json: async () => ({ submission_id: 123, status: "processed", lead_created: true }) };
   }, console, setTimeout });
   vm.runInContext(ownerScript, context);
   vm.runInContext(tagScript, context);
@@ -141,7 +141,7 @@ test("accepted submission is measured once on the thank you page, not the submit
   assert.equal(env.leads().length, 0); assert.equal(env.redirects.length, 1);
   const thanks = fixture({ url: "https://www.nextvisionstudio.com/quotesend/", session: env.session }); thanks.runForms();
   assert.equal(thanks.leads().length, 1); assert.equal(thanks.leads()[0].lead_id, "nvs-form-123");
-  assert.equal(thanks.leads()[0].transaction_id, "nvs-form-123"); assert.equal(thanks.leads()[0].crm_submission_status, "received");
+  assert.equal(thanks.leads()[0].transaction_id, "nvs-form-123"); assert.equal(thanks.leads()[0].crm_submission_status, "processed");
   assert.ok(!JSON.stringify(thanks.leads()).includes("synthetic@example.invalid"));
   const refreshed = fixture({ url: "https://www.nextvisionstudio.com/quotesend/", session: env.session }); refreshed.runForms(); assert.equal(refreshed.leads().length, 0);
 });
@@ -165,7 +165,7 @@ test("forms without a redirect use the same receipt ID to prevent a duplicate ev
 test("opening a thank you URL directly never creates a lead", () => {
   const env = fixture({ url: "https://www.nextvisionstudio.com/quotesend/" }); env.runForms(); assert.equal(env.leads().length, 0);
 });
-const pending = (overrides = {}) => JSON.stringify({ version: 1, destination: "/quotesend/", expiresAt: Date.now() + 60000, parameters: { lead_id: "nvs-form-123", transaction_id: "nvs-form-123", crm_submission_status: "received" }, ...overrides });
+const pending = (overrides = {}) => JSON.stringify({ version: 2, statusUrl: null, confirmed: true, destination: "/quotesend/", expiresAt: Date.now() + 60000, parameters: { lead_id: "nvs-form-123", transaction_id: "nvs-form-123", crm_submission_status: "processed" }, ...overrides });
 for (const [label, value] of [
   ["expired", pending({ expiresAt: Date.now() - 1000 })],
   ["wrong destination", pending({ destination: "/website-design-quote/thanks/" })],
@@ -196,4 +196,26 @@ test("form focus before consent does not suppress a later consented form start",
   f.focus(); assert.equal((env.window.dataLayer || []).filter(e => e.event === "lead_form_start").length, 0);
   env.localStorage.setItem("nvs-cookie-consent", "granted"); f.focus(); f.focus();
   assert.equal(env.window.dataLayer.filter(e => e.event === "lead_form_start").length, 1);
+});
+
+const signedReceiptUrl = 'https://crm.nextvisionstudio.com/api/forms/submissions/123/status?expires=2000000000&signature=' + 'a'.repeat(64);
+for (const [state, created, expected] of [['processed', true, 1], ['processed', false, 0], ['rejected', false, 0], ['failed', false, 0]]) {
+  test(`queued receipt ${state}/${created} counts only a confirmed opportunity`, async () => {
+    const saved = pending({ confirmed: false, statusUrl: signedReceiptUrl, parameters: { lead_id: 'nvs-form-123', transaction_id: 'nvs-form-123', crm_submission_status: 'received' } });
+    const env = fixture({ url: 'https://www.nextvisionstudio.com/quotesend/', session: store({ 'nvs-pending-lead': saved }), response: () => ({ ok: true, status: 200, json: async () => ({ submission_id: 123, status: state, lead_created: created }) }) });
+    env.runForms(); await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal(env.leads().length, expected);
+    if (expected) assert.equal(env.leads()[0].crm_submission_status, 'processed');
+    if (['rejected', 'failed'].includes(state)) assert.equal(env.session.getItem('nvs-pending-lead'), null);
+  });
+}
+test('untrusted status URLs and legacy accepted-only receipts never count a lead or fetch a URL', () => {
+  for (const url of [signedReceiptUrl.replace('crm.nextvisionstudio.com', 'evil.example'), signedReceiptUrl.replace('/123/', '/124/'), 'https://crm.nextvisionstudio.com/api/forms/submissions/123/status']) {
+    const env = fixture({ url: 'https://www.nextvisionstudio.com/quotesend/', session: store({ 'nvs-pending-lead': pending({ confirmed: false, statusUrl: url }) }) });
+    env.runForms(); assert.equal(env.leads().length, 0); assert.equal(env.requests.length, 0);
+  }
+});
+test('queued acceptance without status confirmation does not count a lead', async () => {
+  const f = form(''); const env = fixture({ forms: [f], response: () => ({ ok: true, json: async () => ({ submission_id: 123, status: 'received' }) }) });
+  env.runForms(); await f.submit(); assert.equal(env.leads().length, 0);
 });
