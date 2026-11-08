@@ -43,3 +43,25 @@ A deliberate test run can use `?nvs_debug=1`. It persists a QA flag for the tab 
 ## Verification
 
 `npm run build && npm run check:measurement` exercises the real measurement code with isolated browser fixtures. No fixture sends network requests. Tests cover early GTM loading, consent states and withdrawal, preview and owner exclusion, foreground/background timing, exit deduplication, late consent, scroll depth/stop, section dwell, interactive clicks, URL sanitization, native video and real CRM receipt rules. Verify production separately with a marked test visit and provider-side receipt before declaring end-to-end completion.
+
+## Confirmed leads and content detail — 8 November 2026
+
+The CRM now returns a 15-minute signed, non-personal status URL. HTTP 202 means inbox acceptance only. `generate_lead` and the diagnostic GA4-only `lead_processed` require `processed` AND `lead_created=true` for the same receipt. Rejected/failed/expired/unconfirmed receipts never count. Never sum these two event names: they describe the same lead; only `generate_lead` remains the enquiry key event. Deduplication is per receipt in the browser session. Receipt polling stops after approximately 30 seconds and can resume on a thank-you-page refresh within 15 minutes. A closed tab, revoked consent, blocked tracking or slow queue can undercount Analytics; CRM opportunities remain the operational source of truth. No email, name, phone number, form text or GA identifier is sent in custom event parameters.
+
+| New event | Meaning / reporting rule |
+| --- | --- |
+| cta_view | CTA at least 50% visible for one foreground second, once per page; an immediate click also establishes exposure |
+| content_click | CTA click, same `cta_id` as exposure; use `first_click=1` divided by matching cta_view counts for a page-instance click rate |
+| section_attention | Additive `visible_seconds` attributed to one nearest-centre section at a time; filter this event, never add page_attention to it |
+| content_exit | Last observed section and action at pagehide; does not prove why someone left |
+| video_watch | Additive `watch_seconds`, foreground native playback only; seeking is excluded; filter by `video_id` |
+| video_seek | Playback position was changed; does not count as watched time |
+| form_view / form_begin / form_step_view | Exposed form / first interaction / step reached, matched by form_id |
+| form_validation | First observed invalid input per form; field_name and error_type only, never its value |
+| form_submit_attempt / form_submission_received | Attempt / saved inbox receipt, neither is a lead |
+| lead_processed | CRM confirmed a created opportunity; diagnostic counterpart of generate_lead |
+| contact_intent | Phone or WhatsApp link click; not proof of a connected call or sent message |
+
+New events use the existing GA4 destination and consent gate, with matching Clarity timeline events. CTA IDs combine path, section, destination and public label. They identify interface elements, not people. CTA rate groups MUST match event date, page, CTA ID and traffic segment, and exclude `measurement_traffic=qa`. Do not divide repeated content_click events by views: use first_click only. Avoid treating scroll_stop or content_exit as an explanation for abandonment; use Clarity recordings for hypotheses.
+
+The CRM retains the operational form location/type and duration in opportunity metadata. Analytics identifiers, referrer and first touch are only retained with analytics consent; advertising click IDs only with ad_user_data consent. URL query strings/fragments are removed from stored page/referrer metadata. The signed status response contains only receipt ID, state and lead_created, with no-store caching.

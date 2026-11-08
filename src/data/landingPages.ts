@@ -226,14 +226,14 @@ export const landingPages: Record<string, LandingPageData> = {
   photography: {
     slug: "photography-dublin",
     kind: "photo",
-    metaTitle: "Commercial Photographer Dublin | Product & Brand Photography",
+    metaTitle: "Product & Commercial Photography Dublin | NextVision Studio",
     metaDescription:
-      "Commercial photographer in Dublin for product, brand and team photography. View original work and request a quote for your website, social media or campaign.",
+      "Product and commercial photography in Dublin. See original product, food and business photos, plan your shot list and request a quote for your next shoot.",
     eyebrow: "Photography Dublin",
     headlineStart: "Commercial Photography",
     headlineAccent: "in Dublin",
     lead:
-      "Show your products, people and business at their best. We plan your photo session and deliver edited images for your website, social media, ads and sales material.",
+      "Product and commercial photography for Dublin businesses, from individual product details to brand and team images. We agree the shot list, lighting, image formats and intended use before your shoot.",
     heroImage: {
       src: "/images/photography/product-photography-dublin.webp",
       alt: "Product photography in Dublin: a printed greeting card photographed by NextVision Studio",
