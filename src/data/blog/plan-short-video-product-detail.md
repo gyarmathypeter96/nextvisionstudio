@@ -9,6 +9,9 @@ category: "Product video"
 readingTime: "9 min read"
 heroImage: "/images/portfolio/GTzSrbR4-k4.webp"
 heroAlt: "A detail from the Macaron Boutique product video filmed in Alicante"
+heroProject:
+  label: "Macaron Boutique product video"
+  href: "/case-studies/macaron-boutique-product-video/"
 featured: false
 keywords:
   - "product video production Ireland"

@@ -6,8 +6,11 @@ publishAt: "2026-11-30T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/case-studies/perfect-clean-advertising-video.webp"
+heroAlt: "A frame from a Perfect Clean advertising video produced by NextVision Studio"
+heroProject:
+  label: "Perfect Clean video advertising project"
+  href: "/case-studies/perfect-clean-video-advertising/"
 featured: false
 ---
 

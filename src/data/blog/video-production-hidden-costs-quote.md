@@ -6,8 +6,11 @@ publishAt: "2026-11-17T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/portfolio/JVA_WxYY3p0.webp"
+heroAlt: "A frame from the Gut Fest event film produced in Dublin by NextVision Studio"
+heroProject:
+  label: "Gut Fest event film"
+  href: "/case-studies/gut-fest-event-videography-dublin/"
 featured: false
 ---
 

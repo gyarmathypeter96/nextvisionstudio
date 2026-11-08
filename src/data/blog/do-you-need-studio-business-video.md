@@ -6,8 +6,11 @@ publishAt: "2026-11-26T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/portfolio/fLzjvPVHzAc.webp"
+heroAlt: "A view of podcast and video production at SG Studios Dublin, filmed by NextVision Studio"
+heroProject:
+  label: "SG Studios Dublin video project"
+  href: "/case-studies/sg-studios-dublin-podcast-studio-content/"
 featured: false
 ---
 

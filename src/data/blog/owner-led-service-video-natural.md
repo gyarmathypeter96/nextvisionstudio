@@ -9,6 +9,9 @@ category: "Business video"
 readingTime: "7 min read"
 heroImage: "/images/case-studies/perfect-clean-owner.webp"
 heroAlt: "The Perfect Clean owner speaking to camera for customer-focused advertising creative"
+heroProject:
+  label: "Perfect Clean video project"
+  href: "/case-studies/perfect-clean-video-advertising/"
 featured: false
 keywords:
   - "business owner video Dublin"
