@@ -87,3 +87,11 @@ test('section views require foreground dwell and fire only once',()=>{
   f.tick(1000);assert.equal(f.events('section_view')[0].section_id,'content-packages');
   f.tick(10000);assert.equal(f.events('section_view').length,1);
 });
+
+test('a calibration identity is requested only in consented, non-excluded QA mode',()=>{
+  for (const options of [{qa:false},{qa:true,consent:'denied'},{qa:true,owner:true},{qa:true,hostname:'localhost'}]) {
+    const f=fixture(options);assert.equal(f.calls.filter(args=>args[0]==='get').length,0);
+  }
+  const f=fixture({qa:true});const get=f.calls.find(args=>args[0]==='get');
+  assert.equal(get[1],'G-KNFH3LFFLY');assert.equal(get[2],'client_id');
+});
