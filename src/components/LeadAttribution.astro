@@ -141,6 +141,28 @@
       return /^\d{1,20}\.\d{1,20}$/.test(clientId) ? clientId : undefined;
     };
 
+    const readAnalyticsIdentity = async (): Promise<{ clientId?: string; sessionId?: string }> => {
+      if (!analyticsConsentGranted()) return {};
+      const identity: { clientId?: string; sessionId?: string } = { clientId: readGaClientId() };
+      if (!window.gtag) return identity;
+      await new Promise<void>((resolve) => {
+        let completed = 0;
+        const done = () => { if (++completed === 2) resolve(); };
+        window.setTimeout(resolve, 800);
+        try {
+        window.gtag!("get", GA4_MEASUREMENT_ID, "client_id", (value: unknown) => {
+          if (typeof value === "string" && /^\d{1,20}\.\d{1,20}$/.test(value)) identity.clientId = value;
+          done();
+        });
+        window.gtag!("get", GA4_MEASUREMENT_ID, "session_id", (value: unknown) => {
+          if (/^[1-9]\d{0,19}$/.test(String(value))) identity.sessionId = String(value);
+          done();
+        });
+        } catch (_) { resolve(); }
+      });
+      return analyticsConsentGranted() ? identity : {};
+    };
+
     attribution = captureSessionAttribution();
 
     const captureFirstTouchAttribution = () => {
@@ -166,7 +188,27 @@
         : "website-form";
       const formId = form.dataset.formId || form.id || `form-${leadSource || index + 1}`;
       let formStarted = false;
-      let validationErrorTracked = false;
+      const fieldErrors = new Map<string, { at: number; category: string; count: number }>();
+      let validationAttempt = 0;
+      let lastValidationAt = -Infinity;
+      const recordFieldError = (name: string, category: string, source = "browser") => {
+        if (!analyticsConsentGranted()) return;
+        const field = name.replace(/[^a-zA-Z0-9_.-]/g, "").slice(0, 80) || "unknown";
+        if (["botcheck", "website", "turnstile_token"].includes(field)) return;
+        const at = Date.now(), previous = fieldErrors.get(field);
+        // checkValidity + reportValidity can emit the same invalid event twice.
+        // Suppress only that immediate browser echo, not a later retry.
+        if (previous && previous.category === category && at - previous.at < 250) return;
+        if (at - lastValidationAt >= 250) validationAttempt++;
+        lastValidationAt = at;
+        const count = (previous?.count || 0) + 1;
+        fieldErrors.set(field, { at, category, count });
+        const parameters = { form_id: formId, form_location: window.location.pathname,
+          field_name: field, error_type: category, validation_source: source,
+          validation_attempt: validationAttempt, field_error_count: count };
+        detail("form_validation", parameters);
+        track("lead_form_validation_error", { ...parameters, form_type: readFormType() });
+      };
       let submitting = false;
       let attemptIdentity = "";
       let attemptKey = "";
@@ -213,19 +255,13 @@
       });
 
       form.addEventListener("invalid", (event) => {
-        if (validationErrorTracked || !analyticsConsentGranted()) return;
-        validationErrorTracked = true;
         const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
-        detail("form_validation", { form_id: formId, form_location: window.location.pathname,
-          field_name: target?.name?.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80) || "unknown",
-          error_type: target?.validity?.valueMissing ? "required" : target?.validity?.typeMismatch ? "format" : "constraint" });
-        track("lead_form_validation_error", {
-          form_id: formId,
-          form_type: readFormType(),
-          field_type: target?.type || target?.tagName.toLowerCase() || "unknown",
-          field_name: target?.name?.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80) || "unknown",
-          error_type: target?.validity?.valueMissing ? "required" : target?.validity?.typeMismatch ? "format" : "constraint",
-        });
+        const validity = target?.validity;
+        const category = validity?.valueMissing ? "required" : validity?.typeMismatch ? "format"
+          : validity?.patternMismatch ? "pattern" : validity?.tooShort || validity?.tooLong ? "length"
+          : validity?.rangeUnderflow || validity?.rangeOverflow ? "range" : validity?.stepMismatch ? "step"
+          : validity?.customError ? "custom" : "constraint";
+        recordFieldError(target?.name || "unknown", category);
       }, true);
 
       form.addEventListener("submit", async (event) => {
@@ -275,6 +311,7 @@
         const formDurationSeconds = Math.min(86400, Math.max(0, Math.floor(Date.now() / 1000) - (startedAt || Math.floor(Date.now() / 1000))));
         const messageParts = [read("message")];
         if (extraDetails.length) messageParts.push(extraDetails.join("\n"));
+        const analyticsIdentity = await readAnalyticsIdentity();
         const payload: Record<string, unknown> = {
           name: read("name"),
           email: read("email") || undefined,
@@ -286,7 +323,8 @@
           consent: true,
           analytics_consent: analyticsConsentGranted(),
           ad_user_data_consent: analyticsConsentGranted(),
-          ga_client_id: readGaClientId(),
+          ga_client_id: analyticsIdentity.clientId,
+          ga_session_id: analyticsIdentity.sessionId,
           website: read("botcheck") || read("website"),
           form_started_at: startedAt || Math.floor(Date.now() / 1000),
           form_duration_seconds: formDurationSeconds,
@@ -329,6 +367,15 @@
           });
           const body = await response.json().catch(() => ({}));
           if (!response.ok) {
+            if (response.status === 422 && body.errors && typeof body.errors === "object") {
+              for (const field of Object.keys(body.errors).slice(0, 20)) {
+                // Only configured, visible form fields; never send server messages or values.
+                if (/^[a-zA-Z0-9_-]{1,80}$/.test(field) && form.querySelector(`[name="${field}"]`)) {
+                  recordFieldError(field, "server_validation", "server");
+                }
+              }
+            }
+            detail("form_submission_error", { form_id: formId, error_type: response.status === 422 ? "validation" : "http", http_status: response.status });
             const errors = Object.values(body.errors || {}).flat();
             throw new Error(String(errors[0] || body.message || "The form could not be submitted."));
           }
