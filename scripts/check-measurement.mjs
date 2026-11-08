@@ -48,6 +48,11 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
   }, console, setTimeout });
   vm.runInContext(ownerScript, context);
   vm.runInContext(tagScript, context);
+  const originalGtag = window.gtag;
+  if (originalGtag) window.gtag = (...args) => {
+    if (args[0] === "get" && typeof args[3] === "function") args[3](args[2] === "client_id" ? "123.456" : "1794139200");
+    else originalGtag(...args);
+  };
   return { context, window, session, localStorage, appended, requests, idle, redirects, runForms: () => vm.runInContext(formScript, context), leads: () => (window.dataLayer ?? []).filter((item) => item.event === "generate_lead") };
 }
 function form(redirect = "/quotesend/?source=video") {
@@ -68,6 +73,7 @@ function form(redirect = "/quotesend/?source=video") {
     submit: () => listeners.get("submit")({ preventDefault() {} }), button,
     step: (detail) => listeners.get("nvs:form-step")({ detail }),
     focus: () => listeners.get("focusin")({ target: { type: "text", name: "name" } }),
+    invalid: (target) => listeners.get("invalid")({ target }),
   };
   return instance;
 }
@@ -150,7 +156,7 @@ test("double click cannot submit twice; a network retry retains the CRM idempote
   const f = form(); const env = fixture({ forms: [f], response: () => new Promise((resolve) => { release = resolve; }) }); env.runForms();
   const first = f.submit(); await f.submit(); assert.equal(env.requests.length, 1);
   release({ ok: false, json: async () => ({ message: "Temporary error" }) }); await first;
-  const retry = f.submit(); assert.equal(env.requests.length, 2);
+  const retry = f.submit(); await new Promise(setImmediate); assert.equal(env.requests.length, 2);
   assert.equal(env.requests[0][1].headers["Idempotency-Key"], env.requests[1][1].headers["Idempotency-Key"]);
   release({ ok: true, json: async () => ({ submission_id: 123, status: "processed" }) }); await retry;
 });
@@ -218,4 +224,38 @@ test('untrusted status URLs and legacy accepted-only receipts never count a lead
 test('queued acceptance without status confirmation does not count a lead', async () => {
   const f = form(''); const env = fixture({ forms: [f], response: () => ({ ok: true, json: async () => ({ submission_id: 123, status: 'received' }) }) });
   env.runForms(); await f.submit(); assert.equal(env.leads().length, 0);
+});
+
+test("all fields and later validation retries are measured without immediate echoes or values", () => {
+  const f = form(), browser = fixture({ forms: [f] }); browser.runForms();
+  let clock = 1000;
+  browser.context.Date = class extends Date { static now() { return clock; } };
+  const target = { name: "email", value: "private@example.invalid", validity: { valueMissing: true } };
+  f.invalid(target); f.invalid(target);
+  f.invalid({ name: "phone", validity: { patternMismatch: true } });
+  clock += 1000; f.invalid(target);
+  clock += 1000; f.invalid({ ...target, validity: { typeMismatch: true } });
+  const events = browser.window.dataLayer.filter(e => e.event === "lead_form_validation_error");
+  assert.equal(events.length, 4);
+  assert.deepEqual(Array.from(events, e => e.field_error_count), [1, 1, 2, 3]);
+  assert.deepEqual(Array.from(events, e => e.validation_attempt), [1, 1, 2, 3]);
+  assert.equal(events.at(-1).error_type, "format");
+  assert.ok(!JSON.stringify(events).includes("private@example.invalid"));
+});
+test("server validation reports configured field names without response messages", async () => {
+  const f = form(), browser = fixture({ forms: [f], response: async () => ({ ok: false, status: 422, json: async () => ({ errors: { email: ["private@example.invalid is invalid"], phone: ["private number"], private_record: ["private"] } }) }) });
+  browser.runForms(); await f.submit();
+  const events = browser.window.dataLayer.filter(e => e.event === "lead_form_validation_error");
+  assert.deepEqual(Array.from(events, e => e.field_name), ["email", "phone"]);
+  assert.ok(events.every(e => e.validation_source === "server"));
+  assert.ok(!JSON.stringify(events).includes("private"));
+  assert.equal(browser.leads().length, 0);
+});
+test("the official tag identity is passed to the CRM only with analytics consent", async () => {
+  const f = form(), b = fixture({ forms: [f] }); b.runForms(); await f.submit();
+  const payload = JSON.parse(b.requests[0][1].body);
+  assert.equal(payload.ga_client_id, "123.456"); assert.equal(payload.ga_session_id, "1794139200");
+  const deniedForm = form(), denied = fixture({ consent: "denied", forms: [deniedForm] }); denied.runForms(); await deniedForm.submit();
+  const deniedPayload = JSON.parse(denied.requests[0][1].body);
+  assert.equal(deniedPayload.ga_client_id, undefined); assert.equal(deniedPayload.ga_session_id, undefined);
 });
