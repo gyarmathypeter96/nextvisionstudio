@@ -61,6 +61,7 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
   const nativeVideos = new WeakMap<HTMLVideoElement, { started: boolean; depths: Set<number> }>();
   const qaEvents: string[] = [];
   let qaOutput: HTMLOutputElement | null = null;
+  let qaClientId = "";
 
   const emit = (name: string, parameters: Parameters = {}, clarityEvent?: string) => {
     if (!allowed() || !w.gtag) return;
@@ -84,7 +85,7 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
         qaOutput.style.cssText = "position:fixed;bottom:8px;left:8px;z-index:10000;max-width:min(550px,90vw);max-height:220px;overflow:auto;background:#111;color:#fff;padding:12px;font:11px monospace;white-space:pre-wrap;border:1px solid #9bd2ff";
         doc.body.appendChild(qaOutput);
       }
-      qaOutput.textContent = `Measurement QA — QUEUED events (not server receipt)\n${qaEvents.slice(-8).join("\n")}`;
+      qaOutput.textContent = `Measurement QA — QUEUED events (not server receipt)\n${qaClientId ? `QA client ID: ${qaClientId}\n` : ""}${qaEvents.slice(-8).join("\n")}`;
     }
   };
   const sectionId = (element: Element) => label(element.id || element.getAttribute("aria-labelledby") || "main");
@@ -153,6 +154,13 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
       sections.set(element, { id: id === "main" ? `section-${sections.size + 1}` : id, since: null, sent: false });
     }
     emit("measurement_ready", { traffic_type: qa ? "qa" : "visitor" });
+    // The opt-in QA panel makes a consented test identity available for an
+    // end-to-end server calibration. It is never a custom reporting dimension.
+    if (qa) w.gtag?.("get", GA4_MEASUREMENT_ID, "client_id", (value: unknown) => {
+      if (!allowed() || typeof value !== "string" || !/^\d{1,20}\.\d{1,20}$/.test(value)) return;
+      qaClientId = value;
+      if (qaOutput) qaOutput.textContent = `Measurement QA — QUEUED events (not server receipt)\nQA client ID: ${qaClientId}\n${qaEvents.slice(-8).join("\n")}`;
+    });
     if (foreground) sampleScroll();
   };
   doc.addEventListener("nvs:consent-change", () => {
