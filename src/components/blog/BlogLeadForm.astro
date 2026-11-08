@@ -1,0 +1,76 @@
+---
+import { CRM_FORM_ENDPOINT } from "../../config/forms";
+
+interface Props {
+  postId: string;
+  service: string;
+}
+
+const { postId, service } = Astro.props;
+const formId = `blog-enquiry-${postId}`;
+const source = `blog-${postId}`;
+---
+
+<section class="blog-enquiry" aria-labelledby={`${formId}-title`}>
+  <div class="blog-enquiry__copy">
+    <p class="blog-enquiry__eyebrow">Planning a project?</p>
+    <h2 id={`${formId}-title`}>Tell us what you have in mind.</h2>
+    <p>Share a few details and NextVision Studio will get back to you with a clear next step.</p>
+  </div>
+
+  <form
+    id={formId}
+    class="blog-enquiry__form"
+    action={CRM_FORM_ENDPOINT}
+    method="POST"
+    data-crm-form
+    data-form-id={formId}
+  >
+    <input type="hidden" name="redirect" value={`https://www.nextvisionstudio.com/quotesend/?submitted=1&source=${source}`} />
+    <input type="hidden" name="subject" value="New project enquiry from a NextVision Studio blog article" />
+    <input type="hidden" name="from_name" value="NextVision Studio Website" />
+    <input type="hidden" name="service" value={service} />
+    <input type="hidden" name="landing_page" value={`/blog/${postId}/`} />
+    <div class="blog-enquiry__botcheck" aria-hidden="true">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="blog-enquiry__fields">
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Email address</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label class="blog-enquiry__message">
+        <span>What are you planning?</span>
+        <textarea name="message" rows="2" placeholder="A few details about your project" required></textarea>
+      </label>
+    </div>
+    <button type="submit">Ask about your project <span aria-hidden="true">→</span></button>
+    <p class="blog-enquiry__privacy">Your details are used only to respond to your enquiry. <a href="/privacy-policy/">Privacy policy</a>.</p>
+  </form>
+</section>
+
+<style>
+  .blog-enquiry { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); align-items:center; gap:40px; margin:38px auto 0; padding:34px; border:1px solid rgba(180,220,255,.22); border-radius:24px; background:linear-gradient(135deg,rgba(155,210,255,.11),rgba(255,255,255,.035) 58%); }
+  .blog-enquiry__eyebrow { margin:0 0 12px; color:#9bd2ff; font-size:10px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
+  .blog-enquiry__copy h2 { margin:0; color:#fff; font-size:clamp(28px,3vw,40px); letter-spacing:-.055em; line-height:1; }
+  .blog-enquiry__copy > p:last-child { margin:16px 0 0; color:rgba(255,255,255,.65); font-size:15px; line-height:1.6; }
+  .blog-enquiry__fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .blog-enquiry__fields label { display:grid; gap:7px; color:rgba(255,255,255,.76); font-size:12px; font-weight:750; }
+  .blog-enquiry__message { grid-column:1/-1; }
+  .blog-enquiry__fields input,.blog-enquiry__fields textarea { width:100%; min-height:48px; padding:12px 14px; border:1px solid rgba(180,220,255,.2); border-radius:12px; background:rgba(8,11,15,.62); color:#fff; font:inherit; font-size:14px; }
+  .blog-enquiry__fields textarea { min-height:76px; resize:vertical; }
+  .blog-enquiry__fields input:focus,.blog-enquiry__fields textarea:focus { outline:2px solid #9bd2ff; outline-offset:2px; }
+  .blog-enquiry__form button { display:flex; min-height:49px; margin-top:14px; padding:0 19px; align-items:center; justify-content:space-between; gap:22px; border:0; border-radius:999px; background:#d3edff; color:#111820; cursor:pointer; font:inherit; font-size:12px; font-weight:900; }
+  .blog-enquiry__form button:disabled { cursor:wait; opacity:.65; }
+  .blog-enquiry__form button span { font-size:20px; }
+  .blog-enquiry__privacy { margin:12px 0 0; color:rgba(255,255,255,.48); font-size:10px; line-height:1.5; }
+  .blog-enquiry__privacy a { color:#cfeaff; }
+  .blog-enquiry__botcheck { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+  @media(max-width:760px) { .blog-enquiry { grid-template-columns:1fr; gap:24px; padding:25px 20px; } }
+  @media(max-width:460px) { .blog-enquiry__fields { grid-template-columns:1fr; } .blog-enquiry__message { grid-column:auto; } }
+</style>

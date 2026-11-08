@@ -6,8 +6,11 @@ publishAt: "2026-11-21T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/portfolio/53-_kK95Eoc.webp"
+heroAlt: "A vertical social video frame produced for Leroy’s Barking World"
+heroProject:
+  label: "Leroy’s Barking World social videos"
+  href: "/case-studies/leroys-barking-world-social-content/"
 featured: false
 ---
 

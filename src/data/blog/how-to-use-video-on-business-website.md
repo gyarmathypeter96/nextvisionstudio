@@ -6,8 +6,11 @@ publishAt: "2026-11-28T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/case-studies/balbriggan-braces-crossbite-video.webp"
+heroAlt: "A still from a patient education video produced for Balbriggan Braces"
+heroProject:
+  label: "Balbriggan Braces video collection"
+  href: "/case-studies/balbriggan-braces-dental-videos/"
 featured: false
 ---
 

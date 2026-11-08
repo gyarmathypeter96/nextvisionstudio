@@ -9,6 +9,9 @@ category: "Event videography"
 readingTime: "9 min read"
 heroImage: "/images/portfolio/JVA_WxYY3p0.webp"
 heroAlt: "Gut Fest at Bolands Mills in Dublin, captured for event and social video"
+heroProject:
+  label: "Gut Fest event film"
+  href: "/case-studies/gut-fest-event-videography-dublin/"
 featured: false
 keywords:
   - "event videographer Dublin"

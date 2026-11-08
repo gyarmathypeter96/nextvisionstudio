@@ -7,7 +7,10 @@ author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
 heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroAlt: "A frame from the VentSolve service video produced by NextVision Studio"
+heroProject:
+  label: "VentSolve video project"
+  href: "/case-studies/ventsolve-content-production/"
 featured: false
 ---
 

@@ -6,8 +6,11 @@ publishAt: "2026-11-24T00:00:00+00:00"
 author: "Peter Gyarmathy"
 category: "Business video"
 readingTime: "4 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "A NextVision Studio business video production for VentSolve"
+heroImage: "/images/portfolio/8ouFX2Nqe7o.webp"
+heroAlt: "A frame from a short VentSolve promotional video produced by NextVision Studio"
+heroProject:
+  label: "VentSolve video project"
+  href: "/case-studies/ventsolve-content-production/"
 featured: false
 ---
 

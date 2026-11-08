@@ -7,8 +7,11 @@ publishAt: 2026-11-15T00:00:00+00:00
 author: "Peter Gyarmathy"
 category: "Customer education"
 readingTime: "9 min read"
-heroImage: "/images/portfolio/SUeoIgRtH0I.webp"
-heroAlt: "VentSolve video production for a technical service business"
+heroImage: "/images/portfolio/X68pQhtHIOY.webp"
+heroAlt: "A VentSolve campaign video frame produced by NextVision Studio"
+heroProject:
+  label: "VentSolve video project"
+  href: "/case-studies/ventsolve-content-production/"
 featured: false
 keywords:
   - "technical service video"
