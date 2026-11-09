@@ -14,7 +14,9 @@
     "check:motion": "node --test scripts/check-background-motion.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "check:seo-growth": "node scripts/check-seo-growth.mjs"
+    "check:seo-growth": "node scripts/check-seo-growth.mjs",
+    "check:orbit-release": "node scripts/check-orbit-release.mjs",
+    "check:orbit-packages": "node --test scripts/check-orbit-packages.mjs"
   },
   "dependencies": {
     "astro": "^7.3.3"

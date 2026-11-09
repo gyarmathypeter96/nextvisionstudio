@@ -1,5 +1,8 @@
 ---
 import { monthlyContentPackages } from "../data/monthlyContentPackages";
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const Inclusions = compact ? "details" : "div";
 const promotionActive = new Date() < new Date("2026-12-01T00:00:00Z");
 ---
 
@@ -24,6 +27,8 @@ const promotionActive = new Date() < new Date("2026-12-01T00:00:00Z");
         <h3 id={`plan-${plan.id}-title`}>{plan.name}</h3>
         <p class="content-plan__description">{plan.description}</p>
         <p class="content-plan__price">{plan.featured && promotionActive && <del class="content-plan__was">€{plan.price}</del>}<strong>€{("salePrice" in plan && promotionActive ? plan.salePrice : plan.price).toLocaleString("en-IE")}</strong><span>/ month </span></p>
+        <Inclusions class:list={[{ "plan-details": compact }]} open={compact ? true : undefined}>
+          {compact && <summary>What’s included</summary>}
         <div class="content-plan__includes">
           <p>Every month, you get</p>
           <ul>
@@ -33,6 +38,7 @@ const promotionActive = new Date() < new Date("2026-12-01T00:00:00Z");
             <li><strong>{plan.videos} short form videos</strong>, edited and ready to post</li>
           </ul>
         </div>
+        </Inclusions>
         <a class="content-plan__cta" href="#contact-form" data-content-plan={plan.id} data-content-plan-name={plan.name} data-content-plan-price={"salePrice" in plan && promotionActive ? plan.salePrice : plan.price} data-black-friday={plan.featured && promotionActive ? "true" : undefined} data-cta-placement={`monthly-package-${plan.id}`}>{plan.cta}<span aria-hidden="true">↗</span></a>
       </article>
     ))}

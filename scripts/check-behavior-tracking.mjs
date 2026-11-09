@@ -95,3 +95,10 @@ test('a calibration identity is requested only in consented, non-excluded QA mod
   const f=fixture({qa:true});const get=f.calls.find(args=>args[0]==='get');
   assert.equal(get[1],'G-KNFH3LFFLY');assert.equal(get[2],'client_id');
 });
+
+test('each film in a shared player gets its own progress lifecycle',()=>{
+ const f=fixture();const v={tagName:'VIDEO',autoplay:false,loop:false,controls:true,currentTime:0,duration:20,currentSrc:'https://www.nextvisionstudio.com/videos/a.mp4',getAttribute:()=>null};
+ f.fireDoc('play',{target:v});v.currentTime=16;f.fireDoc('timeupdate',{target:v});
+ f.fireDoc('nvs:video-reset',{target:v});v.currentSrc='https://www.nextvisionstudio.com/videos/b.mp4';v.currentTime=0;f.fireDoc('play',{target:v});v.currentTime=16;f.fireDoc('timeupdate',{target:v});
+ assert.equal(f.events('portfolio_video_start').length,2);assert.equal(f.events('portfolio_video_progress').length,6);
+});

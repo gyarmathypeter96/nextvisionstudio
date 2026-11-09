@@ -1,0 +1,12 @@
+/* Two real still-image layers: Earth stays fixed, astronaut moves with scroll. */
+.hero-stage{isolation:isolate}
+.space-background{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000;pointer-events:none}
+.space-background img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:none}
+.astronaut-plane{position:absolute;inset:0;z-index:2;pointer-events:none}
+.astronaut-subject{position:absolute;left:50%;top:53%;display:block;width:clamp(320px,36vw,520px);max-width:none;height:auto;object-fit:contain;transform:translate(-50%,-50%) translateY(var(--astro-y,0px)) scale(var(--astro-scale,1)) rotate(var(--astro-rotate,0deg));transform-origin:50% 45%;will-change:transform}
+.hero-copy{z-index:3}
+.astronaut-in-front .astronaut-plane{z-index:5}
+.scene-caption{z-index:4}
+.hero-bottom{z-index:6}
+@media(max-width:760px){.astronaut-subject{width:340px;max-width:none}}
+@media(prefers-reduced-motion:reduce){.astronaut-subject{transform:translate(-50%,-50%)!important;will-change:auto}.astronaut-plane{z-index:2}}

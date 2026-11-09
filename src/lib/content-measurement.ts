@@ -1,5 +1,6 @@
 import { ANALYTICS_HOSTS, GA4_MEASUREMENT_ID } from '../config/site';
 import { safeMeasurementPath } from './behavior-tracking';
+import { measurementVisible } from './measurement-visibility';
 
 // Detail events go only to GA4, never to the advertising conversion tags.
 type MeasurementWindow = Window & { nvsContentBound?: boolean; nvsTrackingExcluded?: boolean; gtag?: (...args: unknown[]) => void; clarity?: (...args: unknown[]) => void };
@@ -20,9 +21,11 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
   };
   const section = (el: Element | null) => {
     const node = el?.closest('section[id], section[aria-labelledby], article[id], header, footer, nav');
-    return clean(node?.id || node?.getAttribute('aria-labelledby') || node?.tagName.toLowerCase() || 'main');
+    return clean(node?.getAttribute('data-measure-section') || node?.id || node?.getAttribute('aria-labelledby') || node?.tagName.toLowerCase() || 'main');
   };
   const ctas = new Map<Element, { id: string; label: string; section: string; since: number | null; seen: boolean; clicked: boolean }>();
+  const seenCtas = new Set<string>();
+  const clickedCtas = new Set<string>();
   const sectionMs = new Map<string, number>();
   const sectionSent = new Map<string, number>();
   let active = 'main', last = now(), foreground = false, started = false, suspended = false, lastFlush = now();
@@ -30,12 +33,12 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
   const currentSection = () => {
     let result = 'main';
     let distance = Infinity;
-    for (const el of doc.querySelectorAll('main section[id], main section[aria-labelledby], main h2[id]')) {
+    for (const el of doc.querySelectorAll('main section[id], main section[aria-labelledby], main article[id], main h2[id]')) {
       const rect = el.getBoundingClientRect();
-      if (rect.bottom <= 0 || rect.top >= w.innerHeight || rect.height <= 0) continue;
+      if (rect.bottom <= 0 || rect.top >= w.innerHeight || rect.height <= 0 || !measurementVisible(el, w, doc)) continue;
       const center = Math.max(rect.top, 0) + (Math.min(rect.bottom, w.innerHeight) - Math.max(rect.top, 0)) / 2;
       const d = Math.abs(center - w.innerHeight / 2);
-      if (d < distance) { distance = d; result = clean(el.id || el.getAttribute('aria-labelledby') || 'main'); }
+      if (d <= distance) { distance = d; result = clean(el.getAttribute('data-measure-section') || el.id || el.getAttribute('aria-labelledby') || 'main'); }
     }
     return result;
   };
@@ -55,7 +58,9 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
   };
   const scan = () => {
     for (const el of doc.querySelectorAll('a[href], button')) {
-      if (ctas.has(el) || el.closest('[aria-hidden="true"], [data-cookie-consent], #nvs-measurement-qa')) continue;
+      if (ctas.has(el)) continue;
+      const excluded = el.closest('[aria-hidden="true"], [data-cookie-consent], #nvs-measurement-qa');
+      if (excluded && excluded.getAttribute('data-measure-clone') !== 'true') continue;
       const label = clean(el.getAttribute('data-track-label') || el.getAttribute('aria-label') || el.textContent || el.tagName.toLowerCase());
       const target = el.getAttribute('href') || '';
       ctas.set(el, { id: el.getAttribute('data-track-id') || `cta-${hash(`${path}|${section(el)}|${target ? safeMeasurementPath(target, w.location.origin) : ''}|${label}`)}`, label, section: section(el), since: null, seen: false, clicked: false });
@@ -71,14 +76,14 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
     if (!allowed() || !visible() || suspended) { for (const data of ctas.values()) data.since = null; return; }
     scan();
     for (const [el, data] of ctas) {
-      if (data.seen) continue;
+      if (data.seen || seenCtas.has(data.id)) continue;
       const r = el.getBoundingClientRect();
       const shown = Math.max(0, Math.min(r.bottom, w.innerHeight) - Math.max(r.top, 0));
       const horizontal = Math.max(0, Math.min(r.right, w.innerWidth) - Math.max(r.left, 0));
-      if (r.height <= 0 || r.width <= 0 || shown * horizontal < Math.min(r.height, w.innerHeight) * Math.min(r.width, w.innerWidth) * .5 || (el as HTMLElement).hidden) { data.since = null; continue; }
+      if (r.height <= 0 || r.width <= 0 || shown * horizontal < Math.min(r.height, w.innerHeight) * Math.min(r.width, w.innerWidth) * .5 || (el as HTMLElement).hidden || !measurementVisible(el, w, doc)) { data.since = null; continue; }
       data.since ??= now();
       if (now() - data.since >= 1000) {
-        data.seen = true;
+        data.seen = true; seenCtas.add(data.id);
         emit(el.tagName === 'FORM' ? 'form_view' : 'cta_view', { [el.tagName === 'FORM' ? 'form_id' : 'cta_id']: data.id, element_name: data.label, section_id: data.section });
       }
     }
@@ -100,19 +105,19 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
     if (!el) return;
     scan(); const data = ctas.get(el); if (!data) return;
     lastAction = data.id;
-    if (!data.seen) { data.seen = true; emit('cta_view', { cta_id: data.id, element_name: data.label, section_id: data.section, view_reason: 'interaction' }); }
-    emit('content_click', { cta_id: data.id, element_name: data.label, section_id: data.section, first_click: data.clicked ? 0 : 1, cta_seen: data.seen ? 1 : 0, target_path: safeMeasurementPath(el.getAttribute('href') || path, w.location.origin) });
-    data.clicked = true;
+    if (!seenCtas.has(data.id)) { data.seen = true; seenCtas.add(data.id); emit('cta_view', { cta_id: data.id, element_name: data.label, section_id: data.section, view_reason: 'interaction' }); }
+    emit('content_click', { cta_id: data.id, element_name: data.label, section_id: data.section, first_click: clickedCtas.has(data.id) ? 0 : 1, cta_seen: seenCtas.has(data.id) ? 1 : 0, target_path: safeMeasurementPath(el.getAttribute('href') || path, w.location.origin) });
+    data.clicked = true; clickedCtas.add(data.id);
   }, true);
 
-  const videos = new Map<HTMLVideoElement, { time: number; wall: number; playing: boolean; seeking: boolean; ms: number; sent: number }>();
+  const videos = new Map<HTMLVideoElement, { time: number; wall: number; playing: boolean; seeking: boolean; ms: number; sent: number; metadata: ReturnType<typeof videoData> }>();
   const videoData = (video: HTMLVideoElement) => ({ video_id: `video-${hash(safeMeasurementPath(video.currentSrc || video.querySelector('source')?.getAttribute('src') || '', w.location.origin))}`, video_title: clean(video.getAttribute('aria-label') || video.title || 'Portfolio video') });
-  const flushVideo = (video: HTMLVideoElement, s: { ms: number; sent: number }) => { const seconds = Math.floor((s.ms - s.sent) / 1000); if (seconds > 0) { emit('video_watch', { ...videoData(video), watch_seconds: seconds }); s.sent += seconds * 1000; } };
+  const flushVideo = (video: HTMLVideoElement, s: { ms: number; sent: number; metadata: ReturnType<typeof videoData> }) => { const seconds = Math.floor((s.ms - s.sent) / 1000); if (seconds > 0) { emit('video_watch', { ...s.metadata, watch_seconds: seconds }); s.sent += seconds * 1000; } };
   const observeVideo = (event: Event) => {
     const video = event.target as HTMLVideoElement;
     if (!started || !allowed() || video.tagName !== 'VIDEO' || video.autoplay || video.loop || !video.controls) return;
     let s = videos.get(video);
-    if (!s) { s = { time: video.currentTime, wall: now(), playing: false, seeking: false, ms: 0, sent: 0 }; videos.set(video, s); }
+    if (!s) { s = { time: video.currentTime, wall: now(), playing: !video.paused && !video.ended, seeking: false, ms: 0, sent: 0, metadata: videoData(video) }; videos.set(video, s); }
     const wall = Math.max(0, (now() - s.wall) / 1000);
     const delta = video.currentTime - s.time;
     const rate = video.playbackRate || 1;
@@ -124,6 +129,11 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
     if (event.type === 'pause' || event.type === 'ended') { s.playing = false; flushVideo(video, s); }
     if (s.ms - s.sent >= 15000) flushVideo(video, s);
   };
+  // Withdrawal discards unsent state; a later opt-in starts at the current playhead.
+  doc.addEventListener('nvs:consent-change', () => { if (!allowed()) videos.clear(); });
+  const resetVideo = (event: Event) => { const video = event.target as HTMLVideoElement; const state = videos.get(video); if (state) { flushVideo(video, state); videos.delete(video); } };
+  doc.addEventListener('nvs:video-reset', resetVideo, true);
+  doc.addEventListener('emptied', resetVideo, true);
   for (const name of ['play', 'pause', 'timeupdate', 'seeking', 'seeked', 'ended']) doc.addEventListener(name, observeVideo, true);
   const videoVisibility = () => { for (const [video, s] of videos) { flushVideo(video, s); s.time = video.currentTime; s.wall = now(); } };
   doc.addEventListener('visibilitychange', videoVisibility);
