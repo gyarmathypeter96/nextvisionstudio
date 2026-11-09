@@ -1,34 +1,44 @@
 ---
 import { projectVideoSchema } from "../data/projectVideos";
+import { novemberClientFilms } from "../data/novemberClientFilms";
 import { SITE_URL } from "../config/site";
 
 interface Props { id?: string; }
 const { id = 'social-video-work' } = Astro.props;
 const films = [
- {slug:'ventsolve-content-production',client:'VentSolve',text:'Service and brand video production for an Irish business.',video:{src:'/videos/case-studies/ventsolve.mp4',poster:'/images/portfolio/SUeoIgRtH0I.webp',title:'VentSolve business video',width:720,height:1280}},
+ {slug:'ventsolve-content-production',client:'VentSolve',text:'Service and brand video production for an Irish business.',video:novemberClientFilms["ventsolve"][0],clips:novemberClientFilms["ventsolve"]},
  {slug:'gut-fest-event-videography-dublin',client:'Gut Fest Dublin',text:'Event videography at Bolands Mills in Dublin.',video:{src:'/videos/case-studies/gut-fest.mp4',poster:'/images/portfolio/JVA_WxYY3p0.webp',title:'Gut Fest Dublin event film',width:720,height:1280}},
- {slug:'balbriggan-braces-dental-videos',client:'Balbriggan Braces',text:'Patient education videos filmed in Balbriggan, North Dublin.',video:{src:'/videos/case-studies/balbriggan-braces.mp4',poster:'/images/case-studies/balbriggan-braces-aligner-video.webp',title:'Balbriggan Braces patient education video',width:720,height:1280}},
- {slug:'perfect-clean-video-advertising',client:'Perfect Clean',text:'Owner-led video content for an Irish cleaning business.',video:{src:'/videos/case-studies/perfect-clean.mp4',poster:'/images/case-studies/perfect-clean-owner.webp',title:'Perfect Clean business video',width:720,height:1280}},
+ {slug:'balbriggan-braces-dental-videos',client:'Balbriggan Braces',text:'Patient education videos filmed in Balbriggan, North Dublin.',video:novemberClientFilms["braces"][0],clips:novemberClientFilms["braces"]},
+ {slug:'perfect-clean-video-advertising',client:'Perfect Clean',text:'Owner-led video content for an Irish cleaning business.',video:novemberClientFilms["perfect-clean"][0],clips:novemberClientFilms["perfect-clean"]},
  {slug:'leroys-barking-world-social-content',client:"Leroy’s Barking World",text:'Short-form social video for a dog grooming business in Blessington, County Wicklow.',video:{src:'/videos/case-studies/leroys-barking-world.mp4',poster:'/images/portfolio/53-_kK95Eoc.webp',title:'Leroy’s Barking World social video',width:720,height:1280}},
-];
+].map(film => ({...film, clips: 'clips' in film ? film.clips : []}));
 const localSchemas = [
-  ['SUeoIgRtH0I', '/videos/case-studies/ventsolve.mp4'],
   ['JVA_WxYY3p0', '/videos/case-studies/gut-fest.mp4'],
   ['53-_kK95Eoc', '/videos/case-studies/leroys-barking-world.mp4'],
 ].map(([id, path]) => {
   const { embedUrl, ...schema } = projectVideoSchema(id)!;
   return { ...schema, contentUrl: new URL(path, SITE_URL).href };
 });
+const newSchemas = Object.values(novemberClientFilms).flat().map(film => ({
+  '@context': 'https://schema.org', '@type': 'VideoObject',
+  '@id': `${SITE_URL}/#video-${film.key}`, name: film.title,
+  description: 'Short-form client video created by NextVision Studio. Watch the film and explore the client project.',
+  thumbnailUrl: new URL(film.poster, SITE_URL).href,
+  contentUrl: new URL(film.src, SITE_URL).href,
+  uploadDate: film.uploadDate, duration: film.durationISO,
+  creator: { '@id': `${SITE_URL}/#business` },
+}));
+
 
 
 ---
-{localSchemas.map(schema => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+{[...localSchemas,...newSchemas].map(schema => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
 <section class="social-films" id={id} aria-labelledby={`${id}-title`} data-social-carousel>
   <header class="social-films__heading">
     <div><h2 id={`${id}-title`}>Video production for Dublin and Irish businesses</h2><p>From North Dublin patient education to Dublin events and Irish service businesses. Watch our video work and explore the projects behind it.</p></div>
     <nav aria-label="Browse social videos"><button type="button" data-reel-previous aria-label="Previous social video"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7" /></svg></button><button type="button" data-reel-next aria-label="Next social video"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7" /></svg></button></nav>
   </header>
-  <ol class="social-films__rail" tabindex="0" aria-label="Swipe or scroll to explore five original client videos">
+  <ol class="social-films__rail" tabindex="0" aria-label="Swipe or scroll to explore original client videos">
     {films.map((film,index)=><li class:list={['social-films__item',{'is-current':index===0}]}>
       <div class="social-films__phone">
         <video playsinline preload="none" width={film.video.width} height={film.video.height} poster={film.video.poster} title={film.video.title} aria-label={film.video.title}>
@@ -37,6 +47,9 @@ const localSchemas = [
         <button class="social-films__play" type="button" aria-label={`Play ${film.client} social video`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg></button>
         <noscript><a href={film.video.src}>Watch the {film.client} video</a></noscript>
       </div>
+      {film.clips.length > 1 && <div class="social-films__choices" role="group" aria-label={`Choose a ${film.client} film`}>
+        {film.clips.map((clip,clipIndex)=><button type="button" data-film-src={clip.src} data-film-poster={clip.poster} data-film-title={clip.title} aria-pressed={clipIndex===0?'true':'false'}>{clip.title}</button>)}
+      </div>}
       <h3>{film.client}</h3><p>{film.text}</p><a href={`/case-studies/${film.slug}/`}>Explore the {film.client} project</a>
     </li>)}
   </ol>
@@ -77,6 +90,20 @@ const localSchemas = [
           updateNavigation();
         });
       },{passive:true});
+      section.querySelectorAll<HTMLButtonElement>('[data-film-src]').forEach(choice=>choice.addEventListener('click',()=>{
+        const item=choice.closest<HTMLElement>('.social-films__item')!;
+        const video=item.querySelector<HTMLVideoElement>('video')!;
+        const button=item.querySelector<HTMLButtonElement>('.social-films__play')!;
+        video.pause();
+        video.src=choice.dataset.filmSrc!;
+        video.poster=choice.dataset.filmPoster!;
+        video.title=choice.dataset.filmTitle!;
+        video.setAttribute('aria-label',choice.dataset.filmTitle!);
+        video.controls=true;
+        video.preload='metadata';
+        item.querySelectorAll('[data-film-src]').forEach(other=>other.setAttribute('aria-pressed',String(other===choice)));
+        video.play().then(()=>{button.hidden=true;}).catch(()=>{button.hidden=false;});
+      }));
       videos.forEach(video=>{
         const button=video.parentElement?.querySelector<HTMLButtonElement>('.social-films__play');
         button?.addEventListener('click',()=>{
@@ -117,6 +144,9 @@ const localSchemas = [
 .social-films .social-films__play { position:absolute; left:20px; bottom:20px; width:54px; height:54px; background:#0d131bea; border-color:#cfeaff; }
 .social-films .social-films__play[hidden] { display:none; }
 .social-films__play svg path { fill:currentColor; stroke:none; }
+.social-films__choices { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.social-films .social-films__choices button { display:block; width:auto; height:auto; border-radius:20px; padding:9px 11px; font-size:11px; line-height:1.4; text-align:left; }
+.social-films .social-films__choices button[aria-pressed="true"] { border-color:#cfeaff; background:#293743; }
 .social-films h3 { margin:20px 0 9px; font-size:21px; font-weight:650; }
 .social-films__item p { margin:0 0 12px; color:#bfc6cd; font-size:15px; line-height:1.6; }
 .social-films a { color:#cfeaff; font-size:14px; text-decoration:none; line-height:1.6; }

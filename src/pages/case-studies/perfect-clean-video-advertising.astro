@@ -1,4 +1,5 @@
 ---
+import NovemberClientFilms from "../../components/NovemberClientFilms.astro";
 import ClientCaseStudyPage from "../../components/ClientCaseStudyPage.astro";
 import CaseStudyImageSlot from "../../components/CaseStudyImageSlot.astro";
 import { clientCaseStudyMedia } from "../../data/clientCaseStudyMedia";
@@ -16,6 +17,7 @@ const media = clientCaseStudyMedia.perfectClean;
   serviceHref="/short-form-video-production-dublin/"
   serviceLabel="Explore advertising video production"
 >
+  <NovemberClientFilms client="perfect-clean" />
   <section id="the-project">
     <h2>A person behind the service</h2>
     <p>For Perfect Clean, I filmed the work process and the owner speaking about the business. The videos were used as advertising creative.</p>
