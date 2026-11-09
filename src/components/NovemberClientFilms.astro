@@ -1,0 +1,18 @@
+---
+import { novemberClientFilms } from "../data/novemberClientFilms";
+interface Props { client: keyof typeof novemberClientFilms; }
+const films = novemberClientFilms[Astro.props.client];
+---
+<section class="november-films" aria-label="More original client videos">
+  <h2>More short-form videos from this project.</h2>
+  <div class="november-films__grid">{films.map(film => <figure><video controls playsinline preload="none" poster={film.poster} width={film.width} height={film.height} aria-label={film.title}><source src={film.src} type="video/mp4" /></video><figcaption>{film.title}</figcaption></figure>)}</div>
+</section>
+<style>
+.november-films { width:min(100% - 48px,1180px); margin:64px auto; color:#fff; }
+h2 { font-size:clamp(28px,4vw,45px); line-height:1.12; max-width:25ch; margin-bottom:30px; }
+.november-films__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+figure { margin:0; min-width:0; }
+video { display:block; width:100%; height:auto; aspect-ratio:9/16; object-fit:contain; background:#000; border-radius:20px; }
+figcaption { margin-top:16px; font-size:15px; line-height:1.5; }
+@media(max-width:700px) { .november-films__grid { grid-template-columns:1fr; gap:35px; } video { max-height:75svh; } }
+</style>
