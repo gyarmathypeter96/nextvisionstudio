@@ -42,7 +42,7 @@ if (dialog && !promotionExpired) {
   try { dismissed = sessionStorage.getItem(key) === 'true'; } catch {}
   const remember = () => { dismissed = true; try { sessionStorage.setItem(key, 'true'); } catch {} };
   const open = () => { if (!dialog.open) { dialog.showModal(); remember(); } };
-  const autoOpen = () => { if (!dismissed) window.setTimeout(() => { if (!dismissed && !dialog.open) open(); }, 1500); };
+  const autoOpen = () => { if (!dismissed) window.setTimeout(() => { if (!dismissed && !dialog.open) open(); }, 5000); };
   document.querySelector('[data-bf-open]')?.addEventListener('click', open);
   dialog.querySelector('.bf-close')?.addEventListener('click', () => dialog.close());
   dialog.addEventListener('close', remember);

@@ -28,7 +28,7 @@ const promotionActive = new Date() < new Date("2026-12-01T00:00:00Z");
         <p class="content-plan__description">{plan.description}</p>
         <p class="content-plan__price">{plan.featured && promotionActive && <del class="content-plan__was">€{plan.price}</del>}<strong>€{("salePrice" in plan && promotionActive ? plan.salePrice : plan.price).toLocaleString("en-IE")}</strong><span>/ month </span></p>
         <Inclusions class:list={[{ "plan-details": compact }]} open={compact ? true : undefined}>
-          {compact && <summary>What’s included</summary>}
+          {compact && <summary><span>What’s included</span><svg class="plan-details__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 12h12" /><path class="plan-details__vertical" d="M12 6v12" /></svg></summary>}
         <div class="content-plan__includes">
           <p>Every month, you get</p>
           <ul>

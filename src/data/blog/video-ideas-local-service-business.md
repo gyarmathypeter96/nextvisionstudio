@@ -46,4 +46,4 @@ Choose a [short-form video](/short-form-video-production-dublin/) for one questi
 
 ## Plan the right scope for your business
 
-Every brief is different. [Plan your short-form videos](/short-form-video-production-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Plan your short-form videos](/short-form-video-production-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

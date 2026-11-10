@@ -28,3 +28,15 @@
 @media(max-width:760px){.orbit-home .ported-packages .plan-details{margin-top:0}.orbit-home .ported-packages .plan-details>summary{display:block;padding:11px 0}.orbit-home .ported-packages .content-plan__price{margin:18px 0}.orbit-home .ported-packages .content-plan__top{min-height:14px;margin:0 0 14px}.orbit-home .ported-packages .content-plan__description{min-height:0}}
 .orbit-home .ported-packages .content-plan{background:#121210;border-color:#484842;box-shadow:none}
 @media(max-width:760px){.orbit-home .ported-packages .content-plan__popular{left:18px;transform:none;top:-11px}}
+
+/* A quiet disclosure control with a drawn icon, aligned to the mobile card. */
+.plan-details__icon{display:none}
+@media(max-width:760px){
+.orbit-home .ported-packages .plan-details>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px}
+.orbit-home .ported-packages .plan-details>summary::after{content:none}
+.orbit-home .ported-packages .plan-details__icon{display:block;flex:none;width:28px;height:28px;padding:3px;border:1px solid #80659c;border-radius:50%;color:#c9acf4;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.orbit-home .ported-packages .plan-details__vertical{transform-origin:12px 12px;transition:transform .2s ease,opacity .2s ease}
+.orbit-home .ported-packages .plan-details[open] .plan-details__vertical{transform:rotate(90deg);opacity:0}
+.orbit-home .ported-packages .plan-details>summary:focus-visible{outline:2px solid #c9acf4;outline-offset:4px;border-radius:4px}
+}
+@media(prefers-reduced-motion:reduce){.orbit-home .ported-packages .plan-details__vertical{transition:none}}

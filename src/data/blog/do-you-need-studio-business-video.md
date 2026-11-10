@@ -38,4 +38,4 @@ A filming location can support a [corporate interview](/corporate-video-producti
 
 ## Plan the right scope for your business
 
-Every brief is different. [Explore business video production](/corporate-video-production-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Explore business video production](/corporate-video-production-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

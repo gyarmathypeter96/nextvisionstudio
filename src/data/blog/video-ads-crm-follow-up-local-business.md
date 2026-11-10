@@ -38,4 +38,4 @@ The individual parts can be scoped as [video production](/short-form-video-produ
 
 ## Plan the right scope for your business
 
-Every brief is different. [Explore CRM and lead automation](/crm-lead-automation-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Explore CRM and lead automation](/crm-lead-automation-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

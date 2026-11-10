@@ -38,4 +38,4 @@ Depending on the brief, the output may be [short-form videos](/short-form-video-
 
 ## Plan the right scope for your business
 
-Every brief is different. [Explore monthly social content](/social-media-content-creation-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Explore monthly social content](/social-media-content-creation-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

@@ -38,4 +38,4 @@ The scope differs between [corporate video](/corporate-video-production-dublin/)
 
 ## Plan the right scope for your business
 
-Every brief is different. [Use the business video quote checklist](/blog/compare-business-video-quotes/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Use the business video quote checklist](/blog/compare-business-video-quotes/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
