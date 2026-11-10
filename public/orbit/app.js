@@ -83,19 +83,19 @@ document.fonts.ready.then(requestRender);
 
 function updateMotion() {
   document.body.classList.toggle('ambient-paused', motionPaused || document.hidden || dialog.open);
-  motionToggle.setAttribute('aria-pressed', String(motionPaused));
-  motionToggle.setAttribute('aria-label', motionPaused ? 'Play animation' : 'Pause animation');
-  motionToggle.innerHTML = `<span aria-hidden="true">${motionPaused ? '▷' : 'Ⅱ'}</span>`;
+  motionToggle?.setAttribute('aria-pressed', String(motionPaused));
+  motionToggle?.setAttribute('aria-label', motionPaused ? 'Play animation' : 'Pause animation');
+  if (motionToggle) motionToggle.innerHTML = `<span aria-hidden="true">${motionPaused ? '▷' : 'Ⅱ'}</span>`;
   if (motionPaused || document.hidden || dialog.open) orbit?.pause();
   else if (orbit) orbit.play().catch(() => {
     motionPaused = true;
     document.body.classList.add('ambient-paused');
-    motionToggle.setAttribute('aria-pressed', 'true');
-    motionToggle.setAttribute('aria-label', 'Play animation');
-    motionToggle.innerHTML = '<span aria-hidden="true">▷</span>';
+    motionToggle?.setAttribute('aria-pressed', 'true');
+    motionToggle?.setAttribute('aria-label', 'Play animation');
+    if (motionToggle) motionToggle.innerHTML = '<span aria-hidden="true">▷</span>';
   });
 }
-motionToggle.addEventListener('click', () => { motionPaused = !motionPaused; updateMotion(); });
+motionToggle?.addEventListener('click', () => { motionPaused = !motionPaused; updateMotion(); });
 document.addEventListener('visibilitychange', updateMotion);
 reducedMotion.addEventListener('change', () => { motionPaused = reducedMotion.matches; updateMotion(); requestRender(); });
 

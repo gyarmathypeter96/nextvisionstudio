@@ -11,6 +11,8 @@ for(const page of baseline.pages){
  assert.equal(decode(attr(html.match(/<meta\s+name="description"[^>]*>/)[0],'content')),page.description,`${page.route}: description`);
  assert.equal(attr(html.match(/<link\s+rel="canonical"[^>]*>/)[0],'href'),page.canonical,`${page.route}: canonical`);
  assert.deepEqual([...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)].map(m=>text(m[1])),page.h1,`${page.route}: H1`);
+ const jsonLd=[...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+ assert.deepEqual(jsonLd,page.jsonLd,`${page.route}: original structured data`);
  assert.ok(!/<meta\s+name="robots"\s+content="[^"]*noindex/.test(html),`${page.route}: indexable release`);
  assert.ok(!html.includes('action="/api/enquiries"')&&!html.includes('Local preview. Enquiries'),`${page.route}: no prototype form`);
  const paths=new Set([...html.matchAll(/<a\b[^>]*>/g)].map(([tag])=>attr(tag,'href')).filter(Boolean).map(href=>new URL(decode(href),page.canonical)).filter(u=>u.hostname==='www.nextvisionstudio.com').map(u=>u.pathname));
