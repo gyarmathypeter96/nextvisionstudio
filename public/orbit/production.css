@@ -50,4 +50,40 @@
 .orbit-home .hero-cta{left:50%;transform:translate3d(calc(-50% + var(--astro-x,0px)),var(--copy-y,0px),0)}
 .orbit-home .astronaut-plane{will-change:transform}
 .orbit-home .astronaut-subject{transform:translate3d(-50%,-50%,0) translate3d(0,var(--astro-y,0px),0) scale(var(--astro-scale,1)) rotate(var(--astro-rotate,0deg));backface-visibility:hidden}
-@media(prefers-reduced-motion:reduce){.orbit-home .astronaut-plane{will-change:auto}.orbit-home .hero-cta{transform:translate3d(calc(-50% + var(--astro-x,0px)),0,0)!important}}
+@media(prefers-reduced-motion:reduce){.orbit-home .astronaut-plane{will-change:auto}.orbit-home .hero-cta{left:calc(50% + 25vw);transform:translateX(-50%)!important}}
+@media(prefers-reduced-motion:reduce) and (max-width:760px){.orbit-home .hero-cta{left:50%}}
+
+/* On supported mobile browsers the scroll compositor owns the hero motion.
+   Animate transform/opacity directly, never an inherited custom property. */
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+  .orbit-home .hero-scroll[data-hero-motion="native"] .astronaut-plane{transform:none;will-change:auto}
+  .orbit-home .hero-scroll[data-hero-motion="native"] :is(.astronaut-subject,.hero-copy,.hero-cta,.scene-caption){
+    animation-duration:1s;animation-timing-function:linear;animation-fill-mode:both;
+    animation-timeline:scroll(root block);
+    animation-range:var(--hero-start,0px) var(--hero-end,85svh);
+  }
+  .orbit-home .hero-scroll[data-hero-motion="native"] .astronaut-subject{animation-name:orbit-mobile-astronaut}
+  .orbit-home .hero-scroll[data-hero-motion="native"] .hero-copy{animation-name:orbit-mobile-copy}
+  .orbit-home .hero-scroll[data-hero-motion="native"] .hero-cta{animation-name:orbit-mobile-cta}
+  .orbit-home .hero-scroll[data-hero-motion="native"] .scene-caption{animation-name:orbit-mobile-caption}
+}
+@keyframes orbit-mobile-astronaut{
+  from{transform:translate3d(-50%,-50%,0) translate3d(0,0,0) scale(1) rotate(0deg)}
+  to{transform:translate3d(-50%,-50%,0) translate3d(0,-197px,0) scale(1.68) rotate(-4deg)}
+}
+@keyframes orbit-mobile-copy{
+  0%{transform:translate3d(0,0,0);opacity:1}
+  65%{transform:translate3d(0,-13px,0);opacity:1}
+  100%{transform:translate3d(0,-20px,0);opacity:0}
+}
+@keyframes orbit-mobile-cta{
+  0%{transform:translate3d(-50%,0,0);opacity:1}
+  65%{transform:translate3d(-50%,-13px,0);opacity:1}
+  100%{transform:translate3d(-50%,-20px,0);opacity:0}
+}
+@keyframes orbit-mobile-caption{
+  0%{transform:translate3d(0,30px,0);opacity:0}
+  42%{transform:translate3d(0,17.4px,0);opacity:0}
+  75.333%{transform:translate3d(0,7.4px,0);opacity:1}
+  100%{transform:translate3d(0,0,0);opacity:1}
+}
