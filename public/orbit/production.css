@@ -87,3 +87,10 @@
   75.333%{transform:translate3d(0,7.4px,0);opacity:1}
   100%{transform:translate3d(0,0,0);opacity:1}
 }
+
+/* Opening focus announces the film title; the close control stays a plain X.
+   Keyboard navigation retains a quiet, visible white focus indicator. */
+.orbit-home #dialog-title:focus{outline:none}
+.orbit-home #close-video{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:#fff}
+.orbit-home #close-video span{margin:0;font-size:28px;line-height:1}
+.orbit-home #close-video:focus-visible{outline:2px solid #fff;outline-offset:2px}
