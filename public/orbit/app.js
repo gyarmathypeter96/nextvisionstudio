@@ -20,6 +20,14 @@ let queued = false;
 let opener;
 const heroStage = hero.querySelector('.hero-stage');
 const workflowStage = workflow.querySelector('.workflow-stage');
+const astronautPlane = hero.querySelector('.astronaut-plane');
+const astronaut = hero.querySelector('.astronaut-subject');
+const heroCopy = hero.querySelector('.hero-copy');
+const heroCaption = hero.querySelector('.scene-caption');
+const supportsNativeHero = CSS.supports('animation-timeline: scroll(root block)') && CSS.supports('animation-range: 0px 100px');
+let nativeHero = false;
+let heroFront;
+let ctaHidden;
 let geometryDirty = true;
 let geometry;
 let previousHero = NaN;
@@ -42,7 +50,52 @@ function refreshGeometry() {
     workflowRange: Math.max(1, workflow.offsetHeight - workflowStage.clientHeight),
     width: innerWidth,
   };
+  const useNative = geometry.width <= 760 && supportsNativeHero && !reducedMotion.matches;
+  if (useNative !== nativeHero) {
+    // A mode switch must not leave inline fallback transforms on native layers.
+    [astronautPlane, astronaut, heroCopy, heroCta, heroCaption].filter(Boolean).forEach(element => {
+      element.style.removeProperty('transform');
+      element.style.removeProperty('opacity');
+    });
+    previousHero = NaN;
+  }
+  nativeHero = useNative;
+  hero.dataset.heroMotion = nativeHero ? 'native' : 'script';
+  if (nativeHero) {
+    const start = `${geometry.heroTop}px`;
+    const end = `${geometry.heroTop + geometry.heroRange}px`;
+    if (hero.style.getPropertyValue('--hero-start') !== start) hero.style.setProperty('--hero-start', start);
+    if (hero.style.getPropertyValue('--hero-end') !== end) hero.style.setProperty('--hero-end', end);
+  }
   geometryDirty = false;
+}
+
+function paintHero(progress) {
+  // Fallback writes only the affected layers. Inheritable variables on the whole
+  // hero would invalidate every descendant's styles on each scroll frame.
+  const smallScreen = geometry.width <= 760;
+  const x = smallScreen ? 0 : geometry.width * .25 * (1 - clamp(progress / .4));
+  const y = -progress * (smallScreen ? 197 : 140);
+  const copyY = -progress * (smallScreen ? 20 : 85);
+  const opacity = clamp(1 - Math.max(0, progress - .65) / .35);
+  astronautPlane.style.transform = `translate3d(${x}px,0,0)`;
+  astronaut.style.transform = `translate3d(-50%,-50%,0) translate3d(0,${y}px,0) scale(${(1 + progress * .68).toFixed(4)}) rotate(${progress * -4}deg)`;
+  heroCopy.style.transform = `translate3d(0,${copyY}px,0)`;
+  heroCopy.style.opacity = opacity.toFixed(3);
+  if (heroCta) {
+    heroCta.style.transform = `translate3d(calc(-50% + ${x}px),${copyY}px,0)`;
+    heroCta.style.opacity = opacity.toFixed(3);
+  }
+  if (heroCaption) {
+    heroCaption.style.opacity = clamp((progress - .42) * 3).toFixed(3);
+    heroCaption.style.transform = `translate3d(0,${(1 - progress) * 30}px,0)`;
+  }
+}
+function syncHeroControls(progress) {
+  const front = progress > .18;
+  const hidden = progress > .9825;
+  if (front !== heroFront) { hero.classList.toggle('astronaut-in-front', front); heroFront = front; }
+  if (hidden !== ctaHidden && heroCta) { heroCta.inert = hidden; ctaHidden = hidden; }
 }
 function invalidateGeometry() { geometryDirty = true; requestRender(); }
 
@@ -63,14 +116,8 @@ function renderScroll() {
     if (wasReduced) return;
     wasReduced = true;
     slides.forEach(slide => slide.setAttribute('aria-hidden', 'false'));
-    hero.style.setProperty('--copy-y', '0px');
-    hero.style.setProperty('--copy-opacity', '1');
-    if (heroCta) heroCta.inert = false;
-    hero.style.setProperty('--astro-x', `${innerWidth <= 760 ? 0 : innerWidth * .25}px`);
-    hero.style.setProperty('--astro-scale', '1');
-    hero.style.setProperty('--astro-y', '0px');
-    hero.style.setProperty('--astro-rotate', '0deg');
-    hero.classList.remove('astronaut-in-front');
+    paintHero(0);
+    syncHeroControls(0);
     return;
   }
   if (wasReduced) {
@@ -80,20 +127,12 @@ function renderScroll() {
   }
   const heroProgress = clamp((scrollY - geometry.heroTop) / geometry.heroRange);
   const journey = clamp((scrollY - geometry.workflowTop) / geometry.workflowRange);
-  const smallScreen = geometry.width <= 760;
   if (heroProgress !== previousHero) {
     previousHero = heroProgress;
-    hero.style.setProperty('--astro-x', `${smallScreen ? 0 : geometry.width * .25 * (1 - clamp(heroProgress / .4))}px`);
-    hero.style.setProperty('--astro-scale', (1 + heroProgress * .68).toFixed(4));
-    hero.style.setProperty('--astro-y', `${-heroProgress * (smallScreen ? 197 : 140)}px`);
-    hero.style.setProperty('--astro-rotate', `${heroProgress * -4}deg`);
-    hero.style.setProperty('--copy-y', `${-heroProgress * (smallScreen ? 20 : 85)}px`);
-    const copyOpacity = clamp(1 - Math.max(0, heroProgress - .65) / .35);
-    hero.style.setProperty('--copy-opacity', copyOpacity.toFixed(3));
-    if (heroCta) heroCta.inert = copyOpacity < .05;
-    hero.classList.toggle('astronaut-in-front', heroProgress > .18);
-    hero.style.setProperty('--caption-opacity', clamp((heroProgress - .42) * 3).toFixed(3));
-    hero.style.setProperty('--caption-y', `${(1 - heroProgress) * 30}px`);
+    // Native mobile motion has zero per-frame JS style writes. The browser's
+    // scroll timeline owns transform/opacity, including during inertial scroll.
+    if (!nativeHero) paintHero(heroProgress);
+    syncHeroControls(heroProgress);
   }
   if (journey === previousJourney) return;
   previousJourney = journey;
@@ -145,7 +184,7 @@ function updateMotion() {
 }
 motionToggle?.addEventListener('click', () => { motionPaused = !motionPaused; updateMotion(); });
 document.addEventListener('visibilitychange', updateMotion);
-reducedMotion.addEventListener('change', () => { motionPaused = reducedMotion.matches; updateMotion(); requestRender(); });
+reducedMotion.addEventListener('change', () => { motionPaused = reducedMotion.matches; updateMotion(); invalidateGeometry(); });
 
 const videoChoices = dialog.querySelector('.video-choices');
 function selectClip(film, index) {
