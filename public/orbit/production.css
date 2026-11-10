@@ -40,3 +40,14 @@
 .orbit-home .ported-packages .plan-details>summary:focus-visible{outline:2px solid #c9acf4;outline-offset:4px;border-radius:4px}
 }
 @media(prefers-reduced-motion:reduce){.orbit-home .ported-packages .plan-details__vertical{transition:none}}
+
+/* Pure white service panel and platform-independent project play controls. */
+.orbit-home .services{background:#fff}
+.orbit-home .project-media>button .play-mark{background:rgba(12,12,12,.5);color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 3px 18px #0002}
+.orbit-home .project-media .play-mark svg{display:block;width:26px;height:26px;fill:currentColor;stroke:none;margin-left:3px}
+@media(hover:hover){.orbit-home .project-media>button:hover .play-mark{background:rgba(12,12,12,.72)}}
+/* Move the CTA with the same compositor transform as the astronaut, not left. */
+.orbit-home .hero-cta{left:50%;transform:translate3d(calc(-50% + var(--astro-x,0px)),var(--copy-y,0px),0)}
+.orbit-home .astronaut-plane{will-change:transform}
+.orbit-home .astronaut-subject{transform:translate3d(-50%,-50%,0) translate3d(0,var(--astro-y,0px),0) scale(var(--astro-scale,1)) rotate(var(--astro-rotate,0deg));backface-visibility:hidden}
+@media(prefers-reduced-motion:reduce){.orbit-home .astronaut-plane{will-change:auto}.orbit-home .hero-cta{transform:translate3d(calc(-50% + var(--astro-x,0px)),0,0)!important}}
