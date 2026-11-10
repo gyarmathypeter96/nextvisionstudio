@@ -18,6 +18,33 @@ const clamp = (value, low = 0, high = 1) => Math.min(high, Math.max(low, value))
 let motionPaused = reducedMotion.matches;
 let queued = false;
 let opener;
+const heroStage = hero.querySelector('.hero-stage');
+const workflowStage = workflow.querySelector('.workflow-stage');
+let geometryDirty = true;
+let geometry;
+let previousHero = NaN;
+let previousJourney = NaN;
+let previousStep = -1;
+let wasReduced = false;
+
+function refreshGeometry() {
+  // Read layout together, before any animation writes. The stable sticky-stage
+  // height avoids a jump when Safari's address bar changes window.innerHeight.
+  const y = scrollY;
+  if (geometry && geometry.width !== innerWidth) {
+    previousHero = NaN;
+    wasReduced = false;
+  }
+  geometry = {
+    heroTop: hero.getBoundingClientRect().top + y,
+    heroRange: Math.max(1, hero.offsetHeight - heroStage.clientHeight),
+    workflowTop: workflow.getBoundingClientRect().top + y,
+    workflowRange: Math.max(1, workflow.offsetHeight - workflowStage.clientHeight),
+    width: innerWidth,
+  };
+  geometryDirty = false;
+}
+function invalidateGeometry() { geometryDirty = true; requestRender(); }
 
 // The copy is visual only; keyboard and accessibility navigation use the original group.
 document.querySelectorAll('.marquee-track').forEach(track => {
@@ -31,7 +58,10 @@ document.querySelectorAll('.marquee-track').forEach(track => {
 
 function renderScroll() {
   queued = false;
+  if (geometryDirty) refreshGeometry();
   if (reducedMotion.matches) {
+    if (wasReduced) return;
+    wasReduced = true;
     slides.forEach(slide => slide.setAttribute('aria-hidden', 'false'));
     hero.style.setProperty('--copy-y', '0px');
     hero.style.setProperty('--copy-opacity', '1');
@@ -43,43 +73,61 @@ function renderScroll() {
     hero.classList.remove('astronaut-in-front');
     return;
   }
-  const heroProgress = clamp(-hero.getBoundingClientRect().top / Math.max(1, hero.offsetHeight - innerHeight));
-  const smallScreen = innerWidth <= 760;
-  hero.style.setProperty('--astro-x', `${smallScreen ? 0 : innerWidth * .25 * (1 - clamp(heroProgress / .4))}px`);
-  hero.style.setProperty('--astro-scale', (1 + heroProgress * .68).toFixed(4));
-  hero.style.setProperty('--astro-y', `${-heroProgress * (smallScreen ? 197 : 140)}px`);
-  hero.style.setProperty('--astro-rotate', `${heroProgress * -4}deg`);
-  hero.style.setProperty('--copy-y', `${-heroProgress * (smallScreen ? 20 : 85)}px`);
-  const copyOpacity = clamp(1 - Math.max(0, heroProgress - .65) / .35);
-  hero.style.setProperty('--copy-opacity', copyOpacity.toFixed(3));
-  if (heroCta) heroCta.inert = copyOpacity < .05;
-  hero.classList.toggle('astronaut-in-front', heroProgress > .18);
-  hero.style.setProperty('--caption-opacity', clamp((heroProgress - .42) * 3).toFixed(3));
-  hero.style.setProperty('--caption-y', `${(1 - heroProgress) * 30}px`);
-  const journey = clamp(-workflow.getBoundingClientRect().top / Math.max(1, workflow.offsetHeight - innerHeight));
+  if (wasReduced) {
+    previousHero = previousJourney = NaN;
+    previousStep = -1;
+    wasReduced = false;
+  }
+  const heroProgress = clamp((scrollY - geometry.heroTop) / geometry.heroRange);
+  const journey = clamp((scrollY - geometry.workflowTop) / geometry.workflowRange);
+  const smallScreen = geometry.width <= 760;
+  if (heroProgress !== previousHero) {
+    previousHero = heroProgress;
+    hero.style.setProperty('--astro-x', `${smallScreen ? 0 : geometry.width * .25 * (1 - clamp(heroProgress / .4))}px`);
+    hero.style.setProperty('--astro-scale', (1 + heroProgress * .68).toFixed(4));
+    hero.style.setProperty('--astro-y', `${-heroProgress * (smallScreen ? 197 : 140)}px`);
+    hero.style.setProperty('--astro-rotate', `${heroProgress * -4}deg`);
+    hero.style.setProperty('--copy-y', `${-heroProgress * (smallScreen ? 20 : 85)}px`);
+    const copyOpacity = clamp(1 - Math.max(0, heroProgress - .65) / .35);
+    hero.style.setProperty('--copy-opacity', copyOpacity.toFixed(3));
+    if (heroCta) heroCta.inert = copyOpacity < .05;
+    hero.classList.toggle('astronaut-in-front', heroProgress > .18);
+    hero.style.setProperty('--caption-opacity', clamp((heroProgress - .42) * 3).toFixed(3));
+    hero.style.setProperty('--caption-y', `${(1 - heroProgress) * 30}px`);
+  }
+  if (journey === previousJourney) return;
+  previousJourney = journey;
   const phase = journey * (slides.length - 1);
   const current = Math.round(phase);
   workflow.style.setProperty('--journey', journey.toFixed(5));
   workflow.style.setProperty('--phase', phase.toFixed(4));
-  workflow.style.setProperty('--step-color', colors[current]);
-  workflowIcons.forEach((icon, i) => icon.classList.toggle('is-current', i === current));
+  const stepChanged = current !== previousStep;
+  if (stepChanged) {
+    workflow.style.setProperty('--step-color', colors[current]);
+    workflowIcons.forEach((icon, i) => icon.classList.toggle('is-current', i === current));
+  }
   slides.forEach((slide, i) => {
     const distance = i - phase;
     slide.style.opacity = clamp(1 - Math.abs(distance) * 1.65).toFixed(4);
     slide.style.transform = `translateY(${distance * 85}px)`;
-    slide.setAttribute('aria-hidden', String(i !== current));
+    if (stepChanged) slide.setAttribute('aria-hidden', String(i !== current));
   });
-  steps.forEach((step, i) => {
+  if (stepChanged) steps.forEach((step, i) => {
     step.classList.toggle('is-active', i === current);
     step.classList.toggle('is-past', i < current);
     if (i === current) step.setAttribute('aria-current', 'step');
     else step.removeAttribute('aria-current');
   });
+  previousStep = current;
 }
 function requestRender() { if (!queued) { queued = true; requestAnimationFrame(renderScroll); } }
 addEventListener('scroll', requestRender, { passive: true });
-addEventListener('resize', requestRender, { passive: true });
-document.fonts.ready.then(requestRender);
+addEventListener('resize', invalidateGeometry, { passive: true });
+addEventListener('load', invalidateGeometry, { once: true });
+document.fonts.ready.then(invalidateGeometry);
+// Packages, accordions and loaded media can shift a later sticky section.
+const layoutObserver = new ResizeObserver(invalidateGeometry);
+[document.body, hero, heroStage, workflow, workflowStage].forEach(element => layoutObserver.observe(element));
 
 function updateMotion() {
   document.body.classList.toggle('ambient-paused', motionPaused || document.hidden || dialog.open);
