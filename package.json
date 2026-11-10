@@ -19,6 +19,6 @@
     "check:orbit-packages": "node --test scripts/check-orbit-packages.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.3"
+    "astro": "^7.4.7"
   }
 }
