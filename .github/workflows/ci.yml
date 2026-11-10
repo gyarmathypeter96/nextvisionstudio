@@ -27,3 +27,6 @@ jobs:
       - run: npm run check:measurement
       - run: npm run check:motion
       - run: node scripts/check-home-packages.mjs
+
+      - run: npm run check:orbit-release
+      - run: npm run check:orbit-packages

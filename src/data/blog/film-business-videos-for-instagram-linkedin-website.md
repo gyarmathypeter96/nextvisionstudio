@@ -38,4 +38,4 @@ Discuss [short-form production](/short-form-video-production-dublin/), a longer 
 
 ## Plan the right scope for your business
 
-Every brief is different. [Explore short-form video production](/short-form-video-production-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Explore short-form video production](/short-form-video-production-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

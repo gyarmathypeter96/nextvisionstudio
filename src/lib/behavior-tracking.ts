@@ -1,4 +1,5 @@
 import { ANALYTICS_HOSTS, GA4_MEASUREMENT_ID } from "../config/site";
+import { measurementVisible } from "./measurement-visibility";
 
 type Parameters = Record<string, string | number | boolean>;
 type Clarity = ((...args: unknown[]) => void) & { q?: unknown[][] };
@@ -88,12 +89,12 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
       qaOutput.textContent = `Measurement QA — QUEUED events (not server receipt)\n${qaClientId ? `QA client ID: ${qaClientId}\n` : ""}${qaEvents.slice(-8).join("\n")}`;
     }
   };
-  const sectionId = (element: Element) => label(element.id || element.getAttribute("aria-labelledby") || "main");
+  const sectionId = (element: Element) => label(element.getAttribute("data-measure-section") || element.id || element.getAttribute("aria-labelledby") || "main");
   const currentSection = () => {
     let found = "main";
     for (const [element, data] of sections) {
       const box = element.getBoundingClientRect();
-      if (box.top <= w.innerHeight * .45 && box.bottom > w.innerHeight * .45) found = data.id;
+      if (box.top <= w.innerHeight * .45 && box.bottom > w.innerHeight * .45 && measurementVisible(element, w, doc)) found = data.id;
     }
     return found;
   };
@@ -198,7 +199,7 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
       if (data.sent) continue;
       const box = element.getBoundingClientRect();
       const visibleHeight = Math.min(box.bottom, w.innerHeight) - Math.max(box.top, 0);
-      if (visibleHeight >= Math.min(box.height, w.innerHeight) * .35 && visibleHeight > 0) {
+      if (visibleHeight >= Math.min(box.height, w.innerHeight) * .35 && visibleHeight > 0 && measurementVisible(element, w, doc)) {
         data.since ??= now;
         if (now - data.since >= 1000) {
           data.sent = true;
@@ -241,6 +242,9 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
       state.depths.add(100); emit("portfolio_video_complete", { ...parameters, video_percent: 100 }, "portfolio_video_complete");
     }
   };
+  const resetVideo = (event: Event) => nativeVideos.delete(event.target as HTMLVideoElement);
+  doc.addEventListener("nvs:video-reset", resetVideo, true);
+  doc.addEventListener("emptied", resetVideo, true);
   for (const name of ["play", "pause", "timeupdate", "ended"]) doc.addEventListener(name, videoEvent, true);
   start();
 }

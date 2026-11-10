@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Also ignore dependency symlinks used by isolated worktrees.
+/node_modules

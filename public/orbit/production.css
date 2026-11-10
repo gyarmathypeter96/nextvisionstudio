@@ -1,0 +1,42 @@
+/* The service heading remains the dominant real title. */
+.orbit-home .hero-greeting{font-size:clamp(38px,6vw,95px);opacity:.78}
+.orbit-home .hero-copy #hero-title{font-family:var(--display);font-size:clamp(48px,6.8vw,112px);line-height:.98;max-width:19ch;white-space:normal;text-wrap:balance}
+.orbit-home .hero-details{margin-top:22px}
+.orbit-home .hero-intro{max-width:710px}
+.orbit-home .hero-intro>p{font-size:clamp(13px,1.2vw,17px);max-width:53ch}
+@media(max-width:760px){.orbit-home .hero-greeting{font-size:clamp(33px,9vw,56px)}.orbit-home .hero-copy #hero-title{font-size:clamp(39px,10.5vw,66px);max-width:17ch}.orbit-home .hero-copy{top:115px}.orbit-home .hero-cta{bottom:65px}}
+
+.legacy-anchor{display:block;height:0;width:0;scroll-margin-top:85px}
+/* Keep the animation control clear of the existing floating contact buttons. */
+.orbit-home .hero-bottom{top:108px;bottom:auto;pointer-events:none}
+.orbit-home #motion-toggle{pointer-events:auto;background:#08080899}
+@media(max-width:760px){.orbit-home .hero-bottom{top:96px}}
+/* The astronaut starts beside the copy, then moves to the centre on scroll. */
+.orbit-home .astronaut-plane{transform:translate3d(var(--astro-x,0px),0,0)}
+.orbit-home .hero-cta{left:calc(50% + var(--astro-x,0px))}
+
+/* Keep the original package business rules inside the Orbit presentation. */
+.orbit-home .ported-packages .content-packages{width:100%;max-width:none;padding:0;margin:0}
+.orbit-home .ported-packages .content-plan__gift,.orbit-home .ported-packages .content-plan__index{display:none}
+.orbit-home .ported-packages .content-plan--featured{background:#17121f!important;border-color:#80659c!important;box-shadow:none!important}
+.orbit-home .ported-packages .content-plan--featured:before{display:none}
+.orbit-home .ported-packages .content-plan__popular{background:#19141f;color:#eee;border-color:#80659c}
+.orbit-home .ported-packages .content-plan__season{background:none!important;border:0!important;padding:0;color:#b09bca!important;font-size:10px!important}
+.orbit-home .ported-packages .content-plan__bonus{padding:0!important;border:0!important;background:none!important}
+.orbit-home .ported-packages .content-plan__includes{padding-top:0;border-top:0}
+.orbit-home .ported-packages .content-plan--featured .content-plan__cta{background:none;color:#fff}
+@media(max-width:760px){.orbit-home .ported-packages .plan-details{margin-top:0}.orbit-home .ported-packages .plan-details>summary{display:block;padding:11px 0}.orbit-home .ported-packages .content-plan__price{margin:18px 0}.orbit-home .ported-packages .content-plan__top{min-height:14px;margin:0 0 14px}.orbit-home .ported-packages .content-plan__description{min-height:0}}
+.orbit-home .ported-packages .content-plan{background:#121210;border-color:#484842;box-shadow:none}
+@media(max-width:760px){.orbit-home .ported-packages .content-plan__popular{left:18px;transform:none;top:-11px}}
+
+/* A quiet disclosure control with a drawn icon, aligned to the mobile card. */
+.plan-details__icon{display:none}
+@media(max-width:760px){
+.orbit-home .ported-packages .plan-details>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px}
+.orbit-home .ported-packages .plan-details>summary::after{content:none}
+.orbit-home .ported-packages .plan-details__icon{display:block;flex:none;width:28px;height:28px;padding:3px;border:1px solid #80659c;border-radius:50%;color:#c9acf4;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.orbit-home .ported-packages .plan-details__vertical{transform-origin:12px 12px;transition:transform .2s ease,opacity .2s ease}
+.orbit-home .ported-packages .plan-details[open] .plan-details__vertical{transform:rotate(90deg);opacity:0}
+.orbit-home .ported-packages .plan-details>summary:focus-visible{outline:2px solid #c9acf4;outline-offset:4px;border-radius:4px}
+}
+@media(prefers-reduced-motion:reduce){.orbit-home .ported-packages .plan-details__vertical{transition:none}}

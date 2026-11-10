@@ -38,4 +38,4 @@ The preparation differs for [short-form videos](/short-form-video-production-dub
 
 ## Plan the right scope for your business
 
-Every brief is different. [Discuss your filming brief](/contact/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Discuss your filming brief](/contact/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

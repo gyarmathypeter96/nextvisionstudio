@@ -30,6 +30,7 @@ interface Props {
   // Keep link equity flowing from pages that should not appear in search.
   followLinks?: boolean;
   minimal?: boolean;
+  visualTheme?: "orbit-service" | "orbit-home";
 }
 
 const {
@@ -41,6 +42,7 @@ const {
   noindex = false,
   followLinks = false,
   minimal = false,
+  visualTheme,
 } = Astro.props;
 const canonicalUrl = canonical || `${SITE_URL}${Astro.url.pathname}`;
 const socialImage = ogImage
@@ -190,10 +192,11 @@ const websiteSchema = {
         }
       })();
     </script>
+    {visualTheme === "orbit-service" && <link rel="stylesheet" href="/orbit/service.css" />}
     <TagManager />
   </head>
 
-  <body>
+  <body class:list={[visualTheme]}>
     <!-- Render the original logo artwork without its black matte. No raster
          re-generation or replacement of the brand drawing is needed. -->
     <svg class="logo-filters" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="0" height="0">
@@ -215,7 +218,7 @@ const websiteSchema = {
           />
         </div>
       ) : (
-        <SiteHeader />
+        <SiteHeader orbit={!!visualTheme} />
       )
     }
     <slot />

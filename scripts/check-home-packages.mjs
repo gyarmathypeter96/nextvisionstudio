@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
+const promotionActive=Date.now()<Date.parse('2026-12-01T00:00:00Z');
 const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
 assert.equal([...html.matchAll(/<article[^>]*data-monthly-plan="/g)].length, 3);
 for (const [id,name,price,count] of [
   ['starter','Starter Video','350',4],
-  ['monthly','Full Monthly Content','450',8],
+  ['monthly','Full Monthly Content',promotionActive?'450':'550',8],
   ['growth','Growth Video','750',12],
 ]) {
   const card = html.match(new RegExp(`<article[^>]*data-monthly-plan="${id}"[^>]*>([\\s\\S]*?)<\\/article>`))?.[1];
@@ -14,8 +15,8 @@ for (const [id,name,price,count] of [
   assert.ok(card.includes('href="#contact-form"'));
   assert.ok(card.includes(`data-content-plan="${id}"`));
   assert.equal(card.includes('Most popular'), id === 'monthly');
-  assert.equal(card.includes('BLACK FRIDAY DEAL'), id === 'monthly');
-  if(id==='monthly') {assert.ok(card.includes('€550'));assert.ok(card.includes('8 edited on-location photographs'));}
+  assert.equal(card.includes('BLACK FRIDAY DEAL'), id === 'monthly' && promotionActive);
+  if(id==='monthly') {assert.ok(card.includes('€550'));assert.equal(card.includes('8 edited on-location photographs'),promotionActive);}
 }
 assert.ok(!html.includes('From a clear plan to content that brings in enquiries.'));
 assert.ok(html.includes('name="content_package"'));

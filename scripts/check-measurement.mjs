@@ -20,7 +20,7 @@ const store = (initial = {}) => {
   const values = new Map(Object.entries(initial));
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, String(value)), removeItem: (key) => values.delete(key) };
 };
-function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/", consent = "granted", owner = false, session = store(), forms = [], response, local, readyState = "complete" } = {}) {
+function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/", consent = "granted", owner = false, session = store(), forms = [], response, local, readyState = "complete", clock } = {}) {
   const localStorage = local ?? store({ "nvs-cookie-consent": consent, ...(owner ? { "nvs-owner-optout": "1" } : {}) });
   const location = new URL(url);
   const redirects = [];
@@ -37,8 +37,9 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
     head: { appendChild: (node) => appended.push(node) },
     addEventListener: (name, callback) => listeners.set(name, callback),
   };
-  const window = { location, document, requestIdleCallback: (callback) => idle.push(callback), setTimeout: (callback) => idle.push(callback), addEventListener: (name, callback) => listeners.set(name, callback) };
-  const context = vm.createContext({ window, document, localStorage, sessionStorage: session, URL, URLSearchParams, history: { state: null, replaceState() {} }, crypto: { randomUUID: () => `test-key-${requests.length + 1}` }, FormData: class {
+  const window = { location, document, requestIdleCallback: (callback) => idle.push(callback), setTimeout: (callback, delay = 0) => clock ? clock.timers.push({at: clock.now + delay, callback}) : idle.push(callback), addEventListener: (name, callback) => listeners.set(name, callback) };
+  class FixtureDate extends Date { static now() { return clock?.now ?? Date.now(); } }
+  const context = vm.createContext({ Date: FixtureDate, window, document, localStorage, sessionStorage: session, URL, URLSearchParams, history: { state: null, replaceState() {} }, crypto: { randomUUID: () => `test-key-${requests.length + 1}` }, FormData: class {
     constructor(form) { this.values = new Map(Object.entries(form.values)); }
     get(key) { return this.values.get(key); }
     entries() { return this.values.entries(); }
@@ -258,4 +259,23 @@ test("the official tag identity is passed to the CRM only with analytics consent
   const deniedForm = form(), denied = fixture({ consent: "denied", forms: [deniedForm] }); denied.runForms(); await deniedForm.submit();
   const deniedPayload = JSON.parse(denied.requests[0][1].body);
   assert.equal(deniedPayload.ga_client_id, undefined); assert.equal(deniedPayload.ga_session_id, undefined);
+});
+
+// The live queue is minute-based: the successful Nov 10 receipt took 57 seconds.
+test('a lead processed after 57 seconds is measured once without a page refresh', async () => {
+  const start = Date.now();
+  const clock = {now: start, timers: []};
+  const session = store({'nvs-pending-lead': pending({confirmed:false, statusUrl:signedReceiptUrl, expiresAt:start+90000})});
+  const env = fixture({url:'https://www.nextvisionstudio.com/quotesend/', session, clock, response:async()=>({ok:true,json:async()=>({submission_id:123,status:clock.now-start>=57000?'processed':'received',lead_created:clock.now-start>=57000})})});
+  env.runForms();
+  await new Promise(resolve=>setImmediate(resolve));
+  while(clock.timers.length && clock.now-start<90000){
+    clock.timers.sort((a,b)=>a.at-b.at);
+    const timer=clock.timers.shift();clock.now=timer.at;timer.callback();
+    await new Promise(resolve=>setImmediate(resolve));
+  }
+  assert.equal(env.leads().length,1);
+  assert.equal(env.leads()[0].lead_id,'nvs-form-123');
+  assert.equal(session.getItem('nvs-pending-lead'),null);
+  assert.ok(env.requests.length<30,'Use a slower polling interval after the initial wait');
 });

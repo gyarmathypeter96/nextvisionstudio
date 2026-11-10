@@ -38,4 +38,4 @@ For a repeat content batch, compare [short-form video production](/short-form-vi
 
 ## Plan the right scope for your business
 
-Every brief is different. [Compare NextVision filming and package prices](/how-much-does-a-videographer-cost-in-dublin/) or [contact NextVision](/contact/#contact-form/) to discuss your audience, timing and the finished work you need.
+Every brief is different. [Compare NextVision filming and package prices](/how-much-does-a-videographer-cost-in-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.

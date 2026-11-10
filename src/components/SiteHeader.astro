@@ -1,5 +1,7 @@
 ---
 import { MAIN_NAV_SERVICES } from "../config/services";
+interface Props { orbit?: boolean }
+const { orbit = false } = Astro.props;
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 const isShortFormLanding = pathname === "/short-form-video-production-dublin/";
@@ -40,7 +42,7 @@ const isCurrent = (href: string) =>
   <div class="site-header__inner">
     <a class="site-header__brand" href="/" aria-label="NextVision Studio home">
       <img
-        src="/images/brand/nextvision-studio-logo.webp"
+        src={orbit ? "/orbit/assets/nextvision-astronaut-logo.webp" : "/images/brand/nextvision-studio-logo.webp"}
         width="500"
         height="500"
         alt="NextVision Studio"
