@@ -77,7 +77,7 @@ function paintHero(progress) {
   const x = smallScreen ? 0 : geometry.width * .25 * (1 - clamp(progress / .4));
   const y = -progress * (smallScreen ? 197 : 140);
   const copyY = -progress * (smallScreen ? 20 : 85);
-  const opacity = clamp(1 - Math.max(0, progress - .65) / .35);
+  const opacity = smallScreen ? clamp(1 - progress / .16) : clamp(1 - Math.max(0, progress - .65) / .35);
   astronautPlane.style.transform = `translate3d(${x}px,0,0)`;
   astronaut.style.transform = `translate3d(-50%,-50%,0) translate3d(0,${y}px,0) scale(${(1 + progress * .68).toFixed(4)}) rotate(${progress * -4}deg)`;
   heroCopy.style.transform = `translate3d(0,${copyY}px,0)`;
@@ -93,7 +93,7 @@ function paintHero(progress) {
 }
 function syncHeroControls(progress) {
   const front = progress > .18;
-  const hidden = progress > .9825;
+  const hidden = progress > (geometry.width <= 760 ? .152 : .9825);
   if (front !== heroFront) { hero.classList.toggle('astronaut-in-front', front); heroFront = front; }
   if (hidden !== ctaHidden && heroCta) { heroCta.inert = hidden; ctaHidden = hidden; }
 }
@@ -252,5 +252,52 @@ const mobilePricing = matchMedia('(max-width:760px)');
 function syncPricingDetails() { document.querySelectorAll('.plan-details').forEach(detail => detail.open = !mobilePricing.matches); }
 mobilePricing.addEventListener('change', syncPricingDetails);
 syncPricingDetails();
+// Counts start on visibility, once; the accessible labels and HTML totals stay intact.
+function initStatsCounters() {
+  const counters = [...document.querySelectorAll('[data-stats] [data-counter]')];
+  const finalText = new Map(counters.map(counter => [counter, counter.textContent]));
+  const running = new Map();
+  const formatter = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 });
+  const finish = counter => {
+    const animation = running.get(counter);
+    if (animation) cancelAnimationFrame(animation.frame);
+    running.delete(counter);
+    counter.textContent = finalText.get(counter);
+    counter.dataset.counting = 'complete';
+  };
+  let observer;
+  const settle = () => {
+    observer?.disconnect();
+    counters.forEach(finish);
+  };
+  if (reducedMotion.matches || typeof IntersectionObserver === 'undefined') { settle(); return; }
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(({ target: counter, isIntersecting }) => {
+      if (!isIntersecting || counter.dataset.counting) return;
+      observer.unobserve(counter);
+      const target = Number(counter.dataset.target);
+      const start = Number(counter.dataset.start || 0);
+      if (!Number.isFinite(target) || !Number.isFinite(start)) return;
+      counter.dataset.counting = 'active';
+      const state = { startTime: null, frame: 0 };
+      running.set(counter, state);
+      const tick = now => {
+        state.startTime ??= now;
+        const progress = Math.min(1, (now - state.startTime) / 1300);
+        const eased = 1 - (1 - progress) ** 3;
+        const value = Math.round(start + (target - start) * eased);
+        const text = `${counter.dataset.prefix || ''}${formatter.format(value)}${counter.dataset.suffix || ''}`;
+        if (counter.textContent !== text) counter.textContent = text;
+        if (progress < 1) state.frame = requestAnimationFrame(tick);
+        else finish(counter);
+      };
+      state.frame = requestAnimationFrame(tick);
+    });
+  }, { threshold: .6 });
+  counters.forEach(counter => observer.observe(counter));
+  reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) settle(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) [...running.keys()].forEach(finish); });
+}
+initStatsCounters();
 document.documentElement.dataset.orbitReady = 'true';
 })();

@@ -102,3 +102,11 @@ test('native mobile motion can switch to desktop fallback and back without stale
   assert.ok(!f.astronaut.style.transform);
   assert.ok(!f.cta.style.transform);
 });
+
+test('mobile copy and CTA fade before the astronaut crosses the text, in both motion modes', () => {
+  const script = fixture(); script.scroll(150);
+  assert.equal(script.copy.style.opacity, '0.000'); assert.equal(script.cta.inert, true);
+  script.scroll(0); assert.equal(script.copy.style.opacity, '1.000'); assert.equal(script.cta.inert, false);
+  const native = fixture({ native: true }); native.scroll(150); assert.equal(native.cta.inert, true);
+  native.scroll(0); assert.equal(native.cta.inert, false);
+});
