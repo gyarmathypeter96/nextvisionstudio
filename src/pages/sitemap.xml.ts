@@ -9,6 +9,7 @@ import { SITE_URL } from "../config/site";
 // if this list and the rendered robots meta tags ever disagree.
 const noindexRoutes = new Set([
   "404/",
+  "christmas-photoshoot/",
   "quotesend/",
   "tracking-preferences/",
   "videography-dublin/",
