@@ -1,0 +1,152 @@
+---
+const media = "/images/christmas-2026/";
+const studioPhotos = [
+  ["DSC09799", "Christmas studio portrait"],
+  ["DSC09803", "Portrait from the Christmas studio session"],
+  ["DSC09804", "Christmas portrait with festive decorations"],
+  ["DSC09805", "Portrait in the Christmas set"],
+  ["DSC09806", "Christmas studio portrait"],
+  ["DSC09807", "Portrait from the Christmas studio session"],
+  ["DSC09809", "Christmas portrait"],
+  ["DSC09812", "Festive studio portrait"],
+  ["DSC09818", "Christmas studio portrait"],
+  ["DSC09819", "Portrait from the Christmas studio session"],
+  ["studio-overview", "The Christmas studio setup in Balbriggan"],
+];
+const examples = [
+  ["holiday-treats", "A woman and a girl sharing sweets at a Christmas table"],
+  ["christmas-mug", "A girl holding a red Christmas mug"],
+  ["family", "A family sitting together beside a Christmas tree"],
+  ["tree-lights", "Parents holding a toddler beside Christmas lights"],
+];
+const phone = "+353838697791";
+const phoneDisplay = "+353 83 869 7791";
+const whatsapp = "https://wa.me/353838697791";
+---
+<!doctype html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christmas Photoshoot in Balbriggan | NextVision Studio</title>
+  <meta name="description" content="Book a one-hour Christmas photoshoot in Balbriggan. €150 for 15 edited photos, delivered within 48 hours of choosing your favourites.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://www.nextvisionstudio.com/christmas-photoshoot/">
+  <link rel="icon" href="/images/brand/nextvision-studio-logo.webp">
+  <link rel="stylesheet" href="/christmas-2026.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell masthead-inner">
+      <a class="brand" href="/" target="_top"><img src="/orbit/assets/nextvision-astronaut-logo.webp" alt="" width="500" height="425"><span>NextVision Studio</span></a>
+      <nav aria-label="On this page">
+        <a class="nav-link" href="#portfolio">Portfolio</a>
+        <a class="button nav-book" href="#booking">Book a session</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <p class="location">Balbriggan, Co. Dublin</p>
+          <h1>Christmas<br> Photoshoots</h1>
+          <p class="hero-intro">A relaxed hour in our Christmas studio for family portraits and the little moments in between.</p>
+          <a class="button primary" href="#booking">Choose a time <span aria-hidden="true">↗</span></a>
+          <a class="hero-contact" href={whatsapp} target="_blank" rel="noopener">Questions? Message us on WhatsApp</a>
+        </div>
+        <video class="christmas-promo" controls playsinline preload="none" poster={media + "promo-poster.webp"} aria-label="Watch the Christmas photoshoot promo">
+          <source src="/videos/christmas-2026/promo.mp4" type="video/mp4">
+          <a href="/videos/christmas-2026/promo.mp4">Watch the Christmas photoshoot promo</a>
+        </video>
+      </div>
+    </section>
+    <section class="package" aria-label="Session details">
+      <div class="shell package-inner">
+        <div><strong>1 hour</strong><span>Private studio session</span></div>
+        <div><strong>15 edited photos</strong><span>Within 48 hours of your selection</span></div>
+        <div><strong>€150</strong><span>Fixed price, payable on the day</span></div>
+      </div>
+    </section>
+    <section class="session-info shell" aria-labelledby="session-title">
+      <h2 id="session-title">How the session works</h2>
+      <div class="session-steps">
+        <div>
+          <h3>During the shoot</h3>
+          <p>We’ll start with a few guided portraits, then give you time to get comfortable and capture more natural moments. We can take a mix of group photos and individual portraits.</p>
+        </div>
+        <div>
+          <h3>After the shoot</h3>
+          <p>Choose your 15 favourites from the session. We’ll edit and deliver your selected photos within 48 hours of receiving your choices.</p>
+        </div>
+      </div>
+    </section>
+    <section id="portfolio" class="portfolio shell" aria-labelledby="portfolio-title">
+      <h2 id="portfolio-title">Inside our Christmas studio</h2>
+      <div class="photo-grid studio-grid">
+        {studioPhotos.map(([file, alt]) => (
+          <a href={media + file + ".webp"} target="_blank" rel="noopener">
+            <img src={media + file + ".webp"} alt={alt} width="960" height="1440" loading="lazy" decoding="async">
+          </a>
+        ))}
+      </div>
+      <figure class="reference-photos">
+        <figcaption>These family photos were taken in a different studio and are shown as examples.</figcaption>
+        <div class="photo-grid">
+          {examples.map(([file, alt]) => (
+            <a href={media + file + ".webp"} target="_blank" rel="noopener">
+              <img src={media + file + ".webp"} alt={alt} width="730" height="1298" loading="lazy" decoding="async">
+            </a>
+          ))}
+        </div>
+      </figure>
+    </section>
+    <section id="booking" class="booking shell" aria-labelledby="booking-title">
+      <div class="booking-copy">
+        <h2 id="booking-title">Book your session</h2>
+        <p>Choose a weekday evening and leave your contact details. Sessions run from 18:00 to 19:00 or 19:00 to 20:00, Dublin time.</p>
+        <p>Bookings are open through 20 December 2026. The last weekday session is Friday, 18 December.</p>
+      </div>
+      <div class="booking-panel" data-christmas-booking>
+        <form id="booking-form">
+          <label class="date-picker" for="booking-date">Choose a date</label>
+          <select id="booking-date" required disabled><option value="">Select a weekday</option></select>
+          <fieldset id="time-section" hidden>
+            <legend>Choose a time</legend>
+            <div id="times" class="times"></div>
+          </fieldset>
+          <fieldset id="details" hidden disabled>
+            <legend>Your details</legend>
+            <div class="fields">
+              <label>Full name<input name="customer_name" autocomplete="name" required maxlength="120"></label>
+              <label>Phone number<input name="customer_phone" type="tel" autocomplete="tel" required maxlength="35"></label>
+              <label class="email-field">Email<input name="customer_email" type="email" autocomplete="email" required maxlength="254"></label>
+            </div>
+            <p class="field-help">We use your details to manage your booking. <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy policy</a>.</p>
+            <button type="submit" class="button reserve">Confirm booking</button>
+          </fieldset>
+          <p id="status" role="status" aria-live="polite">Loading availability…</p>
+          <button class="text-button" id="retry" type="button" hidden>Reload availability</button>
+          <noscript><p><a href={whatsapp} target="_blank" rel="noopener">Message us on WhatsApp to arrange a session.</a></p></noscript>
+        </form>
+        <div class="confirmation" id="confirmation" hidden>
+          <span aria-hidden="true">✓</span>
+          <h3 tabindex="-1">Your session is booked</h3>
+          <p id="confirmation-slot"></p>
+          <p id="confirmation-reference"></p>
+          <p id="confirmation-email" hidden>We’ll send the booking details to your email.</p>
+          <a href={`tel:${phone}`}>Call {phoneDisplay} on arrival</a>
+        </div>
+      </div>
+    </section>
+    <section class="arrival shell" aria-labelledby="arrival-title">
+      <h2 id="arrival-title">Getting here</h2>
+      <p>Balbriggan, Co. Dublin, <a href="https://www.google.com/maps/search/?api=1&amp;query=K32%20YY17" target="_blank" rel="noopener">K32 YY17</a>. Please call <a href={`tel:${phone}`}>{phoneDisplay}</a> when you arrive.</p>
+      <p>You can park for free near the studio or in the large free car park opposite St. Peter &amp; Paul’s Church. There’s also parking at the nearby Lidl (K32 EF83).</p>
+      <a class="button nav-book" href={whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell footer-inner"><span>NextVision Studio</span><a href="mailto:hello@nextvisionstudio.com">hello@nextvisionstudio.com</a></div></footer>
+  <script src="../scripts/christmas-booking.ts"></script>
+</body>
+</html>

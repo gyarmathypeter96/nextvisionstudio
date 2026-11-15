@@ -1,4 +1,5 @@
 ---
+import ChristmasPhotoshootPopup from "./ChristmasPhotoshootPopup.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "./ContactForm.astro";
 import MonthlyContentPackages from "./MonthlyContentPackages.astro";
@@ -16,6 +17,7 @@ const schemas = [{"@context": "https://schema.org", "@type": "VideoObject", "@id
  <Fragment set:html={prefix.split("__ORBIT_MONTHLY_PACKAGES__")[1]} />
  <div id="contact" class="orbit-production-contact"><ContactForm source="homepage-contact" /></div>
  <Fragment set:html={suffix} />
+ <ChristmasPhotoshootPopup />
  <script is:inline src="/orbit/app.js"></script>
 </BaseLayout>
 <style is:global>

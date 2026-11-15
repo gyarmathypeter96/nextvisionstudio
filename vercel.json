@@ -45,6 +45,16 @@
       ]
     }
   ],
+  "rewrites": [
+    {
+      "source": "/christmas-booking-api/slots/",
+      "destination": "https://crm.nextvisionstudio.com/api/book/christmas-2026/slots"
+    },
+    {
+      "source": "/christmas-booking-api/reserve/",
+      "destination": "https://crm.nextvisionstudio.com/api/book/christmas-2026"
+    }
+  ],
   "redirects": [
     {
       "source": "/home-3-2/",
