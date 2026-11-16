@@ -488,6 +488,7 @@ export const landingPages: Record<string, LandingPageData> = {
       { label: "Add professional photography", href: "/photography-dublin/" },
       { label: "Plan social media content", href: "/social-media-content-creation-dublin/" },
       { label: "Run Google Ads and Meta Ads", href: "/google-ads-meta-ads-dublin/" },
+      { label: "Recent build: Eco Mould Removal Dublin", href: "https://ecomouldremoval.pages.dev/" },
     ],
     formTitle: "Tell us what your website needs to achieve.",
     formText:
