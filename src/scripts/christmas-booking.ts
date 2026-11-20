@@ -15,6 +15,32 @@ let days: BookingDay[] = [];
 let loading = false;
 let submitting = false;
 
+function trackConfirmedBooking() {
+  const trackingWindow = window as Window & {
+    dataLayer?: unknown[];
+    nvsTrackingExcluded?: boolean;
+  };
+
+  try {
+    if (
+      trackingWindow.nvsTrackingExcluded ||
+      window.localStorage.getItem("nvs-cookie-consent") !== "granted" ||
+      !Array.isArray(trackingWindow.dataLayer)
+    ) return;
+
+    trackingWindow.dataLayer.push({
+      event: "generate_lead",
+      lead_source: "christmas_photoshoot",
+      form_type: "booking",
+      form_id: "christmas-booking",
+      form_location: "christmas-photoshoot",
+      service_interest: "christmas_photoshoot",
+    });
+  } catch {
+    // Skip optional tracking if the browser blocks access to consent storage.
+  }
+}
+
 function dateLabel(day: string) {
   return dateFormat.format(new Date(day + "T12:00:00Z"));
 }
@@ -132,6 +158,7 @@ form.addEventListener("submit", async event => {
     document.querySelector("#confirmation-slot")!.textContent = dateLabel(date.value) + ", " + timeLabel(result);
     document.querySelector("#confirmation-reference")!.textContent = "Booking reference " + result.reference;
     document.querySelector<HTMLParagraphElement>("#confirmation-email")!.hidden = !result.confirmation_email_enabled;
+    trackConfirmedBooking();
     form.reset();
     form.hidden = true;
     confirmation.hidden = false;
