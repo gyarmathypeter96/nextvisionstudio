@@ -4,6 +4,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import TagManager from "../components/TagManager.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import VercelAnalytics from "../components/VercelAnalytics.astro";
 import BlackFridayPopup from "../components/BlackFridayPopup.astro";
 import LeadAttribution from "../components/LeadAttribution.astro";
 import BehaviorTracking from "../components/BehaviorTracking.astro";
@@ -194,6 +195,7 @@ const websiteSchema = {
     </script>
     {visualTheme === "orbit-service" && <link rel="stylesheet" href="/orbit/service.css" />}
     <TagManager />
+    <VercelAnalytics />
   </head>
 
   <body class:list={[visualTheme]}>
