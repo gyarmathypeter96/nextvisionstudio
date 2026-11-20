@@ -1,0 +1,35 @@
+---
+import { ANALYTICS_HOSTS } from "../config/site";
+
+// Vercel Web Analytics counts page views and their referring site without
+// cookies or local storage, so it shows where visits come from even when a
+// visitor declines optional analytics. It follows the same owner and host
+// exclusions as the other measurement, and query strings are removed before
+// a page view is sent.
+---
+
+<script is:inline define:vars={{ analyticsHosts: ANALYTICS_HOSTS }}>
+  (() => {
+    if (!analyticsHosts.includes(window.location.hostname)) return;
+
+    let ownerExcluded = window.nvsTrackingExcluded === true;
+    try {
+      ownerExcluded = ownerExcluded || localStorage.getItem("nvs-owner-optout") === "1";
+    } catch (_) {}
+    if (ownerExcluded) return;
+
+    window.va = window.va || function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+    window.va("beforeSend", (event) => {
+      const url = new URL(event.url);
+      url.search = "";
+      return { ...event, url: url.toString() };
+    });
+
+    const script = document.createElement("script");
+    script.defer = true;
+    script.src = "/_vercel/insights/script.js";
+    document.head.appendChild(script);
+  })();
+</script>
