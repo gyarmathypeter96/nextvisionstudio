@@ -92,7 +92,10 @@ for (const hostname of ["www.nextvisionstudio.com", "nextvisionstudio.com"]) {
   test(`live ${hostname}: one consented GTM loader`, () => {
     const env = fixture({ url: `https://${hostname}/` });
     env.window.nvsLoadTagManager(); env.window.nvsLoadTagManager();
-    assert.equal(env.window.nvsTrackingExcluded, false); assert.equal(env.appended.length, 1);
+    assert.equal(env.window.nvsTrackingExcluded, false);
+    assert.equal(env.appended.filter((node) => node.dataset?.nvsGtm).length, 1, "exactly one GTM container");
+    assert.equal(env.appended.filter((node) => String(node.src).includes("connect.facebook.net")).length, 1, "the ad account pixel loads once, after consent");
+    assert.equal(env.appended.length, 2);
   });
 }
 test("owner exclusion persists; no GTM; legitimate live enquiry still reaches CRM but is not measured", async () => {
@@ -195,7 +198,7 @@ test("deduplication falls back to memory when session storage is blocked", async
 
 test("returning consented visitor starts measurement before the load event", () => {
   const env = fixture({ readyState: "loading" });
-  assert.equal(env.appended.length, 1, "Do not lose short visits while images and videos are still loading");
+  assert.equal(env.appended.filter((node) => node.dataset?.nvsGtm).length, 1, "Do not lose short visits while images and videos are still loading");
 });
 
 test("form focus before consent does not suppress a later consented form start", () => {
