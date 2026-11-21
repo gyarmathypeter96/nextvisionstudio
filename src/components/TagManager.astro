@@ -1,5 +1,5 @@
 ---
-import { GTM_CONTAINER_ID, ANALYTICS_HOSTS } from "../config/site";
+import { GTM_CONTAINER_ID, ANALYTICS_HOSTS, META_AD_PIXEL_ID } from "../config/site";
 
 // Every measurement tag (GA4, Google Ads, Meta Pixel, Clarity) lives in this
 // Google Tag Manager container. The container loads only after consent.
@@ -8,7 +8,7 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
 
 <script
   is:inline
-  define:vars={{ tagManagerSource, analyticsHosts: ANALYTICS_HOSTS }}
+  define:vars={{ tagManagerSource, analyticsHosts: ANALYTICS_HOSTS, metaAdPixelId: META_AD_PIXEL_ID }}
 >
   (() => {
   if (!analyticsHosts.includes(window.location.hostname) || window.nvsTrackingExcluded) return;
@@ -55,6 +55,27 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
       if (localStorage.getItem("nvs-cookie-consent") !== "granted") return;
     } catch (_) { return; }
     if (document.querySelector("script[data-nvs-gtm]")) return;
+
+    // Initialise the ad account's Meta pixel before GTM runs its own pixel
+    // tag. GTM's fbq("track", "PageView") and Lead calls then reach both.
+    try {
+      if (!window.fbq) {
+        const fbq = function () {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+        window.fbq = fbq;
+        if (!window._fbq) window._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = true;
+        fbq.version = "2.0";
+        fbq.queue = [];
+        const pixelScript = document.createElement("script");
+        pixelScript.async = true;
+        pixelScript.src = "https://connect.facebook.net/en_US/fbevents.js";
+        document.head.appendChild(pixelScript);
+      }
+      window.fbq("init", metaAdPixelId);
+    } catch (_) {}
 
     window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
 

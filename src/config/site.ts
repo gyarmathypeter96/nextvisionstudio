@@ -4,6 +4,10 @@ export const CONTACT_EMAIL = "hello@nextvisionstudio.com";
 export const CONTACT_PHONE = "+353 89 479 7055";
 export const CONTACT_PHONE_E164 = "+353894797055";
 export const GTM_CONTAINER_ID = "GTM-PL34N8WF";
+// Meta dataset the "Solutions Engineering Team" ad account can use for ads.
+// The GTM container separately loads pixel 657703057386611; GTM's
+// fbq("track", ...) calls reach every initialised pixel, so both get events.
+export const META_AD_PIXEL_ID = "663546966795433";
 export const GA4_MEASUREMENT_ID = "G-KNFH3LFFLY";
 export const ANALYTICS_HOSTS = ["www.nextvisionstudio.com", "nextvisionstudio.com"];
 // Service coverage is not a claim that the business has an office in each town.
