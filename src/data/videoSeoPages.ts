@@ -27,7 +27,7 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
     showExamples: true,
     metaTitle: "Corporate Video Production Dublin | Business Films & Interviews",
     metaDescription:
-      "Corporate video production in Dublin: service explainers, interviews and training films. See real VentSolve work, plan your deliverables and request a quote.",
+      "Corporate video production in Dublin: explainers, interviews and training films, as made for VentSolve and Balbriggan Braces. Request a quote.",
     eyebrow: "Videographer Dublin · corporate & business video",
     title: "Corporate & Business Video Production in Dublin",
     lead:
@@ -65,7 +65,7 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
     slug: "event-videographer-dublin",
     metaTitle: "Event Videographer Dublin | Event Video Production",
     metaDescription:
-      "Event videographer in Dublin for conferences, launches, live performances and branded events. Highlight films and social edits by NextVision Studio.",
+      "Event videographer in Dublin for conferences, launches and live shows. Highlight films and social edits, as filmed for Gut Fest and Red Line Events.",
     eyebrow: "Event videographer Dublin",
     title: "Event video that keeps working after the room is empty.",
     lead:
