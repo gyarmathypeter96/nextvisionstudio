@@ -27,6 +27,7 @@ const examples = [
 const phone = "+353838697791";
 const phoneDisplay = "+353 83 869 7791";
 const whatsapp = "https://wa.me/353838697791";
+const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a question about the Christmas photoshoot.");
 ---
 <!doctype html>
 <html lang="en-IE">
@@ -128,7 +129,7 @@ const whatsapp = "https://wa.me/353838697791";
       <h2 id="portfolio-title">Inside our Christmas studio</h2>
       <div class="photo-grid studio-grid">
         {studioPhotos.map(([file, alt]) => (
-          <a href={media + file + ".webp"} target="_blank" rel="noopener">
+          <a href={media + file + ".webp"} target="_blank" rel="noopener" data-lightbox>
             <img src={media + file + ".webp"} alt={alt} width="960" height="1440" loading="lazy" decoding="async">
           </a>
         ))}
@@ -137,7 +138,7 @@ const whatsapp = "https://wa.me/353838697791";
         <figcaption>These family photos were taken in a different studio and are shown as examples.</figcaption>
         <div class="photo-grid">
           {examples.map(([file, alt]) => (
-            <a href={media + file + ".webp"} target="_blank" rel="noopener">
+            <a href={media + file + ".webp"} target="_blank" rel="noopener" data-lightbox>
               <img src={media + file + ".webp"} alt={alt} width="730" height="1298" loading="lazy" decoding="async">
             </a>
           ))}
@@ -173,6 +174,7 @@ const whatsapp = "https://wa.me/353838697791";
           <button class="text-button" id="retry" type="button" hidden>Reload availability</button>
           <noscript><p><a href={whatsapp} target="_blank" rel="noopener">Message us on WhatsApp to arrange a session.</a></p></noscript>
         </form>
+        <a class="button whatsapp-button booking-whatsapp" href={whatsappQuestion} target="_blank" rel="noopener">Not sure? Message us on WhatsApp</a>
         <div class="confirmation" id="confirmation" hidden>
           <span aria-hidden="true">✓</span>
           <h3 tabindex="-1">Your session is booked</h3>
@@ -195,7 +197,17 @@ const whatsapp = "https://wa.me/353838697791";
       <path d="M16.02 3a12.98 12.98 0 0 0-11.3 19.38L3 29l6.81-1.62A13 13 0 1 0 16.02 3Zm0 23.7c-1.9 0-3.76-.5-5.38-1.46l-.39-.23-4.04.96 1.07-3.91-.25-.4A10.7 10.7 0 1 1 16.02 26.7Zm5.94-8.01c-.33-.16-1.91-.94-2.2-1.05-.29-.1-.51-.16-.72.16-.22.33-.84 1.05-1.03 1.27-.19.22-.38.24-.7.08-.33-.16-1.37-.5-2.61-1.61-.97-.86-1.62-1.93-1.81-2.25-.19-.33-.02-.5.14-.66.15-.15.32-.38.48-.57.16-.19.22-.32.32-.54.11-.22.06-.4-.02-.56-.08-.16-.72-1.76-1-2.41-.26-.63-.53-.55-.73-.56l-.62-.01c-.21 0-.56.08-.85.41-.3.32-1.14 1.11-1.14 2.71 0 1.59 1.17 3.14 1.33 3.36.16.21 2.29 3.5 5.55 4.9.78.34 1.38.54 1.85.69.78.25 1.48.21 2.04.13.63-.1 1.92-.79 2.19-1.54.27-.76.27-1.41.19-1.55-.08-.13-.29-.21-.62-.38Z"/>
     </svg>
   </a>
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <figure>
+      <img id="lightbox-image" alt="" width="960" height="1440" decoding="async">
+      <figcaption><span id="lightbox-caption"></span> <span id="lightbox-count" class="lightbox-count"></span></figcaption>
+    </figure>
+    <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close photo">×</button>
+    <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="Previous photo">‹</button>
+    <button type="button" class="lightbox-nav lightbox-next" data-lightbox-next aria-label="Next photo">›</button>
+  </dialog>
   <CookieConsent />
   <script src="../scripts/christmas-booking.ts"></script>
+  <script src="../scripts/christmas-lightbox.ts"></script>
 </body>
 </html>
