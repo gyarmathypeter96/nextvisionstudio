@@ -26,6 +26,14 @@ const examples = [
 ];
 const phone = "+353838697791";
 const phoneDisplay = "+353 83 869 7791";
+// Real client feedback for Dora's sessions, translated from Hungarian and
+// shared with the clients' permission (confirmed by the owner, Nov 2026).
+const testimonials = [
+  ["Bia", "Such a lovely atmosphere. We really enjoyed it and it felt properly Christmassy."],
+  ["Anna", "I went with my little one and everyone was so kind. There were plenty of toys to keep them busy, and Dora is brilliant with children."],
+  ["Dave", "We came for a couples' Christmas shoot. I'm not comfortable in front of the camera, but the atmosphere and the direction helped a lot."],
+  ["John", "We came for a family shoot with my partner and our two little ones. The kids loved it too, and Dora handled everything really professionally. Highly recommend."],
+];
 const whatsapp = "https://wa.me/353838697791";
 const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a question about the Christmas photoshoot.");
 ---
@@ -112,17 +120,19 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
         <div><strong>€150</strong><span>Fixed price, payable on the day</span></div>
       </div>
     </section>
-    <section class="session-info shell" aria-labelledby="session-title">
-      <h2 id="session-title">How the session works</h2>
-      <div class="session-steps">
-        <div>
-          <h3>During the shoot</h3>
-          <p>We’ll start with a few guided portraits, then give you time to get comfortable and capture more natural moments. We can take a mix of group photos and individual portraits.</p>
-        </div>
-        <div>
-          <h3>After the shoot</h3>
-          <p>Choose your 15 favourites from the session. We’ll edit and deliver your selected photos within 48 hours of receiving your choices.</p>
-        </div>
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <div class="testimonial-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
+      <div class="shell">
+      <p class="testimonial-eyebrow"><span aria-hidden="true">✦</span> Kind words <span aria-hidden="true">✦</span></p>
+      <h2 id="testimonials-title">What families say</h2>
+      <div class="testimonial-grid">
+        {testimonials.map(([name, quote]) => (
+          <figure class="testimonial">
+            <blockquote><p>{quote}</p></blockquote>
+            <figcaption><span class="testimonial-initial" aria-hidden="true">{name.charAt(0)}</span>{name}</figcaption>
+          </figure>
+        ))}
+      </div>
       </div>
     </section>
     <section id="portfolio" class="portfolio shell" aria-labelledby="portfolio-title">
@@ -188,6 +198,14 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
           <a href={`tel:${phone}`}>Call {phoneDisplay} on arrival</a>
         </div>
       </div>
+    </section>
+    <section class="session-info shell" aria-labelledby="session-title">
+      <h2 id="session-title">How the session works</h2>
+      <ol class="session-steps">
+        <li><strong>Settle in</strong>We start with a few guided family portraits.</li>
+        <li><strong>Relax and play</strong>Time to get comfortable while we capture natural moments.</li>
+        <li><strong>Pick your favourites</strong>Choose 15 photos. We edit and send them within 48 hours.</li>
+      </ol>
     </section>
     <section class="arrival shell" aria-labelledby="arrival-title">
       <h2 id="arrival-title">Getting here</h2>
