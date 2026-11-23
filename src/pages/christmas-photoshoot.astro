@@ -120,15 +120,19 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
         <div><strong>€150</strong><span>Fixed price, payable on the day</span></div>
       </div>
     </section>
-    <section class="testimonials shell" aria-labelledby="testimonials-title">
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <div class="testimonial-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
+      <div class="shell">
+      <p class="testimonial-eyebrow"><span aria-hidden="true">✦</span> Kind words <span aria-hidden="true">✦</span></p>
       <h2 id="testimonials-title">What families say</h2>
       <div class="testimonial-grid">
         {testimonials.map(([name, quote]) => (
           <figure class="testimonial">
-            <blockquote><p>“{quote}”</p></blockquote>
-            <figcaption>{name}</figcaption>
+            <blockquote><p>{quote}</p></blockquote>
+            <figcaption><span class="testimonial-initial" aria-hidden="true">{name.charAt(0)}</span>{name}</figcaption>
           </figure>
         ))}
+      </div>
       </div>
     </section>
     <section id="portfolio" class="portfolio shell" aria-labelledby="portfolio-title">

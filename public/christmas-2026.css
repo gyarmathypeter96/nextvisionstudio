@@ -157,12 +157,37 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .hero-copy, .christmas-promo, .hero-stars span { animation: none; }
   .photo-grid img, .whatsapp-float { transition: none; }
 }
-.testimonials { padding-top: 62px; }
-.testimonial-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.testimonial { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; margin: 0; padding: 20px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); }
-.testimonial blockquote { margin: 0; }
-.testimonial p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
-.testimonial figcaption { font-weight: 700; font-size: 14px; color: var(--berry-dark); }
+.testimonials {
+  position: relative; isolation: isolate; overflow: hidden; margin-top: 0; padding: 58px 0 64px; color: var(--paper);
+  background: radial-gradient(ellipse at 18% 0%, #345840, transparent 55%), radial-gradient(ellipse at 90% 100%, #2a4a37, transparent 50%), var(--pine);
+}
+.testimonials h2 { color: var(--paper); margin-bottom: 26px; }
+.testimonial-eyebrow { margin: 0 0 10px; color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.testimonial-stars { position: absolute; inset: 0; z-index: -1; color: var(--gold); pointer-events: none; }
+.testimonial-stars span { position: absolute; opacity: .35; font-size: 18px; }
+.testimonial-stars span:nth-child(1) { top: 14%; right: 9%; font-size: 26px; }
+.testimonial-stars span:nth-child(2) { top: 30%; right: 30%; }
+.testimonial-stars span:nth-child(3) { bottom: 12%; left: 4%; font-size: 14px; }
+.testimonial-stars span:nth-child(4) { bottom: 22%; right: 5%; }
+.testimonial-stars span:nth-child(5) { top: 10%; left: 42%; font-size: 12px; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.testimonial {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; margin: 14px 0 0;
+  padding: 34px 20px 20px; border: 1px solid #e7d6ad; border-top: 4px solid var(--berry); border-radius: 12px;
+  background: linear-gradient(180deg, #fffaf0, var(--paper)); color: var(--ink); box-shadow: 0 10px 26px #0b1a1440;
+}
+/* A small bauble hanging over each card. */
+.testimonial::before {
+  content: ""; position: absolute; top: -15px; left: 22px; width: 22px; height: 22px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #d9707f, var(--berry) 55%, var(--berry-dark));
+  box-shadow: 0 2px 6px #0b1a1455;
+}
+.testimonial::after { content: ""; position: absolute; top: -20px; left: 29px; width: 8px; height: 6px; border-radius: 2px; background: var(--gold); }
+.testimonial blockquote { position: relative; margin: 0; }
+.testimonial blockquote::before { content: "“"; position: absolute; top: -26px; right: -2px; color: #e9d9b4; font-family: var(--display); font-size: 70px; line-height: 1; }
+.testimonial p { position: relative; margin: 0; font-family: var(--display); font-size: 17px; line-height: 1.5; letter-spacing: -.01em; }
+.testimonial figcaption { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; color: var(--berry-dark); }
+.testimonial-initial { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid var(--gold); border-radius: 50%; background: var(--berry); color: #fff; font-family: var(--display); font-size: 16px; }
 .session-info { margin-bottom: 48px; }
 .session-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
 .session-steps li { position: relative; padding: 18px 18px 18px 58px; border-radius: 10px; background: var(--sand); color: var(--muted); font-size: 15px; line-height: 1.45; counter-increment: step; }
@@ -215,8 +240,8 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .arrival { margin-bottom: 90px; }
   .christmas-promo { width: min(100%, 245px); }
   .arrival { padding-bottom: 56px; }
-  .testimonials { padding-top: 40px; }
-  .testimonial-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -4px; padding: 2px 4px 10px; scrollbar-width: none; }
+  .testimonials { padding: 40px 0 44px; }
+  .testimonial-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -4px; padding: 6px 4px 12px; scrollbar-width: none; }
   .testimonial-grid::-webkit-scrollbar { display: none; }
   .testimonial { flex: 0 0 82%; scroll-snap-align: start; }
   .session-info { margin-bottom: 40px; }
