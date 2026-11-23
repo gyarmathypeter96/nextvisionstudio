@@ -38,7 +38,7 @@ button:disabled { cursor: wait; opacity: .7; }
 .whatsapp-button, .whatsapp-float { color: #fff; background: var(--whatsapp); }
 .whatsapp-button:hover, .whatsapp-float:hover { background: #065e35; }
 .whatsapp-float {
-  position: fixed; z-index: 5; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom));
+  position: fixed; z-index: 5; right: max(18px, env(safe-area-inset-right)); bottom: calc(max(18px, env(safe-area-inset-bottom)) + var(--cookie-offset, 0px));
   display: grid; place-items: center; width: 56px; height: 56px; border: 2px solid #fffdfa;
   border-radius: 50%; box-shadow: 0 5px 20px #132d2555; transition: transform .2s ease;
 }
@@ -231,7 +231,7 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .date-chip { flex: 0 0 74px; scroll-snap-align: start; min-height: 64px; }
   .whatsapp-float { display: none; }
   .mobile-book-bar:not([hidden]) {
-    position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; display: flex; gap: 10px; align-items: center;
+    position: fixed; z-index: 6; left: 0; right: 0; bottom: var(--cookie-offset, 0px); display: flex; gap: 10px; align-items: center;
     padding: 10px max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
     background: var(--white); border-top: 1px solid var(--line); box-shadow: 0 -6px 18px #132d2522;
   }
