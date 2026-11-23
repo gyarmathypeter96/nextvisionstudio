@@ -167,10 +167,21 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
 .booking { margin-bottom: 48px; }
 .booking-copy p + p { margin-top: 15px; }
 .date-picker { display: block; margin-bottom: 8px; font-weight: 700; font-size: 15px; }
-#booking-date {
-  display: block; width: 100%; min-height: 43px; margin-bottom: 20px; border: 1px solid var(--line);
-  border-radius: 5px; padding: 8px; color: var(--ink); background: #fff; font: inherit;
-}
+.date-select { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; opacity: 0; pointer-events: none; }
+.date-chips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; margin-bottom: 22px; }
+.date-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; min-height: 58px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 2px; color: var(--ink); background: #fff; font: inherit; cursor: pointer; }
+.date-chip span { font-size: 12px; color: var(--muted); }
+.date-chip strong { font-size: 14px; }
+.date-chip small { font-size: 10px; font-weight: 700; color: var(--muted); }
+.date-chip:hover { border-color: var(--berry); }
+.date-chip[aria-checked="true"] { border-color: var(--berry); background: var(--berry); color: #fff; }
+.date-chip[aria-checked="true"] span { color: #fff; }
+.date-chip:focus-visible { outline: 3px solid #ae4a62; outline-offset: 2px; }
+.date-chip:disabled { background: var(--sand); color: var(--muted); cursor: default; text-decoration: line-through; }
+.booking-facts { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.booking-facts li { display: grid; gap: 1px; font-size: 15px; line-height: 1.4; color: var(--muted); }
+.booking-facts strong { color: var(--ink); }
+.mobile-book-bar { display: none; }
 .times { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .option span { flex-direction: column; gap: 2px; min-height: 48px; }
 .option input:disabled, .option input:disabled + span { cursor: default; }
@@ -182,6 +193,18 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
 .arrival p + p { margin-top: 10px; }
 .arrival .button { margin-top: 15px; }
 @media (max-width: 720px) {
+  .date-chips { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 8px; margin-inline: -4px; padding: 2px 4px 8px; scrollbar-width: none; }
+  .date-chips::-webkit-scrollbar { display: none; }
+  .date-chip { flex: 0 0 74px; scroll-snap-align: start; min-height: 64px; }
+  .whatsapp-float { display: none; }
+  .mobile-book-bar:not([hidden]) {
+    position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; display: flex; gap: 10px; align-items: center;
+    padding: 10px max(14px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+    background: var(--white); border-top: 1px solid var(--line); box-shadow: 0 -6px 18px #132d2522;
+  }
+  .mobile-book-bar .button { flex: 1; }
+  .mobile-book-whatsapp { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 50%; color: #fff; background: var(--whatsapp); }
+  .arrival { margin-bottom: 90px; }
   .christmas-promo { width: min(100%, 245px); }
   .arrival { padding-bottom: 56px; }
   .session-info { padding-top: 40px; }

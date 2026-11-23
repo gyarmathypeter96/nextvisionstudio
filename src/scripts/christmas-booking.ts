@@ -3,6 +3,7 @@ interface BookingDay { date: string; slots: Slot[] }
 
 const form = document.querySelector<HTMLFormElement>("#booking-form")!;
 const date = document.querySelector<HTMLSelectElement>("#booking-date")!;
+const dateChips = document.querySelector<HTMLDivElement>("#date-chips")!;
 const timeSection = document.querySelector<HTMLFieldSetElement>("#time-section")!;
 const times = document.querySelector<HTMLDivElement>("#times")!;
 const details = document.querySelector<HTMLFieldSetElement>("#details")!;
@@ -10,6 +11,9 @@ const statusLine = document.querySelector<HTMLParagraphElement>("#status")!;
 const retry = document.querySelector<HTMLButtonElement>("#retry")!;
 const confirmation = document.querySelector<HTMLDivElement>("#confirmation")!;
 const dateFormat = new Intl.DateTimeFormat("en-IE", { weekday: "long", day: "numeric", month: "long", timeZone: "Europe/Dublin" });
+const chipDayFormat = new Intl.DateTimeFormat("en-IE", { weekday: "short", timeZone: "Europe/Dublin" });
+const chipDateFormat = new Intl.DateTimeFormat("en-IE", { day: "numeric", month: "short", timeZone: "Europe/Dublin" });
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const timeFormat = new Intl.DateTimeFormat("en-IE", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "Europe/Dublin" });
 let days: BookingDay[] = [];
 let loading = false;
@@ -49,6 +53,53 @@ function timeLabel(slot: Slot) {
   return timeFormat.format(new Date(slot.starts_at)) + "–" + timeFormat.format(new Date(slot.ends_at));
 }
 
+// Bring the next step into view on small screens, without jumping on desktop.
+function revealNext(element: HTMLElement) {
+  if (window.innerWidth > 720) return;
+  window.setTimeout(() => element.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }), 60);
+}
+
+// Tappable date buttons replace the long dropdown; the hidden select stays
+// the form's source of truth, so submission and validation are unchanged.
+function renderDateChips() {
+  dateChips.replaceChildren(...days.map(day => {
+    const full = day.slots.every(slot => slot.booked);
+    const when = new Date(day.date + "T12:00:00Z");
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "date-chip";
+    chip.dataset.date = day.date;
+    chip.setAttribute("role", "radio");
+    chip.setAttribute("aria-checked", String(day.date === date.value));
+    chip.setAttribute("aria-label", dateLabel(day.date) + (full ? ", fully booked" : ""));
+    chip.disabled = full;
+    const weekday = document.createElement("span");
+    weekday.textContent = chipDayFormat.format(when);
+    const dayMonth = document.createElement("strong");
+    dayMonth.textContent = chipDateFormat.format(when);
+    chip.append(weekday, dayMonth);
+    if (full) {
+      const booked = document.createElement("small");
+      booked.textContent = "Full";
+      chip.append(booked);
+    }
+    return chip;
+  }));
+}
+
+function syncDateChips() {
+  dateChips.querySelectorAll<HTMLButtonElement>(".date-chip").forEach(chip => {
+    chip.setAttribute("aria-checked", String(chip.dataset.date === date.value));
+  });
+}
+
+dateChips.addEventListener("click", event => {
+  const chip = (event.target as HTMLElement).closest<HTMLButtonElement>(".date-chip");
+  if (!chip || chip.disabled || !chip.dataset.date) return;
+  date.value = chip.dataset.date;
+  date.dispatchEvent(new Event("change", { bubbles: true }));
+});
+
 function syncDetails() {
   const selected = times.querySelector<HTMLInputElement>("input:checked");
   details.hidden = !selected;
@@ -86,6 +137,7 @@ async function refreshAvailability({ message = "" } = {}) {
   const priorDate = date.value;
   const priorTime = times.querySelector<HTMLInputElement>("input:checked")?.value;
   date.disabled = true;
+  dateChips.inert = true;
   times.inert = true;
   const reserve = details.querySelector("button")!;
   reserve.disabled = true;
@@ -101,6 +153,7 @@ async function refreshAvailability({ message = "" } = {}) {
       return new Option(dateLabel(day.date) + (full ? " (Booked)" : ""), day.date);
     }));
     if (days.some(day => day.date === priorDate)) date.value = priorDate;
+    renderDateChips();
     renderTimes(priorTime);
     date.disabled = !days.length;
     statusLine.textContent = message || (days.length ? "" : "Online bookings have closed. Contact us to ask about another date.");
@@ -110,6 +163,7 @@ async function refreshAvailability({ message = "" } = {}) {
     retry.hidden = false;
   } finally {
     times.inert = false;
+    dateChips.inert = false;
     reserve.disabled = date.disabled;
     loading = false;
   }
@@ -117,11 +171,14 @@ async function refreshAvailability({ message = "" } = {}) {
 
 date.addEventListener("change", () => {
   statusLine.textContent = "";
+  syncDateChips();
   renderTimes();
+  if (!timeSection.hidden) revealNext(timeSection);
 });
 times.addEventListener("change", () => {
   statusLine.textContent = "";
   syncDetails();
+  if (!details.hidden) revealNext(details);
 });
 retry.addEventListener("click", () => void refreshAvailability());
 
@@ -134,6 +191,7 @@ form.addEventListener("submit", async event => {
   submitting = true;
   reserve.disabled = true;
   date.inert = true;
+  dateChips.inert = true;
   times.inert = true;
   statusLine.textContent = "Saving your booking…";
   try {
@@ -169,6 +227,7 @@ form.addEventListener("submit", async event => {
   } finally {
     reserve.disabled = date.disabled;
     date.inert = false;
+    dateChips.inert = false;
     times.inert = false;
     submitting = false;
   }
