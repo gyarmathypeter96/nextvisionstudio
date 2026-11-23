@@ -157,9 +157,17 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .hero-copy, .christmas-promo, .hero-stars span { animation: none; }
   .photo-grid img, .whatsapp-float { transition: none; }
 }
-.session-info { padding-top: 62px; }
-.session-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.session-steps h3 { margin: 0 0 6px; font-size: 19px; letter-spacing: -.02em; }
+.testimonials { padding-top: 62px; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.testimonial { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; margin: 0; padding: 20px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); }
+.testimonial blockquote { margin: 0; }
+.testimonial p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.testimonial figcaption { font-weight: 700; font-size: 14px; color: var(--berry-dark); }
+.session-info { margin-bottom: 48px; }
+.session-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.session-steps li { position: relative; padding: 18px 18px 18px 58px; border-radius: 10px; background: var(--sand); color: var(--muted); font-size: 15px; line-height: 1.45; counter-increment: step; }
+.session-steps li::before { content: counter(step); position: absolute; left: 18px; top: 18px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--berry); color: #fff; font-weight: 700; font-size: 14px; }
+.session-steps strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 16px; }
 .session-steps p, .arrival p { margin: 0; max-width: 570px; color: var(--muted); line-height: 1.6; }
 .studio-grid img { aspect-ratio: 1; }
 .reference-photos { margin: 29px 0 0; }
@@ -207,6 +215,10 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .arrival { margin-bottom: 90px; }
   .christmas-promo { width: min(100%, 245px); }
   .arrival { padding-bottom: 56px; }
-  .session-info { padding-top: 40px; }
-  .session-steps { grid-template-columns: 1fr; gap: 15px; }
+  .testimonials { padding-top: 40px; }
+  .testimonial-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -4px; padding: 2px 4px 10px; scrollbar-width: none; }
+  .testimonial-grid::-webkit-scrollbar { display: none; }
+  .testimonial { flex: 0 0 82%; scroll-snap-align: start; }
+  .session-info { margin-bottom: 40px; }
+  .session-steps { grid-template-columns: 1fr; gap: 10px; }
 }
