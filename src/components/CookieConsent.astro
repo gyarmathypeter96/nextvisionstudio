@@ -1,20 +1,35 @@
+---
+// "slim" renders a thin bottom bar that does not cover the page (used on the
+// Christmas landing page). The consent logic is identical for both variants.
+const { variant = "default" } = Astro.props as { variant?: "default" | "slim" };
+const slim = variant === "slim";
+---
 <aside
   id="cookie-preferences"
-  class="cookie-consent"
+  class:list={["cookie-consent", { "cookie-consent--slim": slim }]}
   aria-label="Cookie preferences"
   aria-live="polite"
   data-cookie-consent
   hidden
 >
-  <div>
-    <strong>Analytics preferences</strong>
-    <p>
-      We use optional Google Analytics, Google Ads, Meta Pixel and Microsoft
-      Clarity measurement to understand which pages and campaigns generate
-      enquiries. Essential site features work without these cookies. <a href="/privacy-policy/">Privacy policy</a>
-    </p>
-    <p data-cookie-status role="status"></p>
-  </div>
+  {slim ? (
+    <div>
+      <p>
+        <span class="cookie-consent__long">Optional cookies (Google Analytics &amp; Ads, Meta Pixel, Microsoft Clarity) help us see which ads bring visitors. The page and booking work either way.</span><span class="cookie-consent__short">Optional cookies (Google, Meta, Clarity) measure our ads.</span> <a href="/privacy-policy/">Privacy</a>
+      </p>
+      <p class="cookie-consent__status" data-cookie-status role="status"></p>
+    </div>
+  ) : (
+    <div>
+      <strong>Analytics preferences</strong>
+      <p>
+        We use optional Google Analytics, Google Ads, Meta Pixel and Microsoft
+        Clarity measurement to understand which pages and campaigns generate
+        enquiries. Essential site features work without these cookies. <a href="/privacy-policy/">Privacy policy</a>
+      </p>
+      <p data-cookie-status role="status"></p>
+    </div>
+  )}
   <div class="cookie-consent__actions">
     <button
       type="button"
@@ -25,7 +40,7 @@
       class="cookie-consent__accept"
       data-cookie-accept
     >
-      Accept analytics
+      {slim ? "Accept" : "Accept analytics"}
     </button>
   </div>
 </aside>
@@ -235,6 +250,104 @@
 
     .cookie-consent button {
       min-height: 38px;
+    }
+  }
+
+  /* Slim variant: a thin full-width bar at the bottom edge. Both buttons get
+     the same visual weight so neither choice is nudged. */
+  .cookie-consent--slim {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    gap: 14px;
+    border: 0;
+    border-top: 1px solid #dfd7c7;
+    border-radius: 0;
+    background: #fffdfa;
+    box-shadow: 0 -4px 14px rgba(19, 45, 37, 0.12);
+    color: #23352c;
+    backdrop-filter: none;
+  }
+
+  .cookie-consent--slim p {
+    margin: 0;
+    color: #536057;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .cookie-consent--slim a {
+    color: #742132;
+  }
+
+  .cookie-consent__short {
+    display: none;
+  }
+
+  .cookie-consent--slim .cookie-consent__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .cookie-consent--slim .cookie-consent__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cookie-consent--slim button,
+  .cookie-consent--slim .cookie-consent__accept {
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid #23352c;
+    background: #fffdfa;
+    color: #23352c;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .cookie-consent--slim button:focus-visible {
+    outline-color: #742132;
+  }
+
+  @media (max-width: 680px) {
+    .cookie-consent--slim {
+      right: 0;
+      bottom: 0;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      padding: 7px 12px max(7px, env(safe-area-inset-bottom));
+      gap: 6px;
+      border-radius: 0;
+    }
+
+    .cookie-consent--slim .cookie-consent__long {
+      display: none;
+    }
+
+    .cookie-consent--slim .cookie-consent__short {
+      display: inline;
+    }
+
+    .cookie-consent--slim p {
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .cookie-consent--slim .cookie-consent__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .cookie-consent--slim button {
+      min-height: 30px;
+      padding: 0 10px;
+      font-size: 11px;
     }
   }
 </style>
