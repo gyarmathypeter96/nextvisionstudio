@@ -3,6 +3,8 @@ import VercelAnalytics from "../components/VercelAnalytics.astro";
 import TagManager from "../components/TagManager.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import { ANALYTICS_HOSTS } from "../config/site";
+// Inlined so the first paint does not wait for a separate stylesheet request.
+import christmasCss from "../../public/christmas-2026.css?raw";
 
 const media = "/images/christmas-2026/";
 const studioPhotos = [
@@ -59,7 +61,8 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.nextvisionstudio.com/christmas-photoshoot/">
   <link rel="icon" href="/images/brand/nextvision-studio-logo.webp">
-  <link rel="stylesheet" href="/christmas-2026.css">
+  <link rel="preload" as="image" href={media + "promo-poster.webp"} fetchpriority="high">
+  <Fragment set:html={`<style>${christmasCss}</style>`} />
   <!-- Keep owner traffic out of Vercel Analytics and GTM before either loads. -->
   <script is:inline define:vars={{ analyticsHosts: ANALYTICS_HOSTS }}>
     (() => {
@@ -88,7 +91,7 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
 <body>
   <header class="masthead">
     <div class="shell masthead-inner">
-      <a class="brand" href="/" aria-label="Visit the NextVision Studio homepage"><img src="/orbit/assets/nextvision-astronaut-logo.webp" alt="" width="500" height="425"><span>NextVision Studio</span></a>
+      <a class="brand" href="/" aria-label="Visit the NextVision Studio homepage"><img src={media + "nvs-logo-96.webp"} alt="" width="96" height="82"><span>NextVision Studio</span></a>
       <nav aria-label="On this page">
         <a class="nav-link" href="#portfolio">Portfolio</a>
         <a class="button nav-book" href="#booking">Book a session</a>
@@ -102,6 +105,10 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
         <div class="hero-copy">
           <h1 id="hero-title">Christmas<br> Photoshoots</h1>
           <p class="hero-intro">A relaxed hour in our Christmas studio for family portraits and the little moments in between.</p>
+          <p class="hero-offer">
+            <span class="hero-price"><span class="visually-hidden">Regular price </span><s>€200</s> <span class="visually-hidden">Christmas price </span><strong>€150</strong></span>
+            <span class="sessions-left" data-sessions-left>Limited sessions left</span>
+          </p>
           <div class="hero-actions">
             <a class="button primary" href="#booking">Choose a time <span aria-hidden="true">↗</span></a>
             <a class="button whatsapp-button" href={whatsapp} target="_blank" rel="noopener">Questions? Message us on WhatsApp</a>
@@ -117,7 +124,18 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
       <div class="shell package-inner">
         <div><strong>1 hour</strong><span>Private studio session</span></div>
         <div><strong>15 edited photos</strong><span>Within 48 hours of your selection</span></div>
-        <div><strong>€150</strong><span>Fixed price, payable on the day</span></div>
+        <div><strong><span class="visually-hidden">Regular price </span><s class="was-price">€200</s> <span class="visually-hidden">Christmas price </span>€150</strong><span>Christmas price, payable on the day</span></div>
+      </div>
+    </section>
+    <section class="meet-dora shell" aria-labelledby="dora-title">
+      <img src={media + "dora.webp"} alt="Dora, the photographer, laughing with Christmas presents in the studio" width="640" height="800" loading="lazy" decoding="async">
+      <div class="dora-head">
+        <p class="dora-eyebrow">Your photographer</p>
+        <h2 id="dora-title">Hi, I’m Dora</h2>
+      </div>
+      <div class="dora-text">
+        <p>Photography and Christmas are my two favourite things, so this season I get to do both at once. If it were up to me, the tree would stay up all year round, so the cosy Christmas feeling is guaranteed.</p>
+        <p>I keep the hour relaxed and guide you through every shot, so you can simply enjoy it together.</p>
       </div>
     </section>
     <section class="testimonials" aria-labelledby="testimonials-title">
@@ -140,16 +158,16 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
       <div class="photo-grid studio-grid">
         {studioPhotos.map(([file, alt]) => (
           <a href={media + file + ".webp"} target="_blank" rel="noopener" data-lightbox>
-            <img src={media + file + ".webp"} alt={alt} width="960" height="1440" loading="lazy" decoding="async">
+            <img src={media + "thumbs/" + file + ".webp"} alt={alt} width="540" height="720" loading="lazy" decoding="async">
           </a>
         ))}
       </div>
       <figure class="reference-photos">
-        <figcaption>These family photos were taken in a different studio and are shown as examples.</figcaption>
+        <figcaption>Christmas family portraits</figcaption>
         <div class="photo-grid">
           {examples.map(([file, alt]) => (
             <a href={media + file + ".webp"} target="_blank" rel="noopener" data-lightbox>
-              <img src={media + file + ".webp"} alt={alt} width="730" height="1298" loading="lazy" decoding="async">
+              <img src={media + "thumbs/" + file + ".webp"} alt={alt} width="540" height="720" loading="lazy" decoding="async">
             </a>
           ))}
         </div>
@@ -158,9 +176,10 @@ const whatsappQuestion = whatsapp + "?text=" + encodeURIComponent("Hi! I have a 
     <section id="booking" class="booking shell" aria-labelledby="booking-title">
       <div class="booking-copy">
         <h2 id="booking-title">Book your session</h2>
+        <p class="sessions-left booking-sessions-left" data-sessions-left>Limited sessions left</p>
         <ul class="booking-facts">
           <li><strong>Weekday evenings</strong> 18:00–19:00 or 19:00–20:00</li>
-          <li><strong>€150, paid on the day</strong> 15 edited photos within 48 hours</li>
+          <li><strong><span class="visually-hidden">Regular price </span><s class="was-price">€200</s> <span class="visually-hidden">Christmas price </span>€150, paid on the day</strong> 15 edited photos within 48 hours</li>
           <li><strong>Last session</strong> Friday 18 December</li>
         </ul>
         <p class="capacity-note"><strong>Limited studio capacity</strong>For comfort and space, each session can accommodate up to 2 adults and 2 small children, or 3 adults.</p>

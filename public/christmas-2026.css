@@ -247,3 +247,30 @@ legend { margin-bottom: 10px; padding: 0; font-weight: 700; font-size: 15px; }
   .session-info { margin-bottom: 40px; }
   .session-steps { grid-template-columns: 1fr; gap: 10px; }
 }
+
+/* Price, scarcity and photographer intro */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.hero-offer { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: -6px 0 24px; }
+.hero-price { display: inline-flex; gap: 10px; align-items: baseline; color: #fff; font-family: var(--display); }
+.hero-price s { color: #c9bfa9; font-size: 21px; text-decoration-color: var(--gold); text-decoration-thickness: 2px; }
+.hero-price strong { font-size: 34px; font-weight: 500; letter-spacing: -.03em; }
+.sessions-left { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; background: var(--gold); color: var(--pine); font-size: 13px; font-weight: 800; letter-spacing: .02em; }
+.sessions-left::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--berry); }
+.booking-sessions-left { margin: 0 0 14px; }
+.was-price { margin-right: 4px; color: #8c8574; font-size: .72em; text-decoration-color: var(--berry); text-decoration-thickness: 2px; }
+.meet-dora { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); grid-template-areas: "img head" "img text"; column-gap: clamp(28px, 5vw, 64px); padding: clamp(44px, 7vw, 84px) 0; }
+.meet-dora img { grid-area: img; display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 14px 34px rgba(19, 45, 37, .16); }
+.dora-head { grid-area: head; align-self: end; }
+.dora-text { grid-area: text; align-self: start; max-width: 560px; }
+.dora-eyebrow { margin: 0 0 6px; color: var(--berry); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.meet-dora h2 { margin: 0 0 14px; font-size: clamp(32px, 4vw, 48px); }
+.dora-text p { margin: 0 0 12px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+@media (max-width: 720px) {
+  .hero-offer { margin: -2px 0 17px; }
+  .hero-price strong { font-size: 30px; }
+  .meet-dora { grid-template-columns: 112px minmax(0, 1fr); grid-template-areas: "img head" "text text"; column-gap: 16px; row-gap: 16px; align-items: center; padding: 38px 0 34px; }
+  .meet-dora img { border-radius: 12px; }
+  .dora-head { align-self: center; }
+  .meet-dora h2 { margin: 0; font-size: 30px; }
+  .dora-text p { font-size: 16px; }
+}
