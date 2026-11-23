@@ -61,6 +61,14 @@ function revealNext(element: HTMLElement) {
 
 // Tappable date buttons replace the long dropdown; the hidden select stays
 // the form's source of truth, so submission and validation are unchanged.
+// Show the real number of free sessions once it gets low; until then the
+// static "Limited sessions left" text stays.
+function updateSessionsLeft() {
+  const free = days.reduce((sum, day) => sum + day.slots.filter(slot => !slot.booked).length, 0);
+  const text = free === 0 ? "Fully booked" : free <= 10 ? `Only ${free} session${free === 1 ? "" : "s"} left` : "Limited sessions left";
+  document.querySelectorAll<HTMLElement>("[data-sessions-left]").forEach(label => { label.textContent = text; });
+}
+
 function renderDateChips() {
   dateChips.replaceChildren(...days.map(day => {
     const full = day.slots.every(slot => slot.booked);
@@ -148,6 +156,7 @@ async function refreshAvailability({ message = "" } = {}) {
     const result = await response.json();
     if (!Array.isArray(result.days)) throw new Error();
     days = result.days;
+    updateSessionsLeft();
     date.replaceChildren(new Option("Select a weekday", ""), ...days.map(day => {
       const full = day.slots.every(slot => slot.booked);
       return new Option(dateLabel(day.date) + (full ? " (Booked)" : ""), day.date);
