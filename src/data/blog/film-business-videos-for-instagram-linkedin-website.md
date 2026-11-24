@@ -12,6 +12,7 @@ heroProject:
   label: "Leroy’s Barking World social videos"
   href: "/case-studies/leroys-barking-world-social-content/"
 featured: false
+updatedDate: "2026-11-24"
 ---
 
 One shoot can support several channels when the formats and messages are planned before filming. List where each finished video will appear, who will watch it and what they need to do. Agree the number of versions and aspect ratios in the quote; a cropped copy is not automatically a well-composed edit for every screen.
@@ -39,3 +40,7 @@ Discuss [short-form production](/short-form-video-production-dublin/), a longer 
 ## Plan the right scope for your business
 
 Every brief is different. [Explore short-form video production](/short-form-video-production-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
+
+## What different versions looked like for Collen
+
+The [Collen Construction event project](/case-studies/collen-construction-harbour-event-video/) delivered landscape and square versions of a volunteers’ experience film and two interviews. Collen used the main film on LinkedIn. This is an example of planning several usable assets around one real event; it is not a claim that every film belongs on every platform. For your project, identify the main destination first and agree the other edits before filming.

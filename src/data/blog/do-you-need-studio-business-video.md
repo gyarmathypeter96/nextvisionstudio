@@ -39,3 +39,7 @@ A filming location can support a [corporate interview](/corporate-video-producti
 ## Plan the right scope for your business
 
 Every brief is different. [Explore business video production](/corporate-video-production-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
+
+## See a studio and an on-location project
+
+The [SG Studios Dublin collaboration](/case-studies/sg-studios-dublin-podcast-studio-content/) shows work in a controlled podcast and video studio. The [Collen Construction harbour event](/case-studies/collen-construction-harbour-event-video/) shows the other side: people, activity and short interviews captured where the event happened. A studio helps when the room and repeatable setup matter. On-location filming helps when the place and the work are part of the explanation. Choose the setting around the message, access and sound conditions, then agree any studio hire in your quote.

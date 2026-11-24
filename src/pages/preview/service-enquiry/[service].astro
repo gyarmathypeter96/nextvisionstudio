@@ -14,7 +14,7 @@ const { service } = Astro.props;
     <p><strong>Péter, ez helyi terv.</strong> Nem éles. A próbaküldés nem hoz létre CRM-rekordot.</p>
     <nav aria-label="Szolgáltatás előnézetek">{LISTED_SERVICES.map(item=><a aria-current={service.key===item.key?'page':undefined} href={`/preview/service-enquiry/${item.key}/`}>{item.title}</a>)}</nav>
   </aside>
-  <ServiceEnquiryHero service={service} content={serviceEnquiryContent[service.key]} preview />
+  <ServiceEnquiryHero service={service} content={serviceEnquiryContent[service.key as keyof typeof serviceEnquiryContent]} preview />
 </BaseLayout>
 <style>
 .design-review { padding:115px 28px 20px; background:#111; color:#b0bbc4; border-bottom:1px solid #2c343b; }

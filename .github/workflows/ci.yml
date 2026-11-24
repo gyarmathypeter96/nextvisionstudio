@@ -16,12 +16,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.23.2
+          node-version: 24.18.0
           cache: npm
       - run: npm ci
       - run: npm audit --audit-level=high
+      - run: npm run check:types
       - run: npm run build
       - run: npm run check:indexability
+      - run: npm run check:audit
       - run: npm run check:seo-growth
       - run: npm run check:service-content
       - run: npm run check:measurement
@@ -30,3 +32,21 @@ jobs:
 
       - run: npm run check:orbit-release
       - run: npm run check:orbit-packages
+
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check:performance
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: output/performance

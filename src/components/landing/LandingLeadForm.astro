@@ -35,7 +35,7 @@ const messageId = `${page.slug}-message`;
       </a>
     </div>
 
-    <form action={CRM_FORM_ENDPOINT} method="POST" data-crm-form>
+    <form data-clarity-mask="true" action={CRM_FORM_ENDPOINT} method="POST" data-crm-form>
       <input
         type="hidden"
         name="redirect"
@@ -59,7 +59,7 @@ const messageId = `${page.slug}-message`;
           placeholder="Your name"
           autocomplete="name"
           required
-        />
+        maxlength="150" />
       </div>
 
       <div class="landing-contact__field">
@@ -72,11 +72,11 @@ const messageId = `${page.slug}-message`;
           autocomplete="email"
           inputmode="email"
           required
-        />
+        maxlength="255" />
       </div>
 
       <div class="landing-contact__field">
-        <label for={phoneId}>Phone number</label>
+        <label for={phoneId}>Phone number <span>(optional)</span></label>
         <input
           id={phoneId}
           type="tel"
@@ -84,8 +84,8 @@ const messageId = `${page.slug}-message`;
           placeholder="+353"
           autocomplete="tel"
           inputmode="tel"
-          required
-        />
+
+        maxlength="50" />
       </div>
 
       <div class="landing-contact__field">
@@ -96,7 +96,7 @@ const messageId = `${page.slug}-message`;
           placeholder="What would you like to create or improve?"
           rows="7"
           required
-        ></textarea>
+         maxlength="10000"></textarea>
       </div>
 
       <button type="submit"><span>Request a project quote</span></button>

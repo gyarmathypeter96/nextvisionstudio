@@ -46,7 +46,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
         </p>
       </aside>
 
-      <form
+      <form data-clarity-mask="true"
         id="contact-form"
         class="contact-page__form"
         action={CRM_FORM_ENDPOINT}
@@ -78,7 +78,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             placeholder="Your name"
             autocomplete="name"
             required
-          />
+          maxlength="150" />
         </div>
 
         <div class="contact-page__field">
@@ -91,11 +91,11 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             autocomplete="email"
             inputmode="email"
             required
-          />
+          maxlength="255" />
         </div>
 
         <div class="contact-page__field">
-          <label for="contact-page-phone">Phone number</label>
+          <label for="contact-page-phone">Phone number <span>(optional)</span></label>
           <input
             id="contact-page-phone"
             type="tel"
@@ -103,8 +103,8 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             placeholder="+353"
             autocomplete="tel"
             inputmode="tel"
-            required
-          />
+
+          maxlength="50" />
         </div>
 
         <div class="contact-page__field">
@@ -124,7 +124,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
             placeholder="What would you like to create or improve?"
             rows="7"
             required
-          ></textarea>
+           maxlength="10000"></textarea>
         </div>
 
         <button type="submit"><span>Send enquiry</span></button>

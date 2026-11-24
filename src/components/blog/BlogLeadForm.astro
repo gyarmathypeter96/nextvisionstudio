@@ -18,7 +18,7 @@ const source = `blog-${postId}`;
     <p>Share a few details and NextVision Studio will get back to you with a clear next step.</p>
   </div>
 
-  <form
+  <form data-clarity-mask="true"
     id={formId}
     class="blog-enquiry__form"
     action={CRM_FORM_ENDPOINT}
@@ -38,15 +38,15 @@ const source = `blog-${postId}`;
     <div class="blog-enquiry__fields">
       <label>
         <span>Your name</span>
-        <input type="text" name="name" autocomplete="name" required />
+        <input type="text" name="name" autocomplete="name" required maxlength="150" />
       </label>
       <label>
         <span>Email address</span>
-        <input type="email" name="email" autocomplete="email" required />
+        <input type="email" name="email" autocomplete="email" required maxlength="255" />
       </label>
       <label class="blog-enquiry__message">
         <span>What are you planning?</span>
-        <textarea name="message" rows="2" placeholder="A few details about your project" required></textarea>
+        <textarea name="message" rows="2" placeholder="A few details about your project" required maxlength="10000"></textarea>
       </label>
     </div>
     <button type="submit">Ask about your project <span aria-hidden="true">→</span></button>

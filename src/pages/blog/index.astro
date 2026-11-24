@@ -1,4 +1,5 @@
 ---
+import { FOUNDER_ID } from "../../config/site";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { isBlogPostPublished } from "../../lib/blogPublication";
@@ -41,6 +42,7 @@ const blogSchema = {
       blogPost: guides.map((guide) => ({
         "@type": "BlogPosting",
         headline: guide.title,
+        author: { "@id": FOUNDER_ID },
         url: `https://www.nextvisionstudio.com${guide.href}`,
         datePublished: guide.pubDate.toISOString(),
       })),

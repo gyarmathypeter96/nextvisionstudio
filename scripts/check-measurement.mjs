@@ -12,6 +12,7 @@ const formScript = compiled.outputFiles[0].text;
 const html = await readFile("dist/index.html", "utf8");
 const inlineScripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(([, script]) => script);
 const ownerScript = inlineScripts.find((script) => script.includes('const marker = "nvs-owner-optout"'));
+const privacyScript = inlineScripts.find((script) => script.includes("window.nvsSafeAnalyticsUrl ="));
 const tagScript = inlineScripts.find((script) => script.includes("script[data-nvs-gtm]"));
 assert.ok(ownerScript && tagScript, "Build the website before running measurement checks");
 assert.ok(html.indexOf(ownerScript) < html.indexOf(tagScript), "Owner policy must execute before GTM");
@@ -37,9 +38,9 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
     head: { appendChild: (node) => appended.push(node) },
     addEventListener: (name, callback) => listeners.set(name, callback),
   };
-  const window = { location, document, requestIdleCallback: (callback) => idle.push(callback), setTimeout: (callback, delay = 0) => clock ? clock.timers.push({at: clock.now + delay, callback}) : idle.push(callback), addEventListener: (name, callback) => listeners.set(name, callback) };
+  const window = { location, document, clearTimeout: () => {}, requestIdleCallback: (callback) => idle.push(callback), setTimeout: (callback, delay = 0) => clock ? clock.timers.push({at: clock.now + delay, callback}) : idle.push(callback), addEventListener: (name, callback) => listeners.set(name, callback) };
   class FixtureDate extends Date { static now() { return clock?.now ?? Date.now(); } }
-  const context = vm.createContext({ Date: FixtureDate, window, document, localStorage, sessionStorage: session, URL, URLSearchParams, history: { state: null, replaceState() {} }, crypto: { randomUUID: () => `test-key-${requests.length + 1}` }, FormData: class {
+  const context = vm.createContext({ AbortController, Date: FixtureDate, window, document, localStorage, sessionStorage: session, URL, URLSearchParams, history: { state: null, replaceState() {} }, crypto: { randomUUID: () => `test-key-${requests.length + 1}` }, FormData: class {
     constructor(form) { this.values = new Map(Object.entries(form.values)); }
     get(key) { return this.values.get(key); }
     entries() { return this.values.entries(); }
@@ -48,13 +49,14 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
     return response ? response(...args) : { ok: true, json: async () => ({ submission_id: 123, status: "processed", lead_created: true }) };
   }, console, setTimeout });
   vm.runInContext(ownerScript, context);
+  vm.runInContext(privacyScript, context);
   vm.runInContext(tagScript, context);
   const originalGtag = window.gtag;
   if (originalGtag) window.gtag = (...args) => {
     if (args[0] === "get" && typeof args[3] === "function") args[3](args[2] === "client_id" ? "123.456" : "1794139200");
     else originalGtag(...args);
   };
-  return { context, window, session, localStorage, appended, requests, idle, redirects, runForms: () => vm.runInContext(formScript, context), leads: () => (window.dataLayer ?? []).filter((item) => item.event === "generate_lead") };
+  return { context, window, session, localStorage, appended, requests, idle, redirects, dispatch: (name) => listeners.get(name)?.(), runForms: () => vm.runInContext(formScript, context), leads: () => (window.dataLayer ?? []).filter((item) => item.event === "generate_lead") };
 }
 function form(redirect = "/quotesend/?source=video") {
   const values = { name: "Synthetic Test", email: "synthetic@example.invalid", phone: "0000000000", service: "Business Video Production", message: "Offline fixture only", consent: "on", redirect, form_type: "Video enquiry" };
@@ -281,4 +283,41 @@ test('a lead processed after 57 seconds is measured once without a page refresh'
   assert.equal(env.leads()[0].lead_id,'nvs-form-123');
   assert.equal(session.getItem('nvs-pending-lead'),null);
   assert.ok(env.requests.length<30,'Use a slower polling interval after the initial wait');
+});
+
+
+test("late consent captures the landing before any form interaction", () => {
+  const env = fixture({url:"https://www.nextvisionstudio.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp", consent:"denied"});
+  env.runForms(); assert.equal(env.session.getItem("nvs-lead-attribution"), null);
+  env.localStorage.setItem("nvs-cookie-consent", "granted"); env.dispatch("nvs:consent-change");
+  const first = JSON.parse(env.session.getItem("nvs-lead-attribution"));
+  assert.equal(first.landing_page, "https://www.nextvisionstudio.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp");
+  const next = fixture({url:"https://www.nextvisionstudio.com/contact/",session:env.session,local:env.localStorage});next.runForms();
+  assert.equal(JSON.parse(next.session.getItem("nvs-lead-attribution")).landing_page, first.landing_page);
+});
+
+test("URL queries are sanitised before an automatic GA4 page view can initialise", () => {
+  const env = fixture({url:"https://www.nextvisionstudio.com/?email=private@example.invalid&token=private&nvs_debug=1&utm_source=google"});
+  const config = env.window.dataLayer.find(args=>args[0]==="set" && args[1]?.page_location)?.[1];
+  assert.equal(config.page_location,"https://www.nextvisionstudio.com/?utm_source=google");
+  assert.ok(!JSON.stringify(config).includes("private"));
+});
+
+test('network timeout keeps the form editable and uses the same receipt key on retry',async()=>{
+ const clock={now:Date.now(),timers:[]};const f=form();
+ const env=fixture({forms:[f],clock,response:(_,options)=>new Promise((_,reject)=>options.signal.addEventListener('abort',()=>reject(Object.assign(new Error('Timed out'),{name:'AbortError'}))))});
+ env.runForms();const submit=f.submit();await new Promise(setImmediate);
+ const timer=clock.timers.find(t=>t.at-clock.now===30000);assert.ok(timer);timer.callback();await submit;
+ assert.equal(f.button.disabled,false);assert.match(f.status.textContent,/retry|try again/i);assert.equal(f.values.message,'Offline fixture only');
+ const retry=f.submit();await new Promise(setImmediate);
+ assert.equal(env.requests[0][1].headers['Idempotency-Key'],env.requests[1][1].headers['Idempotency-Key']);
+ clock.timers.at(-1).callback();await retry;assert.equal(env.leads().length,0);
+});
+
+test("form telemetry redacts an email-bearing URL path before recording form location", () => {
+  const f=form();const env=fixture({url:"https://www.nextvisionstudio.com/private@example.invalid/",forms:[f]});
+  env.runForms();f.focus();
+  const start=env.window.dataLayer.find(event=>event.event==="lead_form_start");
+  assert.ok(start);assert.equal(start.form_location,"/redacted/");
+  assert.ok(!JSON.stringify(env.window.dataLayer).includes("private@example.invalid"));
 });

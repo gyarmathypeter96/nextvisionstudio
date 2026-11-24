@@ -12,6 +12,7 @@ heroProject:
   label: "Gut Fest event film"
   href: "/case-studies/gut-fest-event-videography-dublin/"
 featured: false
+updatedDate: "2026-11-24"
 ---
 
 The best way to compare video production quotes is to compare their deliverables and exclusions, not only the headline figure. Ask what planning, filming, editing, versions, revisions, travel and usage are included. A lower filming-only quote can be appropriate, but it is a different scope from a finished video package.
@@ -39,3 +40,9 @@ The scope differs between [corporate video](/corporate-video-production-dublin/)
 ## Plan the right scope for your business
 
 Every brief is different. [Use the business video quote checklist](/blog/compare-business-video-quotes/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
+
+## A real example: one event, several deliverables
+
+For the [Collen Construction harbour project](/case-studies/collen-construction-harbour-event-video/), the work included a volunteers’ experience film, two separate interviews, photographs and landscape and square versions of the three films. That is a useful way to read a quote: count the finished assets and formats, rather than treating “an event video” as one fixed deliverable.
+
+The case study shows the actual work; it does not publish the client’s private fee. If your brief needs interviews, aerial coverage or more than one format, include those requirements when comparing [event videography](/event-videographer-dublin/) proposals. Ask which versions are included in the edit and which would be an additional deliverable. You can then compare the [published filming and editing rates](/how-much-does-a-videographer-cost-in-dublin/) against a clearly defined production plan.
