@@ -12,6 +12,7 @@ export interface CaseStudySummary {
 
 // Shared by the case study index and the "more case studies" links on each project.
 export const caseStudies: CaseStudySummary[] = [
+  {"client": "Collen Construction", "title": "Collen Construction: A Day at the Harbour", "location": "Corporate volunteering event, Ireland", "href": "/case-studies/collen-construction-harbour-event-video/", "image": "/images/case-studies/collen-volunteers-harbour.jpg", "alt": "Collen volunteers gathered beside boats at the harbour, wearing red lifejackets"},
   ...expandedCaseStudies,
   { client: "Amber Oxygen Therapy", title: "Amber Oxygen Therapy: A Short-Form Video Series", location: "On-location content production", href: "/case-studies/amber-oxygen-therapy-video-production/", image: clientCaseStudyMedia.amber.hero?.src, alt: clientCaseStudyMedia.amber.hero?.alt ?? "" },
   { client: "Balbriggan Braces", title: "Balbriggan Braces: Patient Education in Long and Short Form", location: "Balbriggan, County Dublin", href: "/case-studies/balbriggan-braces-dental-videos/", image: clientCaseStudyMedia.braces.hero?.src, alt: clientCaseStudyMedia.braces.hero?.alt ?? "" },

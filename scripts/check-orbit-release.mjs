@@ -29,7 +29,8 @@ assert.equal(createHash('sha256').update(await readFile('dist/robots.txt')).dige
 for(const [file,key] of [['src/pages/sitemap.xml.ts','sitemapSourceSha256'],['src/lib/blogPublication.ts','blogPublicationSourceSha256']])assert.equal(createHash('sha256').update(await readFile(file)).digest('hex'),baseline[key],`${file}: original sitemap/publication implementation`);
 const sitemap=await readFile('dist/sitemap.xml','utf8');const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 for(const url of baseline.sitemapUrls)assert.ok(urls.includes(url),`Retained sitemap URL ${url}`);
-for(const url of urls)assert.ok(baseline.sitemapUrls.includes(url)||baseline.plannedBlogUrls.includes(url),`Unapproved sitemap addition ${url}`);
+const approvedProjectUrls = ['https://www.nextvisionstudio.com/case-studies/collen-construction-harbour-event-video/'];
+for(const url of urls)assert.ok(baseline.sitemapUrls.includes(url)||baseline.plannedBlogUrls.includes(url)||approvedProjectUrls.includes(url),`Unapproved sitemap addition ${url}`);
 if(urls.length===baseline.sitemapUrls.length)assert.equal(createHash('sha256').update(sitemap).digest('hex'),baseline.sitemapSha256,'same-date sitemap output: byte-identical');
 for(const name of ['earth-layer.webp','astronaut-layer.webp'])await access('dist/orbit/assets/'+name);
 const home=await readFile('dist/index.html','utf8');assert.ok(!home.includes('earth-layer.png')&&!home.includes('astronaut-layer.png'));
