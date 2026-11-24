@@ -470,7 +470,7 @@
     },
     {
       "route": "/services/",
-      "title": "Video, Photography & Digital Services Dublin | NextVision Studio",
+      "title": "Video & Photography Services Dublin | NextVision Studio",
       "description": "Explore video production, commercial photography, social media content, Google and Meta Ads, website design, and CRM automation in Dublin.",
       "canonical": "https://www.nextvisionstudio.com/services/",
       "h1": [
@@ -714,7 +714,7 @@
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Video, Photography & Digital Services Dublin",
+              "name": "Video & Photography Services Dublin",
               "item": "https://www.nextvisionstudio.com/services/"
             }
           ]
@@ -1268,7 +1268,7 @@
     },
     {
       "route": "/corporate-video-production-dublin/",
-      "title": "Corporate Video Production Dublin | Business Films & Interviews",
+      "title": "Corporate Video Production Dublin | Business Films",
       "description": "Corporate video production in Dublin: service explainers, interviews and training films. See real VentSolve work, plan your deliverables and request a quote.",
       "canonical": "https://www.nextvisionstudio.com/corporate-video-production-dublin/",
       "h1": [
@@ -1523,7 +1523,7 @@
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Corporate Video Production Dublin | Business Films & Interviews",
+              "name": "Corporate Video Production Dublin | Business Films",
               "item": "https://www.nextvisionstudio.com/corporate-video-production-dublin/"
             }
           ]
@@ -1577,7 +1577,7 @@
               "@type": "WebPage",
               "@id": "https://www.nextvisionstudio.com/corporate-video-production-dublin/#webpage",
               "url": "https://www.nextvisionstudio.com/corporate-video-production-dublin/",
-              "name": "Corporate Video Production Dublin | Business Films & Interviews",
+              "name": "Corporate Video Production Dublin | Business Films",
               "description": "NextVision Studio produces corporate service explainers, interviews, customer stories and training videos for Dublin businesses. These films help customers understand an offer or help staff learn a process. The audience and purpose are agreed before filming.",
               "mainEntity": {
                 "@id": "https://www.nextvisionstudio.com/corporate-video-production-dublin/#service"

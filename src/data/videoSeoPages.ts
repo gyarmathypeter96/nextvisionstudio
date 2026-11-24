@@ -25,7 +25,7 @@ export const videoSeoPages: Record<string, VideoSeoPageData> = {
   corporate: {
     slug: "corporate-video-production-dublin",
     showExamples: true,
-    metaTitle: "Corporate Video Production Dublin | Business Films & Interviews",
+    metaTitle: "Corporate Video Production Dublin | Business Films",
     metaDescription:
       "Corporate video production in Dublin: service explainers, interviews and training films. See real VentSolve work, plan your deliverables and request a quote.",
     eyebrow: "Videographer Dublin · corporate & business video",
