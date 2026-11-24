@@ -83,7 +83,7 @@
       "duration": "PT80.81S"
     }
   ],
-  "publishedDate": "2026-11-24T10:00:00+00:00",
+  "publishedDate": "2026-11-24T09:15:44+00:00",
   "related": [
     "/case-studies/gut-fest-event-videography-dublin/",
     "/case-studies/saas-networking-photography-dublin/",
