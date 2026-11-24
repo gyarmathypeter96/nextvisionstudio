@@ -19,6 +19,7 @@ import {
   FOUNDER_NAME,
   ANALYTICS_HOSTS,
 } from "../config/site";
+const GOOGLE_MAPS_URL = SOCIAL_PROFILES.find((profile) => profile.label === "Google Maps")?.href;
 import { LISTED_SERVICES } from "../config/services";
 
 interface Props {
@@ -79,6 +80,16 @@ const websiteSchema = {
       "@type": ["Organization", "ProfessionalService"],
       // Public town only: a service-area business, with no street address exposed.
       address: { "@type": "PostalAddress", addressLocality: "Balbriggan", addressRegion: "County Dublin", addressCountry: "IE" },
+      foundingDate: "2023",
+      hasMap: GOOGLE_MAPS_URL,
+      // Same hours as the Google Business Profile.
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "06:00",
+        closes: "22:00",
+      },
+      priceRange: "€€",
       description: "Video production, photography and digital services for businesses in Dublin and North Dublin. Filming takes place on location.",
       "@id": `${SITE_URL}/#business`,
       name: SITE_NAME,

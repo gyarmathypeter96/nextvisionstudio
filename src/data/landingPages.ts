@@ -74,7 +74,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "video",
     metaTitle: "Business Video Production Dublin | NextVision Studio",
     metaDescription:
-      "Video production in Dublin for businesses. We plan, film and edit website videos, service explainers and social clips. View projects and request a quote.",
+      "Video production in Dublin for businesses: website videos, explainers and social clips, as made for VentSolve and Perfect Clean. View projects, get a quote.",
     eyebrow: "Video production Dublin",
     headlineStart: "Business Video Production",
     headlineAccent: "in Dublin",
@@ -228,7 +228,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "photo",
     metaTitle: "Product & Commercial Photography Dublin | NextVision Studio",
     metaDescription:
-      "Product and commercial photography in Dublin. See original product, food and business photos, plan your shot list and request a quote for your next shoot.",
+      "Product and commercial photography in Dublin: product, studio and business photos, as shot for SG Studios and Dió Dublin. Plan your shot list, get a quote.",
     eyebrow: "Photography Dublin",
     headlineStart: "Commercial Photography",
     headlineAccent: "in Dublin",
@@ -411,7 +411,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "web",
     metaTitle: "Web Designer Dublin | Websites That Generate Enquiries",
     metaDescription:
-      "Web designer in Dublin building fast, SEO-ready business websites with clear offers, proof and an easy path to enquiry.",
+      "Web designer in Dublin building fast, SEO-ready business websites, such as Eco Mould Removal: clear offers, proof and an easy path to enquiry.",
     eyebrow: "Web Designer Dublin",
     headlineStart: "Websites that turn visits into",
     headlineAccent: "enquiries",
@@ -667,7 +667,7 @@ export const landingPages: Record<string, LandingPageData> = {
     kind: "social",
     metaTitle: "Monthly Social Media Content Dublin | NextVision Studio",
     metaDescription:
-      "Monthly social media content for Dublin businesses. Regular ideas, filming, photography and editing, with a fresh batch of videos and photos ready to share.",
+      "Monthly social media content for Dublin businesses: ideas, filming, photos and editing every month, as for Leroy's Barking World and Amber Oxygen Therapy.",
     eyebrow: "Monthly Social Media Content Dublin",
     headlineStart: "Monthly Social Media Content",
     headlineAccent: "for Dublin Businesses.",
