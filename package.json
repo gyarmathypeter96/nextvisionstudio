@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "astro dev",
@@ -17,7 +17,7 @@
     "check:seo-growth": "node scripts/check-seo-growth.mjs",
     "check:orbit-release": "node scripts/check-orbit-release.mjs",
     "check:orbit-packages": "node --test scripts/check-orbit-packages.mjs",
-    "check:types": "astro-check --minimumFailingSeverity error",
+    "check:types": "astro sync && astro-check --minimumFailingSeverity error",
     "check:audit": "node --test scripts/check-audit-regressions.mjs && node scripts/check-seo-integrity.mjs",
     "check:performance": "node scripts/check-performance.mjs"
   },

@@ -50,3 +50,7 @@ The Orbit snapshot changes were restricted to the optional-phone labels, the new
 - After a separately approved deployment, confirm page-view receipt in DebugView/Tag Assistant using a marked, consented QA visit. No extra production test lead is needed to repeat the offline receipt tests.
 
 Detailed private source exports, commercial keyword mapping, browser evidence and the Hungarian report are kept in the assistant project's `output/seo-conversion-audit-20261124/`, outside this website repository.
+
+## Clean CI environment
+
+Use Node >=22.23.4 (CI pins the verified 24.18.0 runtime). `check:types` runs `astro sync` first so a fresh checkout generates content collection types before checking them. A clean checkout reproduced the missing-type failure and passed after synchronization.
