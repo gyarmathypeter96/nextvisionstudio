@@ -2,10 +2,10 @@
 {
   "client": "Collen Construction",
   "title": "Collen Construction: A Cold Day at the Harbour",
-  "metaTitle": "Collen Construction Event Video Case Study | NextVision",
-  "description": "A harbour volunteering day filmed for Collen Construction: a short event film, two interviews, drone coverage and photography in cold outdoor conditions.",
-  "location": "Harbour location, Ireland",
-  "date": "2026",
+  "metaTitle": "Collen Construction Event Video in Malahide | NextVision",
+  "description": "A volunteering day at Malahide Marina filmed for Collen Construction: a short event film, two interviews, drone coverage and photography in cold outdoor conditions.",
+  "location": "Malahide Marina, County Dublin",
+  "date": "13 November 2026",
   "service": "Corporate event video, interviews, drone coverage and photography",
   "heroImage": "/images/case-studies/collen-volunteers-harbour.jpg",
   "heroAlt": "Collen volunteers gathered beside boats at the harbour, wearing red lifejackets",
@@ -92,9 +92,9 @@
 }
 ---
 
-It was cold enough at the harbour that I felt it every time I stopped moving. The day kept going: people arriving, putting on lifejackets, talking, getting involved and giving me a few moments for an interview before returning to the activity. My job for Collen Construction was to bring that experience back in films and photographs that felt like the people who were there.
+At Malahide Marina on 13 November 2026, it was cold enough that I felt it every time I stopped moving. The day kept going: people arriving, putting on lifejackets, talking, getting involved and giving me a few moments for an interview before returning to the activity. My job for Collen Construction was to bring that experience back in films and photographs that felt like the people who were there.
 
-There are three finished films from the project. **Collen 01 — Volunteers’ Experience** brings the day together, and Collen has already used it. The other two are separate interviews with David and Rebecca. You can watch all three on this page. They show how one day of [event videography](/event-videographer-dublin/) can produce an overview of an event alongside more personal accounts.
+There are three finished films from the project. **Collen 01 — Volunteers’ Experience** brings the day together, and Collen has already used it on LinkedIn. The other two are separate interviews with David and Rebecca. You can watch all three on this page. They show how one day of [event videography](/event-videographer-dublin/) can produce an overview of an event alongside more personal accounts.
 
 ## What did Collen need the videos to show?
 
@@ -103,6 +103,14 @@ The people were the centre of this project. A harbour gives you an attractive se
 Collen is an established construction business. Its [official website](https://www.collen.com/) describes work across Ireland, the UK and Europe. It was a privilege to make content for the team. For this particular brief, the story was a volunteering day away from the usual construction setting. Showing people doing something together gave the film a clear focus.
 
 This is a useful approach to [corporate video production](/corporate-video-production-dublin/) when a business wants to communicate its culture. The strongest material often comes from a specific occasion: the work people do, the things they notice and the way they speak about an experience. A real day gives the viewer something concrete to understand.
+
+## What happened at Malahide Marina?
+
+The activity involved volunteers counting oysters into bundles, filling baskets and helping with their deployment at the marina. That sequence gave the filming a practical structure. I could follow the work from preparation through to the water, while keeping the people doing it in view. Small actions mattered here: hands working through the material, people leaning in to help and the concentration around a basket.
+
+The brief called for Collen volunteers taking part, a group portrait and photographs of the work in progress. The finished group image brings everyone together beside the boats; the closer photographs return to individual moments. Those two scales help a viewer understand both the group effort and what participation actually involved.
+
+For a business planning an outdoor event in [Malahide or North Dublin](/videographer-malahide/), this is a useful starting point: identify the activity that makes the day worth documenting. A location gives the film its setting, but the practical sequence gives it something to follow.
 
 ## Filming at a harbour in very cold conditions
 
