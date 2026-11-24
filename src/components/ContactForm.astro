@@ -14,7 +14,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
     <p>Three short steps. We reply with a clear plan and price, usually within one working day.</p>
   </header>
 
-  <form
+  <form data-clarity-mask="true"
     class="contact__form"
     action={CRM_FORM_ENDPOINT}
     method="POST"
@@ -81,7 +81,7 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
           placeholder="For example: 4 Reels a month for our clinic, or a 2-minute video for our website."
           rows="4"
           required
-        ></textarea>
+         maxlength="10000"></textarea>
       </div>
       <div class="contact__nav">
         <button type="button" class="contact__back" data-step-back hidden>Back</button>
@@ -93,15 +93,15 @@ const { serviceKey, source = "homepage-contact" } = Astro.props;
       <legend>Where should we send your quote?</legend>
       <div class="contact__field">
         <label for="contact-name">Name <span>(required)</span></label>
-        <input id="contact-name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
+        <input id="contact-name" type="text" name="name" placeholder="Your name" autocomplete="name" required maxlength="150" />
       </div>
       <div class="contact__field">
         <label for="contact-email">Email <span>(required)</span></label>
-        <input id="contact-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required />
+        <input id="contact-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required maxlength="255" />
       </div>
       <div class="contact__field">
-        <label for="contact-phone">Phone number <span>(required)</span></label>
-        <input id="contact-phone" type="tel" name="phone" placeholder="+353" autocomplete="tel" inputmode="tel" required />
+        <label for="contact-phone">Phone number <span>(optional)</span></label>
+        <input id="contact-phone" type="tel" name="phone" placeholder="+353" autocomplete="tel" inputmode="tel" maxlength="50" />
       </div>
       <div class="contact__nav">
         <button type="button" class="contact__back" data-step-back hidden>Back</button>

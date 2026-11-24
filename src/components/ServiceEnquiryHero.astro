@@ -25,7 +25,7 @@ const id = `enquiry-${service.key}`;
       <h2 id={`${id}-form-title`}>Let’s plan your project.</h2>
       <p class="service-enquiry__form-intro">Tell me what you need. I’ll reply with a clear next step and what to include in your quote.</p>
       <p class="service-enquiry__selected">{service.title}</p>
-      <form action={CRM_FORM_ENDPOINT} method="POST" id={`${id}-form`} data-crm-form={preview ? undefined : true} data-enquiry-preview={preview ? true : undefined} aria-labelledby={`${id}-form-title`}>
+      <form data-clarity-mask="true" action={CRM_FORM_ENDPOINT} method="POST" id={`${id}-form`} data-crm-form={preview ? undefined : true} data-enquiry-preview={preview ? true : undefined} aria-labelledby={`${id}-form-title`}>
         <input type="hidden" name="redirect" value={`https://www.nextvisionstudio.com/quotesend/?submitted=1&source=${service.href.split('/').filter(Boolean)[0]}`} />
         <input type="hidden" name="subject" value={`${service.title} enquiry`} />
         <input type="hidden" name="from_name" value="NextVision Studio Website" />
@@ -33,10 +33,10 @@ const id = `enquiry-${service.key}`;
         {!simple && <input type="hidden" name="service" value={service.title} />}
         <div hidden aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></div>
         <div class="service-enquiry__fields">
-          <div><label for={`${id}-name`}>Your name <span>(required)</span></label><input id={`${id}-name`} name="name" type="text" autocomplete="name" placeholder="Your name" required /></div>
-          <div><label for={`${id}-email`}>Email <span>(required)</span></label><input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@company.ie" required /></div>
-          <div class="service-enquiry__wide"><label for={`${id}-phone`}>Phone <span>(required)</span></label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" placeholder="+353" required /></div>
-          {simple ? <><div class="service-enquiry__wide"><label for={`${id}-service`}>What do you need?</label><select id={`${id}-service`} name="service" required><option value="Videography">Videography</option><option value="Commercial Photography">Photography</option><option value="CRM and AI Automation">CRM / AI automation</option><option value="Website Design and Development">Website</option><option value="Google and Meta Ads Management">Meta Ads / Google Ads management</option></select></div><input type="hidden" name="message" value={`${service.title} enquiry — please contact me to discuss the right service.`} /></> : <div class="service-enquiry__wide"><label for={`${id}-message`}>A little about your project <span>(required)</span></label><textarea id={`${id}-message`} name="message" rows="3" placeholder="What would you like to create or improve? Include a date if you have one." required></textarea></div> }
+          <div><label for={`${id}-name`}>Your name <span>(required)</span></label><input id={`${id}-name`} name="name" type="text" autocomplete="name" placeholder="Your name" required maxlength="150" /></div>
+          <div><label for={`${id}-email`}>Email <span>(required)</span></label><input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@company.ie" required maxlength="255" /></div>
+          <div class="service-enquiry__wide"><label for={`${id}-phone`}>Phone <span>(optional)</span></label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" placeholder="+353" maxlength="50" /></div>
+          {simple ? <><div class="service-enquiry__wide"><label for={`${id}-service`}>What do you need?</label><select id={`${id}-service`} name="service" required><option value="Videography">Videography</option><option value="Commercial Photography">Photography</option><option value="CRM and AI Automation">CRM / AI automation</option><option value="Website Design and Development">Website</option><option value="Google and Meta Ads Management">Meta Ads / Google Ads management</option></select></div><input type="hidden" name="message" value={`${service.title} enquiry — please contact me to discuss the right service.`} /></> : <div class="service-enquiry__wide"><label for={`${id}-message`}>A little about your project <span>(required)</span></label><textarea id={`${id}-message`} name="message" rows="3" placeholder="What would you like to create or improve? Include a date if you have one." required maxlength="10000"></textarea></div> }
         </div>
         <button type="submit">Request my quote</button>
         <p class="service-enquiry__privacy">No obligation. Your details are used only to respond to your enquiry.</p>

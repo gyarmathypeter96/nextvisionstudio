@@ -1,3 +1,4 @@
+import { safeAnalyticsUrl } from "./analytics-privacy";
 import { ANALYTICS_HOSTS, GA4_MEASUREMENT_ID } from "../config/site";
 import { measurementVisible } from "./measurement-visibility";
 
@@ -17,7 +18,7 @@ export function safeMeasurementPath(href: string, origin: string) {
   try {
     const url = new URL(href, origin);
     if (!/^https?:$/.test(url.protocol)) return url.protocol.replace(":", "");
-    const path = url.pathname.replace(/[^/]*@[^/]*/g, "redacted");
+    const path = new URL(safeAnalyticsUrl(url.href, origin, false) || origin).pathname;
     return (url.origin === origin ? path : `${url.hostname}${path}`).slice(0, 100);
   } catch { return "unknown"; }
 }
@@ -41,7 +42,7 @@ export function initialiseBehaviorTracking(browser: Window, doc: Document) {
     if (debugChoice === "0") w.sessionStorage.removeItem("nvs-measurement-qa");
     qa = w.sessionStorage.getItem("nvs-measurement-qa") === "1";
   } catch { /* Storage may be blocked; consent remains required. */ }
-  const pagePath = w.location.pathname;
+  const pagePath = safeMeasurementPath(w.location.href, w.location.origin);
   const pageType = pagePath === "/" ? "home" : pagePath.startsWith("/case-studies/") ? "case_study"
     : pagePath.startsWith("/blog/") ? "blog" : "service_or_information";
   const visible = () => doc.visibilityState === "visible" && doc.hasFocus();

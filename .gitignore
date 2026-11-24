@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Also ignore dependency symlinks used by isolated worktrees.
 /node_modules
+
+# Generated local/CI Lighthouse reports
+/output/performance/

@@ -12,6 +12,7 @@ heroProject:
   label: "VentSolve video project"
   href: "/case-studies/ventsolve-content-production/"
 featured: false
+updatedDate: "2026-11-24"
 ---
 
 A half-day video shoot is a defined filming session, not a promise of unlimited finished videos. Before booking, agree the actual hours, location, people, filming plan and the edits you need. At NextVision, the published half-day shooting rate is €250; editing is quoted separately. The written quote confirms the scope and any extras.
@@ -39,3 +40,7 @@ For a repeat content batch, compare [short-form video production](/short-form-vi
 ## Plan the right scope for your business
 
 Every brief is different. [Compare NextVision filming and package prices](/how-much-does-a-videographer-cost-in-dublin/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
+
+## Define the output before counting filming hours
+
+The [Amber Oxygen Therapy project](/case-studies/amber-oxygen-therapy-video-production/) combined twelve short videos with six images. It is a useful example of defining the content library, but it is not a promise that the same quantity fits every half day. Speakers, preparation, locations and edit complexity change what is realistic. Tell us the priority explanations and final formats first; we can then propose the filming time and editing needed for your own brief.

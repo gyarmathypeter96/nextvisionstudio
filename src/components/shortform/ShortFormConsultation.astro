@@ -19,7 +19,7 @@ import { CRM_FORM_ENDPOINT } from "../../config/forms";
     </ul>
   </div>
 
-  <form
+  <form data-clarity-mask="true"
     class="sf-consultation__form"
     action={CRM_FORM_ENDPOINT}
     method="POST"
@@ -41,15 +41,15 @@ import { CRM_FORM_ENDPOINT } from "../../config/forms";
 
     <label>
       <span>Name</span>
-      <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+      <input type="text" name="name" autocomplete="name" placeholder="Your name" required maxlength="150" />
     </label>
     <label>
       <span>Business email</span>
-      <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@business.ie" required />
+      <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@business.ie" required maxlength="255" />
     </label>
     <label>
       <span>Phone number</span>
-      <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353" required />
+      <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353" maxlength="50" />
     </label>
     <label>
       <span>Business name</span>
@@ -57,7 +57,7 @@ import { CRM_FORM_ENDPOINT } from "../../config/forms";
     </label>
     <label class="sf-consultation__wide">
       <span>What would you like video to help with?</span>
-      <textarea name="message" rows="4" placeholder="More local awareness, enquiries, consistent content..." required></textarea>
+      <textarea name="message" rows="4" placeholder="More local awareness, enquiries, consistent content..." required maxlength="10000"></textarea>
     </label>
 
     <button type="submit" class="sf-button">

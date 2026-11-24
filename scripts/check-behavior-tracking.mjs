@@ -16,7 +16,7 @@ function fixture({consent='granted',hostname='www.nextvisionstudio.com',owner=fa
     innerHeight:800,scrollY:0,gtag:(...args)=>calls.push(args),
     addEventListener:(n,fn)=>(winListeners[n]??=[]).push(fn),setInterval:fn=>intervals.push(fn),
     setTimeout:fn=>{timers.set(++tid,fn);return tid},clearTimeout:id=>timers.delete(id)};
-  const context=vm.createContext({URL,console});vm.runInContext(script,context);
+  const context=vm.createContext({URL,URLSearchParams,console});vm.runInContext(script,context);
   context.Tracking.initialiseBehaviorTracking(win,doc);
   const dispatch=(map,n,event={})=>(map[n]??[]).forEach(fn=>fn({...event,type:n}));
   return {win,doc,calls,sections,init:()=>context.Tracking.initialiseBehaviorTracking(win,doc),

@@ -125,7 +125,7 @@ const websiteSchema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-IE">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -293,4 +293,11 @@ const websiteSchema = {
     object-fit: contain;
     filter: url("#nvs-logo-transparency");
   }
+</style>
+
+<style is:global>
+  .form-field-error { color:#ffb4ad; font-size:13px; line-height:1.5; margin:8px 0 0; }
+  form [aria-invalid="true"] { border-color:#e78f88 !important; }
+  .orbit-home .form-field-error { color:#a21b1b; }
+  form [data-crm-form-status] { line-height:1.6; overflow-wrap:anywhere; }
 </style>

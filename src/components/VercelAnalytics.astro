@@ -23,13 +23,11 @@ import { ANALYTICS_HOSTS } from "../config/site";
     };
     // Keep campaign tags so the UTM report works; drop every other parameter.
     window.va("beforeSend", (event) => {
-      const url = new URL(event.url);
-      const kept = new URLSearchParams();
-      url.searchParams.forEach((value, key) => {
-        if (/^utm_(source|medium|campaign|content|term)$/.test(key)) kept.append(key, value.slice(0, 100));
-      });
-      url.search = kept.toString();
-      return { ...event, url: url.toString() };
+      const safe = window.nvsSafeAnalyticsUrl?.(event.url, window.location.origin);
+      if (!safe) return null;
+      const url = new URL(safe);
+      for (const key of [...url.searchParams.keys()]) if (!key.startsWith("utm_")) url.searchParams.delete(key);
+      return { ...event, url: url.href };
     });
 
     const script = document.createElement("script");

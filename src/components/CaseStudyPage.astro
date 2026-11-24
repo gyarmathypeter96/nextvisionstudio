@@ -61,7 +61,8 @@ const primaryVideoUrl = videoUrl ?? props.socialVideos?.[0]?.href ?? (props.loca
 const otherCaseStudies = caseStudies.filter((study) => study.href !== Astro.url.pathname && (!props.related?.length || props.related.includes(study.href))).slice(0, 4);
 
 const articleSchema = {
-  "@type": "Article",
+  "@type": props.publishedDate ? "Article" : "CreativeWork",
+  "@id": `${canonical}#case-study`,
   headline: props.title,
   description: props.description,
   ...(props.heroImage ? { image: `https://www.nextvisionstudio.com${props.heroImage}` } : {}),

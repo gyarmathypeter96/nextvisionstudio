@@ -9,7 +9,7 @@ const promotionActive = new Date() < new Date('2026-12-01T00:00:00Z');
     <p class="bf-label">BLACK FRIDAY · ENDS 30 NOVEMBER</p>
     <h2 id="bf-title">8 Reels + 8 Photos</h2>
     <p class="bf-price-line"><del>€550</del><span><small>NOW</small><strong>€450</strong><em>/ month</em></span></p>
-    <form action={CRM_FORM_ENDPOINT} method="POST" id="black-friday-popup-form" data-crm-form data-form-id="black-friday-popup">
+    <form data-clarity-mask="true" action={CRM_FORM_ENDPOINT} method="POST" id="black-friday-popup-form" data-crm-form data-form-id="black-friday-popup">
       <input type="hidden" name="redirect" value="https://www.nextvisionstudio.com/quotesend/?submitted=1&source=black-friday-popup" />
       <input type="hidden" name="subject" value="Black Friday popup enquiry" />
       <input type="hidden" name="form_type" value="Black Friday popup" />
@@ -18,11 +18,11 @@ const promotionActive = new Date() < new Date('2026-12-01T00:00:00Z');
       <input type="hidden" name="content_package" value="Full Monthly Content — Black Friday EUR 450" />
       <div hidden aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></div>
       <label for="bf-name">Name</label>
-      <input id="bf-name" name="name" autocomplete="name" placeholder="Your name" required />
+      <input id="bf-name" name="name" autocomplete="name" placeholder="Your name" required maxlength="150" />
       <label for="bf-email">Email</label>
-      <input id="bf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      <input id="bf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="255" />
       <label for="bf-phone">Phone</label>
-      <input id="bf-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" required />
+      <input id="bf-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" maxlength="50" />
       <button type="submit">Claim the deal</button>
       <p class="bf-privacy">No obligation. We’ll use your details to reply. <a href="/privacy-policy/">Privacy policy</a></p>
       <p data-bf-status role="status" aria-live="polite"></p>

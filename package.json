@@ -16,9 +16,17 @@
     "astro": "astro",
     "check:seo-growth": "node scripts/check-seo-growth.mjs",
     "check:orbit-release": "node scripts/check-orbit-release.mjs",
-    "check:orbit-packages": "node --test scripts/check-orbit-packages.mjs"
+    "check:orbit-packages": "node --test scripts/check-orbit-packages.mjs",
+    "check:types": "astro-check --minimumFailingSeverity error",
+    "check:audit": "node --test scripts/check-audit-regressions.mjs && node scripts/check-seo-integrity.mjs",
+    "check:performance": "node scripts/check-performance.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.3"
+    "astro": "^7.4.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "esbuild": "^0.28.1",
+    "typescript": "^5.9.3"
   }
 }

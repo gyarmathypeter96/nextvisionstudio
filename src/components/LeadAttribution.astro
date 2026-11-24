@@ -1,6 +1,10 @@
 <script>
+  import { safeAnalyticsUrl, safeEventLabel, enquiryIdentity } from "../lib/analytics-privacy";
+  import { showFieldError, clearFieldError } from "../lib/form-feedback";
   import { ANALYTICS_HOSTS, GA4_MEASUREMENT_ID } from "../config/site";
   import { acceptedReceipt, pendingLeadKey, sentLeadKey, readPendingLead, safeThankYouPath, thankYouPaths, type LeadParameters, type PendingLead } from "../lib/lead-receipts";
+  class EnquiryError extends Error {}
+  const measurementPath = new URL(safeAnalyticsUrl(window.location.href, window.location.origin, false) || window.location.origin).pathname;
   const productionHost = ANALYTICS_HOSTS.includes(window.location.hostname);
   const consentStorageKey = "nvs-cookie-consent";
   const analyticsConsentGranted = () => {
@@ -43,7 +47,7 @@
   const detail = (name: string, parameters: Record<string, string | number | undefined>) => {
     if (!analyticsConsentGranted()) return;
     const qa = (() => { try { return sessionStorage.getItem("nvs-measurement-qa") === "1"; } catch (_) { return false; } })();
-    window.gtag?.("event", name, { send_to: GA4_MEASUREMENT_ID, page_path: window.location.pathname, measurement_traffic: qa ? "qa" : "visitor", measurement_version: "20261108", ...(qa ? { debug_mode: true, traffic_type: "qa" } : {}), ...parameters });
+    window.gtag?.("event", name, { send_to: GA4_MEASUREMENT_ID, page_path: measurementPath, measurement_traffic: qa ? "qa" : "visitor", measurement_version: "20261108", ...(qa ? { debug_mode: true, traffic_type: "qa" } : {}), ...parameters });
     window.clarity?.("event", name);
   };
   const clearPending = (id: unknown) => {
@@ -121,12 +125,12 @@
       const storedAttribution = readStoredObject(sessionStorage, storageKey);
       trackedKeys.forEach((key) => {
         const value = query.get(key);
-        if (value) storedAttribution[key] = value.slice(0, 300);
+        if (value) storedAttribution[key] = value.slice(0, 255);
       });
 
-      if (!storedAttribution.landing_page) storedAttribution.landing_page = window.location.href;
+      if (!storedAttribution.landing_page) storedAttribution.landing_page = safeAnalyticsUrl(window.location.href, window.location.origin) || window.location.origin + window.location.pathname;
       if (!storedAttribution.initial_referrer && document.referrer) {
-        storedAttribution.initial_referrer = document.referrer;
+        storedAttribution.initial_referrer = safeAnalyticsUrl(document.referrer, window.location.origin, false) || "";
       }
 
       try {
@@ -206,7 +210,7 @@
         lastValidationAt = at;
         const count = (previous?.count || 0) + 1;
         fieldErrors.set(field, { at, category, count });
-        const parameters = { form_id: formId, form_location: window.location.pathname,
+        const parameters = { form_id: formId, form_location: measurementPath,
           field_name: field, error_type: category, validation_source: source,
           validation_attempt: validationAttempt, field_error_count: count };
         detail("form_validation", parameters);
@@ -228,11 +232,11 @@
         startedAt = Math.floor(Date.now() / 1000);
         attribution = captureSessionAttribution();
         firstTouchAttribution = captureFirstTouchAttribution();
-        detail("form_begin", { form_id: formId, form_type: readFormType(), form_location: window.location.pathname });
+        detail("form_begin", { form_id: formId, form_type: readFormType(), form_location: measurementPath });
         track("lead_form_start", {
           form_id: formId,
           form_type: readFormType(),
-          form_location: window.location.pathname,
+          form_location: measurementPath,
           lead_source: leadSource,
         });
       };
@@ -257,6 +261,11 @@
         });
       });
 
+      for (const eventName of ["input", "change"]) form.addEventListener(eventName, (event) => {
+        const field = event.target as HTMLInputElement;
+        if (field?.name && field.getAttribute?.("aria-invalid") === "true") clearFieldError(field);
+      });
+
       form.addEventListener("invalid", (event) => {
         const target = event.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
         const validity = target?.validity;
@@ -265,6 +274,7 @@
           : validity?.rangeUnderflow || validity?.rangeOverflow ? "range" : validity?.stepMismatch ? "step"
           : validity?.customError ? "custom" : "constraint";
         recordFieldError(target?.name || "unknown", category);
+        if (target?.name) showFieldError(form, target.name, category);
       }, true);
 
       form.addEventListener("submit", async (event) => {
@@ -284,13 +294,15 @@
         if (!form.reportValidity()) return;
         markFormStarted();
         submitting = true;
-        detail("form_submit_attempt", { form_id: formId, form_type: readFormType(), form_location: window.location.pathname });
+        detail("form_submit_attempt", { form_id: formId, form_type: readFormType(), form_location: measurementPath });
 
         const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
         const status = document.createElement("p");
         status.setAttribute("role", "status");
         status.setAttribute("aria-live", "polite");
         status.dataset.crmFormStatus = "true";
+        status.textContent = "Sending your enquiry…";
+        form.setAttribute?.("aria-busy", "true");
         form.querySelector("[data-crm-form-status]")?.remove();
         submit?.insertAdjacentElement("afterend", status);
         if (submit) submit.disabled = true;
@@ -353,13 +365,16 @@
         }
 
         // A network retry of the same enquiry must reuse its CRM key.
-        const identity = JSON.stringify({ ...payload, form_started_at: 0, form_duration_seconds: 0 });
+        const identity = enquiryIdentity(payload);
         if (identity !== attemptIdentity) {
           attemptIdentity = identity;
           attemptKey = crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
         }
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 30000);
         try {
           const response = await fetch(form.action, {
+            signal: controller.signal,
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -375,15 +390,19 @@
                 // Only configured, visible form fields; never send server messages or values.
                 if (/^[a-zA-Z0-9_-]{1,80}$/.test(field) && form.querySelector(`[name="${field}"]`)) {
                   recordFieldError(field, "server_validation", "server");
+                  showFieldError(form, field, "server_validation");
                 }
               }
             }
             detail("form_submission_error", { form_id: formId, error_type: response.status === 422 ? "validation" : "http", http_status: response.status });
-            const errors = Object.values(body.errors || {}).flat();
-            throw new Error(String(errors[0] || body.message || "The form could not be submitted."));
+            if (response.status === 422) {
+              form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus?.();
+              throw new EnquiryError("Please check the highlighted fields. Your details have been kept.");
+            }
+            throw new EnquiryError("We could not send your enquiry. Please retry or contact us directly.");
           }
           const receipt = acceptedReceipt(body);
-          if (!receipt) throw new Error("We could not confirm your enquiry. Please try again or contact us directly.");
+          if (!receipt) throw new EnquiryError("We could not confirm your enquiry. Please try again or contact us directly.");
 
           status.textContent = "Thank you. Your enquiry has been received.";
           const redirect = read("redirect");
@@ -395,12 +414,12 @@
             lead_source: leadSource,
             form_type: formType || "Website enquiry",
             form_id: formId,
-            form_location: window.location.pathname,
+            form_location: measurementPath,
             service_interest: serviceInterest,
             form_duration_seconds: formDurationSeconds,
           };
 
-          detail("form_submission_received", { form_id: formId, form_location: window.location.pathname, crm_submission_status: receipt.status });
+          detail("form_submission_received", { form_id: formId, form_location: measurementPath, crm_submission_status: receipt.status });
           const pending: PendingLead = {
             version: 2,
             destination: safeThankYouPath(redirect, window.location.origin) || "/quotesend/",
@@ -425,7 +444,9 @@
           if (!deferred && analyticsConsentGranted()) void confirmLead(pending);
           window.location.assign(redirect);
         } catch (error) {
-          status.textContent = error instanceof Error ? error.message : "The form could not be submitted.";
+          status.textContent = error && typeof error === "object" && "name" in error && error.name === "AbortError"
+            ? "We could not confirm your enquiry in time. Your details have been kept. Retry this form or contact us directly."
+            : error instanceof EnquiryError ? error.message : "We could not connect. Your details have been kept. Please retry or contact us directly.";
           track("lead_form_error", {
             form_id: formId,
             form_type: formType || "Website enquiry",
@@ -433,6 +454,9 @@
           });
           if (submit) submit.disabled = false;
           submitting = false;
+        } finally {
+          window.clearTimeout(timeout);
+          form.removeAttribute?.("aria-busy");
         }
       });
     });
@@ -448,6 +472,9 @@
   }
   initialiseCrmForms();
   document.addEventListener("astro:page-load", initialiseCrmForms);
+  // Capture the original landing as soon as consent is granted, even if no
+  // form is touched before the visitor opens a second page.
+  document.addEventListener("nvs:consent-change", initialiseCrmForms);
 
   document.addEventListener("click", (event) => {
     const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
@@ -459,18 +486,18 @@
     if (ctaPlacement) {
       track("cta_click", {
         cta_placement: ctaPlacement,
-        link_text: link.textContent?.trim().slice(0, 120) || "",
-        link_url: href,
+        link_text: safeEventLabel(link.textContent || ""),
+        link_url: safeAnalyticsUrl(href, window.location.origin, false) || new URL(href).protocol,
       });
     }
 
     if (href.startsWith("tel:")) {
-      detail("contact_intent", { contact_method: "phone", form_location: window.location.pathname });
-      track("click_call", { link_url: href });
+      detail("contact_intent", { contact_method: "phone", form_location: measurementPath });
+      track("click_call", { link_url: "tel:" });
     }
     if (href.includes("wa.me")) {
-      detail("contact_intent", { contact_method: "whatsapp", form_location: window.location.pathname });
-      track("click_whatsapp", { link_url: href });
+      detail("contact_intent", { contact_method: "whatsapp", form_location: measurementPath });
+      track("click_whatsapp", { link_url: safeAnalyticsUrl(href, window.location.origin, false) || "https://wa.me/" });
     }
   });
 </script>

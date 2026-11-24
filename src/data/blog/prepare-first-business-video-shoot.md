@@ -12,6 +12,7 @@ heroProject:
   label: "Leroy’s Barking World shoot"
   href: "/case-studies/leroys-barking-world-social-content/"
 featured: false
+updatedDate: "2026-11-24"
 ---
 
 Prepare for a first business video shoot by deciding who needs to watch, what they need to understand and what they should do next. Then confirm the location, people, filming permissions and finished video list with the producer. You do not need a perfect script to start; a clear question and an honest answer are more useful than a memorised sales pitch.
@@ -39,3 +40,7 @@ The preparation differs for [short-form videos](/short-form-video-production-dub
 ## Plan the right scope for your business
 
 Every brief is different. [Discuss your filming brief](/contact/) or [contact NextVision](/contact/#contact-form) to discuss your audience, timing and the finished work you need.
+
+## Start with a question the owner can answer
+
+In the [Perfect Clean advertising project](/case-studies/perfect-clean-video-advertising/), the owner spoke about the business while the video also showed the cleaning process. The customer-focused message gave the explanation a clear purpose. For your first filming session, write down one question customers ask and a straightforward answer in your own words. Then list the real work or details that would help someone understand it. That gives us a practical starting point without asking you to arrive with a polished script.

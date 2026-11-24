@@ -665,9 +665,9 @@ export const landingPages: Record<string, LandingPageData> = {
   social: {
     slug: "social-media-content-creation-dublin",
     kind: "social",
-    metaTitle: "Monthly Social Media Content Dublin | NextVision Studio",
+    metaTitle: "Social Media Content Creation Dublin | Monthly Packages",
     metaDescription:
-      "Monthly social media content for Dublin businesses. Regular ideas, filming, photography and editing, with a fresh batch of videos and photos ready to share.",
+      "Monthly social media content creation in Dublin: ideas, filming, photography and editing. Compare what is included, see real client work and plan your content.",
     eyebrow: "Monthly Social Media Content Dublin",
     headlineStart: "Monthly Social Media Content",
     headlineAccent: "for Dublin Businesses.",

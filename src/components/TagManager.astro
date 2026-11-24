@@ -1,11 +1,14 @@
 ---
+import { safeAnalyticsUrl } from "../lib/analytics-privacy";
 import { GTM_CONTAINER_ID, ANALYTICS_HOSTS, META_AD_PIXEL_ID } from "../config/site";
 
 // Every measurement tag (GA4, Google Ads, Meta Pixel, Clarity) lives in this
 // Google Tag Manager container. The container loads only after consent.
+const privacyBootstrap = `window.nvsSafeAnalyticsUrl = ${safeAnalyticsUrl.toString()};`;
 const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}`;
 ---
 
+<script is:inline set:html={privacyBootstrap} />
 <script
   is:inline
   define:vars={{ tagManagerSource, analyticsHosts: ANALYTICS_HOSTS, metaAdPixelId: META_AD_PIXEL_ID }}
@@ -18,10 +21,15 @@ const tagManagerSource = `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTA
     window.dataLayer.push(arguments);
   };
 
+  window.gtag("set", {
+    page_location: window.nvsSafeAnalyticsUrl(window.location.href, window.location.origin),
+    page_referrer: document.referrer ? window.nvsSafeAnalyticsUrl(document.referrer, window.location.origin, false) || "" : "",
+  });
+
   // Deliberate QA runs remain identifiable in GA4, including automatic events.
   // This sets no visitor identity and never bypasses consent or owner exclusion.
   try {
-    const debugChoice = new URL(location.href).searchParams.get("nvs_debug");
+    const debugChoice = new URL(window.location.href).searchParams.get("nvs_debug");
     if (debugChoice === "1") sessionStorage.setItem("nvs-measurement-qa", "1");
     if (debugChoice === "0") sessionStorage.removeItem("nvs-measurement-qa");
     if (sessionStorage.getItem("nvs-measurement-qa") === "1") {

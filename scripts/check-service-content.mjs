@@ -51,7 +51,7 @@ assert.ok(!/<iframe[^>]*youtube/.test(documents.get("video")), "YouTube must loa
 
 for (const route of ["", "contact/", "videography-dublin/", "photography-dublin/", "corporate-video-production-dublin/", "short-form-video-production-dublin/"]) {
   const document = await html(route);
-  for (const name of (route === "corporate-video-production-dublin/" ? ["email", "phone"] : ["email", "phone", "message"])) {
+  for (const name of (route === "corporate-video-production-dublin/" ? ["email"] : ["email", "message"])) {
     const tag = [...document.matchAll(/<(?:input|textarea)\b[^>]*>/g)].map(([tag]) => tag).find((tag) => tag.includes(`name="${name}"`));
     assert.ok(tag && /\brequired\b/.test(tag), `Missing required ${name}: /${route}`);
   }

@@ -10,7 +10,7 @@ export function initialiseContentMeasurement(w: MeasurementWindow, doc: Document
   const allowed = () => { try { return !w.nvsTrackingExcluded && w.localStorage.getItem('nvs-cookie-consent') === 'granted'; } catch { return false; } };
   const visible = () => doc.visibilityState === 'visible' && doc.hasFocus();
   const now = () => w.performance.now();
-  const path = w.location.pathname;
+  const path = safeMeasurementPath(w.location.href, w.location.origin);
   const clean = (value: string) => value.replace(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/gi, '[email]').replace(/\+?\d[\d ()-]{7,}\d/g, '[number]').replace(/\s+/g, ' ').trim().slice(0, 80);
   const hash = (value: string) => { let n = 2166136261; for (const c of value) n = Math.imul(n ^ c.charCodeAt(0), 16777619); return (n >>> 0).toString(36); };
   const emit = (name: string, data: Record<string, string | number>) => {
