@@ -28,6 +28,9 @@ function inspect(node,route){
  for(const value of Object.values(node))if(value&&typeof value==='object')inspect(value,route);
 }
 for(const [route,html]of pages){
+ // Empty alternatives are intentional for decoration and labelled video controls;
+ // a genuinely absent attribute is a different accessibility failure.
+ for(const [tag]of html.matchAll(/<img\b[^>]*>/g))assert.match(tag,/\salt(?:\s*=|\s|\/?>)/i,`${route}: image missing alt attribute`);
  assert.equal(attr(html.match(/<meta\b[^>]*property="og:url"[^>]*>/)?.[0]||'','content'),origin+route,`${route}: OG canonical`);
  const targets=new Set();
  for(const [tag]of html.matchAll(/<a\b[^>]*>/g)){
@@ -47,4 +50,4 @@ for(const [source,r]of redirects){assert.equal(r.permanent,true,`${source}: perm
 console.log(`PASS: ${pages.size} pages, ${nodes} schema nodes, ${listed.length} reachable sitemap URLs; OG URLs, dated articles, video fields, breadcrumbs and one-step route redirects.`);
 
 const reportPath=process.argv.find(arg=>arg.startsWith('--report='))?.slice(9);
-if(reportPath)await writeFile(reportPath,JSON.stringify({pages:pages.size,sitemapPages:listed.length,schemaNodes:nodes,routes:[...pages].map(([route,html])=>({route,indexable:listed.includes(route),depth:depth.get(route)??null,title:html.match(/<title>(.*?)<\/title>/)?.[1],description:attr(html.match(/<meta\b[^>]*name="description"[^>]*>/)?.[0]||'','content'),internalDestinations:links.get(route)?.size,mainLinks:(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1].match(/<a\b/g)||[]).length,imageCount:(html.match(/<img\b/g)||[]).length,emptyAlt:(html.match(/<img\b[^>]*alt=""/g)||[]).length}))},null,2));
+if(reportPath)await writeFile(reportPath,JSON.stringify({pages:pages.size,sitemapPages:listed.length,schemaNodes:nodes,routes:[...pages].map(([route,html])=>({route,indexable:listed.includes(route),depth:depth.get(route)??null,title:html.match(/<title>(.*?)<\/title>/)?.[1],description:attr(html.match(/<meta\b[^>]*name="description"[^>]*>/)?.[0]||'','content'),internalDestinations:links.get(route)?.size,mainLinks:(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1].match(/<a\b/g)||[]).length,imageCount:(html.match(/<img\b/g)||[]).length,emptyAlt:[...html.matchAll(/<img\b[^>]*>/g)].filter(([tag])=>attr(tag,'alt')===''||/\salt(?=\s|\/?>)/i.test(tag)).length}))},null,2));

@@ -56,7 +56,7 @@ function fixture({ url = "https://www.nextvisionstudio.com/videography-dublin/",
     if (args[0] === "get" && typeof args[3] === "function") args[3](args[2] === "client_id" ? "123.456" : "1794139200");
     else originalGtag(...args);
   };
-  return { context, window, session, localStorage, appended, requests, idle, redirects, dispatch: (name) => listeners.get(name)?.(), runForms: () => vm.runInContext(formScript, context), leads: () => (window.dataLayer ?? []).filter((item) => item.event === "generate_lead") };
+  return { context, window, session, localStorage, appended, requests, idle, redirects, dispatch: (name, event) => listeners.get(name)?.(event), runForms: () => vm.runInContext(formScript, context), leads: () => (window.dataLayer ?? []).filter((item) => item.event === "generate_lead") };
 }
 function form(redirect = "/quotesend/?source=video") {
   const values = { name: "Synthetic Test", email: "synthetic@example.invalid", phone: "0000000000", service: "Business Video Production", message: "Offline fixture only", consent: "on", redirect, form_type: "Video enquiry" };
@@ -321,3 +321,21 @@ test("form telemetry redacts an email-bearing URL path before recording form loc
   assert.ok(start);assert.equal(start.form_location,"/redacted/");
   assert.ok(!JSON.stringify(env.window.dataLayer).includes("private@example.invalid"));
 });
+
+// Exercise the real link listener without invoking a phone app or sending a message.
+for (const [method, href, expected] of [['phone','tel:+353894797055','click_call'],['whatsapp','https://wa.me/353894797055?text=Private%20message','click_whatsapp']]) {
+  test(`${method} click emits one intent and one conversion candidate; respects consent/owner exclusion`, () => {
+    for (const options of [{consent:'granted'}, {consent:'denied'}, {owner:true}]) {
+      const env=fixture(options);env.runForms();
+      const link={href,dataset:{},textContent:'Contact',closest:()=>null};
+      env.dispatch('click',{target:{closest:()=>link}});
+      const events=(env.window.dataLayer??[]).filter(item=>item.event===expected);
+      const intents=(env.window.dataLayer??[]).filter(item=>item?.[0]==='event'&&item[1]==='contact_intent');
+      const allowed=options.consent!=='denied'&&!options.owner;
+      assert.equal(events.length,allowed?1:0);
+      assert.equal(intents.length,allowed?1:0);
+      assert.ok(!JSON.stringify(events).includes('Private'));
+      assert.equal(env.leads().length,0,'Contact click is not a processed CRM lead');
+    }
+  });
+}
