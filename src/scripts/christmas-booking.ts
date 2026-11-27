@@ -157,7 +157,7 @@ async function refreshAvailability({ message = "" } = {}) {
     if (!Array.isArray(result.days)) throw new Error();
     days = result.days;
     updateSessionsLeft();
-    date.replaceChildren(new Option("Select a weekday", ""), ...days.map(day => {
+    date.replaceChildren(new Option("Select a date", ""), ...days.map(day => {
       const full = day.slots.every(slot => slot.booked);
       return new Option(dateLabel(day.date) + (full ? " (Booked)" : ""), day.date);
     }));

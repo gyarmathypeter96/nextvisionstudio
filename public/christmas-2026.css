@@ -99,6 +99,8 @@ h2 { margin: 0 0 20px; font-size: clamp(34px, 5vw, 62px); line-height: 1.04; }
 .booking-copy p { max-width: 290px; margin: 0 0 8px; line-height: 1.5; }
 .booking-copy .capacity-note { max-width: 360px; margin: 20px 0 0; padding: 14px 16px; border: 1px solid var(--line); border-left: 4px solid var(--berry); border-radius: 8px; background: var(--white); font-size: 14px; }
 .capacity-note strong { display: block; margin-bottom: 4px; color: var(--berry-dark); }
+.booking-copy .special-day-note { max-width: 360px; margin: 18px 0 0; padding: 14px 16px; border: 1px solid #c9b996; border-left: 4px solid var(--pine); border-radius: 8px; background: #f4e8cc; font-size: 14px; }
+.special-day-note strong { display: block; margin-bottom: 4px; color: var(--pine); }
 .time-zone { color: var(--muted); font-size: 13px; }
 .booking-panel { min-width: 0; padding: clamp(16px, 3vw, 28px); border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
 fieldset { min-inline-size: 0; padding: 0; margin: 0; border: 0; }
