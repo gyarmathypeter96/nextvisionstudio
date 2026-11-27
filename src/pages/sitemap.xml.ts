@@ -10,6 +10,7 @@ import { SITE_URL } from "../config/site";
 const noindexRoutes = new Set([
   "404/",
   "christmas-photoshoot/",
+  "content-sprint/",
   "quotesend/",
   "tracking-preferences/",
   "videography-dublin/",

@@ -1,0 +1,262 @@
+@import url('/orbit/fonts.css');
+
+/* Content Sprint landing page. Uses the NextVision orbit identity: near-black,
+   warm off-white, Barlow Condensed display type, Manrope text, the purple and
+   lime accents and the purple-to-orange gradient reserved for the main action. */
+.cs {
+  --black: #080808;
+  --panel: #121211;
+  --line: #2b2b28;
+  --white: #f5f5f0;
+  --muted: #a7a7a0;
+  --purple: #9239ff;
+  --lime: #ccff59;
+  --grad: linear-gradient(100deg, #8930f8 5%, #de36db 60%, #ffb753);
+  --display: 'Barlow Condensed', 'Arial Narrow', Impact, sans-serif;
+  --body: 'Manrope', Arial, sans-serif;
+  --pad: clamp(20px, 5vw, 80px);
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+.cs *, .cs *::before, .cs *::after { box-sizing: border-box; }
+.cs h1, .cs h2, .cs h3, .cs p, .cs ol, .cs ul, .cs dl, .cs dd, .cs figure { margin: 0; padding: 0; }
+.cs ol, .cs ul { list-style: none; }
+.cs img, .cs video { display: block; max-width: 100%; }
+.cs button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; }
+.cs :focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
+.cs .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.minimal-site-logo { display: none; }
+/* The Black Friday monthly offer competes with this one; keep it off this page. */
+.bf-launch, #black-friday-deal { display: none !important; }
+
+/* Buttons */
+.cs-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; border-radius: 100px; border: 1px solid transparent; font: 800 14px/1 var(--body); letter-spacing: .01em; text-decoration: none; white-space: nowrap; transition: transform .2s, background .2s, color .2s; }
+.cs-btn--primary { background: var(--grad); color: #fff; }
+.cs-btn--primary:hover { transform: translateY(-2px); }
+.cs-btn--ghost { border-color: currentColor; color: inherit; }
+.cs-btn--ghost:hover { background: var(--white); color: var(--black); }
+.cs-btn--small { min-height: 42px; padding: 0 20px; font-size: 13px; background: var(--white); color: var(--black); }
+.cs-btn--wide { width: 100%; }
+
+/* Top bar */
+.cs-top { position: absolute; z-index: 5; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 18px var(--pad); }
+.cs-top__logo img { width: 58px; height: 58px; object-fit: contain; filter: url("#nvs-logo-transparency"); }
+
+/* Hero */
+.cs-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: clamp(28px, 5vw, 90px); min-height: 100svh; padding: 110px var(--pad) 70px; }
+.cs-hero__for { color: var(--muted); font-size: 14px; font-weight: 700; margin-bottom: 18px; }
+.cs-hero h1 { font: 900 clamp(64px, 9.6vw, 170px)/.88 var(--display); letter-spacing: -.03em; padding-bottom: .1em; }
+.cs-hero h1 span { display: block; }
+.cs-hero h1 span:nth-child(2) { color: transparent; -webkit-text-stroke: 1.5px var(--white); }
+.cs-hero h1 span:nth-child(3) { color: var(--lime); }
+.cs-hero__lede { max-width: 30em; margin-top: 18px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; color: #d4d4cd; }
+.cs-offer { display: flex; align-items: center; gap: 22px; margin-top: 30px; }
+.cs-offer__price { font: 900 clamp(56px, 6vw, 88px)/.9 var(--display); }
+.cs-offer__terms { font-size: 14px; line-height: 1.6; color: var(--muted); border-left: 1px solid var(--line); padding-left: 22px; }
+.cs-status { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-weight: 800; font-size: 15px; }
+.cs-status__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 0 rgba(204, 255, 89, .6); animation: cs-pulse 2.4s infinite; }
+.cs-status--full .cs-status__dot { background: #ff6b5a; animation: none; }
+@keyframes cs-pulse { 0% { box-shadow: 0 0 0 0 rgba(204, 255, 89, .55); } 70% { box-shadow: 0 0 0 12px rgba(204, 255, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(204, 255, 89, 0); } }
+.cs-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.cs-bonus { margin-top: 18px; font-size: 14px; color: var(--lime); font-weight: 700; }
+.cs-hero__reel { justify-self: center; width: min(100%, 380px); }
+.cs-phone { position: relative; aspect-ratio: 9 / 16; border-radius: 36px; overflow: hidden; border: 1px solid #3d3d39; background: #000; box-shadow: 0 40px 120px rgba(146, 57, 255, .28); }
+.cs-phone video { width: 100%; height: 100%; object-fit: cover; }
+.cs-hero__reel figcaption { margin-top: 14px; text-align: center; font-size: 13px; color: var(--muted); }
+
+/* The shoot morning */
+.cs-morning { position: relative; height: 360vh; border-top: 1px solid var(--line); }
+.cs-morning__stage { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: center; gap: clamp(24px, 4vw, 70px); padding: 40px var(--pad); }
+.cs-morning h2 { font: 800 clamp(30px, 3vw, 48px)/1.02 var(--display); max-width: 15em; }
+.cs-clock { margin-top: 14px; font: 900 clamp(110px, 13vw, 230px)/.85 var(--display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.cs-track { position: relative; height: 4px; margin: 18px 0 26px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.cs-track span { position: absolute; inset: 0 auto 0 0; width: calc(var(--p, 0) * 100%); background: var(--grad); }
+.cs-steps { display: grid; gap: 14px; }
+.cs-steps li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; opacity: .32; transition: opacity .3s; }
+.cs-steps li.is-on { opacity: 1; }
+.cs-steps time { font: 800 15px/1.5 var(--display); color: var(--lime); }
+.cs-steps h3 { font-size: 16px; font-weight: 800; }
+.cs-steps p { margin-top: 3px; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 34em; }
+.cs-reels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.cs-reel { transition: opacity .5s, transform .5s, filter .5s; }
+.cs-morning.is-live .cs-reel:not(.is-in) { opacity: .22; transform: scale(.95); filter: grayscale(1); }
+.cs-reel button { position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: #191917; }
+.cs-reel video { width: 100%; height: 100%; object-fit: cover; }
+.cs-reel__play { position: absolute; right: 10px; bottom: 10px; width: 34px; height: 34px; border-radius: 50%; background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px); }
+.cs-reel__play::after { content: ""; position: absolute; left: 13px; top: 10px; border-style: solid; border-width: 7px 0 7px 11px; border-color: transparent transparent transparent var(--white); }
+.cs-reel button:hover .cs-reel__play { background: var(--purple); }
+.cs-reel__title { display: flex; gap: 8px; margin-top: 10px; font-size: 14px; font-weight: 800; line-height: 1.3; }
+.cs-reel__title span { color: var(--lime); font-family: var(--display); }
+.cs-reel__client { margin-top: 2px; font-size: 12px; color: var(--muted); padding-left: 16px; }
+
+/* Posting plan */
+.cs-plan { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 90px); align-items: center; padding: clamp(80px, 10vw, 140px) var(--pad); border-top: 1px solid var(--line); }
+.cs-plan h2, .cs-deal h2, .cs-faq h2 { font: 900 clamp(44px, 5.4vw, 92px)/.9 var(--display); letter-spacing: -.02em; }
+.cs-plan__copy > p { margin-top: 22px; max-width: 30em; font-size: 17px; line-height: 1.6; color: #d4d4cd; }
+.cs-plan__detail { margin-top: 34px; padding: 22px 24px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); max-width: 30em; }
+.cs-plan__when { font-size: 13px; font-weight: 800; color: var(--lime); }
+.cs-plan__what { margin-top: 6px; font: 800 28px/1.05 var(--display); }
+.cs-plan__why { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.cs-calendar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: clamp(6px, .8vw, 12px); padding: clamp(16px, 2vw, 28px); border-radius: 24px; background: var(--panel); border: 1px solid var(--line); }
+.cs-calendar__day { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); padding-bottom: 4px; }
+.cs-calendar__empty, .cs-calendar__post { aspect-ratio: 4 / 5; border-radius: 10px; }
+.cs-calendar__empty { background: #191917; }
+.cs-calendar__post { position: relative; padding: 0; overflow: hidden; outline-offset: 2px; }
+.cs-calendar__post img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.cs-calendar__post:hover img { transform: scale(1.06); }
+.cs-calendar__post[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--lime); }
+
+/* What you get */
+.cs-deal { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); gap: clamp(28px, 5vw, 90px); align-items: start; padding: clamp(80px, 10vw, 140px) var(--pad); border-top: 1px solid var(--line); }
+.cs-deal__list ul { display: grid; gap: 14px; margin-top: 32px; }
+.cs-deal__list li { position: relative; padding-left: 34px; font-size: 17px; line-height: 1.45; }
+.cs-deal__list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); }
+.cs-deal__list li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 8px; height: 5px; border-left: 2px solid var(--black); border-bottom: 2px solid var(--black); transform: rotate(-45deg); }
+.cs-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 36px; }
+.cs-photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; }
+.cs-photos__note { margin-top: 10px; font-size: 13px; color: var(--muted); }
+.cs-ticket { position: sticky; top: 24px; padding: clamp(22px, 2.5vw, 34px); border-radius: 28px; background: var(--white); color: var(--black); }
+.cs-ticket__price { font: 900 clamp(80px, 8vw, 120px)/.85 var(--display); letter-spacing: -.03em; }
+.cs-split { display: flex; gap: 4px; margin-top: 22px; height: 44px; font: 800 14px/44px var(--body); }
+.cs-split span { border-radius: 10px; padding: 0 14px; }
+.cs-split span:first-child { background: var(--purple); color: #fff; }
+.cs-split span:last-child { background: #e3e3dc; }
+.cs-ticket__terms { display: grid; gap: 10px; margin-top: 18px; }
+.cs-ticket__terms div { display: grid; grid-template-columns: 54px 1fr; gap: 10px; font-size: 14px; line-height: 1.45; }
+.cs-ticket__terms dt { font-weight: 800; }
+.cs-ticket__terms dd { color: #55554f; }
+.cs-promises { display: grid; gap: 16px; margin: 28px 0; padding-top: 24px; border-top: 1px solid #d3d3cb; }
+.cs-promises h3 { font-size: 16px; font-weight: 800; }
+.cs-promises p { margin-top: 4px; font-size: 14px; line-height: 1.5; color: #55554f; }
+
+/* Proof */
+.cs-proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 60px var(--pad) 70px; border-top: 1px solid var(--line); }
+.cs-proof > p strong, .cs-proof > p a strong { display: block; font: 900 clamp(48px, 5vw, 84px)/.9 var(--display); letter-spacing: -.02em; }
+.cs-proof > p span { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); }
+.cs-proof a { text-decoration: none; }
+.cs-logos { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: clamp(22px, 4vw, 60px); margin-top: 20px; }
+.cs-logos img { height: 44px; width: auto; max-width: 140px; object-fit: contain; filter: grayscale(1) brightness(1.6); opacity: .75; }
+
+/* Booking */
+.cs-book { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); margin: 0 12px; padding: clamp(40px, 6vw, 90px) var(--pad); border-radius: 32px; background: var(--white); color: var(--black); scroll-margin-top: 12px; }
+.cs-book h2 { font: 900 clamp(48px, 6vw, 100px)/.88 var(--display); letter-spacing: -.02em; }
+.cs-seats { margin-top: 26px; padding: 22px 24px; border-radius: 20px; background: var(--black); color: var(--white); }
+.cs-seats__big { font: 900 52px/.95 var(--display); color: var(--lime); }
+.cs-seats--full .cs-seats__big { color: #ff8a7a; }
+.cs-seats p:not(.cs-seats__big) { margin-top: 8px; font-size: 15px; line-height: 1.5; color: #d4d4cd; }
+.cs-seats__bonus { color: var(--lime) !important; font-weight: 700; }
+.cs-how { display: grid; gap: 12px; margin-top: 30px; counter-reset: how; }
+.cs-how li { position: relative; padding-left: 40px; font-size: 15px; line-height: 1.5; color: #3d3d39; counter-increment: how; }
+.cs-how li::before { content: counter(how); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--black); font: 800 13px/24px var(--body); text-align: center; }
+.cs-how strong { color: var(--black); }
+.cs-whatsapp { display: inline-block; margin-top: 24px; font-weight: 800; font-size: 15px; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
+
+.cs-form { padding: clamp(18px, 2.4vw, 32px); border-radius: 24px; background: #fff; border: 1px solid #deded6; }
+.cs-form__trap { position: absolute; left: -9999px; }
+.cs-form__tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 24px; }
+.cs-form__tabs li { padding: 12px 0 0; border-top: 3px solid #e3e3dc; font-size: 13px; font-weight: 800; color: #8b8b84; }
+.cs-form__tabs li[aria-current="step"] { border-color: var(--purple); color: var(--black); }
+.cs-form__tabs li.is-done { border-color: var(--black); color: var(--black); }
+.cs-form__step { border: 0; margin: 0; padding: 0; min-width: 0; }
+.cs-form__step legend { padding: 0; margin-bottom: 16px; font-size: 18px; font-weight: 800; }
+.cs-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; margin-bottom: 22px; }
+.cs-form__grid label { display: block; font-size: 14px; font-weight: 700; color: var(--black); }
+.cs-form__grid label small { font-size: 13px; font-weight: 500; color: #77776f; }
+.cs-form__grid label input { margin-top: 7px; }
+.cs-form__wide { grid-column: 1 / -1; }
+.cs-form input:not([type="radio"]):not([type="checkbox"]) { width: 100%; min-height: 50px; padding: 0 14px; border-radius: 12px; border: 1px solid #cfcfc6; background: #fafaf7; font: 500 16px var(--body); color: var(--black); }
+.cs-form input:focus { outline: 3px solid var(--purple); outline-offset: 1px; border-color: var(--purple); }
+.cs-dates { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 10px; margin-bottom: 22px; }
+.cs-date { position: relative; display: grid; gap: 2px; padding: 14px; border-radius: 14px; border: 1px solid #cfcfc6; cursor: pointer; transition: border-color .2s, background .2s; }
+.cs-date input { position: absolute; opacity: 0; }
+.cs-date__day { font-size: 13px; color: #6b6b64; font-weight: 700; }
+.cs-date__date { font: 900 26px/1 var(--display); }
+.cs-date__state { font-size: 12px; color: #6b6b64; font-weight: 600; }
+.cs-date:has(input:checked) { border-color: var(--purple); background: #f3ebff; box-shadow: inset 0 0 0 1px var(--purple); }
+.cs-date:has(input:focus-visible) { outline: 3px solid var(--purple); outline-offset: 2px; }
+.cs-date--taken { opacity: .45; cursor: not-allowed; text-decoration: line-through; }
+.cs-date--other .cs-date__date { font-size: 18px; line-height: 1.1; }
+.cs-form__nav { display: flex; justify-content: space-between; gap: 10px; }
+.cs-form__nav .cs-btn--ghost { color: var(--black); }
+.cs-summary { display: grid; gap: 10px; margin-bottom: 18px; padding: 18px; border-radius: 14px; background: #fafaf7; border: 1px solid #e3e3dc; }
+.cs-summary div { display: grid; grid-template-columns: 130px 1fr; gap: 10px; font-size: 14px; line-height: 1.4; }
+.cs-summary dt { color: #6b6b64; }
+.cs-summary dd { font-weight: 700; overflow-wrap: anywhere; }
+.cs-form__note { margin-bottom: 20px; font-size: 14px; line-height: 1.5; color: #4b4b45; }
+.cs-form__privacy { margin-top: 16px; font-size: 13px; color: #6b6b64; }
+.cs-form__privacy a { color: inherit; }
+.cs-form [data-crm-form-status] { margin-top: 12px; font-size: 14px; font-weight: 700; }
+
+/* FAQ and close */
+.cs-faq { display: grid; grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: clamp(28px, 5vw, 90px); padding: clamp(80px, 10vw, 140px) var(--pad); }
+.cs-faq details { border-bottom: 1px solid var(--line); }
+.cs-faq details:first-child { border-top: 1px solid var(--line); }
+.cs-faq summary { display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; cursor: pointer; list-style: none; font-size: 18px; font-weight: 800; }
+.cs-faq summary::-webkit-details-marker { display: none; }
+.cs-faq summary::after { content: "+"; font-weight: 400; font-size: 26px; line-height: 1; transition: transform .2s; }
+.cs-faq details[open] summary::after { transform: rotate(45deg); }
+.cs-faq details p { padding-bottom: 22px; max-width: 42em; font-size: 16px; line-height: 1.6; color: var(--muted); }
+.cs-end { padding: 40px var(--pad) 120px; text-align: center; }
+.cs-end__line { margin-bottom: 28px; font: 900 clamp(44px, 7vw, 120px)/.9 var(--display); letter-spacing: -.02em; }
+.cs-end__small { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+/* Mobile action bar and player */
+.cs-bar { position: fixed; z-index: 40; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 100px; background: rgba(18, 18, 17, .92); border: 1px solid var(--line); backdrop-filter: blur(14px); }
+.cs-bar[hidden] { display: none; }
+.cs-bar p { display: grid; line-height: 1.2; }
+.cs-bar strong { font: 900 24px/1 var(--display); }
+.cs-bar span { font-size: 11px; color: var(--muted); }
+.cs-bar .cs-btn { min-height: 46px; padding: 0 20px; }
+.cs-player { width: min(420px, 92vw); padding: 12px; border: 1px solid var(--line); border-radius: 22px; background: var(--black); color: var(--white); }
+.cs-player::backdrop { background: rgba(0, 0, 0, .85); backdrop-filter: blur(10px); }
+.cs-player video { width: 100%; max-height: 74svh; border-radius: 14px; background: #000; }
+.cs-player p { margin: 12px 4px 4px; font-size: 14px; font-weight: 700; }
+.cs-player__close { position: absolute; top: 20px; right: 20px; padding: 8px 14px; border-radius: 100px; background: rgba(0, 0, 0, .65); font-size: 13px; font-weight: 800; }
+
+@media (min-width: 901px) { .cs-bar { display: none !important; } }
+
+@media (max-width: 900px) {
+  .cs-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 96px; padding-bottom: 56px; }
+  .cs-hero h1 { font-size: clamp(60px, 19vw, 110px); }
+  .cs-hero__reel { width: min(76vw, 320px); }
+  .cs-offer { gap: 16px; }
+  .cs-offer__terms { padding-left: 16px; }
+  .cs-hero__actions .cs-btn { flex: 1 1 auto; }
+  .cs-morning { height: auto; }
+  .cs-morning__stage { position: static; height: auto; display: flex; flex-direction: column; align-items: stretch; padding: 70px 0 60px; }
+  .cs-morning__time { display: contents; }
+  .cs-morning h2 { order: 1; padding: 0 var(--pad); }
+  .cs-clock, .cs-track { display: none; }
+  .cs .cs-steps { order: 3; margin-top: 34px; padding: 0 var(--pad); }
+  .cs-steps li { opacity: 1; }
+  .cs .cs-reels { order: 2; width: 100%; min-width: 0; display: flex; gap: 12px; margin-top: 26px; padding: 0 var(--pad) 8px; scroll-padding-inline: var(--pad); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .cs-reels::-webkit-scrollbar { display: none; }
+  .cs-reel { flex: 0 0 58vw; max-width: 260px; scroll-snap-align: start; }
+  .cs-morning.is-live .cs-reel:not(.is-in) { opacity: 1; transform: none; filter: none; }
+  .cs-plan, .cs-deal, .cs-faq, .cs-book { grid-template-columns: 1fr; }
+  .cs-calendar { gap: 5px; padding: 12px; }
+  .cs-ticket { position: static; }
+  .cs-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-proof { grid-template-columns: 1fr; gap: 26px; }
+  .cs-book { margin: 0 6px; border-radius: 24px; padding: 40px 18px; }
+  .cs-form { padding: 18px 14px; }
+  .cs-form__grid { grid-template-columns: 1fr; }
+  .cs-summary div { grid-template-columns: 1fr; gap: 2px; }
+  .cs-faq summary { font-size: 16px; }
+  .cs-end { padding-bottom: 130px; }
+  /* The action bar sits where the WhatsApp float would; WhatsApp stays
+     available in the booking section. */
+  .whatsapp-float { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-status__dot { animation: none; }
+  .cs-morning { height: auto; }
+  .cs-morning__stage { position: static; height: auto; }
+  .cs-morning.is-live .cs-reel:not(.is-in) { opacity: 1; transform: none; filter: none; }
+  .cs-steps li { opacity: 1; }
+  .cs-btn, .cs-reel, .cs-calendar__post img { transition: none; }
+}
