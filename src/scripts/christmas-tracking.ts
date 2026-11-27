@@ -12,7 +12,7 @@ interface TrackingWindow {
   fbq?: (...args: unknown[]) => void;
 }
 
-// What a confirmed Christmas session is worth, reported as the Lead value.
+// What a confirmed Christmas session is worth (GA4 generate_lead value).
 export const CHRISTMAS_SESSION_VALUE = 150;
 
 const trackingWindow = window as unknown as TrackingWindow;
@@ -26,12 +26,10 @@ function measurementAllowed() {
   }
 }
 
-function sendMetaEvent(event: string, params: MetaParams, eventID?: string) {
+function sendMetaEvent(event: string, params: MetaParams) {
   if (typeof trackingWindow.fbq !== "function") return;
   try {
-    // The eventID lets Meta drop a duplicate of the same booking.
-    if (eventID) trackingWindow.fbq("track", event, params, { eventID });
-    else trackingWindow.fbq("track", event, params);
+    trackingWindow.fbq("track", event, params);
   } catch {
     // Measurement is optional; never let it break the page.
   }
@@ -42,6 +40,7 @@ function pushDataLayer(payload: Record<string, unknown>) {
 }
 
 // A booking the CRM has saved. `reference` is the NV-CH-… booking number.
+// GA4 and the GTM Meta Lead tag both read this generate_lead push.
 export function trackConfirmedBooking(reference: string) {
   if (!measurementAllowed()) return;
 
@@ -57,12 +56,9 @@ export function trackConfirmedBooking(reference: string) {
     booking_reference: reference,
   });
 
-  sendMetaEvent("Lead", {
-    value: CHRISTMAS_SESSION_VALUE,
-    currency: "EUR",
-    content_name: "Christmas photoshoot",
-    content_category: "christmas_photoshoot",
-  }, reference);
+  // No direct fbq("track", "Lead") here: the GTM container already turns
+  // generate_lead into a Meta Lead for both initialised pixels, so a second
+  // call would count every booking twice.
 }
 
 // Every WhatsApp link on the page counts as a Contact, wherever it sits.
