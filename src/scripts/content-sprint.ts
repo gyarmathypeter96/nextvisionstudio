@@ -2,6 +2,7 @@
 // loops that only play on screen, the posting-plan picker, the video player,
 // the three-step request form and the mobile action bar. Form submission
 // itself is handled by LeadAttribution.astro (CRM receipt and generate_lead).
+import { buildPlan } from "./content-sprint-plan";
 
 const root = document.querySelector<HTMLElement>("[data-sprint]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -82,18 +83,71 @@ function setupMorning() {
   update();
 }
 
-// Posting plan: choosing a day shows which video goes out and why.
+// Posting plan: rebuilt for the visitor's own date so it always shows next
+// month; choosing a day shows which video or photo goes out and why.
 function setupPlan() {
+  const section = root!.querySelector<HTMLElement>("[data-plan]");
+  const grid = root!.querySelector<HTMLElement>("[data-plan-grid]");
   const detail = root!.querySelector<HTMLElement>("[data-plan-detail]");
-  const posts = [...root!.querySelectorAll<HTMLButtonElement>("[data-post-what]")];
-  if (!detail) return;
+  if (!section || !grid || !detail) return;
   const [when, what, why] = [".cs-plan__when", ".cs-plan__what", ".cs-plan__why"].map((s) => detail.querySelector<HTMLElement>(s)!);
-  posts.forEach((post) => post.addEventListener("click", () => {
-    posts.forEach((other) => other.setAttribute("aria-pressed", String(other === post)));
+
+  const plan = buildPlan(new Date());
+  const label = root!.querySelector<HTMLElement>("[data-plan-label]");
+  if (label && label.textContent !== plan.label) {
+    label.textContent = plan.label;
+    section.querySelectorAll<HTMLElement>("[data-plan-month]").forEach((node) => { node.textContent = plan.monthName; });
+    grid.setAttribute("aria-label", `Example posting plan for ${plan.label}`);
+    grid.querySelectorAll(".cs-calendar__blank, .cs-calendar__date, .cs-calendar__post").forEach((cell) => cell.remove());
+    for (let i = 0; i < plan.leadingBlanks; i++) {
+      const blank = document.createElement("span");
+      blank.className = "cs-calendar__blank";
+      blank.setAttribute("aria-hidden", "true");
+      grid.append(blank);
+    }
+    let first = true;
+    for (const day of plan.days) {
+      if (!day.item) {
+        const cell = document.createElement("span");
+        cell.className = "cs-calendar__date";
+        cell.setAttribute("aria-hidden", "true");
+        cell.textContent = String(day.day);
+        grid.append(cell);
+        continue;
+      }
+      const kind = day.item.kind === "video" ? "Video" : "Photo";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `cs-calendar__post cs-calendar__post--${day.item.kind}`;
+      button.setAttribute("aria-pressed", String(first));
+      button.dataset.postWhen = `${day.weekday} ${day.day} ${plan.monthName} · ${kind}`;
+      button.dataset.postWhat = day.item.title;
+      button.dataset.postWhy = day.item.why;
+      button.setAttribute("aria-label", `${day.weekday} ${day.day}: ${day.item.kind} — ${day.item.title}`);
+      const image = document.createElement("img");
+      Object.assign(image, { src: day.item.image, alt: "", loading: "lazy", decoding: "async", width: 540, height: 960 });
+      const number = document.createElement("span");
+      number.className = "cs-calendar__num";
+      number.textContent = String(day.day);
+      button.append(image, number);
+      grid.append(button);
+      if (first) {
+        when.textContent = button.dataset.postWhen;
+        what.textContent = day.item.title;
+        why.textContent = day.item.why;
+        first = false;
+      }
+    }
+  }
+
+  grid.addEventListener("click", (event) => {
+    const post = (event.target as HTMLElement).closest<HTMLButtonElement>(".cs-calendar__post");
+    if (!post) return;
+    grid.querySelectorAll(".cs-calendar__post").forEach((other) => other.setAttribute("aria-pressed", String(other === post)));
     when.textContent = post.dataset.postWhen || "";
     what.textContent = post.dataset.postWhat || "";
     why.textContent = post.dataset.postWhy || "";
-  }));
+  });
 }
 
 // Full videos open with sound in a dialog.
@@ -187,17 +241,27 @@ function setupForm() {
 
 }
 
-// Mobile bar: visible after the hero, hidden while the booking form is on screen.
+// Mobile bar: visible after the hero, hidden while the booking form or the
+// closing call to action is on screen, so it never covers another button.
 function setupBar() {
   const bar = root!.querySelector<HTMLElement>("[data-sprint-bar]");
   const hero = root!.querySelector<HTMLElement>(".cs-hero");
   const book = root!.querySelector<HTMLElement>("#book");
+  const end = root!.querySelector<HTMLElement>(".cs-end");
   if (!bar || !hero || !book || !("IntersectionObserver" in window)) return;
   let heroVisible = true;
   let bookVisible = false;
-  const update = () => { bar.hidden = heroVisible || bookVisible; };
+  let endVisible = false;
+  const cookie = document.querySelector<HTMLElement>("[data-cookie-consent]");
+  const update = () => {
+    bar.hidden = heroVisible || bookVisible || endVisible;
+    // Sit above the cookie bar while it is open instead of covering it.
+    bar.style.setProperty("--cookie-offset", cookie && !cookie.hidden ? `${cookie.offsetHeight}px` : "0px");
+  };
+  if (cookie) new MutationObserver(update).observe(cookie, { attributes: true, attributeFilter: ["hidden"] });
   new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; update(); }).observe(hero);
   new IntersectionObserver(([entry]) => { bookVisible = entry.isIntersecting; update(); }, { rootMargin: "0px 0px -15% 0px" }).observe(book);
+  if (end) new IntersectionObserver(([entry]) => { endVisible = entry.isIntersecting; update(); }).observe(end);
 }
 
 // The build bakes the bonus in; remove it in the browser once it has expired.

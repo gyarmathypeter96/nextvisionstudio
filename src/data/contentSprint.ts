@@ -47,6 +47,18 @@ export const sprintVideos = [
   { id: "08", title: "An invitation", why: "A clear reason to visit, call or book this month.", client: "SG Studios Dublin", full: "/videos/portfolio-2026/sg-studios-short.mp4" },
 ];
 
+// The eight photos from the same morning. Images are NextVision photography.
+export const sprintPhotos = [
+  { title: "Your products", why: "Clean product shots for your website and posts.", image: "/images/photography/thumbs/product-photography-dublin.jpg" },
+  { title: "Food and drink", why: "What you serve, shot to make people hungry.", image: "/images/photography/thumbs/food-drink-photography-dublin.jpg" },
+  { title: "The team at work", why: "Real people doing the real job.", image: "/images/photography/thumbs/brand-photography-social-content-dublin.jpg" },
+  { title: "Your space", why: "The room your customers walk into.", image: "/images/photography/thumbs/hospitality-brand-photography-dublin.jpg" },
+  { title: "Owner portrait", why: "A face for your About page and profile.", image: "/images/photography/thumbs/creative-portrait-photography-dublin.jpg" },
+  { title: "Close-up detail", why: "The finish and care, up close.", image: "/images/photography/thumbs/automotive-detail-photography-dublin.jpg" },
+  { title: "Team portrait", why: "For LinkedIn, Google and your website.", image: "/images/photography/thumbs/corporate-photography-dublin.jpg" },
+  { title: "A busy moment", why: "Proof that people choose you.", image: "/images/photography/thumbs/event-photography-dublin.jpg" },
+];
+
 // The shoot morning. Minutes are counted from 09:00 and drive the clock.
 export const shootSteps = [
   { at: 0, time: "09:00", title: "Set-up", text: "Light, camera and the running order. Your doors stay open." },
@@ -68,8 +80,8 @@ export const included = [
 
 // Owner confirms these before the page goes live.
 export const promises = [
-  { title: "Approve the plan first", text: `You see the plan for all 8 videos before we film. If we can't agree on it, you get the €200 deposit back.` },
-  { title: "Fixed if it misses the plan", text: "If a finished video doesn't match what we agreed, we re-edit it free from the shoot footage." },
+  "Approve the plan before we film, or get the deposit back",
+  "Free re-edit if a video misses the agreed plan",
 ];
 
 export const faq = [
@@ -86,10 +98,14 @@ export const proof = [
   { value: "816+", label: "pieces of content published" },
 ];
 
+// Same Irish client set and assets as the home page logo rail.
 export const clientLogos = [
-  { src: "/images/clients/ventsolve.webp", alt: "VentSolve", width: 400, height: 141 },
-  { src: "/images/clients/perfect-clean.webp", alt: "Perfect Clean", width: 172, height: 160 },
-  { src: "/images/clients/amber-oxygen.svg", alt: "Amber Oxygen Therapy", width: 827, height: 243 },
-  { src: "/images/clients/balbriggan-braces.png", alt: "Balbriggan Braces", width: 988, height: 238 },
-  { src: "/images/clients/collen-optimized.svg", alt: "Collen Construction", width: 483, height: 107 },
+  { src: "/images/clients/collen-optimized.svg", alt: "Collen Construction", width: 483, height: 107, light: true },
+  { src: "/orbit/assets/ventsolve.webp", alt: "VentSolve", width: 200, height: 100 },
+  { src: "/orbit/assets/perfect-clean.png", alt: "Perfect Clean", width: 200, height: 100 },
+  { src: "/orbit/assets/gut-fest-340.webp", alt: "Gut Fest", width: 200, height: 100 },
+  { src: "/orbit/assets/leroys-340.webp", alt: "Leroy's Barking World", width: 200, height: 100 },
+  { src: "/images/clients/amber-oxygen.svg", alt: "Amber Oxygen Therapy", width: 200, height: 100 },
+  { src: "/orbit/assets/balbriggan-braces.png", alt: "Balbriggan Braces", width: 200, height: 100 },
+  { src: "/orbit/assets/sg-studios-logo.png", alt: "SG Studios Dublin", width: 240, height: 80 },
 ];

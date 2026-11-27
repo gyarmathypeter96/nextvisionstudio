@@ -6,6 +6,7 @@ import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "../config/site";
 import {
   sprint, shootMornings, sprintVideos, shootSteps, included, promises, faq, proof, clientLogos,
 } from "../data/contentSprint";
+import { buildPlan } from "../scripts/content-sprint-plan";
 import "../styles/content-sprint.css";
 
 // Ad landing page for the Content Sprint offer. Not for organic search.
@@ -26,22 +27,12 @@ const availability = fullyBooked
     ? `${shootMornings.length} shoot mornings in ${sprint.month}`
     : `${openMornings.length} of ${shootMornings.length} ${sprint.month} mornings left`;
 
-// Four weeks after the shoot, two posts a week (Tuesday and Friday).
+// Next month's example posting plan; the browser rebuilds it for its own date.
 const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const postDays = new Map<number, (typeof sprintVideos)[number]>();
-sprintVideos.forEach((video, index) => {
-  const week = Math.floor(index / 2);
-  const day = index % 2 === 0 ? 1 : 4;
-  postDays.set(week * 7 + day, video);
-});
+const plan = buildPlan();
+const firstPost = plan.days.find((day) => day.item)!;
 const media = "/images/content-sprint/";
 const loops = "/videos/content-sprint/";
-const photos = [
-  ["brand-photography-social-content-dublin", "Brand photograph of a team at work"],
-  ["food-drink-photography-dublin", "Food and drink photograph"],
-  ["product-photography-dublin", "Product photograph"],
-  ["hospitality-brand-photography-dublin", "Hospitality photograph"],
-];
 ---
 
 <BaseLayout
@@ -53,6 +44,7 @@ const photos = [
   noindex
   followLinks
   minimal
+  cookieVariant="slim"
 >
   <div class="cs" data-sprint data-fully-booked={fullyBooked ? "true" : "false"}>
     <header class="cs-top">
@@ -65,24 +57,18 @@ const photos = [
     <main>
       <section class="cs-hero" aria-labelledby="cs-title">
         <div class="cs-hero__copy">
-          <p class="cs-hero__for">Content Sprint for Dublin businesses</p>
           <h1 id="cs-title"><span>One morning.</span> <span>8 videos.</span> <span>8 photos.</span></h1>
-          <p class="cs-hero__lede">We plan, film and edit a month of posts at your business. You're on camera for about an hour.</p>
+          <p class="cs-hero__lede">A month of posts, filmed at your business in Dublin.</p>
 
           <div class="cs-offer">
             <p class="cs-offer__price">€{sprint.price}</p>
-            <p class="cs-offer__terms">€{sprint.deposit} holds your morning.<br />The other €{balance} after you've watched your videos.</p>
+            <p class:list={["cs-status", { "cs-status--full": fullyBooked }]}><span class="cs-status__dot" aria-hidden="true"></span>{availability}</p>
           </div>
-
-          <p class:list={["cs-status", { "cs-status--full": fullyBooked }]}><span class="cs-status__dot" aria-hidden="true"></span>{availability}</p>
 
           <div class="cs-hero__actions">
             <a class="cs-btn cs-btn--primary" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
             <a class="cs-btn cs-btn--ghost" href="#morning">See the 8 videos</a>
           </div>
-          {bonusActive && !fullyBooked && (
-            <p class="cs-bonus" data-bonus data-until={sprint.bonus.until}>Book by {sprint.bonus.untilLabel} and get {sprint.bonus.text}.</p>
-          )}
         </div>
 
         <figure class="cs-hero__reel">
@@ -125,31 +111,37 @@ const photos = [
         </div>
       </section>
 
-      <section class="cs-plan" aria-labelledby="cs-plan-title">
+      <section class="cs-plan" aria-labelledby="cs-plan-title" data-plan>
         <div class="cs-plan__copy">
-          <h2 id="cs-plan-title">Your next four weeks, planned before we film.</h2>
-          <p>Two posts a week, with captions written. Most businesses post nothing in January. You'll have something ready every Tuesday and Friday.</p>
+          <h2 id="cs-plan-title">Your <span data-plan-month>{plan.monthName}</span>, planned before we film.</h2>
+          <p>8 videos and 8 photos, spread across the month, captions written.</p>
+          <ul class="cs-legend">
+            <li class="cs-legend__video">Video</li>
+            <li class="cs-legend__photo">Photo</li>
+          </ul>
           <div class="cs-plan__detail" aria-live="polite" data-plan-detail>
-            <p class="cs-plan__when">Week 1, Tuesday</p>
-            <p class="cs-plan__what">{sprintVideos[0].title}</p>
-            <p class="cs-plan__why">{sprintVideos[0].why}</p>
+            <p class="cs-plan__when">{firstPost.weekday} {firstPost.day} {plan.monthName} · {firstPost.item!.kind === "video" ? "Video" : "Photo"}</p>
+            <p class="cs-plan__what">{firstPost.item!.title}</p>
+            <p class="cs-plan__why">{firstPost.item!.why}</p>
           </div>
         </div>
 
-        <div class="cs-calendar" role="group" aria-label="Example posting plan for the 4 weeks after your shoot">
-          {weekdays.map((day) => <span class="cs-calendar__day" aria-hidden="true">{day}</span>)}
-          {Array.from({ length: 28 }, (_, cell) => {
-            const video = postDays.get(cell);
-            const week = Math.floor(cell / 7) + 1;
-            const dayName = cell % 7 === 1 ? "Tuesday" : "Friday";
-            return video ? (
-              <button type="button" class="cs-calendar__post" aria-pressed={cell === 1 ? "true" : "false"} data-post-when={`Week ${week}, ${dayName}`} data-post-what={video.title} data-post-why={video.why} aria-label={`Week ${week}, ${dayName}: ${video.title}`}>
-                <img src={`${media}poster-${video.id}.webp`} alt="" width="540" height="960" loading="lazy" decoding="async" />
+        <div class="cs-calendar-wrap">
+          <p class="cs-calendar__month" data-plan-label>{plan.label}</p>
+          <div class="cs-calendar" role="group" aria-label={`Example posting plan for ${plan.label}`} data-plan-grid>
+            {weekdays.map((day) => <span class="cs-calendar__day" aria-hidden="true">{day}</span>)}
+            {Array.from({ length: plan.leadingBlanks }, () => <span class="cs-calendar__blank" aria-hidden="true"></span>)}
+            {plan.days.map((day) => day.item ? (
+              <button type="button" class:list={["cs-calendar__post", `cs-calendar__post--${day.item.kind}`]} aria-pressed={day === firstPost ? "true" : "false"}
+                data-post-when={`${day.weekday} ${day.day} ${plan.monthName} · ${day.item.kind === "video" ? "Video" : "Photo"}`} data-post-what={day.item.title} data-post-why={day.item.why}
+                aria-label={`${day.weekday} ${day.day}: ${day.item.kind} — ${day.item.title}`}>
+                <img src={day.item.image} alt="" loading="lazy" decoding="async" width="540" height="960" />
+                <span class="cs-calendar__num">{day.day}</span>
               </button>
             ) : (
-              <span class="cs-calendar__empty" aria-hidden="true"></span>
-            );
-          })}
+              <span class="cs-calendar__date" aria-hidden="true">{day.day}</span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -157,25 +149,16 @@ const photos = [
         <div class="cs-deal__list">
           <h2 id="cs-deal-title">What €{sprint.price} covers</h2>
           <ul>{included.map((item) => <li>{item}</li>)}</ul>
-          <div class="cs-photos">
-            {photos.map(([file, alt]) => <img src={`/images/photography/thumbs/${file}.jpg`} alt={alt} width="506" height="760" loading="lazy" decoding="async" />)}
-          </div>
-          <p class="cs-photos__note">Photos from NextVision shoots. Yours are taken on the same morning.</p>
+
         </div>
 
         <aside class="cs-ticket" aria-label="Price and payment">
           <p class="cs-ticket__price">€{sprint.price}</p>
-          <div class="cs-split" aria-hidden="true">
-            <span style={`flex:${sprint.deposit}`}>€{sprint.deposit}</span>
-            <span style={`flex:${balance}`}>€{balance}</span>
+          <div class="cs-split">
+            <p style={`flex:${sprint.deposit}`}><strong>€{sprint.deposit}</strong><span>to book</span></p>
+            <p style={`flex:${balance}`}><strong>€{balance}</strong><span>after delivery</span></p>
           </div>
-          <dl class="cs-ticket__terms">
-            <div><dt>€{sprint.deposit}</dt><dd>when you approve the plan, to hold your morning</dd></div>
-            <div><dt>€{balance}</dt><dd>after you've watched your finished videos</dd></div>
-          </dl>
-          <ul class="cs-promises">
-            {promises.map((promise) => <li><h3>{promise.title}</h3><p>{promise.text}</p></li>)}
-          </ul>
+          <ul class="cs-promises">{promises.map((promise) => <li>{promise}</li>)}</ul>
           <a class="cs-btn cs-btn--primary cs-btn--wide" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
         </aside>
       </section>
@@ -183,32 +166,31 @@ const photos = [
       <section class="cs-proof" aria-label="Our work in numbers">
         {proof.map((item) => <p><strong>{item.value}</strong><span>{item.label}</span></p>)}
         <p><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener"><strong>{GOOGLE_RATING.value}</strong><span>on Google from {GOOGLE_RATING.count} reviews</span></a></p>
-        <ul class="cs-logos" aria-label="Some of our clients">
-          {clientLogos.map((logo) => <li><img src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} loading="lazy" decoding="async" /></li>)}
-        </ul>
+        <div class="cs-marquee" aria-label="Some of our Irish clients" role="region">
+          <div class="cs-marquee__track">
+            {[0, 1].map((copy) => (
+              <ul class="cs-marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
+                {clientLogos.map((logo) => (
+                  <li><img src={logo.src} alt={copy === 1 ? "" : logo.alt} width={logo.width} height={logo.height} loading="lazy" decoding="async" class:list={[{ "is-light": logo.light }]} /></li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section class="cs-book" id="book" aria-labelledby="cs-book-title">
         <div class="cs-book__intro">
-          <h2 id="cs-book-title">{fullyBooked ? `${sprint.month} is fully booked` : "Pick your morning"}</h2>
+          <h2 id="cs-book-title">{fullyBooked ? `${sprint.month} is full` : "Pick your morning"}</h2>
           <div class:list={["cs-seats", { "cs-seats--full": fullyBooked }]}>
-            {fullyBooked ? (
-              <>
-                <p class="cs-seats__big">Fully booked</p>
-                <p>Send a request and we'll offer you the first free {sprint.nextMonth} morning before anyone else.</p>
-              </>
-            ) : (
-              <>
-                <p class="cs-seats__big">{allOpen ? `${shootMornings.length} mornings` : `${openMornings.length} of ${shootMornings.length} left`}</p>
-                <p>We film one business per morning, so {sprint.month} has {shootMornings.length} places.</p>
-                {bonusActive && <p class="cs-seats__bonus" data-bonus data-until={sprint.bonus.until}>Book by {sprint.bonus.untilLabel}: {sprint.bonus.text}.</p>}
-              </>
-            )}
+            <p class="cs-seats__big">{fullyBooked ? "Fully booked" : allOpen ? `${shootMornings.length} mornings in ${sprint.month}` : `${openMornings.length} of ${shootMornings.length} left`}</p>
+            <p>{fullyBooked ? `Request now and get the first free ${sprint.nextMonth} morning.` : "One business per morning."}</p>
+            {bonusActive && !fullyBooked && <p class="cs-seats__bonus" data-bonus data-until={sprint.bonus.until}>Book by {sprint.bonus.untilLabel}: {sprint.bonus.text}.</p>}
           </div>
           <ol class="cs-how">
-            <li><strong>Send your request.</strong> It takes about a minute. No payment.</li>
-            <li><strong>We call you within one working day</strong> and agree the 8 videos.</li>
-            <li><strong>€{sprint.deposit} holds your morning</strong> once you've approved the plan.</li>
+            <li>Send your request</li>
+            <li>We call you within a day</li>
+            <li>€{sprint.deposit} holds your morning</li>
           </ol>
           <a class="cs-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noopener">Questions first? Message us on WhatsApp</a>
         </div>
@@ -295,10 +277,11 @@ const photos = [
         </div>
       </section>
 
-      <section class="cs-end" aria-label="Book a morning">
-        <p class="cs-end__line">One morning. 8 videos. 8 photos. €{sprint.price}.</p>
+      <section class="cs-end" aria-labelledby="cs-end-title">
+        <h2 id="cs-end-title" class="cs-end__line">Ready for a month of posts?</h2>
+        <p class="cs-end__offer">One morning, 8 videos and 8 photos for €{sprint.price}.</p>
         <a class="cs-btn cs-btn--primary" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
-        <p class="cs-end__small">Prices exclude VAT where it applies. Filming in Dublin and North Dublin.</p>
+        <p class="cs-end__small">Prices exclude VAT where it applies.</p>
       </section>
     </main>
 
