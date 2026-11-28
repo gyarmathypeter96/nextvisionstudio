@@ -68,14 +68,11 @@ export const shootSteps = [
   { at: 210, time: "12:30", title: "Customers and wrap", text: "Atmosphere where it suits. The first edited video reaches you within 48 hours." },
 ];
 
-export const included = [
-  "A plan for all 8 videos, agreed with you before the shoot",
-  "One morning of filming at your business, up to 4 hours",
-  "8 vertical videos, 20 to 60 seconds, edited with subtitles and music",
-  "8 edited photos for your website and social media",
-  "A caption for every video and a 4-week posting plan",
+// Shown under the four "What €690 covers" tiles (videos, photos, plan, morning).
+export const extras = [
   "One round of changes on the whole set",
   "Travel anywhere in Dublin and North Dublin",
+  "Yours to post and to use in ads",
 ];
 
 // Owner confirms these before the page goes live.

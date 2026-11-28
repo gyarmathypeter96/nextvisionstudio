@@ -4,7 +4,7 @@ import { CRM_FORM_ENDPOINT } from "../config/forms";
 import { WHATSAPP_URL } from "../config/contact";
 import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "../config/site";
 import {
-  sprint, shootMornings, sprintVideos, shootSteps, included, promises, faq, proof, clientLogos,
+  sprint, shootMornings, sprintVideos, sprintPhotos, shootSteps, extras, promises, faq, proof, clientLogos,
 } from "../data/contentSprint";
 import { buildPlan } from "../scripts/content-sprint-plan";
 import "../styles/content-sprint.css";
@@ -69,15 +69,41 @@ const loops = "/videos/content-sprint/";
             <a class="cs-btn cs-btn--primary" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
             <a class="cs-btn cs-btn--ghost" href="#morning">See the 8 videos</a>
           </div>
+
+          <a class="cs-trust" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">
+            <span class="cs-trust__stars" aria-hidden="true">★★★★★</span>
+            <span><strong>{GOOGLE_RATING.value}</strong> on Google</span>
+            <span class="cs-trust__sep" aria-hidden="true"></span>
+            <span><strong>{proof[0].value}</strong> views for Irish clients</span>
+          </a>
         </div>
 
-        <figure class="cs-hero__reel">
+        <figure class="cs-stage">
+          <div class="cs-stage__glow" aria-hidden="true"></div>
+          <img class="cs-stage__card cs-stage__card--l" src={`${media}poster-03.webp`} width="540" height="960" alt="" decoding="async" fetchpriority="low" />
+          <img class="cs-stage__card cs-stage__card--r" src={`${media}poster-06.webp`} width="540" height="960" alt="" decoding="async" fetchpriority="low" />
+          <img class="cs-stage__photo cs-stage__photo--a" src="/images/photography/thumbs/food-drink-photography-dublin.jpg" width="506" height="760" alt="" decoding="async" fetchpriority="low" />
+          <img class="cs-stage__photo cs-stage__photo--b" src="/images/photography/thumbs/product-photography-dublin.jpg" width="427" height="760" alt="" decoding="async" fetchpriority="low" />
           <div class="cs-phone">
             <video src={`${loops}montage.mp4`} poster={`${media}montage-poster.webp`} autoplay muted loop playsinline preload="metadata" aria-label="Clips from 8 videos filmed for NextVision clients"></video>
           </div>
+          <p class="cs-chip cs-chip--a"><span aria-hidden="true">▶</span> First video in 48 hours</p>
+          <p class="cs-chip cs-chip--b">Captions written for you</p>
           <figcaption>Cut from real NextVision client videos</figcaption>
         </figure>
       </section>
+
+      <div class="cs-marquee cs-marquee--hero" aria-label="Some of our Irish clients" role="region">
+        <div class="cs-marquee__track">
+          {[0, 1].map((copy) => (
+            <ul class="cs-marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
+              {clientLogos.map((logo) => (
+                <li><img src={logo.src} alt={copy === 1 ? "" : logo.alt} width={logo.width} height={logo.height} loading="lazy" decoding="async" class:list={[{ "is-light": logo.light }]} /></li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
 
       <section class="cs-morning" id="morning" aria-labelledby="cs-morning-title" data-morning>
         <div class="cs-morning__stage">
@@ -146,14 +172,42 @@ const loops = "/videos/content-sprint/";
       </section>
 
       <section class="cs-deal" aria-labelledby="cs-deal-title">
-        <div class="cs-deal__list">
+        <div class="cs-deal__main">
           <h2 id="cs-deal-title">What €{sprint.price} covers</h2>
-          <ul>{included.map((item) => <li>{item}</li>)}</ul>
-
+          <div class="cs-bento">
+            <article class="cs-tile cs-tile--videos">
+              <div class="cs-tile__fan" aria-hidden="true">
+                {["01", "04", "07", "02"].map((id) => <img src={`${media}poster-${id}.webp`} width="540" height="960" alt="" loading="lazy" decoding="async" />)}
+              </div>
+              <h3>{sprint.videos} vertical videos</h3>
+              <p>20 to 60 seconds each, edited with subtitles and music.</p>
+            </article>
+            <article class="cs-tile cs-tile--photos">
+              <div class="cs-tile__grid" aria-hidden="true">
+                {sprintPhotos.slice(2, 6).map((photo) => <img src={photo.image} width="506" height="760" alt="" loading="lazy" decoding="async" />)}
+              </div>
+              <h3>{sprint.photos} edited photos</h3>
+              <p>For your website, Google profile and posts.</p>
+            </article>
+            <article class="cs-tile cs-tile--plan">
+              <p class="cs-tile__big">4 weeks</p>
+              <h3>Posting plan and captions</h3>
+              <p>Agreed with you before we film, with a caption for every video.</p>
+            </article>
+            <article class="cs-tile cs-tile--time">
+              <p class="cs-tile__big">09–13</p>
+              <div class="cs-tile__text">
+                <h3>One morning at your business</h3>
+                <p>Up to 4 hours of filming. We need you for 30 to 60 minutes.</p>
+              </div>
+            </article>
+          </div>
+          <ul class="cs-extras">{extras.map((item) => <li>{item}</li>)}</ul>
         </div>
 
         <aside class="cs-ticket" aria-label="Price and payment">
           <p class="cs-ticket__price">€{sprint.price}</p>
+          <p class="cs-ticket__per">{sprint.videos + sprint.photos} posts, about €{Math.round(sprint.price / (sprint.videos + sprint.photos))} each</p>
           <div class="cs-split">
             <p style={`flex:${sprint.deposit}`}><strong>€{sprint.deposit}</strong><span>to book</span></p>
             <p style={`flex:${balance}`}><strong>€{balance}</strong><span>after delivery</span></p>
@@ -166,17 +220,6 @@ const loops = "/videos/content-sprint/";
       <section class="cs-proof" aria-label="Our work in numbers">
         {proof.map((item) => <p><strong>{item.value}</strong><span>{item.label}</span></p>)}
         <p><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener"><strong>{GOOGLE_RATING.value}</strong><span>on Google from {GOOGLE_RATING.count} reviews</span></a></p>
-        <div class="cs-marquee" aria-label="Some of our Irish clients" role="region">
-          <div class="cs-marquee__track">
-            {[0, 1].map((copy) => (
-              <ul class="cs-marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
-                {clientLogos.map((logo) => (
-                  <li><img src={logo.src} alt={copy === 1 ? "" : logo.alt} width={logo.width} height={logo.height} loading="lazy" decoding="async" class:list={[{ "is-light": logo.light }]} /></li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section class="cs-book" id="book" aria-labelledby="cs-book-title">
@@ -278,6 +321,9 @@ const loops = "/videos/content-sprint/";
       </section>
 
       <section class="cs-end" aria-labelledby="cs-end-title">
+        <div class="cs-end__fan" aria-hidden="true">
+          {sprintVideos.map((video) => <img src={`${media}poster-${video.id}.webp`} width="540" height="960" alt="" loading="lazy" decoding="async" />)}
+        </div>
         <h2 id="cs-end-title" class="cs-end__line">Ready for a month of posts?</h2>
         <p class="cs-end__offer">One morning, 8 videos and 8 photos for €{sprint.price}.</p>
         <a class="cs-btn cs-btn--primary" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
