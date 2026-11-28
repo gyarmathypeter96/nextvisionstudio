@@ -32,6 +32,8 @@ interface Props {
   followLinks?: boolean;
   minimal?: boolean;
   visualTheme?: "orbit-service" | "orbit-home";
+  // "slim" keeps the cookie choice to a thin bar (ad landing pages).
+  cookieVariant?: "default" | "slim";
 }
 
 const {
@@ -44,6 +46,7 @@ const {
   followLinks = false,
   minimal = false,
   visualTheme,
+  cookieVariant = "default",
 } = Astro.props;
 const canonicalUrl = canonical || `${SITE_URL}${Astro.url.pathname}`;
 const socialImage = ogImage
@@ -226,7 +229,7 @@ const websiteSchema = {
     <slot />
     {!minimal && <SiteFooter />}
     <WhatsAppButton />
-    <CookieConsent />
+    <CookieConsent variant={cookieVariant} />
     <BlackFridayPopup />
     <LeadAttribution />
     <BehaviorTracking />
