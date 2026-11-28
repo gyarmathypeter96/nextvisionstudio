@@ -90,6 +90,48 @@ export const faq = [
   { q: "What if I want this every month?", a: "Ask on the call. We'll quote a monthly plan with the same shoot-and-plan approach." },
 ];
 
+// "Sound familiar?" lines. Plain, specific, no exaggeration.
+export const pains = [
+  "You film on your phone between customers, and it shows.",
+  "You know exactly what to say in person. On camera it goes blank.",
+  "A week goes by, then a month. The last post is from the summer.",
+];
+
+// Real result from the SG Studios case study (/case-studies/sg-studios-dublin-podcast-studio-content/).
+export const spotlight = {
+  value: "55,000",
+  text: "views on TikTok for one short promo we made for SG Studios Dublin.",
+  videoId: "08",
+  full: "/videos/portfolio-2026/sg-studios-short.mp4",
+  href: "/case-studies/sg-studios-dublin-podcast-studio-content/",
+};
+
+// Comparison table. Columns: doing it yourself, a monthly retainer, the sprint.
+export const comparison = {
+  columns: ["Filming it yourself", "Monthly retainer", "Content Sprint"],
+  rows: [
+    { label: "Cost", cells: ["Your evenings", "A monthly fee, often with a minimum term", `€${sprint.price}, once`] },
+    { label: "Plan for the month", cells: ["Up to you", "Usually", "Agreed before we film"] },
+    { label: "Edited, subtitles, music", cells: ["If you find the time", "Yes", "Yes"] },
+    { label: "Ready to post", cells: ["Whenever it gets done", "Spread over the month", `All ${sprint.videos + sprint.photos} posts within 7 days`] },
+    { label: "Commitment", cells: ["None", "Contract", "One morning"] },
+  ],
+};
+
+export const fit = {
+  yes: [
+    "Cafés, restaurants and bakeries",
+    "Clinics, salons and studios",
+    "Trades and home services",
+    "Shops, gyms and local brands",
+  ],
+  no: [
+    "You want a long brand film or a TV ad",
+    "You need someone to post every day for you",
+    "Your business is outside Dublin and North Dublin",
+  ],
+};
+
 export const proof = [
   { value: "816,122+", label: "views on videos we've made for clients" },
   { value: "816+", label: "pieces of content published" },

@@ -5,6 +5,7 @@ import { WHATSAPP_URL } from "../config/contact";
 import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "../config/site";
 import {
   sprint, shootMornings, sprintVideos, sprintPhotos, shootSteps, extras, promises, faq, proof, clientLogos,
+  pains, spotlight, comparison, fit,
 } from "../data/contentSprint";
 import { buildPlan } from "../scripts/content-sprint-plan";
 import "../styles/content-sprint.css";
@@ -18,6 +19,7 @@ const bonusActive = new Date() < new Date(sprint.bonus.until);
 const longDate = new Intl.DateTimeFormat("en-IE", { weekday: "long", day: "numeric", month: "long", timeZone: "Europe/Dublin" });
 const chipDay = new Intl.DateTimeFormat("en-IE", { weekday: "short", timeZone: "Europe/Dublin" });
 const chipDate = new Intl.DateTimeFormat("en-IE", { day: "numeric", month: "short", timeZone: "Europe/Dublin" });
+const dayNumber = new Intl.DateTimeFormat("en-IE", { day: "numeric", timeZone: "Europe/Dublin" });
 const asDate = (day: string) => new Date(`${day}T12:00:00Z`);
 
 const allOpen = openMornings.length === shootMornings.length;
@@ -47,12 +49,27 @@ const loops = "/videos/content-sprint/";
   cookieVariant="slim"
 >
   <div class="cs" data-sprint data-fully-booked={fullyBooked ? "true" : "false"}>
+    {bonusActive && !fullyBooked && (
+      <p class="cs-announce" data-bonus data-until={sprint.bonus.until}>
+        <span><strong>Book by {sprint.bonus.untilLabel}:</strong> {sprint.bonus.text}.</span>
+        <span class="cs-announce__time" data-countdown></span>
+      </p>
+    )}
     <header class="cs-top">
       <a class="cs-top__logo" href="/" aria-label="NextVision Studio home">
         <img src="/images/brand/nextvision-studio-logo.webp" width="500" height="500" alt="" decoding="async" />
       </a>
       <a class="cs-btn cs-btn--small" href="#book">{fullyBooked ? "Request a morning" : "Choose a morning"}</a>
     </header>
+
+    <div class="cs-sticky" data-sticky inert>
+      <a class="cs-sticky__logo" href="/" aria-label="NextVision Studio home">
+        <img src="/images/brand/nextvision-studio-logo.webp" width="500" height="500" alt="" decoding="async" loading="lazy" />
+      </a>
+      <p class="cs-sticky__offer"><strong>€{sprint.price}</strong><span>{sprint.videos} videos and {sprint.photos} photos from one morning</span></p>
+      <p class:list={["cs-status", { "cs-status--full": fullyBooked }]}><span class="cs-status__dot" aria-hidden="true"></span>{availability}</p>
+      <a class="cs-btn cs-btn--primary" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
+    </div>
 
     <main>
       <section class="cs-hero" aria-labelledby="cs-title">
@@ -62,7 +79,19 @@ const loops = "/videos/content-sprint/";
 
           <div class="cs-offer">
             <p class="cs-offer__price">€{sprint.price}</p>
-            <p class:list={["cs-status", { "cs-status--full": fullyBooked }]}><span class="cs-status__dot" aria-hidden="true"></span>{availability}</p>
+            <div class="cs-mornings">
+              <p class:list={["cs-status", { "cs-status--full": fullyBooked }]}><span class="cs-status__dot" aria-hidden="true"></span>{availability}</p>
+              <ul class="cs-pills" aria-label={`Shoot mornings in ${sprint.month}`}>
+                {shootMornings.map((morning) => {
+                  const when = asDate(morning.date);
+                  return (
+                    <li class:list={["cs-pill", { "cs-pill--taken": morning.booked }]}>
+                      {chipDay.format(when)} {dayNumber.format(when)}<span class="visually-hidden">{morning.booked ? ", booked" : ", open"}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
 
           <div class="cs-hero__actions">
@@ -105,6 +134,12 @@ const loops = "/videos/content-sprint/";
         </div>
       </div>
 
+      <section class="cs-pain" aria-labelledby="cs-pain-title" data-pain>
+        <h2 id="cs-pain-title">Sound familiar?</h2>
+        <ul>{pains.map((line, index) => <li style={`--i:${index}`}><span>{line}</span></li>)}</ul>
+        <p class="cs-pain__turn">One morning with us, and the whole month is done.</p>
+      </section>
+
       <section class="cs-morning" id="morning" aria-labelledby="cs-morning-title" data-morning>
         <div class="cs-morning__stage">
           <div class="cs-morning__time">
@@ -134,6 +169,19 @@ const loops = "/videos/content-sprint/";
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section class="cs-spot" aria-labelledby="cs-spot-title">
+        <button type="button" class="cs-spot__video" data-open-video={spotlight.full} data-video-title="Promo filmed for SG Studios Dublin">
+          <video data-src={`${loops}loop-${spotlight.videoId}.mp4`} poster={`${media}poster-${spotlight.videoId}.webp`} muted loop playsinline preload="none" aria-hidden="true"></video>
+          <span class="cs-reel__play" aria-hidden="true"></span>
+          <span class="visually-hidden">Play the SG Studios Dublin promo</span>
+        </button>
+        <div class="cs-spot__copy">
+          <h2 id="cs-spot-title"><span class="cs-spot__value">{spotlight.value}</span> <span class="cs-spot__text">{spotlight.text}</span></h2>
+          <p>Short, vertical and planned around one clear message. The same kind of video you get eight of.</p>
+          <a class="cs-link" href={spotlight.href}>Read the SG Studios case study</a>
         </div>
       </section>
 
@@ -168,6 +216,28 @@ const loops = "/videos/content-sprint/";
               <span class="cs-calendar__date" aria-hidden="true">{day.day}</span>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section class="cs-compare" aria-labelledby="cs-compare-title">
+        <h2 id="cs-compare-title">Why one morning beats filming every week</h2>
+        <div class="cs-compare__wrap">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                {comparison.columns.map((column, index) => <th scope="col" class:list={[{ "is-us": index === 2 }]}>{column}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {comparison.rows.map((row) => (
+                <tr>
+                  <th scope="row">{row.label}</th>
+                  {row.cells.map((cell, index) => <td class:list={[{ "is-us": index === 2 }]} data-col={comparison.columns[index]}>{cell}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -215,6 +285,26 @@ const loops = "/videos/content-sprint/";
           <ul class="cs-promises">{promises.map((promise) => <li>{promise}</li>)}</ul>
           <a class="cs-btn cs-btn--primary cs-btn--wide" href="#book">{fullyBooked ? `Request a ${sprint.nextMonth} morning` : "Choose a morning"}</a>
         </aside>
+      </section>
+
+      <section class="cs-guarantee" aria-labelledby="cs-guarantee-title">
+        <div class="cs-seal" aria-hidden="true"><strong>€{sprint.deposit}</strong><span>back if you don't approve the plan</span></div>
+        <div>
+          <h2 id="cs-guarantee-title">You only pay for a plan you like.</h2>
+          <ul class="cs-guarantee__list">{promises.map((promise) => <li>{promise}</li>)}</ul>
+          <p>No payment when you send a request. The €{sprint.deposit} deposit comes after we've agreed the plan together.</p>
+        </div>
+      </section>
+
+      <section class="cs-fit" aria-label="Who the Content Sprint is for">
+        <div class="cs-fit__col cs-fit__col--yes">
+          <h2>Made for</h2>
+          <ul>{fit.yes.map((item) => <li>{item}</li>)}</ul>
+        </div>
+        <div class="cs-fit__col cs-fit__col--no">
+          <h2>Not the right fit if</h2>
+          <ul>{fit.no.map((item) => <li>{item}</li>)}</ul>
+        </div>
       </section>
 
       <section class="cs-proof" aria-label="Our work in numbers">

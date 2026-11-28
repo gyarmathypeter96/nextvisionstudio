@@ -15,6 +15,7 @@ if (root) {
   setupPlayer();
   setupForm();
   setupBar();
+  setupPain();
   hideExpiredBonus();
 }
 
@@ -241,10 +242,12 @@ function setupForm() {
 
 }
 
-// Mobile bar: visible after the hero, hidden while the booking form or the
-// closing call to action is on screen, so it never covers another button.
+// Mobile bar and desktop sticky header: visible after the hero, hidden while
+// the booking form or the closing call to action is on screen, so neither
+// ever covers another button.
 function setupBar() {
   const bar = root!.querySelector<HTMLElement>("[data-sprint-bar]");
+  const sticky = root!.querySelector<HTMLElement>("[data-sticky]");
   const hero = root!.querySelector<HTMLElement>(".cs-hero");
   const book = root!.querySelector<HTMLElement>("#book");
   const end = root!.querySelector<HTMLElement>(".cs-end");
@@ -254,7 +257,12 @@ function setupBar() {
   let endVisible = false;
   const cookie = document.querySelector<HTMLElement>("[data-cookie-consent]");
   const update = () => {
-    bar.hidden = heroVisible || bookVisible || endVisible;
+    const off = heroVisible || bookVisible || endVisible;
+    bar.hidden = off;
+    if (sticky) {
+      sticky.classList.toggle("is-on", !off);
+      sticky.inert = off;
+    }
     // Sit above the cookie bar while it is open instead of covering it.
     bar.style.setProperty("--cookie-offset", cookie && !cookie.hidden ? `${cookie.offsetHeight}px` : "0px");
   };
@@ -264,9 +272,35 @@ function setupBar() {
   if (end) new IntersectionObserver(([entry]) => { endVisible = entry.isIntersecting; update(); }).observe(end);
 }
 
-// The build bakes the bonus in; remove it in the browser once it has expired.
+// "Sound familiar?" lines are struck through once the section is on screen.
+function setupPain() {
+  const pain = root!.querySelector<HTMLElement>("[data-pain]");
+  if (!pain) return;
+  if (reduceMotion || !("IntersectionObserver" in window)) { pain.classList.add("is-in"); return; }
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    pain.classList.add("is-in");
+    observer.disconnect();
+  }, { threshold: 0.45 });
+  observer.observe(pain);
+}
+
+// The build bakes the bonus in; remove it in the browser once it has expired,
+// and keep the countdown in the announcement bar current to the minute.
 function hideExpiredBonus() {
-  root!.querySelectorAll<HTMLElement>("[data-bonus]").forEach((bonus) => {
-    if (Date.now() > Date.parse(bonus.dataset.until || "")) bonus.remove();
-  });
+  const bonuses = [...root!.querySelectorAll<HTMLElement>("[data-bonus]")];
+  const tick = () => {
+    for (const bonus of bonuses) {
+      const left = Date.parse(bonus.dataset.until || "") - Date.now();
+      if (!(left > 0)) { bonus.remove(); continue; }
+      const timer = bonus.querySelector<HTMLElement>("[data-countdown]");
+      if (!timer) continue;
+      const days = Math.floor(left / 86_400_000);
+      const hours = Math.floor((left % 86_400_000) / 3_600_000);
+      const minutes = Math.floor((left % 3_600_000) / 60_000);
+      timer.textContent = days > 0 ? `${days}d ${hours}h left` : `${hours}h ${minutes}m left`;
+    }
+  };
+  tick();
+  if (bonuses.some((bonus) => bonus.querySelector("[data-countdown]"))) window.setInterval(tick, 30_000);
 }
